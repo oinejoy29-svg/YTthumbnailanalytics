@@ -1,0 +1,59 @@
+name: Update YouTube Data
+
+on:
+  schedule:
+    # 12:00 JST
+    - cron: '0 3 * * *'
+
+    # 16:00 JST
+    - cron: '0 7 * * *'
+
+    # 20:00 JST
+    - cron: '0 11 * * *'
+
+    # 23:50 JST
+    - cron: '50 14 * * *'
+
+  # GitHubから手動実行
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          pip install requests
+
+      - name: Update data
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+          YOUTUBE_CHANNEL_ID: UCiLmCoftZHWXSFuQlnEJSsQ
+        run: |
+          python update_data.py
+
+      - name: Commit and push changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add data.json
+
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "Update YouTube data"
+            git push
+          fi
