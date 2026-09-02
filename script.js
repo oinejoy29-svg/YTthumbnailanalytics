@@ -20,11 +20,10 @@ let rangeDays = 7;
 let rangeOffset = 0;
 
 const SUBSCRIBER_HISTORY_INITIAL_LIMIT = 5;
+const SUBSCRIBER_HISTORY_STEP = 10;
 
 let subscriberHistoryLimit =
   SUBSCRIBER_HISTORY_INITIAL_LIMIT;
-
-let subscriberHistoryExpanded = false;
 
 const $ = id => document.getElementById(id);
 
@@ -52,7 +51,11 @@ function todayJST() {
 function daysSinceStart() {
   const start = dateObj(START_DATE);
   const today = dateObj(todayJST());
-  return Math.max(0, Math.floor((today - start) / 86400000));
+
+  return Math.max(
+    0,
+    Math.floor((today - start) / 86400000)
+  );
 }
 
 /* =========================================================
@@ -61,44 +64,74 @@ function daysSinceStart() {
 
 function getSubscriberOverrides() {
   try {
-    return JSON.parse(localStorage.getItem(SUBSCRIBER_OVERRIDES_KEY) || "{}");
+    return JSON.parse(
+      localStorage.getItem(
+        SUBSCRIBER_OVERRIDES_KEY
+      ) || "{}"
+    );
   } catch {
     return {};
   }
 }
 
-function saveSubscriberOverride(date, count) {
-  const overrides = getSubscriberOverrides();
-  overrides[date] = Number(count);
+function saveSubscriberOverride(
+  date,
+  count
+) {
+  const overrides =
+    getSubscriberOverrides();
+
+  overrides[date] =
+    Number(count);
+
   localStorage.setItem(
     SUBSCRIBER_OVERRIDES_KEY,
     JSON.stringify(overrides)
   );
 }
 
-function clearSubscriberOverride(date) {
-  const overrides = getSubscriberOverrides();
+function clearSubscriberOverride(
+  date
+) {
+  const overrides =
+    getSubscriberOverrides();
+
   delete overrides[date];
+
   localStorage.setItem(
     SUBSCRIBER_OVERRIDES_KEY,
     JSON.stringify(overrides)
   );
 }
 
-function applySubscriberOverrides(rows) {
-  const overrides = getSubscriberOverrides();
+function applySubscriberOverrides(
+  rows
+) {
+  const overrides =
+    getSubscriberOverrides();
 
   return rows.map(row => {
-    if (Object.prototype.hasOwnProperty.call(overrides, row.date)) {
+    if (
+      Object.prototype.hasOwnProperty.call(
+        overrides,
+        row.date
+      )
+    ) {
       return {
         ...row,
-        count: Number(overrides[row.date])
+        count:
+          Number(
+            overrides[row.date]
+          )
       };
     }
 
     return {
       ...row,
-      count: Number(row.count || 0)
+      count:
+        Number(
+          row.count || 0
+        )
     };
   });
 }
@@ -118,20 +151,40 @@ function updateHeader() {
 
   if (!DATA.updatedAt) return;
 
-  const d = new Date(DATA.updatedAt);
+  const d =
+    new Date(DATA.updatedAt);
 
-  const parts = new Intl.DateTimeFormat("en-CA", {
-    timeZone: "Asia/Tokyo",
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-    hour: "2-digit",
-    minute: "2-digit",
-    hourCycle: "h23"
-  }).formatToParts(d);
+  const parts =
+    new Intl.DateTimeFormat(
+      "en-CA",
+      {
+        timeZone:
+          "Asia/Tokyo",
+
+        year:
+          "numeric",
+
+        month:
+          "2-digit",
+
+        day:
+          "2-digit",
+
+        hour:
+          "2-digit",
+
+        minute:
+          "2-digit",
+
+        hourCycle:
+          "h23"
+      }
+    ).formatToParts(d);
 
   const get = type =>
-    parts.find(p => p.type === type)?.value || "";
+    parts.find(
+      p => p.type === type
+    )?.value || "";
 
   const desktopText =
     `${get("year")}/${Number(get("month"))}/${Number(get("day"))} ` +
@@ -141,8 +194,11 @@ function updateHeader() {
     `${get("year")}/${Number(get("month"))}/${Number(get("day"))} ` +
     `${get("hour")}:${get("minute")}`;
 
-  $("updatedAtDesktop").textContent = desktopText;
-  $("updatedAtMobile").textContent = mobileText;
+  $("updatedAtDesktop").textContent =
+    desktopText;
+
+  $("updatedAtMobile").textContent =
+    mobileText;
 }
 
 /* =========================================================
@@ -150,19 +206,26 @@ function updateHeader() {
 ========================================================= */
 
 function detectTags(video) {
-  return MEMBERS.filter(member =>
-    `${video.title || ""} ${video.description || ""}`.includes(member)
+  return MEMBERS.filter(
+    member =>
+      `${video.title || ""} ${video.description || ""}`
+        .includes(member)
   );
 }
 
 function normalizeVideos() {
-  DATA.videos = (DATA.videos || []).map(video => ({
-    ...video,
-    tags:
-      Array.isArray(video.tags) && video.tags.length
-        ? video.tags
-        : detectTags(video)
-  }));
+  DATA.videos =
+    (DATA.videos || []).map(
+      video => ({
+        ...video,
+
+        tags:
+          Array.isArray(video.tags) &&
+          video.tags.length
+            ? video.tags
+            : detectTags(video)
+      })
+    );
 }
 
 /* =========================================================
@@ -171,29 +234,60 @@ function normalizeVideos() {
 
 function sortedSubscribers() {
   return applySubscriberOverrides(
-    [...(DATA.subscribers || [])]
-      .sort((a, b) => String(a.date).localeCompare(String(b.date)))
+    [
+      ...(DATA.subscribers || [])
+    ].sort(
+      (a, b) =>
+        String(a.date)
+          .localeCompare(
+            String(b.date)
+          )
+    )
   );
 }
 
 function latestRecord() {
-  return sortedSubscribers().at(-1) || null;
+  return (
+    sortedSubscribers()
+      .at(-1) || null
+  );
 }
 
 function previousRecord(date) {
-  return sortedSubscribers()
-    .filter(row => row.date < date)
-    .at(-1) || null;
+  return (
+    sortedSubscribers()
+      .filter(
+        row =>
+          row.date < date
+      )
+      .at(-1) || null
+  );
 }
 
-function newSubscriberForDate(date) {
-  const rows = sortedSubscribers();
-  const index = rows.findIndex(row => row.date === date);
+function newSubscriberForDate(
+  date
+) {
+  const rows =
+    sortedSubscribers();
 
-  if (index <= 0) return 0;
+  const index =
+    rows.findIndex(
+      row =>
+        row.date === date
+    );
 
-  return Number(rows[index].count) -
-    Number(rows[index - 1].count);
+  if (index <= 0) {
+    return 0;
+  }
+
+  return (
+    Number(
+      rows[index].count
+    ) -
+    Number(
+      rows[index - 1].count
+    )
+  );
 }
 
 /*
@@ -208,33 +302,58 @@ function newSubscriberForDate(date) {
  * これにより、APIが現在値を持っている限り
  * 「最新日の新規登録者数」は今日基準になる。
  */
-function getTodayNewSubscribers() {
-  const today = todayJST();
-  const rows = sortedSubscribers();
 
-  const todayRow = rows.find(row => row.date === today);
+function getTodayNewSubscribers() {
+  const today =
+    todayJST();
+
+  const rows =
+    sortedSubscribers();
+
+  const todayRow =
+    rows.find(
+      row =>
+        row.date === today
+    );
 
   if (todayRow) {
-    const prev = previousRecord(today);
+    const prev =
+      previousRecord(today);
 
     if (prev) {
-      return Number(todayRow.count) - Number(prev.count);
+      return (
+        Number(
+          todayRow.count
+        ) -
+        Number(
+          prev.count
+        )
+      );
     }
 
     return 0;
   }
 
-  const current = Number(
-    DATA.currentSubscriberCount ??
-    latestRecord()?.count ??
-    0
+  const current =
+    Number(
+      DATA.currentSubscriberCount ??
+      latestRecord()?.count ??
+      0
+    );
+
+  const latest =
+    latestRecord();
+
+  if (!latest) {
+    return 0;
+  }
+
+  return (
+    current -
+    Number(
+      latest.count
+    )
   );
-
-  const latest = latestRecord();
-
-  if (!latest) return 0;
-
-  return current - Number(latest.count);
 }
 
 /* =========================================================
@@ -242,18 +361,24 @@ function getTodayNewSubscribers() {
 ========================================================= */
 
 function renderSummary() {
-  const rows = sortedSubscribers();
-  const latest = latestRecord();
+  const rows =
+    sortedSubscribers();
 
-  const current = Number(
-    DATA.currentSubscriberCount ??
-    latest?.count ??
-    0
-  );
+  const latest =
+    latestRecord();
 
-  $("currentSubs").textContent = `${fmt(current)}人`;
+  const current =
+    Number(
+      DATA.currentSubscriberCount ??
+      latest?.count ??
+      0
+    );
 
-  const todayNew = getTodayNewSubscribers();
+  $("currentSubs").textContent =
+    `${fmt(current)}人`;
+
+  const todayNew =
+    getTodayNewSubscribers();
 
   $("latestNew").textContent =
     `${todayNew >= 0 ? "+" : ""}${fmt(todayNew)}人`;
@@ -261,17 +386,29 @@ function renderSummary() {
   $("latestDate").textContent =
     `最新日：${jpDate(todayJST())}`;
 
-  const diffs = rows
-    .slice(1)
-    .map((row, index) =>
-      Number(row.count) - Number(rows[index].count)
-    );
+  const diffs =
+    rows
+      .slice(1)
+      .map(
+        (row, index) =>
+          Number(row.count) -
+          Number(
+            rows[index].count
+          )
+      );
 
-  const avg = diffs.length
-    ? diffs.reduce((a, b) => a + b, 0) / diffs.length
-    : 0;
+  const avg =
+    diffs.length
+      ? diffs.reduce(
+          (a, b) =>
+            a + b,
+          0
+        ) /
+        diffs.length
+      : 0;
 
-  $("avgNew").textContent = avg.toFixed(1);
+  $("avgNew").textContent =
+    avg.toFixed(1);
 
   $("videoCount").textContent =
     `${fmt(DATA.videos.length)}本`;
@@ -282,35 +419,57 @@ function renderSummary() {
 ========================================================= */
 
 function buildRolling() {
-  const videos = [...DATA.videos];
+  const videos =
+    [...DATA.videos];
 
   if (!videos.length) {
-    [0, 1, 2].forEach(i => {
-      $(`lane${i}`).innerHTML = "";
-    });
+    [0, 1, 2]
+      .forEach(i => {
+        $(`lane${i}`).innerHTML =
+          "";
+      });
+
     return;
   }
 
-  const shuffled = videos.sort(() => Math.random() - 0.5);
+  const shuffled =
+    videos.sort(
+      () =>
+        Math.random() - 0.5
+    );
 
-  const lanes = [[], [], []];
+  const lanes =
+    [[], [], []];
 
-  shuffled.forEach((video, index) => {
-    lanes[index % 3].push(video);
-  });
+  shuffled.forEach(
+    (video, index) => {
+      lanes[
+        index % 3
+      ].push(video);
+    }
+  );
 
-  lanes.forEach((arr, index) => {
-    const twice = [...arr, ...arr];
+  lanes.forEach(
+    (arr, index) => {
+      const twice =
+        [...arr, ...arr];
 
-    $(`lane${index}`).innerHTML = twice.map(video => `
-      <img
-        class="thumb-roll"
-        src="${escapeHtml(video.thumbnail || "")}"
-        alt=""
-        loading="lazy"
-      >
-    `).join("");
-  });
+      $(`lane${index}`)
+        .innerHTML =
+        twice
+          .map(
+            video => `
+              <img
+                class="thumb-roll"
+                src="${escapeHtml(video.thumbnail || "")}"
+                alt=""
+                loading="lazy"
+              >
+            `
+          )
+          .join("");
+    }
+  );
 }
 
 /* =========================================================
@@ -320,193 +479,324 @@ function buildRolling() {
 function renderTags() {
   $("tagSelect").innerHTML =
     '<option value="">すべてのメンバー</option>' +
-    MEMBERS.map(member =>
-      `<option value="${escapeHtml(member)}">${escapeHtml(member)}</option>`
-    ).join("");
+    MEMBERS
+      .map(
+        member =>
+          `<option value="${escapeHtml(member)}">${escapeHtml(member)}</option>`
+      )
+      .join("");
 }
 
 function durationNum(video) {
-  return Number(video.durationSeconds || 0);
+  return Number(
+    video.durationSeconds || 0
+  );
 }
 
 function renderVideos() {
-  const sort = $("sortSelect").value;
-  const tag = $("tagSelect").value;
+  const sort =
+    $("sortSelect").value;
 
-  const list = DATA.videos.filter(video =>
-    !tag ||
-    (video.tags || detectTags(video)).includes(tag)
+  const tag =
+    $("tagSelect").value;
+
+  const list =
+    DATA.videos.filter(
+      video =>
+        !tag ||
+        (
+          video.tags ||
+          detectTags(video)
+        ).includes(tag)
+    );
+
+  list.sort(
+    (a, b) => {
+      if (
+        sort ===
+        "popular"
+      ) {
+        return (
+          Number(
+            b.viewCount || 0
+          ) -
+          Number(
+            a.viewCount || 0
+          )
+        );
+      }
+
+      if (
+        sort ===
+        "newest"
+      ) {
+        return String(
+          b.date
+        ).localeCompare(
+          String(a.date)
+        );
+      }
+
+      if (
+        sort ===
+        "oldest"
+      ) {
+        return String(
+          a.date
+        ).localeCompare(
+          String(b.date)
+        );
+      }
+
+      if (
+        sort ===
+        "longest"
+      ) {
+        return (
+          durationNum(b) -
+          durationNum(a)
+        );
+      }
+
+      return (
+        durationNum(a) -
+        durationNum(b)
+      );
+    }
   );
 
-  list.sort((a, b) => {
-    if (sort === "popular") {
-      return Number(b.viewCount || 0) -
-        Number(a.viewCount || 0);
-    }
+  $("videoGrid").innerHTML =
+    list
+      .map(
+        video => `
+          <article
+            class="video-card"
+            data-video-id="${escapeHtml(video.id || "")}"
+            tabindex="0"
+            role="button"
+            aria-label="動画詳細を開く"
+          >
+            <img
+              src="${escapeHtml(video.thumbnail || "")}"
+              alt=""
+              loading="lazy"
+            >
 
-    if (sort === "newest") {
-      return String(b.date)
-        .localeCompare(String(a.date));
-    }
+            <div class="video-info">
 
-    if (sort === "oldest") {
-      return String(a.date)
-        .localeCompare(String(b.date));
-    }
+              <div class="video-title">
+                ${escapeHtml(video.title || "")}
+              </div>
 
-    if (sort === "longest") {
-      return durationNum(b) - durationNum(a);
-    }
+              <div class="video-meta">
+                ${fmt(video.viewCount)}回
+                <span class="video-meta-separator">・</span>
+                ${jpDate(video.date)}
+              </div>
 
-    return durationNum(a) - durationNum(b);
-  });
+            </div>
+          </article>
+        `
+      )
+      .join("");
 
-  $("videoGrid").innerHTML = list.map(video => `
-    <article
-      class="video-card"
-      data-video-id="${escapeHtml(video.id || "")}"
-      tabindex="0"
-      role="button"
-      aria-label="動画詳細を開く"
-    >
-      <img
-        src="${escapeHtml(video.thumbnail || "")}"
-        alt=""
-        loading="lazy"
-      >
+  document
+    .querySelectorAll(
+      ".video-card"
+    )
+    .forEach(card => {
+      const open = () => {
+        const video =
+          DATA.videos.find(
+            item =>
+              String(item.id) ===
+              String(
+                card.dataset.videoId
+              )
+          );
 
-      <div class="video-info">
-        <div class="video-title">
-          ${escapeHtml(video.title || "")}
-        </div>
+        if (video) {
+          openVideoDetail(
+            video
+          );
+        }
+      };
 
-        <div class="video-meta">
-          ${fmt(video.viewCount)}回
-          <span class="video-meta-separator">・</span>
-          ${jpDate(video.date)}
-        </div>
-      </div>
-    </article>
-  `).join("");
-
-  document.querySelectorAll(".video-card").forEach(card => {
-    const open = () => {
-      const video = DATA.videos.find(
-        item => String(item.id) === String(card.dataset.videoId)
+      card.addEventListener(
+        "click",
+        open
       );
 
-      if (video) openVideoDetail(video);
-    };
-
-    card.addEventListener("click", open);
-
-    card.addEventListener("keydown", event => {
-      if (event.key === "Enter" || event.key === " ") {
-        event.preventDefault();
-        open();
-      }
+      card.addEventListener(
+        "keydown",
+        event => {
+          if (
+            event.key ===
+              "Enter" ||
+            event.key ===
+              " "
+          ) {
+            event.preventDefault();
+            open();
+          }
+        }
+      );
     });
-  });
 }
 
 /* =========================================================
    Video detail modal
 ========================================================= */
 
-function openVideoDetail(video) {
-  const tags = video.tags || detectTags(video);
+function openVideoDetail(
+  video
+) {
+  const tags =
+    video.tags ||
+    detectTags(video);
 
-  $("videoDetailContent").innerHTML = `
-    <div class="video-detail-layout">
+  $("videoDetailContent").innerHTML =
+    `
+      <div class="video-detail-layout">
 
-      <div class="video-detail-thumbnail">
-        <img
-          src="${escapeHtml(video.thumbnail || "")}"
-          alt=""
-        >
-      </div>
-
-      <div class="video-detail-info">
-
-        <h3 class="video-detail-title">
-          ${escapeHtml(video.title || "")}
-        </h3>
-
-        <div class="video-detail-meta">
-          <div>
-            <span>投稿日</span>
-            <strong>${jpDate(video.date)}</strong>
-          </div>
-
-          <div>
-            <span>再生回数</span>
-            <strong>${fmt(video.viewCount)}回</strong>
-          </div>
-
-          <div>
-            <span>動画時間</span>
-            <strong>${escapeHtml(video.duration || "—")}</strong>
-          </div>
+        <div class="video-detail-thumbnail">
+          <img
+            src="${escapeHtml(video.thumbnail || "")}"
+            alt=""
+          >
         </div>
 
-        <div class="video-detail-tags">
-          ${
-            tags.length
-              ? tags.map(tag =>
-                `<span class="tag">${escapeHtml(tag)}</span>`
-              ).join("")
-              : `<span class="no-tags">タグなし</span>`
-          }
+        <div class="video-detail-info">
+
+          <h3 class="video-detail-title">
+            ${escapeHtml(video.title || "")}
+          </h3>
+
+          <div class="video-detail-meta">
+
+            <div>
+              <span>投稿日</span>
+              <strong>
+                ${jpDate(video.date)}
+              </strong>
+            </div>
+
+            <div>
+              <span>再生回数</span>
+              <strong>
+                ${fmt(video.viewCount)}回
+              </strong>
+            </div>
+
+            <div>
+              <span>動画時間</span>
+              <strong>
+                ${escapeHtml(video.duration || "—")}
+              </strong>
+            </div>
+
+          </div>
+
+          <div class="video-detail-tags">
+            ${
+              tags.length
+                ? tags
+                    .map(
+                      tag =>
+                        `<span class="tag">${escapeHtml(tag)}</span>`
+                    )
+                    .join("")
+                : `
+                  <span class="no-tags">
+                    タグなし
+                  </span>
+                `
+            }
+          </div>
+
+          <button
+            type="button"
+            class="primary-btn edit-video-tags-btn"
+            id="editVideoTags"
+          >
+            タグを編集
+          </button>
+
         </div>
-
-        <button
-          type="button"
-          class="primary-btn edit-video-tags-btn"
-          id="editVideoTags"
-        >
-          タグを編集
-        </button>
-
       </div>
-    </div>
-  `;
+    `;
 
-  $("videoDetailModal").classList.add("open");
-  $("videoDetailModal").setAttribute("aria-hidden", "false");
+  $("videoDetailModal")
+    .classList
+    .add("open");
 
-  $("editVideoTags").onclick = () =>
-    editVideoTags(video);
+  $("videoDetailModal")
+    .setAttribute(
+      "aria-hidden",
+      "false"
+    );
+
+  $("editVideoTags").onclick =
+    () =>
+      editVideoTags(video);
 }
 
 function closeVideoDetail() {
-  $("videoDetailModal").classList.remove("open");
-  $("videoDetailModal").setAttribute("aria-hidden", "true");
+  $("videoDetailModal")
+    .classList
+    .remove("open");
+
+  $("videoDetailModal")
+    .setAttribute(
+      "aria-hidden",
+      "true"
+    );
 }
 
-function editVideoTags(video) {
+function editVideoTags(
+  video
+) {
   const currentTags =
-    Array.isArray(video.tags)
+    Array.isArray(
+      video.tags
+    )
       ? video.tags
       : detectTags(video);
 
-  const input = prompt(
-    "タグを編集してください。\n\nメンバー名を「、」で区切って入力してください。",
-    currentTags.join("、")
-  );
+  const input =
+    prompt(
+      "タグを編集してください。\n\nメンバー名を「、」で区切って入力してください。",
+      currentTags.join("、")
+    );
 
-  if (input === null) return;
+  if (
+    input === null
+  ) {
+    return;
+  }
 
-  const tags = input
-    .split(/[、,，]/)
-    .map(tag => tag.trim())
-    .filter(Boolean)
-    .filter(tag => MEMBERS.includes(tag));
+  const tags =
+    input
+      .split(/[、,，]/)
+      .map(
+        tag =>
+          tag.trim()
+      )
+      .filter(Boolean)
+      .filter(
+        tag =>
+          MEMBERS.includes(
+            tag
+          )
+      );
 
   video.tags = tags;
 
   renderVideos();
 
-  openVideoDetail(video);
+  openVideoDetail(
+    video
+  );
 }
 
 /* =========================================================
@@ -514,13 +804,17 @@ function editVideoTags(video) {
 ========================================================= */
 
 function escapeHtml(value) {
-  return String(value).replace(/[&<>"']/g, char => ({
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    '"': "&quot;",
-    "'": "&#39;"
-  }[char]));
+  return String(value)
+    .replace(
+      /[&<>"']/g,
+      char => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+      }[char])
+    );
 }
 
 /* =========================================================
@@ -528,24 +822,37 @@ function escapeHtml(value) {
 ========================================================= */
 
 function getChartRows() {
-  const rows = sortedSubscribers();
+  const rows =
+    sortedSubscribers();
 
-  if (rangeDays === "all") {
+  if (
+    rangeDays ===
+    "all"
+  ) {
     return rows;
   }
 
-  if (!rows.length) return [];
+  if (
+    !rows.length
+  ) {
+    return [];
+  }
 
-  const latest = rows.at(-1)?.date || START_DATE;
+  const latest =
+    rows.at(-1)?.date ||
+    START_DATE;
 
-  const end = dateObj(latest);
+  const end =
+    dateObj(latest);
 
   end.setDate(
     end.getDate() +
-    rangeOffset * Number(rangeDays)
+    rangeOffset *
+      Number(rangeDays)
   );
 
-  const start = new Date(end);
+  const start =
+    new Date(end);
 
   start.setDate(
     start.getDate() -
@@ -553,81 +860,164 @@ function getChartRows() {
     1
   );
 
-  return rows.filter(row => {
-    const d = dateObj(row.date);
+  return rows.filter(
+    row => {
+      const d =
+        dateObj(
+          row.date
+        );
 
-    return d >= start && d <= end;
-  });
-}
-
-function chartVideoTitles(date) {
-  return DATA.videos
-    .filter(video => video.date === date)
-    .map(video => video.title);
-}
-
-function fixedSubscriberScale(rows) {
-  const values = rows.map(row =>
-    Number(row.count || 0)
+      return (
+        d >= start &&
+        d <= end
+      );
+    }
   );
+}
 
-  if (!values.length) {
-    return { min: 0, max: 10 };
+function chartVideoTitles(
+  date
+) {
+  return DATA.videos
+    .filter(
+      video =>
+        video.date === date
+    )
+    .map(
+      video =>
+        video.title
+    );
+}
+
+function fixedSubscriberScale(
+  rows
+) {
+  const values =
+    rows.map(
+      row =>
+        Number(
+          row.count || 0
+        )
+    );
+
+  if (
+    !values.length
+  ) {
+    return {
+      min: 0,
+      max: 10
+    };
   }
 
-  const min = Math.min(...values, 0);
-  const max = Math.max(...values, 0);
+  const min =
+    Math.min(
+      ...values,
+      0
+    );
+
+  const max =
+    Math.max(
+      ...values,
+      0
+    );
 
   return {
-    min: Math.floor(min / 10) * 10,
-    max: Math.max(
-      10,
-      Math.ceil((max + 10) / 10) * 10
-    )
+    min:
+      Math.floor(
+        min / 10
+      ) * 10,
+
+    max:
+      Math.max(
+        10,
+        Math.ceil(
+          (max + 10) /
+          10
+        ) * 10
+      )
   };
 }
 
 function fixedNewSubscriberScale() {
-  const rows = sortedSubscribers();
+  const rows =
+    sortedSubscribers();
 
-  const values = rows
-    .slice(1)
-    .map((row, index) =>
-      Number(row.count) -
-      Number(rows[index].count)
-    );
+  const values =
+    rows
+      .slice(1)
+      .map(
+        (row, index) =>
+          Number(
+            row.count
+          ) -
+          Number(
+            rows[index].count
+          )
+      );
 
-  if (!values.length) {
-    return { min: 0, max: 10 };
+  if (
+    !values.length
+  ) {
+    return {
+      min: 0,
+      max: 10
+    };
   }
 
-  const min = Math.min(...values, 0);
-  const max = Math.max(...values, 0);
+  const min =
+    Math.min(
+      ...values,
+      0
+    );
 
-  const span = Math.max(5, max - min);
-  const pad = Math.max(
-    2,
-    Math.ceil(span * 0.12)
-  );
+  const max =
+    Math.max(
+      ...values,
+      0
+    );
+
+  const span =
+    Math.max(
+      5,
+      max - min
+    );
+
+  const pad =
+    Math.max(
+      2,
+      Math.ceil(
+        span * 0.12
+      )
+    );
 
   return {
     min:
       min >= 0
         ? 0
-        : Math.floor((min - pad) / 5) * 5,
+        : Math.floor(
+            (min - pad) /
+            5
+          ) * 5,
 
     max:
       Math.max(
         5,
-        Math.ceil((max + pad) / 5) * 5
+        Math.ceil(
+          (max + pad) /
+          5
+        ) * 5
       )
   };
 }
 
-function baseChartOptions(scale) {
+function baseChartOptions(
+  scale
+) {
   return {
     responsive: true,
-    maintainAspectRatio: false,
+
+    maintainAspectRatio:
+      false,
 
     interaction: {
       mode: "index",
@@ -643,22 +1033,40 @@ function baseChartOptions(scale) {
         callbacks: {
           title: items =>
             items[0]
-              ? monthDay(items[0].label)
+              ? monthDay(
+                  items[0].label
+                )
               : "",
 
-          afterBody: items => {
-            if (!items.length) return [];
+          afterBody:
+            items => {
+              if (
+                !items.length
+              ) {
+                return [];
+              }
 
-            const date =
-              sortedSubscribers()[items[0].dataIndex]?.date;
+              const date =
+                sortedSubscribers()[
+                  items[0]
+                    .dataIndex
+                ]?.date;
 
-            const titles =
-              chartVideoTitles(date);
+              const titles =
+                chartVideoTitles(
+                  date
+                );
 
-            return titles.length
-              ? ["", ...titles.map(title => `🎬 ${title}`)]
-              : [];
-          }
+              return titles.length
+                ? [
+                    "",
+                    ...titles.map(
+                      title =>
+                        `🎬 ${title}`
+                    )
+                  ]
+                : [];
+            }
         }
       }
     },
@@ -677,11 +1085,16 @@ function baseChartOptions(scale) {
       },
 
       y: {
-        min: scale.min,
-        max: scale.max,
+        min:
+          scale.min,
+
+        max:
+          scale.max,
 
         ticks: {
-          callback: value => fmt(value)
+          callback:
+            value =>
+              fmt(value)
         }
       }
     }
@@ -689,187 +1102,304 @@ function baseChartOptions(scale) {
 }
 
 function renderCharts() {
-  const rows = getChartRows();
+  const rows =
+    getChartRows();
 
-  if (!rows.length) return;
+  if (
+    !rows.length
+  ) {
+    return;
+  }
 
-  const allRows = sortedSubscribers();
+  const allRows =
+    sortedSubscribers();
 
   const subScale =
-    fixedSubscriberScale(allRows);
+    fixedSubscriberScale(
+      allRows
+    );
 
   const newScale =
     fixedNewSubscriberScale();
 
   const labels =
-    rows.map(row => monthDay(row.date));
+    rows.map(
+      row =>
+        monthDay(
+          row.date
+        )
+    );
 
   const videoDates =
-    rows.map(row =>
-      chartVideoTitles(row.date).length
+    rows.map(
+      row =>
+        chartVideoTitles(
+          row.date
+        ).length
     );
 
   const pointColors =
-    videoDates.map(hasVideo =>
-      hasVideo ? "#FF3030" : "#FFF36A"
+    videoDates.map(
+      hasVideo =>
+        hasVideo
+          ? "#FF3030"
+          : "#FFF36A"
     );
 
   /* -----------------------------------------
      累計登録者
   ----------------------------------------- */
 
-  if (subsChart) {
+  if (
+    subsChart
+  ) {
     subsChart.destroy();
   }
 
-  subsChart = new Chart($("subsChart"), {
-    type: "line",
+  subsChart =
+    new Chart(
+      $("subsChart"),
+      {
+        type:
+          "line",
 
-    data: {
-      labels,
+        data: {
+          labels,
 
-      datasets: [{
-        data: rows.map(row => row.count),
+          datasets: [
+            {
+              data:
+                rows.map(
+                  row =>
+                    row.count
+                ),
 
-        borderColor: "#E7D400",
-        backgroundColor: "#E7D400",
+              borderColor:
+                "#E7D400",
 
-        pointBackgroundColor: pointColors,
+              backgroundColor:
+                "#E7D400",
 
-        /*
-         * 背景が透けて見えるように透明。
-         * 白い輪郭をなくして、線と丸の間に
-         * ごく小さい隙間を作る。
-         */
-        pointBorderColor: "transparent",
-        pointBorderWidth: 0,
+              pointBackgroundColor:
+                pointColors,
 
-        pointRadius: 4,
-        pointHoverRadius: 6,
+              pointBorderColor:
+                "transparent",
 
-        tension: 0.28,
-        borderWidth: 2.5
-      }]
-    },
+              pointBorderWidth:
+                0,
 
-    options: {
-      ...baseChartOptions(subScale),
+              pointRadius:
+                4,
 
-      plugins: {
-        ...baseChartOptions(subScale).plugins,
+              pointHoverRadius:
+                6,
 
-        tooltip: {
-          callbacks: {
-            title: items =>
-              items[0]
-                ? monthDay(rows[items[0].dataIndex].date)
-                : "",
+              tension:
+                0.28,
 
-            label: ctx =>
-              ` 登録者数：${fmt(ctx.raw)}人`,
+              borderWidth:
+                2.5
+            }
+          ]
+        },
 
-            afterBody: items => {
-              if (!items.length) return [];
+        options: {
+          ...baseChartOptions(
+            subScale
+          ),
 
-              const titles =
-                chartVideoTitles(
-                  rows[items[0].dataIndex].date
-                );
+          plugins: {
+            ...baseChartOptions(
+              subScale
+            ).plugins,
 
-              return titles.length
-                ? ["", ...titles.map(title => `🎬 ${title}`)]
-                : [];
+            tooltip: {
+              callbacks: {
+                title:
+                  items =>
+                    items[0]
+                      ? monthDay(
+                          rows[
+                            items[0]
+                              .dataIndex
+                          ].date
+                        )
+                      : "",
+
+                label:
+                  ctx =>
+                    ` 登録者数：${fmt(ctx.raw)}人`,
+
+                afterBody:
+                  items => {
+                    if (
+                      !items.length
+                    ) {
+                      return [];
+                    }
+
+                    const titles =
+                      chartVideoTitles(
+                        rows[
+                          items[0]
+                            .dataIndex
+                        ].date
+                      );
+
+                    return titles.length
+                      ? [
+                          "",
+                          ...titles.map(
+                            title =>
+                              `🎬 ${title}`
+                          )
+                        ]
+                      : [];
+                  }
+              }
             }
           }
         }
       }
-    }
-  });
+    );
 
   /* -----------------------------------------
      新規登録者
   ----------------------------------------- */
 
   const newVals =
-    rows.map(row =>
-      newSubscriberForDate(row.date)
+    rows.map(
+      row =>
+        newSubscriberForDate(
+          row.date
+        )
     );
 
   const periodTotal =
-    newVals.reduce((a, b) => a + b, 0);
+    newVals.reduce(
+      (a, b) =>
+        a + b,
+      0
+    );
 
   const periodAverage =
     newVals.length
-      ? periodTotal / newVals.length
+      ? periodTotal /
+        newVals.length
       : 0;
 
-  $("periodAverage").textContent =
+  $("periodAverage")
+    .textContent =
     `平均：${periodAverage.toFixed(1)}人/日`;
 
-  $("periodTotal").textContent =
+  $("periodTotal")
+    .textContent =
     `累計：${periodTotal >= 0 ? "+" : ""}${fmt(periodTotal)}人`;
 
-  if (newSubsChart) {
+  if (
+    newSubsChart
+  ) {
     newSubsChart.destroy();
   }
 
-  newSubsChart = new Chart($("newSubsChart"), {
-    type: "bar",
+  newSubsChart =
+    new Chart(
+      $("newSubsChart"),
+      {
+        type:
+          "bar",
 
-    data: {
-      labels,
+        data: {
+          labels,
 
-      datasets: [{
-        data: newVals,
+          datasets: [
+            {
+              data:
+                newVals,
 
-        backgroundColor:
-          videoDates.map(hasVideo =>
-            hasVideo
-              ? "#FF3030"
-              : "#FFF36A"
+              backgroundColor:
+                videoDates.map(
+                  hasVideo =>
+                    hasVideo
+                      ? "#FF3030"
+                      : "#FFF36A"
+                ),
+
+              borderWidth:
+                0,
+
+              borderColor:
+                "transparent",
+
+              borderRadius:
+                2
+            }
+          ]
+        },
+
+        options: {
+          ...baseChartOptions(
+            newScale
           ),
 
-        borderWidth: 0,
-        borderColor: "transparent",
-        borderRadius: 2
-      }]
-    },
+          plugins: {
+            ...baseChartOptions(
+              newScale
+            ).plugins,
 
-    options: {
-      ...baseChartOptions(newScale),
+            tooltip: {
+              callbacks: {
+                title:
+                  items =>
+                    items[0]
+                      ? monthDay(
+                          rows[
+                            items[0]
+                              .dataIndex
+                          ].date
+                        )
+                      : "",
 
-      plugins: {
-        ...baseChartOptions(newScale).plugins,
+                label:
+                  ctx =>
+                    ` 新規登録者数：${ctx.raw >= 0 ? "+" : ""}${fmt(ctx.raw)}人`,
 
-        tooltip: {
-          callbacks: {
-            title: items =>
-              items[0]
-                ? monthDay(rows[items[0].dataIndex].date)
-                : "",
+                afterBody:
+                  items => {
+                    if (
+                      !items.length
+                    ) {
+                      return [];
+                    }
 
-            label: ctx =>
-              ` 新規登録者数：${ctx.raw >= 0 ? "+" : ""}${fmt(ctx.raw)}人`,
+                    const titles =
+                      chartVideoTitles(
+                        rows[
+                          items[0]
+                            .dataIndex
+                        ].date
+                      );
 
-            afterBody: items => {
-              if (!items.length) return [];
-
-              const titles =
-                chartVideoTitles(
-                  rows[items[0].dataIndex].date
-                );
-
-              return titles.length
-                ? ["", ...titles.map(title => `🎬 ${title}`)]
-                : [];
+                    return titles.length
+                      ? [
+                          "",
+                          ...titles.map(
+                            title =>
+                              `🎬 ${title}`
+                          )
+                        ]
+                      : [];
+                  }
+              }
             }
           }
         }
       }
-    }
-  });
+    );
 
-  $("rangeLabel").textContent =
+  $("rangeLabel")
+    .textContent =
     `${monthDay(rows[0].date)} – ${monthDay(rows.at(-1).date)}`;
 }
 
@@ -878,58 +1408,81 @@ function renderCharts() {
 ========================================================= */
 
 function renderSubscriberHistory() {
-  const rows = sortedSubscribers();
+  const rows =
+    sortedSubscribers();
 
   const visibleRows =
-    rows.slice(
-      Math.max(
-        0,
-        rows.length - subscriberHistoryLimit
+    rows
+      .slice(
+        Math.max(
+          0,
+          rows.length -
+          subscriberHistoryLimit
+        )
       )
-    ).reverse();
+      .reverse();
 
-  $("subscriberHistoryBody").innerHTML =
-    visibleRows.map(row => {
-      const newCount =
-        newSubscriberForDate(row.date);
+  $("subscriberHistoryBody")
+    .innerHTML =
+    visibleRows
+      .map(
+        row => {
+          const newCount =
+            newSubscriberForDate(
+              row.date
+            );
 
-      return `
-        <tr>
-          <td>${jpDate(row.date)}</td>
+          return `
+            <tr>
 
-          <td class="history-count">
-            ${fmt(row.count)}人
-          </td>
+              <td>
+                ${jpDate(row.date)}
+              </td>
 
-          <td class="history-new ${
-            newCount < 0 ? "negative" : ""
-          }">
-            ${newCount >= 0 ? "+" : ""}${fmt(newCount)}人
-          </td>
+              <td class="history-count">
+                ${fmt(row.count)}人
+              </td>
 
-          <td>
-            <button
-              type="button"
-              class="history-edit-btn"
-              data-date="${escapeHtml(row.date)}"
-            >
-              編集
-            </button>
-          </td>
-        </tr>
-      `;
-    })
-    .join("");
+              <td
+                class="history-new ${
+                  newCount < 0
+                    ? "negative"
+                    : ""
+                }"
+              >
+                ${newCount >= 0 ? "+" : ""}${fmt(newCount)}人
+              </td>
+
+              <td>
+                <button
+                  type="button"
+                  class="history-edit-btn"
+                  data-date="${escapeHtml(row.date)}"
+                >
+                  編集
+                </button>
+              </td>
+
+            </tr>
+          `;
+        }
+      )
+      .join("");
 
   document
-    .querySelectorAll(".history-edit-btn")
-    .forEach(button => {
-      button.onclick = () => {
-        editSubscriberRecord(
-          button.dataset.date
-        );
-      };
-    });
+    .querySelectorAll(
+      ".history-edit-btn"
+    )
+    .forEach(
+      button => {
+        button.onclick =
+          () => {
+            editSubscriberRecord(
+              button.dataset.date
+            );
+          };
+      }
+    );
 
   const moreButton =
     $("showMoreSubscribers");
@@ -938,49 +1491,95 @@ function renderSubscriberHistory() {
     rows.length <=
     SUBSCRIBER_HISTORY_INITIAL_LIMIT
   ) {
-    moreButton.style.display = "none";
-  } else if (subscriberHistoryExpanded) {
-    moreButton.style.display = "";
-    moreButton.textContent = "閉じる";
-  } else {
-    moreButton.style.display = "";
-    moreButton.textContent =
-      `もっと見る（${
-        rows.length -
-        SUBSCRIBER_HISTORY_INITIAL_LIMIT
-      }日）`;
-  }
-}
+    moreButton.style.display =
+      "none";
 
-function editSubscriberRecord(date) {
-  const row =
-    sortedSubscribers().find(
-      item => item.date === date
-    );
-
-  if (!row) return;
-
-  const input = prompt(
-    `${jpDate(date)}の累計登録者数を入力してください。`,
-    String(row.count)
-  );
-
-  if (input === null) return;
-
-  const count = Number(
-    String(input).replace(/,/g, "").trim()
-  );
-
-  if (!Number.isFinite(count) || count < 0) {
-    alert("正しい登録者数を入力してください。");
     return;
   }
 
-  saveSubscriberOverride(date, Math.round(count));
+  moreButton.style.display =
+    "";
+
+  if (
+    subscriberHistoryLimit >=
+    rows.length
+  ) {
+    moreButton.textContent =
+      "閉じる";
+  } else {
+    const remaining =
+      rows.length -
+      subscriberHistoryLimit;
+
+    moreButton.textContent =
+      `もっと見る（あと${remaining}日）`;
+  }
+}
+
+function editSubscriberRecord(
+  date
+) {
+  const row =
+    sortedSubscribers()
+      .find(
+        item =>
+          item.date === date
+      );
+
+  if (
+    !row
+  ) {
+    return;
+  }
+
+  const input =
+    prompt(
+      `${jpDate(date)}の累計登録者数を入力してください。`,
+      String(
+        row.count
+      )
+    );
+
+  if (
+    input === null
+  ) {
+    return;
+  }
+
+  const count =
+    Number(
+      String(input)
+        .replace(
+          /,/g,
+          ""
+        )
+        .trim()
+    );
+
+  if (
+    !Number.isFinite(
+      count
+    ) ||
+    count < 0
+  ) {
+    alert(
+      "正しい登録者数を入力してください。"
+    );
+
+    return;
+  }
+
+  saveSubscriberOverride(
+    date,
+    Math.round(count)
+  );
 
   renderSummary();
+
   renderSubscriberHistory();
+
   renderCharts();
+
   renderTrendAnalysis();
 }
 
@@ -989,28 +1588,56 @@ function editSubscriberRecord(date) {
 ========================================================= */
 
 function getHistoricalAverage() {
-  const rows = sortedSubscribers();
+  const rows =
+    sortedSubscribers();
 
-  if (rows.length < 2) return 0;
+  if (
+    rows.length < 2
+  ) {
+    return 0;
+  }
 
-  const first = dateObj(rows[0].date);
-  const last = dateObj(rows.at(-1).date);
+  const first =
+    dateObj(
+      rows[0].date
+    );
 
-  const days = Math.max(
-    1,
-    Math.round((last - first) / 86400000)
-  );
+  const last =
+    dateObj(
+      rows.at(-1).date
+    );
+
+  const days =
+    Math.max(
+      1,
+      Math.round(
+        (last - first) /
+        86400000
+      )
+    );
 
   return (
-    Number(rows.at(-1).count) -
-    Number(rows[0].count)
+    Number(
+      rows.at(-1).count
+    ) -
+    Number(
+      rows[0].count
+    )
   ) / days;
 }
 
-function getWindowStats(n, endIndex = null) {
-  const rows = sortedSubscribers();
+function getWindowStats(
+  n,
+  endIndex = null
+) {
+  const rows =
+    sortedSubscribers();
 
-  if (!rows.length) return null;
+  if (
+    !rows.length
+  ) {
+    return null;
+  }
 
   const end =
     endIndex == null
@@ -1019,46 +1646,83 @@ function getWindowStats(n, endIndex = null) {
 
   const arr =
     rows.slice(
-      Math.max(0, end - n),
+      Math.max(
+        0,
+        end - n
+      ),
       end
     );
 
-  if (!arr.length) return null;
+  if (
+    !arr.length
+  ) {
+    return null;
+  }
 
   const startIndex =
-    Math.max(0, end - n);
+    Math.max(
+      0,
+      end - n
+    );
 
   const startCount =
     startIndex > 0
-      ? Number(rows[startIndex - 1].count)
-      : Number(arr[0].count);
+      ? Number(
+          rows[
+            startIndex - 1
+          ].count
+        )
+      : Number(
+          arr[0].count
+        );
 
   const total =
-    Number(arr.at(-1).count) -
+    Number(
+      arr.at(-1).count
+    ) -
     startCount;
 
   return {
-    n: arr.length,
+    n:
+      arr.length,
+
     total,
+
     avg:
-      total / Math.max(1, arr.length),
-    start: arr[0].date,
-    end: arr.at(-1).date
+      total /
+      Math.max(
+        1,
+        arr.length
+      ),
+
+    start:
+      arr[0].date,
+
+    end:
+      arr.at(-1).date
   };
 }
 
 function compareWindow(n) {
-  const rows = sortedSubscribers();
+  const rows =
+    sortedSubscribers();
 
-  const end = rows.length;
+  const end =
+    rows.length;
 
   const recent =
-    getWindowStats(n, end);
+    getWindowStats(
+      n,
+      end
+    );
 
   const previous =
     getWindowStats(
       n,
-      Math.max(0, end - n)
+      Math.max(
+        0,
+        end - n
+      )
     );
 
   if (
@@ -1072,19 +1736,31 @@ function compareWindow(n) {
   return {
     recent,
     previous,
+
     rate:
-      (recent.total - previous.total) /
-      Math.abs(previous.total) *
+      (
+        recent.total -
+        previous.total
+      ) /
+      Math.abs(
+        previous.total
+      ) *
       100
   };
 }
 
 function bestWindow(n) {
-  const rows = sortedSubscribers();
+  const rows =
+    sortedSubscribers();
 
-  if (rows.length < n) return null;
+  if (
+    rows.length < n
+  ) {
+    return null;
+  }
 
-  let best = null;
+  let best =
+    null;
 
   for (
     let end = n;
@@ -1092,13 +1768,18 @@ function bestWindow(n) {
     end++
   ) {
     const window =
-      getWindowStats(n, end);
+      getWindowStats(
+        n,
+        end
+      );
 
     if (
       !best ||
-      window.total > best.total
+      window.total >
+      best.total
     ) {
-      best = window;
+      best =
+        window;
     }
   }
 
@@ -1107,20 +1788,29 @@ function bestWindow(n) {
 
 function getLatestVideo() {
   return DATA.videos?.length
-    ? [...DATA.videos].sort(
-        (a, b) =>
-          String(b.date)
-            .localeCompare(String(a.date))
-      )[0]
+    ? [...DATA.videos]
+        .sort(
+          (a, b) =>
+            String(b.date)
+              .localeCompare(
+                String(a.date)
+              )
+        )[0]
     : null;
 }
 
-function getIncreaseAfterVideo(date, n) {
-  const rows = sortedSubscribers();
+function getIncreaseAfterVideo(
+  date,
+  n
+) {
+  const rows =
+    sortedSubscribers();
 
-  const start = dateObj(date);
+  const start =
+    dateObj(date);
 
-  const end = new Date(start);
+  const end =
+    new Date(start);
 
   end.setDate(
     end.getDate() + n
@@ -1128,35 +1818,54 @@ function getIncreaseAfterVideo(date, n) {
 
   const before =
     rows
-      .filter(row =>
-        dateObj(row.date) < start
+      .filter(
+        row =>
+          dateObj(
+            row.date
+          ) < start
       )
       .at(-1);
 
   const after =
     rows
-      .filter(row =>
-        dateObj(row.date) <= end
+      .filter(
+        row =>
+          dateObj(
+            row.date
+          ) <= end
       )
       .at(-1);
 
-  return before && after
-    ? Number(after.count) -
-      Number(before.count)
+  return (
+    before &&
+    after
+  )
+    ? Number(
+        after.count
+      ) -
+      Number(
+        before.count
+      )
     : null;
 }
 
 function generateTrendAnalysis() {
   const len =
-    DATA.subscribers?.length || 0;
+    DATA.subscribers?.length ||
+    0;
 
-  if (len < 2) {
+  if (
+    len < 2
+  ) {
     return "登録者データがまだ少ないため、今後のデータからチャンネルの傾向を分析します。";
   }
 
   const w7 =
     getWindowStats(
-      Math.min(7, len)
+      Math.min(
+        7,
+        len
+      )
     );
 
   const hist =
@@ -1165,30 +1874,38 @@ function generateTrendAnalysis() {
   const compareDays =
     Math.min(
       7,
-      Math.floor(len / 2)
+      Math.floor(
+        len / 2
+      )
     );
 
   const c7 =
-    compareWindow(compareDays);
+    compareWindow(
+      compareDays
+    );
 
-  let text = "";
+  let text =
+    "";
 
   if (
     w7 &&
-    w7.avg > hist * 1.5 &&
+    w7.avg >
+      hist * 1.5 &&
     w7.avg > 2
   ) {
     text =
       "🚀 最近は登録者の伸びが大きく加速しています。";
   } else if (
     w7 &&
-    w7.avg > hist * 1.15
+    w7.avg >
+      hist * 1.15
   ) {
     text =
       "📈 最近は歴代平均を上回るペースで登録者が増えています。";
   } else if (
     w7 &&
-    w7.avg < hist * 0.65 &&
+    w7.avg <
+      hist * 0.65 &&
     hist > 1
   ) {
     text =
@@ -1199,24 +1916,34 @@ function generateTrendAnalysis() {
   }
 
   if (c7) {
-    if (c7.rate >= 50) {
+    if (
+      c7.rate >=
+      50
+    ) {
       text +=
         ` 直近${w7.n}日間は平均＋${w7.avg.toFixed(1)}人/日で、前の${c7.previous.n}日間より${Math.abs(c7.rate).toFixed(0)}%増加しています。`;
-    } else if (c7.rate <= -30) {
+
+    } else if (
+      c7.rate <=
+      -30
+    ) {
       text +=
         ` 直近${w7.n}日間の平均は＋${w7.avg.toFixed(1)}人/日で、前の${c7.previous.n}日間から${Math.abs(c7.rate).toFixed(0)}%減少しています。`;
+
     } else {
       text +=
         ` 直近${w7.n}日間は平均＋${w7.avg.toFixed(1)}人/日のペースです。`;
     }
   }
 
-  const best = bestWindow(7);
+  const best =
+    bestWindow(7);
 
   if (
     best &&
     w7 &&
-    best.total === w7.total &&
+    best.total ===
+      w7.total &&
     best.total > 0
   ) {
     text +=
@@ -1226,7 +1953,9 @@ function generateTrendAnalysis() {
   const latestVideo =
     getLatestVideo();
 
-  if (latestVideo) {
+  if (
+    latestVideo
+  ) {
     const after =
       getIncreaseAfterVideo(
         latestVideo.date,
@@ -1249,7 +1978,9 @@ function renderTrendAnalysis() {
   const element =
     $("trendAnalysis");
 
-  if (element) {
+  if (
+    element
+  ) {
     element.textContent =
       generateTrendAnalysis();
   }
@@ -1260,33 +1991,49 @@ function renderTrendAnalysis() {
 ========================================================= */
 
 function openCollage() {
-  $("collageModal").classList.add("open");
-  $("collageModal").setAttribute(
-    "aria-hidden",
-    "false"
-  );
+  $("collageModal")
+    .classList
+    .add("open");
+
+  $("collageModal")
+    .setAttribute(
+      "aria-hidden",
+      "false"
+    );
 
   buildCollagePages();
 }
 
 function closeCollage() {
-  $("collageModal").classList.remove("open");
-  $("collageModal").setAttribute(
-    "aria-hidden",
-    "true"
-  );
+  $("collageModal")
+    .classList
+    .remove("open");
+
+  $("collageModal")
+    .setAttribute(
+      "aria-hidden",
+      "true"
+    );
 }
 
 function buildCollagePages() {
   const pages =
     Math.max(
       1,
-      Math.ceil(DATA.videos.length / 100)
+      Math.ceil(
+        DATA.videos.length /
+        100
+      )
     );
 
-  $("collagePages").innerHTML =
+  $("collagePages")
+    .innerHTML =
     Array.from(
-      { length: pages },
+      {
+        length:
+          pages
+      },
+
       (_, index) => `
         <button
           class="page-btn ${index === 0 ? "active" : ""}"
@@ -1298,45 +2045,69 @@ function buildCollagePages() {
           )}
         </button>
       `
-    ).join("");
+    )
+      .join("");
 
   document
-    .querySelectorAll(".page-btn")
-    .forEach(button => {
-      button.onclick = () =>
-        renderCollage(
-          Number(button.dataset.page)
-        );
-    });
+    .querySelectorAll(
+      ".page-btn"
+    )
+    .forEach(
+      button => {
+        button.onclick =
+          () =>
+            renderCollage(
+              Number(
+                button.dataset.page
+              )
+            );
+      }
+    );
 
   renderCollage(0);
 }
 
-function renderCollage(page) {
+function renderCollage(
+  page
+) {
   document
-    .querySelectorAll(".page-btn")
-    .forEach(button => {
-      button.classList.toggle(
-        "active",
-        Number(button.dataset.page) === page
-      );
-    });
+    .querySelectorAll(
+      ".page-btn"
+    )
+    .forEach(
+      button => {
+        button.classList.toggle(
+          "active",
+          Number(
+            button.dataset.page
+          ) === page
+        );
+      }
+    );
 
   const list =
     DATA.videos
       .slice()
-      .sort((a, b) =>
-        String(a.date)
-          .localeCompare(String(b.date))
+      .sort(
+        (a, b) =>
+          String(a.date)
+            .localeCompare(
+              String(b.date)
+            )
       )
       .slice(
         page * 100,
-        page * 100 + 100
+        page * 100 +
+          100
       );
 
-  $("collageGrid").innerHTML =
+  $("collageGrid")
+    .innerHTML =
     Array.from(
-      { length: 100 },
+      {
+        length: 100
+      },
+
       (_, index) =>
         list[index]
           ? `
@@ -1354,70 +2125,79 @@ function renderCollage(page) {
               "
             ></div>
           `
-    ).join("");
+    )
+      .join("");
 
-  $("downloadCollage").dataset.page =
+  $("downloadCollage")
+    .dataset.page =
     page;
 }
 
 async function downloadCollage() {
   const page =
     Number(
-      $("downloadCollage").dataset.page || 0
+      $("downloadCollage")
+        .dataset.page ||
+      0
     );
 
   const list =
     DATA.videos
       .slice()
-      .sort((a, b) =>
-        String(a.date)
-          .localeCompare(String(b.date))
+      .sort(
+        (a, b) =>
+          String(a.date)
+            .localeCompare(
+              String(b.date)
+            )
       )
       .slice(
         page * 100,
-        page * 100 + 100
+        page * 100 +
+          100
       );
 
-  if (!list.length) return;
+  if (
+    !list.length
+  ) {
+    return;
+  }
 
-  /*
-   * 保存画像は
-   * 1サムネ = 320 × 180
-   * 必ず16:9で統一
-   */
-  const cellW = 320;
-  const cellH = 180;
+  const cellW =
+    320;
 
-  const columns = 10;
+  const cellH =
+    180;
 
-  /*
-   * 実際に必要な行数だけ作る。
-   *
-   * 22枚なら
-   * 10 + 10 + 2 = 3行
-   *
-   * 以前のように常に10行作らないので、
-   * 下の巨大な白い余白もなくなる。
-   */
+  const columns =
+    10;
+
   const rows =
-    Math.ceil(list.length / columns);
+    Math.ceil(
+      list.length /
+      columns
+    );
 
   const canvas =
-    document.createElement("canvas");
+    document.createElement(
+      "canvas"
+    );
 
   canvas.width =
-    cellW * columns;
+    cellW *
+    columns;
 
   canvas.height =
-    cellH * rows;
+    cellH *
+    rows;
 
   const ctx =
-    canvas.getContext("2d");
+    canvas.getContext(
+      "2d"
+    );
 
-  /*
-   * 空いているセル部分は白
-   */
-  ctx.fillStyle = "#fff";
+  ctx.fillStyle =
+    "#fff";
 
   ctx.fillRect(
     0,
@@ -1426,10 +2206,6 @@ async function downloadCollage() {
     canvas.height
   );
 
-  /*
-   * 画像を16:9の枠へ
-   * 「引き伸ばさず」に中央トリミングして描画する関数
-   */
   function drawImageCover(
     ctx,
     img,
@@ -1439,13 +2215,18 @@ async function downloadCollage() {
     height
   ) {
     const imageRatio =
-      img.naturalWidth / img.naturalHeight;
+      img.naturalWidth /
+      img.naturalHeight;
 
     const cellRatio =
-      width / height;
+      width /
+      height;
 
-    let sx = 0;
-    let sy = 0;
+    let sx =
+      0;
+
+    let sy =
+      0;
 
     let sourceWidth =
       img.naturalWidth;
@@ -1453,46 +2234,42 @@ async function downloadCollage() {
     let sourceHeight =
       img.naturalHeight;
 
-    /*
-     * 元画像のほうが横長
-     */
-    if (imageRatio > cellRatio) {
+    if (
+      imageRatio >
+      cellRatio
+    ) {
       sourceWidth =
-        img.naturalHeight * cellRatio;
+        img.naturalHeight *
+        cellRatio;
 
       sx =
-        (img.naturalWidth - sourceWidth) / 2;
-    }
-
-    /*
-     * 元画像のほうが縦長
-     *
-     * YouTubeのhqdefaultは
-     * 480×360になっていることがあるため、
-     * ここで上下をカットして16:9にする。
-     */
-    else if (imageRatio < cellRatio) {
+        (
+          img.naturalWidth -
+          sourceWidth
+        ) /
+        2;
+    } else if (
+      imageRatio <
+      cellRatio
+    ) {
       sourceHeight =
-        img.naturalWidth / cellRatio;
+        img.naturalWidth /
+        cellRatio;
 
       sy =
-        (img.naturalHeight - sourceHeight) / 2;
+        (
+          img.naturalHeight -
+          sourceHeight
+        ) /
+        2;
     }
 
     ctx.drawImage(
       img,
-
-      /*
-       * 元画像から切り出す範囲
-       */
       sx,
       sy,
       sourceWidth,
       sourceHeight,
-
-      /*
-       * Canvas上の描画位置
-       */
       x,
       y,
       width,
@@ -1512,15 +2289,19 @@ async function downloadCollage() {
         );
 
       const x =
-        (i % columns) * cellW;
+        (
+          i %
+          columns
+        ) *
+        cellW;
 
       const y =
-        Math.floor(i / columns) * cellH;
+        Math.floor(
+          i /
+          columns
+        ) *
+        cellH;
 
-      /*
-       * 通常のdrawImageではなく
-       * 16:9を維持する描画を使う
-       */
       drawImageCover(
         ctx,
         img,
@@ -1530,7 +2311,9 @@ async function downloadCollage() {
         cellH
       );
 
-    } catch (error) {
+    } catch (
+      error
+    ) {
       console.warn(
         "thumbnail skipped",
         list[i].thumbnail
@@ -1538,40 +2321,56 @@ async function downloadCollage() {
     }
   }
 
-  canvas.toBlob(blob => {
-    if (!blob) return;
+  canvas.toBlob(
+    blob => {
+      if (
+        !blob
+      ) {
+        return;
+      }
 
-    const a =
-      document.createElement("a");
+      const a =
+        document.createElement(
+          "a"
+        );
 
-    const url =
-      URL.createObjectURL(blob);
+      const url =
+        URL.createObjectURL(
+          blob
+        );
 
-    a.href = url;
+      a.href =
+        url;
 
-    a.download =
-      `thumbnail-collection-${page * 100 + 1}-${Math.min(
-        page * 100 + list.length,
-        DATA.videos.length
-      )}.png`;
+      a.download =
+        `thumbnail-collection-${page * 100 + 1}-${Math.min(
+          page * 100 +
+          list.length,
+          DATA.videos.length
+        )}.png`;
 
-    a.click();
+      a.click();
 
-    /*
-     * クリック直後にURLを破棄すると
-     * 一部ブラウザで保存に失敗する可能性があるので
-     * 少し待ってから破棄する
-     */
-    setTimeout(() => {
-      URL.revokeObjectURL(url);
-    }, 1000);
+      setTimeout(
+        () => {
+          URL.revokeObjectURL(
+            url
+          );
+        },
+        1000
+      );
 
-  }, "image/png");
+    },
+    "image/png"
+  );
 }
 
 function loadImage(src) {
   return new Promise(
-    (resolve, reject) => {
+    (
+      resolve,
+      reject
+    ) => {
       const img =
         new Image();
 
@@ -1579,12 +2378,14 @@ function loadImage(src) {
         "anonymous";
 
       img.onload =
-        () => resolve(img);
+        () =>
+          resolve(img);
 
       img.onerror =
         reject;
 
-      img.src = src;
+      img.src =
+        src;
     }
   );
 }
@@ -1595,50 +2396,71 @@ function loadImage(src) {
 
 function setupRange() {
   document
-    .querySelectorAll(".preset-group button")
-    .forEach(button => {
-      button.onclick = () => {
-        const value =
-          button.dataset.range;
+    .querySelectorAll(
+      ".preset-group button"
+    )
+    .forEach(
+      button => {
+        button.onclick =
+          () => {
+            const value =
+              button.dataset.range;
 
-        rangeDays =
-          value === "all"
-            ? "all"
-            : Number(value);
+            rangeDays =
+              value === "all"
+                ? "all"
+                : Number(
+                    value
+                  );
 
-        rangeOffset = 0;
+            rangeOffset =
+              0;
 
-        document
-          .querySelectorAll(
-            ".preset-group button"
-          )
-          .forEach(other => {
-            other.classList.toggle(
-              "selected",
-              other === button
-            );
-          });
+            document
+              .querySelectorAll(
+                ".preset-group button"
+              )
+              .forEach(
+                other => {
+                  other
+                    .classList
+                    .toggle(
+                      "selected",
+                      other ===
+                        button
+                    );
+                }
+              );
+
+            renderCharts();
+          };
+      }
+    );
+
+  $("prevRange").onclick =
+    () => {
+      if (
+        rangeDays !==
+        "all"
+      ) {
+        rangeOffset--;
 
         renderCharts();
-      };
-    });
+      }
+    };
 
-  $("prevRange").onclick = () => {
-    if (rangeDays !== "all") {
-      rangeOffset--;
-      renderCharts();
-    }
-  };
+  $("nextRange").onclick =
+    () => {
+      if (
+        rangeDays !==
+          "all" &&
+        rangeOffset < 0
+      ) {
+        rangeOffset++;
 
-  $("nextRange").onclick = () => {
-    if (
-      rangeDays !== "all" &&
-      rangeOffset < 0
-    ) {
-      rangeOffset++;
-      renderCharts();
-    }
-  };
+        renderCharts();
+      }
+    };
 }
 
 /* =========================================================
@@ -1647,40 +2469,66 @@ function setupRange() {
 
 function setupNav() {
   document
-    .querySelectorAll(".switch-btn")
-    .forEach(button => {
-      button.onclick = () => {
-        document
-          .querySelectorAll(".switch-btn")
-          .forEach(other =>
-            other.classList.toggle(
-              "active",
-              other === button
-            )
-          );
+    .querySelectorAll(
+      ".switch-btn"
+    )
+    .forEach(
+      button => {
+        button.onclick =
+          () => {
+            document
+              .querySelectorAll(
+                ".switch-btn"
+              )
+              .forEach(
+                other =>
+                  other
+                    .classList
+                    .toggle(
+                      "active",
+                      other ===
+                        button
+                    )
+              );
 
-        document
-          .querySelectorAll(".page")
-          .forEach(page =>
-            page.classList.remove("active")
-          );
+            document
+              .querySelectorAll(
+                ".page"
+              )
+              .forEach(
+                page =>
+                  page
+                    .classList
+                    .remove(
+                      "active"
+                    )
+              );
 
-        const target =
-          button.dataset.page === "videos"
-            ? "videosPage"
-            : "analyticsPage";
+            const target =
+              button
+                .dataset.page ===
+              "videos"
+                ? "videosPage"
+                : "analyticsPage";
 
-        $(target).classList.add("active");
+            $(target)
+              .classList
+              .add(
+                "active"
+              );
 
-        if (
-          button.dataset.page ===
-          "analytics"
-        ) {
-          renderCharts();
-          renderSubscriberHistory();
-        }
-      };
-    });
+            if (
+              button
+                .dataset.page ===
+              "analytics"
+            ) {
+              renderCharts();
+
+              renderSubscriberHistory();
+            }
+          };
+      }
+    );
 }
 
 /* =========================================================
@@ -1688,10 +2536,12 @@ function setupNav() {
 ========================================================= */
 
 function setupModals() {
-  $("closeVideoDetail").onclick =
+  $("closeVideoDetail")
+    .onclick =
     closeVideoDetail;
 
-  $("videoDetailModal").onclick =
+  $("videoDetailModal")
+    .onclick =
     event => {
       if (
         event.target.id ===
@@ -1701,10 +2551,12 @@ function setupModals() {
       }
     };
 
-  $("closeCollage").onclick =
+  $("closeCollage")
+    .onclick =
     closeCollage;
 
-  $("collageModal").onclick =
+  $("collageModal")
+    .onclick =
     event => {
       if (
         event.target.id ===
@@ -1714,15 +2566,22 @@ function setupModals() {
       }
     };
 
-  document.addEventListener(
-    "keydown",
-    event => {
-      if (event.key !== "Escape") return;
+  document
+    .addEventListener(
+      "keydown",
+      event => {
+        if (
+          event.key !==
+          "Escape"
+        ) {
+          return;
+        }
 
-      closeVideoDetail();
-      closeCollage();
-    }
-  );
+        closeVideoDetail();
+
+        closeCollage();
+      }
+    );
 }
 
 /* =========================================================
@@ -1730,17 +2589,43 @@ function setupModals() {
 ========================================================= */
 
 function setupSubscriberHistory() {
-  $("showMoreSubscribers").onclick =
+  $("showMoreSubscribers")
+    .onclick =
     () => {
-      subscriberHistoryExpanded =
-        !subscriberHistoryExpanded;
+      const rows =
+        sortedSubscribers();
 
-      if (subscriberHistoryExpanded) {
-        subscriberHistoryLimit =
-          sortedSubscribers().length;
-      } else {
+      /*
+       * 全件表示済みなら
+       * 最新5件に戻す
+       */
+      if (
+        subscriberHistoryLimit >=
+        rows.length
+      ) {
         subscriberHistoryLimit =
           SUBSCRIBER_HISTORY_INITIAL_LIMIT;
+      }
+
+      /*
+       * まだ残っている場合は
+       * 10件ずつ追加
+       */
+      else {
+        subscriberHistoryLimit +=
+          SUBSCRIBER_HISTORY_STEP;
+
+        /*
+         * 最後だけ残り件数が10未満なら
+         * 行数を超えないように調整
+         */
+        if (
+          subscriberHistoryLimit >
+          rows.length
+        ) {
+          subscriberHistoryLimit =
+            rows.length;
+        }
       }
 
       renderSubscriberHistory();
@@ -1755,15 +2640,24 @@ async function init() {
   try {
     const response =
       await fetch(
-        "data.json?ts=" + Date.now(),
+        "data.json?ts=" +
+          Date.now(),
         {
-          cache: "no-store"
+          cache:
+            "no-store"
         }
       );
 
-    DATA = await response.json();
-  } catch (error) {
-    console.error(error);
+    DATA =
+      await response.json();
+
+  } catch (
+    error
+  ) {
+    console.error(
+      error
+    );
+
     return;
   }
 
@@ -1791,16 +2685,20 @@ async function init() {
 
   setupSubscriberHistory();
 
-  $("sortSelect").onchange =
+  $("sortSelect")
+    .onchange =
     renderVideos;
 
-  $("tagSelect").onchange =
+  $("tagSelect")
+    .onchange =
     renderVideos;
 
-  $("openCollage").onclick =
+  $("openCollage")
+    .onclick =
     openCollage;
 
-  $("downloadCollage").onclick =
+  $("downloadCollage")
+    .onclick =
     downloadCollage;
 }
 
