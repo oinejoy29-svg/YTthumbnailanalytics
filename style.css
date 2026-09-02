@@ -1458,3 +1458,52 @@ select:focus{
   padding-bottom: 18px;
   min-height: 0;
 }
+
+/* =========================
+   MOBILE CHART RANGE 1 LINE
+========================= */
+
+@media (max-width: 768px){
+
+  .range-bar{
+    width:100%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    flex-wrap:nowrap;
+    gap:5px;
+  }
+
+  .range-bar strong{
+    flex:1;
+    min-width:0;
+    font-size:10px;
+    white-space:nowrap;
+    text-align:center;
+  }
+
+  .arrow-btn{
+    flex:0 0 auto;
+    width:28px;
+    height:28px;
+    font-size:19px;
+  }
+
+  .preset-group{
+    width:auto;
+    margin-left:4px;
+    display:flex;
+    flex:0 0 auto;
+    justify-content:flex-end;
+    gap:3px;
+  }
+
+  .preset-group button{
+    flex:0 0 auto;
+    padding:4px 7px;
+    font-size:9px;
+    line-height:1.2;
+    white-space:nowrap;
+  }
+
+}
