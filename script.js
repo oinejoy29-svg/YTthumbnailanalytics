@@ -1479,40 +1479,8 @@ function renderSubscriberHistory() {
   const moreButton =
     $("showMoreSubscribers");
 
-  let closeButton =
+  const closeButton =
     $("closeSubscribers");
-
-  if (!closeButton) {
-    closeButton =
-      document.createElement(
-        "button"
-      );
-
-    closeButton.id =
-      "closeSubscribers";
-
-    closeButton.className =
-      "more-btn";
-
-    closeButton.type =
-      "button";
-
-    closeButton.textContent =
-      "閉じる";
-
-    moreButton.insertAdjacentElement(
-      "afterend",
-      closeButton
-    );
-
-    closeButton.onclick =
-      () => {
-        subscriberHistoryLimit =
-          SUBSCRIBER_HISTORY_INITIAL_LIMIT;
-
-        renderSubscriberHistory();
-      };
-  }
 
   if (
     rows.length <=
@@ -2644,6 +2612,15 @@ function setupSubscriberHistory() {
         subscriberHistoryLimit =
           rows.length;
       }
+
+      renderSubscriberHistory();
+    };
+
+  $("closeSubscribers")
+    .onclick =
+    () => {
+      subscriberHistoryLimit =
+        SUBSCRIBER_HISTORY_INITIAL_LIMIT;
 
       renderSubscriberHistory();
     };
