@@ -17,11 +17,10 @@
       <h1>#切り抜くぞニアジョイ</h1>
     </div>
     <div class="header-info">
-      <div class="analytics-label">YouTube analytics</div>
+      <div class="analytics-label"><span class="desktop-analytics">YouTube analytics</span><span class="mobile-analytics">YouTube archive &amp; analytics</span></div>
       <div class="header-meta">
-        <span id="periodText">2026/4/3 〜 —</span>
-        <span id="dayCount">（—日）</span>
-        <span class="updated">最終更新：<span id="updatedAt">—</span></span>
+        <span id="periodText">2026/4/3～—</span><span id="dayCount">（—日）</span>
+        <span class="updated"><span class="updated-label">最終更新:</span> <span id="updatedAtDesktop">—</span><span id="updatedAtMobile">—</span></span>
       </div>
     </div>
   </header>
@@ -85,17 +84,7 @@
         </article>
       </div>
 
-      <section class="memo-card">
-        <div class="memo-head">
-          <div>
-            <span class="section-kicker">AUTOMATIC ANALYSIS</span>
-            <h2>一言分析</h2>
-          </div>
-          <span class="auto-badge">自動更新</span>
-        </div>
-        <div id="trendAnalysis" class="trend-analysis">登録者データを分析しています…</div>
-        <p class="memo-note">最近の登録者の増加ペースや過去との比較から自動生成しています。</p>
-      </section>
+      <div id="trendAnalysis" class="trend-analysis" aria-live="polite">登録者データを分析しています…</div>
 
       <section class="charts">
         <div class="range-bar">
