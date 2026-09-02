@@ -14,7 +14,7 @@ on:
     # 23:50 JST
     - cron: '50 14 * * *'
 
-  # GitHub上から手動実行できるようにする
+  # GitHubから手動実行
   workflow_dispatch:
 
 permissions:
@@ -25,29 +25,25 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # GitHubリポジトリのファイルを取得
       - name: Checkout
         uses: actions/checkout@v4
 
-      # Pythonをセットアップ
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.x'
 
-      # 必要なライブラリをインストール
       - name: Install dependencies
         run: |
           pip install requests
 
-      # YouTube APIからデータを取得
       - name: Update data
         env:
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+          YOUTUBE_CHANNEL_ID: UCiLmCoftZHWXSFuQlnEJSsQ
         run: |
           python update_data.py
 
-      # 更新されたdata.jsonをGitHubに保存
       - name: Commit and push changes
         run: |
           git config user.name "github-actions[bot]"
