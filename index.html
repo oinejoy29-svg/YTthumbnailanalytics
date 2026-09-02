@@ -1,3 +1,4 @@
+```html
 <!doctype html>
 <html lang="ja">
 <head>
@@ -5,135 +6,418 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#EFEAE3">
   <title>#切り抜くぞニアジョイ</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&family=Noto+Sans+JP:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+
+  <!-- =========================
+       HEADER
+  ========================== -->
   <header class="site-header">
     <div class="brand-block">
-      <div class="eyebrow">≒JOY / YouTube archive & analytics</div>
+      <div class="eyebrow">≒JOY / YouTube archive &amp; analytics</div>
       <h1>#切り抜くぞニアジョイ</h1>
     </div>
+
     <div class="header-info">
-      <div class="analytics-label"><span class="desktop-analytics">YouTube analytics</span><span class="mobile-analytics">YouTube archive &amp; analytics</span></div>
+      <div class="analytics-label">
+        <span class="desktop-analytics">YouTube analytics</span>
+        <span class="mobile-analytics">YouTube archive &amp; analytics</span>
+      </div>
+
       <div class="header-meta">
-        <span id="periodText">2026/4/3～—</span><span id="dayCount">（—日）</span>
-        <span class="updated"><span class="updated-label">最終更新:</span> <span id="updatedAtDesktop">—</span><span id="updatedAtMobile">—</span></span>
+        <span id="periodText">2026/4/3～—</span>
+        <span id="dayCount">（—日）</span>
+
+        <span class="updated">
+          <span class="updated-label">最終更新:</span>
+          <span id="updatedAtDesktop">—</span>
+          <span id="updatedAtMobile">—</span>
+        </span>
       </div>
     </div>
   </header>
 
+
+  <!-- =========================
+       PAGE SWITCH
+  ========================== -->
   <nav class="page-switch" aria-label="ページ切り替え">
-    <button class="switch-btn active" data-page="videos">Video collections</button>
-    <button class="switch-btn" data-page="analytics">Subscribers analytics</button>
+    <button class="switch-btn active" data-page="videos">
+      Video collections
+    </button>
+
+    <button class="switch-btn" data-page="analytics">
+      Subscribers analytics
+    </button>
   </nav>
 
+
   <main>
+
+    <!-- =========================
+         VIDEO PAGE
+    ========================== -->
     <section id="videosPage" class="page active">
+
       <div class="rolling" aria-label="動画サムネイル">
         <div class="lane" id="lane0"></div>
         <div class="lane reverse" id="lane1"></div>
         <div class="lane" id="lane2"></div>
       </div>
 
-      <button class="collection-card" id="openCollage" type="button" aria-label="thumbnail collectionを開く">
+
+      <!-- Thumbnail collection -->
+      <button
+        class="collection-card"
+        id="openCollage"
+        type="button"
+        aria-label="thumbnail collectionを開く"
+      >
         <span class="section-kicker">THUMBNAIL ARCHIVE</span>
-        <span class="collection-title">thumbnail collection <span aria-hidden="true">→</span></span>
+        <span class="collection-title">
+          thumbnail collection
+          <span aria-hidden="true">→</span>
+        </span>
       </button>
 
+
+      <!-- Video list -->
       <section class="video-section">
+
         <div class="section-heading">
           <div>
             <span class="section-kicker">VIDEO LIST</span>
             <h2>Videos</h2>
           </div>
+
           <div class="filters">
             <select id="sortSelect" aria-label="並び替え">
               <option value="popular">人気順</option>
-              <option value="newest">新しい順</option>
+              <option value="newest" selected>新しい順</option>
               <option value="oldest">古い順</option>
               <option value="longest">再生時間が長い順</option>
               <option value="shortest">再生時間が短い順</option>
             </select>
+
             <select id="tagSelect" aria-label="メンバー絞り込み">
               <option value="">すべてのメンバー</option>
             </select>
           </div>
         </div>
+
         <div id="videoGrid" class="video-grid"></div>
+
       </section>
     </section>
 
+
+
+    <!-- =========================
+         ANALYTICS PAGE
+    ========================== -->
     <section id="analyticsPage" class="page">
+
+      <!-- Summary -->
       <div class="summary-grid">
+
         <article class="summary-card">
           <span>現在の登録者数</span>
           <strong id="currentSubs">—</strong>
         </article>
+
+
         <article class="summary-card">
           <span>最新日の新規登録者数</span>
+
           <strong id="latestNew">—</strong>
+
           <small id="latestDate">最新日：—</small>
-          <small>平均：<b id="avgNew">—</b>人/日</small>
+
+          <small>
+            平均：<b id="avgNew">—</b>人/日
+          </small>
         </article>
+
+
         <article class="summary-card">
           <span>動画本数</span>
           <strong id="videoCount">—</strong>
         </article>
+
       </div>
 
-      <div id="trendAnalysis" class="trend-analysis" aria-live="polite">登録者データを分析しています…</div>
 
+      <!-- AI analysis -->
+      <div
+        id="trendAnalysis"
+        class="trend-analysis"
+        aria-live="polite"
+      >
+        登録者データを分析しています…
+      </div>
+
+
+
+      <!-- =========================
+           CHARTS
+      ========================== -->
       <section class="charts">
+
         <div class="range-bar">
-          <button class="arrow-btn" id="prevRange" aria-label="前の期間">‹</button>
+
+          <button
+            class="arrow-btn"
+            id="prevRange"
+            aria-label="前の期間"
+          >
+            ‹
+          </button>
+
           <strong id="rangeLabel">—</strong>
-          <button class="arrow-btn" id="nextRange" aria-label="次の期間">›</button>
+
+          <button
+            class="arrow-btn"
+            id="nextRange"
+            aria-label="次の期間"
+          >
+            ›
+          </button>
+
+
           <div class="preset-group">
-            <button data-range="7">7日</button>
-            <button data-range="30" class="selected">30日</button>
-            <button data-range="90">90日</button>
-            <button data-range="all">累計</button>
+
+            <!-- 初期表示は7日 -->
+            <button data-range="7" class="selected">
+              7日
+            </button>
+
+            <button data-range="30">
+              30日
+            </button>
+
+            <button data-range="90">
+              90日
+            </button>
+
+            <button data-range="all">
+              累計
+            </button>
+
           </div>
+
         </div>
+
+
+        <!-- Cumulative subscribers -->
         <article class="chart-card">
+
           <div class="chart-heading">
             <h3>累計登録者数</h3>
           </div>
-          <div class="chart-wrap"><canvas id="subsChart"></canvas></div>
-        </article>
-        <article class="chart-card">
-          <div class="chart-heading">
-            <h3>新規登録者数</h3>
-            <div class="period-stats"><span id="periodAverage">平均：—人/日</span><span id="periodTotal">累計：—人</span></div>
+
+          <div class="chart-wrap">
+            <canvas id="subsChart"></canvas>
           </div>
-          <div class="chart-wrap"><canvas id="newSubsChart"></canvas></div>
+
         </article>
+
+
+        <!-- New subscribers -->
+        <article class="chart-card">
+
+          <div class="chart-heading">
+
+            <h3>新規登録者数</h3>
+
+            <div class="period-stats">
+              <span id="periodAverage">
+                平均：—人/日
+              </span>
+
+              <span id="periodTotal">
+                累計：—人
+              </span>
+            </div>
+
+          </div>
+
+          <div class="chart-wrap">
+            <canvas id="newSubsChart"></canvas>
+          </div>
+
+        </article>
+
+
+        <!-- =========================
+             SUBSCRIBER HISTORY TABLE
+        ========================== -->
+        <section class="subscriber-history">
+
+          <div class="history-heading">
+            <div>
+              <span class="section-kicker">SUBSCRIBER HISTORY</span>
+              <h3>登録者推移</h3>
+            </div>
+          </div>
+
+
+          <div class="history-table-wrap">
+
+            <table class="history-table">
+
+              <thead>
+                <tr>
+                  <th>日にち</th>
+                  <th>累計登録者</th>
+                  <th>新規登録者</th>
+                  <th>編集</th>
+                </tr>
+              </thead>
+
+              <tbody id="subscriberHistoryBody">
+                <!-- script.jsで生成 -->
+              </tbody>
+
+            </table>
+
+          </div>
+
+
+          <button
+            id="showMoreSubscribers"
+            class="more-btn"
+            type="button"
+          >
+            もっと見る
+          </button>
+
+        </section>
+
       </section>
+
     </section>
+
   </main>
 
-  <div id="collageModal" class="modal" aria-hidden="true">
-    <div class="modal-inner">
+
+
+  <!-- =========================
+       VIDEO DETAIL MODAL
+  ========================== -->
+  <div
+    id="videoDetailModal"
+    class="modal video-detail-modal"
+    aria-hidden="true"
+  >
+
+    <div class="modal-inner video-detail-inner">
+
       <div class="modal-head">
+
         <div>
-          <span class="section-kicker">THUMBNAIL COLLECTION</span>
-          <h2>thumbnail collection</h2>
+          <span class="section-kicker">VIDEO DETAIL</span>
+          <h2>動画詳細</h2>
         </div>
-        <button id="closeCollage" class="close-btn" type="button">×</button>
+
+        <button
+          id="closeVideoDetail"
+          class="close-btn"
+          type="button"
+          aria-label="閉じる"
+        >
+          ×
+        </button>
+
       </div>
-      <div class="collage-toolbar">
-        <div id="collagePages"></div>
-        <button class="primary-btn" id="downloadCollage" type="button">画像を保存</button>
+
+
+      <div id="videoDetailContent" class="video-detail-content">
+        <!-- script.jsで生成 -->
       </div>
-      <div id="collageGrid" class="collage-grid"></div>
-      <p class="collage-note">古い動画から順に左上へ配置しています。空きセルは白のままです。</p>
+
     </div>
+
   </div>
 
+
+
+  <!-- =========================
+       COLLAGE MODAL
+  ========================== -->
+  <div
+    id="collageModal"
+    class="modal"
+    aria-hidden="true"
+  >
+
+    <div class="modal-inner">
+
+      <div class="modal-head">
+
+        <div>
+          <span class="section-kicker">
+            THUMBNAIL COLLECTION
+          </span>
+
+          <h2>thumbnail collection</h2>
+        </div>
+
+        <button
+          id="closeCollage"
+          class="close-btn"
+          type="button"
+          aria-label="閉じる"
+        >
+          ×
+        </button>
+
+      </div>
+
+
+      <div class="collage-toolbar">
+
+        <div id="collagePages"></div>
+
+        <button
+          class="primary-btn"
+          id="downloadCollage"
+          type="button"
+        >
+          画像を保存
+        </button>
+
+      </div>
+
+
+      <div
+        id="collageGrid"
+        class="collage-grid"
+      ></div>
+
+
+      <p class="collage-note">
+        古い動画から順に左上へ配置しています。空きセルは白のままです。
+      </p>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- =========================
+       SCRIPTS
+  ========================== -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
   <script src="script.js"></script>
+
 </body>
 </html>
+```
