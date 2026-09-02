@@ -18,7 +18,13 @@ let newSubsChart = null;
 
 let rangeDays = 7;
 let rangeOffset = 0;
-let subscriberHistoryLimit = 5;
+
+const SUBSCRIBER_HISTORY_INITIAL_LIMIT = 5;
+
+let subscriberHistoryLimit =
+  SUBSCRIBER_HISTORY_INITIAL_LIMIT;
+
+let subscriberHistoryExpanded = false;
 
 const $ = id => document.getElementById(id);
 
@@ -928,12 +934,21 @@ function renderSubscriberHistory() {
   const moreButton =
     $("showMoreSubscribers");
 
-  if (rows.length <= subscriberHistoryLimit) {
+  if (
+    rows.length <=
+    SUBSCRIBER_HISTORY_INITIAL_LIMIT
+  ) {
     moreButton.style.display = "none";
+  } else if (subscriberHistoryExpanded) {
+    moreButton.style.display = "";
+    moreButton.textContent = "閉じる";
   } else {
     moreButton.style.display = "";
     moreButton.textContent =
-      `もっと見る（${rows.length - subscriberHistoryLimit}日）`;
+      `もっと見る（${
+        rows.length -
+        SUBSCRIBER_HISTORY_INITIAL_LIMIT
+      }日）`;
   }
 }
 
@@ -1717,7 +1732,17 @@ function setupModals() {
 function setupSubscriberHistory() {
   $("showMoreSubscribers").onclick =
     () => {
-      subscriberHistoryLimit += 10;
+      subscriberHistoryExpanded =
+        !subscriberHistoryExpanded;
+
+      if (subscriberHistoryExpanded) {
+        subscriberHistoryLimit =
+          sortedSubscribers().length;
+      } else {
+        subscriberHistoryLimit =
+          SUBSCRIBER_HISTORY_INITIAL_LIMIT;
+      }
+
       renderSubscriberHistory();
     };
 }
