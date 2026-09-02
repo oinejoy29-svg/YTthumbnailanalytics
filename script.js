@@ -2592,6 +2592,81 @@ function setupModals() {
 }
 
 /* =========================================================
+   Mobile chart tooltip close
+========================================================= */
+
+function setupMobileChartTooltipClose() {
+  document.addEventListener(
+    "touchstart",
+    event => {
+      const subsCanvas =
+        $("subsChart");
+
+      const newSubsCanvas =
+        $("newSubsChart");
+
+      const touchedSubsChart =
+        subsCanvas &&
+        subsCanvas.contains(
+          event.target
+        );
+
+      const touchedNewSubsChart =
+        newSubsCanvas &&
+        newSubsCanvas.contains(
+          event.target
+        );
+
+      if (
+        touchedSubsChart ||
+        touchedNewSubsChart
+      ) {
+        return;
+      }
+
+      if (subsChart) {
+        subsChart.setActiveElements([]);
+
+        if (
+          subsChart.tooltip
+        ) {
+          subsChart.tooltip.setActiveElements(
+            [],
+            {
+              x: 0,
+              y: 0
+            }
+          );
+        }
+
+        subsChart.update("none");
+      }
+
+      if (newSubsChart) {
+        newSubsChart.setActiveElements([]);
+
+        if (
+          newSubsChart.tooltip
+        ) {
+          newSubsChart.tooltip.setActiveElements(
+            [],
+            {
+              x: 0,
+              y: 0
+            }
+          );
+        }
+
+        newSubsChart.update("none");
+      }
+    },
+    {
+      passive: true
+    }
+  );
+}
+
+/* =========================================================
    Subscriber history
 ========================================================= */
 
@@ -2678,6 +2753,8 @@ async function init() {
   setupModals();
 
   setupSubscriberHistory();
+
+  setupMobileChartTooltipClose();
 
   $("sortSelect")
     .onchange =
