@@ -1,8 +1,20 @@
-name: Update YouTube data
+name: Update YouTube Data
 
 on:
   schedule:
-    - cron: "0 3,7,11,15 * * *" # JST 12:00 / 16:00 / 20:00 / 00:00
+    # 12:00 JST
+    - cron: '0 3 * * *'
+
+    # 16:00 JST
+    - cron: '0 7 * * *'
+
+    # 20:00 JST
+    - cron: '0 11 * * *'
+
+    # 23:50 JST
+    - cron: '50 14 * * *'
+
+  # GitHub上から手動実行できるようにする
   workflow_dispatch:
 
 permissions:
@@ -11,32 +23,41 @@ permissions:
 jobs:
   update:
     runs-on: ubuntu-latest
+
     steps:
+      # GitHubリポジトリのファイルを取得
       - name: Checkout
         uses: actions/checkout@v4
 
+      # Pythonをセットアップ
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.x"
+          python-version: '3.x'
 
+      # 必要なライブラリをインストール
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: |
+          pip install requests
 
-      - name: Update data.json
+      # YouTube APIからデータを取得
+      - name: Update data
         env:
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
-          YOUTUBE_CHANNEL_ID: ${{ secrets.YOUTUBE_CHANNEL_ID }}
-        run: python update_data.py
+        run: |
+          python update_data.py
 
-      - name: Commit and push
+      # 更新されたdata.jsonをGitHubに保存
+      - name: Commit and push changes
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
           git add data.json
+
           if git diff --cached --quiet; then
-            echo "No data changes"
-            exit 0
+            echo "No changes to commit."
+          else
+            git commit -m "Update YouTube data"
+            git push
           fi
-          git commit -m "Update YouTube data"
-          git push
