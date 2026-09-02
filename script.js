@@ -1363,18 +1363,45 @@ async function downloadCollage() {
         page * 100 + 100
       );
 
+  if (!list.length) return;
+
+  /*
+   * 保存画像は
+   * 1サムネ = 320 × 180
+   * 必ず16:9で統一
+   */
   const cellW = 320;
   const cellH = 180;
+
+  const columns = 10;
+
+  /*
+   * 実際に必要な行数だけ作る。
+   *
+   * 22枚なら
+   * 10 + 10 + 2 = 3行
+   *
+   * 以前のように常に10行作らないので、
+   * 下の巨大な白い余白もなくなる。
+   */
+  const rows =
+    Math.ceil(list.length / columns);
 
   const canvas =
     document.createElement("canvas");
 
-  canvas.width = cellW * 10;
-  canvas.height = cellH * 10;
+  canvas.width =
+    cellW * columns;
+
+  canvas.height =
+    cellH * rows;
 
   const ctx =
     canvas.getContext("2d");
 
+  /*
+   * 空いているセル部分は白
+   */
   ctx.fillStyle = "#fff";
 
   ctx.fillRect(
@@ -1383,6 +1410,80 @@ async function downloadCollage() {
     canvas.width,
     canvas.height
   );
+
+  /*
+   * 画像を16:9の枠へ
+   * 「引き伸ばさず」に中央トリミングして描画する関数
+   */
+  function drawImageCover(
+    ctx,
+    img,
+    x,
+    y,
+    width,
+    height
+  ) {
+    const imageRatio =
+      img.naturalWidth / img.naturalHeight;
+
+    const cellRatio =
+      width / height;
+
+    let sx = 0;
+    let sy = 0;
+
+    let sourceWidth =
+      img.naturalWidth;
+
+    let sourceHeight =
+      img.naturalHeight;
+
+    /*
+     * 元画像のほうが横長
+     */
+    if (imageRatio > cellRatio) {
+      sourceWidth =
+        img.naturalHeight * cellRatio;
+
+      sx =
+        (img.naturalWidth - sourceWidth) / 2;
+    }
+
+    /*
+     * 元画像のほうが縦長
+     *
+     * YouTubeのhqdefaultは
+     * 480×360になっていることがあるため、
+     * ここで上下をカットして16:9にする。
+     */
+    else if (imageRatio < cellRatio) {
+      sourceHeight =
+        img.naturalWidth / cellRatio;
+
+      sy =
+        (img.naturalHeight - sourceHeight) / 2;
+    }
+
+    ctx.drawImage(
+      img,
+
+      /*
+       * 元画像から切り出す範囲
+       */
+      sx,
+      sy,
+      sourceWidth,
+      sourceHeight,
+
+      /*
+       * Canvas上の描画位置
+       */
+      x,
+      y,
+      width,
+      height
+    );
+  }
 
   for (
     let i = 0;
@@ -1395,13 +1496,25 @@ async function downloadCollage() {
           list[i].thumbnail
         );
 
-      ctx.drawImage(
+      const x =
+        (i % columns) * cellW;
+
+      const y =
+        Math.floor(i / columns) * cellH;
+
+      /*
+       * 通常のdrawImageではなく
+       * 16:9を維持する描画を使う
+       */
+      drawImageCover(
+        ctx,
         img,
-        (i % 10) * cellW,
-        Math.floor(i / 10) * cellH,
+        x,
+        y,
         cellW,
         cellH
       );
+
     } catch (error) {
       console.warn(
         "thumbnail skipped",
@@ -1416,18 +1529,28 @@ async function downloadCollage() {
     const a =
       document.createElement("a");
 
-    a.href =
+    const url =
       URL.createObjectURL(blob);
+
+    a.href = url;
 
     a.download =
       `thumbnail-collection-${page * 100 + 1}-${Math.min(
-        page * 100 + 100,
+        page * 100 + list.length,
         DATA.videos.length
       )}.png`;
 
     a.click();
 
-    URL.revokeObjectURL(a.href);
+    /*
+     * クリック直後にURLを破棄すると
+     * 一部ブラウザで保存に失敗する可能性があるので
+     * 少し待ってから破棄する
+     */
+    setTimeout(() => {
+      URL.revokeObjectURL(url);
+    }, 1000);
+
   }, "image/png");
 }
 
