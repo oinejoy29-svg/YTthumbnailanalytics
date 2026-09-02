@@ -1146,10 +1146,6 @@ function renderCharts() {
           : "#FFF36A"
     );
 
-  /* -----------------------------------------
-     累計登録者
-  ----------------------------------------- */
-
   if (
     subsChart
   ) {
@@ -1263,10 +1259,6 @@ function renderCharts() {
         }
       }
     );
-
-  /* -----------------------------------------
-     新規登録者
-  ----------------------------------------- */
 
   const newVals =
     rows.map(
@@ -1487,6 +1479,41 @@ function renderSubscriberHistory() {
   const moreButton =
     $("showMoreSubscribers");
 
+  let closeButton =
+    $("closeSubscribers");
+
+  if (!closeButton) {
+    closeButton =
+      document.createElement(
+        "button"
+      );
+
+    closeButton.id =
+      "closeSubscribers";
+
+    closeButton.className =
+      "more-btn";
+
+    closeButton.type =
+      "button";
+
+    closeButton.textContent =
+      "閉じる";
+
+    moreButton.insertAdjacentElement(
+      "afterend",
+      closeButton
+    );
+
+    closeButton.onclick =
+      () => {
+        subscriberHistoryLimit =
+          SUBSCRIBER_HISTORY_INITIAL_LIMIT;
+
+        renderSubscriberHistory();
+      };
+  }
+
   if (
     rows.length <=
     SUBSCRIBER_HISTORY_INITIAL_LIMIT
@@ -1494,22 +1521,34 @@ function renderSubscriberHistory() {
     moreButton.style.display =
       "none";
 
+    closeButton.style.display =
+      "none";
+
     return;
   }
 
-  moreButton.style.display =
-    "";
+  const isExpanded =
+    subscriberHistoryLimit >
+    SUBSCRIBER_HISTORY_INITIAL_LIMIT;
+
+  closeButton.style.display =
+    isExpanded
+      ? ""
+      : "none";
 
   if (
     subscriberHistoryLimit >=
     rows.length
   ) {
-    moreButton.textContent =
-      "閉じる";
+    moreButton.style.display =
+      "none";
   } else {
     const remaining =
       rows.length -
       subscriberHistoryLimit;
+
+    moreButton.style.display =
+      "";
 
     moreButton.textContent =
       `もっと見る（あと${remaining}日）`;
@@ -2595,37 +2634,15 @@ function setupSubscriberHistory() {
       const rows =
         sortedSubscribers();
 
-      /*
-       * 全件表示済みなら
-       * 最新5件に戻す
-       */
+      subscriberHistoryLimit +=
+        SUBSCRIBER_HISTORY_STEP;
+
       if (
-        subscriberHistoryLimit >=
+        subscriberHistoryLimit >
         rows.length
       ) {
         subscriberHistoryLimit =
-          SUBSCRIBER_HISTORY_INITIAL_LIMIT;
-      }
-
-      /*
-       * まだ残っている場合は
-       * 10件ずつ追加
-       */
-      else {
-        subscriberHistoryLimit +=
-          SUBSCRIBER_HISTORY_STEP;
-
-        /*
-         * 最後だけ残り件数が10未満なら
-         * 行数を超えないように調整
-         */
-        if (
-          subscriberHistoryLimit >
-          rows.length
-        ) {
-          subscriberHistoryLimit =
-            rows.length;
-        }
+          rows.length;
       }
 
       renderSubscriberHistory();
