@@ -4,7 +4,7 @@ const MEMBERS = [
   "小澤愛実","髙橋舞","藤沢莉子","村山結香","山田杏佳","山野愛月"
 ];
 
-let DATA = {subscribers:[], videos:[], updatedAt:null, memo:""};
+let DATA = {subscribers:[], videos:[], updatedAt:null};
 let subsChart, newSubsChart;
 let rangeDays = 30;
 let rangeOffset = 0;
@@ -21,7 +21,7 @@ const jpDate = s => s ? s.replaceAll("-","/") : "—";
 function daysSinceStart(){
   const a=dateObj(START_DATE), b=new Date();
   const todayJST = new Date(b.toLocaleString("en-US",{timeZone:"Asia/Tokyo"}));
-  return Math.max(0,Math.floor((todayJST-a)/86400000)+1);
+  return Math.max(0,Math.floor((todayJST-a)/86400000));
 }
 function todayJST(){
   return new Intl.DateTimeFormat("en-CA",{timeZone:"Asia/Tokyo",year:"numeric",month:"2-digit",day:"2-digit"}).format(new Date());
@@ -66,7 +66,10 @@ function renderSummary(){
 }
 function buildRolling(){
   const videos=[...DATA.videos];
-  if(!videos.length) return;
+  if(!videos.length){
+    [0,1,2].forEach(i=>$(`lane${i}`).innerHTML="");
+    return;
+  }
   const shuffled=videos.sort(()=>Math.random()-.5);
   const lanes=[[],[],[]];
   // A thumbnail is assigned to one lane only, so the three visible streams do not share the same item.
@@ -135,21 +138,92 @@ function renderCharts(){
   subsChart=new Chart($("subsChart"),{type:"line",data:{labels,datasets:[{data:rows.map(r=>r.count),borderColor:"#111",backgroundColor:"#111",pointBackgroundColor:pointColors,pointBorderColor:borderColors,pointRadius:5,pointHoverRadius:7,tension:.28,borderWidth:2}]},options:common});
   if(newSubsChart)newSubsChart.destroy();
   const newVals=rows.map(r=>{const p=previousRecord(r.date);return p?r.count-p.count:0});
-  newSubsChart=new Chart($("newSubsChart"),{type:"bar",data:{labels,datasets:[{data:newVals,backgroundColor:rows.map(r=>chartVideoTitles(r.date).length?"#FF3030":"#FFF36A"),borderColor:"#111",borderWidth:1}]},options:{...common,plugins:{...common.plugins,tooltip:{callbacks:{label:(ctx)=>` 新規登録者数：${ctx.raw>=0?"+":""}${fmt(ctx.raw)}人`}}}}});
+  newSubsChart=new Chart($("newSubsChart"),{type:"bar",data:{labels,datasets:[{data:newVals,backgroundColor:rows.map(r=>chartVideoTitles(r.date).length?"#FF3030":"#FFF36A"),borderColor:"#111",borderWidth:1}]},options:{...common,plugins:{...common.plugins,tooltip:{callbacks:{label:(ctx)=>` 新規登録者数：${ctx.raw>=0?"+":""}${fmt(ctx.raw)}人`,afterBody:(items)=>{const r=rows[items[0].dataIndex];const titles=chartVideoTitles(r.date);return titles.length?titles.map(t=>`🎬 ${t}`):[]}}}}}});
+  const validNewVals=newVals.slice(1);
+  const periodTotal=validNewVals.reduce((a,b)=>a+b,0);
+  const periodAverage=validNewVals.length?periodTotal/validNewVals.length:0;
+  $("periodAverage").textContent=`平均：${periodAverage.toFixed(1)}人/日`;
+  $("periodTotal").textContent=`累計：${periodTotal>=0?"+":""}${fmt(periodTotal)}人`;
   const first=rows[0].date,last=rows[rows.length-1].date;
   $("rangeLabel").textContent=`${jpDate(first)} – ${jpDate(last)}`;
 }
-function renderMemo(){
-  const stored=localStorage.getItem("joyMemo");
-  $("memoText").value=stored ?? DATA.memo ?? "";
-  $("memoText").disabled=true;
+function getHistoricalAverage(){
+  const rows=[...(DATA.subscribers||[])].sort((a,b)=>a.date.localeCompare(b.date));
+  if(rows.length<2) return 0;
+  const first=dateObj(rows[0].date), last=dateObj(rows[rows.length-1].date);
+  const days=Math.max(1,Math.round((last-first)/86400000));
+  return (rows[rows.length-1].count-rows[0].count)/days;
 }
-function setMemoEdit(on){
-  $("memoText").disabled=!on;
-  $("memoEdit").style.display=on?"none":"inline-block";
-  $("memoSave").style.display=on?"inline-block":"none";
-  $("memoCancel").style.display=on?"inline-block":"none";
-  if(on)$("memoText").focus();
+function getWindowStats(n,endIndex=null){
+  const rows=[...(DATA.subscribers||[])].sort((a,b)=>a.date.localeCompare(b.date));
+  if(!rows.length) return null;
+  const end=endIndex==null?rows.length:endIndex;
+  const arr=rows.slice(Math.max(0,end-n),end);
+  if(!arr.length) return null;
+  const startIndex=Math.max(0,end-n);
+  const startCount=startIndex>0?rows[startIndex-1].count:arr[0].count;
+  const total=arr[arr.length-1].count-startCount;
+  return {n:arr.length,total,avg:total/Math.max(1,arr.length),start:arr[0].date,end:arr[arr.length-1].date};
+}
+function compareWindow(n){
+  const rows=[...(DATA.subscribers||[])].sort((a,b)=>a.date.localeCompare(b.date));
+  const end=rows.length;
+  const recent=getWindowStats(n,end);
+  const previous=getWindowStats(n,Math.max(0,end-n));
+  if(!recent||!previous||previous.total===0) return null;
+  return {recent,previous,rate:(recent.total-previous.total)/Math.abs(previous.total)*100};
+}
+function bestWindow(n){
+  const rows=[...(DATA.subscribers||[])].sort((a,b)=>a.date.localeCompare(b.date));
+  if(rows.length<n) return null;
+  let best=null;
+  for(let end=n;end<=rows.length;end++){
+    const w=getWindowStats(n,end);
+    if(!best||w.total>best.total) best=w;
+  }
+  return best;
+}
+function getLatestVideo(){
+  if(!DATA.videos?.length) return null;
+  return [...DATA.videos].sort((a,b)=>String(b.date).localeCompare(String(a.date)))[0];
+}
+function getIncreaseAfterVideo(date,n){
+  const rows=[...(DATA.subscribers||[])].sort((a,b)=>a.date.localeCompare(b.date));
+  const start=dateObj(date), end=new Date(start);
+  end.setDate(end.getDate()+n);
+  const before=rows.filter(x=>dateObj(x.date)<start).at(-1);
+  const after=rows.filter(x=>dateObj(x.date)<=end).at(-1);
+  if(!before||!after) return null;
+  return after.count-before.count;
+}
+function generateTrendAnalysis(){
+  const len=DATA.subscribers?.length||0;
+  if(len<2) return '登録者データがまだ少ないため、今後データが増えるとチャンネルの傾向を自動分析します。';
+  const w7=getWindowStats(Math.min(7,len));
+  const hist=getHistoricalAverage();
+  const c7=compareWindow(Math.min(7,Math.floor(len/2)));
+  let text='';
+  if(w7&&w7.avg>hist*1.5&&w7.avg>2) text='🚀 最近は登録者の伸びが大きく加速しています。';
+  else if(w7&&w7.avg>hist*1.15) text='📈 最近は歴代平均を上回るペースで登録者が増えています。';
+  else if(w7&&w7.avg<hist*.65&&hist>1) text='📉 最近は登録者の増加ペースがやや落ち着いています。';
+  else text='➡️ 最近は大きな変動なく、比較的安定したペースで登録者が増えています。';
+  if(c7){
+    if(c7.rate>=50) text+=` 直近${w7.n}日間は平均＋${w7.avg.toFixed(1)}人/日で、前の${c7.previous.n}日間より${Math.abs(c7.rate).toFixed(0)}%増加しています。`;
+    else if(c7.rate<=-30) text+=` 直近${w7.n}日間の平均は＋${w7.avg.toFixed(1)}人/日で、前の${c7.previous.n}日間から${Math.abs(c7.rate).toFixed(0)}%減少しています。`;
+    else text+=` 直近${w7.n}日間は平均＋${w7.avg.toFixed(1)}人/日のペースです。`;
+  }
+  const best=bestWindow(7);
+  if(best&&w7&&best.total===w7.total&&best.total>0) text+=' 過去の7日間と比べても最高ペースです。';
+  const latestVideo=getLatestVideo();
+  if(latestVideo){
+    const after=getIncreaseAfterVideo(latestVideo.date,7);
+    if(after!==null&&after>0) text+=` 🎬 ${jpDate(latestVideo.date)}の動画投稿後7日間で＋${fmt(after)}人増加しています。`;
+  }
+  return text;
+}
+function renderTrendAnalysis(){
+  const el=$("trendAnalysis");
+  if(el) el.textContent=generateTrendAnalysis();
 }
 function openCollage(){
   $("collageModal").classList.add("open");
@@ -214,11 +288,8 @@ async function init(){
     const r=await fetch("data.json?ts="+Date.now(),{cache:"no-store"});
     DATA=await r.json();
   }catch(e){console.error(e);return}
-  normalizeVideos();updateHeader();renderSummary();renderTags();renderVideos();buildRolling();renderMemo();setupRange();setupNav();
+  normalizeVideos();updateHeader();renderSummary();renderTags();renderVideos();buildRolling();renderTrendAnalysis();setupRange();setupNav();
   $("sortSelect").onchange=renderVideos;$("tagSelect").onchange=renderVideos;
-  $("memoEdit").onclick=()=>setMemoEdit(true);
-  $("memoCancel").onclick=()=>{renderMemo();setMemoEdit(false)};
-  $("memoSave").onclick=()=>{localStorage.setItem("joyMemo",$("memoText").value);$("memoStatus").textContent="この端末に保存しました";setMemoEdit(false)};
   $("openCollage").onclick=openCollage;$("closeCollage").onclick=closeCollage;$("downloadCollage").onclick=downloadCollage;
   $("collageModal").onclick=e=>{if(e.target.id==="collageModal")closeCollage()};
 }

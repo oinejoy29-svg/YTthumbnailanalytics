@@ -1,23 +1,31 @@
 # #切り抜くぞニアジョイ
 
-GitHub Pagesで公開するYouTube切り抜きチャンネル分析サイトです。
+GitHub Pagesで公開する静的サイトです。
 
-## ファイル
-- `index.html` — 画面構成
-- `style.css` — デザイン
-- `script.js` — 表示・グラフ・コラージュ
-- `data.json` — YouTubeから取得したデータ
-- `update_data.py` — YouTube Data API取得
-- `.github/workflows/update.yml` — 12/16/20/0時(JST)の自動更新
+## 構成
 
-## GitHub設定
-1. GitHubで新しい空リポジトリを作る。
-2. このフォルダの中身をそのままアップロード。
-3. Settings → Secrets and variables → Actions → New repository secret
-4. 名前を `YOUTUBE_API_KEY` にしてYouTube Data API v3のAPIキーを登録。
-5. Actionsのworkflowを一度 `Run workflow` して動作確認。
-6. Settings → Pages → Deploy from a branch → `main` / `/ (root)` を選択。
+- `index.html` — サイト本体
+- `style.css` — デザイン / レスポンシブ対応
+- `script.js` — 表示・グラフ・サムネイルコレクション・自動分析
+- `data.json` — YouTube APIで更新される初期データ
+- `update_data.py` — YouTube Data API v3からデータ取得
+- `.github/workflows/update.yml` — GitHub Actionsの自動更新
 
-## メモについて
-現在の「一言分析」は、ブラウザの `localStorage` に保存します。
-GitHub上の `memo.json` をブラウザから直接書き換えるには、公開サイトに書き込み権限を持つGitHubトークンを埋め込まない安全なバックエンドが必要です。そのため、今回は安全性を優先して端末保存にしています。
+## YouTube API設定
+
+GitHubリポジトリの **Settings → Secrets and variables → Actions** に以下を登録します。
+
+- `YOUTUBE_API_KEY`
+- `YOUTUBE_CHANNEL_ID`
+
+## 自動更新
+
+GitHub ActionsはJSTの12:00 / 16:00 / 20:00 / 00:00に実行します。
+
+API取得時点の登録者数を、その時点ではなく **完了した直前のJST日付** に記録します。たとえば9/2 16:00の取得なら、履歴には9/1として記録します。
+
+サイト上の「現在の登録者数」はAPI取得時点の値、「最新日の新規登録者数」は履歴上の最新日とその前日の差分です。
+
+## GitHub Pages
+
+GitHubの Settings → Pages から、公開元を対象ブランチのrootに設定してください。

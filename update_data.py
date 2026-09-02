@@ -1,68 +1,123 @@
-import os, json, re, requests
+import json
+import os
+import re
 from datetime import datetime, timedelta, timezone
 
-API_KEY=os.environ["YOUTUBE_API_KEY"]
-CHANNEL_ID=os.environ.get("YOUTUBE_CHANNEL_ID","UCiLmCoftZHWXSFuQlnEJSsQ")
-DATA_FILE="data.json"
-JST=timezone(timedelta(hours=9))
-MEMBERS=["逢田珠里依","天野香乃愛","市原愛弓","江角怜音","大信田美月","大西葵","小澤愛実","髙橋舞","藤沢莉子","村山結香","山田杏佳","山野愛月"]
+import requests
 
-def api(url,params):
-    p={**params,"key":API_KEY}
-    r=requests.get(url,params=p,timeout=30); r.raise_for_status(); return r.json()
+API_KEY = os.environ["YOUTUBE_API_KEY"]
+CHANNEL_ID = os.environ["YOUTUBE_CHANNEL_ID"]
+DATA_FILE = "data.json"
+JST = timezone(timedelta(hours=9))
+MEMBERS = [
+    "逢田珠里依", "天野香乃愛", "市原愛弓", "江角怜音", "大信田美月", "大西葵",
+    "小澤愛実", "髙橋舞", "藤沢莉子", "村山結香", "山田杏佳", "山野愛月"
+]
 
-def iso_duration_seconds(s):
-    m=re.fullmatch(r"PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?",s or "")
-    if not m:return 0
-    h,mi,se=[int(x or 0) for x in m.groups()]
-    return h*3600+mi*60+se
 
-def pretty_duration(sec):
-    sec=int(sec); h=sec//3600; m=(sec%3600)//60; s=sec%60
-    return f"{h}:{m:02d}:{s:02d}" if h else f"{m}:{s:02d}"
+def api(url, params):
+    response = requests.get(url, params={**params, "key": API_KEY}, timeout=30)
+    response.raise_for_status()
+    return response.json()
+
+
+def iso_duration_seconds(value):
+    match = re.fullmatch(r"PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?", value or "")
+    if not match:
+        return 0
+    hours, minutes, seconds = [int(x or 0) for x in match.groups()]
+    return hours * 3600 + minutes * 60 + seconds
+
+
+def pretty_duration(seconds):
+    seconds = int(seconds)
+    hours = seconds // 3600
+    minutes = (seconds % 3600) // 60
+    secs = seconds % 60
+    return f"{hours}:{minutes:02d}:{secs:02d}" if hours else f"{minutes}:{secs:02d}"
+
 
 def get_channel():
-    d=api("https://www.googleapis.com/youtube/v3/channels",{"part":"statistics,snippet","id":CHANNEL_ID})
-    return d["items"][0]
+    data = api(
+        "https://www.googleapis.com/youtube/v3/channels",
+        {"part": "statistics,snippet,contentDetails", "id": CHANNEL_ID},
+    )
+    if not data.get("items"):
+        raise RuntimeError(f"Channel not found: {CHANNEL_ID}")
+    return data["items"][0]
 
-def get_all_videos():
-    items=[]; token=None
+
+def get_all_video_ids(uploads_playlist_id):
+    ids = []
+    token = None
     while True:
-        p={"part":"id","channelId":CHANNEL_ID,"maxResults":50,"order":"date"}
-        if token:p["pageToken"]=token
-        d=api("https://www.googleapis.com/youtube/v3/search",p)
-        items += [x["id"]["videoId"] for x in d.get("items",[]) if x["id"].get("kind")=="youtube#video"]
-        token=d.get("nextPageToken")
-        if not token:break
-    out=[]
-    for i in range(0,len(items),50):
-        d=api("https://www.googleapis.com/youtube/v3/videos",{"part":"snippet,contentDetails,statistics","id":",".join(items[i:i+50])})
-        for x in d.get("items",[]):
-            sn=x["snippet"]; sec=iso_duration_seconds(x["contentDetails"]["duration"])
-            out.append({
-                "id":x["id"],"title":sn.get("title",""),"date":sn["publishedAt"][:10],
-                "thumbnail":sn["thumbnails"].get("high",sn["thumbnails"].get("default",{})).get("url",""),
-                "duration":pretty_duration(sec),"durationSeconds":sec,
-                "viewCount":int(x["statistics"].get("viewCount",0)),
-                "tags":[m for m in MEMBERS if m in sn.get("title","")]
+        params = {"part": "contentDetails", "playlistId": uploads_playlist_id, "maxResults": 50}
+        if token:
+            params["pageToken"] = token
+        data = api("https://www.googleapis.com/youtube/v3/playlistItems", params)
+        ids.extend(item["contentDetails"]["videoId"] for item in data.get("items", []))
+        token = data.get("nextPageToken")
+        if not token:
+            break
+    return ids
+
+
+def get_all_videos(uploads_playlist_id):
+    ids = get_all_video_ids(uploads_playlist_id)
+    videos = []
+    for start in range(0, len(ids), 50):
+        data = api(
+            "https://www.googleapis.com/youtube/v3/videos",
+            {"part": "snippet,contentDetails,statistics", "id": ",".join(ids[start:start + 50])},
+        )
+        for item in data.get("items", []):
+            snippet = item["snippet"]
+            seconds = iso_duration_seconds(item["contentDetails"]["duration"])
+            text_for_tags = f"{snippet.get('title', '')} {snippet.get('description', '')}"
+            videos.append({
+                "id": item["id"],
+                "title": snippet.get("title", ""),
+                "date": snippet["publishedAt"][:10],
+                "thumbnail": snippet.get("thumbnails", {}).get("high", snippet.get("thumbnails", {}).get("default", {})).get("url", ""),
+                "duration": pretty_duration(seconds),
+                "durationSeconds": seconds,
+                "viewCount": int(item["statistics"].get("viewCount", 0)),
+                "tags": [member for member in MEMBERS if member in text_for_tags],
             })
-    return sorted(out,key=lambda x:x["date"])
+    return sorted(videos, key=lambda video: (video["date"], video["id"]))
+
 
 def main():
-    now=datetime.now(JST)
-    with open(DATA_FILE,"r",encoding="utf-8") as f:data=json.load(f)
-    channel=get_channel()
-    current=int(channel["statistics"].get("subscriberCount",0))
-    videos=get_all_videos()
-    # At every scheduled run, record the completed previous JST calendar day.
-    target=(now.date()-timedelta(days=1)).isoformat()
-    existing={x["date"]:x for x in data.get("subscribers",[])}
-    existing[target]={"date":target,"count":current}
-    data["subscribers"]=sorted(existing.values(),key=lambda x:x["date"])
-    data["currentSubscriberCount"]=current
-    data["videos"]=videos
-    data["updatedAt"]=now.isoformat()
-    with open(DATA_FILE,"w",encoding="utf-8") as f:json.dump(data,f,ensure_ascii=False,indent=2)
-    print(f"updated {now.isoformat()} / subscribers={current} / videos={len(videos)} / recorded={target}")
+    now = datetime.now(JST)
+    with open(DATA_FILE, "r", encoding="utf-8") as file:
+        data = json.load(file)
 
-if __name__=="__main__":main()
+    channel = get_channel()
+    current = int(channel["statistics"].get("subscriberCount", 0))
+    uploads_playlist_id = channel["contentDetails"]["relatedPlaylists"]["uploads"]
+    videos = get_all_videos(uploads_playlist_id)
+
+    # A scheduled run records the completed previous JST calendar day.
+    target_date = (now.date() - timedelta(days=1)).isoformat()
+    history = {row["date"]: row for row in data.get("subscribers", [])}
+    history[target_date] = {"date": target_date, "count": current}
+
+    data["channelId"] = CHANNEL_ID
+    data["channelName"] = channel["snippet"].get("title", data.get("channelName", "#切り抜くぞニアジョイ"))
+    data["updatedAt"] = now.isoformat()
+    data["currentSubscriberCount"] = current
+    data["subscribers"] = sorted(history.values(), key=lambda row: row["date"])
+    data["videos"] = videos
+    data["memo"] = None
+
+    with open(DATA_FILE, "w", encoding="utf-8") as file:
+        json.dump(data, file, ensure_ascii=False, indent=2)
+
+    print(
+        f"updated {now.isoformat()} / subscribers={current} / "
+        f"videos={len(videos)} / recorded={target_date}"
+    )
+
+
+if __name__ == "__main__":
+    main()
