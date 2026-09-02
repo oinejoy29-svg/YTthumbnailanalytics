@@ -1451,4 +1451,10 @@ select:focus{
     font-size:9px;
   }
 }
+/* ===== Analytics 上部3カードを少しコンパクトに ===== */
 
+.summary-card {
+  padding-top: 18px;
+  padding-bottom: 18px;
+  min-height: 0;
+}
