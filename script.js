@@ -136,70 +136,6 @@ function applySubscriberOverrides(
   });
 }
 
-/* =========================================================
-   Header
-========================================================= */
-
-function updateHeader() {
-  const today = todayJST();
-
-  $("periodText").textContent =
-    `${jpDate(START_DATE)}～${today.replace(/-/g, "/")}`;
-
-  $("dayCount").textContent =
-    `（${daysSinceStart()}日）`;
-
-  if (!DATA.updatedAt) return;
-
-  const d =
-    new Date(DATA.updatedAt);
-
-  const parts =
-    new Intl.DateTimeFormat(
-      "en-CA",
-      {
-        timeZone:
-          "Asia/Tokyo",
-
-        year:
-          "numeric",
-
-        month:
-          "2-digit",
-
-        day:
-          "2-digit",
-
-        hour:
-          "2-digit",
-
-        minute:
-          "2-digit",
-
-        hourCycle:
-          "h23"
-      }
-    ).formatToParts(d);
-
-  const get = type =>
-    parts.find(
-      p => p.type === type
-    )?.value || "";
-
-  const desktopText =
-    `${get("year")}/${Number(get("month"))}/${Number(get("day"))} ` +
-    `${get("hour")}:${get("minute")}`;
-
-  const mobileText =
-    `${get("year")}/${Number(get("month"))}/${Number(get("day"))} ` +
-    `${get("hour")}:${get("minute")}`;
-
-  $("updatedAtDesktop").textContent =
-    desktopText;
-
-  $("updatedAtMobile").textContent =
-    mobileText;
-}
 
 /* =========================================================
    Video tags
@@ -2832,11 +2768,11 @@ async function init() {
     return;
   }
 
-  normalizeVideos();
+ normalizeVideos();
 
-  updateHeader();
+updateCommonHeader(DATA);
 
-  renderSummary();
+renderSummary();
 
   renderTags();
 
