@@ -1,0 +1,657 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  >
+  <meta name="theme-color" content="#EFEAE3">
+
+  <title>Future outlook | #切り抜くぞニアジョイ</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&family=Noto+Sans+JP:wght@500;600;700;800;900&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="future.css">
+</head>
+
+<body>
+
+  <!-- =========================
+       HEADER
+  ========================== -->
+  <header class="site-header">
+
+    <div class="brand-block">
+
+      <div class="eyebrow">
+        ≒JOY / YouTube archive &amp; analytics
+      </div>
+
+      <h1>
+        #切り抜くぞニアジョイ
+      </h1>
+
+    </div>
+
+
+    <div class="header-info">
+
+      <div class="analytics-label">
+
+        <span class="desktop-analytics">
+          YouTube analytics
+        </span>
+
+        <span class="mobile-analytics">
+          YouTube archive &amp; analytics
+        </span>
+
+      </div>
+
+
+      <div class="header-meta">
+
+        <span id="periodText">
+          2026/4/3～—
+        </span>
+
+        <span id="dayCount">
+          （—日）
+        </span>
+
+
+        <span class="updated">
+
+          <span class="updated-label">
+            最終更新:
+          </span>
+
+          <span id="updatedAtDesktop">
+            —
+          </span>
+
+          <span id="updatedAtMobile">
+            —
+          </span>
+
+        </span>
+
+      </div>
+
+    </div>
+
+  </header>
+
+
+
+  <!-- =========================
+       PAGE SWITCH
+  ========================== -->
+  <nav
+    class="page-switch"
+    aria-label="ページ切り替え"
+  >
+
+    <a
+      class="switch-btn"
+      href="../index.html?page=videos"
+    >
+      Video collections
+    </a>
+
+    <a
+      class="switch-btn"
+      href="../index.html?page=analytics"
+    >
+      Subscriber analytics
+    </a>
+
+    <a
+      class="switch-btn active"
+      href="./future.html"
+    >
+      Future outlook
+    </a>
+
+  </nav>
+
+
+
+  <main class="future-page">
+
+
+    <!-- =========================
+         PAGE INTRO
+    ========================== -->
+    <section class="future-intro">
+
+      <div>
+
+        <span class="section-kicker">
+          FUTURE OUTLOOK
+        </span>
+
+        <h2>
+          Future outlook
+        </h2>
+
+      </div>
+
+      <p>
+        登録者推移と動画投稿データをもとに、
+        今後の成長と投稿ペースを予測します。
+      </p>
+
+    </section>
+
+
+
+    <!-- =========================
+         GOAL COUNTDOWN
+    ========================== -->
+    <section class="future-section">
+
+      <div class="section-heading">
+
+        <div>
+
+          <span class="section-kicker">
+            GOAL COUNTDOWN
+          </span>
+
+          <h2>
+            次のマイルストーン
+          </h2>
+
+        </div>
+
+      </div>
+
+
+
+      <div class="goal-layout">
+
+
+        <!-- Main goal card -->
+        <article class="goal-main-card">
+
+          <div class="goal-topline">
+
+            <span>
+              NEXT GOAL
+            </span>
+
+            <strong id="goalTarget">
+              — subscribers
+            </strong>
+
+          </div>
+
+
+          <div class="goal-eta-block">
+
+            <span class="goal-eta-label">
+              Estimated arrival
+            </span>
+
+            <strong
+              id="goalEta"
+              class="goal-eta"
+            >
+              —
+            </strong>
+
+          </div>
+
+
+          <div class="goal-progress-info">
+
+            <span id="goalCurrent">
+              現在 —人
+            </span>
+
+            <span id="goalRemaining">
+              あと —人
+            </span>
+
+          </div>
+
+
+          <div
+            class="goal-progress"
+            aria-label="目標達成率"
+          >
+
+            <div
+              id="goalProgressBar"
+              class="goal-progress-bar"
+            ></div>
+
+          </div>
+
+
+          <div class="goal-progress-bottom">
+
+            <span id="goalProgressPercent">
+              —%
+            </span>
+
+            <span id="goalRemainingDays">
+              残り予測 —日
+            </span>
+
+          </div>
+
+        </article>
+
+
+
+        <!-- Pace card -->
+        <article class="goal-side-card">
+
+          <span class="card-kicker">
+            CURRENT STATUS
+          </span>
+
+          <strong
+            id="paceStatus"
+            class="pace-status"
+          >
+            —
+          </strong>
+
+          <p id="paceAdvice">
+            データを分析しています…
+          </p>
+
+          <div class="pace-difference">
+
+            <span>
+              予測との差
+            </span>
+
+            <strong id="paceDifference">
+              —
+            </strong>
+
+          </div>
+
+        </article>
+
+      </div>
+
+
+
+      <!-- Prediction source -->
+      <div class="pace-grid">
+
+        <article class="pace-card">
+
+          <span>
+            直近7日
+          </span>
+
+          <strong id="pace7">
+            —
+          </strong>
+
+          <small>
+            人 / 日
+          </small>
+
+        </article>
+
+
+        <article class="pace-card">
+
+          <span>
+            直近30日
+          </span>
+
+          <strong id="pace30">
+            —
+          </strong>
+
+          <small>
+            人 / 日
+          </small>
+
+        </article>
+
+
+        <article class="pace-card">
+
+          <span>
+            全期間
+          </span>
+
+          <strong id="paceAll">
+            —
+          </strong>
+
+          <small>
+            人 / 日
+          </small>
+
+        </article>
+
+
+        <article class="pace-card highlight">
+
+          <span>
+            基準予測ペース
+          </span>
+
+          <strong id="paceWeighted">
+            —
+          </strong>
+
+          <small>
+            人 / 日
+          </small>
+
+        </article>
+
+      </div>
+
+
+
+      <!-- Prediction history -->
+      <article class="prediction-history">
+
+        <div class="history-heading">
+
+          <div>
+
+            <span class="section-kicker">
+              PREDICTION HISTORY
+            </span>
+
+            <h3>
+              過去の予測
+            </h3>
+
+          </div>
+
+        </div>
+
+
+        <div
+          id="predictionHistory"
+          class="prediction-history-list"
+        >
+
+          <div class="empty-state">
+            達成済みの予測はまだありません。
+          </div>
+
+        </div>
+
+      </article>
+
+    </section>
+
+
+
+    <!-- =========================
+         FUTURE SCENARIOS
+    ========================== -->
+    <section class="future-section">
+
+      <div class="section-heading">
+
+        <div>
+
+          <span class="section-kicker">
+            FUTURE SCENARIOS
+          </span>
+
+          <h2>
+            成長シナリオ
+          </h2>
+
+        </div>
+
+      </div>
+
+
+
+      <article class="scenario-card">
+
+        <div class="scenario-summary">
+
+          <div>
+
+            <span>
+              慎重
+            </span>
+
+            <strong id="scenarioLowValue">
+              —
+            </strong>
+
+            <small>
+              3ヶ月後
+            </small>
+
+          </div>
+
+
+          <div>
+
+            <span>
+              標準
+            </span>
+
+            <strong id="scenarioStandardValue">
+              —
+            </strong>
+
+            <small>
+              3ヶ月後
+            </small>
+
+          </div>
+
+
+          <div>
+
+            <span>
+              好調
+            </span>
+
+            <strong id="scenarioHighValue">
+              —
+            </strong>
+
+            <small>
+              3ヶ月後
+            </small>
+
+          </div>
+
+        </div>
+
+
+
+        <div class="scenario-chart-wrap">
+
+          <canvas id="scenarioChart"></canvas>
+
+        </div>
+
+
+
+        <p class="scenario-note">
+          慎重・標準・好調の3パターンを、
+          現在の登録者推移から毎回再計算します。
+          Goal Countdownの固定予測日には影響しません。
+        </p>
+
+      </article>
+
+    </section>
+
+
+
+    <!-- =========================
+         POSTING CALENDAR
+    ========================== -->
+    <section class="future-section">
+
+      <div class="section-heading calendar-section-heading">
+
+        <div>
+
+          <span class="section-kicker">
+            POSTING CALENDAR
+          </span>
+
+          <h2>
+            投稿カレンダー
+          </h2>
+
+        </div>
+
+
+        <div class="calendar-controls">
+
+          <button
+            id="prevMonth"
+            class="calendar-arrow"
+            type="button"
+            aria-label="前の月"
+          >
+            ‹
+          </button>
+
+          <strong id="calendarMonthLabel">
+            —
+          </strong>
+
+          <button
+            id="nextMonth"
+            class="calendar-arrow"
+            type="button"
+            aria-label="次の月"
+          >
+            ›
+          </button>
+
+        </div>
+
+      </div>
+
+
+
+      <div class="posting-summary">
+
+        <article>
+
+          <span>
+            直近10本の平均間隔
+          </span>
+
+          <strong id="recentPostInterval">
+            —
+          </strong>
+
+          <small>
+            日
+          </small>
+
+        </article>
+
+
+        <article>
+
+          <span>
+            全期間の平均間隔
+          </span>
+
+          <strong id="allPostInterval">
+            —
+          </strong>
+
+          <small>
+            日
+          </small>
+
+        </article>
+
+
+        <article class="recommended">
+
+          <span>
+            次回おすすめ
+          </span>
+
+          <strong id="recommendedWindow">
+            —
+          </strong>
+
+        </article>
+
+      </div>
+
+
+
+      <article class="calendar-card">
+
+        <div class="calendar-weekdays">
+
+          <span>日</span>
+          <span>月</span>
+          <span>火</span>
+          <span>水</span>
+          <span>木</span>
+          <span>金</span>
+          <span>土</span>
+
+        </div>
+
+
+        <div
+          id="calendarGrid"
+          class="calendar-grid"
+        ></div>
+
+      </article>
+
+
+
+      <div class="calendar-legend">
+
+        <span>
+          <i class="legend-recommended"></i>
+          おすすめ投稿日
+        </span>
+
+        <span>
+          <i class="legend-posted"></i>
+          投稿日
+        </span>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"
+  ></script>
+
+  <script src="future.js"></script>
+
+</body>
+</html>
