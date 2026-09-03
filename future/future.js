@@ -751,11 +751,9 @@ function processGoalState() {
 
   if (
     !state ||
-    !Number.isFinite(
-      Number(
-        state.target
-      )
-    )
+    !Number.isFinite(Number(state.target)) ||
+    !Number.isFinite(Number(state.startCount)) ||
+    !Number.isFinite(Number(state.fixedPace))
   ) {
 
     state =
