@@ -584,12 +584,181 @@ function renderVideos() {
    Video detail modal
 ========================================================= */
 
+function hasCompletedSevenDayForecast(video) {
+  const forecast =
+    video?.sevenDayForecast;
+
+  if (!forecast) {
+    return false;
+  }
+
+  const predicted =
+    Number(
+      forecast.predictedViews
+    );
+
+  const actual =
+    Number(
+      video.sevenDayViews ??
+      forecast.actualViews
+    );
+
+  return (
+    (
+      forecast.status ===
+        "completed" ||
+      Number.isFinite(
+        Number(video.sevenDayViews)
+      )
+    ) &&
+    Number.isFinite(predicted) &&
+    predicted > 0 &&
+    Number.isFinite(actual)
+  );
+}
+
+function sevenDayForecastResult(video) {
+  if (
+    !hasCompletedSevenDayForecast(
+      video
+    )
+  ) {
+    return null;
+  }
+
+  const predicted =
+    Number(
+      video.sevenDayForecast
+        .predictedViews
+    );
+
+  const actual =
+    Number(
+      video.sevenDayViews ??
+      video.sevenDayForecast
+        .actualViews
+    );
+
+  const difference =
+    actual - predicted;
+
+  const differencePercent =
+    predicted > 0
+      ? difference / predicted * 100
+      : 0;
+
+  let label =
+    "ほぼ的中";
+
+  if (
+    differencePercent > 5
+  ) {
+    label = "上振れ";
+  }
+
+  else if (
+    differencePercent < -5
+  ) {
+    label = "下振れ";
+  }
+
+  return {
+    predicted,
+    actual,
+    difference,
+    differencePercent,
+    label
+  };
+}
+
+function signedNumber(value) {
+  const number =
+    Number(value || 0);
+
+  return (
+    `${number >= 0 ? "+" : ""}${fmt(number)}`
+  );
+}
+
+function signedPercent(value) {
+  const number =
+    Number(value || 0);
+
+  return (
+    `${number >= 0 ? "+" : ""}${number.toFixed(1)}%`
+  );
+}
+
+function renderSevenDayForecastResult(
+  video
+) {
+  const result =
+    sevenDayForecastResult(
+      video
+    );
+
+  const panel =
+    $("sevenDayForecastResult");
+
+  if (
+    !result ||
+    !panel
+  ) {
+    return;
+  }
+
+  panel.innerHTML = `
+    <div class="seven-day-result-head">
+      <span class="section-kicker">
+        7-DAY FORECAST
+      </span>
+      <h4>一週間予測</h4>
+    </div>
+
+    <div class="seven-day-result-grid">
+      <div class="seven-day-result-item">
+        <span>予測</span>
+        <strong>${fmt(result.predicted)}回</strong>
+      </div>
+
+      <div class="seven-day-result-item">
+        <span>実績</span>
+        <strong>${fmt(result.actual)}回</strong>
+      </div>
+    </div>
+
+    <div class="seven-day-result-summary">
+      <span>${escapeHtml(result.label)}</span>
+      <strong>
+        ${signedNumber(result.difference)}回（${signedPercent(result.differencePercent)}）
+      </strong>
+    </div>
+  `;
+
+  panel.hidden = false;
+
+  const button =
+    $("openSevenDayForecast");
+
+  if (button) {
+    button.setAttribute(
+      "aria-expanded",
+      "true"
+    );
+  }
+}
+
 function openVideoDetail(
   video
 ) {
   const tags =
     video.tags ||
     detectTags(video);
+
+  const canShowForecast =
+    hasCompletedSevenDayForecast(
+      video
+    );
 
   $("videoDetailContent").innerHTML =
     `
@@ -650,13 +819,42 @@ function openVideoDetail(
             }
           </div>
 
-          <button
-            type="button"
-            class="primary-btn edit-video-tags-btn"
-            id="editVideoTags"
-          >
-            タグを編集
-          </button>
+          <div class="video-detail-actions">
+            <button
+              type="button"
+              class="primary-btn edit-video-tags-btn"
+              id="editVideoTags"
+            >
+              タグを編集
+            </button>
+
+            ${
+              canShowForecast
+                ? `
+                  <button
+                    type="button"
+                    class="forecast-result-btn"
+                    id="openSevenDayForecast"
+                    aria-expanded="false"
+                  >
+                    一週間予測
+                  </button>
+                `
+                : ""
+            }
+          </div>
+
+          ${
+            canShowForecast
+              ? `
+                <div
+                  id="sevenDayForecastResult"
+                  class="seven-day-result-panel"
+                  hidden
+                ></div>
+              `
+              : ""
+          }
 
         </div>
       </div>
@@ -675,6 +873,44 @@ function openVideoDetail(
   $("editVideoTags").onclick =
     () =>
       editVideoTags(video);
+
+  if (canShowForecast) {
+    $("openSevenDayForecast")
+      .onclick =
+      () =>
+        renderSevenDayForecastResult(
+          video
+        );
+  }
+}
+
+function openRequestedVideoFromUrl() {
+  const params =
+    new URLSearchParams(
+      window.location.search
+    );
+
+  const videoId =
+    params.get("video");
+
+  if (!videoId) {
+    return;
+  }
+
+  const video =
+    DATA.videos.find(
+      item =>
+        String(item.id) ===
+        String(videoId)
+    );
+
+  if (!video) {
+    return;
+  }
+
+  openVideoDetail(
+    video
+  );
 }
 
 function closeVideoDetail() {
@@ -810,7 +1046,6 @@ function getChartRows() {
     }
   );
 }
-
 function chartVideoTitles(
   date
 ) {
@@ -2332,7 +2567,6 @@ function loadImage(src) {
     }
   );
 }
-
 /* =========================================================
    Range controls
 ========================================================= */
@@ -2768,13 +3002,17 @@ async function init() {
     return;
   }
 
-normalizeVideos();
+  normalizeVideos();
 
-if (typeof updateCommonHeader === "function") {
-  updateCommonHeader(DATA);
-}
+  if (
+    typeof updateCommonHeader ===
+    "function"
+  ) {
+    updateCommonHeader(DATA);
+  }
 
-renderSummary();
+  renderSummary();
+
   renderTags();
 
   renderVideos();
@@ -2790,6 +3028,16 @@ renderSummary();
   setupNav();
 
   setupModals();
+
+  /*
+   * Future outlookのCOMPLETEDカードから
+   *
+   * index.html?page=videos&video=VIDEO_ID
+   *
+   * で来た場合、data.jsonの読み込み完了後に
+   * 対象動画の詳細を自動で開く。
+   */
+  openRequestedVideoFromUrl();
 
   setupSubscriberHistory();
 
