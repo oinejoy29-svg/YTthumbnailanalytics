@@ -2475,67 +2475,169 @@ function setupRange() {
 ========================================================= */
 
 function setupNav() {
-  document
-    .querySelectorAll(
-      ".switch-btn"
-    )
-    .forEach(
+
+  const buttons =
+    document.querySelectorAll(
+      ".switch-btn[data-page]"
+    );
+
+
+  function openPage(
+    pageName,
+    updateUrl = true
+  ) {
+
+    const targetPage =
+      pageName === "analytics"
+        ? "analytics"
+        : "videos";
+
+
+    buttons.forEach(
       button => {
-        button.onclick =
-          () => {
-            document
-              .querySelectorAll(
-                ".switch-btn"
-              )
-              .forEach(
-                other =>
-                  other
-                    .classList
-                    .toggle(
-                      "active",
-                      other ===
-                        button
-                    )
-              );
 
-            document
-              .querySelectorAll(
-                ".page"
-              )
-              .forEach(
-                page =>
-                  page
-                    .classList
-                    .remove(
-                      "active"
-                    )
-              );
+        button
+          .classList
+          .toggle(
+            "active",
+            button.dataset.page ===
+              targetPage
+          );
 
-            const target =
-              button
-                .dataset.page ===
-              "videos"
-                ? "videosPage"
-                : "analyticsPage";
-
-            $(target)
-              .classList
-              .add(
-                "active"
-              );
-
-            if (
-              button
-                .dataset.page ===
-              "analytics"
-            ) {
-              renderCharts();
-
-              renderSubscriberHistory();
-            }
-          };
       }
     );
+
+
+    document
+      .querySelectorAll(".page")
+      .forEach(
+        page =>
+          page
+            .classList
+            .remove("active")
+      );
+
+
+    const targetId =
+      targetPage === "analytics"
+        ? "analyticsPage"
+        : "videosPage";
+
+
+    $(targetId)
+      .classList
+      .add("active");
+
+
+    if (
+      targetPage ===
+      "analytics"
+    ) {
+
+      renderCharts();
+
+      renderSubscriberHistory();
+
+    }
+
+
+    if (updateUrl) {
+
+      const url =
+        new URL(
+          window.location.href
+        );
+
+
+      if (
+        targetPage ===
+        "videos"
+      ) {
+
+        url.searchParams
+          .delete("page");
+
+      }
+
+      else {
+
+        url.searchParams
+          .set(
+            "page",
+            targetPage
+          );
+
+      }
+
+
+      window.history
+        .replaceState(
+          {},
+          "",
+          url
+        );
+
+    }
+
+  }
+
+
+  buttons.forEach(
+    button => {
+
+      button.onclick =
+        () => {
+
+          openPage(
+            button.dataset.page
+          );
+
+        };
+
+    }
+  );
+
+
+  /*
+    Future outlookから
+
+    ../index.html?page=analytics
+
+    のように戻ってきた場合、
+    URLを見て最初からAnalyticsを開く。
+  */
+
+  const params =
+    new URLSearchParams(
+      window.location.search
+    );
+
+
+  const requestedPage =
+    params.get("page");
+
+
+  if (
+    requestedPage ===
+    "analytics"
+  ) {
+
+    openPage(
+      "analytics",
+      false
+    );
+
+  }
+
+  else {
+
+    openPage(
+      "videos",
+      false
+    );
+
+  }
+
 }
 
 /* =========================================================
