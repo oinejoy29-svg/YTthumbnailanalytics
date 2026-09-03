@@ -1,4 +1,9 @@
-const START_DATE = "2026-04-03";
+/* =========================================================
+   Future outlook
+========================================================= */
+
+const FUTURE_START_DATE =
+  "2026-04-03";
 
 const GOAL_STATE_KEY =
   "joyFutureGoalState";
@@ -6,327 +11,359 @@ const GOAL_STATE_KEY =
 const GOAL_HISTORY_KEY =
   "joyFutureGoalHistory";
 
-const GOAL_STEP = 100;
-
 let DATA = {
   subscribers: [],
   videos: [],
   updatedAt: null
 };
 
-let scenarioChart = null;
+let scenarioChart =
+  null;
 
-let calendarYear = null;
-let calendarMonth = null;
+let calendarMonth =
+  null;
 
-const $ = id =>
-  document.getElementById(id);
+let postingRecommendation =
+  null;
+
+
+const $ =
+  id =>
+    document.getElementById(id);
 
 
 
 /* =========================================================
-   Utilities
+   Basic helpers
 ========================================================= */
 
-function parseDate(dateString) {
-  if (!dateString) {
-    return null;
-  }
-
-  const [year, month, day] =
-    dateString
-      .split("-")
-      .map(Number);
+function dateObj(
+  date
+) {
 
   return new Date(
-    year,
-    month - 1,
-    day
+    `${date}T00:00:00+09:00`
   );
+
 }
 
 
-function formatDateJP(date) {
-  if (!date) {
-    return "—";
-  }
+function dateToIso(
+  date
+) {
 
-  return `${date.getMonth() + 1}月${date.getDate()}日`;
-}
-
-
-function formatDateFullJP(date) {
-  if (!date) {
-    return "—";
-  }
-
-  return (
-    `${date.getFullYear()}年` +
-    `${date.getMonth() + 1}月` +
-    `${date.getDate()}日`
-  );
-}
-
-
-function formatDateShort(date) {
-  if (!date) {
-    return "—";
-  }
-
-  return (
-    `${date.getMonth() + 1}/` +
-    `${date.getDate()}`
-  );
-}
-
-
-function toDateString(date) {
   const year =
     date.getFullYear();
 
   const month =
     String(
       date.getMonth() + 1
-    ).padStart(2, "0");
+    ).padStart(
+      2,
+      "0"
+    );
 
   const day =
     String(
       date.getDate()
-    ).padStart(2, "0");
+    ).padStart(
+      2,
+      "0"
+    );
 
-  return `${year}-${month}-${day}`;
-}
 
-
-function addDays(date, days) {
-  const result =
-    new Date(date);
-
-  result.setDate(
-    result.getDate() + days
+  return (
+    `${year}-${month}-${day}`
   );
 
-  return result;
 }
 
 
-function diffDays(dateA, dateB) {
-  const oneDay =
-    24 * 60 * 60 * 1000;
+function todayJST() {
 
-  const utcA =
-    Date.UTC(
-      dateA.getFullYear(),
-      dateA.getMonth(),
-      dateA.getDate()
-    );
+  const parts =
+    new Intl.DateTimeFormat(
+      "en-CA",
+      {
+        timeZone:
+          "Asia/Tokyo",
 
-  const utcB =
-    Date.UTC(
-      dateB.getFullYear(),
-      dateB.getMonth(),
-      dateB.getDate()
-    );
+        year:
+          "numeric",
 
-  return Math.round(
-    (utcB - utcA) / oneDay
+        month:
+          "2-digit",
+
+        day:
+          "2-digit"
+      }
+    )
+      .formatToParts(
+        new Date()
+      );
+
+
+  const get =
+    type =>
+      parts.find(
+        part =>
+          part.type === type
+      )?.value || "";
+
+
+  return (
+    `${get("year")}-` +
+    `${get("month")}-` +
+    `${get("day")}`
   );
+
 }
 
 
-function average(numbers) {
-  const valid =
-    numbers.filter(
-      number =>
-        Number.isFinite(number)
-    );
+function jpDate(
+  date
+) {
 
-  if (!valid.length) {
-    return 0;
+  if (!date) {
+    return "—";
   }
 
+
+  const [
+    year,
+    month,
+    day
+  ] =
+    date
+      .split("-")
+      .map(Number);
+
+
   return (
-    valid.reduce(
-      (sum, number) =>
-        sum + number,
-      0
-    ) / valid.length
+    `${year}/${month}/${day}`
   );
+
 }
 
 
-function roundOne(value) {
-  return (
-    Math.round(value * 10) /
-    10
-  );
-}
-
-
-function clamp(
-  value,
-  min,
-  max
+function monthDay(
+  date
 ) {
-  return Math.min(
-    max,
-    Math.max(
-      min,
-      value
-    )
+
+  if (!date) {
+    return "—";
+  }
+
+
+  const [
+    ,
+    month,
+    day
+  ] =
+    date
+      .split("-")
+      .map(Number);
+
+
+  return (
+    `${month}/${day}`
   );
+
+}
+
+
+function fmt(
+  value
+) {
+
+  return Number(
+    value ?? 0
+  ).toLocaleString(
+    "ja-JP"
+  );
+
+}
+
+
+function diffDays(
+  later,
+  earlier
+) {
+
+  return Math.round(
+    (
+      dateObj(later) -
+      dateObj(earlier)
+    ) /
+    86400000
+  );
+
+}
+
+
+function addDays(
+  dateString,
+  days
+) {
+
+  const date =
+    dateObj(
+      dateString
+    );
+
+
+  date.setDate(
+    date.getDate() +
+    days
+  );
+
+
+  return dateToIso(
+    date
+  );
+
+}
+
+
+function escapeHtml(
+  value
+) {
+
+  return String(
+    value ?? ""
+  )
+    .replace(
+      /[&<>"']/g,
+      char =>
+        ({
+          "&":"&amp;",
+          "<":"&lt;",
+          ">":"&gt;",
+          '"':"&quot;",
+          "'":"&#39;"
+        }[char])
+    );
+
 }
 
 
 
 /* =========================================================
-   Normalize data
+   Data
 ========================================================= */
 
-function normalizeSubscribers() {
+function normalizeData() {
+
   DATA.subscribers =
-    (DATA.subscribers || [])
-      .filter(
-        item =>
-          item &&
-          item.date &&
-          Number.isFinite(
-            Number(item.count)
-          )
+    [
+      ...(
+        DATA.subscribers ||
+        []
       )
+    ]
       .map(
-        item => ({
-          date: item.date,
+        row => ({
+          date:
+            String(
+              row.date || ""
+            ),
+
           count:
-            Number(item.count)
+            Number(
+              row.count || 0
+            )
         })
       )
+      .filter(
+        row =>
+          row.date
+      )
       .sort(
-        (a, b) =>
+        (a,b) =>
           a.date.localeCompare(
             b.date
           )
       );
-}
 
 
-function normalizeVideos() {
   DATA.videos =
-    (DATA.videos || [])
-      .filter(
-        video =>
-          video &&
-          video.date
+    [
+      ...(
+        DATA.videos ||
+        []
       )
+    ]
       .map(
         video => ({
           ...video,
 
-          viewCount:
-            Number(
-              video.viewCount || 0
+          date:
+            String(
+              video.date ||
+              video.publishedAt ||
+              ""
+            )
+              .slice(
+                0,
+                10
+              ),
+
+          id:
+            video.id ||
+            video.videoId ||
+            "",
+
+          thumbnail:
+            video.thumbnail ||
+            video.thumbnailUrl ||
+            (
+              video.id ||
+              video.videoId
+                ? `https://i.ytimg.com/vi/${video.id || video.videoId}/hqdefault.jpg`
+                : ""
             )
         })
       )
+      .filter(
+        video =>
+          video.date
+      )
       .sort(
-        (a, b) =>
+        (a,b) =>
           a.date.localeCompare(
             b.date
           )
       );
+
 }
 
 
+function subscribers() {
 
-/* =========================================================
-   Header
-========================================================= */
+  return DATA.subscribers;
 
-function updateHeader() {
-  const subscribers =
-    DATA.subscribers;
-
-  if (!subscribers.length) {
-    return;
-  }
-
-  const latest =
-    subscribers[
-      subscribers.length - 1
-    ];
-
-  const start =
-    parseDate(START_DATE);
-
-  const end =
-    parseDate(latest.date);
-
-  const days =
-    diffDays(start, end) + 1;
-
-  $("periodText").textContent =
-    `2026/4/3～` +
-    `${end.getFullYear()}/` +
-    `${end.getMonth() + 1}/` +
-    `${end.getDate()}`;
-
-  $("dayCount").textContent =
-    `（${days}日）`;
+}
 
 
-  let updatedDate = null;
+function latestSubscriber() {
 
-  if (DATA.updatedAt) {
-    updatedDate =
-      new Date(DATA.updatedAt);
-  }
+  return (
+    subscribers()
+      .at(-1) ||
+    null
+  );
 
-
-  if (
-    !updatedDate ||
-    Number.isNaN(
-      updatedDate.getTime()
-    )
-  ) {
-    updatedDate =
-      new Date();
-  }
+}
 
 
-  const desktopText =
-    updatedDate
-      .toLocaleString(
-        "ja-JP",
-        {
-          year: "numeric",
-          month: "numeric",
-          day: "numeric",
-          hour: "2-digit",
-          minute: "2-digit"
-        }
-      );
+function currentSubscribers() {
 
+  return Number(
+    DATA.currentSubscriberCount ??
+    latestSubscriber()?.count ??
+    0
+  );
 
-  const mobileText =
-    updatedDate
-      .toLocaleString(
-        "ja-JP",
-        {
-          month: "numeric",
-          day: "numeric",
-          hour: "2-digit",
-          minute: "2-digit"
-        }
-      );
-
-
-  $("updatedAtDesktop")
-    .textContent =
-    desktopText;
-
-  $("updatedAtMobile")
-    .textContent =
-    mobileText;
 }
 
 
@@ -335,154 +372,159 @@ function updateHeader() {
    Growth pace
 ========================================================= */
 
-function getLatestSubscriber() {
-  if (!DATA.subscribers.length) {
-    return null;
-  }
-
-  return (
-    DATA.subscribers[
-      DATA.subscribers.length - 1
-    ]
-  );
-}
-
-
 function calculateSlopeForDays(
   rangeDays
 ) {
-  const subscribers =
-    DATA.subscribers;
+
+  const rows =
+    subscribers();
+
 
   if (
-    subscribers.length < 2
+    rows.length <
+    2
   ) {
+
     return 0;
+
   }
 
 
   const latest =
-    subscribers[
-      subscribers.length - 1
-    ];
+    rows.at(-1);
 
-  const latestDate =
-    parseDate(latest.date);
 
   const cutoff =
     addDays(
-      latestDate,
+      latest.date,
       -rangeDays
     );
 
 
-  let first =
-    subscribers[0];
+  let start =
+    rows[0];
 
 
-  for (
-    let i =
-      subscribers.length - 1;
-    i >= 0;
-    i--
-  ) {
-    const date =
-      parseDate(
-        subscribers[i].date
-      );
-
-    if (date <= cutoff) {
-      first =
-        subscribers[i];
-
-      break;
-    }
-
-    first =
-      subscribers[i];
-  }
-
-
-  const firstDate =
-    parseDate(first.date);
-
-  const dayDifference =
-    diffDays(
-      firstDate,
-      latestDate
+  const beforeCutoff =
+    rows.filter(
+      row =>
+        row.date <= cutoff
     );
 
 
   if (
-    dayDifference <= 0
+    beforeCutoff.length
   ) {
-    return 0;
+
+    start =
+      beforeCutoff.at(-1);
+
+  }
+
+  else {
+
+    const inside =
+      rows.find(
+        row =>
+          row.date >= cutoff
+      );
+
+    if (inside) {
+      start = inside;
+    }
+
   }
 
 
+  const days =
+    Math.max(
+      1,
+      diffDays(
+        latest.date,
+        start.date
+      )
+    );
+
+
   return (
-    latest.count -
-    first.count
-  ) / dayDifference;
+    Number(
+      latest.count
+    ) -
+    Number(
+      start.count
+    )
+  ) /
+  days;
+
 }
 
 
-function calculateAllTimeSlope() {
-  const subscribers =
-    DATA.subscribers;
+function calculateAllSlope() {
+
+  const rows =
+    subscribers();
+
 
   if (
-    subscribers.length < 2
+    rows.length <
+    2
   ) {
+
     return 0;
+
   }
 
 
   const first =
-    subscribers[0];
+    rows[0];
 
-  const latest =
-    subscribers[
-      subscribers.length - 1
-    ];
+  const last =
+    rows.at(-1);
 
 
   const days =
-    diffDays(
-      parseDate(first.date),
-      parseDate(latest.date)
+    Math.max(
+      1,
+      diffDays(
+        last.date,
+        first.date
+      )
     );
-
-
-  if (days <= 0) {
-    return 0;
-  }
 
 
   return (
-    latest.count -
-    first.count
-  ) / days;
+    Number(
+      last.count
+    ) -
+    Number(
+      first.count
+    )
+  ) /
+  days;
+
 }
 
 
-function getGrowthPaces() {
+function growthPaces() {
+
   const pace7 =
-    calculateSlopeForDays(7);
+    calculateSlopeForDays(
+      7
+    );
 
   const pace30 =
-    calculateSlopeForDays(30);
+    calculateSlopeForDays(
+      30
+    );
 
   const paceAll =
-    calculateAllTimeSlope();
+    calculateAllSlope();
 
 
   const weighted =
-    (
-      pace7 * 0.50 +
-      pace30 * 0.35 +
-      paceAll * 0.15
-    );
+    pace7 * .50 +
+    pace30 * .35 +
+    paceAll * .15;
 
 
   return {
@@ -491,6 +533,7 @@ function getGrowthPaces() {
     paceAll,
     weighted
   };
+
 }
 
 
@@ -500,309 +543,289 @@ function getGrowthPaces() {
 ========================================================= */
 
 function loadGoalState() {
+
   try {
-    const saved =
+
+    const value =
       localStorage.getItem(
         GOAL_STATE_KEY
       );
 
-    if (!saved) {
-      return null;
-    }
 
-    return JSON.parse(saved);
+    return value
+      ? JSON.parse(value)
+      : null;
 
-  } catch (error) {
-    return null;
   }
+
+  catch {
+
+    return null;
+
+  }
+
 }
 
 
-function saveGoalState(state) {
+function saveGoalState(
+  state
+) {
+
   localStorage.setItem(
     GOAL_STATE_KEY,
     JSON.stringify(state)
   );
+
 }
 
 
 function loadGoalHistory() {
+
   try {
-    const saved =
+
+    return JSON.parse(
       localStorage.getItem(
         GOAL_HISTORY_KEY
-      );
+      ) ||
+      "[]"
+    );
 
-    if (!saved) {
-      return [];
-    }
-
-    const parsed =
-      JSON.parse(saved);
-
-    return Array.isArray(parsed)
-      ? parsed
-      : [];
-
-  } catch (error) {
-    return [];
   }
+
+  catch {
+
+    return [];
+
+  }
+
 }
 
 
-function saveGoalHistory(history) {
+function saveGoalHistory(
+  history
+) {
+
   localStorage.setItem(
     GOAL_HISTORY_KEY,
-    JSON.stringify(history)
+    JSON.stringify(
+      history
+    )
   );
+
 }
 
 
-function getNextGoal(count) {
+function nextMilestone(
+  current
+) {
+
   return (
     Math.floor(
-      count / GOAL_STEP
-    ) *
-      GOAL_STEP +
-    GOAL_STEP
-  );
+      current /
+      100
+    ) +
+    1
+  ) *
+  100;
+
 }
 
 
-function findGoalAchievement(
+function calculateEta(
+  current,
   target,
-  afterDate = null
+  pace,
+  fromDate
 ) {
-  for (
-    const record of
-    DATA.subscribers
+
+  if (
+    !Number.isFinite(
+      pace
+    ) ||
+    pace <= 0
   ) {
-    if (
-      afterDate &&
-      record.date <
-        afterDate
-    ) {
-      continue;
-    }
 
-    if (
-      record.count >=
-      target
-    ) {
-      return record;
-    }
-  }
-
-  return null;
-}
-
-
-function createGoalState(
-  target = null
-) {
-  const latest =
-    getLatestSubscriber();
-
-  if (!latest) {
     return null;
+
   }
-
-
-  const paces =
-    getGrowthPaces();
-
-  const goal =
-    target ??
-    getNextGoal(
-      latest.count
-    );
 
 
   const remaining =
-    goal -
-    latest.count;
+    Math.max(
+      0,
+      target -
+      current
+    );
 
 
-  let daysNeeded = null;
-
-  if (
-    paces.weighted > 0
-  ) {
-    daysNeeded =
-      Math.ceil(
-        remaining /
-        paces.weighted
-      );
-  }
+  const days =
+    Math.ceil(
+      remaining /
+      pace
+    );
 
 
-  const startDate =
-    parseDate(latest.date);
+  return addDays(
+    fromDate,
+    days
+  );
 
-
-  const eta =
-    daysNeeded !== null
-      ? addDays(
-          startDate,
-          daysNeeded
-        )
-      : null;
-
-
-  const state = {
-    target: goal,
-
-    startDate:
-      latest.date,
-
-    startCount:
-      latest.count,
-
-    pace7:
-      paces.pace7,
-
-    pace30:
-      paces.pace30,
-
-    paceAll:
-      paces.paceAll,
-
-    weightedPace:
-      paces.weighted,
-
-    eta:
-      eta
-        ? toDateString(eta)
-        : null
-  };
-
-
-  saveGoalState(state);
-
-  return state;
 }
 
 
+function createGoalState() {
 
-/* =========================================================
-   Goal rollover
-========================================================= */
+  const current =
+    currentSubscribers();
+
+  const target =
+    nextMilestone(
+      current
+    );
+
+  const paces =
+    growthPaces();
+
+  const createdDate =
+    latestSubscriber()?.date ||
+    todayJST();
+
+
+  const eta =
+    calculateEta(
+      current,
+      target,
+      paces.weighted,
+      createdDate
+    );
+
+
+  return {
+    target,
+    startCount:
+      current,
+
+    createdDate,
+
+    eta,
+
+    fixedPace:
+      paces.weighted
+  };
+
+}
+
+
+function findAchievementDate(
+  state
+) {
+
+  const match =
+    subscribers()
+      .find(
+        row =>
+          row.date >=
+            state.createdDate &&
+          Number(
+            row.count
+          ) >=
+            Number(
+              state.target
+            )
+      );
+
+
+  return (
+    match?.date ||
+    todayJST()
+  );
+
+}
+
 
 function processGoalState() {
-  const latest =
-    getLatestSubscriber();
-
-  if (!latest) {
-    return null;
-  }
-
 
   let state =
     loadGoalState();
 
 
-  if (!state) {
+  if (
+    !state ||
+    !Number.isFinite(
+      Number(
+        state.target
+      )
+    )
+  ) {
+
     state =
       createGoalState();
 
-    return state;
+    saveGoalState(
+      state
+    );
+
   }
+
+
+  const current =
+    currentSubscribers();
 
 
   if (
-    latest.count <
-    state.target
+    current >=
+    Number(
+      state.target
+    )
   ) {
-    return state;
-  }
 
+    const actualDate =
+      findAchievementDate(
+        state
+      );
 
-  const achievement =
-    findGoalAchievement(
-      state.target,
-      state.startDate
-    );
-
-
-  if (achievement) {
 
     const history =
       loadGoalHistory();
 
 
-    const alreadySaved =
-      history.some(
-        item =>
-          Number(item.target) ===
-            Number(
-              state.target
-            ) &&
-          item.startDate ===
-            state.startDate
-      );
+    history.unshift({
+      target:
+        Number(
+          state.target
+        ),
+
+      predictedDate:
+        state.eta,
+
+      actualDate,
+
+      createdDate:
+        state.createdDate
+    });
 
 
-    if (!alreadySaved) {
-
-      const etaDate =
-        state.eta
-          ? parseDate(
-              state.eta
-            )
-          : null;
-
-      const actualDate =
-        parseDate(
-          achievement.date
-        );
-
-
-      let differenceDays =
-        null;
-
-
-      if (etaDate) {
-        differenceDays =
-          diffDays(
-            actualDate,
-            etaDate
-          );
-      }
-
-
-      history.unshift({
-        target:
-          state.target,
-
-        startDate:
-          state.startDate,
-
-        predictedDate:
-          state.eta,
-
-        actualDate:
-          achievement.date,
-
-        differenceDays
-      });
-
-
-      saveGoalHistory(
-        history
-      );
-    }
+    saveGoalHistory(
+      history.slice(
+        0,
+        20
+      )
+    );
 
 
     state =
-      createGoalState(
-        getNextGoal(
-          latest.count
-        )
-      );
+      createGoalState();
+
+
+    saveGoalState(
+      state
+    );
+
   }
 
 
   return state;
+
 }
 
 
@@ -811,221 +834,89 @@ function processGoalState() {
    Goal rendering
 ========================================================= */
 
-function getCurrentExpectedCount(
-  state,
-  latest
-) {
-  const startDate =
-    parseDate(
-      state.startDate
-    );
-
-  const latestDate =
-    parseDate(
-      latest.date
-    );
-
-
-  const elapsed =
-    Math.max(
-      0,
-      diffDays(
-        startDate,
-        latestDate
-      )
-    );
-
-
-  return (
-    Number(
-      state.startCount
-    ) +
-    Number(
-      state.weightedPace
-    ) *
-      elapsed
-  );
-}
-
-
-function getPaceAdvice(
-  difference,
-  state
-) {
-  const pace =
-    Math.max(
-      Number(
-        state.weightedPace
-      ),
-      0.1
-    );
-
-
-  const strongThreshold =
-    Math.max(
-      5,
-      pace * 2
-    );
-
-
-  if (
-    difference >=
-    strongThreshold
-  ) {
-    return {
-      status:
-        "かなり好調",
-
-      text:
-        "当初予測を大きく上回るペースで伸びています。目標を予測日より早く達成する可能性が高まっています。"
-    };
-  }
-
-
-  if (
-    difference >= 2
-  ) {
-    return {
-      status:
-        "いい調子",
-
-      text:
-        "当初の予測より少し先行しています。現在の伸びを維持できれば、予測日より早い達成も期待できます。"
-    };
-  }
-
-
-  if (
-    difference > -2
-  ) {
-    return {
-      status:
-        "想定通り",
-
-      text:
-        "当初に立てた予測とほぼ同じペースで進んでいます。現在のところ大きなズレはありません。"
-    };
-  }
-
-
-  if (
-    difference >
-    -strongThreshold
-  ) {
-    return {
-      status:
-        "ややペース低下",
-
-      text:
-        "当初の予測より少し遅れています。直近の登録者増加ペースが戻るかを見ていきたいところです。"
-    };
-  }
-
-
-  return {
-    status:
-      "ペース低下",
-
-    text:
-      "当初予測より遅いペースになっています。予測日は固定したまま、今後の伸びの変化を追跡します。"
-  };
-}
-
-
 function renderGoal() {
+
   const state =
     processGoalState();
 
-  const latest =
-    getLatestSubscriber();
-
-
-  if (
-    !state ||
-    !latest
-  ) {
-    return;
-  }
-
-
   const paces =
-    getGrowthPaces();
+    growthPaces();
+
+  const current =
+    currentSubscribers();
 
 
-  $("pace7").textContent =
-    roundOne(
-      paces.pace7
-    );
-
-  $("pace30").textContent =
-    roundOne(
-      paces.pace30
-    );
-
-  $("paceAll").textContent =
-    roundOne(
-      paces.paceAll
-    );
-
-
-  $("paceWeighted")
-    .textContent =
-    roundOne(
-      Number(
-        state.weightedPace
-      )
-    );
-
+  /* Main values */
 
   $("goalTarget")
     .textContent =
-    `${state.target.toLocaleString()} subscribers`;
+    `${fmt(state.target)} subscribers`;
+
+
+  $("goalCurrent")
+    .textContent =
+    `${fmt(current)}人`;
+
+
+  $("goalToday")
+    .textContent =
+    jpDate(
+      todayJST()
+    );
 
 
   $("goalEta")
     .textContent =
     state.eta
-      ? formatDateFullJP(
-          parseDate(
-            state.eta
-          )
+      ? jpDate(
+          state.eta
         )
-      : "予測不能";
+      : "算出不可";
 
 
-  $("goalCurrent")
-    .textContent =
-    `現在 ${latest.count.toLocaleString()}人`;
-
+  /* Remaining */
 
   const remaining =
     Math.max(
       0,
-      state.target -
-      latest.count
+      Number(
+        state.target
+      ) -
+      current
     );
 
 
   $("goalRemaining")
     .textContent =
-    `あと ${remaining.toLocaleString()}人`;
+    `あと ${fmt(remaining)}人`;
 
 
-  const milestoneStart =
-    state.target -
-    GOAL_STEP;
+  /* Progress */
+
+  const lowerMilestone =
+    Math.max(
+      0,
+      Number(
+        state.target
+      ) -
+      100
+    );
 
 
   const progress =
-    clamp(
-      (
-        latest.count -
-        milestoneStart
-      ) /
-        GOAL_STEP *
-        100,
+    Math.max(
       0,
-      100
+      Math.min(
+        100,
+        (
+          (
+            current -
+            lowerMilestone
+          ) /
+          100
+        ) *
+        100
+      )
     );
 
 
@@ -1036,81 +927,182 @@ function renderGoal() {
 
   $("goalProgressPercent")
     .textContent =
-    `${Math.round(progress)}%`;
+    `${progress.toFixed(0)}%`;
 
 
-  let remainingDaysText =
-    "残り予測 —日";
+  /* Remaining days */
 
+  if (
+    state.eta
+  ) {
 
-  if (state.eta) {
     const remainingDays =
       diffDays(
-        parseDate(latest.date),
-        parseDate(state.eta)
+        state.eta,
+        todayJST()
       );
 
 
-    if (remainingDays >= 0) {
-      remainingDaysText =
-        `予測日まで ${remainingDays}日`;
-    } else {
-      remainingDaysText =
-        `予測日から ${Math.abs(
-          remainingDays
-        )}日経過`;
-    }
+    $("goalRemainingDays")
+      .textContent =
+      remainingDays >= 0
+        ? `残り予測 ${remainingDays}日`
+        : `予測日から ${Math.abs(remainingDays)}日経過`;
+
+  }
+
+  else {
+
+    $("goalRemainingDays")
+      .textContent =
+      "残り予測 —日";
+
   }
 
 
-  $("goalRemainingDays")
+  /* Pace cards */
+
+  $("pace7")
     .textContent =
-    remainingDaysText;
+    paces.pace7
+      .toFixed(1);
 
 
-  const expected =
-    getCurrentExpectedCount(
-      state,
-      latest
+  $("pace30")
+    .textContent =
+    paces.pace30
+      .toFixed(1);
+
+
+  $("paceAll")
+    .textContent =
+    paces.paceAll
+      .toFixed(1);
+
+
+  $("paceWeighted")
+    .textContent =
+    paces.weighted
+      .toFixed(1);
+
+
+  renderGoalStatus(
+    state,
+    current
+  );
+
+
+  renderPredictionHistory();
+
+}
+
+
+
+/* =========================================================
+   Goal status
+========================================================= */
+
+function renderGoalStatus(
+  state,
+  current
+) {
+
+  const latestDate =
+    latestSubscriber()?.date ||
+    todayJST();
+
+
+  const elapsedDays =
+    Math.max(
+      0,
+      diffDays(
+        latestDate,
+        state.createdDate
+      )
     );
 
 
+  const expected =
+    Number(
+      state.startCount
+    ) +
+    Number(
+      state.fixedPace || 0
+    ) *
+    elapsedDays;
+
+
   const difference =
-    latest.count -
+    current -
     expected;
 
 
-  const roundedDifference =
-    Math.round(
-      difference
+  const threshold =
+    Math.max(
+      3,
+      Math.abs(
+        Number(
+          state.fixedPace || 0
+        )
+      ) *
+      2
     );
 
 
   $("paceDifference")
     .textContent =
-    roundedDifference > 0
-      ? `+${roundedDifference}人`
-      : `${roundedDifference}人`;
+    `${difference >= 0 ? "+" : ""}${difference.toFixed(1)}人`;
 
 
-  const advice =
-    getPaceAdvice(
-      difference,
-      state
-    );
+  if (
+    difference >
+    threshold
+  ) {
+
+    $("paceStatus")
+      .textContent =
+      "予測より好調";
+
+
+    $("paceAdvice")
+      .textContent =
+      "固定した予測ペースを上回って進んでいます。このペースが続けば、予想到達日より早くマイルストーンに到達する可能性があります。";
+
+
+    return;
+
+  }
+
+
+  if (
+    difference <
+    -threshold
+  ) {
+
+    $("paceStatus")
+      .textContent =
+      "予測より遅め";
+
+
+    $("paceAdvice")
+      .textContent =
+      "現在は固定した予測ペースをやや下回っています。予想到達日は変更せず、今後の伸びを引き続き比較します。";
+
+
+    return;
+
+  }
 
 
   $("paceStatus")
     .textContent =
-    advice.status;
+    "ほぼ予測通り";
 
 
   $("paceAdvice")
     .textContent =
-    advice.text;
+    "現在の登録者数は固定した予測ライン付近で推移しています。今のところ大きなペースのずれはありません。";
 
-
-  renderPredictionHistory();
 }
 
 
@@ -1120,89 +1112,85 @@ function renderGoal() {
 ========================================================= */
 
 function renderPredictionHistory() {
-  const container =
-    $("predictionHistory");
 
   const history =
     loadGoalHistory();
 
 
-  if (!history.length) {
-    container.innerHTML = `
-      <div class="empty-state">
-        達成済みの予測はまだありません。
-      </div>
-    `;
+  if (
+    !history.length
+  ) {
+
+    $("predictionHistory")
+      .innerHTML =
+      `
+        <div class="empty-state">
+          達成済みの予測はまだありません。
+        </div>
+      `;
+
 
     return;
+
   }
 
 
-  container.innerHTML =
+  $("predictionHistory")
+    .innerHTML =
     history
       .map(
         item => {
 
-          const predicted =
-            item.predictedDate
-              ? formatDateJP(
-                  parseDate(
-                    item.predictedDate
-                  )
-                )
-              : "—";
-
-
-          const actual =
-            formatDateJP(
-              parseDate(
-                item.actualDate
-              )
-            );
-
-
           let resultText =
-            "予測との差 —";
-
+            "—";
 
           let resultClass =
             "";
 
 
           if (
-            Number.isFinite(
-              item.differenceDays
-            )
+            item.predictedDate &&
+            item.actualDate
           ) {
 
+            const difference =
+              diffDays(
+                item.predictedDate,
+                item.actualDate
+              );
+
+
             if (
-              item.differenceDays >
-              0
+              difference > 0
             ) {
+
               resultText =
-                `${item.differenceDays}日早く達成`;
+                `${difference}日早く達成`;
 
               resultClass =
                 "history-early";
+
             }
 
             else if (
-              item.differenceDays <
-              0
+              difference < 0
             ) {
+
               resultText =
-                `${Math.abs(
-                  item.differenceDays
-                )}日遅く達成`;
+                `${Math.abs(difference)}日遅く達成`;
 
               resultClass =
                 "history-late";
+
             }
 
             else {
+
               resultText =
                 "予測日どおり";
+
             }
+
           }
 
 
@@ -1210,17 +1198,15 @@ function renderPredictionHistory() {
             <div class="prediction-history-item">
 
               <strong class="history-target">
-                ${Number(
-                  item.target
-                ).toLocaleString()}人
+                ${fmt(item.target)}人
               </strong>
 
               <span>
-                予測 ${predicted}
+                予測 ${item.predictedDate ? jpDate(item.predictedDate) : "—"}
               </span>
 
               <span>
-                実績 ${actual}
+                実績 ${item.actualDate ? jpDate(item.actualDate) : "—"}
               </span>
 
               <span
@@ -1231,9 +1217,11 @@ function renderPredictionHistory() {
 
             </div>
           `;
+
         }
       )
       .join("");
+
 }
 
 
@@ -1242,260 +1230,175 @@ function renderPredictionHistory() {
    Future scenarios
 ========================================================= */
 
-function buildScenarioDates(
-  startDate,
-  months = 6
-) {
-  const end =
-    new Date(startDate);
-
-  end.setMonth(
-    end.getMonth() +
-    months
-  );
-
-
-  const totalDays =
-    diffDays(
-      startDate,
-      end
-    );
-
-
-  const dates = [];
-
-
-  for (
-    let day = 0;
-    day <= totalDays;
-    day += 7
-  ) {
-    dates.push(
-      addDays(
-        startDate,
-        day
-      )
-    );
-  }
-
-
-  if (
-    dates[
-      dates.length - 1
-    ] < end
-  ) {
-    dates.push(end);
-  }
-
-
-  return dates;
-}
-
-
-function getScenarioPaces() {
-  const paces =
-    getGrowthPaces();
-
-
-  const standard =
-    Math.max(
-      0,
-      (
-        paces.pace7 * 0.50 +
-        paces.pace30 * 0.35 +
-        paces.paceAll * 0.15
-      )
-    );
-
-
-  const cautious =
-    Math.max(
-      0,
-      paces.pace30 * 0.80
-    );
-
-
-  const positive =
-    Math.max(
-      standard,
-      paces.pace7,
-      standard * 1.15
-    );
-
-
-  return {
-    cautious,
-    standard,
-    positive
-  };
-}
-
-
 function renderScenarios() {
-  const latest =
-    getLatestSubscriber();
 
-  if (!latest) {
-    return;
-  }
+  const current =
+    currentSubscribers();
+
+  const paces =
+    growthPaces();
 
 
-  const latestDate =
-    parseDate(
-      latest.date
+  const cautiousPace =
+    Math.max(
+      0,
+      paces.pace30 *
+      .80
     );
 
 
-  const scenarioPaces =
-    getScenarioPaces();
-
-
-  const dates =
-    buildScenarioDates(
-      latestDate,
-      6
+  const standardPace =
+    Math.max(
+      0,
+      paces.weighted
     );
 
 
-  const labels =
-    dates.map(
-      date =>
-        formatDateShort(date)
+  const positivePace =
+    Math.max(
+      standardPace,
+      paces.pace7
     );
 
 
-  const cautiousData =
-    dates.map(
-      date => {
-
-        const days =
-          diffDays(
-            latestDate,
-            date
-          );
-
-        return Math.round(
-          latest.count +
-          scenarioPaces.cautious *
-            days
-        );
-      }
-    );
-
-
-  const standardData =
-    dates.map(
-      date => {
-
-        const days =
-          diffDays(
-            latestDate,
-            date
-          );
-
-        return Math.round(
-          latest.count +
-          scenarioPaces.standard *
-            days
-        );
-      }
-    );
-
-
-  const positiveData =
-    dates.map(
-      date => {
-
-        const days =
-          diffDays(
-            latestDate,
-            date
-          );
-
-        return Math.round(
-          latest.count +
-          scenarioPaces.positive *
-            days
-        );
-      }
-    );
-
-
-  const threeMonthsLater =
-    new Date(latestDate);
-
-  threeMonthsLater.setMonth(
-    threeMonthsLater.getMonth() +
-    3
-  );
-
-
-  const threeMonthDays =
-    diffDays(
-      latestDate,
-      threeMonthsLater
-    );
+  const threeMonths =
+    90;
 
 
   $("scenarioLowValue")
     .textContent =
-    Math.round(
-      latest.count +
-      scenarioPaces.cautious *
-        threeMonthDays
-    ).toLocaleString();
+    `${fmt(
+      Math.round(
+        current +
+        cautiousPace *
+        threeMonths
+      )
+    )}人`;
 
 
   $("scenarioStandardValue")
     .textContent =
-    Math.round(
-      latest.count +
-      scenarioPaces.standard *
-        threeMonthDays
-    ).toLocaleString();
+    `${fmt(
+      Math.round(
+        current +
+        standardPace *
+        threeMonths
+      )
+    )}人`;
 
 
   $("scenarioHighValue")
     .textContent =
-    Math.round(
-      latest.count +
-      scenarioPaces.positive *
-        threeMonthDays
-    ).toLocaleString();
+    `${fmt(
+      Math.round(
+        current +
+        positivePace *
+        threeMonths
+      )
+    )}人`;
 
 
-  if (scenarioChart) {
-    scenarioChart.destroy();
+  const horizon =
+    180;
+
+
+  const labels =
+    [];
+
+  const lowValues =
+    [];
+
+  const standardValues =
+    [];
+
+  const highValues =
+    [];
+
+
+  for (
+    let day = 0;
+    day <= horizon;
+    day += 7
+  ) {
+
+    const date =
+      addDays(
+        todayJST(),
+        day
+      );
+
+
+    labels.push(
+      monthDay(
+        date
+      )
+    );
+
+
+    lowValues.push(
+      Math.round(
+        current +
+        cautiousPace *
+        day
+      )
+    );
+
+
+    standardValues.push(
+      Math.round(
+        current +
+        standardPace *
+        day
+      )
+    );
+
+
+    highValues.push(
+      Math.round(
+        current +
+        positivePace *
+        day
+      )
+    );
+
   }
 
 
-  const canvas =
-    $("scenarioChart");
+  if (
+    scenarioChart
+  ) {
+
+    scenarioChart.destroy();
+
+  }
 
 
   scenarioChart =
     new Chart(
-      canvas,
+      $("scenarioChart"),
       {
-        type: "line",
+        type:
+          "line",
 
         data: {
           labels,
 
           datasets: [
-
             {
               label:
                 "慎重",
 
               data:
-                cautiousData,
+                lowValues,
 
-              borderWidth: 2,
+              tension:
+                .28,
 
-              pointRadius: 0,
+              pointRadius:
+                0,
 
-              tension: .3
+              borderWidth:
+                2
             },
 
             {
@@ -1503,13 +1406,16 @@ function renderScenarios() {
                 "標準",
 
               data:
-                standardData,
+                standardValues,
 
-              borderWidth: 3,
+              tension:
+                .28,
 
-              pointRadius: 0,
+              pointRadius:
+                0,
 
-              tension: .3
+              borderWidth:
+                3
             },
 
             {
@@ -1517,128 +1423,83 @@ function renderScenarios() {
                 "好調",
 
               data:
-                positiveData,
+                highValues,
 
-              borderWidth: 2,
+              tension:
+                .28,
 
-              pointRadius: 0,
+              pointRadius:
+                0,
 
-              tension: .3
+              borderWidth:
+                2
             }
-
           ]
         },
 
-
         options: {
-
-          responsive: true,
+          responsive:
+            true,
 
           maintainAspectRatio:
             false,
 
           interaction: {
-            intersect: false,
-            mode: "index"
+            mode:
+              "index",
+
+            intersect:
+              false
           },
 
           plugins: {
-
             legend: {
-              display: true,
+              display:
+                true,
 
-              labels: {
-                usePointStyle:
-                  true,
-
-                boxWidth:
-                  8,
-
-                font: {
-                  family:
-                    'Inter,"Noto Sans JP",sans-serif',
-
-                  weight:
-                    "700",
-
-                  size:
-                    11
-                }
-              }
-            },
-
-            tooltip: {
-              callbacks: {
-
-                label(context) {
-                  return (
-                    `${context.dataset.label}: ` +
-                    `${context.parsed.y.toLocaleString()}人`
-                  );
-                }
-
-              }
+              position:
+                "bottom"
             }
-
           },
 
-
           scales: {
-
             x: {
-
               grid: {
-                display: false
+                display:
+                  false
               },
 
               ticks: {
-                maxTicksLimit: 8,
+                maxTicksLimit:
+                  9,
 
-                font: {
-                  size: 10,
-                  weight: "700"
-                }
+                maxRotation:
+                  0
               }
-
             },
 
-
             y: {
-
-              beginAtZero: false,
-
               ticks: {
-
-                callback(value) {
-                  return (
-                    `${Number(
-                      value
-                    ).toLocaleString()}`
-                  );
-                },
-
-                font: {
-                  size: 10,
-                  weight: "700"
-                }
+                callback:
+                  value =>
+                    fmt(value)
               }
-
             }
-
           }
-
         }
       }
     );
+
 }
 
 
 
 /* =========================================================
-   Posting interval
+   Posting intervals
 ========================================================= */
 
-function getUniqueVideoDates() {
+function uniquePostingDates() {
+
   return [
     ...new Set(
       DATA.videos
@@ -1648,21 +1509,28 @@ function getUniqueVideoDates() {
         )
         .filter(Boolean)
     )
-  ].sort();
+  ]
+    .sort();
+
 }
 
 
-function calculateIntervals(
+function averageIntervals(
   dates
 ) {
+
   if (
-    dates.length < 2
+    dates.length <
+    2
   ) {
-    return [];
+
+    return 0;
+
   }
 
 
-  const intervals = [];
+  const intervals =
+    [];
 
 
   for (
@@ -1670,136 +1538,131 @@ function calculateIntervals(
     i < dates.length;
     i++
   ) {
-    const previous =
-      parseDate(
-        dates[i - 1]
-      );
 
-    const current =
-      parseDate(
-        dates[i]
-      );
+    intervals.push(
+      Math.max(
+        0,
+        diffDays(
+          dates[i],
+          dates[i - 1]
+        )
+      )
+    );
 
-
-    const difference =
-      diffDays(
-        previous,
-        current
-      );
-
-
-    if (
-      difference >= 0
-    ) {
-      intervals.push(
-        difference
-      );
-    }
   }
 
 
-  return intervals;
+  return (
+    intervals.reduce(
+      (a,b) =>
+        a + b,
+      0
+    ) /
+    intervals.length
+  );
+
 }
 
 
-function getPostingRecommendation() {
+function calculatePostingRecommendation() {
+
   const dates =
-    getUniqueVideoDates();
+    uniquePostingDates();
 
 
-  if (!dates.length) {
+  if (
+    !dates.length
+  ) {
+
     return null;
+
   }
 
 
-  const allIntervals =
-    calculateIntervals(
-      dates
+  const recentDates =
+    dates.slice(
+      -11
     );
 
 
-  const recentDates =
-    dates.slice(-11);
-
-
-  const recentIntervals =
-    calculateIntervals(
+  const recent =
+    averageIntervals(
       recentDates
     );
 
 
-  const allAverage =
-    allIntervals.length
-      ? average(
-          allIntervals
-        )
-      : 0;
-
-
-  const recentAverage =
-    recentIntervals.length
-      ? average(
-          recentIntervals
-        )
-      : allAverage;
-
-
-  let recommendedInterval =
-    (
-      recentAverage * .65 +
-      allAverage * .35
+  const all =
+    averageIntervals(
+      dates
     );
+
+
+  let weightedInterval;
 
 
   if (
-    recommendedInterval <= 0
+    recent > 0 &&
+    all > 0
   ) {
-    recommendedInterval = 2;
+
+    weightedInterval =
+      recent *
+      .65 +
+      all *
+      .35;
+
+  }
+
+  else {
+
+    weightedInterval =
+      recent ||
+      all ||
+      1;
+
   }
 
 
-  const lastPostDate =
-    parseDate(
-      dates[
-        dates.length - 1
-      ]
-    );
+  const latestPost =
+    dates.at(-1);
 
 
-  const centerDays =
-    Math.max(
-      1,
-      Math.round(
-        recommendedInterval
-      )
-    );
-
-
-  const recommendedStart =
+  const center =
     addDays(
-      lastPostDate,
+      latestPost,
       Math.max(
         1,
-        centerDays - 1
+        Math.round(
+          weightedInterval
+        )
       )
     );
 
 
-  const recommendedEnd =
+  const start =
     addDays(
-      lastPostDate,
-      centerDays + 1
+      center,
+      -1
+    );
+
+
+  const end =
+    addDays(
+      center,
+      1
     );
 
 
   return {
-    recentAverage,
-    allAverage,
-    recommendedInterval,
-    lastPostDate,
-    recommendedStart,
-    recommendedEnd
+    recent,
+    all,
+    weightedInterval,
+    latestPost,
+    center,
+    start,
+    end
   };
+
 }
 
 
@@ -1809,68 +1672,71 @@ function getPostingRecommendation() {
 ========================================================= */
 
 function renderPostingSummary() {
-  const recommendation =
-    getPostingRecommendation();
+
+  postingRecommendation =
+    calculatePostingRecommendation();
 
 
-  if (!recommendation) {
+  if (
+    !postingRecommendation
+  ) {
+
+    $("recentPostInterval")
+      .textContent =
+      "—";
+
+
+    $("allPostInterval")
+      .textContent =
+      "—";
+
+
+    $("recommendedWindow")
+      .textContent =
+      "—";
+
+
     return;
+
   }
 
 
   $("recentPostInterval")
     .textContent =
-    roundOne(
-      recommendation
-        .recentAverage
-    );
+    postingRecommendation.recent
+      .toFixed(1);
 
 
   $("allPostInterval")
     .textContent =
-    roundOne(
-      recommendation
-        .allAverage
-    );
-
-
-  const start =
-    recommendation
-      .recommendedStart;
-
-
-  const end =
-    recommendation
-      .recommendedEnd;
-
-
-  let label =
-    `${start.getMonth() + 1}/${start.getDate()}`;
-
-
-  if (
-    toDateString(start) !==
-    toDateString(end)
-  ) {
-
-    if (
-      start.getMonth() ===
-      end.getMonth()
-    ) {
-      label +=
-        `〜${end.getDate()}`;
-    }
-
-    else {
-      label +=
-        `〜${end.getMonth() + 1}/${end.getDate()}`;
-    }
-  }
+    postingRecommendation.all
+      .toFixed(1);
 
 
   $("recommendedWindow")
     .textContent =
-    label;
+    `${monthDay(postingRecommendation.start)}〜${monthDay(postingRecommendation.end)}`;
+
+
+  if (
+    !calendarMonth
+  ) {
+
+    const initialDate =
+      dateObj(
+        postingRecommendation.start
+      );
+
+
+    calendarMonth =
+      new Date(
+        initialDate.getFullYear(),
+        initialDate.getMonth(),
+        1
+      );
+
+  }
+
 }
 
 
@@ -1880,356 +1746,249 @@ function renderPostingSummary() {
 ========================================================= */
 
 function videosForDate(
-  dateString
+  date
 ) {
-  return DATA.videos.filter(
-    video =>
-      video.date ===
-      dateString
-  );
+
+  return DATA.videos
+    .filter(
+      video =>
+        video.date ===
+        date
+    );
+
 }
 
 
-function isRecommendedDate(
-  date,
-  recommendation
+function isRecommendationDate(
+  date
 ) {
-  if (!recommendation) {
+
+  if (
+    !postingRecommendation
+  ) {
+
     return false;
+
   }
 
 
-  const current =
-    new Date(
-      date.getFullYear(),
-      date.getMonth(),
-      date.getDate()
-    );
-
-
-  const start =
-    new Date(
-      recommendation
-        .recommendedStart
-        .getFullYear(),
-
-      recommendation
-        .recommendedStart
-        .getMonth(),
-
-      recommendation
-        .recommendedStart
-        .getDate()
-    );
-
-
-  const end =
-    new Date(
-      recommendation
-        .recommendedEnd
-        .getFullYear(),
-
-      recommendation
-        .recommendedEnd
-        .getMonth(),
-
-      recommendation
-        .recommendedEnd
-        .getDate()
-    );
-
-
   return (
-    current >= start &&
-    current <= end
+    date >=
+      postingRecommendation.start &&
+    date <=
+      postingRecommendation.end
   );
+
 }
 
 
 function renderCalendar() {
-  const recommendation =
-    getPostingRecommendation();
-
 
   if (
-    calendarYear === null ||
-    calendarMonth === null
+    !calendarMonth
   ) {
-    const baseDate =
-      recommendation
-        ? recommendation
-            .recommendedStart
-        : new Date();
 
+    const today =
+      dateObj(
+        todayJST()
+      );
 
-    calendarYear =
-      baseDate.getFullYear();
 
     calendarMonth =
-      baseDate.getMonth();
+      new Date(
+        today.getFullYear(),
+        today.getMonth(),
+        1
+      );
+
   }
+
+
+  const year =
+    calendarMonth
+      .getFullYear();
+
+
+  const month =
+    calendarMonth
+      .getMonth();
+
+
+  $("calendarMonthLabel")
+    .textContent =
+    `${year}年${month + 1}月`;
 
 
   const firstDay =
     new Date(
-      calendarYear,
-      calendarMonth,
+      year,
+      month,
       1
     );
 
 
   const lastDay =
     new Date(
-      calendarYear,
-      calendarMonth + 1,
+      year,
+      month + 1,
       0
     );
 
 
-  $("calendarMonthLabel")
-    .textContent =
-    `${calendarYear}年${calendarMonth + 1}月`;
-
-
-  const grid =
-    $("calendarGrid");
-
-
-  grid.innerHTML = "";
-
-
-  const emptyBefore =
+  const startBlank =
     firstDay.getDay();
+
+
+  const days =
+    lastDay.getDate();
+
+
+  const cells =
+    [];
 
 
   for (
     let i = 0;
-    i < emptyBefore;
+    i < startBlank;
     i++
   ) {
-    const empty =
-      document.createElement(
-        "div"
-      );
 
-    empty.className =
-      "calendar-day empty";
+    cells.push(`
+      <div class="calendar-day empty"></div>
+    `);
 
-    grid.appendChild(empty);
   }
-
-
-  const today =
-    new Date();
 
 
   for (
     let day = 1;
-    day <= lastDay.getDate();
+    day <= days;
     day++
   ) {
 
     const date =
-      new Date(
-        calendarYear,
-        calendarMonth,
-        day
+      dateToIso(
+        new Date(
+          year,
+          month,
+          day
+        )
       );
-
-
-    const dateString =
-      toDateString(date);
 
 
     const videos =
       videosForDate(
-        dateString
+        date
       );
 
 
     const recommended =
-      isRecommendedDate(
-        date,
-        recommendation
+      isRecommendationDate(
+        date
       );
 
 
-    const cell =
-      document.createElement(
-        "div"
-      );
+    const today =
+      date ===
+      todayJST();
 
 
-    cell.className =
-      "calendar-day";
+    cells.push(`
+      <div
+        class="
+          calendar-day
+          ${recommended ? "recommended-day" : ""}
+          ${today ? "today" : ""}
+        "
+      >
 
+        <span class="calendar-date">
+          ${day}
+        </span>
 
-    if (recommended) {
-      cell.classList.add(
-        "recommended-day"
-      );
-    }
+        <div class="calendar-posts">
 
+          ${videos
+            .map(
+              video => `
+                <div
+                  class="calendar-post"
+                  title="${escapeHtml(video.title || "")}"
+                >
 
-    if (
-      today.getFullYear() ===
-        calendarYear &&
-      today.getMonth() ===
-        calendarMonth &&
-      today.getDate() ===
-        day
-    ) {
-      cell.classList.add(
-        "today"
-      );
-    }
+                  <img
+                    src="${escapeHtml(video.thumbnail || "")}"
+                    alt=""
+                    loading="lazy"
+                  >
 
+                  <span class="calendar-post-title">
+                    ${escapeHtml(video.title || "")}
+                  </span>
 
-    const dateElement =
-      document.createElement(
-        "span"
-      );
+                </div>
+              `
+            )
+            .join("")
+          }
 
+        </div>
 
-    dateElement.className =
-      "calendar-date";
-
-
-    dateElement.textContent =
-      day;
-
-
-    cell.appendChild(
-      dateElement
-    );
-
-
-    if (videos.length) {
-
-      const posts =
-        document.createElement(
-          "div"
-        );
-
-
-      posts.className =
-        "calendar-posts";
-
-
-      videos.forEach(
-        video => {
-
-          const post =
-            document.createElement(
-              "div"
-            );
-
-
-          post.className =
-            "calendar-post";
-
-
-          const image =
-            document.createElement(
-              "img"
-            );
-
-
-          image.src =
-            video.thumbnail ||
-            (
-              video.id
-                ? `https://i.ytimg.com/vi/${video.id}/hqdefault.jpg`
-                : ""
-            );
-
-
-          image.alt =
-            video.title ||
-            "動画サムネイル";
-
-
-          image.loading =
-            "lazy";
-
-
-          post.appendChild(
-            image
-          );
-
-
-          posts.appendChild(
-            post
-          );
-
+        ${
+          recommended &&
+          !videos.length
+            ? `
+              <span class="recommend-badge">
+                RECOMMENDED
+              </span>
+            `
+            : ""
         }
-      );
+
+      </div>
+    `);
+
+  }
 
 
-      cell.appendChild(
-        posts
-      );
-    }
+  const total =
+    cells.length;
 
 
-    if (
-      recommended &&
-      !videos.length
+  const remainder =
+    total %
+    7;
+
+
+  if (
+    remainder !==
+    0
+  ) {
+
+    const missing =
+      7 -
+      remainder;
+
+
+    for (
+      let i = 0;
+      i < missing;
+      i++
     ) {
 
-      const badge =
-        document.createElement(
-          "span"
-        );
+      cells.push(`
+        <div class="calendar-day empty"></div>
+      `);
 
-
-      badge.className =
-        "recommend-badge";
-
-
-      badge.textContent =
-        "おすすめ";
-
-
-      cell.appendChild(
-        badge
-      );
     }
 
-
-    grid.appendChild(
-      cell
-    );
   }
 
 
-  const totalCells =
-    emptyBefore +
-    lastDay.getDate();
+  $("calendarGrid")
+    .innerHTML =
+    cells.join("");
 
-
-  const trailing =
-    (
-      7 -
-      totalCells % 7
-    ) % 7;
-
-
-  for (
-    let i = 0;
-    i < trailing;
-    i++
-  ) {
-    const empty =
-      document.createElement(
-        "div"
-      );
-
-    empty.className =
-      "calendar-day empty";
-
-    grid.appendChild(empty);
-  }
 }
 
 
@@ -2244,16 +2003,16 @@ function setupCalendarControls() {
     .onclick =
     () => {
 
-      calendarMonth--;
+      calendarMonth =
+        new Date(
+          calendarMonth.getFullYear(),
+          calendarMonth.getMonth() - 1,
+          1
+        );
 
-      if (
-        calendarMonth < 0
-      ) {
-        calendarMonth = 11;
-        calendarYear--;
-      }
 
       renderCalendar();
+
     };
 
 
@@ -2261,23 +2020,24 @@ function setupCalendarControls() {
     .onclick =
     () => {
 
-      calendarMonth++;
+      calendarMonth =
+        new Date(
+          calendarMonth.getFullYear(),
+          calendarMonth.getMonth() + 1,
+          1
+        );
 
-      if (
-        calendarMonth > 11
-      ) {
-        calendarMonth = 0;
-        calendarYear++;
-      }
 
       renderCalendar();
+
     };
+
 }
 
 
 
 /* =========================================================
-   Mobile scenario tooltip close
+   Mobile chart tooltip
 ========================================================= */
 
 function setupMobileChartTooltipClose() {
@@ -2296,7 +2056,9 @@ function setupMobileChartTooltipClose() {
           event.target
         )
       ) {
+
         return;
+
       }
 
 
@@ -2305,7 +2067,9 @@ function setupMobileChartTooltipClose() {
       ) {
 
         scenarioChart
-          .setActiveElements([]);
+          .setActiveElements(
+            []
+          );
 
 
         if (
@@ -2317,51 +2081,28 @@ function setupMobileChartTooltipClose() {
             .setActiveElements(
               [],
               {
-                x: 0,
-                y: 0
+                x:0,
+                y:0
               }
             );
+
         }
 
 
         scenarioChart
-          .update("none");
+          .update(
+            "none"
+          );
+
       }
 
     },
     {
-      passive: true
+      passive:
+        true
     }
   );
-}
 
-
-
-/* =========================================================
-   Load data
-========================================================= */
-
-async function loadData() {
-
-  const response =
-    await fetch(
-      `../data.json?ts=${Date.now()}`
-    );
-
-
-  if (!response.ok) {
-    throw new Error(
-      `data.json load failed: ${response.status}`
-    );
-  }
-
-
-  DATA =
-    await response.json();
-
-
-  normalizeSubscribers();
-  normalizeVideos();
 }
 
 
@@ -2370,54 +2111,77 @@ async function loadData() {
    Init
 ========================================================= */
 
-async function init() {
+async function initFuture() {
 
   try {
 
-    await loadData();
-
-    updateHeader();
-
-    renderGoal();
-
-    renderScenarios();
-
-    renderPostingSummary();
-
-    setupCalendarControls();
-
-    renderCalendar();
-
-    setupMobileChartTooltipClose();
-
-  }
-
-  catch (error) {
-
-    console.error(error);
-
-    document.body
-      .insertAdjacentHTML(
-        "beforeend",
-        `
-          <div
-            style="
-              max-width:900px;
-              margin:20px auto 50px;
-              padding:18px;
-              background:#fff;
-              border:2px solid #111;
-              border-radius:16px;
-              font-weight:800;
-            "
-          >
-            Future outlookのデータ読み込みに失敗しました。
-          </div>
-        `
+    const response =
+      await fetch(
+        "../data.json?ts=" +
+        Date.now(),
+        {
+          cache:
+            "no-store"
+        }
       );
 
+
+    DATA =
+      await response.json();
+
   }
+
+  catch (
+    error
+  ) {
+
+    console.error(
+      "Future outlook data load failed:",
+      error
+    );
+
+
+    return;
+
+  }
+
+
+  normalizeData();
+
+
+  /*
+    common.js が正常に存在する場合のみ
+    共通ヘッダーを更新。
+
+    common.jsに問題があっても
+    Future本体まで消えないようにする。
+  */
+
+  if (
+    typeof updateCommonHeader ===
+    "function"
+  ) {
+
+    updateCommonHeader(
+      DATA
+    );
+
+  }
+
+
+  renderGoal();
+
+  renderScenarios();
+
+  renderPostingSummary();
+
+  renderCalendar();
+
+  setupCalendarControls();
+
+  setupMobileChartTooltipClose();
+
 }
 
 
-init();
+initFuture();
