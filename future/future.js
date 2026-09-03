@@ -844,8 +844,6 @@ function renderGoal() {
     currentSubscribers();
 
 
-  /* Main values */
-
   $("goalTarget")
     .textContent =
     `${fmt(state.target)} subscribers`;
@@ -872,8 +870,6 @@ function renderGoal() {
       : "算出不可";
 
 
-  /* Remaining */
-
   const remaining =
     Math.max(
       0,
@@ -888,8 +884,6 @@ function renderGoal() {
     .textContent =
     `あと ${fmt(remaining)}人`;
 
-
-  /* Progress */
 
   const lowerMilestone =
     Math.max(
@@ -928,8 +922,6 @@ function renderGoal() {
     `${progress.toFixed(0)}%`;
 
 
-  /* Remaining days */
-
   if (
     state.eta
   ) {
@@ -957,8 +949,6 @@ function renderGoal() {
 
   }
 
-
-  /* Pace cards */
 
   $("pace7")
     .textContent =
@@ -1219,6 +1209,609 @@ function renderPredictionHistory() {
         }
       )
       .join("");
+
+}
+
+
+
+/* =========================================================
+   7-DAY FORECAST
+========================================================= */
+
+function parseDateTime(
+  value
+) {
+
+  if (!value) {
+    return null;
+  }
+
+
+  const date =
+    new Date(value);
+
+
+  return Number.isNaN(
+    date.getTime()
+  )
+    ? null
+    : date;
+
+}
+
+
+function forecastTargetDate(
+  video
+) {
+
+  const forecast =
+    video.sevenDayForecast;
+
+
+  return (
+    parseDateTime(
+      forecast?.targetAt
+    ) ||
+    (
+      parseDateTime(
+        video.publishedAt
+      )
+        ? new Date(
+            parseDateTime(
+              video.publishedAt
+            ).getTime() +
+            168 * 60 * 60 * 1000
+          )
+        : null
+    )
+  );
+
+}
+
+
+function forecastCompletedDate(
+  video
+) {
+
+  return (
+    parseDateTime(
+      video.sevenDayCompletedAt
+    ) ||
+    parseDateTime(
+      video.sevenDayForecast?.completedAt
+    )
+  );
+
+}
+
+
+function isForecastCompleted(
+  video
+) {
+
+  return Boolean(
+    video.sevenDayForecast &&
+    (
+      video.sevenDayForecast.status ===
+        "completed" ||
+      Number.isFinite(
+        Number(
+          video.sevenDayViews
+        )
+      )
+    )
+  );
+
+}
+
+
+function shouldShowCompletedForecast(
+  video,
+  now = new Date()
+) {
+
+  if (
+    !isForecastCompleted(
+      video
+    )
+  ) {
+    return false;
+  }
+
+
+  const completedAt =
+    forecastCompletedDate(
+      video
+    );
+
+
+  if (!completedAt) {
+    return false;
+  }
+
+
+  const elapsed =
+    now.getTime() -
+    completedAt.getTime();
+
+
+  return (
+    elapsed >= 0 &&
+    elapsed <
+      24 * 60 * 60 * 1000
+  );
+
+}
+
+
+function forecastDayNumber(
+  video,
+  now = new Date()
+) {
+
+  const publishedAt =
+    parseDateTime(
+      video.publishedAt
+    );
+
+
+  if (!publishedAt) {
+    return 1;
+  }
+
+
+  const elapsedHours =
+    Math.max(
+      0,
+      (
+        now.getTime() -
+        publishedAt.getTime()
+      ) /
+      3600000
+    );
+
+
+  return Math.max(
+    1,
+    Math.min(
+      7,
+      Math.floor(
+        elapsedHours / 24
+      ) + 1
+    )
+  );
+
+}
+
+
+function forecastElapsedRatio(
+  video,
+  now = new Date()
+) {
+
+  const publishedAt =
+    parseDateTime(
+      video.publishedAt
+    );
+
+
+  if (!publishedAt) {
+    return 0;
+  }
+
+
+  return Math.max(
+    0,
+    Math.min(
+      1,
+      (
+        now.getTime() -
+        publishedAt.getTime()
+      ) /
+      (
+        168 *
+        60 *
+        60 *
+        1000
+      )
+    )
+  );
+
+}
+
+
+function forecastPaceStatus(
+  video,
+  now = new Date()
+) {
+
+  const predicted =
+    Number(
+      video.sevenDayForecast
+        ?.predictedViews ||
+      0
+    );
+
+  const current =
+    Number(
+      video.viewCount ||
+      0
+    );
+
+  const elapsedRatio =
+    forecastElapsedRatio(
+      video,
+      now
+    );
+
+
+  if (
+    predicted <= 0 ||
+    elapsedRatio <= 0
+  ) {
+
+    return {
+      differencePercent: 0,
+      text:
+        "予測ペースを確認しています"
+    };
+
+  }
+
+
+  const expectedNow =
+    predicted *
+    elapsedRatio;
+
+
+  if (
+    expectedNow <= 0
+  ) {
+
+    return {
+      differencePercent: 0,
+      text:
+        "予測ペースを確認しています"
+    };
+
+  }
+
+
+  const differencePercent =
+    (
+      current /
+      expectedNow -
+      1
+    ) *
+    100;
+
+
+  if (
+    differencePercent > 5
+  ) {
+
+    return {
+      differencePercent,
+      text:
+        "予測を上回るペースで伸びています"
+    };
+
+  }
+
+
+  if (
+    differencePercent < -5
+  ) {
+
+    return {
+      differencePercent,
+      text:
+        "ややペースが予測より低いです"
+    };
+
+  }
+
+
+  return {
+    differencePercent,
+    text:
+      "予測通りです"
+  };
+
+}
+
+
+function forecastDots(
+  day
+) {
+
+  return Array.from(
+    { length: 7 },
+    (_, index) => `
+      <span
+        class="seven-day-dot ${index < day ? "active" : ""}"
+        aria-hidden="true"
+      ></span>
+    `
+  ).join("");
+
+}
+
+
+function openCompletedForecastVideo(
+  videoId
+) {
+
+  if (!videoId) {
+    return;
+  }
+
+
+  window.location.href =
+    `../index.html?page=videos&video=${encodeURIComponent(videoId)}`;
+
+}
+
+
+function renderActiveForecastCard(
+  video,
+  now
+) {
+
+  const forecast =
+    video.sevenDayForecast ||
+    {};
+
+  const predicted =
+    Number(
+      forecast.predictedViews ||
+      0
+    );
+
+  const current =
+    Number(
+      video.viewCount ||
+      0
+    );
+
+  const day =
+    forecastDayNumber(
+      video,
+      now
+    );
+
+  const pace =
+    forecastPaceStatus(
+      video,
+      now
+    );
+
+
+  return `
+    <article class="seven-day-card active-forecast">
+
+      <div class="seven-day-video-side">
+
+        <div class="seven-day-thumbnail-wrap">
+          <img
+            class="seven-day-thumbnail"
+            src="${escapeHtml(video.thumbnail || "")}"
+            alt=""
+            loading="lazy"
+          >
+        </div>
+
+        <strong class="seven-day-video-title">
+          ${escapeHtml(video.title || "")}
+        </strong>
+
+      </div>
+
+
+      <div class="seven-day-metrics">
+
+        <span class="seven-day-label">
+          7日予測
+        </span>
+
+        <div class="seven-day-prediction-line">
+          <strong class="seven-day-predicted">
+            ${fmt(predicted)}回
+          </strong>
+
+          <span
+            class="seven-day-lock"
+            aria-label="予測値は固定されています"
+            title="予測値は固定されています"
+          >
+            🔒
+          </span>
+        </div>
+
+        <div class="seven-day-current">
+          <span>現在</span>
+          <strong>${fmt(current)}回</strong>
+        </div>
+
+        <strong class="seven-day-day">
+          DAY ${day} / 7
+        </strong>
+
+        <div
+          class="seven-day-dots"
+          aria-label="7日間の進捗 ${day}日目"
+        >
+          ${forecastDots(day)}
+        </div>
+
+        <p class="seven-day-status-text">
+          ${escapeHtml(pace.text)}
+        </p>
+
+      </div>
+
+    </article>
+  `;
+
+}
+
+
+function renderCompletedForecastCard(
+  video
+) {
+
+  return `
+    <button
+      class="seven-day-card completed-forecast"
+      type="button"
+      data-forecast-video-id="${escapeHtml(video.id || "")}"
+      aria-label="${escapeHtml(video.title || "")}をVideo collectionsで開く"
+    >
+
+      <div class="seven-day-video-side">
+
+        <div class="seven-day-thumbnail-wrap">
+          <img
+            class="seven-day-thumbnail"
+            src="${escapeHtml(video.thumbnail || "")}"
+            alt=""
+            loading="lazy"
+          >
+        </div>
+
+        <strong class="seven-day-video-title">
+          ${escapeHtml(video.title || "")}
+        </strong>
+
+      </div>
+
+      <div class="seven-day-completed-side">
+        <strong>
+          ✓ COMPLETED
+        </strong>
+
+        <span>
+          Video collectionsで結果を見る
+        </span>
+      </div>
+
+    </button>
+  `;
+
+}
+
+
+function renderSevenDayForecasts() {
+
+  const container =
+    $("sevenDayForecastList");
+
+
+  if (!container) {
+    return;
+  }
+
+
+  const now =
+    new Date();
+
+
+  const forecastVideos =
+    DATA.videos
+      .filter(
+        video =>
+          video.sevenDayForecast &&
+          video.sevenDayForecast.locked ===
+            true
+      )
+      .filter(
+        video => {
+
+          if (
+            isForecastCompleted(
+              video
+            )
+          ) {
+
+            return shouldShowCompletedForecast(
+              video,
+              now
+            );
+
+          }
+
+
+          const target =
+            forecastTargetDate(
+              video
+            );
+
+
+          return (
+            !target ||
+            now.getTime() <
+              target.getTime()
+          );
+
+        }
+      )
+      .sort(
+        (a,b) =>
+          String(
+            b.publishedAt ||
+            b.date ||
+            ""
+          ).localeCompare(
+            String(
+              a.publishedAt ||
+              a.date ||
+              ""
+            )
+          )
+      );
+
+
+  if (
+    !forecastVideos.length
+  ) {
+
+    container.innerHTML = `
+      <div class="seven-day-empty">
+        現在、予測中の動画はありません。
+      </div>
+    `;
+
+
+    return;
+  }
+
+
+  container.innerHTML =
+    forecastVideos
+      .map(
+        video =>
+          isForecastCompleted(video)
+            ? renderCompletedForecastCard(video)
+            : renderActiveForecastCard(video, now)
+      )
+      .join("");
+
+
+  container
+    .querySelectorAll(
+      "[data-forecast-video-id]"
+    )
+    .forEach(
+      button => {
+
+        button.onclick =
+          () =>
+            openCompletedForecastVideo(
+              button.dataset.forecastVideoId
+            );
+
+      }
+    );
 
 }
 
@@ -2147,14 +2740,6 @@ async function initFuture() {
   normalizeData();
 
 
-  /*
-    common.js が正常に存在する場合のみ
-    共通ヘッダーを更新。
-
-    common.jsに問題があっても
-    Future本体まで消えないようにする。
-  */
-
   if (
     typeof updateCommonHeader ===
     "function"
@@ -2166,6 +2751,8 @@ async function initFuture() {
 
   }
 
+
+  renderSevenDayForecasts();
 
   renderGoal();
 
