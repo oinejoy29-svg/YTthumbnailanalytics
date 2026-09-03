@@ -421,6 +421,188 @@ button{
 
 
 /* =========================
+   7-DAY FORECAST
+========================= */
+
+.seven-day-forecast-list{
+  display:grid;
+  gap:14px;
+}
+
+.seven-day-card,
+.seven-day-empty{
+  background:#fff;
+  border:2px solid var(--line);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+}
+
+.seven-day-card{
+  width:100%;
+  padding:18px;
+
+  display:grid;
+  grid-template-columns:minmax(0,1.15fr) minmax(280px,.85fr);
+  gap:24px;
+  align-items:center;
+}
+
+.seven-day-video-side{
+  min-width:0;
+}
+
+.seven-day-thumbnail-wrap{
+  width:min(100%,520px);
+  overflow:hidden;
+  border-radius:14px;
+  background:#eee;
+}
+
+.seven-day-thumbnail{
+  display:block;
+  width:100%;
+  aspect-ratio:16/9;
+  object-fit:cover;
+}
+
+.seven-day-video-title{
+  display:block;
+  width:min(100%,520px);
+  margin-top:10px;
+
+  font-size:14px;
+  line-height:1.55;
+  font-weight:900;
+  letter-spacing:-.02em;
+}
+
+.seven-day-metrics{
+  min-width:0;
+  padding:4px 4px 4px 0;
+}
+
+.seven-day-label{
+  display:block;
+  color:#777;
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.08em;
+}
+
+.seven-day-prediction-line{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  margin-top:5px;
+}
+
+.seven-day-predicted{
+  font-size:clamp(34px,5vw,58px);
+  line-height:1;
+  font-weight:900;
+  letter-spacing:-.06em;
+}
+
+.seven-day-lock{
+  font-size:18px;
+}
+
+.seven-day-current{
+  display:flex;
+  align-items:baseline;
+  gap:8px;
+  margin-top:14px;
+}
+
+.seven-day-current span{
+  color:#777;
+  font-size:11px;
+  font-weight:800;
+}
+
+.seven-day-current strong{
+  font-size:21px;
+  letter-spacing:-.04em;
+}
+
+.seven-day-day{
+  display:block;
+  margin-top:24px;
+  font-size:19px;
+  letter-spacing:-.035em;
+}
+
+.seven-day-dots{
+  display:flex;
+  gap:7px;
+  margin-top:9px;
+}
+
+.seven-day-dot{
+  width:13px;
+  height:13px;
+  display:block;
+  border:2px solid #111;
+  border-radius:50%;
+  background:#fff;
+}
+
+.seven-day-dot.active{
+  background:var(--yellow);
+}
+
+.seven-day-status-text{
+  margin:17px 0 0;
+  padding-top:14px;
+  border-top:1px solid #ddd;
+
+  font-size:13px;
+  line-height:1.65;
+  font-weight:800;
+}
+
+.seven-day-empty{
+  padding:24px;
+  color:#777;
+  font-size:12px;
+  font-weight:800;
+  text-align:center;
+}
+
+.completed-forecast{
+  appearance:none;
+  color:var(--ink);
+  font:inherit;
+  text-align:left;
+  cursor:pointer;
+}
+
+.completed-forecast:hover{
+  transform:translateY(-1px);
+}
+
+.seven-day-completed-side{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:flex-start;
+  gap:8px;
+}
+
+.seven-day-completed-side strong{
+  font-size:clamp(26px,4vw,44px);
+  line-height:1;
+  letter-spacing:-.05em;
+}
+
+.seven-day-completed-side span{
+  color:#777;
+  font-size:11px;
+  font-weight:800;
+}
+
+
+/* =========================
    FUTURE SCENARIOS
 ========================= */
 
@@ -749,6 +931,102 @@ button{
 
 
 
+  /* 7-day forecast */
+
+  .seven-day-card{
+    grid-template-columns:minmax(0,1fr) minmax(145px,.8fr);
+    gap:12px;
+    padding:12px;
+    align-items:start;
+  }
+
+  .seven-day-thumbnail-wrap{
+    border-radius:9px;
+  }
+
+  .seven-day-video-title{
+    margin-top:7px;
+    font-size:10px;
+    line-height:1.45;
+  }
+
+  .seven-day-metrics{
+    padding:1px 0 0;
+  }
+
+  .seven-day-label{
+    font-size:8px;
+  }
+
+  .seven-day-prediction-line{
+    gap:5px;
+    margin-top:4px;
+  }
+
+  .seven-day-predicted{
+    font-size:25px;
+  }
+
+  .seven-day-lock{
+    font-size:12px;
+  }
+
+  .seven-day-current{
+    gap:5px;
+    margin-top:9px;
+  }
+
+  .seven-day-current span{
+    font-size:8px;
+  }
+
+  .seven-day-current strong{
+    font-size:14px;
+  }
+
+  .seven-day-day{
+    margin-top:14px;
+    font-size:13px;
+  }
+
+  .seven-day-dots{
+    gap:4px;
+    margin-top:6px;
+  }
+
+  .seven-day-dot{
+    width:9px;
+    height:9px;
+    border-width:1.5px;
+  }
+
+  .seven-day-status-text{
+    margin-top:10px;
+    padding-top:9px;
+    font-size:9px;
+    line-height:1.55;
+  }
+
+  .seven-day-empty{
+    padding:18px 12px;
+    font-size:10px;
+  }
+
+  .seven-day-completed-side{
+    align-self:stretch;
+    justify-content:center;
+  }
+
+  .seven-day-completed-side strong{
+    font-size:22px;
+  }
+
+  .seven-day-completed-side span{
+    font-size:8px;
+    line-height:1.4;
+  }
+
+
   /* goal */
 
   .goal-layout{
@@ -980,6 +1258,20 @@ button{
   .goal-progress-info,
   .goal-progress-bottom{
     font-size:10px;
+  }
+
+  .seven-day-card{
+    grid-template-columns:minmax(0,1fr) 140px;
+    gap:9px;
+    padding:10px;
+  }
+
+  .seven-day-predicted{
+    font-size:22px;
+  }
+
+  .seven-day-status-text{
+    font-size:8px;
   }
 
   .posting-summary strong{
