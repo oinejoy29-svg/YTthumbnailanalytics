@@ -1734,26 +1734,21 @@ function renderScenarios() {
     growthPaces();
 
 
-  const cautiousPace =
-    Math.max(
-      0,
-      paces.pace30 *
-      .80
-    );
+ const standardPace =
+  Math.max(
+    0,
+    paces.weighted
+  );
 
 
-  const standardPace =
-    Math.max(
-      0,
-      paces.weighted
-    );
+const cautiousPace =
+  standardPace *
+  .80;
 
 
-  const positivePace =
-    Math.max(
-      standardPace,
-      paces.pace7
-    );
+const positivePace =
+  standardPace *
+  1.20;
 
 
   const threeMonths =
