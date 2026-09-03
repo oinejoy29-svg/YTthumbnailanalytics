@@ -1283,3 +1283,26 @@ button{
   }
 
 }
+@media (max-width: 800px){
+
+  .future-section-head,
+  .future-section-head > div,
+  .section-head,
+  .section-head > div{
+    text-align:left !important;
+    align-items:flex-start !important;
+    justify-content:flex-start !important;
+  }
+
+  .future-section-head h2,
+  .future-section-head h3,
+  .section-head h2,
+  .section-head h3,
+  .future-section-head .section-kicker,
+  .section-head .section-kicker{
+    text-align:left !important;
+    margin-left:0 !important;
+    margin-right:auto !important;
+  }
+
+}
