@@ -544,73 +544,27 @@ function growthPaces() {
 
 function loadGoalState() {
 
-  try {
-
-    const value =
-      localStorage.getItem(
-        GOAL_STATE_KEY
-      );
+  const state =
+    DATA.goalForecast;
 
 
-    return value
-      ? JSON.parse(value)
-      : null;
-
-  }
-
-  catch {
-
-    return null;
-
-  }
-
-}
-
-
-function saveGoalState(
-  state
-) {
-
-  localStorage.setItem(
-    GOAL_STATE_KEY,
-    JSON.stringify(state)
-  );
+  return (
+    state &&
+    typeof state === "object"
+  )
+    ? state
+    : null;
 
 }
 
 
 function loadGoalHistory() {
 
-  try {
-
-    return JSON.parse(
-      localStorage.getItem(
-        GOAL_HISTORY_KEY
-      ) ||
-      "[]"
-    );
-
-  }
-
-  catch {
-
-    return [];
-
-  }
-
-}
-
-
-function saveGoalHistory(
-  history
-) {
-
-  localStorage.setItem(
-    GOAL_HISTORY_KEY,
-    JSON.stringify(
-      history
-    )
-  );
+  return Array.isArray(
+    DATA.goalForecastHistory
+  )
+    ? DATA.goalForecastHistory
+    : [];
 
 }
 
@@ -745,84 +699,32 @@ function findAchievementDate(
 
 function processGoalState() {
 
-  let state =
+  const state =
     loadGoalState();
 
 
   if (
-    !state ||
-    !Number.isFinite(Number(state.target)) ||
-    !Number.isFinite(Number(state.startCount)) ||
-    !Number.isFinite(Number(state.fixedPace))
+    state &&
+    Number.isFinite(Number(state.target)) &&
+    Number.isFinite(Number(state.startCount)) &&
+    Number.isFinite(Number(state.fixedPace))
   ) {
 
-    state =
-      createGoalState();
-
-    saveGoalState(
-      state
-    );
+    return state;
 
   }
 
 
-  const current =
-    currentSubscribers();
+  /*
+    古いdata.jsonを開いた直後など、
+    backend側の固定予測がまだ無い場合だけ
+    一時表示用に計算する。
 
-
-  if (
-    current >=
-    Number(
-      state.target
-    )
-  ) {
-
-    const actualDate =
-      findAchievementDate(
-        state
-      );
-
-
-    const history =
-      loadGoalHistory();
-
-
-    history.unshift({
-      target:
-        Number(
-          state.target
-        ),
-
-      predictedDate:
-        state.eta,
-
-      actualDate,
-
-      createdDate:
-        state.createdDate
-    });
-
-
-    saveGoalHistory(
-      history.slice(
-        0,
-        20
-      )
-    );
-
-
-    state =
-      createGoalState();
-
-
-    saveGoalState(
-      state
-    );
-
-  }
-
-
-  return state;
+    この値は保存しない。
+    GitHub Actions実行後はdata.jsonの固定値が
+    唯一の正しい予測になる。
+  */
+  return createGoalState();
 
 }
 
@@ -970,7 +872,9 @@ function renderGoal() {
 
   $("paceWeighted")
     .textContent =
-    paces.weighted
+    Number(
+      state.fixedPace || 0
+    )
       .toFixed(1);
 
 
@@ -1044,7 +948,7 @@ function renderGoalStatus(
 
   if (
     difference >
-    threshold
+         threshold
   ) {
 
     $("paceStatus")
@@ -1487,7 +1391,7 @@ function forecastPaceStatus(
 
 
   if (
-    differencePercent > 5
+    differencePercent >= 5
   ) {
 
     return {
@@ -1500,7 +1404,7 @@ function forecastPaceStatus(
 
 
   if (
-    differencePercent < -5
+    differencePercent <= -5
   ) {
 
     return {
@@ -1994,7 +1898,7 @@ function renderScenarios() {
 
             {
               label:
-                "標準",
+                                 "標準",
 
               data:
                 standardValues,
