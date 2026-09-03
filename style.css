@@ -1556,3 +1556,7 @@ select:focus{
   }
 
 }
+.page-switch a.switch-btn{
+  text-decoration:none;
+  text-align:center;
+}
