@@ -542,6 +542,376 @@ def update_subscriber_history(
 
 
 # =========================================================
+# Goal Countdown
+# マイルストーン到達予測をdata.jsonに固定保存
+# =========================================================
+
+def parse_date_string(value):
+    if not value:
+        return None
+
+    try:
+        return datetime.strptime(
+            str(value)[:10],
+            "%Y-%m-%d",
+        ).date()
+    except (ValueError, TypeError):
+        return None
+
+
+def add_date_days(date_string, days):
+    base = parse_date_string(date_string)
+    if not base:
+        return None
+
+    return (
+        base
+        + timedelta(days=int(days))
+    ).isoformat()
+
+
+def subscriber_rows(data):
+    rows = []
+
+    for row in data.get("subscribers", []):
+        date = str(row.get("date") or "")[:10]
+
+        if not parse_date_string(date):
+            continue
+
+        try:
+            count = int(row.get("count", 0))
+        except (TypeError, ValueError):
+            continue
+
+        rows.append({
+            "date": date,
+            "count": count,
+        })
+
+    return sorted(
+        rows,
+        key=lambda row: row["date"],
+    )
+
+
+def date_difference_days(later, earlier):
+    later_date = parse_date_string(later)
+    earlier_date = parse_date_string(earlier)
+
+    if not later_date or not earlier_date:
+        return 0
+
+    return (later_date - earlier_date).days
+
+
+def calculate_subscriber_slope(rows, range_days):
+    if len(rows) < 2:
+        return 0.0
+
+    latest = rows[-1]
+    latest_date = parse_date_string(latest["date"])
+
+    if not latest_date:
+        return 0.0
+
+    cutoff_date = (
+        latest_date
+        - timedelta(days=int(range_days))
+    ).isoformat()
+
+    start = rows[0]
+
+    before_cutoff = [
+        row
+        for row in rows
+        if row["date"] <= cutoff_date
+    ]
+
+    if before_cutoff:
+        start = before_cutoff[-1]
+    else:
+        inside = next(
+            (
+                row
+                for row in rows
+                if row["date"] >= cutoff_date
+            ),
+            None,
+        )
+
+        if inside:
+            start = inside
+
+    days = max(
+        1,
+        date_difference_days(
+            latest["date"],
+            start["date"],
+        ),
+    )
+
+    return (
+        int(latest["count"])
+        - int(start["count"])
+    ) / days
+
+
+def calculate_all_subscriber_slope(rows):
+    if len(rows) < 2:
+        return 0.0
+
+    first = rows[0]
+    last = rows[-1]
+
+    days = max(
+        1,
+        date_difference_days(
+            last["date"],
+            first["date"],
+        ),
+    )
+
+    return (
+        int(last["count"])
+        - int(first["count"])
+    ) / days
+
+
+def calculate_goal_growth_paces(data):
+    rows = subscriber_rows(data)
+
+    pace_7 = calculate_subscriber_slope(
+        rows,
+        7,
+    )
+
+    pace_30 = calculate_subscriber_slope(
+        rows,
+        30,
+    )
+
+    pace_all = calculate_all_subscriber_slope(
+        rows
+    )
+
+    weighted = (
+        pace_7 * 0.50
+        + pace_30 * 0.35
+        + pace_all * 0.15
+    )
+
+    return {
+        "pace7": pace_7,
+        "pace30": pace_30,
+        "paceAll": pace_all,
+        "weighted": weighted,
+    }
+
+
+def next_goal_milestone(current):
+    return (
+        current // 100
+        + 1
+    ) * 100
+
+
+def calculate_goal_eta(
+    current,
+    target,
+    pace,
+    from_date,
+):
+    if not isinstance(pace, (int, float)) or pace <= 0:
+        return None
+
+    remaining = max(
+        0,
+        int(target) - int(current),
+    )
+
+    days = int(
+        -(-remaining // pace)
+    )
+
+    # 浮動小数点の切り上げを明示的に補正
+    if pace > 0:
+        import math
+        days = math.ceil(
+            remaining / pace
+        )
+
+    return add_date_days(
+        from_date,
+        days,
+    )
+
+
+def create_goal_forecast_state(data, current):
+    rows = subscriber_rows(data)
+    latest_date = (
+        rows[-1]["date"]
+        if rows
+        else datetime.now(JST).date().isoformat()
+    )
+
+    paces = calculate_goal_growth_paces(
+        data
+    )
+
+    target = next_goal_milestone(
+        int(current)
+    )
+
+    fixed_pace = float(
+        paces["weighted"]
+    )
+
+    eta = calculate_goal_eta(
+        int(current),
+        target,
+        fixed_pace,
+        latest_date,
+    )
+
+    return {
+        "target": target,
+        "startCount": int(current),
+        "createdDate": latest_date,
+        "eta": eta,
+        "fixedPace": fixed_pace,
+        "locked": True,
+    }
+
+
+def find_goal_achievement_date(data, state, fallback_date):
+    target = int(
+        state.get("target", 0)
+        or 0
+    )
+
+    created_date = str(
+        state.get("createdDate")
+        or ""
+    )[:10]
+
+    for row in subscriber_rows(data):
+        if (
+            row["date"] >= created_date
+            and int(row["count"]) >= target
+        ):
+            return row["date"]
+
+    return fallback_date
+
+
+def process_goal_forecast(data, current, now):
+    """
+    Goal Countdownの到達予測をサーバー側で管理する。
+
+    ・初回だけETAを計算してdata.jsonへ保存
+    ・同じマイルストーンの間はETA / fixedPaceを絶対に変更しない
+    ・到達したら履歴へ移し、その時点で次の目標を新規作成
+    """
+
+    state = data.get("goalForecast")
+
+    valid_state = (
+        isinstance(state, dict)
+        and isinstance(state.get("target"), (int, float))
+        and isinstance(state.get("startCount"), (int, float))
+        and isinstance(state.get("fixedPace"), (int, float))
+    )
+
+    if not valid_state:
+        state = create_goal_forecast_state(
+            data,
+            current,
+        )
+
+        data["goalForecast"] = state
+
+        if not isinstance(
+            data.get("goalForecastHistory"),
+            list,
+        ):
+            data["goalForecastHistory"] = []
+
+        print(
+            "NEW GOAL FORECAST / "
+            f"target={state['target']} / "
+            f"eta={state.get('eta')} / "
+            f"pace={state.get('fixedPace', 0):.3f}"
+        )
+
+        return state
+
+    if int(current) < int(state["target"]):
+        # ここではstateを書き換えない。
+        # 登録者数や直近ペースが変わっても予測日は固定。
+        data["goalForecast"] = state
+        return state
+
+    actual_date = find_goal_achievement_date(
+        data,
+        state,
+        now.date().isoformat(),
+    )
+
+    history = data.get(
+        "goalForecastHistory",
+        [],
+    )
+
+    if not isinstance(history, list):
+        history = []
+
+    completed = {
+        "target": int(state["target"]),
+        "predictedDate": state.get("eta"),
+        "actualDate": actual_date,
+        "createdDate": state.get("createdDate"),
+        "startCount": int(state.get("startCount", 0)),
+        "fixedPace": float(state.get("fixedPace", 0)),
+    }
+
+    # 同じtargetを重複保存しない
+    history = [
+        item
+        for item in history
+        if int(item.get("target", -1))
+        != int(state["target"])
+    ]
+
+    history.insert(
+        0,
+        completed,
+    )
+
+    data["goalForecastHistory"] = (
+        history[:20]
+    )
+
+    new_state = create_goal_forecast_state(
+        data,
+        current,
+    )
+
+    data["goalForecast"] = new_state
+
+    print(
+        "GOAL COMPLETED / "
+        f"target={completed['target']} / "
+        f"predicted={completed.get('predictedDate')} / "
+        f"actual={completed.get('actualDate')} / "
+        f"next={new_state['target']} / "
+        f"next_eta={new_state.get('eta')}"
+    )
+
+    return new_state
+
+
+# =========================================================
 # Forecast helpers
 # =========================================================
 
@@ -1747,6 +2117,16 @@ def main():
             current,
             now,
         )
+    )
+
+    # Goal Countdownはdata.jsonを唯一の固定保存先にする。
+    # 先に最新のsubscriber履歴をdataへ反映してから処理する。
+    data["subscribers"] = subscribers
+
+    process_goal_forecast(
+        data,
+        current,
+        now,
     )
 
     videos = (
