@@ -20,6 +20,8 @@ JST = timezone(
     timedelta(hours=9)
 )
 
+UTC = timezone.utc
+
 FORECAST_MODEL_VERSION = "v1"
 
 
@@ -42,14 +44,7 @@ MEMBERS = [
 # =========================================================
 # Historical 7-day data
 #
-# 2026年9月時点でユーザーがExcelから提供した
-# 確定済み20本の7日間再生回数。
-#
-# これは予測モデルの材料としてのみ使用する。
-#
-# この20本には sevenDayForecast を作らないため、
-# Video collections側で将来
-# 「一週間予測」ボタンが表示されることもない。
+# Excelから提供された確定済み20本
 # =========================================================
 
 LEGACY_SEVEN_DAY_VIEWS = {
@@ -99,6 +94,67 @@ def api(
 
 
 # =========================================================
+# Datetime helpers
+# =========================================================
+
+def parse_youtube_datetime(
+    value,
+):
+    """
+    YouTubeの
+
+    2026-09-01T03:00:00Z
+
+    のような日時を
+    timezone-aware datetimeへ変換。
+    """
+
+    if not value:
+        return None
+
+    try:
+        if value.endswith("Z"):
+            value = (
+                value[:-1]
+                + "+00:00"
+            )
+
+        parsed = (
+            datetime.fromisoformat(
+                value
+            )
+        )
+
+        if parsed.tzinfo is None:
+            parsed = (
+                parsed.replace(
+                    tzinfo=UTC
+                )
+            )
+
+        return parsed
+
+    except (
+        ValueError,
+        TypeError,
+    ):
+        return None
+
+
+def to_iso_jst(
+    value,
+):
+    if not value:
+        return None
+
+    return (
+        value
+        .astimezone(JST)
+        .isoformat()
+    )
+
+
+# =========================================================
 # Duration
 # =========================================================
 
@@ -128,7 +184,9 @@ def iso_duration_seconds(
 def pretty_duration(
     seconds,
 ):
-    seconds = int(seconds)
+    seconds = int(
+        seconds
+    )
 
     hours = (
         seconds // 3600
@@ -166,22 +224,27 @@ def get_channel():
         {
             "part":
                 "statistics,snippet,contentDetails",
+
             "id":
                 CHANNEL_ID,
         },
     )
 
-    if not data.get("items"):
+    if not data.get(
+        "items"
+    ):
         raise RuntimeError(
             f"Channel not found: "
             f"{CHANNEL_ID}"
         )
 
-    return data["items"][0]
+    return data[
+        "items"
+    ][0]
 
 
 # =========================================================
-# Videos
+# Video IDs
 # =========================================================
 
 def get_all_video_ids(
@@ -194,8 +257,10 @@ def get_all_video_ids(
         params = {
             "part":
                 "contentDetails",
+
             "playlistId":
                 uploads_playlist_id,
+
             "maxResults":
                 50,
         }
@@ -223,8 +288,10 @@ def get_all_video_ids(
             )
         )
 
-        token = data.get(
-            "nextPageToken"
+        token = (
+            data.get(
+                "nextPageToken"
+            )
         )
 
         if not token:
@@ -233,11 +300,17 @@ def get_all_video_ids(
     return ids
 
 
+# =========================================================
+# Videos
+# =========================================================
+
 def get_all_videos(
     uploads_playlist_id,
 ):
-    ids = get_all_video_ids(
-        uploads_playlist_id
+    ids = (
+        get_all_video_ids(
+            uploads_playlist_id
+        )
     )
 
     videos = []
@@ -256,6 +329,7 @@ def get_all_videos(
             {
                 "part":
                     "snippet,contentDetails,statistics",
+
                 "id":
                     ",".join(
                         batch_ids
@@ -267,9 +341,11 @@ def get_all_videos(
             "items",
             [],
         ):
-            snippet = item[
-                "snippet"
-            ]
+            snippet = (
+                item[
+                    "snippet"
+                ]
+            )
 
             seconds = (
                 iso_duration_seconds(
@@ -281,9 +357,11 @@ def get_all_videos(
                 )
             )
 
-            title = snippet.get(
-                "title",
-                "",
+            title = (
+                snippet.get(
+                    "title",
+                    "",
+                )
             )
 
             description = (
@@ -337,11 +415,6 @@ def get_all_videos(
                 "date":
                     published_at[:10],
 
-                # DAY 1〜7判定を
-                # 正確にするため保存
-                "publishedAt":
-                    published_at,
-
                 "thumbnail":
                     thumbnail,
 
@@ -370,6 +443,10 @@ def get_all_videos(
                     if member
                     in text_for_tags
                 ],
+
+                # 7日判定用
+                "publishedAt":
+                    published_at,
             })
 
     return sorted(
@@ -416,14 +493,6 @@ def update_subscriber_history(
     current,
     now,
 ):
-    """
-    登録者履歴を更新。
-
-    ・現在値は currentSubscriberCount
-    ・今日の行があれば更新
-    ・なければ今日の行を追加
-    """
-
     today = (
         now.date()
         .isoformat()
@@ -455,7 +524,9 @@ def update_subscriber_history(
                 ),
         }
 
-    history[today] = {
+    history[
+        today
+    ] = {
         "date":
             today,
 
@@ -512,13 +583,6 @@ def historical_videos(
     videos,
     before_published_at=None,
 ):
-    """
-    sevenDayViews が確定している動画だけを返す。
-
-    新しい動画を予測する場合、
-    その動画より前に投稿されたものだけを使用。
-    """
-
     result = []
 
     for video in videos:
@@ -562,17 +626,15 @@ def historical_videos(
 
 
 # =========================================================
-# Base value
+# Base
 # =========================================================
 
 def calculate_base(
     history,
 ):
-    """
-    直近5本の7日実績中央値。
-    """
-
-    recent = history[-5:]
+    recent = (
+        history[-5:]
+    )
 
     values = [
         video[
@@ -582,8 +644,10 @@ def calculate_base(
         in recent
     ]
 
-    base = median(
-        values
+    base = (
+        median(
+            values
+        )
     )
 
     if base is None:
@@ -599,15 +663,6 @@ def calculate_base(
 def calculate_momentum(
     history,
 ):
-    """
-    直近5本 vs その前5本。
-
-    変化率の30%だけ反映。
-
-    最終補正は
-    0.80〜1.20に制限。
-    """
-
     if len(
         history
     ) < 10:
@@ -707,29 +762,13 @@ def calculate_momentum(
 
 
 # =========================================================
-# Historical member strength
+# Member correction
 # =========================================================
 
 def member_strength_samples(
     history,
     member,
 ):
-    """
-    同メンバー動画が
-    その当時の直近チャンネル基準に対して
-    どれくらい強かったかを求める。
-
-    例
-
-    当時の直近5本中央値 4000
-    実績                  4800
-
-    → 1.20
-
-    極端な1本による暴走を避けるため、
-    各比率を0.50〜2.00に制限。
-    """
-
     samples = []
 
     for index, video in enumerate(
@@ -753,8 +792,6 @@ def member_strength_samples(
             ]
         )
 
-        # 基準が少なすぎる動画は
-        # メンバー評価に使わない
         if len(
             previous
         ) < 3:
@@ -828,8 +865,10 @@ def calculate_single_member_factor(
                 1.0,
         }
 
-    raw_strength = median(
-        samples
+    raw_strength = (
+        median(
+            samples
+        )
     )
 
     if count == 1:
@@ -879,11 +918,6 @@ def calculate_member_factor(
     history,
     tags,
 ):
-    """
-    複数メンバーの場合は
-    各メンバー補正の平均。
-    """
-
     members = [
         tag
         for tag
@@ -948,22 +982,6 @@ def calculate_member_factor(
 def calculate_duration_factor(
     seconds,
 ):
-    """
-    Model v1
-
-    5分以下
-        -10%
-
-    5分超〜10分以下
-        +7%
-
-    10分超
-        補正なし
-
-    20分以上はサンプル不足のため
-    現時点では補正しない。
-    """
-
     seconds = int(
         seconds or 0
     )
@@ -1031,39 +1049,24 @@ def create_forecast(
     all_videos,
     now,
 ):
-    """
-    7-Day Forecast Model v1
-
-    1.
-    直近5本7日実績中央値
-
-    2.
-    最近の勢い補正
-
-    3.
-    同メンバー補正
-
-    4.
-    動画時間補正
-
-    一度作った予測は
-    以後再計算しない。
-    """
-
-    history = historical_videos(
-        all_videos,
-        before_published_at=(
-            video.get(
-                "publishedAt"
-            )
-        ),
+    history = (
+        historical_videos(
+            all_videos,
+            before_published_at=(
+                video.get(
+                    "publishedAt"
+                )
+            ),
+        )
     )
 
     if not history:
         return None
 
-    base = calculate_base(
-        history
+    base = (
+        calculate_base(
+            history
+        )
     )
 
     if base <= 0:
@@ -1112,7 +1115,6 @@ def create_forecast(
         raw_prediction,
     )
 
-    # 表示用は100回単位
     predicted = int(
         round(
             raw_prediction
@@ -1121,14 +1123,30 @@ def create_forecast(
         * 100
     )
 
-    # 万一100未満になっても
-    # 0回表示にはしない
     if (
         raw_prediction > 0
         and
         predicted == 0
     ):
         predicted = 100
+
+    published = (
+        parse_youtube_datetime(
+            video.get(
+                "publishedAt"
+            )
+        )
+    )
+
+    seven_day_target = None
+
+    if published:
+        seven_day_target = (
+            published
+            + timedelta(
+                hours=168
+            )
+        )
 
     return {
         "modelVersion":
@@ -1146,17 +1164,23 @@ def create_forecast(
         "predictedViews":
             predicted,
 
-        # 内部検証用。
-        # UIでは表示しなくてOK。
         "rawPredictedViews":
             round(
                 raw_prediction,
                 2,
             ),
 
-        # 将来モデル検証をするため
-        # 予測時点の材料を保存。
-        # UIには出さない。
+        # 7日経過予定時刻
+        "targetAt":
+            (
+                to_iso_jst(
+                    seven_day_target
+                )
+                if seven_day_target
+                else None
+            ),
+
+        # 内部検証用
         "basis": {
             "historicalSampleSize":
                 len(
@@ -1240,19 +1264,12 @@ def create_forecast(
 
 
 # =========================================================
-# Legacy seven-day values
+# Legacy data
 # =========================================================
 
 def apply_legacy_seven_day_data(
     videos,
 ):
-    """
-    Excelから提供された過去20本に
-    sevenDayViewsを付与。
-
-    sevenDayForecast は付与しない。
-    """
-
     for video in videos:
         video_id = (
             video.get(
@@ -1280,6 +1297,190 @@ def apply_legacy_seven_day_data(
 
 
 # =========================================================
+# STEP 4
+# 7-day result finalization
+# =========================================================
+
+def finalize_seven_day_results(
+    videos,
+    now,
+):
+    """
+    今後の予測対象動画について、
+
+    publishedAt + 168時間
+
+    を超えた最初のActions実行時に
+    その時点のviewCountを7日実績として固定。
+
+    一度sevenDayViewsを保存したら
+    以降は絶対に上書きしない。
+    """
+
+    for video in videos:
+
+        forecast = (
+            video.get(
+                "sevenDayForecast"
+            )
+        )
+
+        # 予測対象ではない動画は無視
+        if not isinstance(
+            forecast,
+            dict,
+        ):
+            continue
+
+        # 既に確定済みなら
+        # 実績を上書きしない
+        if isinstance(
+            video.get(
+                "sevenDayViews"
+            ),
+            (int, float),
+        ):
+            # statusだけ念のため揃える
+            forecast[
+                "status"
+            ] = "completed"
+
+            video[
+                "sevenDayForecast"
+            ] = forecast
+
+            continue
+
+        published = (
+            parse_youtube_datetime(
+                video.get(
+                    "publishedAt"
+                )
+            )
+        )
+
+        if not published:
+            continue
+
+        target_time = (
+            published
+            + timedelta(
+                hours=168
+            )
+        )
+
+        now_utc = (
+            now.astimezone(
+                UTC
+            )
+        )
+
+        # まだ168時間経っていない
+        if now_utc < target_time:
+            continue
+
+        actual_views = int(
+            video.get(
+                "viewCount",
+                0,
+            )
+        )
+
+        predicted_views = int(
+            forecast.get(
+                "predictedViews",
+                0,
+            )
+            or 0
+        )
+
+        difference = (
+            actual_views
+            - predicted_views
+        )
+
+        if predicted_views > 0:
+            difference_percent = (
+                difference
+                / predicted_views
+                * 100
+            )
+
+        else:
+            difference_percent = None
+
+        # -----------------------------------------
+        # ここで7日実績を永久保存
+        # -----------------------------------------
+
+        video[
+            "sevenDayViews"
+        ] = actual_views
+
+        video[
+            "sevenDaySource"
+        ] = "automatic"
+
+        video[
+            "sevenDayCompletedAt"
+        ] = now.isoformat()
+
+        video[
+            "sevenDayTargetAt"
+        ] = (
+            to_iso_jst(
+                target_time
+            )
+        )
+
+        # -----------------------------------------
+        # Forecast側もcompletedへ
+        # -----------------------------------------
+
+        forecast[
+            "status"
+        ] = "completed"
+
+        forecast[
+            "completedAt"
+        ] = now.isoformat()
+
+        forecast[
+            "actualViews"
+        ] = actual_views
+
+        forecast[
+            "differenceViews"
+        ] = difference
+
+        forecast[
+            "differencePercent"
+        ] = (
+            round(
+                difference_percent,
+                2,
+            )
+            if difference_percent
+            is not None
+            else None
+        )
+
+        video[
+            "sevenDayForecast"
+        ] = forecast
+
+        print(
+            "FORECAST COMPLETED / "
+            f"{video['id']} / "
+            f"predicted={predicted_views} / "
+            f"actual={actual_views} / "
+            f"difference={difference:+d}"
+        )
+
+    return videos
+
+
+# =========================================================
 # Merge fetched + existing
 # =========================================================
 
@@ -1288,16 +1489,6 @@ def merge_video_data(
     existing_data,
     now,
 ):
-    """
-    APIから取得した最新情報と
-    data.jsonに既に保存されている
-    予測データを結合する。
-
-    重要：
-    sevenDayForecastは
-    API更新で絶対に消さない。
-    """
-
     existing_videos = (
         existing_data.get(
             "videos",
@@ -1306,10 +1497,14 @@ def merge_video_data(
     )
 
     existing_by_id = {
-        video.get("id"):
+        video.get(
+            "id"
+        ):
             video
+
         for video
         in existing_videos
+
         if video.get(
             "id"
         )
@@ -1323,7 +1518,9 @@ def merge_video_data(
 
     for fetched in fetched_videos:
         video_id = (
-            fetched["id"]
+            fetched[
+                "id"
+            ]
         )
 
         old = (
@@ -1333,14 +1530,17 @@ def merge_video_data(
             )
         )
 
-        # API最新値を基本とする
+        # APIの最新値を基本にしつつ
+        # 保存済み独自データも保持
         video = {
             **old,
             **fetched,
         }
 
-        # 一度作った予測は
-        # 必ず以前のものを保持
+        # -----------------------------------------
+        # 予測を永久保持
+        # -----------------------------------------
+
         if old.get(
             "sevenDayForecast"
         ):
@@ -1350,7 +1550,10 @@ def merge_video_data(
                 "sevenDayForecast"
             ]
 
-        # sevenDayViewsも保持
+        # -----------------------------------------
+        # 確定済み7日実績を永久保持
+        # -----------------------------------------
+
         if isinstance(
             old.get(
                 "sevenDayViews"
@@ -1374,12 +1577,32 @@ def merge_video_data(
                 "sevenDaySource"
             ]
 
+        if old.get(
+            "sevenDayCompletedAt"
+        ):
+            video[
+                "sevenDayCompletedAt"
+            ] = old[
+                "sevenDayCompletedAt"
+            ]
+
+        if old.get(
+            "sevenDayTargetAt"
+        ):
+            video[
+                "sevenDayTargetAt"
+            ] = old[
+                "sevenDayTargetAt"
+            ]
+
         merged.append(
             video
         )
 
-    # まず過去20本の
-    # sevenDayViewsを入れる
+    # -----------------------------------------
+    # 過去20本のExcel実績
+    # -----------------------------------------
+
     merged = (
         apply_legacy_seven_day_data(
             merged
@@ -1398,18 +1621,18 @@ def merge_video_data(
     )
 
     # =====================================================
-    # New video detection
+    # 新規動画検知
     #
-    # data.jsonに既に存在していた動画は
-    # 予測対象にしない。
-    #
-    # つまり導入前22本には
-    # 予測が後付けされない。
+    # data.jsonに既に存在している動画には
+    # 後付け予測をしない。
     # =====================================================
 
     for video in merged:
+
         video_id = (
-            video["id"]
+            video[
+                "id"
+            ]
         )
 
         is_new_video = (
@@ -1420,8 +1643,6 @@ def merge_video_data(
         if not is_new_video:
             continue
 
-        # 既に何らかの理由で
-        # 予測が付いているなら触らない
         if video.get(
             "sevenDayForecast"
         ):
@@ -1447,6 +1668,19 @@ def merge_video_data(
                 f"{forecast['predictedViews']} views"
             )
 
+    # =====================================================
+    # STEP 4
+    #
+    # 168時間経過済みの予測動画を確定
+    # =====================================================
+
+    merged = (
+        finalize_seven_day_results(
+            merged,
+            now,
+        )
+    )
+
     return merged
 
 
@@ -1455,20 +1689,17 @@ def merge_video_data(
 # =========================================================
 
 def main():
-    now = datetime.now(
-        JST
+    now = (
+        datetime.now(
+            JST
+        )
     )
 
     data = (
         load_existing_data()
     )
 
-    # 初めてForecast対応版を
-    # 動かした日時を保存。
-    #
-    # この時点より前からdata.jsonに
-    # 存在している動画には
-    # 予測を後付けしない。
+    # Forecast機能導入日時
     if not data.get(
         "forecastFeatureStartedAt"
     ):
@@ -1546,7 +1777,9 @@ def main():
 
     data[
         "updatedAt"
-    ] = now.isoformat()
+    ] = (
+        now.isoformat()
+    )
 
     data[
         "currentSubscriberCount"
@@ -1560,8 +1793,6 @@ def main():
         "videos"
     ] = videos
 
-    # 現在使っているモデルを
-    # data.jsonにも記録
     data[
         "forecastModel"
     ] = {
@@ -1600,6 +1831,9 @@ def main():
             "30min+":
                 1.00,
         },
+
+        "completionRule":
+            "first_api_snapshot_at_or_after_168_hours",
     }
 
     data[
@@ -1627,11 +1861,47 @@ def main():
         )
     ]
 
+    active_forecasts = [
+        video
+        for video
+        in forecasts
+        if (
+            video
+            .get(
+                "sevenDayForecast",
+                {},
+            )
+            .get(
+                "status"
+            )
+            == "active"
+        )
+    ]
+
+    completed_forecasts = [
+        video
+        for video
+        in forecasts
+        if (
+            video
+            .get(
+                "sevenDayForecast",
+                {},
+            )
+            .get(
+                "status"
+            )
+            == "completed"
+        )
+    ]
+
     print(
         f"updated {now.isoformat()} / "
         f"subscribers={current} / "
         f"videos={len(videos)} / "
         f"forecasts={len(forecasts)} / "
+        f"active={len(active_forecasts)} / "
+        f"completed={len(completed_forecasts)} / "
         f"recorded={now.date().isoformat()}"
     )
 
