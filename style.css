@@ -1560,3 +1560,149 @@ select:focus{
   text-decoration:none;
   text-align:center;
 }
+
+/* =========================
+   7-DAY FORECAST RESULT
+========================= */
+
+.video-detail-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  align-items:center;
+}
+
+.forecast-result-btn{
+  appearance:none;
+  border:2px solid var(--line);
+  background:#fff;
+  padding:12px 18px;
+  border-radius:999px;
+  font-weight:800;
+  box-shadow:3px 3px 0 var(--ink);
+}
+
+.forecast-result-btn:hover{
+  transform:translate(-1px,-1px);
+}
+
+.seven-day-result-panel{
+  margin-top:18px;
+  padding:18px;
+  background:var(--bg);
+  border:2px solid var(--line);
+  border-radius:16px;
+}
+
+.seven-day-result-panel[hidden]{
+  display:none;
+}
+
+.seven-day-result-head h4{
+  margin:4px 0 16px;
+  font-size:22px;
+  letter-spacing:-.04em;
+}
+
+.seven-day-result-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:10px;
+}
+
+.seven-day-result-item{
+  background:#fff;
+  border:2px solid var(--line);
+  border-radius:14px;
+  padding:14px;
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+
+.seven-day-result-item span{
+  color:#777;
+  font-size:11px;
+  font-weight:800;
+}
+
+.seven-day-result-item strong{
+  font-size:clamp(24px,4vw,36px);
+  line-height:1;
+  letter-spacing:-.05em;
+}
+
+.seven-day-result-summary{
+  margin-top:10px;
+  background:var(--yellow);
+  border:2px solid var(--line);
+  border-radius:14px;
+  padding:14px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+}
+
+.seven-day-result-summary span{
+  font-size:13px;
+  font-weight:900;
+}
+
+.seven-day-result-summary strong{
+  font-size:16px;
+  text-align:right;
+}
+
+@media(max-width:800px){
+  .video-detail-actions{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+  }
+
+  .video-detail-actions .primary-btn,
+  .forecast-result-btn{
+    width:100%;
+    padding:10px 8px;
+    font-size:12px;
+  }
+
+  .seven-day-result-panel{
+    margin-top:14px;
+    padding:12px;
+    border-radius:13px;
+  }
+
+  .seven-day-result-head h4{
+    font-size:19px;
+    margin-bottom:12px;
+  }
+
+  .seven-day-result-grid{
+    gap:7px;
+  }
+
+  .seven-day-result-item{
+    padding:11px;
+    border-radius:11px;
+  }
+
+  .seven-day-result-item strong{
+    font-size:24px;
+  }
+
+  .seven-day-result-summary{
+    padding:11px;
+    border-radius:11px;
+  }
+
+  .seven-day-result-summary span{
+    font-size:11px;
+  }
+
+  .seven-day-result-summary strong{
+    font-size:13px;
+  }
+}
+
