@@ -2768,12 +2768,13 @@ async function init() {
     return;
   }
 
- normalizeVideos();
+normalizeVideos();
 
-updateCommonHeader(DATA);
+if (typeof updateCommonHeader === "function") {
+  updateCommonHeader(DATA);
+}
 
 renderSummary();
-
   renderTags();
 
   renderVideos();
