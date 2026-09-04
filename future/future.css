@@ -610,6 +610,45 @@ button{
   padding:22px;
 }
 
+
+/* 予測期間切り替え */
+
+.scenario-range-buttons{
+  display:flex;
+  justify-content:flex-end;
+  align-items:center;
+  gap:5px;
+  margin-bottom:14px;
+}
+
+.scenario-range-btn{
+  padding:6px 12px;
+
+  background:#fff;
+
+  border:2px solid var(--line);
+  border-radius:999px;
+
+  font-size:11px;
+  font-weight:800;
+  line-height:1.2;
+
+  white-space:nowrap;
+}
+
+.scenario-range-btn:hover{
+  background:#f5f5f5;
+}
+
+.scenario-range-btn.active{
+  background:var(--yellow);
+
+  box-shadow:
+    3px 3px 0
+    var(--line);
+}
+
+
 .scenario-summary{
   display:grid;
   grid-template-columns:repeat(3,1fr);
@@ -1122,16 +1161,32 @@ button{
   }
 
 
+/* scenario */
 
-  /* scenario */
+.scenario-card{
+  padding:15px;
+}
 
-  .scenario-card{
-    padding:15px;
-  }
+.scenario-range-buttons{
+  justify-content:flex-end;
+  gap:4px;
+  margin-bottom:11px;
+}
 
-  .scenario-summary{
-    gap:6px;
-  }
+.scenario-range-btn{
+  padding:5px 9px;
+  font-size:10px;
+}
+
+.scenario-range-btn.active{
+  box-shadow:
+    2px 2px 0
+    var(--line);
+}
+
+.scenario-summary{
+  gap:6px;
+}
 
   .scenario-summary > div{
     padding:11px 8px;
