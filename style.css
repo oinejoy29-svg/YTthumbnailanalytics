@@ -1985,3 +1985,81 @@ select:focus{
   }
 
 }
+/* =========================
+   Chart custom tooltip
+========================= */
+
+.chart-custom-tooltip{
+  position:fixed;
+  z-index:9999;
+
+  min-width:150px;
+  max-width:280px;
+
+  padding:9px 10px;
+
+  background:rgba(0,0,0,.88);
+  color:#fff;
+
+  border-radius:7px;
+
+  font-size:11px;
+
+  transform:translate(-50%, calc(-100% - 10px));
+
+  opacity:0;
+  pointer-events:none;
+
+  transition:opacity .08s ease;
+}
+
+.chart-custom-tooltip-date{
+  margin-bottom:5px;
+
+  font-size:11px;
+  font-weight:700;
+}
+
+.chart-custom-tooltip-value{
+  display:flex;
+  align-items:center;
+  gap:5px;
+
+  font-size:11px;
+  font-weight:700;
+}
+
+.chart-custom-tooltip-red{
+  color:#FF3030;
+  font-size:12px;
+}
+
+.chart-custom-tooltip-thumbs{
+  display:flex;
+  flex-wrap:wrap;
+  gap:5px;
+
+  margin-top:7px;
+}
+
+.chart-custom-tooltip-thumbs img{
+  display:block;
+
+  width:120px;
+  max-width:100%;
+
+  aspect-ratio:16 / 9;
+  object-fit:cover;
+
+  border-radius:5px;
+}
+
+@media(max-width:800px){
+  .chart-custom-tooltip{
+    max-width:230px;
+  }
+
+  .chart-custom-tooltip-thumbs img{
+    width:105px;
+  }
+}
