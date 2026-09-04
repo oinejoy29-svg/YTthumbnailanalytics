@@ -1,229 +1,211 @@
 const START_DATE = "2026-04-03";
-
 const MEMBERS = [
-  "逢田珠里依", "天野香乃愛", "市原愛弓", "江角怜音", "大信田美月", "大西葵",
-  "小澤愛実", "髙橋舞", "藤沢莉子", "村山結香", "山田杏佳", "山野愛月"
+"逢田珠里依", "天野香乃愛", "市原愛弓", "江角怜音", "大信田美月", "大西葵",
+"小澤愛実", "髙橋舞", "藤沢莉子", "村山結香", "山田杏佳", "山野愛月"
 ];
-
 const SUBSCRIBER_OVERRIDES_KEY = "joySubscriberOverrides";
-
 let DATA = {
-  subscribers: [],
-  videos: [],
-  updatedAt: null
+subscribers: [],
+videos: [],
+updatedAt: null
 };
-
 let subsChart = null;
 let newSubsChart = null;
-
 let rangeDays = 7;
 let rangeOffset = 0;
-
 const SUBSCRIBER_HISTORY_INITIAL_LIMIT = 5;
 const SUBSCRIBER_HISTORY_STEP = 10;
-
 let subscriberHistoryLimit =
-  SUBSCRIBER_HISTORY_INITIAL_LIMIT;
-
+SUBSCRIBER_HISTORY_INITIAL_LIMIT;
 const $ = id => document.getElementById(id);
-
 const fmt = n => Number(n ?? 0).toLocaleString("ja-JP");
-
 const dateObj = s => new Date(`${s}T00:00:00+09:00`);
-
 const jpDate = s => s ? s.replace(/-/g, "/") : "—";
-
 const monthDay = s => {
-  if (!s) return "—";
-  const [, m, d] = s.split("-");
-  return `${Number(m)}/${Number(d)}`;
+if (!s) return "—";
+const [, m, d] = s.split("-");
+return `${Number(m)}/${Number(d)}`;
 };
 
 function todayJST() {
-  return new Intl.DateTimeFormat("en-CA", {
-    timeZone: "Asia/Tokyo",
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit"
-  }).format(new Date());
+return new Intl.DateTimeFormat("en-CA", {
+timeZone: "Asia/Tokyo",
+year: "numeric",
+month: "2-digit",
+day: "2-digit"
+}).format(new Date());
 }
 
 function daysSinceStart() {
-  const start = dateObj(START_DATE);
-  const today = dateObj(todayJST());
-
-  return Math.max(
-    0,
-    Math.floor((today - start) / 86400000)
-  );
+const start = dateObj(START_DATE);
+const today = dateObj(todayJST());
+return Math.max(
+0,
+Math.floor((today - start) / 86400000)
+);
 }
 
 /* =========================================================
-   Subscriber overrides
+Subscriber overrides
 ========================================================= */
 
 function getSubscriberOverrides() {
-  try {
-    return JSON.parse(
-      localStorage.getItem(
-        SUBSCRIBER_OVERRIDES_KEY
-      ) || "{}"
-    );
-  } catch {
-    return {};
-  }
+try {
+return JSON.parse(
+localStorage.getItem(
+SUBSCRIBER_OVERRIDES_KEY
+) || "{}"
+);
+} catch {
+return {};
+}
 }
 
 function saveSubscriberOverride(
-  date,
-  count
+date,
+count
 ) {
-  const overrides =
-    getSubscriberOverrides();
-
-  overrides[date] =
-    Number(count);
-
-  localStorage.setItem(
-    SUBSCRIBER_OVERRIDES_KEY,
-    JSON.stringify(overrides)
-  );
+const overrides =
+getSubscriberOverrides();
+overrides[date] =
+Number(count);
+localStorage.setItem(
+SUBSCRIBER_OVERRIDES_KEY,
+JSON.stringify(overrides)
+);
 }
 
 function clearSubscriberOverride(
-  date
+date
 ) {
-  const overrides =
-    getSubscriberOverrides();
-
-  delete overrides[date];
-
-  localStorage.setItem(
-    SUBSCRIBER_OVERRIDES_KEY,
-    JSON.stringify(overrides)
-  );
+const overrides =
+getSubscriberOverrides();
+delete overrides[date];
+localStorage.setItem(
+SUBSCRIBER_OVERRIDES_KEY,
+JSON.stringify(overrides)
+);
 }
 
 function applySubscriberOverrides(
-  rows
+rows
 ) {
-  const overrides =
-    getSubscriberOverrides();
+const overrides =
+getSubscriberOverrides();
 
-  return rows.map(row => {
-    if (
-      Object.prototype.hasOwnProperty.call(
-        overrides,
-        row.date
-      )
-    ) {
-      return {
-        ...row,
-        count:
-          Number(
-            overrides[row.date]
-          )
-      };
-    }
-
-    return {
-      ...row,
-      count:
-        Number(
-          row.count || 0
-        )
-    };
-  });
+return rows.map(row => {
+if (
+Object.prototype.hasOwnProperty.call(
+overrides,
+row.date
+)
+) {
+return {
+...row,
+count:
+Number(
+overrides[row.date]
+)
+};
 }
 
+return {
+...row,
+count:
+Number(
+row.count || 0
+)
+};
+});
+}
 
 /* =========================================================
-   Video tags
+Video tags
 ========================================================= */
 
 function detectTags(video) {
-  return MEMBERS.filter(
-    member =>
-      `${video.title || ""} ${video.description || ""}`
-        .includes(member)
-  );
+return MEMBERS.filter(
+member =>
+String(video.title || "")
+.includes(member)
+);
 }
 
 function normalizeVideos() {
-  DATA.videos =
-    (DATA.videos || []).map(
-      video => ({
-        ...video,
+DATA.videos =
+(DATA.videos || []).map(
+video => ({
+...video,
 
-        tags:
-          Array.isArray(video.tags) &&
-          video.tags.length
-            ? video.tags
-            : detectTags(video)
-      })
-    );
+tags:
+Array.isArray(video.tags) &&
+video.tags.length
+? video.tags
+: detectTags(video)
+})
+);
 }
 
 /* =========================================================
-   Subscriber data
+Subscriber data
 ========================================================= */
 
 function sortedSubscribers() {
-  return applySubscriberOverrides(
-    [
-      ...(DATA.subscribers || [])
-    ].sort(
-      (a, b) =>
-        String(a.date)
-          .localeCompare(
-            String(b.date)
-          )
-    )
-  );
+return applySubscriberOverrides(
+[
+...(DATA.subscribers || [])
+].sort(
+(a, b) =>
+String(a.date)
+.localeCompare(
+String(b.date)
+)
+)
+);
 }
 
 function latestRecord() {
-  return (
-    sortedSubscribers()
-      .at(-1) || null
-  );
+return (
+sortedSubscribers()
+.at(-1) || null
+);
 }
 
 function previousRecord(date) {
-  return (
-    sortedSubscribers()
-      .filter(
-        row =>
-          row.date < date
-      )
-      .at(-1) || null
-  );
+return (
+sortedSubscribers()
+.filter(
+row =>
+row.date < date
+)
+.at(-1) || null
+);
 }
 
 function newSubscriberForDate(
-  date
+date
 ) {
-  const rows =
-    sortedSubscribers();
+const rows =
+sortedSubscribers();
 
-  const index =
-    rows.findIndex(
-      row =>
-        row.date === date
-    );
+const index =
+rows.findIndex(
+row =>
+row.date === date
+);
 
-  if (index <= 0) {
-    return 0;
-  }
+if (index <= 0) {
+return 0;
+}
 
-  return (
-    Number(
-      rows[index].count
-    ) -
-    Number(
-      rows[index - 1].count
-    )
-  );
+return (
+Number(
+rows[index].count
+) -
+Number(
+rows[index - 1].count
+)
+);
 }
 
 /*
@@ -240,514 +222,521 @@ function newSubscriberForDate(
  */
 
 function getTodayNewSubscribers() {
-  const today =
-    todayJST();
+const today =
+todayJST();
 
-  const rows =
-    sortedSubscribers();
+const rows =
+sortedSubscribers();
 
-  const todayRow =
-    rows.find(
-      row =>
-        row.date === today
-    );
+const todayRow =
+rows.find(
+row =>
+row.date === today
+);
 
-  if (todayRow) {
-    const prev =
-      previousRecord(today);
+if (todayRow) {
+const prev =
+previousRecord(today);
 
-    if (prev) {
-      return (
-        Number(
-          todayRow.count
-        ) -
-        Number(
-          prev.count
-        )
-      );
-    }
+if (prev) {
+return (
+Number(
+todayRow.count
+) -
+Number(
+prev.count
+)
+);
+}
 
-    return 0;
-  }
+return 0;
+}
 
-  const current =
-    Number(
-      DATA.currentSubscriberCount ??
-      latestRecord()?.count ??
-      0
-    );
+const current =
+Number(
+DATA.currentSubscriberCount ??
+latestRecord()?.count ??
+0
+);
 
-  const latest =
-    latestRecord();
+const latest =
+latestRecord();
 
-  if (!latest) {
-    return 0;
-  }
+if (!latest) {
+return 0;
+}
 
-  return (
-    current -
-    Number(
-      latest.count
-    )
-  );
+return (
+current -
+Number(
+latest.count
+)
+);
 }
 
 /* =========================================================
-   Summary
+Summary
 ========================================================= */
 
 function renderSummary() {
-  const rows =
-    sortedSubscribers();
+const rows =
+sortedSubscribers();
 
-  const latest =
-    latestRecord();
+const latest =
+latestRecord();
 
-  const current =
-    Number(
-      DATA.currentSubscriberCount ??
-      latest?.count ??
-      0
-    );
+const current =
+Number(
+DATA.currentSubscriberCount ??
+latest?.count ??
+0
+);
 
-  $("currentSubs").textContent =
-    `${fmt(current)}人`;
+$("currentSubs").textContent =
+`${fmt(current)}人`;
 
-  const todayNew =
-    getTodayNewSubscribers();
+const todayNew =
+getTodayNewSubscribers();
 
-  $("latestNew").textContent =
-    `${todayNew >= 0 ? "+" : ""}${fmt(todayNew)}人`;
+$("latestNew").textContent =
+`${todayNew >= 0 ? "+" : ""}${fmt(todayNew)}人`;
 
-  $("latestDate").textContent =
-    `最新日：${jpDate(todayJST())}`;
+$("latestDate").textContent =
+`最新日：${jpDate(todayJST())}`;
 
-  const diffs =
-    rows
-      .slice(1)
-      .map(
-        (row, index) =>
-          Number(row.count) -
-          Number(
-            rows[index].count
-          )
-      );
+const diffs =
+rows
+.slice(1)
+.map(
+(row, index) =>
+Number(row.count) -
+Number(
+rows[index].count
+)
+);
 
-  const avg =
-    diffs.length
-      ? diffs.reduce(
-          (a, b) =>
-            a + b,
-          0
-        ) /
-        diffs.length
-      : 0;
+const avg =
+diffs.length
+? diffs.reduce(
+(a, b) =>
+a + b,
+0
+) /
+diffs.length
+: 0;
 
-  $("avgNew").textContent =
-    avg.toFixed(1);
+$("avgNew").textContent =
+avg.toFixed(1);
 
-  $("videoCount").textContent =
-    `${fmt(DATA.videos.length)}本`;
+$("videoCount").textContent =
+`${fmt(DATA.videos.length)}本`;
 }
 
 /* =========================================================
-   Rolling thumbnails
+Rolling thumbnails
 ========================================================= */
 
 function buildRolling() {
-  const videos =
-    [...DATA.videos];
+const videos =
+[...DATA.videos];
 
-  if (!videos.length) {
-    [0, 1, 2]
-      .forEach(i => {
-        $(`lane${i}`).innerHTML =
-          "";
-      });
+if (!videos.length) {
+[0, 1, 2]
+.forEach(i => {
+$(`lane${i}`).innerHTML =
+"";
+});
 
-    return;
-  }
+return;
+}
 
-  const shuffled =
-    videos.sort(
-      () =>
-        Math.random() - 0.5
-    );
+const shuffled =
+videos.sort(
+() =>
+Math.random() - 0.5
+);
 
-  const lanes =
-    [[], [], []];
+const lanes =
+[[], [], []];
 
-  shuffled.forEach(
-    (video, index) => {
-      lanes[
-        index % 3
-      ].push(video);
-    }
-  );
+shuffled.forEach(
+(video, index) => {
+lanes[
+index % 3
+].push(video);
+}
+);
 
-  lanes.forEach(
-    (arr, index) => {
-      const twice =
-        [...arr, ...arr];
+lanes.forEach(
+(arr, index) => {
+const twice =
+[...arr, ...arr];
 
-      $(`lane${index}`)
-        .innerHTML =
-        twice
-          .map(
-            video => `
-              <img
-                class="thumb-roll"
-                src="${escapeHtml(video.thumbnail || "")}"
-                alt=""
-                loading="lazy"
-              >
-            `
-          )
-          .join("");
-    }
-  );
+$(`lane${index}`)
+.innerHTML =
+twice
+.map(
+video => `
+<img
+class="thumb-roll"
+src="${escapeHtml(video.thumbnail || "")}"
+alt=""
+loading="lazy"
+>
+`
+)
+.join("");
+}
+);
 }
 
 /* =========================================================
-   Video list
+Video list
 ========================================================= */
 
 function renderTags() {
-  $("tagSelect").innerHTML =
-    '<option value="">すべてのメンバー</option>' +
-    MEMBERS
-      .map(
-        member =>
-          `<option value="${escapeHtml(member)}">${escapeHtml(member)}</option>`
-      )
-      .join("");
+$("tagSelect").innerHTML =
+'<option value="">すべてのメンバー</option>' +
+MEMBERS
+.map(
+member =>
+`<option value="${escapeHtml(member)}">${escapeHtml(member)}</option>`
+)
+.join("");
 }
 
 function durationNum(video) {
-  return Number(
-    video.durationSeconds || 0
-  );
+return Number(
+video.durationSeconds || 0
+);
 }
 
 function renderVideos() {
-  const sort =
-    $("sortSelect").value;
+const sort =
+$("sortSelect").value;
 
-  const tag =
-    $("tagSelect").value;
+const tag =
+$("tagSelect").value;
 
-  const list =
-    DATA.videos.filter(
-      video =>
-        !tag ||
-        (
-          video.tags ||
-          detectTags(video)
-        ).includes(tag)
-    );
+const list =
+DATA.videos.filter(
+video =>
+!tag ||
+(
+video.tags ||
+detectTags(video)
+).includes(tag)
+);
 
-  list.sort(
-    (a, b) => {
-      if (
-        sort ===
-        "popular"
-      ) {
-        return (
-          Number(
-            b.viewCount || 0
-          ) -
-          Number(
-            a.viewCount || 0
-          )
-        );
-      }
+list.sort(
+(a, b) => {
+if (
+sort ===
+"popular"
+) {
+return (
+Number(
+b.viewCount || 0
+) -
+Number(
+a.viewCount || 0
+)
+);
+}
 
-      if (
-        sort ===
-        "newest"
-      ) {
-        return String(
-          b.date
-        ).localeCompare(
-          String(a.date)
-        );
-      }
+if (
+sort ===
+"newest"
+) {
+return String(
+b.date
+).localeCompare(
+String(a.date)
+);
+}
 
-      if (
-        sort ===
-        "oldest"
-      ) {
-        return String(
-          a.date
-        ).localeCompare(
-          String(b.date)
-        );
-      }
+if (
+sort ===
+"oldest"
+) {
+return String(
+a.date
+).localeCompare(
+String(b.date)
+);
+}
 
-      if (
-        sort ===
-        "longest"
-      ) {
-        return (
-          durationNum(b) -
-          durationNum(a)
-        );
-      }
+if (
+sort ===
+"longest"
+) {
+return (
+durationNum(b) -
+durationNum(a)
+);
+}
 
-      return (
-        durationNum(a) -
-        durationNum(b)
-      );
-    }
-  );
+return (
+durationNum(a) -
+durationNum(b)
+);
+}
+);
 
-  $("videoGrid").innerHTML =
-    list
-      .map(
-        video => `
-          <article
-            class="video-card"
-            data-video-id="${escapeHtml(video.id || "")}"
-            tabindex="0"
-            role="button"
-            aria-label="動画詳細を開く"
-          >
-            <img
-              src="${escapeHtml(video.thumbnail || "")}"
-              alt=""
-              loading="lazy"
-            >
+$("videoGrid").innerHTML =
+list
+.map(
+video => `
+<article
+class="video-card"
+data-video-id="${escapeHtml(video.id || "")}"
+tabindex="0"
+role="button"
+aria-label="動画詳細を開く"
+>
+<img
+src="${escapeHtml(video.thumbnail || "")}"
+alt=""
+loading="lazy"
+>
 
-            <div class="video-info">
+<div class="video-info">
 
-              <div class="video-title">
-                ${escapeHtml(video.title || "")}
-              </div>
+<div class="video-title">
+${escapeHtml(video.title || "")}
+</div>
 
-              <div class="video-meta">
-                ${fmt(video.viewCount)}回
-                <span class="video-meta-separator">・</span>
-                ${jpDate(video.date)}
-              </div>
+<div class="video-meta">
+<div class="video-view-row">
+<span class="video-view-count">
+${fmt(video.viewCount)}回
+</span>
+<span class="video-view-increase">
+↑${fmt(video.viewCountIncrease || 0)}回
+</span>
+</div>
+<span class="video-date">
+${jpDate(video.date)}
+</span>
+</div>
 
-            </div>
-          </article>
-        `
-      )
-      .join("");
+</div>
+</article>
+`
+)
+.join("");
 
-  document
-    .querySelectorAll(
-      ".video-card"
-    )
-    .forEach(card => {
-      const open = () => {
-        const video =
-          DATA.videos.find(
-            item =>
-              String(item.id) ===
-              String(
-                card.dataset.videoId
-              )
-          );
+document
+.querySelectorAll(
+".video-card"
+)
+.forEach(card => {
+const open = () => {
+const video =
+DATA.videos.find(
+item =>
+String(item.id) ===
+String(
+card.dataset.videoId
+)
+);
 
-        if (video) {
-          openVideoDetail(
-            video
-          );
-        }
-      };
+if (video) {
+openVideoDetail(
+video
+);
+}
+};
 
-      card.addEventListener(
-        "click",
-        open
-      );
+card.addEventListener(
+"click",
+open
+);
 
-      card.addEventListener(
-        "keydown",
-        event => {
-          if (
-            event.key ===
-              "Enter" ||
-            event.key ===
-              " "
-          ) {
-            event.preventDefault();
-            open();
-          }
-        }
-      );
-    });
+card.addEventListener(
+"keydown",
+event => {
+if (
+event.key ===
+"Enter" ||
+event.key ===
+" "
+) {
+event.preventDefault();
+open();
+}
+}
+);
+});
 }
 
 /* =========================================================
-   Video detail modal
+Video detail modal
 ========================================================= */
 
 function hasCompletedSevenDayForecast(video) {
-  const forecast =
-    video?.sevenDayForecast;
+const forecast =
+video?.sevenDayForecast;
 
-  if (!forecast) {
-    return false;
-  }
+if (!forecast) {
+return false;
+}
 
-  const predicted =
-    Number(
-      forecast.predictedViews
-    );
+const predicted =
+Number(
+forecast.predictedViews
+);
 
-  const actual =
-    Number(
-      video.sevenDayViews ??
-      forecast.actualViews
-    );
+const actual =
+Number(
+video.sevenDayViews ??
+forecast.actualViews
+);
 
-  return (
-    (
-      forecast.status ===
-        "completed" ||
-      Number.isFinite(
-        Number(video.sevenDayViews)
-      )
-    ) &&
-    Number.isFinite(predicted) &&
-    predicted > 0 &&
-    Number.isFinite(actual)
-  );
+return (
+(
+forecast.status ===
+"completed" ||
+Number.isFinite(
+Number(video.sevenDayViews)
+)
+) &&
+Number.isFinite(predicted) &&
+predicted > 0 &&
+Number.isFinite(actual)
+);
 }
 
 function sevenDayForecastResult(video) {
-  if (
-    !hasCompletedSevenDayForecast(
-      video
-    )
-  ) {
-    return null;
-  }
+if (
+!hasCompletedSevenDayForecast(
+video
+)
+) {
+return null;
+}
 
-  const predicted =
-    Number(
-      video.sevenDayForecast
-        .predictedViews
-    );
+const predicted =
+Number(
+video.sevenDayForecast
+.predictedViews
+);
 
-  const actual =
-    Number(
-      video.sevenDayViews ??
-      video.sevenDayForecast
-        .actualViews
-    );
+const actual =
+Number(
+video.sevenDayViews ??
+video.sevenDayForecast
+.actualViews
+);
 
-  const difference =
-    actual - predicted;
+const difference =
+actual - predicted;
 
-  const differencePercent =
-    predicted > 0
-      ? difference / predicted * 100
-      : 0;
+const differencePercent =
+predicted > 0
+? difference / predicted * 100
+: 0;
 
-  let label =
-    "ほぼ的中";
+let label =
+"ほぼ的中";
 
-  if (
-    differencePercent > 5
-  ) {
-    label = "上振れ";
-  }
+if (
+differencePercent >= 5
+) {
+label = "上振れ";
+}
 
-  else if (
-    differencePercent < -5
-  ) {
-    label = "下振れ";
-  }
+else if (
+differencePercent <= -5
+) {
+label = "下振れ";
+}
 
-  return {
-    predicted,
-    actual,
-    difference,
-    differencePercent,
-    label
-  };
+return {
+predicted,
+actual,
+difference,
+differencePercent,
+label
+};
 }
 
 function signedNumber(value) {
-  const number =
-    Number(value || 0);
+const number =
+Number(value || 0);
 
-  return (
-    `${number >= 0 ? "+" : ""}${fmt(number)}`
-  );
+return (
+`${number >= 0 ? "+" : ""}${fmt(number)}`
+);
 }
 
 function signedPercent(value) {
-  const number =
-    Number(value || 0);
+const number =
+Number(value || 0);
 
-  return (
-    `${number >= 0 ? "+" : ""}${number.toFixed(1)}%`
-  );
+return (
+`${number >= 0 ? "+" : ""}${number.toFixed(1)}%`
+);
 }
 
 function renderSevenDayForecastResult(
-  video
+video
 ) {
-  const result =
-    sevenDayForecastResult(
-      video
-    );
+const result =
+sevenDayForecastResult(
+video
+);
 
-  const panel =
-    $("sevenDayForecastResult");
+const panel =
+$("sevenDayForecastResult");
 
-  if (
-    !result ||
-    !panel
-  ) {
-    return;
-  }
-
-  panel.innerHTML = `
-    <div class="seven-day-result-head">
-      <span class="section-kicker">
-        7-DAY FORECAST
-      </span>
-      <h4>一週間予測</h4>
-    </div>
-
-    <div class="seven-day-result-grid">
-      <div class="seven-day-result-item">
-        <span>予測</span>
-        <strong>${fmt(result.predicted)}回</strong>
-      </div>
-
-      <div class="seven-day-result-item">
-        <span>実績</span>
-        <strong>${fmt(result.actual)}回</strong>
-      </div>
-    </div>
-
-    <div class="seven-day-result-summary">
-      <span>${escapeHtml(result.label)}</span>
-      <strong>
-        ${signedNumber(result.difference)}回（${signedPercent(result.differencePercent)}）
-      </strong>
-    </div>
-  `;
-
-  panel.hidden = false;
-
-  const button =
-    $("openSevenDayForecast");
-
-  if (button) {
-    button.setAttribute(
-      "aria-expanded",
-      "true"
-    );
-  }
+if (
+!result ||
+!panel
+) {
+return;
 }
 
+panel.innerHTML = `
+<div class="seven-day-result-head">
+<span class="section-kicker">
+7-DAY FORECAST
+</span>
+<h4>一週間予測</h4>
+</div>
+
+<div class="seven-day-result-grid">
+<div class="seven-day-result-item">
+<span>予測</span>
+<strong>${fmt(result.predicted)}回</strong>
+</div>
+
+<div class="seven-day-result-item">
+<span>実績</span>
+<strong>${fmt(result.actual)}回</strong>
+</div>
+</div>
+
+<div class="seven-day-result-summary">
+<span>${escapeHtml(result.label)}</span>
+<strong>
+${signedNumber(result.difference)}回（${signedPercent(result.differencePercent)}）
+</strong>
+</div>
+`;
+
+panel.hidden = false;
+
+const button =
+$("openSevenDayForecast");
+
+if (button) {
+button.setAttribute(
+"aria-expanded",
+"true"
+);
+}
+}
 function openVideoDetail(
   video
 ) {
@@ -1046,6 +1035,7 @@ function getChartRows() {
     }
   );
 }
+
 function chartVideoTitles(
   date
 ) {
@@ -1565,7 +1555,6 @@ function renderCharts() {
     .textContent =
     `${monthDay(rows[0].date)} – ${monthDay(rows.at(-1).date)}`;
 }
-
 /* =========================================================
    Subscriber history table
 ========================================================= */
@@ -1580,7 +1569,7 @@ function renderSubscriberHistory() {
         Math.max(
           0,
           rows.length -
-          subscriberHistoryLimit
+            subscriberHistoryLimit
         )
       )
       .reverse();
@@ -1753,11 +1742,8 @@ function editSubscriberRecord(
   );
 
   renderSummary();
-
   renderSubscriberHistory();
-
   renderCharts();
-
   renderTrendAnalysis();
 }
 
@@ -2343,8 +2329,7 @@ async function downloadCollage() {
 
   const cellW =
     320;
-
-  const cellH =
+    const cellH =
     180;
 
   const columns =
@@ -2567,6 +2552,7 @@ function loadImage(src) {
     }
   );
 }
+
 /* =========================================================
    Range controls
 ========================================================= */
@@ -2630,7 +2616,7 @@ function setupRange() {
     () => {
       if (
         rangeDays !==
-          "all" &&
+        "all" &&
         rangeOffset < 0
       ) {
         rangeOffset++;
@@ -2645,12 +2631,10 @@ function setupRange() {
 ========================================================= */
 
 function setupNav() {
-
   const buttons =
     document.querySelectorAll(
       ".switch-btn[data-page]"
     );
-
 
   function openPage(
     pageName,
@@ -2751,7 +2735,6 @@ function setupNav() {
 
   }
 
-
   buttons.forEach(
     button => {
 
@@ -2767,14 +2750,13 @@ function setupNav() {
     }
   );
 
-
   /*
-    Future outlookから
+  Future outlookから
 
-    ../index.html?page=analytics
+  ../index.html?page=analytics
 
-    のように戻ってきた場合、
-    URLを見て最初からAnalyticsを開く。
+  のように戻ってきた場合、
+  URLを見て最初からAnalyticsを開く。
   */
 
   const params =
@@ -2782,10 +2764,8 @@ function setupNav() {
       window.location.search
     );
 
-
   const requestedPage =
     params.get("page");
-
 
   if (
     requestedPage ===
@@ -2807,7 +2787,6 @@ function setupNav() {
     );
 
   }
-
 }
 
 /* =========================================================
@@ -2982,7 +2961,7 @@ async function init() {
     const response =
       await fetch(
         "data.json?ts=" +
-          Date.now(),
+        Date.now(),
         {
           cache:
             "no-store"
@@ -3012,21 +2991,14 @@ async function init() {
   }
 
   renderSummary();
-
   renderTags();
-
   renderVideos();
-
   buildRolling();
-
   renderTrendAnalysis();
-
   renderSubscriberHistory();
 
   setupRange();
-
   setupNav();
-
   setupModals();
 
   /*
@@ -3040,7 +3012,6 @@ async function init() {
   openRequestedVideoFromUrl();
 
   setupSubscriberHistory();
-
   setupMobileChartTooltipClose();
 
   $("sortSelect")
