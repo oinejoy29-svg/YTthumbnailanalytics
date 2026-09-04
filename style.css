@@ -1723,28 +1723,29 @@ select:focus{
   min-width:0;
 }
 
-/* 総再生回数：黒・少し大きめ */
+/* 再生回数：増加数より大きめ・太字なし */
 .video-view-count{
   color:#111;
-  font-size:17px;
-  font-weight:800;
+  font-size:15px;
+  font-weight:400;
   line-height:1.2;
   white-space:nowrap;
 }
 
-/* 前回更新からの増加数：黒・従来の再生回数サイズ */
+/* 増加数：日付と同じサイズ・太字なし */
 .video-view-increase{
   color:#111;
-  font-size:15px;
-  font-weight:700;
+  font-size:12px;
+  font-weight:400;
   line-height:1.2;
   white-space:nowrap;
 }
 
-/* 投稿日：今まで通り控えめ */
+/* 日付：増加数と同じサイズ */
 .video-date{
   color:#777;
   font-size:12px;
+  font-weight:400;
   line-height:1.2;
   white-space:nowrap;
 }
@@ -1759,13 +1760,10 @@ select:focus{
   }
 
   .video-view-count{
-    font-size:16px;
-  }
-
-  .video-view-increase{
     font-size:14px;
   }
 
+  .video-view-increase,
   .video-date{
     font-size:10px;
   }
