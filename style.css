@@ -1898,7 +1898,7 @@ select:focus{
     height:10px;
   }
 }
-/* NEW / ↑○ UP を少し上へ */
+/* NEW / ↑○ UP を20px上へ・元の傾きを維持 */
 .video-status-sticker{
-  transform: translateY(-20px) rotate(6deg);
+  transform:translateY(-14px) rotate(7deg);
 }
