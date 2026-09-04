@@ -2222,112 +2222,585 @@ function getIncreaseAfterVideo(
 }
 
 function generateTrendAnalysis() {
-  const len =
-    DATA.subscribers?.length ||
-    0;
+  const rows = sortedSubscribers();
+  const len = rows.length;
 
-  if (
-    len < 2
-  ) {
+  if (len < 2) {
     return "登録者データがまだ少ないため、今後のデータからチャンネルの傾向を分析します。";
   }
 
-  const w7 =
-    getWindowStats(
-      Math.min(
-        7,
-        len
-      )
-    );
+  /* =========================
+     基本データ
+  ========================= */
 
-  const hist =
+  const historicalAvg =
     getHistoricalAverage();
 
-  const compareDays =
+  const w3 =
+    getWindowStats(
+      Math.min(3, len)
+    );
+
+  const w7 =
+    getWindowStats(
+      Math.min(7, len)
+    );
+
+  const w30 =
+    getWindowStats(
+      Math.min(30, len)
+    );
+
+  const compare7Days =
     Math.min(
       7,
-      Math.floor(
-        len / 2
-      )
+      Math.floor(len / 2)
     );
 
   const c7 =
-    compareWindow(
-      compareDays
+    compare7Days >= 2
+      ? compareWindow(compare7Days)
+      : null;
+
+  const compare3Days =
+    Math.min(
+      3,
+      Math.floor(len / 2)
     );
 
-  let text =
-    "";
+  const c3 =
+    compare3Days >= 2
+      ? compareWindow(compare3Days)
+      : null;
 
-  if (
-    w7 &&
-    w7.avg >
-      hist * 1.5 &&
-    w7.avg > 2
-  ) {
-    text =
-      "🚀 最近は登録者の伸びが大きく加速しています。";
-  } else if (
-    w7 &&
-    w7.avg >
-      hist * 1.15
-  ) {
-    text =
-      "📈 最近は歴代平均を上回るペースで登録者が増えています。";
-  } else if (
-    w7 &&
-    w7.avg <
-      hist * 0.65 &&
-    hist > 1
-  ) {
-    text =
-      "📉 最近は登録者の増加ペースがやや落ち着いています。";
-  } else {
-    text =
-      "➡️ 最近は大きな変動なく、比較的安定したペースで登録者が増えています。";
-  }
+  const best7 =
+    len >= 7
+      ? bestWindow(7)
+      : null;
 
-  if (c7) {
+  /* =========================
+     日ごとの増加数
+  ========================= */
+
+  const dailyChanges =
+    rows
+      .slice(1)
+      .map(
+        (row, index) => ({
+          date: row.date,
+          value:
+            Number(row.count) -
+            Number(rows[index].count)
+        })
+      );
+
+  const recent7Changes =
+    dailyChanges.slice(-7);
+
+  const recent30Changes =
+    dailyChanges.slice(-30);
+
+  const latestChange =
+    dailyChanges.at(-1)?.value ?? 0;
+
+  /* =========================
+     補助計算
+  ========================= */
+
+  const average = values => {
+    if (!values.length) {
+      return 0;
+    }
+
+    return (
+      values.reduce(
+        (sum, value) =>
+          sum + value,
+        0
+      ) / values.length
+    );
+  };
+
+  const standardDeviation =
+    values => {
+      if (values.length < 2) {
+        return 0;
+      }
+
+      const avg =
+        average(values);
+
+      const variance =
+        average(
+          values.map(
+            value =>
+              Math.pow(
+                value - avg,
+                2
+              )
+          )
+        );
+
+      return Math.sqrt(
+        variance
+      );
+    };
+
+  /* =========================
+     連続プラス日数
+  ========================= */
+
+  let positiveStreak = 0;
+
+  for (
+    let i =
+      dailyChanges.length - 1;
+    i >= 0;
+    i--
+  ) {
     if (
-      c7.rate >=
-      50
+      dailyChanges[i].value > 0
     ) {
-      text +=
-        ` 直近${w7.n}日間は平均＋${w7.avg.toFixed(1)}人/日で、前の${c7.previous.n}日間より${Math.abs(c7.rate).toFixed(0)}%増加しています。`;
-
-    } else if (
-      c7.rate <=
-      -30
-    ) {
-      text +=
-        ` 直近${w7.n}日間の平均は＋${w7.avg.toFixed(1)}人/日で、前の${c7.previous.n}日間から${Math.abs(c7.rate).toFixed(0)}%減少しています。`;
-
+      positiveStreak++;
     } else {
-      text +=
-        ` 直近${w7.n}日間は平均＋${w7.avg.toFixed(1)}人/日のペースです。`;
+      break;
     }
   }
 
-  const best =
-    bestWindow(7);
+  /* =========================
+     次の100人
+  ========================= */
+
+  const current =
+    Number(
+      DATA.currentSubscriberCount ??
+      rows.at(-1)?.count ??
+      0
+    );
+
+  const nextMilestone =
+    (Math.floor(current / 100) + 1) *
+    100;
+
+  const remaining =
+    nextMilestone - current;
+
+  /* =========================
+     分析候補
+  ========================= */
+
+  const candidates = [];
+
+  const addCandidate = (
+    score,
+    type,
+    text
+  ) => {
+    if (!text) {
+      return;
+    }
+
+    candidates.push({
+      score,
+      type,
+      text
+    });
+  };
+
+  /* =========================
+     1. 7日トレンド × 長期水準
+  ========================= */
 
   if (
-    best &&
     w7 &&
-    best.total ===
-      w7.total &&
-    best.total > 0
+    c7 &&
+    historicalAvg > 0
   ) {
-    text +=
-      " 過去の7日間と比べても最高ペースです。";
+    const levelRatio =
+      w7.avg /
+      historicalAvg;
+
+    const rate =
+      c7.rate;
+
+    /*
+      高水準 ＋ さらに加速
+    */
+
+    if (
+      levelRatio >= 1.35 &&
+      rate >= 25
+    ) {
+      addCandidate(
+        95 +
+          Math.min(
+            10,
+            rate / 20
+          ),
+        "trend7",
+        `直近${w7.n}日間は平均＋${w7.avg.toFixed(1)}人/日と高水準で、前の${c7.previous.n}日間からさらに${Math.abs(rate).toFixed(0)}%伸びています。`
+      );
+    }
+
+    /*
+      高水準だけど減速
+    */
+
+    else if (
+      levelRatio >= 1.25 &&
+      rate <= -20
+    ) {
+      addCandidate(
+        94 +
+          Math.min(
+            8,
+            Math.abs(rate) / 20
+          ),
+        "trend7",
+        `直近${w7.n}日間は平均＋${w7.avg.toFixed(1)}人/日と高い水準を維持していますが、前の${c7.previous.n}日間と比べると勢いは${Math.abs(rate).toFixed(0)}%落ち着いています。`
+      );
+    }
+
+    /*
+      低水準から回復
+    */
+
+    else if (
+      levelRatio <= 0.85 &&
+      rate >= 30
+    ) {
+      addCandidate(
+        91,
+        "trend7",
+        `直近${w7.n}日間はまだ長期平均を下回るものの、前の${c7.previous.n}日間から${Math.abs(rate).toFixed(0)}%上向いており、回復の動きが見られます。`
+      );
+    }
+
+    /*
+      低水準 ＋ さらに減速
+    */
+
+    else if (
+      levelRatio <= 0.75 &&
+      rate <= -25
+    ) {
+      addCandidate(
+        93,
+        "trend7",
+        `直近${w7.n}日間は平均＋${w7.avg.toFixed(1)}人/日で、長期平均を下回りながら前の${c7.previous.n}日間からも${Math.abs(rate).toFixed(0)}%ペースが落ちています。`
+      );
+    }
+
+    /*
+      高水準で安定
+    */
+
+    else if (
+      levelRatio >= 1.3 &&
+      Math.abs(rate) < 20
+    ) {
+      addCandidate(
+        82,
+        "trend7",
+        `直近${w7.n}日間は平均＋${w7.avg.toFixed(1)}人/日。大きな加減速はなく、長期平均を上回る好調なペースを維持しています。`
+      );
+    }
+
+    /*
+      前週から明確に上向き
+    */
+
+    else if (
+      rate >= 35
+    ) {
+      addCandidate(
+        84,
+        "trend7",
+        `直近${w7.n}日間の登録者増加は前の${c7.previous.n}日間から${Math.abs(rate).toFixed(0)}%上昇。増加ペースが明確に上向いています。`
+      );
+    }
+
+    /*
+      前週から明確に減速
+    */
+
+    else if (
+      rate <= -35
+    ) {
+      addCandidate(
+        84,
+        "trend7",
+        `直近${w7.n}日間は平均＋${w7.avg.toFixed(1)}人/日で、前の${c7.previous.n}日間から${Math.abs(rate).toFixed(0)}%減速しています。`
+      );
+    }
   }
+
+  /* =========================
+     2. 直近3日の変化
+  ========================= */
+
+  if (
+    w3 &&
+    c3 &&
+    c3.previous.avg !== 0
+  ) {
+    if (
+      c3.rate >= 70
+    ) {
+      addCandidate(
+        90,
+        "trend3",
+        `ここ${w3.n}日で登録者の伸びが急上昇。直前の${c3.previous.n}日間と比べて増加ペースが${Math.abs(c3.rate).toFixed(0)}%高まっています。`
+      );
+    }
+
+    else if (
+      c3.rate >= 35
+    ) {
+      addCandidate(
+        79,
+        "trend3",
+        `ここ${w3.n}日で登録者の伸びが上向いており、短期的に勢いが出てきています。`
+      );
+    }
+
+    else if (
+      c3.rate <= -70
+    ) {
+      addCandidate(
+        88,
+        "trend3",
+        `ここ${w3.n}日は登録者の増加ペースが大きく落ち着いており、直前の${c3.previous.n}日間から明確な変化が見られます。`
+      );
+    }
+
+    else if (
+      c3.rate <= -40
+    ) {
+      addCandidate(
+        77,
+        "trend3",
+        `ここ${w3.n}日は登録者の伸びがやや落ち着き、短期的にはペースダウンしています。`
+      );
+    }
+  }
+
+  /* =========================
+     3. 過去最高7日間
+  ========================= */
+
+  if (
+    best7 &&
+    w7 &&
+    best7.total === w7.total &&
+    w7.total > 0
+  ) {
+    addCandidate(
+      100,
+      "record",
+      `直近7日間で＋${fmt(w7.total)}人を記録し、これまでの7日間では最高の増加ペースとなっています。`
+    );
+  }
+
+  /*
+    過去最高にかなり近い
+  */
+
+  else if (
+    best7 &&
+    w7 &&
+    best7.total > 0 &&
+    w7.total >=
+      best7.total * 0.9
+  ) {
+    addCandidate(
+      86,
+      "record",
+      `直近7日間は＋${fmt(w7.total)}人。過去最高の7日間に迫る強い伸びとなっています。`
+    );
+  }
+
+  /* =========================
+     4. 急増日
+  ========================= */
+
+  if (
+    recent30Changes.length >= 7
+  ) {
+    const recent30Values =
+      recent30Changes.map(
+        item => item.value
+      );
+
+    const avg30 =
+      average(
+        recent30Values
+      );
+
+    const sd30 =
+      standardDeviation(
+        recent30Values
+      );
+
+    const recentPeak =
+      recent7Changes
+        .slice()
+        .sort(
+          (a, b) =>
+            b.value - a.value
+        )[0];
+
+    if (
+      recentPeak &&
+      recentPeak.value >=
+        Math.max(
+          avg30 * 2,
+          avg30 + sd30 * 1.5
+        ) &&
+      recentPeak.value >= 5
+    ) {
+      addCandidate(
+        89,
+        "spike",
+        `${monthDay(recentPeak.date)}は＋${fmt(recentPeak.value)}人と、最近の平均を大きく上回る伸びを記録しました。`
+      );
+    }
+  }
+
+  /* =========================
+     5. 連続増加
+  ========================= */
+
+  if (
+    positiveStreak >= 10
+  ) {
+    addCandidate(
+      88,
+      "streak",
+      `${positiveStreak}日連続で登録者が増加しており、安定したプラス推移が長く続いています。`
+    );
+  }
+
+  else if (
+    positiveStreak >= 7
+  ) {
+    addCandidate(
+      80,
+      "streak",
+      `${positiveStreak}日連続で登録者が増加。大きく崩れず、安定した伸びが続いています。`
+    );
+  }
+
+  /* =========================
+     6. 安定性
+  ========================= */
+
+  if (
+    recent7Changes.length >= 7 &&
+    w7 &&
+    w7.avg > 0
+  ) {
+    const values =
+      recent7Changes.map(
+        item => item.value
+      );
+
+    const sd =
+      standardDeviation(values);
+
+    const variation =
+      sd /
+      Math.max(
+        1,
+        Math.abs(w7.avg)
+      );
+
+    if (
+      variation <= 0.35 &&
+      w7.avg >=
+        historicalAvg * 0.85
+    ) {
+      addCandidate(
+        73,
+        "stable",
+        `直近7日間は日ごとのブレが小さく、平均＋${w7.avg.toFixed(1)}人/日の安定した増加が続いています。`
+      );
+    }
+  }
+
+  /* =========================
+     7. 30日単位の長期傾向
+  ========================= */
+
+  if (
+    w30 &&
+    w7 &&
+    w30.n >= 21 &&
+    historicalAvg > 0
+  ) {
+    if (
+      w30.avg >=
+        historicalAvg * 1.3 &&
+      w7.avg >=
+        w30.avg * 0.9
+    ) {
+      addCandidate(
+        76,
+        "long",
+        `この1か月は平均＋${w30.avg.toFixed(1)}人/日と、長期平均を上回る成長が続いています。`
+      );
+    }
+
+    else if (
+      w30.avg <=
+        historicalAvg * 0.7 &&
+      w7.avg <=
+        w30.avg
+    ) {
+      addCandidate(
+        74,
+        "long",
+        `この1か月は長期平均より穏やかな伸びとなっており、直近も落ち着いた推移が続いています。`
+      );
+    }
+  }
+
+  /* =========================
+     8. 節目接近
+  ========================= */
+
+  if (
+    remaining > 0 &&
+    remaining <= 10
+  ) {
+    addCandidate(
+      87,
+      "milestone",
+      `次の${fmt(nextMilestone)}人まであと${fmt(remaining)}人。次の節目が目前に迫っています。`
+    );
+  }
+
+  else if (
+    remaining > 10 &&
+    remaining <= 25 &&
+    w7 &&
+    w7.avg >= 2
+  ) {
+    addCandidate(
+      68,
+      "milestone",
+      `次の${fmt(nextMilestone)}人まであと${fmt(remaining)}人。現在のペースなら節目が見えてきています。`
+    );
+  }
+
+  /* =========================
+     9. 最新動画投稿後
+  ========================= */
 
   const latestVideo =
     getLatestVideo();
 
-  if (
-    latestVideo
-  ) {
+  if (latestVideo) {
     const after =
       getIncreaseAfterVideo(
         latestVideo.date,
@@ -2336,14 +2809,107 @@ function generateTrendAnalysis() {
 
     if (
       after !== null &&
-      after > 0
+      after > 0 &&
+      w7 &&
+      after >=
+        Math.max(
+          10,
+          w7.total * 0.8
+        )
     ) {
-      text +=
-        ` 🎬 ${jpDate(latestVideo.date)}の動画投稿後7日間で＋${fmt(after)}人増加しています。`;
+      addCandidate(
+        72,
+        "video",
+        `${jpDate(latestVideo.date)}の動画投稿後7日間で登録者が＋${fmt(after)}人増えています。`
+      );
     }
   }
 
-  return text;
+  /* =========================
+     10. 今日の変化が目立つ
+  ========================= */
+
+  if (
+    recent30Changes.length >= 7
+  ) {
+    const normalAvg =
+      average(
+        recent30Changes
+          .slice(0, -1)
+          .map(
+            item =>
+              item.value
+          )
+      );
+
+    if (
+      latestChange >=
+        Math.max(
+          5,
+          normalAvg * 2
+        )
+    ) {
+      addCandidate(
+        83,
+        "today",
+        `最新日は＋${fmt(latestChange)}人と、最近の平均を大きく上回る伸びになっています。`
+      );
+    }
+  }
+
+  /* =========================
+     候補がなかった場合
+  ========================= */
+
+  if (!candidates.length) {
+    if (w7) {
+      return `直近${w7.n}日間は平均＋${w7.avg.toFixed(1)}人/日。大きな変化はなく、比較的安定した推移が続いています。`;
+    }
+
+    return "登録者数は大きな変化なく推移しています。";
+  }
+
+  /* =========================
+     注目度順に並べる
+  ========================= */
+
+  candidates.sort(
+    (a, b) =>
+      b.score - a.score
+  );
+
+  const first =
+    candidates[0];
+
+  /*
+    2つ目は同じ種類を避ける。
+    さらに、弱い情報を無理に追加しない。
+  */
+
+  const second =
+    candidates.find(
+      candidate =>
+        candidate !== first &&
+        candidate.type !==
+          first.type &&
+        candidate.score >= 78 &&
+        candidate.score >=
+          first.score - 18
+    );
+
+  /* =========================
+     最終文章
+  ========================= */
+
+  if (second) {
+    return (
+      first.text +
+      " " +
+      second.text
+    );
+  }
+
+  return first.text;
 }
 
 function renderTrendAnalysis() {
