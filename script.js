@@ -1481,6 +1481,135 @@ function chartVideosForDate(
         video.date === date
     );
 }
+function externalChartTooltip(
+  context,
+  rows,
+  type
+) {
+  const {
+    chart,
+    tooltip
+  } = context;
+
+  let popup =
+    document.getElementById(
+      "chartCustomTooltip"
+    );
+
+  if (!popup) {
+    popup =
+      document.createElement(
+        "div"
+      );
+
+    popup.id =
+      "chartCustomTooltip";
+
+    popup.className =
+      "chart-custom-tooltip";
+
+    document.body.appendChild(
+      popup
+    );
+  }
+
+  if (
+    !tooltip ||
+    tooltip.opacity === 0
+  ) {
+    popup.style.opacity = "0";
+    popup.style.pointerEvents =
+      "none";
+
+    return;
+  }
+
+  const point =
+    tooltip.dataPoints?.[0];
+
+  if (!point) {
+    return;
+  }
+
+  const row =
+    rows[
+      point.dataIndex
+    ];
+
+  if (!row) {
+    return;
+  }
+
+  const videos =
+    chartVideosForDate(
+      row.date
+    );
+
+  const value =
+    Number(
+      point.raw || 0
+    );
+
+  const valueText =
+    type === "new"
+      ? `新規登録者数：${value >= 0 ? "+" : ""}${fmt(value)}人`
+      : `登録者数：${fmt(value)}人`;
+
+  const thumbnailHtml =
+    videos.length
+      ? `
+        <div class="chart-custom-tooltip-thumbs">
+          ${videos
+            .map(
+              video => `
+                <img
+                  src="${escapeHtml(video.thumbnail || "")}"
+                  alt=""
+                >
+              `
+            )
+            .join("")}
+        </div>
+      `
+      : "";
+
+  popup.innerHTML = `
+    <div class="chart-custom-tooltip-date">
+      ${monthDay(row.date)}
+    </div>
+
+    <div class="chart-custom-tooltip-value">
+      <span class="chart-custom-tooltip-red">■</span>
+      ${valueText}
+    </div>
+
+    ${thumbnailHtml}
+  `;
+
+  const canvasRect =
+    chart.canvas
+      .getBoundingClientRect();
+
+  const left =
+    canvasRect.left +
+    tooltip.caretX;
+
+  const top =
+    canvasRect.top +
+    tooltip.caretY;
+
+  popup.style.opacity = "1";
+  popup.style.pointerEvents =
+    videos.length
+      ? "auto"
+      : "none";
+
+  popup.style.left =
+    `${left}px`;
+
+  popup.style.top =
+    `${top}px`;
+}
 
 
 function closeChartVideoPopup() {
