@@ -364,17 +364,9 @@ def get_all_videos(
                 )
             )
 
-            description = (
-                snippet.get(
-                    "description",
-                    "",
-                )
-            )
-
-            text_for_tags = (
-                f"{title} "
-                f"{description}"
-            )
+            # メンバータグは動画タイトルだけから自動検知する。
+            # 概要欄に名前が書かれていてもタグには含めない。
+            text_for_tags = title
 
             thumbnails = (
                 snippet.get(
@@ -1906,6 +1898,48 @@ def merge_video_data(
             **old,
             **fetched,
         }
+
+        # -----------------------------------------
+        # 前回更新からの再生回数増加
+        #
+        # 既存動画:
+        #   今回のviewCount - 前回保存時のviewCount
+        #
+        # 新規動画:
+        #   比較元がないため0として保存
+        #
+        # YouTube側の補正などで再生回数が減った場合も、
+        # 実際の差分をそのまま保存する。
+        # -----------------------------------------
+
+        current_view_count = int(
+            fetched.get(
+                "viewCount",
+                0,
+            )
+            or 0
+        )
+
+        previous_view_count = (
+            old.get(
+                "viewCount"
+            )
+        )
+
+        if isinstance(
+            previous_view_count,
+            (int, float),
+        ):
+            video[
+                "viewCountIncrease"
+            ] = (
+                current_view_count
+                - int(previous_view_count)
+            )
+        else:
+            video[
+                "viewCountIncrease"
+            ] = 0
 
         # -----------------------------------------
         # 予測を永久保持
