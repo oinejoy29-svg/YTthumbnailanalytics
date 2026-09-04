@@ -20,6 +20,12 @@ let DATA = {
 let scenarioChart =
   null;
 
+let scenarioRangeDays =
+  30;
+
+let scenarioRangeLabel =
+  "1ヶ月後";
+
 let calendarMonth =
   null;
 
@@ -1734,25 +1740,30 @@ function renderScenarios() {
     growthPaces();
 
 
- const standardPace =
-  Math.max(
-    0,
-    paces.weighted
-  );
+  const standardPace =
+    Math.max(
+      0,
+      paces.weighted
+    );
 
 
-const cautiousPace =
-  standardPace *
-  .80;
+  const cautiousPace =
+    standardPace *
+    .80;
 
 
-const positivePace =
-  standardPace *
-  1.20;
+  const positivePace =
+    standardPace *
+    1.20;
 
 
-  const threeMonths =
-    90;
+  /*
+    上の3つの予測箱だけ、
+    選択された期間で計算する
+  */
+
+  const selectedDays =
+    scenarioRangeDays;
 
 
   $("scenarioLowValue")
@@ -1761,7 +1772,7 @@ const positivePace =
       Math.round(
         current +
         cautiousPace *
-        threeMonths
+        selectedDays
       )
     )}人`;
 
@@ -1772,7 +1783,7 @@ const positivePace =
       Math.round(
         current +
         standardPace *
-        threeMonths
+        selectedDays
       )
     )}人`;
 
@@ -1783,10 +1794,32 @@ const positivePace =
       Math.round(
         current +
         positivePace *
-        threeMonths
+        selectedDays
       )
     )}人`;
 
+
+  /*
+    箱の下の期間表示
+  */
+
+  $("scenarioLowPeriod")
+    .textContent =
+    scenarioRangeLabel;
+
+  $("scenarioStandardPeriod")
+    .textContent =
+    scenarioRangeLabel;
+
+  $("scenarioHighPeriod")
+    .textContent =
+    scenarioRangeLabel;
+
+
+  /*
+    グラフは今まで通り固定。
+    ボタンを押しても表示期間は変えない。
+  */
 
   const horizon =
     180;
@@ -1893,7 +1926,7 @@ const positivePace =
 
             {
               label:
-                                 "標準",
+                "標準",
 
               data:
                 standardValues,
@@ -1979,6 +2012,69 @@ const positivePace =
         }
       }
     );
+
+}
+
+function setupScenarioRangeControls() {
+
+  const buttons =
+    document.querySelectorAll(
+      ".scenario-range-btn"
+    );
+
+
+  buttons.forEach(
+    button => {
+
+      button.addEventListener(
+        "click",
+        () => {
+
+          const days =
+            Number(
+              button.dataset.scenarioDays
+            );
+
+          const label =
+            button.dataset.scenarioLabel;
+
+
+          if (
+            !Number.isFinite(days) ||
+            days <= 0
+          ) {
+
+            return;
+
+          }
+
+
+          scenarioRangeDays =
+            days;
+
+          scenarioRangeLabel =
+            label || "1ヶ月後";
+
+
+          buttons.forEach(
+            item => {
+
+              item.classList.toggle(
+                "active",
+                item === button
+              );
+
+            }
+          );
+
+
+          renderScenarios();
+
+        }
+      );
+
+    }
+  );
 
 }
 
@@ -2655,9 +2751,11 @@ async function initFuture() {
 
   renderGoal();
 
-  renderScenarios();
+renderScenarios();
 
-  renderPostingSummary();
+setupScenarioRangeControls();
+
+renderPostingSummary();
 
   renderCalendar();
 
