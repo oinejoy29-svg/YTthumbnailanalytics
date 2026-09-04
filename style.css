@@ -1707,7 +1707,6 @@ select:focus{
 }
 /* =========================
    VIDEO LIST VIEW META
-   前回更新からの再生増加数
 ========================= */
 
 .video-meta{
@@ -1724,22 +1723,25 @@ select:focus{
   min-width:0;
 }
 
+/* 総再生回数：黒・少し大きめ */
 .video-view-count{
   color:#111;
-  font-size:15px;
+  font-size:17px;
   font-weight:800;
   line-height:1.2;
   white-space:nowrap;
 }
 
+/* 前回更新からの増加数：黒・従来の再生回数サイズ */
 .video-view-increase{
   color:#111;
-  font-size:12px;
+  font-size:15px;
   font-weight:700;
   line-height:1.2;
   white-space:nowrap;
 }
 
+/* 投稿日：今まで通り控えめ */
 .video-date{
   color:#777;
   font-size:12px;
@@ -1757,12 +1759,14 @@ select:focus{
   }
 
   .video-view-count{
+    font-size:16px;
+  }
+
+  .video-view-increase{
     font-size:14px;
   }
 
-  .video-view-increase,
   .video-date{
     font-size:10px;
   }
 }
-
