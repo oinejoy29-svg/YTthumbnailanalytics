@@ -411,9 +411,13 @@ video.durationSeconds || 0
 );
 }
 
-const POPULAR_RANK_SEEN_KEY =
-  "popularRankingSignalSeenAt";
+const POPULAR_RANK_BASELINE_KEY =
+  "popularRankingBaseline";
 
+/*
+  NEW判定
+  サイトが初めて動画を検出してから24時間。
+*/
 function isNewBadgeVideo(video) {
   const detectedAt =
     new Date(
@@ -440,6 +444,13 @@ function isNewBadgeVideo(video) {
   );
 }
 
+
+/*
+  UP表示対象。
+
+  投稿直後は順位が大きく動くため、
+  今まで通り投稿4日経過後から対象にする。
+*/
 function isPopularRankUpEligible(video) {
   const publishedAt =
     new Date(
@@ -462,22 +473,228 @@ function isPopularRankUpEligible(video) {
     4 * 24 * 60 * 60 * 1000;
 }
 
+
+/*
+  最後にユーザーが人気順を確認した時点の
+  順位一覧をlocalStorageから取得。
+*/
+function loadPopularRankingBaseline() {
+  try {
+    const raw =
+      localStorage.getItem(
+        POPULAR_RANK_BASELINE_KEY
+      );
+
+    if (!raw) {
+      return null;
+    }
+
+    const parsed =
+      JSON.parse(raw);
+
+    if (
+      !parsed ||
+      typeof parsed !==
+        "object" ||
+      !parsed.ranks ||
+      typeof parsed.ranks !==
+        "object"
+    ) {
+      return null;
+    }
+
+    return parsed;
+  } catch (error) {
+    console.warn(
+      "Popular ranking baseline load failed:",
+      error
+    );
+
+    return null;
+  }
+}
+
+
+/*
+  現在の人気順位を作る。
+
+  data.jsonのpopularRankを基本にするが、
+  万一まだ無い場合でもviewCountから順位を作る。
+*/
+function currentPopularRankingMap() {
+  const ranked =
+    [...(DATA.videos || [])]
+      .sort(
+        (a, b) => {
+          const viewDiff =
+            Number(
+              b.viewCount || 0
+            ) -
+            Number(
+              a.viewCount || 0
+            );
+
+          if (viewDiff !== 0) {
+            return viewDiff;
+          }
+
+          return String(
+            a.id || ""
+          ).localeCompare(
+            String(b.id || "")
+          );
+        }
+      );
+
+  const ranks = {};
+
+  ranked.forEach(
+    (video, index) => {
+      const storedRank =
+        Number(
+          video.popularRank
+        );
+
+      ranks[
+        String(video.id)
+      ] =
+        Number.isFinite(
+          storedRank
+        ) &&
+        storedRank > 0
+          ? storedRank
+          : index + 1;
+    }
+  );
+
+  return ranks;
+}
+
+
+/*
+  現在順位を
+  「最後に確認した順位」として保存。
+*/
+function saveCurrentPopularRankingBaseline() {
+  const state = {
+    savedAt:
+      new Date().toISOString(),
+
+    ranks:
+      currentPopularRankingMap()
+  };
+
+  try {
+    localStorage.setItem(
+      POPULAR_RANK_BASELINE_KEY,
+      JSON.stringify(state)
+    );
+  } catch (error) {
+    console.warn(
+      "Popular ranking baseline save failed:",
+      error
+    );
+  }
+}
+
+
+/*
+  最後に確認した順位から
+  現在何位上がったか。
+*/
 function popularRankUpAmount(video) {
   if (
-    !isPopularRankUpEligible(video)
+    !isPopularRankUpEligible(
+      video
+    )
+  ) {
+    return 0;
+  }
+
+  const baseline =
+    loadPopularRankingBaseline();
+
+  /*
+    初回訪問など、
+    比較元がまだ無い場合はUPを出さない。
+  */
+  if (
+    !baseline ||
+    !baseline.ranks
+  ) {
+    return 0;
+  }
+
+  const videoId =
+    String(
+      video.id || ""
+    );
+
+  const oldRank =
+    Number(
+      baseline.ranks[
+        videoId
+      ]
+    );
+
+  const currentRanks =
+    currentPopularRankingMap();
+
+  const currentRank =
+    Number(
+      currentRanks[
+        videoId
+      ]
+    );
+
+  if (
+    !Number.isFinite(
+      oldRank
+    ) ||
+    !Number.isFinite(
+      currentRank
+    )
   ) {
     return 0;
   }
 
   return Math.max(
     0,
-    Number(
-      video.popularRankChange ||
-      0
-    )
+    oldRank - currentRank
   );
 }
 
+
+/*
+  最後に確認した時点から
+  1本でも順位上昇があるか。
+*/
+function hasUnseenPopularRankingChange() {
+  const baseline =
+    loadPopularRankingBaseline();
+
+  if (
+    !baseline ||
+    !baseline.ranks
+  ) {
+    return false;
+  }
+
+  return (
+    (DATA.videos || [])
+      .some(
+        video =>
+          popularRankUpAmount(
+            video
+          ) > 0
+      )
+  );
+}
+
+
+/*
+  ソートselect右上の緑丸を用意。
+*/
 function ensureSortUpdateDot() {
   const select =
     $("sortSelect");
@@ -531,7 +748,7 @@ function ensureSortUpdateDot() {
     );
 
     dot.title =
-      "人気順に順位変動があります";
+      "前回確認時から人気順に順位変動があります";
 
     wrap.appendChild(
       dot
@@ -541,6 +758,13 @@ function ensureSortUpdateDot() {
   return dot;
 }
 
+
+/*
+  緑丸表示更新。
+
+  最後に人気順を確認した時点から
+  順位上昇が1本でもあれば表示。
+*/
 function refreshSortUpdateDot() {
   const dot =
     ensureSortUpdateDot();
@@ -549,41 +773,32 @@ function refreshSortUpdateDot() {
     return;
   }
 
-  const signal =
-    String(
-      DATA.popularRankingSignalAt ||
-      ""
-    );
-
-  const seen =
-    localStorage.getItem(
-      POPULAR_RANK_SEEN_KEY
-    ) ||
-    "";
-
-  dot.hidden = !(
-    signal &&
-    signal !== seen
-  );
+  dot.hidden =
+    !hasUnseenPopularRankingChange();
 }
 
+
+/*
+  人気順をユーザーが確認した。
+
+  IMPORTANT:
+  renderVideos()より先にこれを呼ぶと
+  UP差分が消えてしまう。
+
+  そのため、
+  人気順を一度描画してUPを見せてから
+  baselineだけ現在順位へ更新する。
+*/
 function markPopularRankingAsSeen() {
-  const signal =
-    String(
-      DATA.popularRankingSignalAt ||
-      ""
-    );
+  saveCurrentPopularRankingBaseline();
 
-  if (signal) {
-    localStorage.setItem(
-      POPULAR_RANK_SEEN_KEY,
-      signal
-    );
+  const dot =
+    ensureSortUpdateDot();
+
+  if (dot) {
+    dot.hidden = true;
   }
-
-  refreshSortUpdateDot();
 }
-
 function renderVideos() {
   const sort =
     $("sortSelect").value;
@@ -3791,18 +4006,31 @@ async function init() {
   setupSubscriberHistory();
   setupMobileChartTooltipClose();
 
-   $("sortSelect")
-    .onchange =
-    () => {
-      if (
-        $("sortSelect").value ===
-        "popular"
-      ) {
-        markPopularRankingAsSeen();
-      }
+ $("sortSelect")
+  .onchange =
+  () => {
+    const isPopular =
+      $("sortSelect").value ===
+      "popular";
 
-      renderVideos();
-    };
+    /*
+      重要：
+      先に描画する。
+
+      ここで
+      「前回ユーザーが確認した順位」
+      との差から ↑○ UP が表示される。
+    */
+    renderVideos();
+
+    if (isPopular) {
+      /*
+        UPを画面に出した後で、
+        現在順位を次回比較用として保存。
+      */
+      markPopularRankingAsSeen();
+    }
+  };
 
   $("tagSelect")
     .onchange =
