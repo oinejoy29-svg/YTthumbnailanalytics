@@ -613,12 +613,33 @@ button{
 
 /* 予測期間切り替え */
 
-.scenario-range-buttons{
-  display:flex;
-  justify-content:flex-end;
+.scenario-range-row{
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
   align-items:center;
-  gap:5px;
+
   margin-bottom:14px;
+}
+
+.scenario-date-range{
+  justify-self:start;
+
+  color:#777;
+
+  font-size:11px;
+  font-weight:800;
+
+  white-space:nowrap;
+}
+
+.scenario-range-buttons{
+  grid-column:2;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  gap:5px;
 }
 
 .scenario-range-btn{
@@ -1167,10 +1188,17 @@ button{
   padding:15px;
 }
 
-.scenario-range-buttons{
-  justify-content:flex-end;
-  gap:4px;
+.scenario-range-row{
   margin-bottom:11px;
+}
+
+.scenario-date-range{
+  font-size:8px;
+}
+
+.scenario-range-buttons{
+  justify-content:center;
+  gap:4px;
 }
 
 .scenario-range-btn{
