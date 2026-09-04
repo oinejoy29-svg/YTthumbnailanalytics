@@ -1472,6 +1472,153 @@ function chartVideoTitles(
         video.title
     );
 }
+function chartVideosForDate(
+  date
+) {
+  return (DATA.videos || [])
+    .filter(
+      video =>
+        video.date === date
+    );
+}
+
+
+function closeChartVideoPopup() {
+  const popup =
+    document.getElementById(
+      "chartVideoPopup"
+    );
+
+  if (popup) {
+    popup.remove();
+  }
+}
+
+
+function openChartVideoPopup(
+  videos,
+  date,
+  clientX,
+  clientY
+) {
+  closeChartVideoPopup();
+
+  if (!videos.length) {
+    return;
+  }
+
+  const popup =
+    document.createElement(
+      "div"
+    );
+
+  popup.id =
+    "chartVideoPopup";
+
+  popup.className =
+    "chart-video-popup";
+
+  popup.innerHTML = `
+    <div class="chart-video-popup-date">
+      ${escapeHtml(jpDate(date))}
+    </div>
+
+    <div class="chart-video-popup-grid">
+      ${videos
+        .map(
+          video => `
+            <button
+              type="button"
+              class="chart-video-popup-item"
+              data-video-id="${escapeHtml(video.id || "")}"
+              aria-label="${escapeHtml(video.title || "動画詳細を開く")}"
+            >
+              <img
+                src="${escapeHtml(video.thumbnail || "")}"
+                alt=""
+                loading="lazy"
+              >
+            </button>
+          `
+        )
+        .join("")}
+    </div>
+  `;
+
+  document.body.appendChild(
+    popup
+  );
+
+  const popupRect =
+    popup.getBoundingClientRect();
+
+  const margin =
+    10;
+
+  let left =
+    clientX -
+    popupRect.width / 2;
+
+  let top =
+    clientY -
+    popupRect.height -
+    16;
+
+  left =
+    Math.max(
+      margin,
+      Math.min(
+        left,
+        window.innerWidth -
+          popupRect.width -
+          margin
+      )
+    );
+
+  if (
+    top <
+    margin
+  ) {
+    top =
+      clientY + 16;
+  }
+
+  popup.style.left =
+    `${left}px`;
+
+  popup.style.top =
+    `${top}px`;
+
+  popup
+    .querySelectorAll(
+      ".chart-video-popup-item"
+    )
+    .forEach(
+      button => {
+        button.onclick =
+          event => {
+            event.stopPropagation();
+
+            const video =
+              DATA.videos.find(
+                item =>
+                  String(item.id) ===
+                  String(
+                    button.dataset.videoId
+                  )
+              );
+
+            closeChartVideoPopup();
+
+            if (video) {
+              openVideoDetail(
+                video
+              );
+            }
+          };
+      }
+    );
+}
 
 function fixedSubscriberScale(
   rows
@@ -1784,12 +1931,95 @@ function renderCharts() {
           ]
         },
 
-        options: {
-          ...baseChartOptions(
-            subScale
-          ),
+       options: {
+  ...baseChartOptions(
+    subScale
+  ),
 
-          plugins: {
+  onClick: (
+    event,
+    elements,
+    chart
+  ) => {
+    if (
+      !elements.length
+    ) {
+      closeChartVideoPopup();
+      return;
+    }
+
+    const index =
+      elements[0].index;
+
+    const row =
+      rows[index];
+
+    if (!row) {
+      closeChartVideoPopup();
+      return;
+    }
+
+    const videos =
+      chartVideosForDate(
+        row.date
+      );
+
+    /*
+      動画投稿日以外の黄色い点では
+      サムネポップアップを出さない
+    */
+    if (
+      !videos.length
+    ) {
+      closeChartVideoPopup();
+      return;
+    }
+
+    const nativeEvent =
+      event.native;
+
+    let clientX;
+    let clientY;
+
+    if (
+      nativeEvent?.touches?.length
+    ) {
+      clientX =
+        nativeEvent.touches[0].clientX;
+
+      clientY =
+        nativeEvent.touches[0].clientY;
+    }
+
+    else if (
+      nativeEvent?.changedTouches?.length
+    ) {
+      clientX =
+        nativeEvent.changedTouches[0].clientX;
+
+      clientY =
+        nativeEvent.changedTouches[0].clientY;
+    }
+
+    else {
+      clientX =
+        nativeEvent?.clientX ??
+        window.innerWidth / 2;
+
+      clientY =
+        nativeEvent?.clientY ??
+        window.innerHeight / 2;
+    }
+
+    openChartVideoPopup(
+      videos,
+      row.date,
+      clientX,
+      clientY
+    );
+  },
+
+  plugins: {
             ...baseChartOptions(
               subScale
             ).plugins,
@@ -1808,41 +2038,8 @@ function renderCharts() {
                       : "",
 
                 label:
-                  ctx =>
-                    ` 登録者数：${fmt(ctx.raw)}人`,
-
-                afterBody:
-                  items => {
-                    if (
-                      !items.length
-                    ) {
-                      return [];
-                    }
-
-                    const titles =
-                      chartVideoTitles(
-                        rows[
-                          items[0]
-                            .dataIndex
-                        ].date
-                      );
-
-                    return titles.length
-                      ? [
-                          "",
-                          ...titles.map(
-                            title =>
-                              `🎬 ${title}`
-                          )
-                        ]
-                      : [];
-                  }
-              }
-            }
-          }
-        }
-      }
-    );
+  ctx =>
+    ` 登録者数：${fmt(ctx.raw)}人`
 
   const newVals =
     rows.map(
