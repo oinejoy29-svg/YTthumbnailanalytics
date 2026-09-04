@@ -1308,28 +1308,25 @@ button{
 }
 @media(max-width:800px){
 
-  .section-heading,
-  .section-heading > div,
+  /* 各セクション見出しは左 */
+  .section-heading > div:first-child,
   .section-heading h2,
   .section-heading .section-kicker{
-    text-align:left;
+    text-align:left !important;
   }
 
-  .section-heading{
-    justify-content:flex-start;
+  /* 投稿カレンダーだけ縦配置 */
+  .section-heading.calendar-section-heading{
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:stretch !important;
   }
 
-  /* 投稿カレンダー */
-  .calendar-section-heading{
-    position:relative;
-    display:block;
-  }
-
-  .calendar-section-heading .calendar-controls{
-    position:absolute;
-    left:50%;
-    bottom:0;
-    transform:translateX(-50%);
+  /* 月送り一式を中央 */
+  .section-heading.calendar-section-heading .calendar-controls{
+    align-self:center !important;
+    width:max-content !important;
+    margin:10px auto 0 !important;
   }
 
 }
