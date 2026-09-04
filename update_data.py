@@ -1899,6 +1899,22 @@ def merge_video_data(
             **fetched,
         }
 
+                # -----------------------------------------
+        # サイトがこの動画を初めて確認した時刻
+        #
+        # NEWバッジはこの時刻から24時間だけ表示。
+        # 既存動画には後付けしない。
+        # -----------------------------------------
+
+        if (
+            video_id
+            not in existing_ids
+        ):
+            video[
+                "firstDetectedAt"
+            ] = now.isoformat()
+            
+
         # -----------------------------------------
         # 前回更新からの再生回数増加
         #
@@ -2087,6 +2103,185 @@ def merge_video_data(
 
     return merged
 
+# =========================================================
+# Popular ranking movement
+# =========================================================
+
+def update_popular_ranking_state(
+    videos,
+    existing_data,
+    now,
+):
+    """
+    人気順の順位変動を記録する。
+
+    popularRank
+        現在順位
+
+    popularRankDayStart
+        その日の最初の順位
+
+    popularRankChange
+        その日の最初から何位上がったか
+
+    popularRankDay
+        基準日
+    """
+
+    existing_videos = (
+        existing_data.get(
+            "videos",
+            [],
+        )
+        or []
+    )
+
+    old_by_id = {
+        str(video.get("id")):
+            video
+        for video
+        in existing_videos
+        if video.get("id")
+    }
+
+    ranked = sorted(
+        videos,
+        key=lambda video: (
+            -int(
+                video.get(
+                    "viewCount",
+                    0,
+                )
+                or 0
+            ),
+            str(
+                video.get(
+                    "publishedAt",
+                    "",
+                )
+            ),
+            str(
+                video.get(
+                    "id",
+                    "",
+                )
+            ),
+        ),
+    )
+
+    today_key = (
+        now
+        .astimezone(JST)
+        .date()
+        .isoformat()
+    )
+
+    signal_changed = False
+
+    for rank, video in enumerate(
+        ranked,
+        start=1,
+    ):
+        video_id = str(
+            video.get(
+                "id",
+                "",
+            )
+        )
+
+        old = (
+            old_by_id.get(
+                video_id,
+                {},
+            )
+        )
+
+        previous_rank = (
+            old.get(
+                "popularRank"
+            )
+        )
+
+        if (
+            old.get(
+                "popularRankDay"
+            )
+            == today_key
+            and isinstance(
+                old.get(
+                    "popularRankDayStart"
+                ),
+                (int, float),
+            )
+        ):
+            day_start_rank = int(
+                old[
+                    "popularRankDayStart"
+                ]
+            )
+
+        else:
+            day_start_rank = rank
+
+        video[
+            "popularRank"
+        ] = rank
+
+        video[
+            "popularRankDay"
+        ] = today_key
+
+        video[
+            "popularRankDayStart"
+        ] = day_start_rank
+
+        video[
+            "popularRankChange"
+        ] = max(
+            0,
+            day_start_rank - rank,
+        )
+
+        published_at = (
+            parse_youtube_datetime(
+                video.get(
+                    "publishedAt"
+                )
+            )
+        )
+
+        old_enough = False
+
+        if published_at:
+            old_enough = (
+                now.astimezone(UTC)
+                -
+                published_at.astimezone(UTC)
+            ).total_seconds() >= (
+                4 * 24 * 60 * 60
+            )
+
+        # 投稿4日経過後で、
+        # 前回更新より順位が上昇し、
+        # かつ今日の開始順位より上なら通知
+        if (
+            old_enough
+            and isinstance(
+                previous_rank,
+                (int, float),
+            )
+            and rank
+            < int(previous_rank)
+            and day_start_rank - rank > 0
+        ):
+            signal_changed = True
+
+    if signal_changed:
+        existing_data[
+            "popularRankingSignalAt"
+        ] = now.isoformat()
+
+    return videos
 
 # =========================================================
 # Main
@@ -2170,7 +2365,15 @@ def main():
             now,
         )
     )
-
+    
+    videos = (
+        update_popular_ranking_state(
+            videos,
+            data,
+            now,
+        )
+    )
+    
     data[
         "channelId"
     ] = CHANNEL_ID
