@@ -515,7 +515,42 @@
 
       <article class="scenario-card">
 
-        <div class="scenario-summary">
+  <div
+    class="scenario-range-buttons"
+    aria-label="予測期間"
+  >
+
+    <button
+      class="scenario-range-btn active"
+      type="button"
+      data-scenario-days="30"
+      data-scenario-label="1ヶ月後"
+    >
+      1か月後
+    </button>
+
+    <button
+      class="scenario-range-btn"
+      type="button"
+      data-scenario-days="90"
+      data-scenario-label="3ヶ月後"
+    >
+      3か月後
+    </button>
+
+    <button
+      class="scenario-range-btn"
+      type="button"
+      data-scenario-days="365"
+      data-scenario-label="1年後"
+    >
+      1年後
+    </button>
+
+  </div>
+
+
+  <div class="scenario-summary">
 
           <div>
 
@@ -527,9 +562,9 @@
               —
             </strong>
 
-            <small>
-              3ヶ月後
-            </small>
+            <small id="scenarioLowPeriod">
+  1ヶ月後
+</small>
 
           </div>
 
@@ -544,9 +579,9 @@
               —
             </strong>
 
-            <small>
-              3ヶ月後
-            </small>
+          <small id="scenarioStandardPeriod">
+  1ヶ月後
+</small>
 
           </div>
 
@@ -561,9 +596,9 @@
               —
             </strong>
 
-            <small>
-              3ヶ月後
-            </small>
+           <small id="scenarioHighPeriod">
+  1ヶ月後
+</small>
 
           </div>
 
