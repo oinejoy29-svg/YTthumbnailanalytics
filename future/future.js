@@ -1730,6 +1730,25 @@ function renderSevenDayForecasts() {
 /* =========================================================
    Future scenarios
 ========================================================= */
+function scenarioDisplayDate(
+  date
+) {
+
+  const [
+    year,
+    month,
+    day
+  ] =
+    date
+      .split("-")
+      .map(Number);
+
+
+  return (
+    `${year}/${month}/${day}`
+  );
+
+}
 
 function renderScenarios() {
 
@@ -1764,6 +1783,20 @@ function renderScenarios() {
 
   const selectedDays =
     scenarioRangeDays;
+
+   const startDate =
+  todayJST();
+
+const forecastDate =
+  addDays(
+    startDate,
+    selectedDays
+  );
+
+
+$("scenarioDateRange")
+  .textContent =
+  `${scenarioDisplayDate(startDate)} → ${scenarioDisplayDate(forecastDate)}`;
 
 
   $("scenarioLowValue")
