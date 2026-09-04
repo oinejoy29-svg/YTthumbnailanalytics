@@ -1902,3 +1902,86 @@ select:focus{
 .video-status-sticker{
   transform:translate(12px, -5px) rotate(12deg);
 }
+/* =========================
+   Subscriber chart video popup
+========================= */
+
+.chart-video-popup{
+  position:fixed;
+  z-index:9999;
+
+  width:max-content;
+  max-width:min(360px, calc(100vw - 20px));
+
+  padding:10px;
+
+  background:#fff;
+
+  border:2px solid #111;
+  border-radius:14px;
+
+  box-shadow:
+    4px 4px 0 rgba(17,17,17,.18);
+}
+
+.chart-video-popup-date{
+  margin-bottom:7px;
+
+  font-size:10px;
+  font-weight:800;
+
+  color:#777;
+}
+
+.chart-video-popup-grid{
+  display:flex;
+  flex-wrap:wrap;
+
+  gap:6px;
+
+  max-width:330px;
+}
+
+.chart-video-popup-item{
+  width:120px;
+
+  padding:0;
+
+  overflow:hidden;
+
+  border:2px solid #111;
+  border-radius:8px;
+
+  background:#fff;
+}
+
+.chart-video-popup-item img{
+  display:block;
+
+  width:100%;
+  aspect-ratio:16 / 9;
+
+  object-fit:cover;
+}
+
+
+/* mobile */
+@media(max-width:800px){
+
+  .chart-video-popup{
+    max-width:calc(100vw - 20px);
+
+    padding:8px;
+  }
+
+  .chart-video-popup-grid{
+    max-width:260px;
+
+    gap:5px;
+  }
+
+  .chart-video-popup-item{
+    width:110px;
+  }
+
+}
