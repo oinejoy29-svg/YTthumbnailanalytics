@@ -1705,4 +1705,64 @@ select:focus{
     font-size:13px;
   }
 }
+/* =========================
+   VIDEO LIST VIEW META
+   前回更新からの再生増加数
+========================= */
+
+.video-meta{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:10px;
+}
+
+.video-view-row{
+  display:flex;
+  align-items:baseline;
+  gap:8px;
+  min-width:0;
+}
+
+.video-view-count{
+  color:#111;
+  font-size:15px;
+  font-weight:800;
+  line-height:1.2;
+  white-space:nowrap;
+}
+
+.video-view-increase{
+  color:#111;
+  font-size:12px;
+  font-weight:700;
+  line-height:1.2;
+  white-space:nowrap;
+}
+
+.video-date{
+  color:#777;
+  font-size:12px;
+  line-height:1.2;
+  white-space:nowrap;
+}
+
+@media(max-width:800px){
+  .video-meta{
+    gap:6px;
+  }
+
+  .video-view-row{
+    gap:6px;
+  }
+
+  .video-view-count{
+    font-size:14px;
+  }
+
+  .video-view-increase,
+  .video-date{
+    font-size:10px;
+  }
+}
 
