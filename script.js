@@ -4060,6 +4060,7 @@ function setupMobileChartTooltipClose() {
       ) {
         return;
       }
+      closeChartVideoPopup();
 
       if (subsChart) {
         subsChart.setActiveElements([]);
