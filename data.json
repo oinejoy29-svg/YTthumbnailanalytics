@@ -1,8 +1,8 @@
 {
   "channelId": "UCiLmCoftZHWXSFuQlnEJSsQ",
   "channelName": "#切り抜くぞニアジョイ",
-  "updatedAt": "2026-09-04T20:07:49.206385+09:00",
-  "currentSubscriberCount": 524,
+  "updatedAt": "2026-09-04T23:54:32.262735+09:00",
+  "currentSubscriberCount": 526,
   "subscribers": [
     {
       "date": "2026-04-03",
@@ -622,7 +622,7 @@
     },
     {
       "date": "2026-09-04",
-      "count": 524
+      "count": 526
     }
   ],
   "videos": [
@@ -634,19 +634,11 @@
       "duration": "1:07:09",
       "durationSeconds": 4029,
       "viewCount": 6765,
-      "tags": [
-        "逢田珠里依",
-        "天野香乃愛",
-        "江角怜音",
-        "小澤愛実",
-        "髙橋舞",
-        "藤沢莉子",
-        "村山結香",
-        "山田杏佳"
-      ],
+      "tags": [],
       "publishedAt": "2026-04-03T19:06:34Z",
       "sevenDayViews": 3051,
-      "sevenDaySource": "legacy_excel"
+      "sevenDaySource": "legacy_excel",
+      "viewCountIncrease": 0
     },
     {
       "id": "PmD_nggctn4",
@@ -655,13 +647,14 @@
       "thumbnail": "https://i.ytimg.com/vi/PmD_nggctn4/hqdefault.jpg",
       "duration": "13:20",
       "durationSeconds": 800,
-      "viewCount": 22797,
+      "viewCount": 22829,
       "tags": [
         "小澤愛実"
       ],
       "publishedAt": "2026-04-26T08:26:24Z",
       "sevenDayViews": 107,
-      "sevenDaySource": "legacy_excel"
+      "sevenDaySource": "legacy_excel",
+      "viewCountIncrease": 32
     },
     {
       "id": "a1tQY33iFmM",
@@ -670,13 +663,14 @@
       "thumbnail": "https://i.ytimg.com/vi/a1tQY33iFmM/hqdefault.jpg",
       "duration": "7:21",
       "durationSeconds": 441,
-      "viewCount": 1843,
+      "viewCount": 1844,
       "tags": [
         "天野香乃愛"
       ],
       "publishedAt": "2026-05-10T22:00:01Z",
       "sevenDayViews": 50,
-      "sevenDaySource": "legacy_excel"
+      "sevenDaySource": "legacy_excel",
+      "viewCountIncrease": 1
     },
     {
       "id": "2b_XBGYqJVU",
@@ -691,7 +685,8 @@
       ],
       "publishedAt": "2026-06-09T13:41:44Z",
       "sevenDayViews": 23,
-      "sevenDaySource": "legacy_excel"
+      "sevenDaySource": "legacy_excel",
+      "viewCountIncrease": 0
     },
     {
       "id": "LMDZec3o3-g",
@@ -706,7 +701,8 @@
       ],
       "publishedAt": "2026-06-28T03:00:23Z",
       "sevenDayViews": 41,
-      "sevenDaySource": "legacy_excel"
+      "sevenDaySource": "legacy_excel",
+      "viewCountIncrease": 0
     },
     {
       "id": "lcTtcqjTLlI",
@@ -715,13 +711,14 @@
       "thumbnail": "https://i.ytimg.com/vi/lcTtcqjTLlI/hqdefault.jpg",
       "duration": "7:40",
       "durationSeconds": 460,
-      "viewCount": 3767,
+      "viewCount": 3769,
       "tags": [
         "逢田珠里依"
       ],
       "publishedAt": "2026-07-11T03:00:32Z",
       "sevenDayViews": 3155,
-      "sevenDaySource": "legacy_excel"
+      "sevenDaySource": "legacy_excel",
+      "viewCountIncrease": 2
     },
     {
       "id": "DdvR0LbYUjQ",
@@ -730,13 +727,14 @@
       "thumbnail": "https://i.ytimg.com/vi/DdvR0LbYUjQ/hqdefault.jpg",
       "duration": "15:44",
       "durationSeconds": 944,
-      "viewCount": 4209,
+      "viewCount": 4211,
       "tags": [
         "小澤愛実"
       ],
       "publishedAt": "2026-07-13T10:00:29Z",
       "sevenDayViews": 2404,
-      "sevenDaySource": "legacy_excel"
+      "sevenDaySource": "legacy_excel",
+      "viewCountIncrease": 2
     },
     {
       "id": "JVNpkPsotMU",
@@ -751,7 +749,8 @@
       ],
       "publishedAt": "2026-07-18T10:30:12Z",
       "sevenDayViews": 1183,
-      "sevenDaySource": "legacy_excel"
+      "sevenDaySource": "legacy_excel",
+      "viewCountIncrease": 0
     },
     {
       "id": "3AQw6eUmK58",
@@ -760,13 +759,14 @@
       "thumbnail": "https://i.ytimg.com/vi/3AQw6eUmK58/hqdefault.jpg",
       "duration": "8:05",
       "durationSeconds": 485,
-      "viewCount": 2763,
+      "viewCount": 2764,
       "tags": [
         "大信田美月"
       ],
       "publishedAt": "2026-07-25T03:00:32Z",
       "sevenDayViews": 1480,
-      "sevenDaySource": "legacy_excel"
+      "sevenDaySource": "legacy_excel",
+      "viewCountIncrease": 1
     },
     {
       "id": "_l7l5BH4h_s",
@@ -775,13 +775,14 @@
       "thumbnail": "https://i.ytimg.com/vi/_l7l5BH4h_s/hqdefault.jpg",
       "duration": "17:17",
       "durationSeconds": 1037,
-      "viewCount": 4984,
+      "viewCount": 4994,
       "tags": [
         "江角怜音"
       ],
       "publishedAt": "2026-07-27T11:00:06Z",
       "sevenDayViews": 3072,
-      "sevenDaySource": "legacy_excel"
+      "sevenDaySource": "legacy_excel",
+      "viewCountIncrease": 10
     },
     {
       "id": "dhys8ycR5Iw",
@@ -790,13 +791,14 @@
       "thumbnail": "https://i.ytimg.com/vi/dhys8ycR5Iw/hqdefault.jpg",
       "duration": "15:36",
       "durationSeconds": 936,
-      "viewCount": 8220,
+      "viewCount": 8228,
       "tags": [
         "山田杏佳"
       ],
       "publishedAt": "2026-07-31T03:00:15Z",
       "sevenDayViews": 4400,
-      "sevenDaySource": "legacy_excel"
+      "sevenDaySource": "legacy_excel",
+      "viewCountIncrease": 8
     },
     {
       "id": "EvoV01i7fRw",
@@ -805,13 +807,12 @@
       "thumbnail": "https://i.ytimg.com/vi/EvoV01i7fRw/hqdefault.jpg",
       "duration": "15:55",
       "durationSeconds": 955,
-      "viewCount": 15005,
-      "tags": [
-        "逢田珠里依"
-      ],
+      "viewCount": 15019,
+      "tags": [],
       "publishedAt": "2026-08-01T03:00:07Z",
       "sevenDayViews": 11349,
-      "sevenDaySource": "legacy_excel"
+      "sevenDaySource": "legacy_excel",
+      "viewCountIncrease": 14
     },
     {
       "id": "HgCgwKqeJBI",
@@ -826,7 +827,8 @@
       ],
       "publishedAt": "2026-08-04T10:00:11Z",
       "sevenDayViews": 4199,
-      "sevenDaySource": "legacy_excel"
+      "sevenDaySource": "legacy_excel",
+      "viewCountIncrease": 0
     },
     {
       "id": "g1GPX8SlOmU",
@@ -835,13 +837,14 @@
       "thumbnail": "https://i.ytimg.com/vi/g1GPX8SlOmU/hqdefault.jpg",
       "duration": "8:55",
       "durationSeconds": 535,
-      "viewCount": 6731,
+      "viewCount": 6745,
       "tags": [
         "天野香乃愛"
       ],
       "publishedAt": "2026-08-08T03:00:25Z",
       "sevenDayViews": 5022,
-      "sevenDaySource": "legacy_excel"
+      "sevenDaySource": "legacy_excel",
+      "viewCountIncrease": 14
     },
     {
       "id": "S4tXGHeKBHs",
@@ -850,13 +853,14 @@
       "thumbnail": "https://i.ytimg.com/vi/S4tXGHeKBHs/hqdefault.jpg",
       "duration": "9:39",
       "durationSeconds": 579,
-      "viewCount": 5304,
+      "viewCount": 5315,
       "tags": [
         "小澤愛実"
       ],
       "publishedAt": "2026-08-11T03:30:26Z",
       "sevenDayViews": 4259,
-      "sevenDaySource": "legacy_excel"
+      "sevenDaySource": "legacy_excel",
+      "viewCountIncrease": 11
     },
     {
       "id": "D88Zd_OvaSs",
@@ -865,13 +869,14 @@
       "thumbnail": "https://i.ytimg.com/vi/D88Zd_OvaSs/hqdefault.jpg",
       "duration": "6:43",
       "durationSeconds": 403,
-      "viewCount": 9222,
+      "viewCount": 9237,
       "tags": [
         "大信田美月"
       ],
       "publishedAt": "2026-08-14T03:00:30Z",
       "sevenDayViews": 7521,
-      "sevenDaySource": "legacy_excel"
+      "sevenDaySource": "legacy_excel",
+      "viewCountIncrease": 15
     },
     {
       "id": "pE6Pi35mojw",
@@ -880,13 +885,14 @@
       "thumbnail": "https://i.ytimg.com/vi/pE6Pi35mojw/hqdefault.jpg",
       "duration": "5:05",
       "durationSeconds": 305,
-      "viewCount": 9556,
+      "viewCount": 9585,
       "tags": [
         "江角怜音"
       ],
       "publishedAt": "2026-08-16T03:30:38Z",
       "sevenDayViews": 7635,
-      "sevenDaySource": "legacy_excel"
+      "sevenDaySource": "legacy_excel",
+      "viewCountIncrease": 29
     },
     {
       "id": "rSNhDgGJvPU",
@@ -895,14 +901,14 @@
       "thumbnail": "https://i.ytimg.com/vi/rSNhDgGJvPU/hqdefault.jpg",
       "duration": "5:21",
       "durationSeconds": 321,
-      "viewCount": 13030,
+      "viewCount": 13196,
       "tags": [
-        "市原愛弓",
         "大西葵"
       ],
       "publishedAt": "2026-08-22T03:00:39Z",
       "sevenDayViews": 9710,
-      "sevenDaySource": "legacy_excel"
+      "sevenDaySource": "legacy_excel",
+      "viewCountIncrease": 166
     },
     {
       "id": "a9U4uap71ME",
@@ -911,14 +917,15 @@
       "thumbnail": "https://i.ytimg.com/vi/a9U4uap71ME/hqdefault.jpg",
       "duration": "3:30",
       "durationSeconds": 210,
-      "viewCount": 3274,
+      "viewCount": 3280,
       "tags": [
         "大信田美月",
         "村山結香"
       ],
       "publishedAt": "2026-08-24T03:00:32Z",
       "sevenDayViews": 2952,
-      "sevenDaySource": "legacy_excel"
+      "sevenDaySource": "legacy_excel",
+      "viewCountIncrease": 6
     },
     {
       "id": "B75t0LqJUSg",
@@ -933,7 +940,8 @@
       ],
       "publishedAt": "2026-08-26T04:00:12Z",
       "sevenDayViews": 3416,
-      "sevenDaySource": "legacy_excel"
+      "sevenDaySource": "legacy_excel",
+      "viewCountIncrease": 0
     },
     {
       "id": "SlDTZdCoX7w",
@@ -942,11 +950,12 @@
       "thumbnail": "https://i.ytimg.com/vi/SlDTZdCoX7w/hqdefault.jpg",
       "duration": "5:48",
       "durationSeconds": 348,
-      "viewCount": 19617,
+      "viewCount": 19680,
       "tags": [
         "江角怜音"
       ],
-      "publishedAt": "2026-08-28T08:50:34Z"
+      "publishedAt": "2026-08-28T08:50:34Z",
+      "viewCountIncrease": 63
     },
     {
       "id": "PiikNxCE5_Q",
@@ -955,11 +964,12 @@
       "thumbnail": "https://i.ytimg.com/vi/PiikNxCE5_Q/hqdefault.jpg",
       "duration": "4:40",
       "durationSeconds": 280,
-      "viewCount": 7204,
+      "viewCount": 7210,
       "tags": [
         "逢田珠里依"
       ],
-      "publishedAt": "2026-08-31T08:30:03Z"
+      "publishedAt": "2026-08-31T08:30:03Z",
+      "viewCountIncrease": 6
     },
     {
       "id": "HJbI9RGGR2s",
@@ -968,7 +978,7 @@
       "thumbnail": "https://i.ytimg.com/vi/HJbI9RGGR2s/hqdefault.jpg",
       "duration": "4:51",
       "durationSeconds": 291,
-      "viewCount": 5,
+      "viewCount": 344,
       "tags": [
         "小澤愛実"
       ],
@@ -1001,7 +1011,8 @@
           "durationBucket": "0-5min",
           "durationFactor": 0.9
         }
-      }
+      },
+      "viewCountIncrease": 339
     }
   ],
   "memo": null,
