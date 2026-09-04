@@ -1306,3 +1306,30 @@ button{
   }
 
 }
+@media(max-width:800px){
+
+  .section-heading,
+  .section-heading > div,
+  .section-heading h2,
+  .section-heading .section-kicker{
+    text-align:left;
+  }
+
+  .section-heading{
+    justify-content:flex-start;
+  }
+
+  /* 投稿カレンダー */
+  .calendar-section-heading{
+    position:relative;
+    display:block;
+  }
+
+  .calendar-section-heading .calendar-controls{
+    position:absolute;
+    left:50%;
+    bottom:0;
+    transform:translateX(-50%);
+  }
+
+}
