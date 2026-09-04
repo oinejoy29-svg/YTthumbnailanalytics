@@ -2140,12 +2140,6 @@ function renderCharts() {
         window.innerHeight / 2;
     }
 
-    openChartVideoPopup(
-      videos,
-      row.date,
-      clientX,
-      clientY
-    );
   },
 
   plugins: {
@@ -2153,23 +2147,16 @@ function renderCharts() {
               subScale
             ).plugins,
 
-       tooltip: {
-  callbacks: {
-    title:
-      items =>
-        items[0]
-          ? monthDay(
-              rows[
-                items[0]
-                  .dataIndex
-              ].date
-            )
-          : "",
+  tooltip: {
+  enabled: false,
 
-    label:
-      ctx =>
-        ` 登録者数：${fmt(ctx.raw)}人`
-  }
+  external:
+    context =>
+      externalChartTooltip(
+        context,
+        rows,
+        "total"
+      )
 }
 }
 }
@@ -2317,12 +2304,7 @@ const newVals =
         window.innerHeight / 2;
     }
 
-    openChartVideoPopup(
-      videos,
-      row.date,
-      clientX,
-      clientY
-    );
+    
   },
 
   plugins: {
@@ -2330,24 +2312,17 @@ const newVals =
               newScale
             ).plugins,
 
-            tooltip: {
-              callbacks: {
-                title:
-                  items =>
-                    items[0]
-                      ? monthDay(
-                          rows[
-                            items[0]
-                              .dataIndex
-                          ].date
-                        )
-                      : "",
+     tooltip: {
+  enabled: false,
 
-label:
-  ctx =>
-    ` 新規登録者数：${ctx.raw >= 0 ? "+" : ""}${fmt(ctx.raw)}人`
-              }
-            }
+  external:
+    context =>
+      externalChartTooltip(
+        context,
+        rows,
+        "new"
+      )
+}
           }
         }
       }
