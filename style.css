@@ -1900,5 +1900,5 @@ select:focus{
 }
 /* NEW / ↑○ UP を少し上へ */
 .video-status-sticker{
-  transform: translateY(-16px);
+  transform: translateY(-20px) rotate(6deg);
 }
