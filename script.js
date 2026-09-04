@@ -2024,24 +2024,30 @@ function renderCharts() {
               subScale
             ).plugins,
 
-            tooltip: {
-              callbacks: {
-                title:
-                  items =>
-                    items[0]
-                      ? monthDay(
-                          rows[
-                            items[0]
-                              .dataIndex
-                          ].date
-                        )
-                      : "",
+       tooltip: {
+  callbacks: {
+    title:
+      items =>
+        items[0]
+          ? monthDay(
+              rows[
+                items[0]
+                  .dataIndex
+              ].date
+            )
+          : "",
 
-                label:
-  ctx =>
-    ` 登録者数：${fmt(ctx.raw)}人`
+    label:
+      ctx =>
+        ` 登録者数：${fmt(ctx.raw)}人`
+  }
+}
+}
+}
+}
+);
 
-  const newVals =
+const newVals =
     rows.map(
       row =>
         newSubscriberForDate(
