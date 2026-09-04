@@ -411,163 +411,371 @@ video.durationSeconds || 0
 );
 }
 
+const POPULAR_RANK_SEEN_KEY =
+  "popularRankingSignalSeenAt";
+
+function isNewBadgeVideo(video) {
+  const detectedAt =
+    new Date(
+      video.firstDetectedAt ||
+      ""
+    );
+
+  if (
+    Number.isNaN(
+      detectedAt.getTime()
+    )
+  ) {
+    return false;
+  }
+
+  const elapsed =
+    Date.now() -
+    detectedAt.getTime();
+
+  return (
+    elapsed >= 0 &&
+    elapsed <
+      24 * 60 * 60 * 1000
+  );
+}
+
+function isPopularRankUpEligible(video) {
+  const publishedAt =
+    new Date(
+      video.publishedAt ||
+      ""
+    );
+
+  if (
+    Number.isNaN(
+      publishedAt.getTime()
+    )
+  ) {
+    return false;
+  }
+
+  return (
+    Date.now() -
+    publishedAt.getTime()
+  ) >=
+    4 * 24 * 60 * 60 * 1000;
+}
+
+function popularRankUpAmount(video) {
+  if (
+    !isPopularRankUpEligible(video)
+  ) {
+    return 0;
+  }
+
+  return Math.max(
+    0,
+    Number(
+      video.popularRankChange ||
+      0
+    )
+  );
+}
+
+function ensureSortUpdateDot() {
+  const select =
+    $("sortSelect");
+
+  if (!select) {
+    return null;
+  }
+
+  let wrap =
+    select.closest(
+      ".sort-select-wrap"
+    );
+
+  if (!wrap) {
+    wrap =
+      document.createElement(
+        "span"
+      );
+
+    wrap.className =
+      "sort-select-wrap";
+
+    select.parentNode
+      .insertBefore(
+        wrap,
+        select
+      );
+
+    wrap.appendChild(
+      select
+    );
+  }
+
+  let dot =
+    wrap.querySelector(
+      ".sort-update-dot"
+    );
+
+  if (!dot) {
+    dot =
+      document.createElement(
+        "span"
+      );
+
+    dot.className =
+      "sort-update-dot";
+
+    dot.setAttribute(
+      "aria-label",
+      "人気順に順位変動があります"
+    );
+
+    dot.title =
+      "人気順に順位変動があります";
+
+    wrap.appendChild(
+      dot
+    );
+  }
+
+  return dot;
+}
+
+function refreshSortUpdateDot() {
+  const dot =
+    ensureSortUpdateDot();
+
+  if (!dot) {
+    return;
+  }
+
+  const signal =
+    String(
+      DATA.popularRankingSignalAt ||
+      ""
+    );
+
+  const seen =
+    localStorage.getItem(
+      POPULAR_RANK_SEEN_KEY
+    ) ||
+    "";
+
+  dot.hidden = !(
+    signal &&
+    signal !== seen
+  );
+}
+
+function markPopularRankingAsSeen() {
+  const signal =
+    String(
+      DATA.popularRankingSignalAt ||
+      ""
+    );
+
+  if (signal) {
+    localStorage.setItem(
+      POPULAR_RANK_SEEN_KEY,
+      signal
+    );
+  }
+
+  refreshSortUpdateDot();
+}
+
 function renderVideos() {
-const sort =
-$("sortSelect").value;
+  const sort =
+    $("sortSelect").value;
 
-const tag =
-$("tagSelect").value;
+  const tag =
+    $("tagSelect").value;
 
-const list =
-DATA.videos.filter(
-video =>
-!tag ||
-(
-video.tags ||
-detectTags(video)
-).includes(tag)
-);
+  const list =
+    DATA.videos.filter(
+      video =>
+        !tag ||
+        (
+          video.tags ||
+          detectTags(video)
+        ).includes(tag)
+    );
 
-list.sort(
-(a, b) => {
-if (
-sort ===
-"popular"
-) {
-return (
-Number(
-b.viewCount || 0
-) -
-Number(
-a.viewCount || 0
-)
-);
-}
+  list.sort(
+    (a, b) => {
+      if (
+        sort ===
+        "popular"
+      ) {
+        return (
+          Number(
+            b.viewCount || 0
+          ) -
+          Number(
+            a.viewCount || 0
+          )
+        );
+      }
 
-if (
-sort ===
-"newest"
-) {
-return String(
-b.date
-).localeCompare(
-String(a.date)
-);
-}
+      if (
+        sort ===
+        "newest"
+      ) {
+        return String(
+          b.date
+        ).localeCompare(
+          String(a.date)
+        );
+      }
 
-if (
-sort ===
-"oldest"
-) {
-return String(
-a.date
-).localeCompare(
-String(b.date)
-);
-}
+      if (
+        sort ===
+        "oldest"
+      ) {
+        return String(
+          a.date
+        ).localeCompare(
+          String(b.date)
+        );
+      }
 
-if (
-sort ===
-"longest"
-) {
-return (
-durationNum(b) -
-durationNum(a)
-);
-}
+      if (
+        sort ===
+        "longest"
+      ) {
+        return (
+          durationNum(b) -
+          durationNum(a)
+        );
+      }
 
-return (
-durationNum(a) -
-durationNum(b)
-);
-}
-);
+      return (
+        durationNum(a) -
+        durationNum(b)
+      );
+    }
+  );
 
-$("videoGrid").innerHTML =
-list
-.map(
-video => `
-<article
-class="video-card"
-data-video-id="${escapeHtml(video.id || "")}"
-tabindex="0"
-role="button"
-aria-label="動画詳細を開く"
->
-<img
-src="${escapeHtml(video.thumbnail || "")}"
-alt=""
-loading="lazy"
->
+  $("videoGrid").innerHTML =
+    list
+      .map(
+        video => {
+          const newBadge =
+            isNewBadgeVideo(video);
 
-<div class="video-info">
+          const upAmount =
+            sort === "popular"
+              ? popularRankUpAmount(
+                  video
+                )
+              : 0;
 
-<div class="video-title">
-${escapeHtml(video.title || "")}
-</div>
+          const sticker =
+            newBadge
+              ? `
+                <span
+                  class="video-status-sticker video-status-new"
+                >
+                  NEW
+                </span>
+              `
+              : upAmount > 0
+                ? `
+                  <span
+                    class="video-status-sticker video-status-up"
+                  >
+                    ↑${fmt(upAmount)} UP
+                  </span>
+                `
+                : "";
 
-<div class="video-meta">
-<div class="video-view-row">
-<span class="video-view-count">
-${fmt(video.viewCount)}回
-</span>
-<span class="video-view-increase">
-↑${fmt(video.viewCountIncrease || 0)}回
-</span>
-</div>
-<span class="video-date">
-${jpDate(video.date)}
-</span>
-</div>
+          return `
+            <article
+              class="video-card"
+              data-video-id="${escapeHtml(video.id || "")}"
+              tabindex="0"
+              role="button"
+              aria-label="動画詳細を開く"
+            >
+              ${sticker}
 
-</div>
-</article>
-`
-)
-.join("");
+              <img
+                src="${escapeHtml(video.thumbnail || "")}"
+                alt=""
+                loading="lazy"
+              >
 
-document
-.querySelectorAll(
-".video-card"
-)
-.forEach(card => {
-const open = () => {
-const video =
-DATA.videos.find(
-item =>
-String(item.id) ===
-String(
-card.dataset.videoId
-)
-);
+              <div class="video-info">
 
-if (video) {
-openVideoDetail(
-video
-);
-}
-};
+                <div class="video-title">
+                  ${escapeHtml(video.title || "")}
+                </div>
 
-card.addEventListener(
-"click",
-open
-);
+                <div class="video-meta">
+                  <div class="video-view-row">
+                    <span class="video-view-count">
+                      ${fmt(video.viewCount)}回
+                    </span>
 
-card.addEventListener(
-"keydown",
-event => {
-if (
-event.key ===
-"Enter" ||
-event.key ===
-" "
-) {
-event.preventDefault();
-open();
-}
-}
-);
-});
+                    <span class="video-view-increase">
+                      ↑${fmt(video.viewCountIncrease || 0)}回
+                    </span>
+                  </div>
+
+                  <span class="video-date">
+                    ${jpDate(video.date)}
+                  </span>
+                </div>
+
+              </div>
+            </article>
+          `;
+        }
+      )
+      .join("");
+
+  document
+    .querySelectorAll(
+      ".video-card"
+    )
+    .forEach(card => {
+      const open = () => {
+        const video =
+          DATA.videos.find(
+            item =>
+              String(item.id) ===
+              String(
+                card.dataset.videoId
+              )
+          );
+
+        if (video) {
+          openVideoDetail(
+            video
+          );
+        }
+      };
+
+      card.addEventListener(
+        "click",
+        open
+      );
+
+      card.addEventListener(
+        "keydown",
+        event => {
+          if (
+            event.key ===
+              "Enter" ||
+            event.key ===
+              " "
+          ) {
+            event.preventDefault();
+            open();
+          }
+        }
+      );
+    });
 }
 
 /* =========================================================
@@ -2992,7 +3200,10 @@ async function init() {
 
   renderSummary();
   renderTags();
-  renderVideos();
+    renderVideos();
+
+  refreshSortUpdateDot();
+
   buildRolling();
   renderTrendAnalysis();
   renderSubscriberHistory();
@@ -3014,9 +3225,18 @@ async function init() {
   setupSubscriberHistory();
   setupMobileChartTooltipClose();
 
-  $("sortSelect")
+   $("sortSelect")
     .onchange =
-    renderVideos;
+    () => {
+      if (
+        $("sortSelect").value ===
+        "popular"
+      ) {
+        markPopularRankingAsSeen();
+      }
+
+      renderVideos();
+    };
 
   $("tagSelect")
     .onchange =
