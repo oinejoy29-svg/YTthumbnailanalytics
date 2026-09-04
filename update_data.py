@@ -22,7 +22,7 @@ JST = timezone(
 
 UTC = timezone.utc
 
-FORECAST_MODEL_VERSION = "v1"
+FORECAST_MODEL_VERSION = "v2"
 
 
 MEMBERS = [
@@ -988,10 +988,108 @@ def historical_videos(
 
 
 # =========================================================
-# Base
+# Outlier filtering
+# 「通常時」の再生数を予測するため、
+# バズ・極端な不振などの外れ値を予測材料から除外する。
+#
+# 1本: そのまま使用
+# 2本: 2本とも使用
+# 3本以上: MAD / Modified Z-score で判定
 # =========================================================
 
-def calculate_base(
+def filter_outliers(
+    values,
+):
+    clean = [
+        float(value)
+        for value in values
+        if isinstance(
+            value,
+            (int, float),
+        )
+        and value >= 0
+    ]
+
+    if len(clean) <= 2:
+        return clean
+
+    center = median(
+        clean
+    )
+
+    if center is None:
+        return clean
+
+    deviations = [
+        abs(
+            value - center
+        )
+        for value in clean
+    ]
+
+    mad = median(
+        deviations
+    )
+
+    # MADが0の場合は統計的に安全な判定ができないため
+    # 無理に除外しない
+    if (
+        mad is None
+        or mad <= 0
+    ):
+        return clean
+
+    filtered = []
+
+    for value in clean:
+
+        modified_z = (
+            0.6745
+            * (
+                value - center
+            )
+            / mad
+        )
+
+        if abs(
+            modified_z
+        ) <= 3.5:
+            filtered.append(
+                value
+            )
+
+    # 万一すべて除外された場合は元データを使用
+    if not filtered:
+        return clean
+
+    return filtered
+
+
+def filtered_median(
+    values,
+):
+    filtered = (
+        filter_outliers(
+            values
+        )
+    )
+
+    if not filtered:
+        return None
+
+    return median(
+        filtered
+    )
+
+
+# =========================================================
+# Recent channel base
+#
+# 同メンバー実績が存在しない場合だけ使用。
+# 直近5本から外れ値を除外して通常ラインを作る。
+# =========================================================
+
+def calculate_recent_channel_base(
     history,
 ):
     recent = (
@@ -1004,10 +1102,16 @@ def calculate_base(
         ]
         for video
         in recent
+        if isinstance(
+            video.get(
+                "sevenDayViews"
+            ),
+            (int, float),
+        )
     ]
 
     base = (
-        median(
+        filtered_median(
             values
         )
     )
@@ -1019,7 +1123,264 @@ def calculate_base(
 
 
 # =========================================================
+# Member base
+#
+# 今回の予測で最重要。
+#
+# ・同メンバー動画が1本でもあればメンバー実績を基準
+# ・1本ならその1本
+# ・2本なら2本の中央値
+# ・3本以上なら外れ値除外後の中央値
+# ・同メンバー0本なら最近のチャンネル通常ライン
+# ・複数メンバーなら各メンバー基準値の平均
+# =========================================================
+
+def member_history_values(
+    history,
+    member,
+):
+    values = []
+
+    for video in history:
+
+        if member not in (
+            video.get(
+                "tags",
+                []
+            )
+        ):
+            continue
+
+        seven_day = (
+            video.get(
+                "sevenDayViews"
+            )
+        )
+
+        if not isinstance(
+            seven_day,
+            (int, float),
+        ):
+            continue
+
+        values.append(
+            float(
+                seven_day
+            )
+        )
+
+    return values
+
+
+def calculate_single_member_base(
+    history,
+    member,
+    fallback_base,
+):
+    values = (
+        member_history_values(
+            history,
+            member,
+        )
+    )
+
+    sample_count = len(
+        values
+    )
+
+    # 同メンバー動画が0本なら
+    # チャンネル全体の最近の通常ラインを使用
+    if sample_count == 0:
+        return {
+            "member":
+                member,
+
+            "sampleCount":
+                0,
+
+            "originalValues":
+                [],
+
+            "usedValues":
+                [],
+
+            "outlierCount":
+                0,
+
+            "source":
+                "recent_channel",
+
+            "base":
+                float(
+                    fallback_base
+                ),
+        }
+
+    filtered = (
+        filter_outliers(
+            values
+        )
+    )
+
+    member_base = (
+        median(
+            filtered
+        )
+    )
+
+    if member_base is None:
+        member_base = (
+            fallback_base
+        )
+
+    return {
+        "member":
+            member,
+
+        "sampleCount":
+            sample_count,
+
+        "originalValues":
+            [
+                int(value)
+                for value
+                in values
+            ],
+
+        "usedValues":
+            [
+                int(value)
+                for value
+                in filtered
+            ],
+
+        "outlierCount":
+            max(
+                0,
+                sample_count
+                - len(filtered),
+            ),
+
+        "source":
+            "member_history",
+
+        "base":
+            float(
+                member_base
+            ),
+    }
+
+
+def calculate_member_based_base(
+    history,
+    tags,
+):
+    fallback_base = (
+        calculate_recent_channel_base(
+            history
+        )
+    )
+
+    members = [
+        tag
+        for tag in tags
+        if tag in MEMBERS
+    ]
+
+    # メンバータグ自体がない動画
+    # → 最近のチャンネル通常ライン
+    if not members:
+        return {
+            "base":
+                fallback_base,
+
+            "source":
+                "recent_channel",
+
+            "members":
+                [],
+
+            "fallbackBase":
+                fallback_base,
+        }
+
+    details = [
+        calculate_single_member_base(
+            history,
+            member,
+            fallback_base,
+        )
+        for member
+        in members
+    ]
+
+    bases = [
+        detail[
+            "base"
+        ]
+        for detail
+        in details
+        if isinstance(
+            detail.get(
+                "base"
+            ),
+            (int, float),
+        )
+        and detail[
+            "base"
+        ] > 0
+    ]
+
+    if not bases:
+        final_base = (
+            fallback_base
+        )
+    else:
+        final_base = (
+            sum(
+                bases
+            )
+            / len(
+                bases
+            )
+        )
+
+    has_member_history = any(
+        detail[
+            "sampleCount"
+        ] > 0
+        for detail
+        in details
+    )
+
+    return {
+        "base":
+            final_base,
+
+        "source":
+            (
+                "member_history"
+                if has_member_history
+                else "recent_channel"
+            ),
+
+        "members":
+            details,
+
+        "fallbackBase":
+            fallback_base,
+    }
+
+
+# =========================================================
 # Momentum
+#
+# 最近チャンネル全体が通常より
+# 上向き / 下向きになっている分だけ軽く反映。
+#
+# バズなどの外れ値は除外。
+# 変化量の30%だけ反映。
+# 最終倍率は0.80〜1.20。
 # =========================================================
 
 def calculate_momentum(
@@ -1028,11 +1389,35 @@ def calculate_momentum(
     if len(
         history
     ) < 10:
+        recent_values = [
+            video[
+                "sevenDayViews"
+            ]
+            for video
+            in history[-5:]
+            if isinstance(
+                video.get(
+                    "sevenDayViews"
+                ),
+                (int, float),
+            )
+        ]
+
+        recent_filtered = (
+            filter_outliers(
+                recent_values
+            )
+        )
+
+        recent_median = (
+            median(
+                recent_filtered
+            )
+        )
+
         return {
             "recentMedian":
-                calculate_base(
-                    history
-                ),
+                recent_median,
 
             "previousMedian":
                 None,
@@ -1042,6 +1427,22 @@ def calculate_momentum(
 
             "factor":
                 1.0,
+
+            "recentOriginalCount":
+                len(
+                    recent_values
+                ),
+
+            "recentUsedCount":
+                len(
+                    recent_filtered
+                ),
+
+            "previousOriginalCount":
+                0,
+
+            "previousUsedCount":
+                0,
         }
 
     recent = (
@@ -1052,26 +1453,62 @@ def calculate_momentum(
         history[-10:-5]
     )
 
-    recent_median = median([
+    recent_values = [
         video[
             "sevenDayViews"
         ]
         for video
         in recent
-    ])
+        if isinstance(
+            video.get(
+                "sevenDayViews"
+            ),
+            (int, float),
+        )
+    ]
 
-    previous_median = median([
+    previous_values = [
         video[
             "sevenDayViews"
         ]
         for video
         in previous
-    ])
+        if isinstance(
+            video.get(
+                "sevenDayViews"
+            ),
+            (int, float),
+        )
+    ]
+
+    recent_filtered = (
+        filter_outliers(
+            recent_values
+        )
+    )
+
+    previous_filtered = (
+        filter_outliers(
+            previous_values
+        )
+    )
+
+    recent_median = (
+        median(
+            recent_filtered
+        )
+    )
+
+    previous_median = (
+        median(
+            previous_filtered
+        )
+    )
 
     if (
-        not previous_median
-        or
-        previous_median <= 0
+        recent_median is None
+        or previous_median is None
+        or previous_median <= 0
     ):
         return {
             "recentMedian":
@@ -1085,6 +1522,26 @@ def calculate_momentum(
 
             "factor":
                 1.0,
+
+            "recentOriginalCount":
+                len(
+                    recent_values
+                ),
+
+            "recentUsedCount":
+                len(
+                    recent_filtered
+                ),
+
+            "previousOriginalCount":
+                len(
+                    previous_values
+                ),
+
+            "previousUsedCount":
+                len(
+                    previous_filtered
+                ),
         }
 
     raw_rate = (
@@ -1092,6 +1549,8 @@ def calculate_momentum(
         / previous_median
     )
 
+    # 最近の変化をそのまま100%反映せず、
+    # 30%だけ予測へ反映する
     factor = (
         1
         +
@@ -1120,222 +1579,27 @@ def calculate_momentum(
 
         "factor":
             factor,
+
+        "recentOriginalCount":
+            len(
+                recent_values
+            ),
+
+        "recentUsedCount":
+            len(
+                recent_filtered
+            ),
+
+        "previousOriginalCount":
+            len(
+                previous_values
+            ),
+
+        "previousUsedCount":
+            len(
+                previous_filtered
+            ),
     }
-
-
-# =========================================================
-# Member correction
-# =========================================================
-
-def member_strength_samples(
-    history,
-    member,
-):
-    samples = []
-
-    for index, video in enumerate(
-        history
-    ):
-        if member not in (
-            video.get(
-                "tags",
-                []
-            )
-        ):
-            continue
-
-        previous = (
-            history[
-                max(
-                    0,
-                    index - 5,
-                ):
-                index
-            ]
-        )
-
-        if len(
-            previous
-        ) < 3:
-            continue
-
-        previous_base = median([
-            item[
-                "sevenDayViews"
-            ]
-            for item
-            in previous
-        ])
-
-        if (
-            previous_base is None
-            or
-            previous_base <= 0
-        ):
-            continue
-
-        ratio = (
-            video[
-                "sevenDayViews"
-            ]
-            / previous_base
-        )
-
-        ratio = clamp(
-            ratio,
-            0.50,
-            2.00,
-        )
-
-        samples.append(
-            ratio
-        )
-
-    return samples
-
-
-def calculate_single_member_factor(
-    history,
-    member,
-):
-    samples = (
-        member_strength_samples(
-            history,
-            member,
-        )
-    )
-
-    count = len(
-        samples
-    )
-
-    if count == 0:
-        return {
-            "member":
-                member,
-
-            "sampleCount":
-                0,
-
-            "rawStrength":
-                1.0,
-
-            "confidence":
-                0.0,
-
-            "factor":
-                1.0,
-        }
-
-    raw_strength = (
-        median(
-            samples
-        )
-    )
-
-    if count == 1:
-        confidence = 0.25
-
-    elif count == 2:
-        confidence = 0.50
-
-    else:
-        confidence = 0.75
-
-    factor = (
-        1
-        +
-        (
-            raw_strength
-            - 1
-        )
-        * confidence
-    )
-
-    factor = clamp(
-        factor,
-        0.85,
-        1.15,
-    )
-
-    return {
-        "member":
-            member,
-
-        "sampleCount":
-            count,
-
-        "rawStrength":
-            raw_strength,
-
-        "confidence":
-            confidence,
-
-        "factor":
-            factor,
-    }
-
-
-def calculate_member_factor(
-    history,
-    tags,
-):
-    members = [
-        tag
-        for tag
-        in tags
-        if tag in MEMBERS
-    ]
-
-    if not members:
-        return {
-            "factor":
-                1.0,
-
-            "members":
-                [],
-        }
-
-    details = [
-        calculate_single_member_factor(
-            history,
-            member,
-        )
-        for member
-        in members
-    ]
-
-    factors = [
-        detail[
-            "factor"
-        ]
-        for detail
-        in details
-    ]
-
-    factor = (
-        sum(
-            factors
-        )
-        / len(
-            factors
-        )
-    )
-
-    factor = clamp(
-        factor,
-        0.85,
-        1.15,
-    )
-
-    return {
-        "factor":
-            factor,
-
-        "members":
-            details,
-    }
-
 
 # =========================================================
 # Duration correction
@@ -1403,7 +1667,16 @@ def calculate_duration_factor(
 
 
 # =========================================================
-# Forecast Model v1
+# Forecast Model v2
+#
+# 「普通に推移した場合」の7日再生数を予測する。
+# バズそのものは予測対象にしない。
+#
+# 優先順位:
+# 1. 同メンバー過去実績
+# 2. 同メンバー実績がなければ最近のチャンネル通常ライン
+# 3. 最近のチャンネル全体トレンド
+# 4. 動画尺
 # =========================================================
 
 def create_forecast(
@@ -1425,23 +1698,13 @@ def create_forecast(
     if not history:
         return None
 
-    base = (
-        calculate_base(
-            history
-        )
-    )
+    # -----------------------------------------
+    # 最重要:
+    # メンバーを基準に通常ラインを決める
+    # -----------------------------------------
 
-    if base <= 0:
-        return None
-
-    momentum = (
-        calculate_momentum(
-            history
-        )
-    )
-
-    member = (
-        calculate_member_factor(
+    member_base = (
+        calculate_member_based_base(
             history,
             video.get(
                 "tags",
@@ -1449,6 +1712,31 @@ def create_forecast(
             ),
         )
     )
+
+    base = float(
+        member_base.get(
+            "base",
+            0,
+        )
+        or 0
+    )
+
+    if base <= 0:
+        return None
+
+    # -----------------------------------------
+    # 最近のチャンネル全体傾向
+    # -----------------------------------------
+
+    momentum = (
+        calculate_momentum(
+            history
+        )
+    )
+
+    # -----------------------------------------
+    # 動画尺
+    # -----------------------------------------
 
     duration = (
         calculate_duration_factor(
@@ -1459,12 +1747,17 @@ def create_forecast(
         )
     )
 
+    # -----------------------------------------
+    # 最終予測
+    #
+    # メンバー通常ライン
+    # × 最近の通常トレンド
+    # × 動画尺
+    # -----------------------------------------
+
     raw_prediction = (
         base
         * momentum[
-            "factor"
-        ]
-        * member[
             "factor"
         ]
         * duration[
@@ -1477,6 +1770,7 @@ def create_forecast(
         raw_prediction,
     )
 
+    # 表示は100回単位
     predicted = int(
         round(
             raw_prediction
@@ -1487,8 +1781,7 @@ def create_forecast(
 
     if (
         raw_prediction > 0
-        and
-        predicted == 0
+        and predicted == 0
     ):
         predicted = 100
 
@@ -1512,7 +1805,7 @@ def create_forecast(
 
     return {
         "modelVersion":
-            FORECAST_MODEL_VERSION,
+            "v2",
 
         "createdAt":
             now.isoformat(),
@@ -1532,7 +1825,6 @@ def create_forecast(
                 2,
             ),
 
-        # 7日経過予定時刻
         "targetAt":
             (
                 to_iso_jst(
@@ -1542,18 +1834,40 @@ def create_forecast(
                 else None
             ),
 
-        # 内部検証用
+        # 内部検証用。
+        # サイト上には表示しない。
         "basis": {
+            "predictionType":
+                "normal_expected_views",
+
             "historicalSampleSize":
                 len(
                     history
                 ),
 
-            "baseMedian":
+            "baseSource":
+                member_base[
+                    "source"
+                ],
+
+            "baseViews":
                 round(
                     base,
                     2,
                 ),
+
+            "fallbackChannelBase":
+                round(
+                    member_base[
+                        "fallbackBase"
+                    ],
+                    2,
+                ),
+
+            "memberDetails":
+                member_base[
+                    "members"
+                ],
 
             "recentMedian":
                 (
@@ -1599,18 +1913,27 @@ def create_forecast(
                     4,
                 ),
 
-            "memberFactor":
-                round(
-                    member[
-                        "factor"
+            "recentOutliersRemoved":
+                max(
+                    0,
+                    momentum[
+                        "recentOriginalCount"
+                    ]
+                    - momentum[
+                        "recentUsedCount"
                     ],
-                    4,
                 ),
 
-            "memberDetails":
-                member[
-                    "members"
-                ],
+            "previousOutliersRemoved":
+                max(
+                    0,
+                    momentum[
+                        "previousOriginalCount"
+                    ]
+                    - momentum[
+                        "previousUsedCount"
+                    ],
+                ),
 
             "durationBucket":
                 duration[
@@ -1623,8 +1946,6 @@ def create_forecast(
                 ],
         },
     }
-
-
 # =========================================================
 # Legacy data
 # =========================================================
@@ -2410,48 +2731,55 @@ def main():
         "videos"
     ] = videos
 
-    data[
-        "forecastModel"
-    ] = {
-        "version":
-            FORECAST_MODEL_VERSION,
+data[
+    "forecastModel"
+] = {
+    "version":
+        FORECAST_MODEL_VERSION,
 
-        "base":
-            "recent_5_median",
+    "predictionType":
+        "normal_expected_views",
 
-        "momentumWeight":
-            0.30,
+    "base":
+        "member_history_median",
 
-        "momentumClamp": [
-            0.80,
-            1.20,
-        ],
+    "fallbackBase":
+        "recent_5_filtered_median",
 
-        "memberClamp": [
-            0.85,
-            1.15,
-        ],
+    "outlierMethod":
+        "MAD_modified_z",
 
-        "durationFactors": {
-            "0-5min":
-                0.90,
+    "outlierThreshold":
+        3.5,
 
-            "5-10min":
-                1.07,
+    "momentumWeight":
+        0.30,
 
-            "10-20min":
-                1.00,
+    "momentumClamp": [
+        0.80,
+        1.20,
+    ],
 
-            "20-30min":
-                1.00,
+    "durationFactors": {
+        "0-5min":
+            0.90,
 
-            "30min+":
-                1.00,
-        },
+        "5-10min":
+            1.07,
 
-        "completionRule":
-            "first_api_snapshot_at_or_after_168_hours",
-    }
+        "10-20min":
+            1.00,
+
+        "20-30min":
+            1.00,
+
+        "30min+":
+            1.00,
+    },
+
+    "completionRule":
+        "first_api_snapshot_at_or_after_168_hours",
+}
 
     data[
         "memo"
