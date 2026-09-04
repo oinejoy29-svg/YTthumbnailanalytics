@@ -1768,3 +1768,133 @@ select:focus{
     font-size:10px;
   }
 }
+
+/* =========================
+   VIDEO STATUS STICKERS
+   NEW / POPULAR RANK UP
+========================= */
+
+.video-card{
+  position:relative;
+  overflow:visible;
+}
+
+/* overflowを外したぶん、
+   サムネ左側だけカードに合わせて丸める */
+.video-card > img{
+  border-radius:16px 0 0 16px;
+}
+
+.video-status-sticker{
+  position:absolute;
+  z-index:5;
+  top:-9px;
+  right:-8px;
+
+  min-width:72px;
+  padding:7px 12px 6px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  border:2px solid var(--line);
+  border-radius:999px;
+
+  font-size:12px;
+  font-weight:800;
+  line-height:1;
+  letter-spacing:.02em;
+  white-space:nowrap;
+
+  box-shadow:3px 3px 0 rgba(17,17,17,.18);
+
+  transform:rotate(7deg);
+  transform-origin:center;
+
+  pointer-events:none;
+}
+
+/* NEW：サイトの黄色を使用 */
+.video-status-new{
+  background:var(--yellow);
+}
+
+/* 順位UP：黄色と区別できる淡いグリーン */
+.video-status-up{
+  background:#C9FFB8;
+}
+
+
+/* =========================
+   SORT UPDATE DOT
+========================= */
+
+.sort-select-wrap{
+  position:relative;
+  display:inline-block;
+}
+
+.sort-update-dot{
+  position:absolute;
+  z-index:6;
+
+  top:-4px;
+  right:5px;
+
+  width:11px;
+  height:11px;
+
+  border-radius:50%;
+
+  background:#43D86B;
+  border:2px solid #fff;
+  box-shadow:
+    0 0 0 1.5px var(--line);
+
+  pointer-events:none;
+}
+
+.sort-update-dot[hidden]{
+  display:none;
+}
+
+
+@media(max-width:800px){
+
+  .sort-select-wrap{
+    width:100%;
+  }
+
+  .sort-select-wrap select{
+    width:100%;
+  }
+
+  .video-card > img{
+    border-radius:12px 0 0 12px;
+  }
+
+  .video-status-sticker{
+    top:-7px;
+    right:-6px;
+
+    min-width:60px;
+
+    padding:
+      6px 10px 5px;
+
+    font-size:10px;
+
+    box-shadow:
+      2px 2px 0
+      rgba(17,17,17,.16);
+  }
+
+  .sort-update-dot{
+    top:-3px;
+    right:5px;
+
+    width:10px;
+    height:10px;
+  }
+}
