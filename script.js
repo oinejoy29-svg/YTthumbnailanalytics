@@ -2117,12 +2117,86 @@ const newVals =
           ]
         },
 
-        options: {
-          ...baseChartOptions(
-            newScale
-          ),
+       options: {
+  ...baseChartOptions(
+    newScale
+  ),
 
-          plugins: {
+  onClick: (
+    event,
+    elements
+  ) => {
+    if (!elements.length) {
+      closeChartVideoPopup();
+      return;
+    }
+
+    const index =
+      elements[0].index;
+
+    const row =
+      rows[index];
+
+    if (!row) {
+      closeChartVideoPopup();
+      return;
+    }
+
+    const videos =
+      chartVideosForDate(
+        row.date
+      );
+
+    if (!videos.length) {
+      closeChartVideoPopup();
+      return;
+    }
+
+    const nativeEvent =
+      event.native;
+
+    let clientX;
+    let clientY;
+
+    if (
+      nativeEvent?.touches?.length
+    ) {
+      clientX =
+        nativeEvent.touches[0].clientX;
+
+      clientY =
+        nativeEvent.touches[0].clientY;
+    }
+
+    else if (
+      nativeEvent?.changedTouches?.length
+    ) {
+      clientX =
+        nativeEvent.changedTouches[0].clientX;
+
+      clientY =
+        nativeEvent.changedTouches[0].clientY;
+    }
+
+    else {
+      clientX =
+        nativeEvent?.clientX ??
+        window.innerWidth / 2;
+
+      clientY =
+        nativeEvent?.clientY ??
+        window.innerHeight / 2;
+    }
+
+    openChartVideoPopup(
+      videos,
+      row.date,
+      clientX,
+      clientY
+    );
+  },
+
+  plugins: {
             ...baseChartOptions(
               newScale
             ).plugins,
@@ -2140,36 +2214,9 @@ const newVals =
                         )
                       : "",
 
-                label:
-                  ctx =>
-                    ` 新規登録者数：${ctx.raw >= 0 ? "+" : ""}${fmt(ctx.raw)}人`,
-
-                afterBody:
-                  items => {
-                    if (
-                      !items.length
-                    ) {
-                      return [];
-                    }
-
-                    const titles =
-                      chartVideoTitles(
-                        rows[
-                          items[0]
-                            .dataIndex
-                        ].date
-                      );
-
-                    return titles.length
-                      ? [
-                          "",
-                          ...titles.map(
-                            title =>
-                              `🎬 ${title}`
-                          )
-                        ]
-                      : [];
-                  }
+label:
+  ctx =>
+    ` 新規登録者数：${ctx.raw >= 0 ? "+" : ""}${fmt(ctx.raw)}人`
               }
             }
           }
