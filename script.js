@@ -4401,3 +4401,107 @@ async function init() {
 }
 
 init();
+/* =========================
+   スクロール開始でグラフのポップを即閉じる
+========================= */
+
+let chartTouchStartY = null;
+
+document.addEventListener(
+  "touchstart",
+  event => {
+    chartTouchStartY =
+      event.touches?.[0]?.clientY ?? null;
+  },
+  {
+    passive: true
+  }
+);
+
+document.addEventListener(
+  "touchmove",
+  event => {
+    if (
+      chartTouchStartY === null ||
+      !event.touches?.length
+    ) {
+      return;
+    }
+
+    const currentY =
+      event.touches[0].clientY;
+
+    /*
+      数px以上動いたら
+      スクロール開始とみなす
+    */
+    if (
+      Math.abs(
+        currentY -
+        chartTouchStartY
+      ) < 4
+    ) {
+      return;
+    }
+
+    const popup =
+      document.getElementById(
+        "chartCustomTooltip"
+      );
+
+    if (popup) {
+      popup.style.opacity = "0";
+      popup.style.pointerEvents = "none";
+    }
+
+    /*
+      Chart.js側のtooltip状態も消す
+      → スクロール後に居残らない
+    */
+    [subsChart, newSubsChart]
+      .forEach(
+        chart => {
+          if (!chart) {
+            return;
+          }
+
+          chart.tooltip?.setActiveElements(
+            [],
+            {
+              x: 0,
+              y: 0
+            }
+          );
+
+          chart.setActiveElements([]);
+
+          chart.draw();
+        }
+      );
+
+    chartTouchStartY = null;
+  },
+  {
+    passive: true
+  }
+);
+
+document.addEventListener(
+  "touchend",
+  () => {
+    chartTouchStartY = null;
+  },
+  {
+    passive: true
+  }
+);
+
+document.addEventListener(
+  "touchcancel",
+  () => {
+    chartTouchStartY = null;
+  },
+  {
+    passive: true
+  }
+);
