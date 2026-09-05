@@ -200,294 +200,103 @@
     <section class="future-section">
 
       <div class="section-heading">
-
         <div>
-
-          <span class="section-kicker">
-            GOAL COUNTDOWN
-          </span>
-
-          <h2>
-            次のマイルストーン
-          </h2>
-
+          <span class="section-kicker">GOAL COUNTDOWN</span>
+          <h2>次の目標</h2>
         </div>
-
       </div>
 
-
-      <div class="goal-layout">
-
-
-        <!-- Main goal card -->
-
-        <article class="goal-main-card">
-
-
-          <!-- NEXT GOAL -->
-
-          <div class="goal-primary-block">
-
-            <span class="goal-primary-label">
-              NEXT GOAL
-            </span>
-
-            <div class="goal-value-line">
-
-              <strong
-                id="goalTarget"
-                class="goal-target-value"
-              >
-                —
-              </strong>
-
-              <span class="goal-companion">
-
-                <span class="goal-companion-label">
-                  現在
-                </span>
-
-                <b id="goalCurrent">
-                  —
-                </b>
-
-              </span>
-
-            </div>
-
-          </div>
-
-
-          <!-- ESTIMATED ARRIVAL -->
-
-          <div class="goal-primary-block goal-arrival-block">
-
-            <span class="goal-primary-label">
-              ESTIMATED ARRIVAL
-            </span>
-
-            <div class="goal-value-line">
-
-              <strong
-                id="goalEta"
-                class="goal-eta"
-              >
-                —
-              </strong>
-
-              <span class="goal-companion">
-
-                <span class="goal-companion-label">
-                  今日
-                </span>
-
-                <b id="goalToday">
-                  —
-                </b>
-
-              </span>
-
-            </div>
-
-          </div>
-
-
-          <!-- Progress information -->
-
-          <div class="goal-progress-info">
-
-            <span>
-              目標まで
-            </span>
-
-            <span id="goalRemaining">
-              あと —人
-            </span>
-
-          </div>
-
-
-          <div
-            class="goal-progress"
-            aria-label="目標達成率"
-          >
-
-            <div
-              id="goalProgressBar"
-              class="goal-progress-bar"
-            ></div>
-
-          </div>
-
-
-          <div class="goal-progress-bottom">
-
-            <span id="goalProgressPercent">
-              —%
-            </span>
-
-            <span id="goalRemainingDays">
-              残り予測 —日
-            </span>
-
-          </div>
-
-        </article>
-
-
-
-        <!-- CURRENT STATUS -->
-
-        <article class="goal-side-card">
-
-          <span class="card-kicker">
-            CURRENT STATUS
-          </span>
-
-          <strong
-            id="paceStatus"
-            class="pace-status"
-          >
-            —
-          </strong>
-
-          <p id="paceAdvice">
-            データを分析しています…
-          </p>
-
-          <div class="pace-difference">
-
-            <span>
-              予測との差
-            </span>
-
-            <strong id="paceDifference">
-              —
-            </strong>
-
-          </div>
-
-        </article>
-
-      </div>
-
-
-
-      <!-- =========================
-           PREDICTION SOURCE
-      ========================== -->
-
-      <div class="pace-grid">
-
-        <article class="pace-card">
-
-          <span>
-            直近7日
-          </span>
-
-          <strong id="pace7">
-            —
-          </strong>
-
-          <small>
-            人 / 日
-          </small>
-
-        </article>
-
-
-        <article class="pace-card">
-
-          <span>
-            直近30日
-          </span>
-
-          <strong id="pace30">
-            —
-          </strong>
-
-          <small>
-            人 / 日
-          </small>
-
-        </article>
-
-
-        <article class="pace-card">
-
-          <span>
-            全期間
-          </span>
-
-          <strong id="paceAll">
-            —
-          </strong>
-
-          <small>
-            人 / 日
-          </small>
-
-        </article>
-
-
-        <article class="pace-card highlight">
-
-          <span>
-            基準予測ペース
-          </span>
-
-          <strong id="paceWeighted">
-            —
-          </strong>
-
-          <small>
-            人 / 日
-          </small>
-
-        </article>
-
-      </div>
-
-
-
-      <!-- =========================
-           PREDICTION HISTORY
-      ========================== -->
-
-      <article class="prediction-history">
-
-        <div class="history-heading">
-
-          <div>
-
-            <span class="section-kicker">
-              PREDICTION HISTORY
-            </span>
-
-            <h3>
-              過去の予測
-            </h3>
-
-          </div>
-
-        </div>
-
+      <article class="goal-main-card goal-main-card-redesigned">
+
+        <button
+          id="goalStatusButton"
+          class="goal-status-chip status-level-ontrack"
+          type="button"
+          aria-expanded="false"
+          aria-controls="goalStatusPopover"
+        >
+          <span id="goalStatusSymbol" class="goal-status-symbol">○</span>
+          <span id="goalStatusLabel" class="goal-status-label">予測通り</span>
+          <strong id="goalStatusDifference" class="goal-status-difference">—</strong>
+        </button>
 
         <div
-          id="predictionHistory"
-          class="prediction-history-list"
+          id="goalStatusPopover"
+          class="goal-status-popover"
+          hidden
         >
+          <span class="card-kicker">CURRENT STATUS</span>
 
-          <div class="empty-state">
-            達成済みの予測はまだありません。
+          <div class="goal-popover-title">
+            <span id="goalPopoverSymbol" class="goal-popover-symbol">○</span>
+            <strong id="paceStatus">予測通り</strong>
           </div>
 
+          <p id="paceAdvice">データを分析しています…</p>
+
+          <div class="goal-popover-divider"></div>
+
+          <div class="goal-popover-metrics">
+            <div><span>予測との差</span><strong id="paceDifference">—</strong></div>
+            <div><span>直近7日</span><strong><b id="pace7">—</b>人/日</strong></div>
+            <div><span>直近30日</span><strong><b id="pace30">—</b>人/日</strong></div>
+            <div><span>全期間</span><strong><b id="paceAll">—</b>人/日</strong></div>
+            <div><span>基準予測ペース</span><strong><b id="paceWeighted">—</b>人/日</strong></div>
+          </div>
+        </div>
+
+        <div class="goal-primary-block">
+          <span class="goal-primary-label">NEXT GOAL</span>
+          <div class="goal-value-line">
+            <strong id="goalTarget" class="goal-target-value">—</strong>
+            <span class="goal-companion">
+              <span class="goal-companion-label">現在</span>
+              <b id="goalCurrent">—</b>
+            </span>
+          </div>
+        </div>
+
+        <div class="goal-primary-block goal-arrival-block">
+          <span class="goal-primary-label">ESTIMATED ARRIVAL</span>
+          <div class="goal-value-line">
+            <strong id="goalEta" class="goal-eta">—</strong>
+            <span class="goal-companion">
+              <span class="goal-companion-label">今日</span>
+              <b id="goalToday">—</b>
+            </span>
+          </div>
+        </div>
+
+        <div class="goal-progress-info">
+          <span>目標まで</span>
+          <span id="goalRemaining">あと —人</span>
+        </div>
+
+        <div class="goal-progress" aria-label="目標達成率">
+          <div id="goalProgressBar" class="goal-progress-bar"></div>
+        </div>
+
+        <div class="goal-progress-bottom">
+          <span id="goalProgressPercent">—%</span>
+          <span id="goalRemainingDays">残り予測 —日</span>
         </div>
 
       </article>
 
-    </section>
+      <article class="prediction-history">
+        <div class="history-heading">
+          <div>
+            <span class="section-kicker">PREDICTION HISTORY</span>
+            <h3>過去の予測</h3>
+          </div>
+        </div>
 
+        <div id="predictionHistory" class="prediction-history-list">
+          <div class="empty-state">達成済みの予測はまだありません。</div>
+        </div>
+      </article>
+
+    </section>
 
 
     <!-- =========================
@@ -497,292 +306,122 @@
     <section class="future-section">
 
       <div class="section-heading">
-
         <div>
-
-          <span class="section-kicker">
-            FUTURE SCENARIOS
-          </span>
-
-          <h2>
-            成長シナリオ
-          </h2>
-
+          <span class="section-kicker">FUTURE SCENARIOS</span>
+          <h2>成長シナリオ</h2>
         </div>
-
       </div>
 
+      <article class="scenario-card">
 
-<article class="scenario-card">
+        <div class="scenario-range-row">
+          <div id="scenarioDateRange" class="scenario-date-range">—</div>
 
-  <div class="scenario-range-row">
-
-    <div
-      id="scenarioDateRange"
-      class="scenario-date-range"
-    >
-      —
-    </div>
-
-
-    <div
-      class="scenario-range-buttons"
-      aria-label="予測期間"
-    >
-
-      <button
-        class="scenario-range-btn active"
-        type="button"
-        data-scenario-days="30"
-        data-scenario-label="1ヶ月後"
-      >
-        1か月後
-      </button>
-
-
-      <button
-        class="scenario-range-btn"
-        type="button"
-        data-scenario-days="90"
-        data-scenario-label="3ヶ月後"
-      >
-        3か月後
-      </button>
-
-
-      <button
-        class="scenario-range-btn"
-        type="button"
-        data-scenario-days="365"
-        data-scenario-label="1年後"
-      >
-        1年後
-      </button>
-
-    </div>
-
-  </div>
-
-
-  <div class="scenario-summary">
-
-          <div>
-
-            <span>
-              慎重
-            </span>
-
-            <strong id="scenarioLowValue">
-              —
-            </strong>
-
-            <small id="scenarioLowPeriod">
-  1ヶ月後
-</small>
-
+          <div class="scenario-range-buttons" aria-label="予測期間">
+            <button class="scenario-range-btn active" type="button" data-scenario-days="30" data-scenario-label="1ヶ月後">1か月後</button>
+            <button class="scenario-range-btn" type="button" data-scenario-days="90" data-scenario-label="3ヶ月後">3か月後</button>
+            <button class="scenario-range-btn" type="button" data-scenario-days="365" data-scenario-label="1年後">1年後</button>
           </div>
-
-
-          <div>
-
-            <span>
-              標準
-            </span>
-
-            <strong id="scenarioStandardValue">
-              —
-            </strong>
-
-          <small id="scenarioStandardPeriod">
-  1ヶ月後
-</small>
-
-          </div>
-
-
-          <div>
-
-            <span>
-              好調
-            </span>
-
-            <strong id="scenarioHighValue">
-              —
-            </strong>
-
-           <small id="scenarioHighPeriod">
-  1ヶ月後
-</small>
-
-          </div>
-
         </div>
 
+        <div class="scenario-summary">
+          <div class="scenario-positive">
+            <span>好調</span>
+            <strong id="scenarioHighValue">—</strong>
+            <small id="scenarioHighPeriod">1ヶ月後</small>
+          </div>
+
+          <div class="scenario-standard">
+            <span>標準</span>
+            <strong id="scenarioStandardValue">—</strong>
+            <small id="scenarioStandardPeriod">1ヶ月後</small>
+          </div>
+
+          <div class="scenario-cautious">
+            <span>慎重</span>
+            <strong id="scenarioLowValue">—</strong>
+            <small id="scenarioLowPeriod">1ヶ月後</small>
+          </div>
+        </div>
 
         <div class="scenario-chart-wrap">
-
           <canvas id="scenarioChart"></canvas>
-
         </div>
-
 
         <p class="scenario-note">
-          慎重・標準・好調の3パターンを、
-          現在の登録者推移から毎回再計算します。
+          好調・標準・慎重の3パターンを、現在の登録者推移から毎回再計算します。
           Goal Countdownの固定予測日には影響しません。
         </p>
-
-      </article>
-
-    </section>
-
-
-
-    <!-- =========================
-         POSTING CALENDAR
-    ========================== -->
-
-    <section class="future-section">
-
-      <div
-        class="section-heading calendar-section-heading"
-      >
-
-        <div>
-
-          <span class="section-kicker">
-            POSTING CALENDAR
-          </span>
-
-          <h2>
-            投稿カレンダー
-          </h2>
-
-        </div>
-
-
-        <div class="calendar-controls">
-
-          <button
-            id="prevMonth"
-            class="calendar-arrow"
-            type="button"
-            aria-label="前の月"
-          >
-            ‹
-          </button>
-
-          <strong id="calendarMonthLabel">
-            —
-          </strong>
-
-          <button
-            id="nextMonth"
-            class="calendar-arrow"
-            type="button"
-            aria-label="次の月"
-          >
-            ›
-          </button>
-
-        </div>
-
-      </div>
-
-
-      <div class="posting-summary">
-
-        <article>
-
-          <span>
-            直近10本の平均間隔
-          </span>
-
-          <strong id="recentPostInterval">
-            —
-          </strong>
-
-          <small>
-            日
-          </small>
-
-        </article>
-
-
-        <article>
-
-          <span>
-            全期間の平均間隔
-          </span>
-
-          <strong id="allPostInterval">
-            —
-          </strong>
-
-          <small>
-            日
-          </small>
-
-        </article>
-
-
-        <article class="recommended">
-
-          <span>
-            次回おすすめ
-          </span>
-
-          <strong id="recommendedWindow">
-            —
-          </strong>
-
-        </article>
-
-      </div>
-
-
-      <article class="calendar-card">
-
-        <div class="calendar-weekdays">
-
-          <span>日</span>
-          <span>月</span>
-          <span>火</span>
-          <span>水</span>
-          <span>木</span>
-          <span>金</span>
-          <span>土</span>
-
-        </div>
-
-
-        <div
-          id="calendarGrid"
-          class="calendar-grid"
-        ></div>
-
       </article>
 
 
-      <div class="calendar-legend">
+      <!-- =========================
+           PAST FORECAST
+      ========================== -->
 
-        <span>
+      <article class="past-forecast-card">
+        <div class="future-subheading">
+          <div>
+            <span class="section-kicker">PAST FORECAST</span>
+            <h3>過去時点での「今日」の予測</h3>
+          </div>
 
-          <i class="legend-recommended"></i>
+          <div class="past-actual">
+            <span>今日</span>
+            <strong id="pastForecastActual">—</strong>
+          </div>
+        </div>
 
-          おすすめ投稿日
+        <div id="pastForecastCards" class="past-forecast-grid past-count-0">
+          <div class="empty-state">比較できる過去予測はまだありません。</div>
+        </div>
 
-        </span>
+        <div id="pastForecastAnalysis" class="forecast-analysis status-level-ontrack">
+          <div class="forecast-analysis-title">
+            <span id="pastAnalysisSymbol" class="forecast-analysis-symbol">○</span>
+            <strong id="pastAnalysisLabel">予測データを蓄積中</strong>
+          </div>
+          <p id="pastAnalysisText">過去予測が保存されると、ここで今日の実績との答え合わせを行います。</p>
+        </div>
+      </article>
 
-        <span>
 
-          <i class="legend-posted"></i>
+      <!-- =========================
+           MILESTONE FORECAST
+      ========================== -->
 
-          投稿日
+      <article class="milestone-card">
+        <div class="future-subheading">
+          <div>
+            <span class="section-kicker">MILESTONE FORECAST</span>
+            <h3>次の大台到達予測</h3>
+          </div>
+        </div>
 
-        </span>
+        <div class="milestone-main">
+          <strong id="milestoneTarget" class="milestone-target">—</strong>
 
-      </div>
+          <div class="milestone-dates">
+            <div>
+              <span>現在の到達予測日</span>
+              <strong id="milestoneCurrentEta">—</strong>
+            </div>
+
+            <div>
+              <span id="milestoneReferenceLabel">前回大台達成時点での予測</span>
+              <strong id="milestoneInitialEta">—</strong>
+            </div>
+          </div>
+        </div>
+
+        <div id="milestoneAnalysis" class="forecast-analysis status-level-ontrack">
+          <div class="forecast-analysis-title">
+            <span id="milestoneAnalysisSymbol" class="forecast-analysis-symbol">○</span>
+            <strong id="milestoneAnalysisLabel">基準予測を準備中</strong>
+          </div>
+          <p id="milestoneAnalysisText">前回の500人区切り到達時点の予測が保存されると、現在の予測との変化を比較します。</p>
+        </div>
+      </article>
 
     </section>
 
