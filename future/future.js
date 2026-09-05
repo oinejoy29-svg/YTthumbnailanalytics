@@ -3345,14 +3345,15 @@ async function initFuture() {
   renderScenarios();
   setupScenarioRangeControls();
 
- renderPastForecasts();
-renderMilestoneForecast();
+  renderPastForecasts();
+  renderMilestoneForecast();
 
-/* 投稿カレンダー */
-renderPostingSummary();
-renderCalendar();
-setupCalendarControls();
+  /* 投稿カレンダー */
+  renderPostingSummary();
+  renderCalendar();
+  setupCalendarControls();
 
-setupMobileChartTooltipClose();
+  setupMobileChartTooltipClose();
+}
 
 initFuture();
