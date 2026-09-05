@@ -1,8 +1,8 @@
 {
   "channelId": "UCiLmCoftZHWXSFuQlnEJSsQ",
   "channelName": "#切り抜くぞニアジョイ",
-  "updatedAt": "2026-09-05T23:52:21.341821+09:00",
-  "currentSubscriberCount": 531,
+  "updatedAt": "2026-09-06T02:25:12.656687+09:00",
+  "currentSubscriberCount": 532,
   "subscribers": [
     {
       "date": "2026-04-03",
@@ -627,6 +627,10 @@
     {
       "date": "2026-09-05",
       "count": 531
+    },
+    {
+      "date": "2026-09-06",
+      "count": 532
     }
   ],
   "videos": [
@@ -637,14 +641,14 @@
       "thumbnail": "https://i.ytimg.com/vi/K4mQYWHpcUI/hqdefault.jpg",
       "duration": "1:07:09",
       "durationSeconds": 4029,
-      "viewCount": 6769,
+      "viewCount": 6770,
       "tags": [],
       "publishedAt": "2026-04-03T19:06:34Z",
       "sevenDayViews": 3051,
       "sevenDaySource": "legacy_excel",
-      "viewCountIncrease": 0,
+      "viewCountIncrease": 1,
       "popularRank": 10,
-      "popularRankDay": "2026-09-05",
+      "popularRankDay": "2026-09-06",
       "popularRankDayStart": 10,
       "popularRankChange": 0
     },
@@ -662,9 +666,9 @@
       "publishedAt": "2026-04-26T08:26:24Z",
       "sevenDayViews": 107,
       "sevenDaySource": "legacy_excel",
-      "viewCountIncrease": 23,
+      "viewCountIncrease": 0,
       "popularRank": 1,
-      "popularRankDay": "2026-09-05",
+      "popularRankDay": "2026-09-06",
       "popularRankDayStart": 1,
       "popularRankChange": 0
     },
@@ -675,7 +679,7 @@
       "thumbnail": "https://i.ytimg.com/vi/a1tQY33iFmM/hqdefault.jpg",
       "duration": "7:21",
       "durationSeconds": 441,
-      "viewCount": 1847,
+      "viewCount": 1848,
       "tags": [
         "天野香乃愛"
       ],
@@ -684,7 +688,7 @@
       "sevenDaySource": "legacy_excel",
       "viewCountIncrease": 1,
       "popularRank": 20,
-      "popularRankDay": "2026-09-05",
+      "popularRankDay": "2026-09-06",
       "popularRankDayStart": 20,
       "popularRankChange": 0
     },
@@ -695,16 +699,16 @@
       "thumbnail": "https://i.ytimg.com/vi/2b_XBGYqJVU/hqdefault.jpg",
       "duration": "29:58",
       "durationSeconds": 1798,
-      "viewCount": 477,
+      "viewCount": 478,
       "tags": [
         "逢田珠里依"
       ],
       "publishedAt": "2026-06-09T13:41:44Z",
       "sevenDayViews": 23,
       "sevenDaySource": "legacy_excel",
-      "viewCountIncrease": 2,
+      "viewCountIncrease": 1,
       "popularRank": 23,
-      "popularRankDay": "2026-09-05",
+      "popularRankDay": "2026-09-06",
       "popularRankDayStart": 23,
       "popularRankChange": 0
     },
@@ -715,16 +719,16 @@
       "thumbnail": "https://i.ytimg.com/vi/LMDZec3o3-g/hqdefault.jpg",
       "duration": "6:38",
       "durationSeconds": 398,
-      "viewCount": 696,
+      "viewCount": 697,
       "tags": [
         "江角怜音"
       ],
       "publishedAt": "2026-06-28T03:00:23Z",
       "sevenDayViews": 41,
       "sevenDaySource": "legacy_excel",
-      "viewCountIncrease": 2,
+      "viewCountIncrease": 1,
       "popularRank": 22,
-      "popularRankDay": "2026-09-05",
+      "popularRankDay": "2026-09-06",
       "popularRankDayStart": 22,
       "popularRankChange": 0
     },
@@ -735,16 +739,16 @@
       "thumbnail": "https://i.ytimg.com/vi/lcTtcqjTLlI/hqdefault.jpg",
       "duration": "7:40",
       "durationSeconds": 460,
-      "viewCount": 3782,
+      "viewCount": 3783,
       "tags": [
         "逢田珠里依"
       ],
       "publishedAt": "2026-07-11T03:00:32Z",
       "sevenDayViews": 3155,
       "sevenDaySource": "legacy_excel",
-      "viewCountIncrease": 3,
+      "viewCountIncrease": 1,
       "popularRank": 15,
-      "popularRankDay": "2026-09-05",
+      "popularRankDay": "2026-09-06",
       "popularRankDayStart": 15,
       "popularRankChange": 0
     },
@@ -762,9 +766,9 @@
       "publishedAt": "2026-07-13T10:00:29Z",
       "sevenDayViews": 2404,
       "sevenDaySource": "legacy_excel",
-      "viewCountIncrease": 1,
+      "viewCountIncrease": 0,
       "popularRank": 14,
-      "popularRankDay": "2026-09-05",
+      "popularRankDay": "2026-09-06",
       "popularRankDayStart": 14,
       "popularRankChange": 0
     },
@@ -782,9 +786,9 @@
       "publishedAt": "2026-07-18T10:30:12Z",
       "sevenDayViews": 1183,
       "sevenDaySource": "legacy_excel",
-      "viewCountIncrease": 1,
+      "viewCountIncrease": 0,
       "popularRank": 21,
-      "popularRankDay": "2026-09-05",
+      "popularRankDay": "2026-09-06",
       "popularRankDayStart": 21,
       "popularRankChange": 0
     },
@@ -802,9 +806,9 @@
       "publishedAt": "2026-07-25T03:00:32Z",
       "sevenDayViews": 1480,
       "sevenDaySource": "legacy_excel",
-      "viewCountIncrease": 2,
+      "viewCountIncrease": 0,
       "popularRank": 18,
-      "popularRankDay": "2026-09-05",
+      "popularRankDay": "2026-09-06",
       "popularRankDayStart": 18,
       "popularRankChange": 0
     },
@@ -815,16 +819,16 @@
       "thumbnail": "https://i.ytimg.com/vi/_l7l5BH4h_s/hqdefault.jpg",
       "duration": "17:17",
       "durationSeconds": 1037,
-      "viewCount": 5056,
+      "viewCount": 5066,
       "tags": [
         "江角怜音"
       ],
       "publishedAt": "2026-07-27T11:00:06Z",
       "sevenDayViews": 3072,
       "sevenDaySource": "legacy_excel",
-      "viewCountIncrease": 12,
+      "viewCountIncrease": 10,
       "popularRank": 12,
-      "popularRankDay": "2026-09-05",
+      "popularRankDay": "2026-09-06",
       "popularRankDayStart": 12,
       "popularRankChange": 0
     },
@@ -835,16 +839,16 @@
       "thumbnail": "https://i.ytimg.com/vi/dhys8ycR5Iw/hqdefault.jpg",
       "duration": "15:36",
       "durationSeconds": 936,
-      "viewCount": 8318,
+      "viewCount": 8333,
       "tags": [
         "山田杏佳"
       ],
       "publishedAt": "2026-07-31T03:00:15Z",
       "sevenDayViews": 4400,
       "sevenDaySource": "legacy_excel",
-      "viewCountIncrease": 4,
+      "viewCountIncrease": 15,
       "popularRank": 7,
-      "popularRankDay": "2026-09-05",
+      "popularRankDay": "2026-09-06",
       "popularRankDayStart": 7,
       "popularRankChange": 0
     },
@@ -855,14 +859,14 @@
       "thumbnail": "https://i.ytimg.com/vi/EvoV01i7fRw/hqdefault.jpg",
       "duration": "15:55",
       "durationSeconds": 955,
-      "viewCount": 15176,
+      "viewCount": 15197,
       "tags": [],
       "publishedAt": "2026-08-01T03:00:07Z",
       "sevenDayViews": 11349,
       "sevenDaySource": "legacy_excel",
-      "viewCountIncrease": 23,
+      "viewCountIncrease": 21,
       "popularRank": 3,
-      "popularRankDay": "2026-09-05",
+      "popularRankDay": "2026-09-06",
       "popularRankDayStart": 3,
       "popularRankChange": 0
     },
@@ -873,16 +877,16 @@
       "thumbnail": "https://i.ytimg.com/vi/HgCgwKqeJBI/hqdefault.jpg",
       "duration": "6:44",
       "durationSeconds": 404,
-      "viewCount": 4763,
+      "viewCount": 4764,
       "tags": [
         "天野香乃愛"
       ],
       "publishedAt": "2026-08-04T10:00:11Z",
       "sevenDayViews": 4199,
       "sevenDaySource": "legacy_excel",
-      "viewCountIncrease": 2,
+      "viewCountIncrease": 1,
       "popularRank": 13,
-      "popularRankDay": "2026-09-05",
+      "popularRankDay": "2026-09-06",
       "popularRankDayStart": 13,
       "popularRankChange": 0
     },
@@ -893,16 +897,16 @@
       "thumbnail": "https://i.ytimg.com/vi/g1GPX8SlOmU/hqdefault.jpg",
       "duration": "8:55",
       "durationSeconds": 535,
-      "viewCount": 6830,
+      "viewCount": 6832,
       "tags": [
         "天野香乃愛"
       ],
       "publishedAt": "2026-08-08T03:00:25Z",
       "sevenDayViews": 5022,
       "sevenDaySource": "legacy_excel",
-      "viewCountIncrease": 13,
+      "viewCountIncrease": 2,
       "popularRank": 9,
-      "popularRankDay": "2026-09-05",
+      "popularRankDay": "2026-09-06",
       "popularRankDayStart": 9,
       "popularRankChange": 0
     },
@@ -920,9 +924,9 @@
       "publishedAt": "2026-08-11T03:30:26Z",
       "sevenDayViews": 4259,
       "sevenDaySource": "legacy_excel",
-      "viewCountIncrease": 2,
+      "viewCountIncrease": 0,
       "popularRank": 11,
-      "popularRankDay": "2026-09-05",
+      "popularRankDay": "2026-09-06",
       "popularRankDayStart": 11,
       "popularRankChange": 0
     },
@@ -933,16 +937,16 @@
       "thumbnail": "https://i.ytimg.com/vi/D88Zd_OvaSs/hqdefault.jpg",
       "duration": "6:43",
       "durationSeconds": 403,
-      "viewCount": 9320,
+      "viewCount": 9351,
       "tags": [
         "大信田美月"
       ],
       "publishedAt": "2026-08-14T03:00:30Z",
       "sevenDayViews": 7521,
       "sevenDaySource": "legacy_excel",
-      "viewCountIncrease": 10,
+      "viewCountIncrease": 31,
       "popularRank": 6,
-      "popularRankDay": "2026-09-05",
+      "popularRankDay": "2026-09-06",
       "popularRankDayStart": 6,
       "popularRankChange": 0
     },
@@ -953,16 +957,16 @@
       "thumbnail": "https://i.ytimg.com/vi/pE6Pi35mojw/hqdefault.jpg",
       "duration": "5:05",
       "durationSeconds": 305,
-      "viewCount": 9705,
+      "viewCount": 9731,
       "tags": [
         "江角怜音"
       ],
       "publishedAt": "2026-08-16T03:30:38Z",
       "sevenDayViews": 7635,
       "sevenDaySource": "legacy_excel",
-      "viewCountIncrease": 10,
+      "viewCountIncrease": 26,
       "popularRank": 5,
-      "popularRankDay": "2026-09-05",
+      "popularRankDay": "2026-09-06",
       "popularRankDayStart": 5,
       "popularRankChange": 0
     },
@@ -973,16 +977,16 @@
       "thumbnail": "https://i.ytimg.com/vi/rSNhDgGJvPU/hqdefault.jpg",
       "duration": "5:21",
       "durationSeconds": 321,
-      "viewCount": 13870,
+      "viewCount": 14002,
       "tags": [
         "大西葵"
       ],
       "publishedAt": "2026-08-22T03:00:39Z",
       "sevenDayViews": 9710,
       "sevenDaySource": "legacy_excel",
-      "viewCountIncrease": 61,
+      "viewCountIncrease": 132,
       "popularRank": 4,
-      "popularRankDay": "2026-09-05",
+      "popularRankDay": "2026-09-06",
       "popularRankDayStart": 4,
       "popularRankChange": 0
     },
@@ -993,16 +997,17 @@
       "thumbnail": "https://i.ytimg.com/vi/a9U4uap71ME/hqdefault.jpg",
       "duration": "3:30",
       "durationSeconds": 210,
-      "viewCount": 3340,
+      "viewCount": 3358,
       "tags": [
+        "大信田美月",
         "村山結香"
       ],
       "publishedAt": "2026-08-24T03:00:32Z",
       "sevenDayViews": 2952,
       "sevenDaySource": "legacy_excel",
-      "viewCountIncrease": 0,
+      "viewCountIncrease": 18,
       "popularRank": 17,
-      "popularRankDay": "2026-09-05",
+      "popularRankDay": "2026-09-06",
       "popularRankDayStart": 17,
       "popularRankChange": 0
     },
@@ -1013,16 +1018,16 @@
       "thumbnail": "https://i.ytimg.com/vi/B75t0LqJUSg/hqdefault.jpg",
       "duration": "3:26",
       "durationSeconds": 206,
-      "viewCount": 3441,
+      "viewCount": 3442,
       "tags": [
         "髙橋舞"
       ],
       "publishedAt": "2026-08-26T04:00:12Z",
       "sevenDayViews": 3416,
       "sevenDaySource": "legacy_excel",
-      "viewCountIncrease": 2,
+      "viewCountIncrease": 1,
       "popularRank": 16,
-      "popularRankDay": "2026-09-05",
+      "popularRankDay": "2026-09-06",
       "popularRankDayStart": 16,
       "popularRankChange": 0
     },
@@ -1033,14 +1038,14 @@
       "thumbnail": "https://i.ytimg.com/vi/SlDTZdCoX7w/hqdefault.jpg",
       "duration": "5:48",
       "durationSeconds": 348,
-      "viewCount": 20012,
+      "viewCount": 20054,
       "tags": [
         "江角怜音"
       ],
       "publishedAt": "2026-08-28T08:50:34Z",
-      "viewCountIncrease": 24,
+      "viewCountIncrease": 42,
       "popularRank": 2,
-      "popularRankDay": "2026-09-05",
+      "popularRankDay": "2026-09-06",
       "popularRankDayStart": 2,
       "popularRankChange": 0
     },
@@ -1051,14 +1056,14 @@
       "thumbnail": "https://i.ytimg.com/vi/PiikNxCE5_Q/hqdefault.jpg",
       "duration": "4:40",
       "durationSeconds": 280,
-      "viewCount": 7280,
+      "viewCount": 7289,
       "tags": [
         "逢田珠里依"
       ],
       "publishedAt": "2026-08-31T08:30:03Z",
-      "viewCountIncrease": 5,
+      "viewCountIncrease": 9,
       "popularRank": 8,
-      "popularRankDay": "2026-09-05",
+      "popularRankDay": "2026-09-06",
       "popularRankDayStart": 8,
       "popularRankChange": 0
     },
@@ -1070,7 +1075,7 @@
       "thumbnail": "https://i.ytimg.com/vi/HJbI9RGGR2s/hqdefault.jpg",
       "duration": "4:51",
       "durationSeconds": 291,
-      "viewCount": 2697,
+      "viewCount": 2723,
       "tags": [
         "小澤愛実"
       ],
@@ -1104,9 +1109,9 @@
           "durationFactor": 0.9
         }
       },
-      "viewCountIncrease": 210,
+      "viewCountIncrease": 26,
       "popularRank": 19,
-      "popularRankDay": "2026-09-05",
+      "popularRankDay": "2026-09-06",
       "popularRankDayStart": 19,
       "popularRankChange": 0
     }

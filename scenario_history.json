@@ -1,4 +1,33 @@
 {
-  "dailyForecasts": [],
-  "milestoneForecasts": []
+  "dailyForecasts": [
+    {
+      "date": "2026-09-06",
+      "subscribers": 532,
+      "forecasts": {
+        "30": {
+          "positive": 738,
+          "standard": 704,
+          "cautious": 669
+        },
+        "90": {
+          "positive": 1151,
+          "standard": 1048,
+          "cautious": 944
+        },
+        "365": {
+          "positive": 3041,
+          "standard": 2623,
+          "cautious": 2205
+        }
+      }
+    }
+  ],
+  "milestoneForecasts": [
+    {
+      "fromMilestone": 500,
+      "targetMilestone": 1000,
+      "createdAt": "2026-09-06",
+      "initialForecastDate": "2026-11-27"
+    }
+  ]
 }
