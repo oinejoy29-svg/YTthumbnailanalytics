@@ -2516,9 +2516,6 @@ function renderPastForecastAnalysis(
   $("pastAnalysisSymbol").textContent =
     symbol;
 
-  $("pastAnalysisLabel").textContent =
-    label;
-
   $("pastAnalysisText").textContent =
     text;
 }
@@ -2741,8 +2738,6 @@ function renderMilestoneAnalysis({
   $("milestoneAnalysisSymbol").textContent =
     symbol;
 
-  $("milestoneAnalysisLabel").textContent =
-    label;
 
   $("milestoneAnalysisText").textContent =
     text;
