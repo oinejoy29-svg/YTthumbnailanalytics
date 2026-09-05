@@ -2748,6 +2748,483 @@ function renderMilestoneAnalysis({
     text;
 }
 
+/* =========================================================
+   Posting intervals
+========================================================= */
+
+function uniquePostingDates() {
+
+  return [
+    ...new Set(
+      DATA.videos
+        .map(
+          video =>
+            video.date
+        )
+        .filter(Boolean)
+    )
+  ]
+    .sort();
+}
+
+
+function averageIntervals(
+  dates
+) {
+
+  if (
+    dates.length <
+    2
+  ) {
+
+    return 0;
+  }
+
+
+  const intervals =
+    [];
+
+  for (
+    let i = 1;
+    i < dates.length;
+    i++
+  ) {
+
+    intervals.push(
+      Math.max(
+        0,
+        diffDays(
+          dates[i],
+          dates[i - 1]
+        )
+      )
+    );
+  }
+
+
+  return (
+    intervals.reduce(
+      (a,b) =>
+        a + b,
+      0
+    ) /
+    intervals.length
+  );
+}
+
+
+function calculatePostingRecommendation() {
+
+  const dates =
+    uniquePostingDates();
+
+  if (
+    !dates.length
+  ) {
+
+    return null;
+  }
+
+
+  const recentDates =
+    dates.slice(
+      -11
+    );
+
+  const recent =
+    averageIntervals(
+      recentDates
+    );
+
+  const all =
+    averageIntervals(
+      dates
+    );
+
+
+  let weightedInterval;
+
+  if (
+    recent > 0 &&
+    all > 0
+  ) {
+
+    weightedInterval =
+      recent * .65 +
+      all * .35;
+  }
+
+  else {
+
+    weightedInterval =
+      recent ||
+      all ||
+      1;
+  }
+
+
+  const latestPost =
+    dates.at(-1);
+
+  const center =
+    addDays(
+      latestPost,
+      Math.max(
+        1,
+        Math.round(
+          weightedInterval
+        )
+      )
+    );
+
+  const start =
+    addDays(
+      center,
+      -1
+    );
+
+  const end =
+    addDays(
+      center,
+      1
+    );
+
+
+  return {
+    recent,
+    all,
+    weightedInterval,
+    latestPost,
+    center,
+    start,
+    end
+  };
+}
+
+
+
+/* =========================================================
+   Posting summary
+========================================================= */
+
+function renderPostingSummary() {
+
+  postingRecommendation =
+    calculatePostingRecommendation();
+
+
+  if (
+    !postingRecommendation
+  ) {
+
+    $("recentPostInterval").textContent =
+      "—";
+
+    $("allPostInterval").textContent =
+      "—";
+
+    $("recommendedWindow").textContent =
+      "—";
+
+    return;
+  }
+
+
+  $("recentPostInterval").textContent =
+    postingRecommendation.recent
+      .toFixed(1);
+
+  $("allPostInterval").textContent =
+    postingRecommendation.all
+      .toFixed(1);
+
+  $("recommendedWindow").textContent =
+    `${monthDay(postingRecommendation.start)}〜${monthDay(postingRecommendation.end)}`;
+
+
+  if (
+    !calendarMonth
+  ) {
+
+    const initialDate =
+      dateObj(
+        postingRecommendation.start
+      );
+
+    calendarMonth =
+      new Date(
+        initialDate.getFullYear(),
+        initialDate.getMonth(),
+        1
+      );
+  }
+}
+
+
+
+/* =========================================================
+   Calendar
+========================================================= */
+
+function videosForDate(
+  date
+) {
+
+  return DATA.videos
+    .filter(
+      video =>
+        video.date ===
+        date
+    );
+}
+
+
+function isRecommendationDate(
+  date
+) {
+
+  if (
+    !postingRecommendation
+  ) {
+
+    return false;
+  }
+
+
+  return (
+    date >=
+      postingRecommendation.start &&
+    date <=
+      postingRecommendation.end
+  );
+}
+
+
+function renderCalendar() {
+
+  if (
+    !calendarMonth
+  ) {
+
+    const today =
+      dateObj(
+        todayJST()
+      );
+
+    calendarMonth =
+      new Date(
+        today.getFullYear(),
+        today.getMonth(),
+        1
+      );
+  }
+
+
+  const year =
+    calendarMonth
+      .getFullYear();
+
+  const month =
+    calendarMonth
+      .getMonth();
+
+
+  $("calendarMonthLabel").textContent =
+    `${year}年${month + 1}月`;
+
+
+  const firstDay =
+    new Date(
+      year,
+      month,
+      1
+    );
+
+  const lastDay =
+    new Date(
+      year,
+      month + 1,
+      0
+    );
+
+  const startBlank =
+    firstDay.getDay();
+
+  const days =
+    lastDay.getDate();
+
+  const cells =
+    [];
+
+
+  for (
+    let i = 0;
+    i < startBlank;
+    i++
+  ) {
+
+    cells.push(`
+      <div class="calendar-day empty"></div>
+    `);
+  }
+
+
+  for (
+    let day = 1;
+    day <= days;
+    day++
+  ) {
+
+    const date =
+      dateToIso(
+        new Date(
+          year,
+          month,
+          day
+        )
+      );
+
+    const videos =
+      videosForDate(
+        date
+      );
+
+    const recommended =
+      isRecommendationDate(
+        date
+      );
+
+    const today =
+      date ===
+      todayJST();
+
+
+    cells.push(`
+      <div
+        class="
+          calendar-day
+          ${recommended ? "recommended-day" : ""}
+          ${today ? "today" : ""}
+        "
+      >
+
+        <span class="calendar-date">
+          ${day}
+        </span>
+
+        <div class="calendar-posts">
+
+          ${videos
+            .map(
+              video => `
+                <div
+                  class="calendar-post"
+                  title="${escapeHtml(video.title || "")}"
+                >
+
+                  <img
+                    src="${escapeHtml(video.thumbnail || "")}"
+                    alt=""
+                    loading="lazy"
+                  >
+
+                  <span class="calendar-post-title">
+                    ${escapeHtml(video.title || "")}
+                  </span>
+
+                </div>
+              `
+            )
+            .join("")
+          }
+
+        </div>
+
+        ${
+          recommended &&
+          !videos.length
+            ? `
+              <span class="recommend-badge">
+                RECOMMENDED
+              </span>
+            `
+            : ""
+        }
+
+      </div>
+    `);
+  }
+
+
+  const total =
+    cells.length;
+
+  const remainder =
+    total %
+    7;
+
+
+  if (
+    remainder !==
+    0
+  ) {
+
+    const missing =
+      7 -
+      remainder;
+
+    for (
+      let i = 0;
+      i < missing;
+      i++
+    ) {
+
+      cells.push(`
+        <div class="calendar-day empty"></div>
+      `);
+    }
+  }
+
+
+  $("calendarGrid").innerHTML =
+    cells.join("");
+}
+
+
+
+/* =========================================================
+   Calendar controls
+========================================================= */
+
+function setupCalendarControls() {
+
+  $("prevMonth").onclick =
+    () => {
+
+      calendarMonth =
+        new Date(
+          calendarMonth.getFullYear(),
+          calendarMonth.getMonth() - 1,
+          1
+        );
+
+      renderCalendar();
+    };
+
+
+  $("nextMonth").onclick =
+    () => {
+
+      calendarMonth =
+        new Date(
+          calendarMonth.getFullYear(),
+          calendarMonth.getMonth() + 1,
+          1
+        );
+
+      renderCalendar();
+    };
+}
 
 /* =========================================================
    Mobile chart tooltip
@@ -2868,11 +3345,14 @@ async function initFuture() {
   renderScenarios();
   setupScenarioRangeControls();
 
-  renderPastForecasts();
-  renderMilestoneForecast();
+ renderPastForecasts();
+renderMilestoneForecast();
 
-  setupMobileChartTooltipClose();
-}
+/* 投稿カレンダー */
+renderPostingSummary();
+renderCalendar();
+setupCalendarControls();
 
+setupMobileChartTooltipClose();
 
 initFuture();
