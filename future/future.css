@@ -1425,3 +1425,29 @@ button{
   }
 
 }
+/* ========================================
+   CHANNEL IDENTITY BACKGROUND
+======================================== */
+
+html{
+  background:#EFEAE3;
+}
+
+body{
+  background-color:#EFEAE3;
+  background-image:url("../assets/bg-desktop.png");
+  background-repeat:no-repeat;
+  background-position:right bottom;
+  background-size:100% auto;
+  background-attachment:fixed;
+}
+
+/* スマホ */
+@media(max-width:800px){
+  body{
+    background-image:url("../assets/bg-mobile.png");
+    background-position:right bottom;
+    background-size:100% auto;
+    background-attachment:fixed;
+  }
+}
