@@ -2429,9 +2429,6 @@ function renderPastForecastAnalysis(
     $("pastAnalysisSymbol").textContent =
       "○";
 
-    $("pastAnalysisLabel").textContent =
-      "予測データを蓄積中";
-
     $("pastAnalysisText").textContent =
       "過去予測が保存されると、ここで今日の実績との答え合わせを行います。";
 
@@ -2658,10 +2655,7 @@ function renderMilestoneAnalysis({
 
     $("milestoneAnalysisSymbol").textContent =
       "○";
-
-    $("milestoneAnalysisLabel").textContent =
-      "基準予測を準備中";
-
+     
     $("milestoneAnalysisText").textContent =
       `${fmt(fromMilestone)}人達成時点の初期予測が保存されると、現在の${fmt(target)}人到達予測との変化を比較します。`;
 
