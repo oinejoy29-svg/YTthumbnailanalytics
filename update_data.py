@@ -2731,55 +2731,55 @@ def main():
         "videos"
     ] = videos
 
-data[
-    "forecastModel"
-] = {
-    "version":
-        FORECAST_MODEL_VERSION,
-
-    "predictionType":
-        "normal_expected_views",
-
-    "base":
-        "member_history_median",
-
-    "fallbackBase":
-        "recent_5_filtered_median",
-
-    "outlierMethod":
-        "MAD_modified_z",
-
-    "outlierThreshold":
-        3.5,
-
-    "momentumWeight":
-        0.30,
-
-    "momentumClamp": [
-        0.80,
-        1.20,
-    ],
-
-    "durationFactors": {
-        "0-5min":
-            0.90,
-
-        "5-10min":
-            1.07,
-
-        "10-20min":
-            1.00,
-
-        "20-30min":
-            1.00,
-
-        "30min+":
-            1.00,
-    },
-
-    "completionRule":
-        "first_api_snapshot_at_or_after_168_hours",
-}
+    data[
+        "forecastModel"
+    ] = {
+        "version":
+            FORECAST_MODEL_VERSION,
+    
+        "predictionType":
+            "normal_expected_views",
+    
+        "base":
+            "member_history_median",
+    
+        "fallbackBase":
+            "recent_5_filtered_median",
+    
+        "outlierMethod":
+            "MAD_modified_z",
+    
+        "outlierThreshold":
+            3.5,
+    
+        "momentumWeight":
+            0.30,
+    
+        "momentumClamp": [
+            0.80,
+            1.20,
+        ],
+    
+        "durationFactors": {
+            "0-5min":
+                0.90,
+    
+            "5-10min":
+                1.07,
+    
+            "10-20min":
+                1.00,
+    
+            "20-30min":
+                1.00,
+    
+            "30min+":
+                1.00,
+        },
+    
+        "completionRule":
+            "first_api_snapshot_at_or_after_168_hours",
+    }
 
     data[
         "memo"
