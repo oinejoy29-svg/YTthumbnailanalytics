@@ -411,8 +411,9 @@ video.durationSeconds || 0
 );
 }
 
-const POPULAR_RANK_BASELINE_KEY =
-  "popularRankingBaseline";
+const POPULAR_RANK_STATE_KEY =
+  "popularRankingStateV2";
+
 
 /*
   NEW判定
@@ -449,7 +450,7 @@ function isNewBadgeVideo(video) {
   UP表示対象。
 
   投稿直後は順位が大きく動くため、
-  今まで通り投稿4日経過後から対象にする。
+  投稿4日経過後から対象。
 */
 function isPopularRankUpEligible(video) {
   const publishedAt =
@@ -475,51 +476,7 @@ function isPopularRankUpEligible(video) {
 
 
 /*
-  最後にユーザーが人気順を確認した時点の
-  順位一覧をlocalStorageから取得。
-*/
-function loadPopularRankingBaseline() {
-  try {
-    const raw =
-      localStorage.getItem(
-        POPULAR_RANK_BASELINE_KEY
-      );
-
-    if (!raw) {
-      return null;
-    }
-
-    const parsed =
-      JSON.parse(raw);
-
-    if (
-      !parsed ||
-      typeof parsed !==
-        "object" ||
-      !parsed.ranks ||
-      typeof parsed.ranks !==
-        "object"
-    ) {
-      return null;
-    }
-
-    return parsed;
-  } catch (error) {
-    console.warn(
-      "Popular ranking baseline load failed:",
-      error
-    );
-
-    return null;
-  }
-}
-
-
-/*
-  現在の人気順位を作る。
-
-  data.jsonのpopularRankを基本にするが、
-  万一まだ無い場合でもviewCountから順位を作る。
+  現在の人気順位一覧を作成。
 */
 function currentPopularRankingMap() {
   const ranked =
@@ -550,20 +507,9 @@ function currentPopularRankingMap() {
 
   ranked.forEach(
     (video, index) => {
-      const storedRank =
-        Number(
-          video.popularRank
-        );
-
       ranks[
         String(video.id)
-      ] =
-        Number.isFinite(
-          storedRank
-        ) &&
-        storedRank > 0
-          ? storedRank
-          : index + 1;
+      ] = index + 1;
     }
   );
 
@@ -572,26 +518,57 @@ function currentPopularRankingMap() {
 
 
 /*
-  現在順位を
-  「最後に確認した順位」として保存。
+  人気順通知状態を読み込む。
 */
-function saveCurrentPopularRankingBaseline() {
-  const state = {
-    savedAt:
-      new Date().toISOString(),
-
-    ranks:
-      currentPopularRankingMap()
-  };
-
+function loadPopularRankingState() {
   try {
-    localStorage.setItem(
-      POPULAR_RANK_BASELINE_KEY,
-      JSON.stringify(state)
-    );
+    const raw =
+      localStorage.getItem(
+        POPULAR_RANK_STATE_KEY
+      );
+
+    if (!raw) {
+      return null;
+    }
+
+    const parsed =
+      JSON.parse(raw);
+
+    if (
+      !parsed ||
+      typeof parsed !== "object"
+    ) {
+      return null;
+    }
+
+    return parsed;
+
   } catch (error) {
     console.warn(
-      "Popular ranking baseline save failed:",
+      "Popular ranking state load failed:",
+      error
+    );
+
+    return null;
+  }
+}
+
+
+/*
+  人気順通知状態を保存。
+*/
+function savePopularRankingState(
+  state
+) {
+  try {
+    localStorage.setItem(
+      POPULAR_RANK_STATE_KEY,
+      JSON.stringify(state)
+    );
+
+  } catch (error) {
+    console.warn(
+      "Popular ranking state save failed:",
       error
     );
   }
@@ -599,10 +576,222 @@ function saveCurrentPopularRankingBaseline() {
 
 
 /*
-  最後に確認した順位から
-  現在何位上がったか。
+  data.jsonの更新日時を
+  API更新回の識別子として使う。
 */
-function popularRankUpAmount(video) {
+function currentDataUpdateKey() {
+  return String(
+    DATA.updatedAt || ""
+  );
+}
+
+
+/*
+  「前回サイトを開いた時の順位」
+  と
+  「現在順位」
+  を比較してUP数を作る。
+*/
+function calculatePopularRankUps(
+  previousRanks,
+  currentRanks
+) {
+  const ups = {};
+
+  (DATA.videos || [])
+    .forEach(
+      video => {
+        if (
+          !isPopularRankUpEligible(
+            video
+          )
+        ) {
+          return;
+        }
+
+        const id =
+          String(
+            video.id || ""
+          );
+
+        const previousRank =
+          Number(
+            previousRanks?.[id]
+          );
+
+        const currentRank =
+          Number(
+            currentRanks?.[id]
+          );
+
+        if (
+          !Number.isFinite(
+            previousRank
+          ) ||
+          !Number.isFinite(
+            currentRank
+          )
+        ) {
+          return;
+        }
+
+        const amount =
+          previousRank -
+          currentRank;
+
+        if (amount > 0) {
+          ups[id] =
+            amount;
+        }
+      }
+    );
+
+  return ups;
+}
+
+
+/*
+  サイトを開いた時に一度実行。
+
+  仕様：
+
+  ・前回サイトを開いた時の順位
+    ↓
+    現在順位
+
+    でUPを計算。
+
+  ・一度確認しても
+    同じAPI更新回の間は
+    ↑○ UPを残し続ける。
+
+  ・次のAPI更新が来た時、
+    前回サイトを開いた時の順位を
+    新しい比較基準として使う。
+
+  ・サイトを長期間開かなかった場合は、
+    途中のAPI更新回数に関係なく、
+    最後にサイトを開いた時から
+    現在までの変動を表示する。
+*/
+function syncPopularRankingState() {
+  const currentRanks =
+    currentPopularRankingMap();
+
+  const dataVersion =
+    currentDataUpdateKey();
+
+  let state =
+    loadPopularRankingState();
+
+  /*
+    初回訪問。
+
+    比較元が存在しないので
+    UPは出さず、
+    現在順位だけ保存する。
+  */
+  if (
+    !state ||
+    !state.pendingRanks ||
+    typeof state.pendingRanks !==
+      "object"
+  ) {
+    state = {
+      dataVersion,
+
+      pendingRanks:
+        currentRanks,
+
+      stickyUps: {},
+
+      dotSeen: true
+    };
+
+    savePopularRankingState(
+      state
+    );
+
+    return;
+  }
+
+
+  /*
+    API更新が前回サイト閲覧時から
+    発生している。
+  */
+  if (
+    state.dataVersion !==
+    dataVersion
+  ) {
+    const previousRanks =
+      state.pendingRanks;
+
+    const stickyUps =
+      calculatePopularRankUps(
+        previousRanks,
+        currentRanks
+      );
+
+    state = {
+      dataVersion,
+
+      /*
+        今回サイトを開いた時点の順位。
+
+        次のAPI更新が来た時の
+        比較基準になる。
+      */
+      pendingRanks:
+        currentRanks,
+
+      /*
+        今回表示するUP。
+
+        人気順を見ても消さない。
+        次のAPI更新まで保持。
+      */
+      stickyUps,
+
+      /*
+        順位上昇があれば
+        緑丸は未確認状態。
+      */
+      dotSeen:
+        Object.keys(
+          stickyUps
+        ).length === 0
+    };
+
+    savePopularRankingState(
+      state
+    );
+
+    return;
+  }
+
+
+  /*
+    同じAPI更新回で再読み込みした場合。
+
+    stickyUpsはそのまま残す。
+    pendingRanksも現在順位で維持。
+  */
+  state.pendingRanks =
+    currentRanks;
+
+  savePopularRankingState(
+    state
+  );
+}
+
+
+/*
+  今表示すべき↑○ UPを取得。
+*/
+function popularRankUpAmount(
+  video
+) {
   if (
     !isPopularRankUpEligible(
       video
@@ -611,89 +800,55 @@ function popularRankUpAmount(video) {
     return 0;
   }
 
-  const baseline =
-    loadPopularRankingBaseline();
+  const state =
+    loadPopularRankingState();
 
-  /*
-    初回訪問など、
-    比較元がまだ無い場合はUPを出さない。
-  */
   if (
-    !baseline ||
-    !baseline.ranks
+    !state ||
+    !state.stickyUps
   ) {
     return 0;
   }
 
-  const videoId =
-    String(
-      video.id || ""
-    );
-
-  const oldRank =
+  const amount =
     Number(
-      baseline.ranks[
-        videoId
-      ]
+      state.stickyUps[
+        String(video.id)
+      ] || 0
     );
-
-  const currentRanks =
-    currentPopularRankingMap();
-
-  const currentRank =
-    Number(
-      currentRanks[
-        videoId
-      ]
-    );
-
-  if (
-    !Number.isFinite(
-      oldRank
-    ) ||
-    !Number.isFinite(
-      currentRank
-    )
-  ) {
-    return 0;
-  }
 
   return Math.max(
     0,
-    oldRank - currentRank
+    amount
   );
 }
 
 
 /*
-  最後に確認した時点から
-  1本でも順位上昇があるか。
+  緑丸を表示する必要があるか。
 */
 function hasUnseenPopularRankingChange() {
-  const baseline =
-    loadPopularRankingBaseline();
+  const state =
+    loadPopularRankingState();
 
   if (
-    !baseline ||
-    !baseline.ranks
+    !state ||
+    state.dotSeen
   ) {
     return false;
   }
 
-  return (
-    (DATA.videos || [])
-      .some(
-        video =>
-          popularRankUpAmount(
-            video
-          ) > 0
-      )
+  return Object.values(
+    state.stickyUps || {}
+  ).some(
+    value =>
+      Number(value) > 0
   );
 }
 
 
 /*
-  ソートselect右上の緑丸を用意。
+  ソートselect右上の緑丸。
 */
 function ensureSortUpdateDot() {
   const select =
@@ -748,7 +903,7 @@ function ensureSortUpdateDot() {
     );
 
     dot.title =
-      "前回確認時から人気順に順位変動があります";
+      "前回サイト閲覧時から人気順に順位変動があります";
 
     wrap.appendChild(
       dot
@@ -761,9 +916,6 @@ function ensureSortUpdateDot() {
 
 /*
   緑丸表示更新。
-
-  最後に人気順を確認した時点から
-  順位上昇が1本でもあれば表示。
 */
 function refreshSortUpdateDot() {
   const dot =
@@ -779,18 +931,27 @@ function refreshSortUpdateDot() {
 
 
 /*
-  人気順をユーザーが確認した。
+  人気順を確認した時。
+
+  緑丸だけ消す。
 
   IMPORTANT:
-  renderVideos()より先にこれを呼ぶと
-  UP差分が消えてしまう。
-
-  そのため、
-  人気順を一度描画してUPを見せてから
-  baselineだけ現在順位へ更新する。
+  ↑○ UPは消さない。
+  次のAPI更新までそのまま残す。
 */
 function markPopularRankingAsSeen() {
-  saveCurrentPopularRankingBaseline();
+  const state =
+    loadPopularRankingState();
+
+  if (!state) {
+    return;
+  }
+
+  state.dotSeen = true;
+
+  savePopularRankingState(
+    state
+  );
 
   const dot =
     ensureSortUpdateDot();
@@ -831,6 +992,35 @@ function renderVideos() {
           )
         );
       }
+      if (
+  sort ===
+  "increase"
+) {
+  const increaseDiff =
+    Number(
+      b.viewCountIncrease || 0
+    ) -
+    Number(
+      a.viewCountIncrease || 0
+    );
+
+  if (increaseDiff !== 0) {
+    return increaseDiff;
+  }
+
+  /*
+    増加数が同じなら
+    現在の再生回数が多い方を上に。
+  */
+  return (
+    Number(
+      b.viewCount || 0
+    ) -
+    Number(
+      a.viewCount || 0
+    )
+  );
+}
 
       if (
         sort ===
@@ -4325,12 +4515,18 @@ async function init() {
     return;
   }
 
-  normalizeVideos();
+ normalizeVideos();
 
-  if (
-    typeof updateCommonHeader ===
-    "function"
-  ) {
+/*
+  前回サイト閲覧時からの
+  人気順位変動を確定
+*/
+syncPopularRankingState();
+
+if (
+  typeof updateCommonHeader ===
+  "function"
+) {
     updateCommonHeader(DATA);
   }
 
