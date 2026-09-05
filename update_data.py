@@ -15,6 +15,7 @@ API_KEY = os.environ["YOUTUBE_API_KEY"]
 CHANNEL_ID = os.environ["YOUTUBE_CHANNEL_ID"]
 
 DATA_FILE = "data.json"
+SCENARIO_HISTORY_FILE = "scenario_history.json"
 
 JST = timezone(
     timedelta(hours=9)
@@ -2604,6 +2605,403 @@ def update_popular_ranking_state(
 
     return videos
 
+
+# =========================================================
+# Scenario history
+# Future Scenarios の「過去時点の予測」と
+# 500人単位の大台予測基準を永続保存
+# =========================================================
+
+def load_scenario_history():
+    if not os.path.exists(
+        SCENARIO_HISTORY_FILE
+    ):
+        return {
+            "dailyForecasts": [],
+            "milestoneForecasts": [],
+        }
+
+    try:
+        with open(
+            SCENARIO_HISTORY_FILE,
+            "r",
+            encoding="utf-8",
+        ) as file:
+            history = json.load(
+                file
+            )
+    except (
+        json.JSONDecodeError,
+        OSError,
+    ):
+        history = {}
+
+    daily = history.get(
+        "dailyForecasts",
+        [],
+    )
+
+    milestones = history.get(
+        "milestoneForecasts",
+        [],
+    )
+
+    if not isinstance(
+        daily,
+        list,
+    ):
+        daily = []
+
+    if not isinstance(
+        milestones,
+        list,
+    ):
+        milestones = []
+
+    return {
+        "dailyForecasts": daily,
+        "milestoneForecasts": milestones,
+    }
+
+
+def save_scenario_history(
+    history,
+):
+    with open(
+        SCENARIO_HISTORY_FILE,
+        "w",
+        encoding="utf-8",
+    ) as file:
+        json.dump(
+            history,
+            file,
+            ensure_ascii=False,
+            indent=2,
+        )
+
+
+def scenario_growth_paces(
+    data,
+):
+    paces = (
+        calculate_goal_growth_paces(
+            data
+        )
+    )
+
+    standard = max(
+        0.0,
+        float(
+            paces.get(
+                "weighted",
+                0.0,
+            )
+            or 0.0
+        ),
+    )
+
+    return {
+        "positive":
+            standard * 1.20,
+
+        "standard":
+            standard,
+
+        "cautious":
+            standard * 0.80,
+    }
+
+
+def create_daily_scenario_snapshot(
+    data,
+    current,
+    now,
+):
+    paces = (
+        scenario_growth_paces(
+            data
+        )
+    )
+
+    forecasts = {}
+
+    for days in (
+        30,
+        90,
+        365,
+    ):
+        forecasts[
+            str(days)
+        ] = {
+            "positive":
+                int(
+                    round(
+                        int(current)
+                        + paces["positive"] * days
+                    )
+                ),
+
+            "standard":
+                int(
+                    round(
+                        int(current)
+                        + paces["standard"] * days
+                    )
+                ),
+
+            "cautious":
+                int(
+                    round(
+                        int(current)
+                        + paces["cautious"] * days
+                    )
+                ),
+        }
+
+    return {
+        "date":
+            now.astimezone(
+                JST
+            )
+            .date()
+            .isoformat(),
+
+        "subscribers":
+            int(current),
+
+        "forecasts":
+            forecasts,
+    }
+
+
+def update_daily_scenario_history(
+    history,
+    data,
+    current,
+    now,
+):
+    snapshot = (
+        create_daily_scenario_snapshot(
+            data,
+            current,
+            now,
+        )
+    )
+
+    today = snapshot[
+        "date"
+    ]
+
+    rows = history.get(
+        "dailyForecasts",
+        [],
+    )
+
+    if not isinstance(
+        rows,
+        list,
+    ):
+        rows = []
+
+    # 同じ日は4回のActions実行のたびに
+    # その時点の最新予測へ置き換える。
+    rows = [
+        row
+        for row in rows
+        if str(
+            row.get(
+                "date",
+                "",
+            )
+        ) != today
+    ]
+
+    rows.append(
+        snapshot
+    )
+
+    rows.sort(
+        key=lambda row:
+            str(
+                row.get(
+                    "date",
+                    "",
+                )
+            )
+    )
+
+    history[
+        "dailyForecasts"
+    ] = rows
+
+    print(
+        "SCENARIO DAILY SNAPSHOT / "
+        f"date={today} / "
+        f"subscribers={current} / "
+        f"30d={snapshot['forecasts']['30']['standard']} / "
+        f"90d={snapshot['forecasts']['90']['standard']} / "
+        f"365d={snapshot['forecasts']['365']['standard']}"
+    )
+
+
+def next_major_milestone(
+    current,
+):
+    return (
+        int(current) // 500
+        + 1
+    ) * 500
+
+
+def previous_major_milestone(
+    target,
+):
+    return max(
+        0,
+        int(target) - 500,
+    )
+
+
+def calculate_major_milestone_eta(
+    data,
+    current,
+    target,
+    from_date,
+):
+    pace = (
+        scenario_growth_paces(
+            data
+        )[
+            "standard"
+        ]
+    )
+
+    return calculate_goal_eta(
+        int(current),
+        int(target),
+        pace,
+        from_date,
+    )
+
+
+def update_milestone_scenario_history(
+    history,
+    data,
+    current,
+    now,
+):
+    target = (
+        next_major_milestone(
+            current
+        )
+    )
+
+    from_milestone = (
+        previous_major_milestone(
+            target
+        )
+    )
+
+    rows = history.get(
+        "milestoneForecasts",
+        [],
+    )
+
+    if not isinstance(
+        rows,
+        list,
+    ):
+        rows = []
+
+    # 同じ到達目標の基準予測が既にあれば
+    # 絶対に作り直さない。
+    existing = next(
+        (
+            row
+            for row in rows
+            if int(
+                row.get(
+                    "targetMilestone",
+                    -1,
+                )
+                or -1
+            ) == int(target)
+        ),
+        None,
+    )
+
+    if existing:
+        history[
+            "milestoneForecasts"
+        ] = rows
+        return
+
+    created_at = (
+        now.astimezone(
+            JST
+        )
+        .date()
+        .isoformat()
+    )
+
+    initial_eta = (
+        calculate_major_milestone_eta(
+            data,
+            current,
+            target,
+            created_at,
+        )
+    )
+
+    record = {
+        "fromMilestone":
+            int(from_milestone),
+
+        "targetMilestone":
+            int(target),
+
+        "createdAt":
+            created_at,
+
+        "initialForecastDate":
+            initial_eta,
+    }
+
+    rows.append(
+        record
+    )
+
+    rows.sort(
+        key=lambda row: (
+            int(
+                row.get(
+                    "targetMilestone",
+                    0,
+                )
+                or 0
+            ),
+            str(
+                row.get(
+                    "createdAt",
+                    "",
+                )
+            ),
+        )
+    )
+
+    history[
+        "milestoneForecasts"
+    ] = rows
+
+    print(
+        "NEW MILESTONE FORECAST / "
+        f"from={from_milestone} / "
+        f"target={target} / "
+        f"eta={initial_eta}"
+    )
+
+
+
 # =========================================================
 # Main
 # =========================================================
@@ -2784,6 +3182,31 @@ def main():
     data[
         "memo"
     ] = None
+
+    # Future Scenarios の予測履歴を永続保存。
+    # dailyForecasts は同日分を最新値で上書きし、
+    # milestoneForecasts は一度作った基準予測を固定する。
+    scenario_history = (
+        load_scenario_history()
+    )
+
+    update_daily_scenario_history(
+        scenario_history,
+        data,
+        current,
+        now,
+    )
+
+    update_milestone_scenario_history(
+        scenario_history,
+        data,
+        current,
+        now,
+    )
+
+    save_scenario_history(
+        scenario_history
+    )
 
     with open(
         DATA_FILE,
