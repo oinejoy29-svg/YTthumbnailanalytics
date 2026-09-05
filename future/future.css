@@ -1425,6 +1425,540 @@ button{
   }
 
 }
+/* =========================================================
+   GOAL / SCENARIO REDESIGN
+========================================================= */
+
+.goal-main-card-redesigned{
+  position:relative;
+  padding-top:30px;
+}
+
+.goal-status-chip{
+  position:absolute;
+  top:22px;
+  right:22px;
+  z-index:4;
+
+  min-height:38px;
+  padding:0 12px 0 0;
+
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+
+  background:#fff;
+  border:2px solid var(--line);
+  border-radius:999px;
+  box-shadow:3px 3px 0 rgba(17,17,17,.14);
+
+  font-size:11px;
+  font-weight:900;
+  line-height:1;
+}
+
+.goal-status-symbol,
+.forecast-analysis-symbol,
+.goal-popover-symbol{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+
+  flex:0 0 auto;
+
+  border-radius:999px;
+  color:#111;
+  font-weight:900;
+}
+
+.goal-status-symbol{
+  width:34px;
+  height:34px;
+  margin-left:0;
+}
+
+.goal-status-label{
+  white-space:nowrap;
+}
+
+.goal-status-difference{
+  padding-left:8px;
+  border-left:1px solid #ddd;
+  white-space:nowrap;
+  font-size:12px;
+}
+
+.status-level-ahead .goal-status-symbol,
+.status-level-ahead .forecast-analysis-symbol,
+.status-level-ahead .goal-popover-symbol{
+  background:#BFE4FF;
+}
+
+.status-level-ontrack .goal-status-symbol,
+.status-level-ontrack .forecast-analysis-symbol,
+.status-level-ontrack .goal-popover-symbol{
+  background:#C9FFB8;
+}
+
+.status-level-behind .goal-status-symbol,
+.status-level-behind .forecast-analysis-symbol,
+.status-level-behind .goal-popover-symbol{
+  background:#FFD39A;
+}
+
+.status-level-overdue .goal-status-symbol,
+.status-level-overdue .forecast-analysis-symbol,
+.status-level-overdue .goal-popover-symbol{
+  background:#FFB8B8;
+}
+
+.goal-status-popover{
+  position:absolute;
+  top:68px;
+  right:22px;
+  z-index:20;
+
+  width:min(360px,calc(100% - 44px));
+  padding:19px;
+
+  background:#fff;
+  border:2px solid var(--line);
+  border-radius:17px;
+  box-shadow:0 14px 36px rgba(0,0,0,.16);
+}
+
+.goal-status-popover[hidden]{
+  display:none;
+}
+
+.goal-popover-title{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  margin-top:12px;
+}
+
+.goal-popover-symbol{
+  width:32px;
+  height:32px;
+  font-size:16px;
+}
+
+.goal-popover-title strong{
+  font-size:20px;
+  letter-spacing:-.04em;
+}
+
+.goal-status-popover > p{
+  margin:12px 0 0;
+  color:#555;
+  font-size:12px;
+  line-height:1.75;
+  font-weight:700;
+}
+
+.goal-popover-divider{
+  height:1px;
+  margin:16px 0;
+  background:#ddd;
+}
+
+.goal-popover-metrics{
+  display:grid;
+  gap:9px;
+}
+
+.goal-popover-metrics > div{
+  display:flex;
+  align-items:baseline;
+  justify-content:space-between;
+  gap:15px;
+}
+
+.goal-popover-metrics span{
+  color:#777;
+  font-size:10px;
+  font-weight:800;
+}
+
+.goal-popover-metrics strong{
+  color:#111;
+  font-size:12px;
+  font-weight:900;
+  white-space:nowrap;
+}
+
+.goal-popover-metrics b{
+  font:inherit;
+}
+
+
+/* Future scenarios: display order is 好調 → 標準 → 慎重 */
+.scenario-summary .scenario-positive{
+  order:1;
+}
+
+.scenario-summary .scenario-standard{
+  order:2;
+}
+
+.scenario-summary .scenario-cautious{
+  order:3;
+}
+
+
+/* Past forecast + milestone */
+.past-forecast-card,
+.milestone-card{
+  margin-top:16px;
+  padding:22px;
+  background:#fff;
+  border:2px solid var(--line);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+}
+
+.future-subheading{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  gap:18px;
+  margin-bottom:18px;
+}
+
+.future-subheading h3{
+  margin:6px 0 0;
+  font-size:24px;
+  letter-spacing:-.045em;
+}
+
+.past-actual{
+  display:flex;
+  align-items:baseline;
+  gap:8px;
+  white-space:nowrap;
+}
+
+.past-actual span{
+  color:#777;
+  font-size:10px;
+  font-weight:800;
+}
+
+.past-actual strong{
+  font-size:25px;
+  letter-spacing:-.045em;
+}
+
+.past-forecast-grid{
+  display:grid;
+  gap:12px;
+}
+
+.past-forecast-grid.past-count-1{
+  grid-template-columns:1fr;
+}
+
+.past-forecast-grid.past-count-2{
+  grid-template-columns:repeat(2,minmax(0,1fr));
+}
+
+.past-forecast-grid.past-count-3{
+  grid-template-columns:repeat(3,minmax(0,1fr));
+}
+
+.past-period-card{
+  min-width:0;
+  padding:17px;
+  background:#f7f7f7;
+  border:1px solid #ddd;
+  border-radius:15px;
+}
+
+.past-count-1 .past-period-card{
+  padding:20px 24px;
+}
+
+.past-period-heading{
+  display:flex;
+  justify-content:space-between;
+  align-items:baseline;
+  gap:10px;
+  margin-bottom:13px;
+}
+
+.past-period-heading strong{
+  font-size:16px;
+  letter-spacing:-.03em;
+}
+
+.past-period-heading span{
+  color:#888;
+  font-size:9px;
+  font-weight:700;
+}
+
+.past-scenario-list{
+  display:grid;
+  gap:7px;
+}
+
+.past-count-1 .past-scenario-list{
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:9px;
+}
+
+.past-scenario-row{
+  display:grid;
+  grid-template-columns:44px 1fr auto;
+  align-items:center;
+  gap:8px;
+  padding:10px 11px;
+  background:#fff;
+  border:1px solid #ddd;
+  border-radius:11px;
+}
+
+.past-count-1 .past-scenario-row{
+  grid-template-columns:1fr;
+  gap:3px;
+  text-align:center;
+  padding:14px 10px;
+}
+
+.past-scenario-row.closest{
+  background:var(--yellow);
+  border:2px solid #111;
+  padding:9px 10px;
+}
+
+.past-count-1 .past-scenario-row.closest{
+  padding:13px 9px;
+}
+
+.past-scenario-row span{
+  color:#666;
+  font-size:10px;
+  font-weight:900;
+}
+
+.past-scenario-row strong{
+  font-size:17px;
+  font-weight:900;
+  letter-spacing:-.035em;
+}
+
+.past-scenario-row small{
+  color:#777;
+  font-size:9px;
+  font-weight:800;
+}
+
+.forecast-analysis{
+  margin-top:14px;
+  padding:16px 17px;
+  background:#fff;
+  border:1px solid #ddd;
+  border-radius:14px;
+}
+
+.forecast-analysis-title{
+  display:flex;
+  align-items:center;
+  gap:9px;
+}
+
+.forecast-analysis-symbol{
+  width:30px;
+  height:30px;
+  font-size:15px;
+}
+
+.forecast-analysis-title strong{
+  font-size:15px;
+  letter-spacing:-.03em;
+}
+
+.forecast-analysis p{
+  margin:9px 0 0;
+  color:#555;
+  font-size:12px;
+  line-height:1.7;
+  font-weight:700;
+}
+
+.milestone-main{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(360px,.9fr);
+  gap:24px;
+  align-items:center;
+  padding:19px;
+  background:#f7f7f7;
+  border-radius:16px;
+}
+
+.milestone-target{
+  font-size:clamp(36px,5vw,60px);
+  line-height:.98;
+  font-weight:900;
+  letter-spacing:-.06em;
+}
+
+.milestone-dates{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:10px;
+}
+
+.milestone-dates > div{
+  padding:14px;
+  background:#fff;
+  border:1px solid #ddd;
+  border-radius:12px;
+}
+
+.milestone-dates span{
+  display:block;
+  color:#777;
+  font-size:9px;
+  line-height:1.4;
+  font-weight:800;
+}
+
+.milestone-dates strong{
+  display:block;
+  margin-top:7px;
+  font-size:20px;
+  letter-spacing:-.04em;
+}
+
+
+@media(max-width:800px){
+
+  .goal-main-card-redesigned{
+    padding-top:65px;
+  }
+
+  .goal-status-chip{
+    top:14px;
+    right:14px;
+    min-height:34px;
+    gap:6px;
+    padding-right:9px;
+    font-size:9px;
+  }
+
+  .goal-status-symbol{
+    width:30px;
+    height:30px;
+  }
+
+  .goal-status-difference{
+    font-size:10px;
+    padding-left:6px;
+  }
+
+  .goal-status-popover{
+    top:55px;
+    right:14px;
+    width:calc(100% - 28px);
+    padding:16px;
+  }
+
+  .future-subheading{
+    align-items:flex-start;
+  }
+
+  .future-subheading h3{
+    font-size:20px;
+  }
+
+  .past-actual strong{
+    font-size:20px;
+  }
+
+  .past-forecast-card,
+  .milestone-card{
+    padding:15px;
+  }
+
+  .past-forecast-grid.past-count-2,
+  .past-forecast-grid.past-count-3{
+    grid-template-columns:1fr;
+  }
+
+  .past-count-1 .past-scenario-list{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:5px;
+  }
+
+  .past-count-1 .past-period-card{
+    padding:14px;
+  }
+
+  .past-count-1 .past-scenario-row{
+    padding:10px 5px;
+  }
+
+  .past-count-1 .past-scenario-row.closest{
+    padding:9px 4px;
+  }
+
+  .past-scenario-row strong{
+    font-size:14px;
+  }
+
+  .forecast-analysis{
+    padding:13px;
+  }
+
+  .forecast-analysis p{
+    font-size:10px;
+  }
+
+  .milestone-main{
+    grid-template-columns:1fr;
+    gap:14px;
+    padding:14px;
+  }
+
+  .milestone-target{
+    font-size:37px;
+  }
+
+  .milestone-dates{
+    grid-template-columns:1fr 1fr;
+    gap:7px;
+  }
+
+  .milestone-dates > div{
+    padding:11px 9px;
+  }
+
+  .milestone-dates span{
+    font-size:8px;
+  }
+
+  .milestone-dates strong{
+    font-size:16px;
+  }
+}
+
+@media(max-width:420px){
+  .goal-status-label{
+    display:none;
+  }
+
+  .past-count-1 .past-scenario-row strong{
+    font-size:13px;
+  }
+
+  .past-count-1 .past-scenario-row small{
+    font-size:8px;
+  }
+}
+
+
 /* ========================================
    CHANNEL IDENTITY BACKGROUND
 ======================================== */
