@@ -1436,25 +1436,27 @@ body{
 
 body{
   position:relative;
+  z-index:0;
 }
 
-/* 固定背景 */
+/* アイデンティティ背景を画面に固定 */
 body::before{
   content:"";
   position:fixed;
-  z-index:-1;
   inset:0;
+  z-index:0;
 
-  background-color:#EFEAE3;
-  background-image:url("../assets/bg-desktop.png");
-  background-repeat:no-repeat;
-  background-position:right bottom;
-  background-size:100% auto;
+  background:#EFEAE3 url("../assets/bg-desktop.png") right bottom / 100% auto no-repeat;
 
   pointer-events:none;
 }
 
-/* スマホ */
+/* body直下のコンテンツを背景より前へ */
+body > *{
+  position:relative;
+  z-index:1;
+}
+
 @media(max-width:800px){
   body::before{
     background-image:url("../assets/bg-mobile.png");
