@@ -32,6 +32,11 @@ let calendarMonth =
 let postingRecommendation =
   null;
 
+let SCENARIO_HISTORY = {
+  dailyForecasts: [],
+  milestoneForecasts: []
+};
+
 
 const $ =
   id =>
@@ -740,6 +745,171 @@ function processGoalState() {
    Goal rendering
 ========================================================= */
 
+function goalStatusMeta(
+  state,
+  current
+) {
+
+  const latestDate =
+    latestSubscriber()?.date ||
+    todayJST();
+
+  const elapsedDays =
+    Math.max(
+      0,
+      diffDays(
+        latestDate,
+        state.createdDate
+      )
+    );
+
+  const expected =
+    Number(state.startCount) +
+    Number(state.fixedPace || 0) *
+    elapsedDays;
+
+  const difference =
+    current - expected;
+
+  const goalSpan =
+    Math.max(
+      1,
+      Number(state.target) -
+      Number(state.startCount)
+    );
+
+  const differenceRatio =
+    difference / goalSpan;
+
+  const overdue =
+    Boolean(
+      state.eta &&
+      todayJST() > state.eta &&
+      current < Number(state.target)
+    );
+
+  if (overdue) {
+
+    const overdueDays =
+      Math.abs(
+        diffDays(
+          state.eta,
+          todayJST()
+        )
+      );
+
+    return {
+      level: "overdue",
+      symbol: "×",
+      label: "予測日超過",
+      difference,
+      text:
+        `到達予測日を${overdueDays}日経過しています。目標にはまだ到達していません。`
+    };
+  }
+
+  if (differenceRatio >= .05) {
+    return {
+      level: "ahead",
+      symbol: "◎",
+      label: "予測より先行",
+      difference,
+      text:
+        `現在の登録者数は予測ラインを${Math.abs(difference).toFixed(1)}人上回っています。想定より速いペースで推移しています。`
+    };
+  }
+
+  if (differenceRatio <= -.05) {
+    return {
+      level: "behind",
+      symbol: "△",
+      label: "遅れ気味",
+      difference,
+      text:
+        `現在の登録者数は予測ラインを${Math.abs(difference).toFixed(1)}人下回っています。予測よりやや遅いペースで推移しています。`
+    };
+  }
+
+  let text;
+
+  if (difference > .05) {
+    text =
+      `現在の登録者数は予測ラインを${difference.toFixed(1)}人上回っています。おおむね予測通りのペースで推移しています。`;
+  }
+  else if (difference < -.05) {
+    text =
+      `現在の登録者数は予測ラインを${Math.abs(difference).toFixed(1)}人下回っています。おおむね予測通りのペースで推移しています。`;
+  }
+  else {
+    text =
+      "現在の登録者数は予測ラインと一致しています。おおむね予測通りのペースで推移しています。";
+  }
+
+  return {
+    level: "ontrack",
+    symbol: "○",
+    label: "予測通り",
+    difference,
+    text
+  };
+}
+
+
+function statusClassName(
+  level
+) {
+
+  if (level === "ahead") {
+    return "status-level-ahead";
+  }
+
+  if (level === "behind") {
+    return "status-level-behind";
+  }
+
+  if (level === "overdue") {
+    return "status-level-overdue";
+  }
+
+  return "status-level-ontrack";
+}
+
+
+function applyStatusClass(
+  element,
+  level
+) {
+
+  if (!element) {
+    return;
+  }
+
+  element.classList.remove(
+    "status-level-ahead",
+    "status-level-ontrack",
+    "status-level-behind",
+    "status-level-overdue"
+  );
+
+  element.classList.add(
+    statusClassName(level)
+  );
+}
+
+
+function signedPeople(
+  value
+) {
+
+  const number =
+    Number(value || 0);
+
+  return (
+    `${number >= 0 ? "+" : ""}${number.toFixed(1)}人`
+  );
+}
+
+
 function renderGoal() {
 
   const state =
@@ -751,57 +921,34 @@ function renderGoal() {
   const current =
     currentSubscribers();
 
-
-  $("goalTarget")
-    .textContent =
+  $("goalTarget").textContent =
     `${fmt(state.target)} subscribers`;
 
-
-  $("goalCurrent")
-    .textContent =
+  $("goalCurrent").textContent =
     `${fmt(current)}人`;
 
+  $("goalToday").textContent =
+    jpDate(todayJST());
 
-  $("goalToday")
-    .textContent =
-    jpDate(
-      todayJST()
-    );
-
-
-  $("goalEta")
-    .textContent =
+  $("goalEta").textContent =
     state.eta
-      ? jpDate(
-          state.eta
-        )
+      ? jpDate(state.eta)
       : "算出不可";
-
 
   const remaining =
     Math.max(
       0,
-      Number(
-        state.target
-      ) -
-      current
+      Number(state.target) - current
     );
 
-
-  $("goalRemaining")
-    .textContent =
+  $("goalRemaining").textContent =
     `あと ${fmt(remaining)}人`;
-
 
   const lowerMilestone =
     Math.max(
       0,
-      Number(
-        state.target
-      ) -
-      100
+      Number(state.target) - 100
     );
-
 
   const progress =
     Math.max(
@@ -809,30 +956,19 @@ function renderGoal() {
       Math.min(
         100,
         (
-          (
-            current -
-            lowerMilestone
-          ) /
+          (current - lowerMilestone) /
           100
-        ) *
-        100
+        ) * 100
       )
     );
 
-
-  $("goalProgressBar")
-    .style.width =
+  $("goalProgressBar").style.width =
     `${progress}%`;
 
-
-  $("goalProgressPercent")
-    .textContent =
+  $("goalProgressPercent").textContent =
     `${progress.toFixed(0)}%`;
 
-
-  if (
-    state.eta
-  ) {
+  if (state.eta) {
 
     const remainingDays =
       diffDays(
@@ -840,169 +976,140 @@ function renderGoal() {
         todayJST()
       );
 
-
-    $("goalRemainingDays")
-      .textContent =
+    $("goalRemainingDays").textContent =
       remainingDays >= 0
         ? `残り予測 ${remainingDays}日`
         : `予測日から ${Math.abs(remainingDays)}日経過`;
-
   }
-
   else {
-
-    $("goalRemainingDays")
-      .textContent =
+    $("goalRemainingDays").textContent =
       "残り予測 —日";
-
   }
 
+  $("pace7").textContent =
+    paces.pace7.toFixed(1);
 
-  $("pace7")
-    .textContent =
-    paces.pace7
-      .toFixed(1);
+  $("pace30").textContent =
+    paces.pace30.toFixed(1);
 
+  $("paceAll").textContent =
+    paces.paceAll.toFixed(1);
 
-  $("pace30")
-    .textContent =
-    paces.pace30
-      .toFixed(1);
-
-
-  $("paceAll")
-    .textContent =
-    paces.paceAll
-      .toFixed(1);
-
-
-  $("paceWeighted")
-    .textContent =
-    Number(
-      state.fixedPace || 0
-    )
-      .toFixed(1);
-
+  $("paceWeighted").textContent =
+    Number(state.fixedPace || 0).toFixed(1);
 
   renderGoalStatus(
     state,
     current
   );
 
-
   renderPredictionHistory();
-
 }
 
-
-
-/* =========================================================
-   Goal status
-========================================================= */
 
 function renderGoalStatus(
   state,
   current
 ) {
 
-  const latestDate =
-    latestSubscriber()?.date ||
-    todayJST();
-
-
-  const elapsedDays =
-    Math.max(
-      0,
-      diffDays(
-        latestDate,
-        state.createdDate
-      )
+  const meta =
+    goalStatusMeta(
+      state,
+      current
     );
 
+  const chip =
+    $("goalStatusButton");
 
-  const expected =
-    Number(
-      state.startCount
-    ) +
-    Number(
-      state.fixedPace || 0
-    ) *
-    elapsedDays;
+  applyStatusClass(
+    chip,
+    meta.level
+  );
 
+  $("goalStatusSymbol").textContent =
+    meta.symbol;
 
-  const difference =
-    current -
-    expected;
+  $("goalStatusLabel").textContent =
+    meta.label;
 
+  $("goalStatusDifference").textContent =
+    signedPeople(meta.difference);
 
-  const threshold =
-    Math.max(
-      3,
-      Math.abs(
-        Number(
-          state.fixedPace || 0
-        )
-      ) *
-      2
-    );
+  $("goalPopoverSymbol").textContent =
+    meta.symbol;
 
+  $("paceStatus").textContent =
+    meta.label;
 
-  $("paceDifference")
-    .textContent =
-    `${difference >= 0 ? "+" : ""}${difference.toFixed(1)}人`;
+  $("paceAdvice").textContent =
+    meta.text;
 
-
-  if (
-    difference >
-         threshold
-  ) {
-
-    $("paceStatus")
-      .textContent =
-      "予測より好調";
-
-
-    $("paceAdvice")
-      .textContent =
-      "固定した予測ペースを上回って進んでいます。このペースが続けば、予想到達日より早くマイルストーンに到達する可能性があります。";
-
-
-    return;
-
-  }
-
-
-  if (
-    difference <
-    -threshold
-  ) {
-
-    $("paceStatus")
-      .textContent =
-      "予測より遅め";
-
-
-    $("paceAdvice")
-      .textContent =
-      "現在は固定した予測ペースをやや下回っています。予想到達日は変更せず、今後の伸びを引き続き比較します。";
-
-
-    return;
-
-  }
-
-
-  $("paceStatus")
-    .textContent =
-    "ほぼ予測通り";
-
-
-  $("paceAdvice")
-    .textContent =
-    "現在の登録者数は固定した予測ライン付近で推移しています。今のところ大きなペースのずれはありません。";
-
+  $("paceDifference").textContent =
+    signedPeople(meta.difference);
 }
 
+
+function setupGoalStatusPopover() {
+
+  const button =
+    $("goalStatusButton");
+
+  const popover =
+    $("goalStatusPopover");
+
+  if (
+    !button ||
+    !popover
+  ) {
+    return;
+  }
+
+  function closePopover() {
+    popover.hidden = true;
+    button.setAttribute(
+      "aria-expanded",
+      "false"
+    );
+  }
+
+  button.addEventListener(
+    "click",
+    event => {
+      event.stopPropagation();
+
+      const willOpen =
+        popover.hidden;
+
+      popover.hidden =
+        !willOpen;
+
+      button.setAttribute(
+        "aria-expanded",
+        willOpen ? "true" : "false"
+      );
+    }
+  );
+
+  popover.addEventListener(
+    "click",
+    event =>
+      event.stopPropagation()
+  );
+
+  document.addEventListener(
+    "click",
+    closePopover
+  );
+
+  document.addEventListener(
+    "keydown",
+    event => {
+      if (event.key === "Escape") {
+        closePopover();
+      }
+    }
+  );
+}
 
 
 /* =========================================================
@@ -1730,6 +1837,7 @@ function renderSevenDayForecasts() {
 /* =========================================================
    Future scenarios
 ========================================================= */
+
 function scenarioDisplayDate(
   date
 ) {
@@ -1743,12 +1851,62 @@ function scenarioDisplayDate(
       .split("-")
       .map(Number);
 
-
   return (
     `${year}/${month}/${day}`
   );
-
 }
+
+
+function scenarioPaces() {
+
+  const paces =
+    growthPaces();
+
+  const standard =
+    Math.max(
+      0,
+      paces.weighted
+    );
+
+  return {
+    positive: standard * 1.20,
+    standard,
+    cautious: standard * .80
+  };
+}
+
+
+function scenarioForecastValues(
+  days
+) {
+
+  const current =
+    currentSubscribers();
+
+  const paces =
+    scenarioPaces();
+
+  return {
+    positive:
+      Math.round(
+        current +
+        paces.positive * days
+      ),
+
+    standard:
+      Math.round(
+        current +
+        paces.standard * days
+      ),
+
+    cautious:
+      Math.round(
+        current +
+        paces.cautious * days
+      )
+  };
+}
+
 
 function renderScenarios() {
 
@@ -1756,120 +1914,53 @@ function renderScenarios() {
     currentSubscribers();
 
   const paces =
-    growthPaces();
-
-
-  const standardPace =
-    Math.max(
-      0,
-      paces.weighted
-    );
-
-
-  const cautiousPace =
-    standardPace *
-    .80;
-
-
-  const positivePace =
-    standardPace *
-    1.20;
-
-
-  /*
-    上の3つの予測箱だけ、
-    選択された期間で計算する
-  */
+    scenarioPaces();
 
   const selectedDays =
     scenarioRangeDays;
 
-   const startDate =
-  todayJST();
+  const startDate =
+    todayJST();
 
-const forecastDate =
-  addDays(
-    startDate,
-    selectedDays
-  );
+  const forecastDate =
+    addDays(
+      startDate,
+      selectedDays
+    );
 
+  $("scenarioDateRange").textContent =
+    `${scenarioDisplayDate(startDate)} → ${scenarioDisplayDate(forecastDate)}`;
 
-$("scenarioDateRange")
-  .textContent =
-  `${scenarioDisplayDate(startDate)} → ${scenarioDisplayDate(forecastDate)}`;
+  const selected =
+    scenarioForecastValues(
+      selectedDays
+    );
 
+  $("scenarioHighValue").textContent =
+    `${fmt(selected.positive)}人`;
 
-  $("scenarioLowValue")
-    .textContent =
-    `${fmt(
-      Math.round(
-        current +
-        cautiousPace *
-        selectedDays
-      )
-    )}人`;
+  $("scenarioStandardValue").textContent =
+    `${fmt(selected.standard)}人`;
 
+  $("scenarioLowValue").textContent =
+    `${fmt(selected.cautious)}人`;
 
-  $("scenarioStandardValue")
-    .textContent =
-    `${fmt(
-      Math.round(
-        current +
-        standardPace *
-        selectedDays
-      )
-    )}人`;
-
-
-  $("scenarioHighValue")
-    .textContent =
-    `${fmt(
-      Math.round(
-        current +
-        positivePace *
-        selectedDays
-      )
-    )}人`;
-
-
-  /*
-    箱の下の期間表示
-  */
-
-  $("scenarioLowPeriod")
-    .textContent =
+  $("scenarioHighPeriod").textContent =
     scenarioRangeLabel;
 
-  $("scenarioStandardPeriod")
-    .textContent =
+  $("scenarioStandardPeriod").textContent =
     scenarioRangeLabel;
 
-  $("scenarioHighPeriod")
-    .textContent =
+  $("scenarioLowPeriod").textContent =
     scenarioRangeLabel;
-
-
-  /*
-    グラフは今まで通り固定。
-    ボタンを押しても表示期間は変えない。
-  */
 
   const horizon =
     180;
 
-
-  const labels =
-    [];
-
-  const lowValues =
-    [];
-
-  const standardValues =
-    [];
-
-  const highValues =
-    [];
-
+  const labels = [];
+  const lowValues = [];
+  const standardValues = [];
+  const highValues = [];
 
   for (
     let day = 0;
@@ -1883,170 +1974,110 @@ $("scenarioDateRange")
         day
       );
 
-
     labels.push(
-      monthDay(
-        date
-      )
+      monthDay(date)
     );
-
 
     lowValues.push(
       Math.round(
         current +
-        cautiousPace *
-        day
+        paces.cautious * day
       )
     );
-
 
     standardValues.push(
       Math.round(
         current +
-        standardPace *
-        day
+        paces.standard * day
       )
     );
-
 
     highValues.push(
       Math.round(
         current +
-        positivePace *
-        day
+        paces.positive * day
       )
     );
-
   }
 
-
-  if (
-    scenarioChart
-  ) {
-
+  if (scenarioChart) {
     scenarioChart.destroy();
-
   }
-
 
   scenarioChart =
     new Chart(
       $("scenarioChart"),
       {
-        type:
-          "line",
+        type: "line",
 
         data: {
           labels,
 
           datasets: [
             {
-              label:
-                "慎重",
-
-              data:
-                lowValues,
-
-              tension:
-                .28,
-
-              pointRadius:
-                0,
-
-              borderWidth:
-                2
+              label: "好調",
+              data: highValues,
+              tension: .28,
+              pointRadius: 0,
+              borderWidth: 2
             },
-
             {
-              label:
-                "標準",
-
-              data:
-                standardValues,
-
-              tension:
-                .28,
-
-              pointRadius:
-                0,
-
-              borderWidth:
-                3
+              label: "標準",
+              data: standardValues,
+              tension: .28,
+              pointRadius: 0,
+              borderWidth: 3
             },
-
             {
-              label:
-                "好調",
-
-              data:
-                highValues,
-
-              tension:
-                .28,
-
-              pointRadius:
-                0,
-
-              borderWidth:
-                2
+              label: "慎重",
+              data: lowValues,
+              tension: .28,
+              pointRadius: 0,
+              borderWidth: 2
             }
           ]
         },
 
         options: {
-          responsive:
-            true,
-
-          maintainAspectRatio:
-            false,
+          responsive: true,
+          maintainAspectRatio: false,
 
           interaction: {
-            mode:
-              "index",
-
-            intersect:
-              false
+            mode: "index",
+            intersect: false
           },
 
           plugins: {
             legend: {
-              display:
-                true,
-
-              position:
-                "bottom"
+              display: true,
+              position: "bottom"
             }
           },
 
           scales: {
             x: {
               grid: {
-                display:
-                  false
+                display: false
               },
 
               ticks: {
-                maxTicksLimit:
-                  9,
-
-                maxRotation:
-                  0
+                maxTicksLimit: 9,
+                maxRotation: 0
               }
             },
 
             y: {
               ticks: {
                 callback:
-                  value =>
-                    fmt(value)
+                  value => fmt(value)
               }
             }
           }
         }
       }
     );
-
 }
+
 
 function setupScenarioRangeControls() {
 
@@ -2054,7 +2085,6 @@ function setupScenarioRangeControls() {
     document.querySelectorAll(
       ".scenario-range-btn"
     );
-
 
   buttons.forEach(
     button => {
@@ -2071,16 +2101,12 @@ function setupScenarioRangeControls() {
           const label =
             button.dataset.scenarioLabel;
 
-
           if (
             !Number.isFinite(days) ||
             days <= 0
           ) {
-
             return;
-
           }
-
 
           scenarioRangeDays =
             days;
@@ -2088,571 +2114,639 @@ function setupScenarioRangeControls() {
           scenarioRangeLabel =
             label || "1ヶ月後";
 
-
           buttons.forEach(
             item => {
-
               item.classList.toggle(
                 "active",
                 item === button
               );
-
             }
           );
 
-
           renderScenarios();
-
         }
       );
-
     }
   );
-
 }
-
 
 
 /* =========================================================
-   Posting intervals
+   Scenario history / Past forecast
 ========================================================= */
 
-function uniquePostingDates() {
+async function loadScenarioHistory() {
 
-  return [
-    ...new Set(
-      DATA.videos
-        .map(
-          video =>
-            video.date
-        )
-        .filter(Boolean)
-    )
-  ]
-    .sort();
+  try {
 
+    const response =
+      await fetch(
+        "../scenario_history.json?ts=" +
+        Date.now(),
+        {
+          cache: "no-store"
+        }
+      );
+
+    if (!response.ok) {
+      throw new Error(
+        `scenario history HTTP ${response.status}`
+      );
+    }
+
+    const data =
+      await response.json();
+
+    SCENARIO_HISTORY = {
+      dailyForecasts:
+        Array.isArray(data.dailyForecasts)
+          ? data.dailyForecasts
+          : [],
+
+      milestoneForecasts:
+        Array.isArray(data.milestoneForecasts)
+          ? data.milestoneForecasts
+          : []
+    };
+  }
+  catch (error) {
+
+    /*
+      保存ファイルは次工程で追加する。
+      まだ存在しない間もFutureページ自体は正常表示する。
+    */
+    SCENARIO_HISTORY = {
+      dailyForecasts: [],
+      milestoneForecasts: []
+    };
+  }
 }
 
 
-function averageIntervals(
-  dates
+function historicalForecastFor(
+  daysAgo,
+  horizonDays
 ) {
 
-  if (
-    dates.length <
-    2
-  ) {
-
-    return 0;
-
-  }
-
-
-  const intervals =
-    [];
-
-
-  for (
-    let i = 1;
-    i < dates.length;
-    i++
-  ) {
-
-    intervals.push(
-      Math.max(
-        0,
-        diffDays(
-          dates[i],
-          dates[i - 1]
-        )
-      )
+  const targetDate =
+    addDays(
+      todayJST(),
+      -daysAgo
     );
 
-  }
+  const row =
+    SCENARIO_HISTORY.dailyForecasts
+      .find(
+        item =>
+          String(item?.date || "") ===
+          targetDate
+      );
 
-
-  return (
-    intervals.reduce(
-      (a,b) =>
-        a + b,
-      0
-    ) /
-    intervals.length
-  );
-
-}
-
-
-function calculatePostingRecommendation() {
-
-  const dates =
-    uniquePostingDates();
-
-
-  if (
-    !dates.length
-  ) {
-
+  if (!row) {
     return null;
-
   }
 
+  const forecasts =
+    row.forecasts || {};
 
-  const recentDates =
-    dates.slice(
-      -11
-    );
+  const values =
+    forecasts[String(horizonDays)] ||
+    forecasts[horizonDays];
 
+  if (!values) {
+    return null;
+  }
 
-  const recent =
-    averageIntervals(
-      recentDates
-    );
+  const positive =
+    Number(values.positive);
 
+  const standard =
+    Number(values.standard);
 
-  const all =
-    averageIntervals(
-      dates
-    );
-
-
-  let weightedInterval;
-
+  const cautious =
+    Number(values.cautious);
 
   if (
-    recent > 0 &&
-    all > 0
+    !Number.isFinite(positive) ||
+    !Number.isFinite(standard) ||
+    !Number.isFinite(cautious)
   ) {
-
-    weightedInterval =
-      recent *
-      .65 +
-      all *
-      .35;
-
+    return null;
   }
-
-  else {
-
-    weightedInterval =
-      recent ||
-      all ||
-      1;
-
-  }
-
-
-  const latestPost =
-    dates.at(-1);
-
-
-  const center =
-    addDays(
-      latestPost,
-      Math.max(
-        1,
-        Math.round(
-          weightedInterval
-        )
-      )
-    );
-
-
-  const start =
-    addDays(
-      center,
-      -1
-    );
-
-
-  const end =
-    addDays(
-      center,
-      1
-    );
-
 
   return {
-    recent,
-    all,
-    weightedInterval,
-    latestPost,
-    center,
-    start,
-    end
+    date: row.date,
+    daysAgo,
+    horizonDays,
+    positive,
+    standard,
+    cautious
   };
-
 }
 
 
+function pastForecastPeriods() {
 
-/* =========================================================
-   Posting summary
-========================================================= */
-
-function renderPostingSummary() {
-
-  postingRecommendation =
-    calculatePostingRecommendation();
-
-
-  if (
-    !postingRecommendation
-  ) {
-
-    $("recentPostInterval")
-      .textContent =
-      "—";
-
-
-    $("allPostInterval")
-      .textContent =
-      "—";
-
-
-    $("recommendedWindow")
-      .textContent =
-      "—";
-
-
-    return;
-
-  }
-
-
-  $("recentPostInterval")
-    .textContent =
-    postingRecommendation.recent
-      .toFixed(1);
-
-
-  $("allPostInterval")
-    .textContent =
-    postingRecommendation.all
-      .toFixed(1);
-
-
-  $("recommendedWindow")
-    .textContent =
-    `${monthDay(postingRecommendation.start)}〜${monthDay(postingRecommendation.end)}`;
-
-
-  if (
-    !calendarMonth
-  ) {
-
-    const initialDate =
-      dateObj(
-        postingRecommendation.start
-      );
-
-
-    calendarMonth =
-      new Date(
-        initialDate.getFullYear(),
-        initialDate.getMonth(),
-        1
-      );
-
-  }
-
+  return [
+    {
+      label: "1か月前",
+      daysAgo: 30,
+      horizonDays: 30
+    },
+    {
+      label: "3か月前",
+      daysAgo: 90,
+      horizonDays: 90
+    },
+    {
+      label: "1年前",
+      daysAgo: 365,
+      horizonDays: 365
+    }
+  ];
 }
 
 
-
-/* =========================================================
-   Calendar
-========================================================= */
-
-function videosForDate(
-  date
+function closestScenarioKey(
+  item,
+  actual
 ) {
 
-  return DATA.videos
-    .filter(
-      video =>
-        video.date ===
-        date
-    );
+  const candidates = [
+    ["positive", item.positive],
+    ["standard", item.standard],
+    ["cautious", item.cautious]
+  ];
 
-}
-
-
-function isRecommendationDate(
-  date
-) {
-
-  if (
-    !postingRecommendation
-  ) {
-
-    return false;
-
-  }
-
-
-  return (
-    date >=
-      postingRecommendation.start &&
-    date <=
-      postingRecommendation.end
+  candidates.sort(
+    (a,b) =>
+      Math.abs(a[1] - actual) -
+      Math.abs(b[1] - actual)
   );
 
+  return candidates[0][0];
 }
 
 
-function renderCalendar() {
+function scenarioDifferenceText(
+  forecast,
+  actual
+) {
 
-  if (
-    !calendarMonth
-  ) {
+  const difference =
+    Number(forecast) -
+    Number(actual);
 
-    const today =
-      dateObj(
-        todayJST()
-      );
-
-
-    calendarMonth =
-      new Date(
-        today.getFullYear(),
-        today.getMonth(),
-        1
-      );
-
-  }
+  return (
+    `${difference >= 0 ? "+" : ""}${fmt(difference)}`
+  );
+}
 
 
-  const year =
-    calendarMonth
-      .getFullYear();
+function renderPastForecasts() {
 
+  const actual =
+    currentSubscribers();
 
-  const month =
-    calendarMonth
-      .getMonth();
+  $("pastForecastActual").textContent =
+    `${fmt(actual)}人`;
 
-
-  $("calendarMonthLabel")
-    .textContent =
-    `${year}年${month + 1}月`;
-
-
-  const firstDay =
-    new Date(
-      year,
-      month,
-      1
-    );
-
-
-  const lastDay =
-    new Date(
-      year,
-      month + 1,
-      0
-    );
-
-
-  const startBlank =
-    firstDay.getDay();
-
-
-  const days =
-    lastDay.getDate();
-
-
-  const cells =
-    [];
-
-
-  for (
-    let i = 0;
-    i < startBlank;
-    i++
-  ) {
-
-    cells.push(`
-      <div class="calendar-day empty"></div>
-    `);
-
-  }
-
-
-  for (
-    let day = 1;
-    day <= days;
-    day++
-  ) {
-
-    const date =
-      dateToIso(
-        new Date(
-          year,
-          month,
-          day
-        )
-      );
-
-
-    const videos =
-      videosForDate(
-        date
-      );
-
-
-    const recommended =
-      isRecommendationDate(
-        date
-      );
-
-
-    const today =
-      date ===
-      todayJST();
-
-
-    cells.push(`
-      <div
-        class="
-          calendar-day
-          ${recommended ? "recommended-day" : ""}
-          ${today ? "today" : ""}
-        "
-      >
-
-        <span class="calendar-date">
-          ${day}
-        </span>
-
-        <div class="calendar-posts">
-
-          ${videos
-            .map(
-              video => `
-                <div
-                  class="calendar-post"
-                  title="${escapeHtml(video.title || "")}"
-                >
-
-                  <img
-                    src="${escapeHtml(video.thumbnail || "")}"
-                    alt=""
-                    loading="lazy"
-                  >
-
-                  <span class="calendar-post-title">
-                    ${escapeHtml(video.title || "")}
-                  </span>
-
-                </div>
-              `
+  const available =
+    pastForecastPeriods()
+      .map(
+        period => ({
+          ...period,
+          forecast:
+            historicalForecastFor(
+              period.daysAgo,
+              period.horizonDays
             )
-            .join("")
-          }
+        })
+      )
+      .filter(
+        item =>
+          item.forecast
+      );
 
-        </div>
+  const container =
+    $("pastForecastCards");
 
-        ${
-          recommended &&
-          !videos.length
-            ? `
-              <span class="recommend-badge">
-                RECOMMENDED
-              </span>
-            `
-            : ""
-        }
+  container.classList.remove(
+    "past-count-0",
+    "past-count-1",
+    "past-count-2",
+    "past-count-3"
+  );
 
+  container.classList.add(
+    `past-count-${available.length}`
+  );
+
+  if (!available.length) {
+
+    container.innerHTML = `
+      <div class="empty-state">
+        比較できる過去予測はまだありません。
       </div>
-    `);
+    `;
 
+    renderPastForecastAnalysis(
+      [],
+      actual
+    );
+
+    return;
   }
 
+  container.innerHTML =
+    available
+      .map(
+        item => {
 
-  const total =
-    cells.length;
+          const forecast =
+            item.forecast;
 
+          const closest =
+            closestScenarioKey(
+              forecast,
+              actual
+            );
 
-  const remainder =
-    total %
-    7;
+          const rows = [
+            ["positive", "好調", forecast.positive],
+            ["standard", "標準", forecast.standard],
+            ["cautious", "慎重", forecast.cautious]
+          ];
 
+          return `
+            <article class="past-period-card">
+              <div class="past-period-heading">
+                <strong>${item.label}</strong>
+                <span>${jpDate(forecast.date)}時点</span>
+              </div>
 
-  if (
-    remainder !==
-    0
-  ) {
+              <div class="past-scenario-list">
+                ${rows
+                  .map(
+                    ([key,label,value]) => `
+                      <div class="past-scenario-row ${key === closest ? "closest" : ""}">
+                        <span>${label}</span>
+                        <strong>${fmt(value)}人</strong>
+                        <small>(${scenarioDifferenceText(value, actual)})</small>
+                      </div>
+                    `
+                  )
+                  .join("")}
+              </div>
+            </article>
+          `;
+        }
+      )
+      .join("");
 
-    const missing =
-      7 -
-      remainder;
-
-
-    for (
-      let i = 0;
-      i < missing;
-      i++
-    ) {
-
-      cells.push(`
-        <div class="calendar-day empty"></div>
-      `);
-
-    }
-
-  }
-
-
-  $("calendarGrid")
-    .innerHTML =
-    cells.join("");
-
+  renderPastForecastAnalysis(
+    available,
+    actual
+  );
 }
 
+
+function renderPastForecastAnalysis(
+  available,
+  actual
+) {
+
+  const box =
+    $("pastForecastAnalysis");
+
+  if (!available.length) {
+
+    applyStatusClass(
+      box,
+      "ontrack"
+    );
+
+    $("pastAnalysisSymbol").textContent =
+      "○";
+
+    $("pastAnalysisLabel").textContent =
+      "予測データを蓄積中";
+
+    $("pastAnalysisText").textContent =
+      "過去予測が保存されると、ここで今日の実績との答え合わせを行います。";
+
+    return;
+  }
+
+  /*
+    一番近い過去時点を主判定に使う。
+    1か月前があれば1か月前、なければ次に近い期間。
+  */
+  const primary =
+    available[0];
+
+  const forecast =
+    primary.forecast;
+
+  const closest =
+    closestScenarioKey(
+      forecast,
+      actual
+    );
+
+  const closestLabel =
+    closest === "positive"
+      ? "好調"
+      : closest === "standard"
+        ? "標準"
+        : "慎重";
+
+  const closestValue =
+    forecast[closest];
+
+  const closestDiff =
+    Math.abs(
+      closestValue - actual
+    );
+
+  let level = "ontrack";
+  let symbol = "○";
+  let label = "おおむね予測通り";
+  let text =
+    `${primary.label}の${closestLabel}予測が実績との差${fmt(closestDiff)}人で最も近く、現在の登録者数は当時の予測範囲内で推移しています。`;
+
+  if (actual > forecast.positive) {
+    level = "ahead";
+    symbol = "◎";
+    label = "予測を上回る成長";
+    text =
+      `今日の登録者数は、${primary.label}の好調シナリオをさらに${fmt(actual - forecast.positive)}人上回りました。当時の想定以上のペースで推移しています。`;
+  }
+  else if (actual < forecast.cautious) {
+    level = "behind";
+    symbol = "△";
+    label = "予測を下回る推移";
+    text =
+      `今日の登録者数は、${primary.label}の慎重シナリオを${fmt(forecast.cautious - actual)}人下回りました。当時の想定より緩やかなペースで推移しています。`;
+  }
+
+  if (available.length >= 2) {
+
+    const older =
+      available[1];
+
+    const olderForecast =
+      older.forecast;
+
+    if (actual > olderForecast.positive) {
+      text +=
+        ` ${older.label}の好調予測も上回っています。`;
+    }
+    else if (actual < olderForecast.cautious) {
+      text +=
+        ` ${older.label}の慎重予測も下回っています。`;
+    }
+  }
+
+  applyStatusClass(
+    box,
+    level
+  );
+
+  $("pastAnalysisSymbol").textContent =
+    symbol;
+
+  $("pastAnalysisLabel").textContent =
+    label;
+
+  $("pastAnalysisText").textContent =
+    text;
+}
 
 
 /* =========================================================
-   Calendar controls
+   Milestone forecast
 ========================================================= */
 
-function setupCalendarControls() {
+function nextMajorMilestone(
+  current
+) {
 
-  $("prevMonth")
-    .onclick =
-    () => {
-
-      calendarMonth =
-        new Date(
-          calendarMonth.getFullYear(),
-          calendarMonth.getMonth() - 1,
-          1
-        );
-
-
-      renderCalendar();
-
-    };
-
-
-  $("nextMonth")
-    .onclick =
-    () => {
-
-      calendarMonth =
-        new Date(
-          calendarMonth.getFullYear(),
-          calendarMonth.getMonth() + 1,
-          1
-        );
-
-
-      renderCalendar();
-
-    };
-
+  return (
+    Math.floor(
+      current / 500
+    ) + 1
+  ) * 500;
 }
 
+
+function previousMajorMilestone(
+  target
+) {
+
+  return Math.max(
+    0,
+    target - 500
+  );
+}
+
+
+function milestoneHistoryForTarget(
+  target
+) {
+
+  return (
+    SCENARIO_HISTORY.milestoneForecasts
+      .filter(
+        item =>
+          Number(item?.targetMilestone) ===
+          Number(target)
+      )
+      .sort(
+        (a,b) =>
+          String(a.createdAt || "")
+            .localeCompare(
+              String(b.createdAt || "")
+            )
+      )
+      .at(-1) ||
+    null
+  );
+}
+
+
+function renderMilestoneForecast() {
+
+  const current =
+    currentSubscribers();
+
+  const target =
+    nextMajorMilestone(
+      current
+    );
+
+  const fromMilestone =
+    previousMajorMilestone(
+      target
+    );
+
+  const pace =
+    scenarioPaces().standard;
+
+  const currentEta =
+    calculateEta(
+      current,
+      target,
+      pace,
+      todayJST()
+    );
+
+  const stored =
+    milestoneHistoryForTarget(
+      target
+    );
+
+  const initialEta =
+    stored?.initialForecastDate ||
+    null;
+
+  $("milestoneTarget").textContent =
+    `${fmt(target)} subscribers`;
+
+  $("milestoneCurrentEta").textContent =
+    currentEta
+      ? jpDate(currentEta)
+      : "算出不可";
+
+  $("milestoneReferenceLabel").textContent =
+    `${fmt(fromMilestone)}人達成時点での予測`;
+
+  $("milestoneInitialEta").textContent =
+    initialEta
+      ? jpDate(initialEta)
+      : "—";
+
+  renderMilestoneAnalysis({
+    target,
+    fromMilestone,
+    currentEta,
+    initialEta,
+    createdAt:
+      stored?.createdAt ||
+      null
+  });
+}
+
+
+function renderMilestoneAnalysis({
+  target,
+  fromMilestone,
+  currentEta,
+  initialEta,
+  createdAt
+}) {
+
+  const box =
+    $("milestoneAnalysis");
+
+  if (
+    !currentEta ||
+    !initialEta
+  ) {
+
+    applyStatusClass(
+      box,
+      "ontrack"
+    );
+
+    $("milestoneAnalysisSymbol").textContent =
+      "○";
+
+    $("milestoneAnalysisLabel").textContent =
+      "基準予測を準備中";
+
+    $("milestoneAnalysisText").textContent =
+      `${fmt(fromMilestone)}人達成時点の初期予測が保存されると、現在の${fmt(target)}人到達予測との変化を比較します。`;
+
+    return;
+  }
+
+  /*
+    初期予測までの期間に対して、
+    現在の予測日が何％前後したかで判定する。
+  */
+  const referenceStart =
+    createdAt ||
+    todayJST();
+
+  const initialDuration =
+    Math.max(
+      1,
+      diffDays(
+        initialEta,
+        referenceStart
+      )
+    );
+
+  const shiftDays =
+    diffDays(
+      initialEta,
+      currentEta
+    );
+
+  const shiftRatio =
+    shiftDays /
+    initialDuration;
+
+  let level = "ontrack";
+  let symbol = "○";
+  let label = "おおむね予測通り";
+  let text;
+
+  if (shiftRatio >= .05) {
+    level = "ahead";
+    symbol = "◎";
+    label = "予測より前倒し";
+    text =
+      `${fmt(target)}人の到達予測日は、${fmt(fromMilestone)}人達成時点から${Math.abs(shiftDays)}日前倒しされています。現在は当初の想定を上回るペースで推移しています。`;
+  }
+  else if (shiftRatio <= -.05) {
+    level = "behind";
+    symbol = "△";
+    label = "予測より後ろ倒し";
+    text =
+      `${fmt(target)}人の到達予測日は、${fmt(fromMilestone)}人達成時点から${Math.abs(shiftDays)}日後ろ倒しされています。現在は当初の想定よりやや遅いペースで推移しています。`;
+  }
+  else {
+
+    if (shiftDays > 0) {
+      text =
+        `${fmt(target)}人の到達予測日は、${fmt(fromMilestone)}人達成時点から${shiftDays}日前倒しされています。現在もおおむね当初の想定に沿って推移しています。`;
+    }
+    else if (shiftDays < 0) {
+      text =
+        `${fmt(target)}人の到達予測日は、${fmt(fromMilestone)}人達成時点から${Math.abs(shiftDays)}日後ろ倒しされています。現在もおおむね当初の想定に沿って推移しています。`;
+    }
+    else {
+      text =
+        `${fmt(target)}人の到達予測日は、${fmt(fromMilestone)}人達成時点の予測から変わっていません。現在もおおむね当初の想定に沿って推移しています。`;
+    }
+  }
+
+  applyStatusClass(
+    box,
+    level
+  );
+
+  $("milestoneAnalysisSymbol").textContent =
+    symbol;
+
+  $("milestoneAnalysisLabel").textContent =
+    label;
+
+  $("milestoneAnalysisText").textContent =
+    text;
+}
 
 
 /* =========================================================
@@ -2739,63 +2833,45 @@ async function initFuture() {
         "../data.json?ts=" +
         Date.now(),
         {
-          cache:
-            "no-store"
+          cache: "no-store"
         }
       );
 
-
     DATA =
       await response.json();
-
   }
-
-  catch (
-    error
-  ) {
+  catch (error) {
 
     console.error(
       "Future outlook data load failed:",
       error
     );
 
-
     return;
-
   }
 
-
   normalizeData();
-
 
   if (
     typeof updateCommonHeader ===
     "function"
   ) {
-
-    updateCommonHeader(
-      DATA
-    );
-
+    updateCommonHeader(DATA);
   }
 
+  await loadScenarioHistory();
 
   renderSevenDayForecasts();
-
   renderGoal();
+  setupGoalStatusPopover();
 
-renderScenarios();
+  renderScenarios();
+  setupScenarioRangeControls();
 
-setupScenarioRangeControls();
-
-renderPostingSummary();
-
-  renderCalendar();
-
-  setupCalendarControls();
+  renderPastForecasts();
+  renderMilestoneForecast();
 
   setupMobileChartTooltipClose();
-
 }
 
 
