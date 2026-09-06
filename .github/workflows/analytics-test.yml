@@ -3,6 +3,9 @@ name: YouTube Analytics API Test
 on:
   workflow_dispatch:
 
+  permissions:
+  contents: write
+
 jobs:
   test-analytics:
     runs-on: ubuntu-latest
