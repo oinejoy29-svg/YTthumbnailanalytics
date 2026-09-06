@@ -1,11 +1,12 @@
 import os
 import json
+import time
 from datetime import date, timedelta
 from pathlib import Path
-from collections import defaultdict
 
 from google.oauth2.credentials import Credentials
 from googleapiclient.discovery import build
+from googleapiclient.errors import HttpError
 
 
 # =========================================================
@@ -14,8 +15,11 @@ from googleapiclient.discovery import build
 
 START_DATE = "2026-04-03"
 
-BASE_DIR = Path(__file__).resolve().parent
-OUTPUT_FILE = BASE_DIR / "analytics_data.json"
+ANALYTICS_DIR = Path(__file__).resolve().parent
+ROOT_DIR = ANALYTICS_DIR.parent
+
+OUTPUT_FILE = ANALYTICS_DIR / "analytics_data.json"
+DATA_FILE = ROOT_DIR / "data.json"
 
 
 # =========================================================
@@ -41,7 +45,7 @@ credentials = Credentials(
 
 
 # =========================================================
-# YouTube Analytics API
+# API
 # =========================================================
 
 analytics = build(
@@ -53,15 +57,10 @@ analytics = build(
 
 
 # =========================================================
-# DATE RANGE
+# DATE
 # =========================================================
 
-end_date = str(date.today() - timedelta(days=1))
-
-print("========================================")
-print("YouTube Analytics DATA UPDATE")
-print(f"期間: {START_DATE} ～ {end_date}")
-print("========================================")
+END_DATE = str(date.today() - timedelta(days=1))
 
 
 # =========================================================
@@ -83,109 +82,48 @@ METRICS = ",".join([
 
 
 # =========================================================
-# 1. CHANNEL DAILY
+# HELPERS
 # =========================================================
 
-print()
-print("[1/2] チャンネル全体の日別データを取得中...")
+def response_to_rows(response):
 
-channel_response = analytics.reports().query(
-    ids="channel==MINE",
-    startDate=START_DATE,
-    endDate=end_date,
-    metrics=METRICS,
-    dimensions="day",
-    sort="day"
-).execute()
+    headers = [
+        column["name"]
+        for column in response.get("columnHeaders", [])
+    ]
 
-channel_headers = [
-    column["name"]
-    for column in channel_response.get("columnHeaders", [])
-]
+    result = []
 
-channel_daily = []
+    for row in response.get("rows", []):
 
-for row in channel_response.get("rows", []):
+        raw = dict(zip(headers, row))
 
-    raw = dict(zip(channel_headers, row))
+        result.append({
+            "date": raw.get("day"),
+            "views": raw.get("views", 0),
+            "engagedViews": raw.get("engagedViews", 0),
+            "watchMinutes": raw.get(
+                "estimatedMinutesWatched", 0
+            ),
+            "averageViewDuration": raw.get(
+                "averageViewDuration", 0
+            ),
+            "averageViewPercentage": raw.get(
+                "averageViewPercentage", 0
+            ),
+            "likes": raw.get("likes", 0),
+            "comments": raw.get("comments", 0),
+            "shares": raw.get("shares", 0),
+            "subscribersGained": raw.get(
+                "subscribersGained", 0
+            ),
+            "subscribersLost": raw.get(
+                "subscribersLost", 0
+            ),
+        })
 
-    channel_daily.append({
-        "date": raw.get("day"),
-        "views": raw.get("views", 0),
-        "engagedViews": raw.get("engagedViews", 0),
-        "watchMinutes": raw.get("estimatedMinutesWatched", 0),
-        "averageViewDuration": raw.get("averageViewDuration", 0),
-        "averageViewPercentage": raw.get("averageViewPercentage", 0),
-        "likes": raw.get("likes", 0),
-        "comments": raw.get("comments", 0),
-        "shares": raw.get("shares", 0),
-        "subscribersGained": raw.get("subscribersGained", 0),
-        "subscribersLost": raw.get("subscribersLost", 0),
-    })
+    return result
 
-
-print(f"→ {len(channel_daily)} 日取得")
-
-
-# =========================================================
-# 2. VIDEO × DAY
-# =========================================================
-
-print()
-print("[2/2] 動画別の日別データを取得中...")
-
-video_response = analytics.reports().query(
-    ids="channel==MINE",
-    startDate=START_DATE,
-    endDate=end_date,
-    metrics=METRICS,
-    dimensions="day,video",
-    sort="day"
-).execute()
-
-video_headers = [
-    column["name"]
-    for column in video_response.get("columnHeaders", [])
-]
-
-video_rows = video_response.get("rows", [])
-
-print(f"→ {len(video_rows)} 行取得")
-
-
-# =========================================================
-# VIDEO DATA
-# =========================================================
-
-video_daily_map = defaultdict(list)
-
-for row in video_rows:
-
-    raw = dict(zip(video_headers, row))
-
-    video_id = raw.get("video")
-
-    if not video_id:
-        continue
-
-    video_daily_map[video_id].append({
-        "date": raw.get("day"),
-        "views": raw.get("views", 0),
-        "engagedViews": raw.get("engagedViews", 0),
-        "watchMinutes": raw.get("estimatedMinutesWatched", 0),
-        "averageViewDuration": raw.get("averageViewDuration", 0),
-        "averageViewPercentage": raw.get("averageViewPercentage", 0),
-        "likes": raw.get("likes", 0),
-        "comments": raw.get("comments", 0),
-        "shares": raw.get("shares", 0),
-        "subscribersGained": raw.get("subscribersGained", 0),
-        "subscribersLost": raw.get("subscribersLost", 0),
-    })
-
-
-# =========================================================
-# SUMMARY FUNCTION
-# =========================================================
 
 def create_summary(rows):
 
@@ -194,12 +132,12 @@ def create_summary(rows):
         for row in rows
     )
 
-    total_engaged_views = sum(
+    total_engaged = sum(
         row["engagedViews"]
         for row in rows
     )
 
-    total_watch_minutes = sum(
+    total_watch = sum(
         row["watchMinutes"]
         for row in rows
     )
@@ -219,31 +157,31 @@ def create_summary(rows):
         for row in rows
     )
 
-    total_subscribers_gained = sum(
+    subscribers_gained = sum(
         row["subscribersGained"]
         for row in rows
     )
 
-    total_subscribers_lost = sum(
+    subscribers_lost = sum(
         row["subscribersLost"]
         for row in rows
     )
 
-    # 平均再生時間・平均再生率は
-    # 日別平均の単純平均ではなく再生数で加重
     if total_views > 0:
 
-        average_view_duration = (
+        average_duration = (
             sum(
-                row["averageViewDuration"] * row["views"]
+                row["averageViewDuration"]
+                * row["views"]
                 for row in rows
             )
             / total_views
         )
 
-        average_view_percentage = (
+        average_percentage = (
             sum(
-                row["averageViewPercentage"] * row["views"]
+                row["averageViewPercentage"]
+                * row["views"]
                 for row in rows
             )
             / total_views
@@ -251,46 +189,170 @@ def create_summary(rows):
 
     else:
 
-        average_view_duration = 0
-        average_view_percentage = 0
+        average_duration = 0
+        average_percentage = 0
 
     return {
         "views": total_views,
-        "engagedViews": total_engaged_views,
-        "watchMinutes": round(total_watch_minutes, 2),
-        "averageViewDuration": round(average_view_duration, 2),
-        "averageViewPercentage": round(average_view_percentage, 2),
+        "engagedViews": total_engaged,
+        "watchMinutes": round(total_watch, 2),
+        "averageViewDuration": round(
+            average_duration, 2
+        ),
+        "averageViewPercentage": round(
+            average_percentage, 2
+        ),
         "likes": total_likes,
         "comments": total_comments,
         "shares": total_shares,
-        "subscribersGained": total_subscribers_gained,
-        "subscribersLost": total_subscribers_lost,
+        "subscribersGained": subscribers_gained,
+        "subscribersLost": subscribers_lost,
     }
 
 
 # =========================================================
-# CHANNEL SUMMARY
+# LOAD data.json
 # =========================================================
 
-channel_summary = create_summary(channel_daily)
+print("========================================")
+print("YouTube Analytics DATA UPDATE")
+print(f"期間: {START_DATE} ～ {END_DATE}")
+print("========================================")
+
+with open(
+    DATA_FILE,
+    "r",
+    encoding="utf-8"
+) as f:
+
+    public_data = json.load(f)
+
+
+source_videos = public_data.get("videos", [])
+
+print()
+print(
+    f"data.jsonから動画を {len(source_videos)} 本読み込み"
+)
 
 
 # =========================================================
-# BUILD VIDEO OBJECT
+# 1. CHANNEL DAILY
 # =========================================================
+
+print()
+print("[1/2] チャンネル全体の日別データを取得中...")
+
+channel_response = analytics.reports().query(
+    ids="channel==MINE",
+    startDate=START_DATE,
+    endDate=END_DATE,
+    metrics=METRICS,
+    dimensions="day",
+    sort="day"
+).execute()
+
+channel_daily = response_to_rows(
+    channel_response
+)
+
+print(
+    f"→ {len(channel_daily)} 日取得"
+)
+
+
+# =========================================================
+# 2. EACH VIDEO DAILY
+# =========================================================
+
+print()
+print("[2/2] 動画別の日別データを取得中...")
 
 videos = {}
 
-for video_id, rows in video_daily_map.items():
+success_count = 0
+error_count = 0
 
-    rows.sort(
-        key=lambda item: item["date"]
+
+for index, video in enumerate(
+    source_videos,
+    start=1
+):
+
+    video_id = video.get("id")
+
+    if not video_id:
+        continue
+
+    title = video.get("title", "")
+    upload_date = video.get(
+        "date",
+        START_DATE
     )
 
-    videos[video_id] = {
-        "summary": create_summary(rows),
-        "daily": rows
-    }
+    # 動画公開前の日付を問い合わせる必要はない
+    video_start_date = max(
+        upload_date,
+        START_DATE
+    )
+
+    print()
+    print(
+        f"[{index}/{len(source_videos)}] "
+        f"{video_id}"
+    )
+
+    print(
+        f"  {title[:60]}"
+    )
+
+    try:
+
+        response = analytics.reports().query(
+            ids="channel==MINE",
+            startDate=video_start_date,
+            endDate=END_DATE,
+            metrics=METRICS,
+            dimensions="day",
+            filters=f"video=={video_id}",
+            sort="day"
+        ).execute()
+
+        daily = response_to_rows(
+            response
+        )
+
+        videos[video_id] = {
+            "title": title,
+            "publishedDate": upload_date,
+            "thumbnail": video.get(
+                "thumbnail"
+            ),
+            "duration": video.get(
+                "duration"
+            ),
+            "summary": create_summary(
+                daily
+            ),
+            "daily": daily
+        }
+
+        success_count += 1
+
+        print(
+            f"  → {len(daily)} 日取得"
+        )
+
+        # APIへ連続アクセスしすぎないよう少し待つ
+        time.sleep(0.1)
+
+    except HttpError as error:
+
+        error_count += 1
+
+        print(
+            f"  ERROR: {error}"
+        )
 
 
 # =========================================================
@@ -302,11 +364,15 @@ output = {
     "meta": {
         "generatedAt": date.today().isoformat(),
         "startDate": START_DATE,
-        "endDate": end_date,
-        "videoCount": len(videos)
+        "endDate": END_DATE,
+        "videoCount": len(videos),
+        "videoSuccessCount": success_count,
+        "videoErrorCount": error_count
     },
 
-    "summary": channel_summary,
+    "summary": create_summary(
+        channel_daily
+    ),
 
     "channelDaily": channel_daily,
 
@@ -341,26 +407,52 @@ print("========================================")
 print("取得結果")
 print("========================================")
 
-print(f"チャンネル日別データ : {len(channel_daily)} 日")
-print(f"動画数                 : {len(videos)} 本")
-print(f"動画×日データ          : {len(video_rows)} 行")
+print(
+    f"チャンネル日別 : {len(channel_daily)} 日"
+)
+
+print(
+    f"動画取得成功   : {success_count} 本"
+)
+
+print(
+    f"動画取得失敗   : {error_count} 本"
+)
+
+print(
+    f"保存動画数     : {len(videos)} 本"
+)
 
 print()
-print(f"総再生数               : {channel_summary['views']}")
-print(f"Engaged Views          : {channel_summary['engagedViews']}")
-print(f"総再生時間             : {channel_summary['watchMinutes']} 分")
-print(f"平均再生時間           : {channel_summary['averageViewDuration']} 秒")
-print(f"平均再生率             : {channel_summary['averageViewPercentage']} %")
-print(f"高評価                 : {channel_summary['likes']}")
-print(f"コメント               : {channel_summary['comments']}")
-print(f"シェア                 : {channel_summary['shares']}")
-print(f"登録者獲得             : {channel_summary['subscribersGained']}")
+print(
+    f"総再生数       : "
+    f"{output['summary']['views']}"
+)
+
+print(
+    f"Engaged Views  : "
+    f"{output['summary']['engagedViews']}"
+)
+
+print(
+    f"平均再生率     : "
+    f"{output['summary']['averageViewPercentage']} %"
+)
+
+print(
+    f"登録者獲得     : "
+    f"{output['summary']['subscribersGained']}"
+)
 
 print()
-print(f"保存先: {OUTPUT_FILE}")
+print(
+    f"保存先: {OUTPUT_FILE}"
+)
 
 print()
 print("========================================")
 print("SUCCESS")
-print("動画別Analyticsデータの生成に成功しました")
+print(
+    "動画別Analyticsデータを生成しました"
+)
 print("========================================")
