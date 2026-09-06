@@ -362,27 +362,26 @@ for index, video in enumerate(
             response
         )
 
-   videos[video_id] = {
-    "title": title,
-    "publishedDate": upload_date,
-    "thumbnail": video.get(
-        "thumbnail"
-    ),
-    "duration": video.get(
-        "duration"
-    ),
-    "summary": create_summary(
-        daily
-    ),
-    "milestones": create_milestones(
-        daily,
-        upload_date
-    ),
-    "daily": daily
-}
+        videos[video_id] = {
+            "title": title,
+            "publishedDate": upload_date,
+            "thumbnail": video.get(
+                "thumbnail"
+            ),
+            "duration": video.get(
+                "duration"
+            ),
+            "summary": create_summary(
+                daily
+            ),
+            "milestones": create_milestones(
+                daily,
+                upload_date
+            ),
+            "daily": daily
+        }
 
         success_count += 1
-
         print(
             f"  → {len(daily)} 日取得"
         )
