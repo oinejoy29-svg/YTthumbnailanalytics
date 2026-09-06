@@ -21,8 +21,13 @@ const COLORS = {
   ink: "#111111",
   muted: "#777777",
   yellow: "#FFF36A",
+
   chartYellow: "#C5A900",
   chartYellowAlt: "#D7BE45",
+
+  // COMPARE VIDEO B
+  chartRed: "#C9665E",
+
   green: "#35C759",
   paper: "#FFFFFF",
   grid: "rgba(17,17,17,.10)",
@@ -1867,33 +1872,33 @@ function renderCompareChart(
     },
 
 
-    {
-      label:"VIDEO B",
+{
+  label:"VIDEO B",
 
-      data:dataB,
+  data:dataB,
 
-      borderColor:
-        COLORS.chartYellowAlt,
+  borderColor:
+    COLORS.chartRed,
 
-      backgroundColor:
-        COLORS.chartYellowAlt,
+  backgroundColor:
+    COLORS.chartRed,
 
-      pointBackgroundColor:
-        COLORS.paper,
+  pointBackgroundColor:
+    COLORS.paper,
 
-      pointBorderColor:
-        COLORS.chartYellowAlt,
+  pointBorderColor:
+    COLORS.chartRed,
 
-      pointBorderWidth:3,
+  pointBorderWidth:3,
 
-      pointRadius:4,
+  pointRadius:4,
 
-      pointHoverRadius:6,
+  pointHoverRadius:6,
 
-      borderWidth:3,
+  borderWidth:3,
 
-      tension:.3
-    }
+  tension:.3
+}
   ];
 
 
