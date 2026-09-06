@@ -2,22 +2,22 @@
   "dailyForecasts": [
     {
       "date": "2026-09-06",
-      "subscribers": 532,
+      "subscribers": 533,
       "forecasts": {
         "30": {
-          "positive": 738,
-          "standard": 704,
-          "cautious": 669
+          "positive": 742,
+          "standard": 707,
+          "cautious": 673
         },
         "90": {
-          "positive": 1151,
-          "standard": 1048,
-          "cautious": 944
+          "positive": 1161,
+          "standard": 1056,
+          "cautious": 952
         },
         "365": {
-          "positive": 3041,
-          "standard": 2623,
-          "cautious": 2205
+          "positive": 3079,
+          "standard": 2655,
+          "cautious": 2230
         }
       }
     }
