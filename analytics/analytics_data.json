@@ -3,20 +3,20 @@
     "generatedAt": "2026-09-06",
     "startDate": "2026-04-03",
     "endDate": "2026-09-05",
-    "videoCount": 23,
-    "videoSuccessCount": 23,
-    "videoErrorCount": 0
+    "videoCount": 22,
+    "videoSuccessCount": 22,
+    "videoErrorCount": 1
   },
   "summary": {
-    "views": 155743,
-    "engagedViews": 132868,
-    "watchMinutes": 553272,
-    "averageViewDuration": 238.21,
-    "averageViewPercentage": 36.66,
-    "likes": 3498,
-    "comments": 127,
-    "shares": 369,
-    "subscribersGained": 597,
+    "views": 160318,
+    "engagedViews": 134912,
+    "watchMinutes": 559137,
+    "averageViewDuration": 236.24,
+    "averageViewPercentage": 36.79,
+    "likes": 3539,
+    "comments": 130,
+    "shares": 373,
+    "subscribersGained": 604,
     "subscribersLost": 73
   },
   "channelDaily": [
@@ -2021,6 +2021,19 @@
       "shares": 2,
       "subscribersGained": 3,
       "subscribersLost": 0
+    },
+    {
+      "date": "2026-09-04",
+      "views": 4575,
+      "engagedViews": 2044,
+      "watchMinutes": 5865,
+      "averageViewDuration": 169,
+      "averageViewPercentage": 41.09,
+      "likes": 41,
+      "comments": 3,
+      "shares": 4,
+      "subscribersGained": 7,
+      "subscribersLost": 0
     }
   ],
   "videos": {
@@ -2030,16 +2043,54 @@
       "thumbnail": "https://i.ytimg.com/vi/K4mQYWHpcUI/hqdefault.jpg",
       "duration": "1:07:09",
       "summary": {
-        "views": 6766,
-        "engagedViews": 6731,
-        "watchMinutes": 74796,
-        "averageViewDuration": 666.95,
-        "averageViewPercentage": 16.57,
+        "views": 6770,
+        "engagedViews": 6734,
+        "watchMinutes": 74805,
+        "averageViewDuration": 666.67,
+        "averageViewPercentage": 16.56,
         "likes": 109,
         "comments": 4,
         "shares": 1,
         "subscribersGained": 28,
         "subscribersLost": 1
+      },
+      "milestones": {
+        "day1": {
+          "throughDate": "2026-04-03",
+          "views": 23,
+          "engagedViews": 23,
+          "watchMinutes": 82,
+          "averageViewDuration": 215.0,
+          "averageViewPercentage": 5.34,
+          "likes": 0,
+          "comments": 3,
+          "shares": 0,
+          "subscribersGained": 0
+        },
+        "day3": {
+          "throughDate": "2026-04-05",
+          "views": 59,
+          "engagedViews": 59,
+          "watchMinutes": 451,
+          "averageViewDuration": 459.88,
+          "averageViewPercentage": 11.42,
+          "likes": 0,
+          "comments": 3,
+          "shares": 0,
+          "subscribersGained": 0
+        },
+        "day7": {
+          "throughDate": "2026-04-09",
+          "views": 2891,
+          "engagedViews": 2891,
+          "watchMinutes": 32068,
+          "averageViewDuration": 665.23,
+          "averageViewPercentage": 16.52,
+          "likes": 62,
+          "comments": 4,
+          "shares": 0,
+          "subscribersGained": 17
+        }
       },
       "daily": [
         {
@@ -4043,6 +4094,19 @@
           "shares": 0,
           "subscribersGained": 0,
           "subscribersLost": 0
+        },
+        {
+          "date": "2026-09-04",
+          "views": 4,
+          "engagedViews": 3,
+          "watchMinutes": 9,
+          "averageViewDuration": 186,
+          "averageViewPercentage": 4.62,
+          "likes": 0,
+          "comments": 0,
+          "shares": 0,
+          "subscribersGained": 0,
+          "subscribersLost": 0
         }
       ]
     },
@@ -4052,16 +4116,54 @@
       "thumbnail": "https://i.ytimg.com/vi/PmD_nggctn4/hqdefault.jpg",
       "duration": "13:20",
       "summary": {
-        "views": 22813,
-        "engagedViews": 22440,
-        "watchMinutes": 129511,
-        "averageViewDuration": 345.74,
-        "averageViewPercentage": 43.28,
-        "likes": 491,
-        "comments": 11,
+        "views": 22987,
+        "engagedViews": 22581,
+        "watchMinutes": 130239,
+        "averageViewDuration": 345.47,
+        "averageViewPercentage": 43.25,
+        "likes": 494,
+        "comments": 12,
         "shares": 51,
         "subscribersGained": 32,
         "subscribersLost": 6
+      },
+      "milestones": {
+        "day1": {
+          "throughDate": "2026-04-26",
+          "views": 31,
+          "engagedViews": 31,
+          "watchMinutes": 235,
+          "averageViewDuration": 456.0,
+          "averageViewPercentage": 57.06,
+          "likes": 2,
+          "comments": 1,
+          "shares": 0,
+          "subscribersGained": 0
+        },
+        "day3": {
+          "throughDate": "2026-04-28",
+          "views": 37,
+          "engagedViews": 37,
+          "watchMinutes": 243,
+          "averageViewDuration": 395.7,
+          "averageViewPercentage": 49.53,
+          "likes": 3,
+          "comments": 1,
+          "shares": 0,
+          "subscribersGained": 0
+        },
+        "day7": {
+          "throughDate": "2026-05-02",
+          "views": 106,
+          "engagedViews": 106,
+          "watchMinutes": 812,
+          "averageViewDuration": 461.32,
+          "averageViewPercentage": 57.73,
+          "likes": 5,
+          "comments": 1,
+          "shares": 0,
+          "subscribersGained": 0
+        }
       },
       "daily": [
         {
@@ -5766,6 +5868,19 @@
           "shares": 0,
           "subscribersGained": 0,
           "subscribersLost": 0
+        },
+        {
+          "date": "2026-09-04",
+          "views": 174,
+          "engagedViews": 141,
+          "watchMinutes": 728,
+          "averageViewDuration": 309,
+          "averageViewPercentage": 38.67,
+          "likes": 3,
+          "comments": 1,
+          "shares": 0,
+          "subscribersGained": 0,
+          "subscribersLost": 0
         }
       ]
     },
@@ -5775,16 +5890,54 @@
       "thumbnail": "https://i.ytimg.com/vi/a1tQY33iFmM/hqdefault.jpg",
       "duration": "7:21",
       "summary": {
-        "views": 1845,
-        "engagedViews": 1836,
-        "watchMinutes": 5129,
-        "averageViewDuration": 168.98,
+        "views": 1847,
+        "engagedViews": 1837,
+        "watchMinutes": 5131,
+        "averageViewDuration": 168.97,
         "averageViewPercentage": 38.42,
         "likes": 56,
         "comments": 0,
         "shares": 2,
         "subscribersGained": 1,
         "subscribersLost": 0
+      },
+      "milestones": {
+        "day1": {
+          "throughDate": "2026-05-10",
+          "views": 16,
+          "engagedViews": 16,
+          "watchMinutes": 29,
+          "averageViewDuration": 109.0,
+          "averageViewPercentage": 24.76,
+          "likes": 3,
+          "comments": 0,
+          "shares": 0,
+          "subscribersGained": 0
+        },
+        "day3": {
+          "throughDate": "2026-05-12",
+          "views": 36,
+          "engagedViews": 36,
+          "watchMinutes": 72,
+          "averageViewDuration": 121.08,
+          "averageViewPercentage": 27.54,
+          "likes": 4,
+          "comments": 0,
+          "shares": 0,
+          "subscribersGained": 0
+        },
+        "day7": {
+          "throughDate": "2026-05-16",
+          "views": 54,
+          "engagedViews": 54,
+          "watchMinutes": 90,
+          "averageViewDuration": 102.56,
+          "averageViewPercentage": 23.34,
+          "likes": 5,
+          "comments": 0,
+          "shares": 0,
+          "subscribersGained": 0
+        }
       },
       "daily": [
         {
@@ -7307,6 +7460,19 @@
           "shares": 0,
           "subscribersGained": 0,
           "subscribersLost": 0
+        },
+        {
+          "date": "2026-09-04",
+          "views": 2,
+          "engagedViews": 1,
+          "watchMinutes": 2,
+          "averageViewDuration": 162,
+          "averageViewPercentage": 36.88,
+          "likes": 0,
+          "comments": 0,
+          "shares": 0,
+          "subscribersGained": 0,
+          "subscribersLost": 0
         }
       ]
     },
@@ -7316,16 +7482,54 @@
       "thumbnail": "https://i.ytimg.com/vi/2b_XBGYqJVU/hqdefault.jpg",
       "duration": "29:58",
       "summary": {
-        "views": 467,
-        "engagedViews": 437,
-        "watchMinutes": 2581,
-        "averageViewDuration": 365.29,
-        "averageViewPercentage": 20.34,
+        "views": 476,
+        "engagedViews": 442,
+        "watchMinutes": 2603,
+        "averageViewDuration": 363.43,
+        "averageViewPercentage": 20.24,
         "likes": 8,
         "comments": 1,
         "shares": 0,
         "subscribersGained": 1,
         "subscribersLost": 0
+      },
+      "milestones": {
+        "day1": {
+          "throughDate": "2026-06-09",
+          "views": 8,
+          "engagedViews": 8,
+          "watchMinutes": 59,
+          "averageViewDuration": 446.0,
+          "averageViewPercentage": 24.84,
+          "likes": 0,
+          "comments": 0,
+          "shares": 0,
+          "subscribersGained": 0
+        },
+        "day3": {
+          "throughDate": "2026-06-11",
+          "views": 16,
+          "engagedViews": 16,
+          "watchMinutes": 76,
+          "averageViewDuration": 293.0,
+          "averageViewPercentage": 16.32,
+          "likes": 0,
+          "comments": 0,
+          "shares": 0,
+          "subscribersGained": 0
+        },
+        "day7": {
+          "throughDate": "2026-06-15",
+          "views": 21,
+          "engagedViews": 21,
+          "watchMinutes": 106,
+          "averageViewDuration": 311.43,
+          "averageViewPercentage": 17.35,
+          "likes": 0,
+          "comments": 0,
+          "shares": 0,
+          "subscribersGained": 0
+        }
       },
       "daily": [
         {
@@ -8458,6 +8662,19 @@
           "shares": 0,
           "subscribersGained": 0,
           "subscribersLost": 0
+        },
+        {
+          "date": "2026-09-04",
+          "views": 9,
+          "engagedViews": 5,
+          "watchMinutes": 22,
+          "averageViewDuration": 267,
+          "averageViewPercentage": 14.859999999999998,
+          "likes": 0,
+          "comments": 0,
+          "shares": 0,
+          "subscribersGained": 0,
+          "subscribersLost": 0
         }
       ]
     },
@@ -8467,16 +8684,54 @@
       "thumbnail": "https://i.ytimg.com/vi/LMDZec3o3-g/hqdefault.jpg",
       "duration": "6:38",
       "summary": {
-        "views": 686,
+        "views": 687,
         "engagedViews": 676,
         "watchMinutes": 1975,
-        "averageViewDuration": 177.72,
-        "averageViewPercentage": 44.77,
+        "averageViewDuration": 177.46,
+        "averageViewPercentage": 44.7,
         "likes": 15,
         "comments": 0,
         "shares": 2,
         "subscribersGained": 1,
         "subscribersLost": 0
+      },
+      "milestones": {
+        "day1": {
+          "throughDate": "2026-06-28",
+          "views": 20,
+          "engagedViews": 20,
+          "watchMinutes": 46,
+          "averageViewDuration": 140.0,
+          "averageViewPercentage": 35.42,
+          "likes": 0,
+          "comments": 0,
+          "shares": 0,
+          "subscribersGained": 0
+        },
+        "day3": {
+          "throughDate": "2026-06-30",
+          "views": 25,
+          "engagedViews": 25,
+          "watchMinutes": 57,
+          "averageViewDuration": 138.56,
+          "averageViewPercentage": 35.02,
+          "likes": 1,
+          "comments": 0,
+          "shares": 0,
+          "subscribersGained": 0
+        },
+        "day7": {
+          "throughDate": "2026-07-04",
+          "views": 34,
+          "engagedViews": 34,
+          "watchMinutes": 77,
+          "averageViewDuration": 139.82,
+          "averageViewPercentage": 35.31,
+          "likes": 1,
+          "comments": 0,
+          "shares": 0,
+          "subscribersGained": 0
+        }
       },
       "daily": [
         {
@@ -9362,6 +9617,19 @@
           "shares": 0,
           "subscribersGained": 0,
           "subscribersLost": 0
+        },
+        {
+          "date": "2026-09-04",
+          "views": 1,
+          "engagedViews": 0,
+          "watchMinutes": 0,
+          "averageViewDuration": 0,
+          "averageViewPercentage": 0,
+          "likes": 0,
+          "comments": 0,
+          "shares": 0,
+          "subscribersGained": 0,
+          "subscribersLost": 0
         }
       ]
     },
@@ -9371,16 +9639,54 @@
       "thumbnail": "https://i.ytimg.com/vi/lcTtcqjTLlI/hqdefault.jpg",
       "duration": "7:40",
       "summary": {
-        "views": 3589,
-        "engagedViews": 3572,
-        "watchMinutes": 12324,
-        "averageViewDuration": 206.87,
-        "averageViewPercentage": 45.12,
+        "views": 3601,
+        "engagedViews": 3582,
+        "watchMinutes": 12361,
+        "averageViewDuration": 206.93,
+        "averageViewPercentage": 45.13,
         "likes": 72,
         "comments": 2,
         "shares": 5,
         "subscribersGained": 7,
         "subscribersLost": 1
+      },
+      "milestones": {
+        "day1": {
+          "throughDate": "2026-07-11",
+          "views": 1236,
+          "engagedViews": 1236,
+          "watchMinutes": 4426,
+          "averageViewDuration": 214.0,
+          "averageViewPercentage": 46.72,
+          "likes": 32,
+          "comments": 1,
+          "shares": 0,
+          "subscribersGained": 3
+        },
+        "day3": {
+          "throughDate": "2026-07-13",
+          "views": 2472,
+          "engagedViews": 2472,
+          "watchMinutes": 8683,
+          "averageViewDuration": 210.05,
+          "averageViewPercentage": 45.82,
+          "likes": 56,
+          "comments": 2,
+          "shares": 2,
+          "subscribersGained": 6
+        },
+        "day7": {
+          "throughDate": "2026-07-17",
+          "views": 2984,
+          "engagedViews": 2984,
+          "watchMinutes": 10334,
+          "averageViewDuration": 207.15,
+          "averageViewPercentage": 45.18,
+          "likes": 67,
+          "comments": 2,
+          "shares": 3,
+          "subscribersGained": 6
+        }
       },
       "daily": [
         {
@@ -10097,6 +10403,19 @@
           "shares": 0,
           "subscribersGained": 0,
           "subscribersLost": 0
+        },
+        {
+          "date": "2026-09-04",
+          "views": 12,
+          "engagedViews": 10,
+          "watchMinutes": 37,
+          "averageViewDuration": 226,
+          "averageViewPercentage": 49.29,
+          "likes": 0,
+          "comments": 0,
+          "shares": 0,
+          "subscribersGained": 0,
+          "subscribersLost": 0
         }
       ]
     },
@@ -10106,16 +10425,54 @@
       "thumbnail": "https://i.ytimg.com/vi/DdvR0LbYUjQ/hqdefault.jpg",
       "duration": "15:44",
       "summary": {
-        "views": 4210,
-        "engagedViews": 4172,
-        "watchMinutes": 22674,
-        "averageViewDuration": 326.7,
-        "averageViewPercentage": 34.64,
+        "views": 4221,
+        "engagedViews": 4181,
+        "watchMinutes": 22688,
+        "averageViewDuration": 326.09,
+        "averageViewPercentage": 34.58,
         "likes": 119,
         "comments": 0,
         "shares": 13,
         "subscribersGained": 16,
         "subscribersLost": 3
+      },
+      "milestones": {
+        "day1": {
+          "throughDate": "2026-07-13",
+          "views": 1083,
+          "engagedViews": 1083,
+          "watchMinutes": 5561,
+          "averageViewDuration": 308.0,
+          "averageViewPercentage": 32.64,
+          "likes": 43,
+          "comments": 0,
+          "shares": 3,
+          "subscribersGained": 5
+        },
+        "day3": {
+          "throughDate": "2026-07-15",
+          "views": 1922,
+          "engagedViews": 1922,
+          "watchMinutes": 9530,
+          "averageViewDuration": 297.4,
+          "averageViewPercentage": 31.52,
+          "likes": 80,
+          "comments": 0,
+          "shares": 6,
+          "subscribersGained": 11
+        },
+        "day7": {
+          "throughDate": "2026-07-19",
+          "views": 2398,
+          "engagedViews": 2398,
+          "watchMinutes": 11359,
+          "averageViewDuration": 284.13,
+          "averageViewPercentage": 30.12,
+          "likes": 91,
+          "comments": 0,
+          "shares": 10,
+          "subscribersGained": 11
+        }
       },
       "daily": [
         {
@@ -10806,6 +11163,19 @@
           "shares": 0,
           "subscribersGained": 0,
           "subscribersLost": 0
+        },
+        {
+          "date": "2026-09-04",
+          "views": 11,
+          "engagedViews": 9,
+          "watchMinutes": 14,
+          "averageViewDuration": 95,
+          "averageViewPercentage": 10.11,
+          "likes": 0,
+          "comments": 0,
+          "shares": 0,
+          "subscribersGained": 0,
+          "subscribersLost": 0
         }
       ]
     },
@@ -10815,16 +11185,54 @@
       "thumbnail": "https://i.ytimg.com/vi/JVNpkPsotMU/hqdefault.jpg",
       "duration": "3:38",
       "summary": {
-        "views": 1673,
-        "engagedViews": 1667,
+        "views": 1675,
+        "engagedViews": 1668,
         "watchMinutes": 2608,
-        "averageViewDuration": 94.17,
-        "averageViewPercentage": 43.45,
+        "averageViewDuration": 94.12,
+        "averageViewPercentage": 43.42,
         "likes": 49,
         "comments": 1,
         "shares": 3,
         "subscribersGained": 7,
         "subscribersLost": 1
+      },
+      "milestones": {
+        "day1": {
+          "throughDate": "2026-07-18",
+          "views": 349,
+          "engagedViews": 349,
+          "watchMinutes": 659,
+          "averageViewDuration": 113.0,
+          "averageViewPercentage": 51.98,
+          "likes": 12,
+          "comments": 0,
+          "shares": 0,
+          "subscribersGained": 1
+        },
+        "day3": {
+          "throughDate": "2026-07-20",
+          "views": 851,
+          "engagedViews": 851,
+          "watchMinutes": 1438,
+          "averageViewDuration": 101.08,
+          "averageViewPercentage": 46.56,
+          "likes": 27,
+          "comments": 0,
+          "shares": 2,
+          "subscribersGained": 2
+        },
+        "day7": {
+          "throughDate": "2026-07-24",
+          "views": 1171,
+          "engagedViews": 1171,
+          "watchMinutes": 1848,
+          "averageViewDuration": 94.37,
+          "averageViewPercentage": 43.52,
+          "likes": 34,
+          "comments": 0,
+          "shares": 2,
+          "subscribersGained": 3
+        }
       },
       "daily": [
         {
@@ -11450,6 +11858,19 @@
           "shares": 0,
           "subscribersGained": 0,
           "subscribersLost": 0
+        },
+        {
+          "date": "2026-09-04",
+          "views": 2,
+          "engagedViews": 1,
+          "watchMinutes": 0,
+          "averageViewDuration": 49,
+          "averageViewPercentage": 22.67,
+          "likes": 0,
+          "comments": 0,
+          "shares": 0,
+          "subscribersGained": 0,
+          "subscribersLost": 0
         }
       ]
     },
@@ -11459,16 +11880,54 @@
       "thumbnail": "https://i.ytimg.com/vi/3AQw6eUmK58/hqdefault.jpg",
       "duration": "8:05",
       "summary": {
-        "views": 2597,
-        "engagedViews": 2573,
-        "watchMinutes": 8081,
-        "averageViewDuration": 188.51,
-        "averageViewPercentage": 38.99,
+        "views": 2599,
+        "engagedViews": 2575,
+        "watchMinutes": 8082,
+        "averageViewDuration": 188.39,
+        "averageViewPercentage": 38.97,
         "likes": 55,
         "comments": 0,
         "shares": 5,
         "subscribersGained": 8,
         "subscribersLost": 0
+      },
+      "milestones": {
+        "day1": {
+          "throughDate": "2026-07-25",
+          "views": 597,
+          "engagedViews": 597,
+          "watchMinutes": 1890,
+          "averageViewDuration": 189.0,
+          "averageViewPercentage": 39.17,
+          "likes": 12,
+          "comments": 0,
+          "shares": 3,
+          "subscribersGained": 2
+        },
+        "day3": {
+          "throughDate": "2026-07-27",
+          "views": 997,
+          "engagedViews": 997,
+          "watchMinutes": 3067,
+          "averageViewDuration": 183.97,
+          "averageViewPercentage": 38.07,
+          "likes": 19,
+          "comments": 0,
+          "shares": 3,
+          "subscribersGained": 2
+        },
+        "day7": {
+          "throughDate": "2026-07-31",
+          "views": 1327,
+          "engagedViews": 1327,
+          "watchMinutes": 3820,
+          "averageViewDuration": 172.26,
+          "averageViewPercentage": 35.64,
+          "likes": 24,
+          "comments": 0,
+          "shares": 3,
+          "subscribersGained": 3
+        }
       },
       "daily": [
         {
@@ -12003,6 +12462,19 @@
           "shares": 0,
           "subscribersGained": 0,
           "subscribersLost": 0
+        },
+        {
+          "date": "2026-09-04",
+          "views": 2,
+          "engagedViews": 2,
+          "watchMinutes": 1,
+          "averageViewDuration": 34,
+          "averageViewPercentage": 7.139999999999999,
+          "likes": 0,
+          "comments": 0,
+          "shares": 0,
+          "subscribersGained": 0,
+          "subscribersLost": 0
         }
       ]
     },
@@ -12012,16 +12484,54 @@
       "thumbnail": "https://i.ytimg.com/vi/_l7l5BH4h_s/hqdefault.jpg",
       "duration": "17:17",
       "summary": {
-        "views": 4994,
-        "engagedViews": 4715,
-        "watchMinutes": 16921,
-        "averageViewDuration": 219.05,
-        "averageViewPercentage": 21.18,
-        "likes": 177,
+        "views": 5047,
+        "engagedViews": 4752,
+        "watchMinutes": 17135,
+        "averageViewDuration": 220.4,
+        "averageViewPercentage": 21.31,
+        "likes": 179,
         "comments": 5,
         "shares": 14,
         "subscribersGained": 18,
         "subscribersLost": 3
+      },
+      "milestones": {
+        "day1": {
+          "throughDate": "2026-07-27",
+          "views": 1107,
+          "engagedViews": 1107,
+          "watchMinutes": 3626,
+          "averageViewDuration": 196.0,
+          "averageViewPercentage": 18.96,
+          "likes": 36,
+          "comments": 2,
+          "shares": 2,
+          "subscribersGained": 2
+        },
+        "day3": {
+          "throughDate": "2026-07-29",
+          "views": 2296,
+          "engagedViews": 2296,
+          "watchMinutes": 7005,
+          "averageViewDuration": 182.6,
+          "averageViewPercentage": 17.66,
+          "likes": 82,
+          "comments": 4,
+          "shares": 7,
+          "subscribersGained": 8
+        },
+        "day7": {
+          "throughDate": "2026-08-02",
+          "views": 3061,
+          "engagedViews": 3061,
+          "watchMinutes": 9228,
+          "averageViewDuration": 180.35,
+          "averageViewPercentage": 17.45,
+          "likes": 111,
+          "comments": 4,
+          "shares": 10,
+          "subscribersGained": 11
+        }
       },
       "daily": [
         {
@@ -12530,6 +13040,19 @@
           "shares": 1,
           "subscribersGained": 0,
           "subscribersLost": 0
+        },
+        {
+          "date": "2026-09-04",
+          "views": 53,
+          "engagedViews": 37,
+          "watchMinutes": 214,
+          "averageViewDuration": 347,
+          "averageViewPercentage": 33.54,
+          "likes": 2,
+          "comments": 0,
+          "shares": 0,
+          "subscribersGained": 0,
+          "subscribersLost": 0
         }
       ]
     },
@@ -12539,16 +13062,54 @@
       "thumbnail": "https://i.ytimg.com/vi/dhys8ycR5Iw/hqdefault.jpg",
       "duration": "15:36",
       "summary": {
-        "views": 7630,
-        "engagedViews": 7197,
-        "watchMinutes": 39409,
-        "averageViewDuration": 327.21,
-        "averageViewPercentage": 35.02,
-        "likes": 129,
+        "views": 7721,
+        "engagedViews": 7258,
+        "watchMinutes": 39689,
+        "averageViewDuration": 326.6,
+        "averageViewPercentage": 34.95,
+        "likes": 130,
         "comments": 1,
         "shares": 5,
         "subscribersGained": 7,
         "subscribersLost": 1
+      },
+      "milestones": {
+        "day1": {
+          "throughDate": "2026-07-31",
+          "views": 1446,
+          "engagedViews": 1446,
+          "watchMinutes": 7949,
+          "averageViewDuration": 329.0,
+          "averageViewPercentage": 35.24,
+          "likes": 32,
+          "comments": 0,
+          "shares": 0,
+          "subscribersGained": 2
+        },
+        "day3": {
+          "throughDate": "2026-08-02",
+          "views": 2603,
+          "engagedViews": 2603,
+          "watchMinutes": 14574,
+          "averageViewDuration": 335.27,
+          "averageViewPercentage": 35.89,
+          "likes": 54,
+          "comments": 1,
+          "shares": 1,
+          "subscribersGained": 3
+        },
+        "day7": {
+          "throughDate": "2026-08-06",
+          "views": 3847,
+          "engagedViews": 3847,
+          "watchMinutes": 20955,
+          "averageViewDuration": 326.19,
+          "averageViewPercentage": 34.92,
+          "likes": 74,
+          "comments": 1,
+          "shares": 2,
+          "subscribersGained": 4
+        }
       },
       "daily": [
         {
@@ -13005,463 +13566,14 @@
           "shares": 0,
           "subscribersGained": 0,
           "subscribersLost": 0
-        }
-      ]
-    },
-    "EvoV01i7fRw": {
-      "title": "「ずっと待っててくれてありがとう」/MV解禁直後配信【夏はジュエリー】【ニアジョイ】",
-      "publishedDate": "2026-08-01",
-      "thumbnail": "https://i.ytimg.com/vi/EvoV01i7fRw/hqdefault.jpg",
-      "duration": "15:55",
-      "summary": {
-        "views": 13382,
-        "engagedViews": 12636,
-        "watchMinutes": 62606,
-        "averageViewDuration": 295.06,
-        "averageViewPercentage": 30.92,
-        "likes": 472,
-        "comments": 28,
-        "shares": 88,
-        "subscribersGained": 26,
-        "subscribersLost": 1
-      },
-      "daily": [
-        {
-          "date": "2026-08-01",
-          "views": 5777,
-          "engagedViews": 5777,
-          "watchMinutes": 29465,
-          "averageViewDuration": 306,
-          "averageViewPercentage": 32.04,
-          "likes": 254,
-          "comments": 18,
-          "shares": 37,
-          "subscribersGained": 17,
-          "subscribersLost": 1
         },
         {
-          "date": "2026-08-02",
-          "views": 1661,
-          "engagedViews": 1661,
-          "watchMinutes": 8670,
-          "averageViewDuration": 313,
-          "averageViewPercentage": 32.79,
-          "likes": 55,
-          "comments": 2,
-          "shares": 14,
-          "subscribersGained": 3,
-          "subscribersLost": 0
-        },
-        {
-          "date": "2026-08-03",
-          "views": 841,
-          "engagedViews": 841,
-          "watchMinutes": 3904,
-          "averageViewDuration": 278,
-          "averageViewPercentage": 29.17,
-          "likes": 28,
-          "comments": 1,
-          "shares": 10,
-          "subscribersGained": 2,
-          "subscribersLost": 0
-        },
-        {
-          "date": "2026-08-04",
-          "views": 636,
-          "engagedViews": 636,
-          "watchMinutes": 3166,
-          "averageViewDuration": 298,
-          "averageViewPercentage": 31.28,
-          "likes": 23,
-          "comments": 0,
-          "shares": 4,
-          "subscribersGained": 1,
-          "subscribersLost": 0
-        },
-        {
-          "date": "2026-08-05",
-          "views": 440,
-          "engagedViews": 440,
-          "watchMinutes": 2229,
-          "averageViewDuration": 304,
-          "averageViewPercentage": 31.840000000000003,
-          "likes": 23,
-          "comments": 1,
-          "shares": 4,
-          "subscribersGained": 0,
-          "subscribersLost": 0
-        },
-        {
-          "date": "2026-08-06",
-          "views": 244,
-          "engagedViews": 244,
-          "watchMinutes": 1066,
-          "averageViewDuration": 262,
-          "averageViewPercentage": 27.47,
-          "likes": 6,
-          "comments": 0,
-          "shares": 0,
-          "subscribersGained": 1,
-          "subscribersLost": 0
-        },
-        {
-          "date": "2026-08-07",
-          "views": 151,
-          "engagedViews": 151,
-          "watchMinutes": 593,
-          "averageViewDuration": 235,
-          "averageViewPercentage": 24.69,
-          "likes": 3,
-          "comments": 0,
-          "shares": 2,
-          "subscribersGained": 0,
-          "subscribersLost": 0
-        },
-        {
-          "date": "2026-08-08",
-          "views": 161,
-          "engagedViews": 161,
-          "watchMinutes": 868,
-          "averageViewDuration": 323,
-          "averageViewPercentage": 33.89,
-          "likes": 7,
-          "comments": 2,
-          "shares": 1,
-          "subscribersGained": 0,
-          "subscribersLost": 0
-        },
-        {
-          "date": "2026-08-09",
-          "views": 127,
-          "engagedViews": 127,
-          "watchMinutes": 733,
-          "averageViewDuration": 346,
-          "averageViewPercentage": 36.26,
-          "likes": 6,
-          "comments": 0,
-          "shares": 1,
-          "subscribersGained": 1,
-          "subscribersLost": 0
-        },
-        {
-          "date": "2026-08-10",
-          "views": 99,
-          "engagedViews": 99,
-          "watchMinutes": 394,
-          "averageViewDuration": 239,
-          "averageViewPercentage": 25.040000000000003,
-          "likes": 1,
-          "comments": 0,
-          "shares": 0,
-          "subscribersGained": 0,
-          "subscribersLost": 0
-        },
-        {
-          "date": "2026-08-11",
-          "views": 79,
-          "engagedViews": 79,
-          "watchMinutes": 381,
-          "averageViewDuration": 289,
-          "averageViewPercentage": 30.349999999999998,
-          "likes": 2,
-          "comments": 0,
-          "shares": 0,
-          "subscribersGained": 0,
-          "subscribersLost": 0
-        },
-        {
-          "date": "2026-08-12",
-          "views": 68,
-          "engagedViews": 68,
-          "watchMinutes": 359,
-          "averageViewDuration": 317,
-          "averageViewPercentage": 33.24,
-          "likes": 1,
-          "comments": 0,
-          "shares": 1,
-          "subscribersGained": 0,
-          "subscribersLost": 0
-        },
-        {
-          "date": "2026-08-13",
-          "views": 64,
-          "engagedViews": 64,
-          "watchMinutes": 306,
-          "averageViewDuration": 287,
-          "averageViewPercentage": 30.11,
-          "likes": 0,
-          "comments": 1,
-          "shares": 0,
-          "subscribersGained": 0,
-          "subscribersLost": 0
-        },
-        {
-          "date": "2026-08-14",
-          "views": 86,
-          "engagedViews": 86,
-          "watchMinutes": 385,
-          "averageViewDuration": 269,
-          "averageViewPercentage": 28.190000000000005,
-          "likes": 1,
-          "comments": 0,
-          "shares": 0,
-          "subscribersGained": 0,
-          "subscribersLost": 0
-        },
-        {
-          "date": "2026-08-15",
-          "views": 66,
-          "engagedViews": 66,
-          "watchMinutes": 288,
-          "averageViewDuration": 261,
-          "averageViewPercentage": 27.43,
-          "likes": 2,
-          "comments": 0,
-          "shares": 2,
-          "subscribersGained": 0,
-          "subscribersLost": 0
-        },
-        {
-          "date": "2026-08-16",
-          "views": 78,
-          "engagedViews": 78,
-          "watchMinutes": 430,
-          "averageViewDuration": 331,
-          "averageViewPercentage": 34.67,
-          "likes": 1,
-          "comments": 0,
-          "shares": 0,
-          "subscribersGained": 0,
-          "subscribersLost": 0
-        },
-        {
-          "date": "2026-08-17",
-          "views": 199,
-          "engagedViews": 199,
-          "watchMinutes": 1098,
-          "averageViewDuration": 331,
-          "averageViewPercentage": 34.67,
-          "likes": 5,
-          "comments": 0,
-          "shares": 0,
-          "subscribersGained": 0,
-          "subscribersLost": 0
-        },
-        {
-          "date": "2026-08-18",
-          "views": 122,
-          "engagedViews": 122,
-          "watchMinutes": 657,
-          "averageViewDuration": 323,
-          "averageViewPercentage": 33.84,
-          "likes": 2,
-          "comments": 0,
-          "shares": 3,
-          "subscribersGained": 1,
-          "subscribersLost": 0
-        },
-        {
-          "date": "2026-08-19",
-          "views": 95,
-          "engagedViews": 95,
-          "watchMinutes": 554,
-          "averageViewDuration": 350,
-          "averageViewPercentage": 36.69,
-          "likes": 4,
-          "comments": 0,
-          "shares": 0,
-          "subscribersGained": 0,
-          "subscribersLost": 0
-        },
-        {
-          "date": "2026-08-20",
-          "views": 211,
-          "engagedViews": 211,
-          "watchMinutes": 906,
-          "averageViewDuration": 257,
-          "averageViewPercentage": 26.979999999999997,
-          "likes": 8,
-          "comments": 0,
-          "shares": 4,
-          "subscribersGained": 0,
-          "subscribersLost": 0
-        },
-        {
-          "date": "2026-08-21",
-          "views": 125,
-          "engagedViews": 125,
-          "watchMinutes": 518,
-          "averageViewDuration": 248,
-          "averageViewPercentage": 26.039999999999996,
-          "likes": 1,
-          "comments": 1,
-          "shares": 0,
-          "subscribersGained": 0,
-          "subscribersLost": 0
-        },
-        {
-          "date": "2026-08-22",
-          "views": 134,
-          "engagedViews": 134,
-          "watchMinutes": 579,
-          "averageViewDuration": 259,
-          "averageViewPercentage": 27.190000000000005,
-          "likes": 0,
-          "comments": 0,
-          "shares": 1,
-          "subscribersGained": 0,
-          "subscribersLost": 0
-        },
-        {
-          "date": "2026-08-23",
-          "views": 116,
-          "engagedViews": 116,
-          "watchMinutes": 495,
-          "averageViewDuration": 256,
-          "averageViewPercentage": 26.839999999999996,
-          "likes": 4,
-          "comments": 0,
-          "shares": 0,
-          "subscribersGained": 0,
-          "subscribersLost": 0
-        },
-        {
-          "date": "2026-08-24",
-          "views": 157,
-          "engagedViews": 157,
-          "watchMinutes": 671,
-          "averageViewDuration": 256,
-          "averageViewPercentage": 26.88,
-          "likes": 10,
-          "comments": 1,
-          "shares": 1,
-          "subscribersGained": 0,
-          "subscribersLost": 0
-        },
-        {
-          "date": "2026-08-25",
-          "views": 123,
-          "engagedViews": 123,
-          "watchMinutes": 502,
-          "averageViewDuration": 245,
-          "averageViewPercentage": 25.670000000000005,
-          "likes": 3,
-          "comments": 0,
-          "shares": 1,
-          "subscribersGained": 0,
-          "subscribersLost": 0
-        },
-        {
-          "date": "2026-08-26",
-          "views": 88,
-          "engagedViews": 88,
-          "watchMinutes": 379,
-          "averageViewDuration": 258,
-          "averageViewPercentage": 27.089999999999996,
-          "likes": 1,
-          "comments": 0,
-          "shares": 0,
-          "subscribersGained": 0,
-          "subscribersLost": 0
-        },
-        {
-          "date": "2026-08-27",
-          "views": 187,
-          "engagedViews": 79,
-          "watchMinutes": 300,
-          "averageViewDuration": 225,
-          "averageViewPercentage": 23.63,
-          "likes": 2,
-          "comments": 0,
-          "shares": 1,
-          "subscribersGained": 0,
-          "subscribersLost": 0
-        },
-        {
-          "date": "2026-08-28",
-          "views": 179,
-          "engagedViews": 77,
-          "watchMinutes": 386,
-          "averageViewDuration": 299,
-          "averageViewPercentage": 31.34,
-          "likes": 1,
-          "comments": 0,
-          "shares": 0,
-          "subscribersGained": 0,
-          "subscribersLost": 0
-        },
-        {
-          "date": "2026-08-29",
-          "views": 215,
-          "engagedViews": 90,
-          "watchMinutes": 417,
+          "date": "2026-09-04",
+          "views": 91,
+          "engagedViews": 61,
+          "watchMinutes": 280,
           "averageViewDuration": 275,
-          "averageViewPercentage": 28.87,
-          "likes": 4,
-          "comments": 0,
-          "shares": 0,
-          "subscribersGained": 0,
-          "subscribersLost": 0
-        },
-        {
-          "date": "2026-08-30",
-          "views": 201,
-          "engagedViews": 113,
-          "watchMinutes": 424,
-          "averageViewDuration": 224,
-          "averageViewPercentage": 23.47,
-          "likes": 0,
-          "comments": 1,
-          "shares": 1,
-          "subscribersGained": 0,
-          "subscribersLost": 0
-        },
-        {
-          "date": "2026-08-31",
-          "views": 166,
-          "engagedViews": 77,
-          "watchMinutes": 345,
-          "averageViewDuration": 267,
-          "averageViewPercentage": 27.99,
-          "likes": 3,
-          "comments": 0,
-          "shares": 0,
-          "subscribersGained": 0,
-          "subscribersLost": 0
-        },
-        {
-          "date": "2026-09-01",
-          "views": 171,
-          "engagedViews": 84,
-          "watchMinutes": 332,
-          "averageViewDuration": 235,
-          "averageViewPercentage": 24.67,
-          "likes": 5,
-          "comments": 0,
-          "shares": 0,
-          "subscribersGained": 0,
-          "subscribersLost": 0
-        },
-        {
-          "date": "2026-09-02",
-          "views": 183,
-          "engagedViews": 93,
-          "watchMinutes": 466,
-          "averageViewDuration": 299,
-          "averageViewPercentage": 31.319999999999997,
-          "likes": 5,
-          "comments": 0,
-          "shares": 0,
-          "subscribersGained": 0,
-          "subscribersLost": 0
-        },
-        {
-          "date": "2026-09-03",
-          "views": 132,
-          "engagedViews": 75,
-          "watchMinutes": 340,
-          "averageViewDuration": 270,
-          "averageViewPercentage": 28.360000000000003,
+          "averageViewPercentage": 29.4,
           "likes": 1,
           "comments": 0,
           "shares": 0,
@@ -13476,16 +13588,54 @@
       "thumbnail": "https://i.ytimg.com/vi/HgCgwKqeJBI/hqdefault.jpg",
       "duration": "6:44",
       "summary": {
-        "views": 4748,
-        "engagedViews": 4714,
-        "watchMinutes": 11936,
-        "averageViewDuration": 151.81,
-        "averageViewPercentage": 37.67,
+        "views": 4761,
+        "engagedViews": 4723,
+        "watchMinutes": 11960,
+        "averageViewDuration": 151.85,
+        "averageViewPercentage": 37.68,
         "likes": 189,
         "comments": 8,
         "shares": 37,
         "subscribersGained": 8,
         "subscribersLost": 1
+      },
+      "milestones": {
+        "day1": {
+          "throughDate": "2026-08-04",
+          "views": 2212,
+          "engagedViews": 2212,
+          "watchMinutes": 5544,
+          "averageViewDuration": 150.0,
+          "averageViewPercentage": 37.22,
+          "likes": 112,
+          "comments": 4,
+          "shares": 17,
+          "subscribersGained": 7
+        },
+        "day3": {
+          "throughDate": "2026-08-06",
+          "views": 3939,
+          "engagedViews": 3939,
+          "watchMinutes": 9661,
+          "averageViewDuration": 146.81,
+          "averageViewPercentage": 36.43,
+          "likes": 178,
+          "comments": 8,
+          "shares": 32,
+          "subscribersGained": 8
+        },
+        "day7": {
+          "throughDate": "2026-08-10",
+          "views": 4195,
+          "engagedViews": 4195,
+          "watchMinutes": 10392,
+          "averageViewDuration": 148.33,
+          "averageViewPercentage": 36.8,
+          "likes": 186,
+          "comments": 8,
+          "shares": 32,
+          "subscribersGained": 8
+        }
       },
       "daily": [
         {
@@ -13890,6 +14040,19 @@
           "shares": 0,
           "subscribersGained": 0,
           "subscribersLost": 0
+        },
+        {
+          "date": "2026-09-04",
+          "views": 13,
+          "engagedViews": 9,
+          "watchMinutes": 24,
+          "averageViewDuration": 166,
+          "averageViewPercentage": 41.11,
+          "likes": 0,
+          "comments": 0,
+          "shares": 0,
+          "subscribersGained": 0,
+          "subscribersLost": 0
         }
       ]
     },
@@ -13899,16 +14062,54 @@
       "thumbnail": "https://i.ytimg.com/vi/g1GPX8SlOmU/hqdefault.jpg",
       "duration": "8:55",
       "summary": {
-        "views": 6178,
-        "engagedViews": 6048,
-        "watchMinutes": 18900,
-        "averageViewDuration": 187.51,
-        "averageViewPercentage": 35.15,
+        "views": 6247,
+        "engagedViews": 6079,
+        "watchMinutes": 19004,
+        "averageViewDuration": 187.65,
+        "averageViewPercentage": 35.18,
         "likes": 145,
         "comments": 12,
         "shares": 19,
         "subscribersGained": 17,
         "subscribersLost": 0
+      },
+      "milestones": {
+        "day1": {
+          "throughDate": "2026-08-08",
+          "views": 1510,
+          "engagedViews": 1510,
+          "watchMinutes": 4903,
+          "averageViewDuration": 194.0,
+          "averageViewPercentage": 36.42,
+          "likes": 45,
+          "comments": 5,
+          "shares": 3,
+          "subscribersGained": 5
+        },
+        "day3": {
+          "throughDate": "2026-08-10",
+          "views": 3072,
+          "engagedViews": 3072,
+          "watchMinutes": 10206,
+          "averageViewDuration": 198.77,
+          "averageViewPercentage": 37.26,
+          "likes": 100,
+          "comments": 9,
+          "shares": 9,
+          "subscribersGained": 11
+        },
+        "day7": {
+          "throughDate": "2026-08-14",
+          "views": 4518,
+          "engagedViews": 4518,
+          "watchMinutes": 13819,
+          "averageViewDuration": 182.98,
+          "averageViewPercentage": 34.31,
+          "likes": 127,
+          "comments": 10,
+          "shares": 15,
+          "subscribersGained": 16
+        }
       },
       "daily": [
         {
@@ -14261,6 +14462,19 @@
           "shares": 0,
           "subscribersGained": 0,
           "subscribersLost": 0
+        },
+        {
+          "date": "2026-09-04",
+          "views": 69,
+          "engagedViews": 31,
+          "watchMinutes": 104,
+          "averageViewDuration": 200,
+          "averageViewPercentage": 37.55,
+          "likes": 0,
+          "comments": 0,
+          "shares": 0,
+          "subscribersGained": 0,
+          "subscribersLost": 0
         }
       ]
     },
@@ -14270,16 +14484,54 @@
       "thumbnail": "https://i.ytimg.com/vi/S4tXGHeKBHs/hqdefault.jpg",
       "duration": "9:39",
       "summary": {
-        "views": 4858,
-        "engagedViews": 4783,
-        "watchMinutes": 17826,
-        "averageViewDuration": 222.92,
-        "averageViewPercentage": 38.54,
+        "views": 4890,
+        "engagedViews": 4806,
+        "watchMinutes": 17915,
+        "averageViewDuration": 222.98,
+        "averageViewPercentage": 38.55,
         "likes": 175,
         "comments": 9,
         "shares": 26,
         "subscribersGained": 15,
         "subscribersLost": 0
+      },
+      "milestones": {
+        "day1": {
+          "throughDate": "2026-08-11",
+          "views": 2037,
+          "engagedViews": 2037,
+          "watchMinutes": 8018,
+          "averageViewDuration": 236.0,
+          "averageViewPercentage": 40.79,
+          "likes": 87,
+          "comments": 5,
+          "shares": 10,
+          "subscribersGained": 9
+        },
+        "day3": {
+          "throughDate": "2026-08-13",
+          "views": 2751,
+          "engagedViews": 2751,
+          "watchMinutes": 10649,
+          "averageViewDuration": 232.1,
+          "averageViewPercentage": 40.12,
+          "likes": 117,
+          "comments": 8,
+          "shares": 15,
+          "subscribersGained": 11
+        },
+        "day7": {
+          "throughDate": "2026-08-17",
+          "views": 3844,
+          "engagedViews": 3844,
+          "watchMinutes": 14553,
+          "averageViewDuration": 226.98,
+          "averageViewPercentage": 39.24,
+          "likes": 156,
+          "comments": 9,
+          "shares": 19,
+          "subscribersGained": 13
+        }
       },
       "daily": [
         {
@@ -14593,6 +14845,19 @@
           "shares": 0,
           "subscribersGained": 0,
           "subscribersLost": 0
+        },
+        {
+          "date": "2026-09-04",
+          "views": 32,
+          "engagedViews": 23,
+          "watchMinutes": 89,
+          "averageViewDuration": 232,
+          "averageViewPercentage": 40.14,
+          "likes": 0,
+          "comments": 0,
+          "shares": 0,
+          "subscribersGained": 0,
+          "subscribersLost": 0
         }
       ]
     },
@@ -14602,16 +14867,54 @@
       "thumbnail": "https://i.ytimg.com/vi/D88Zd_OvaSs/hqdefault.jpg",
       "duration": "6:43",
       "summary": {
-        "views": 8179,
-        "engagedViews": 7895,
-        "watchMinutes": 20215,
-        "averageViewDuration": 153.05,
-        "averageViewPercentage": 38.14,
-        "likes": 185,
+        "views": 8265,
+        "engagedViews": 7950,
+        "watchMinutes": 20375,
+        "averageViewDuration": 153.26,
+        "averageViewPercentage": 38.19,
+        "likes": 186,
         "comments": 4,
         "shares": 13,
         "subscribersGained": 9,
         "subscribersLost": 0
+      },
+      "milestones": {
+        "day1": {
+          "throughDate": "2026-08-14",
+          "views": 2698,
+          "engagedViews": 2698,
+          "watchMinutes": 7685,
+          "averageViewDuration": 170.0,
+          "averageViewPercentage": 42.41,
+          "likes": 84,
+          "comments": 3,
+          "shares": 7,
+          "subscribersGained": 1
+        },
+        "day3": {
+          "throughDate": "2026-08-16",
+          "views": 4615,
+          "engagedViews": 4615,
+          "watchMinutes": 12470,
+          "averageViewDuration": 161.31,
+          "averageViewPercentage": 40.24,
+          "likes": 123,
+          "comments": 3,
+          "shares": 12,
+          "subscribersGained": 6
+        },
+        "day7": {
+          "throughDate": "2026-08-20",
+          "views": 6547,
+          "engagedViews": 6547,
+          "watchMinutes": 16815,
+          "averageViewDuration": 153.44,
+          "averageViewPercentage": 38.25,
+          "likes": 168,
+          "comments": 3,
+          "shares": 12,
+          "subscribersGained": 9
+        }
       },
       "daily": [
         {
@@ -14886,6 +15189,19 @@
           "shares": 0,
           "subscribersGained": 0,
           "subscribersLost": 0
+        },
+        {
+          "date": "2026-09-04",
+          "views": 86,
+          "engagedViews": 55,
+          "watchMinutes": 160,
+          "averageViewDuration": 173,
+          "averageViewPercentage": 43.04,
+          "likes": 1,
+          "comments": 0,
+          "shares": 0,
+          "subscribersGained": 0,
+          "subscribersLost": 0
         }
       ]
     },
@@ -14895,16 +15211,54 @@
       "thumbnail": "https://i.ytimg.com/vi/pE6Pi35mojw/hqdefault.jpg",
       "duration": "5:05",
       "summary": {
-        "views": 7922,
-        "engagedViews": 7286,
-        "watchMinutes": 16890,
-        "averageViewDuration": 139.22,
-        "averageViewPercentage": 45.77,
+        "views": 8045,
+        "engagedViews": 7345,
+        "watchMinutes": 17039,
+        "averageViewDuration": 139.37,
+        "averageViewPercentage": 45.82,
         "likes": 169,
         "comments": 3,
         "shares": 4,
         "subscribersGained": 20,
         "subscribersLost": 4
+      },
+      "milestones": {
+        "day1": {
+          "throughDate": "2026-08-16",
+          "views": 2874,
+          "engagedViews": 2874,
+          "watchMinutes": 6911,
+          "averageViewDuration": 144.0,
+          "averageViewPercentage": 47.31,
+          "likes": 87,
+          "comments": 0,
+          "shares": 0,
+          "subscribersGained": 3
+        },
+        "day3": {
+          "throughDate": "2026-08-18",
+          "views": 4348,
+          "engagedViews": 4348,
+          "watchMinutes": 10485,
+          "averageViewDuration": 144.47,
+          "averageViewPercentage": 47.45,
+          "likes": 118,
+          "comments": 2,
+          "shares": 1,
+          "subscribersGained": 9
+        },
+        "day7": {
+          "throughDate": "2026-08-22",
+          "views": 6012,
+          "engagedViews": 6012,
+          "watchMinutes": 13958,
+          "averageViewDuration": 139.0,
+          "averageViewPercentage": 45.69,
+          "likes": 148,
+          "comments": 2,
+          "shares": 3,
+          "subscribersGained": 17
+        }
       },
       "daily": [
         {
@@ -15153,6 +15507,19 @@
           "shares": 0,
           "subscribersGained": 0,
           "subscribersLost": 0
+        },
+        {
+          "date": "2026-09-04",
+          "views": 123,
+          "engagedViews": 59,
+          "watchMinutes": 149,
+          "averageViewDuration": 149,
+          "averageViewPercentage": 49.06,
+          "likes": 0,
+          "comments": 0,
+          "shares": 0,
+          "subscribersGained": 0,
+          "subscribersLost": 0
         }
       ]
     },
@@ -15162,16 +15529,54 @@
       "thumbnail": "https://i.ytimg.com/vi/rSNhDgGJvPU/hqdefault.jpg",
       "duration": "5:21",
       "summary": {
-        "views": 10633,
-        "engagedViews": 7345,
-        "watchMinutes": 18855,
-        "averageViewDuration": 148.4,
-        "averageViewPercentage": 46.36,
-        "likes": 157,
-        "comments": 12,
-        "shares": 26,
-        "subscribersGained": 11,
+        "views": 11402,
+        "engagedViews": 7528,
+        "watchMinutes": 19264,
+        "averageViewDuration": 147.09,
+        "averageViewPercentage": 45.95,
+        "likes": 162,
+        "comments": 13,
+        "shares": 29,
+        "subscribersGained": 12,
         "subscribersLost": 1
+      },
+      "milestones": {
+        "day1": {
+          "throughDate": "2026-08-22",
+          "views": 3222,
+          "engagedViews": 3222,
+          "watchMinutes": 8606,
+          "averageViewDuration": 160.0,
+          "averageViewPercentage": 49.93,
+          "likes": 79,
+          "comments": 9,
+          "shares": 6,
+          "subscribersGained": 3
+        },
+        "day3": {
+          "throughDate": "2026-08-24",
+          "views": 5192,
+          "engagedViews": 5192,
+          "watchMinutes": 13697,
+          "averageViewDuration": 157.99,
+          "averageViewPercentage": 49.32,
+          "likes": 119,
+          "comments": 12,
+          "shares": 17,
+          "subscribersGained": 7
+        },
+        "day7": {
+          "throughDate": "2026-08-28",
+          "views": 7385,
+          "engagedViews": 6420,
+          "watchMinutes": 16628,
+          "averageViewDuration": 152.52,
+          "averageViewPercentage": 47.64,
+          "likes": 145,
+          "comments": 12,
+          "shares": 22,
+          "subscribersGained": 11
+        }
       },
       "daily": [
         {
@@ -15342,6 +15747,19 @@
           "shares": 1,
           "subscribersGained": 0,
           "subscribersLost": 0
+        },
+        {
+          "date": "2026-09-04",
+          "views": 769,
+          "engagedViews": 183,
+          "watchMinutes": 409,
+          "averageViewDuration": 129,
+          "averageViewPercentage": 40.2,
+          "likes": 5,
+          "comments": 1,
+          "shares": 3,
+          "subscribersGained": 1,
+          "subscribersLost": 0
         }
       ]
     },
@@ -15351,16 +15769,54 @@
       "thumbnail": "https://i.ytimg.com/vi/a9U4uap71ME/hqdefault.jpg",
       "duration": "3:30",
       "summary": {
-        "views": 2628,
-        "engagedViews": 2216,
-        "watchMinutes": 4501,
-        "averageViewDuration": 117.91,
-        "averageViewPercentage": 56.4,
+        "views": 2686,
+        "engagedViews": 2244,
+        "watchMinutes": 4556,
+        "averageViewDuration": 117.89,
+        "averageViewPercentage": 56.39,
         "likes": 49,
         "comments": 1,
         "shares": 3,
         "subscribersGained": 4,
         "subscribersLost": 0
+      },
+      "milestones": {
+        "day1": {
+          "throughDate": "2026-08-24",
+          "views": 1467,
+          "engagedViews": 1467,
+          "watchMinutes": 3089,
+          "averageViewDuration": 126.0,
+          "averageViewPercentage": 60.17,
+          "likes": 30,
+          "comments": 1,
+          "shares": 2,
+          "subscribersGained": 4
+        },
+        "day3": {
+          "throughDate": "2026-08-26",
+          "views": 1856,
+          "engagedViews": 1856,
+          "watchMinutes": 3887,
+          "averageViewDuration": 125.27,
+          "averageViewPercentage": 59.87,
+          "likes": 37,
+          "comments": 1,
+          "shares": 3,
+          "subscribersGained": 4
+        },
+        "day7": {
+          "throughDate": "2026-08-30",
+          "views": 2318,
+          "engagedViews": 2066,
+          "watchMinutes": 4237,
+          "averageViewDuration": 119.81,
+          "averageViewPercentage": 57.3,
+          "likes": 43,
+          "comments": 1,
+          "shares": 3,
+          "subscribersGained": 4
+        }
       },
       "daily": [
         {
@@ -15505,6 +15961,19 @@
           "shares": 0,
           "subscribersGained": 0,
           "subscribersLost": 0
+        },
+        {
+          "date": "2026-09-04",
+          "views": 58,
+          "engagedViews": 28,
+          "watchMinutes": 55,
+          "averageViewDuration": 117,
+          "averageViewPercentage": 55.96,
+          "likes": 0,
+          "comments": 0,
+          "shares": 0,
+          "subscribersGained": 0,
+          "subscribersLost": 0
         }
       ]
     },
@@ -15514,16 +15983,54 @@
       "thumbnail": "https://i.ytimg.com/vi/B75t0LqJUSg/hqdefault.jpg",
       "duration": "3:26",
       "summary": {
-        "views": 3222,
-        "engagedViews": 1528,
-        "watchMinutes": 2587,
-        "averageViewDuration": 94.77,
-        "averageViewPercentage": 46.13,
+        "views": 3227,
+        "engagedViews": 1531,
+        "watchMinutes": 2595,
+        "averageViewDuration": 94.87,
+        "averageViewPercentage": 46.18,
         "likes": 37,
         "comments": 0,
         "shares": 3,
         "subscribersGained": 3,
         "subscribersLost": 1
+      },
+      "milestones": {
+        "day1": {
+          "throughDate": "2026-08-26",
+          "views": 962,
+          "engagedViews": 962,
+          "watchMinutes": 1668,
+          "averageViewDuration": 104.0,
+          "averageViewPercentage": 50.51,
+          "likes": 23,
+          "comments": 0,
+          "shares": 0,
+          "subscribersGained": 1
+        },
+        "day3": {
+          "throughDate": "2026-08-28",
+          "views": 3000,
+          "engagedViews": 1434,
+          "watchMinutes": 2436,
+          "averageViewDuration": 94.9,
+          "averageViewPercentage": 46.19,
+          "likes": 34,
+          "comments": 0,
+          "shares": 3,
+          "subscribersGained": 3
+        },
+        "day7": {
+          "throughDate": "2026-09-01",
+          "views": 3202,
+          "engagedViews": 1515,
+          "watchMinutes": 2561,
+          "averageViewDuration": 94.58,
+          "averageViewPercentage": 46.04,
+          "likes": 37,
+          "comments": 0,
+          "shares": 3,
+          "subscribersGained": 3
+        }
       },
       "daily": [
         {
@@ -15642,6 +16149,19 @@
           "shares": 0,
           "subscribersGained": 0,
           "subscribersLost": 0
+        },
+        {
+          "date": "2026-09-04",
+          "views": 5,
+          "engagedViews": 3,
+          "watchMinutes": 8,
+          "averageViewDuration": 160,
+          "averageViewPercentage": 77.88,
+          "likes": 0,
+          "comments": 0,
+          "shares": 0,
+          "subscribersGained": 0,
+          "subscribersLost": 0
         }
       ]
     },
@@ -15651,16 +16171,54 @@
       "thumbnail": "https://i.ytimg.com/vi/SlDTZdCoX7w/hqdefault.jpg",
       "duration": "5:48",
       "summary": {
-        "views": 19681,
-        "engagedViews": 9396,
-        "watchMinutes": 20884,
-        "averageViewDuration": 130.51,
-        "averageViewPercentage": 37.65,
-        "likes": 240,
+        "views": 20052,
+        "engagedViews": 9569,
+        "watchMinutes": 21217,
+        "averageViewDuration": 130.19,
+        "averageViewPercentage": 37.56,
+        "likes": 244,
         "comments": 4,
         "shares": 19,
         "subscribersGained": 18,
         "subscribersLost": 1
+      },
+      "milestones": {
+        "day1": {
+          "throughDate": "2026-08-28",
+          "views": 8200,
+          "engagedViews": 4257,
+          "watchMinutes": 9928,
+          "averageViewDuration": 138.0,
+          "averageViewPercentage": 39.75,
+          "likes": 124,
+          "comments": 1,
+          "shares": 4,
+          "subscribersGained": 9
+        },
+        "day3": {
+          "throughDate": "2026-08-30",
+          "views": 14580,
+          "engagedViews": 6993,
+          "watchMinutes": 15869,
+          "averageViewDuration": 133.33,
+          "averageViewPercentage": 38.44,
+          "likes": 182,
+          "comments": 3,
+          "shares": 9,
+          "subscribersGained": 15
+        },
+        "day7": {
+          "throughDate": "2026-09-03",
+          "views": 19681,
+          "engagedViews": 9396,
+          "watchMinutes": 20884,
+          "averageViewDuration": 130.51,
+          "averageViewPercentage": 37.65,
+          "likes": 240,
+          "comments": 4,
+          "shares": 19,
+          "subscribersGained": 18
+        }
       },
       "daily": [
         {
@@ -15753,6 +16311,19 @@
           "shares": 0,
           "subscribersGained": 0,
           "subscribersLost": 0
+        },
+        {
+          "date": "2026-09-04",
+          "views": 371,
+          "engagedViews": 173,
+          "watchMinutes": 333,
+          "averageViewDuration": 113,
+          "averageViewPercentage": 32.65,
+          "likes": 4,
+          "comments": 0,
+          "shares": 0,
+          "subscribersGained": 0,
+          "subscribersLost": 0
         }
       ]
     },
@@ -15762,16 +16333,43 @@
       "thumbnail": "https://i.ytimg.com/vi/PiikNxCE5_Q/hqdefault.jpg",
       "duration": "4:40",
       "summary": {
-        "views": 7242,
-        "engagedViews": 3235,
-        "watchMinutes": 8374,
-        "averageViewDuration": 151.02,
-        "averageViewPercentage": 54.05,
-        "likes": 81,
+        "views": 7317,
+        "engagedViews": 3279,
+        "watchMinutes": 8515,
+        "averageViewDuration": 151.43,
+        "averageViewPercentage": 54.19,
+        "likes": 83,
         "comments": 4,
         "shares": 3,
         "subscribersGained": 3,
         "subscribersLost": 0
+      },
+      "milestones": {
+        "day1": {
+          "throughDate": "2026-08-31",
+          "views": 5270,
+          "engagedViews": 2578,
+          "watchMinutes": 6829,
+          "averageViewDuration": 157.0,
+          "averageViewPercentage": 56.14,
+          "likes": 70,
+          "comments": 3,
+          "shares": 3,
+          "subscribersGained": 3
+        },
+        "day3": {
+          "throughDate": "2026-09-02",
+          "views": 6837,
+          "engagedViews": 3145,
+          "watchMinutes": 8185,
+          "averageViewDuration": 152.85,
+          "averageViewPercentage": 54.69,
+          "likes": 81,
+          "comments": 3,
+          "shares": 3,
+          "subscribersGained": 3
+        },
+        "day7": null
       },
       "daily": [
         {
@@ -15825,6 +16423,19 @@
           "shares": 0,
           "subscribersGained": 0,
           "subscribersLost": 0
+        },
+        {
+          "date": "2026-09-04",
+          "views": 75,
+          "engagedViews": 44,
+          "watchMinutes": 141,
+          "averageViewDuration": 191,
+          "averageViewPercentage": 68.26,
+          "likes": 2,
+          "comments": 0,
+          "shares": 0,
+          "subscribersGained": 0,
+          "subscribersLost": 0
         }
       ]
     },
@@ -15834,18 +16445,48 @@
       "thumbnail": "https://i.ytimg.com/vi/HJbI9RGGR2s/hqdefault.jpg",
       "duration": "4:51",
       "summary": {
-        "views": 0,
-        "engagedViews": 0,
-        "watchMinutes": 0,
-        "averageViewDuration": 0,
-        "averageViewPercentage": 0,
-        "likes": 0,
-        "comments": 0,
-        "shares": 0,
-        "subscribersGained": 0,
+        "views": 2466,
+        "engagedViews": 1090,
+        "watchMinutes": 2749,
+        "averageViewDuration": 148.0,
+        "averageViewPercentage": 51.19,
+        "likes": 23,
+        "comments": 1,
+        "shares": 1,
+        "subscribersGained": 1,
         "subscribersLost": 0
       },
-      "daily": []
+      "milestones": {
+        "day1": {
+          "throughDate": "2026-09-04",
+          "views": 2466,
+          "engagedViews": 1090,
+          "watchMinutes": 2749,
+          "averageViewDuration": 148.0,
+          "averageViewPercentage": 51.19,
+          "likes": 23,
+          "comments": 1,
+          "shares": 1,
+          "subscribersGained": 1
+        },
+        "day3": null,
+        "day7": null
+      },
+      "daily": [
+        {
+          "date": "2026-09-04",
+          "views": 2466,
+          "engagedViews": 1090,
+          "watchMinutes": 2749,
+          "averageViewDuration": 148,
+          "averageViewPercentage": 51.190000000000005,
+          "likes": 23,
+          "comments": 1,
+          "shares": 1,
+          "subscribersGained": 1,
+          "subscribersLost": 0
+        }
+      ]
     }
   }
 }
