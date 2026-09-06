@@ -251,11 +251,19 @@ const DUMMY = {
       REACH
       42日分用意して14日ずつ移動可能
     */
+reachLabels: Array.from(
+  {length:42},
+  (_,i) => {
 
-    reachLabels: Array.from(
-      {length:42},
-      (_,i) => `DAY ${i + 1}`
-    ),
+    const date = new Date(
+      2026,
+      7,
+      26 + i
+    );
+
+    return `${date.getMonth() + 1}/${date.getDate()}`;
+  }
+),
 
     impressions: [
       19240,15180,12640,10820,9240,8160,7380,
@@ -697,13 +705,15 @@ function lineChartOptions({
             weight:"700"
           },
 
-          callback(value){
+     callback(value){
 
-            if(percent){
-              return `${value}%`;
-            }
+  if(percent){
+    return `${value}%`;
+  }
 
-            return compactNumber(value);
+  return Number(value).toLocaleString("ja-JP");
+}
+
           }
         }
       }
