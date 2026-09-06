@@ -4931,7 +4931,7 @@ function setIndividualVideo(
   selectedIndividualVideoId =
     video.id;
 
-　renderIndividualRealMetrics();
+ renderIndividualRealMetrics();
 
   const title =
     document.getElementById(
