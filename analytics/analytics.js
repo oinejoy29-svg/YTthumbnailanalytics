@@ -3174,12 +3174,480 @@ function applyPickedVideo(
    INDIVIDUAL VIDEO
 ========================================================= */
 
+/* =========================================================
+   INDIVIDUAL REAL METRICS
+========================================================= */
+
+function formatInteger(value){
+
+  if(
+    value === null ||
+    value === undefined
+  ){
+    return "—";
+  }
+
+  return Number(value)
+    .toLocaleString("ja-JP");
+}
+
+
+function formatPercent(value){
+
+  if(
+    value === null ||
+    value === undefined
+  ){
+    return "—";
+  }
+
+  return `${Number(value).toFixed(1)}%`;
+}
+
+
+function formatDuration(seconds){
+
+  if(
+    seconds === null ||
+    seconds === undefined
+  ){
+    return "—";
+  }
+
+  const total =
+    Math.round(Number(seconds));
+
+  const minutes =
+    Math.floor(total / 60);
+
+  const remain =
+    total % 60;
+
+  return `${minutes}:${String(remain).padStart(2,"0")}`;
+}
+
+
+function formatWatchHours(minutes){
+
+  if(
+    minutes === null ||
+    minutes === undefined
+  ){
+    return "—";
+  }
+
+  const hours =
+    Number(minutes) / 60;
+
+  if(hours >= 100){
+    return Math.round(hours)
+      .toLocaleString("ja-JP");
+  }
+
+  return hours
+    .toFixed(1)
+    .replace(/\.0$/,"");
+}
+
+
+/*
+  ラベル名からカードを取得
+*/
+function findMetricCard(
+  selector,
+  label
+){
+
+  return [
+    ...document.querySelectorAll(
+      selector
+    )
+  ].find(card => {
+
+    const name =
+      card.querySelector(
+        ".metric-name, span"
+      );
+
+    return (
+      name &&
+      name.textContent
+        .trim() === label
+    );
+  });
+}
+
+
+/*
+  上部6カード
+*/
+function updateMainIndividualMetric(
+  label,
+  value
+){
+
+  const card =
+    findMetricCard(
+      "#individualMode .individual-metric-grid .metric-card",
+      label
+    );
+
+  if(!card){
+    return;
+  }
+
+  const element =
+    card.querySelector(
+      ".metric-value"
+    );
+
+  if(element){
+    element.textContent =
+      value;
+  }
+}
+
+
+/*
+  mini metric
+*/
+function updateIndividualMiniMetric(
+  label,
+  value
+){
+
+  const cards =
+    document.querySelectorAll(
+      "#individualMode .mini-metric"
+    );
+
+  for(const card of cards){
+
+    const name =
+      card.querySelector("span");
+
+    if(
+      !name ||
+      name.textContent
+        .trim() !== label
+    ){
+      continue;
+    }
+
+    const strong =
+      card.querySelector(
+        "strong"
+      );
+
+    if(strong){
+      strong.textContent =
+        value;
+    }
+
+    return;
+  }
+}
+
+
+/*
+  DAY1 / DAY3 / DAY7
+*/
+function updateVelocityCard(
+  day,
+  milestone
+){
+
+  const cards =
+    document.querySelectorAll(
+      "#individualMode .velocity-card"
+    );
+
+  const card =
+    [...cards].find(item => {
+
+      const label =
+        item.querySelector("span");
+
+      return (
+        label &&
+        label.textContent
+          .trim() === `DAY ${day}`
+      );
+    });
+
+
+  if(!card){
+    return;
+  }
+
+
+  const strong =
+    card.querySelector(
+      "strong"
+    );
+
+
+  if(strong){
+
+    strong.textContent =
+      milestone
+        ? formatInteger(
+            milestone.views
+          )
+        : "—";
+  }
+}
+
+
+/*
+  DAY1→DAY3 / DAY3→DAY7 の増加
+*/
+function updateVelocityIncrease(
+  index,
+  from,
+  to
+){
+
+  const connectors =
+    document.querySelectorAll(
+      "#individualMode .velocity-connector"
+    );
+
+  const connector =
+    connectors[index];
+
+  if(!connector){
+    return;
+  }
+
+  const strong =
+    connector.querySelector(
+      ".velocity-increase strong"
+    );
+
+  if(!strong){
+    return;
+  }
+
+
+  if(
+    !from ||
+    !to
+  ){
+    strong.textContent = "—";
+    return;
+  }
+
+
+  const increase =
+    Number(to.views || 0) -
+    Number(from.views || 0);
+
+
+  strong.textContent =
+    `+${increase.toLocaleString("ja-JP")}`;
+}
+
+
+/*
+  選択動画の実データを画面へ反映
+*/
+function renderIndividualRealMetrics(){
+
+  const video =
+    getSelectedIndividualVideo();
+
+  if(
+    !video ||
+    !video.analytics
+  ){
+    return;
+  }
+
+
+  const summary =
+    video.analytics.summary || {};
+
+
+  const milestones =
+    video.analytics.milestones || {};
+
+
+  /*
+    上6カード
+
+    クリック率はまだReporting API側なので
+    この段階では触らない。
+  */
+
+  updateMainIndividualMetric(
+    "再生数",
+    formatInteger(
+      summary.views
+    )
+  );
+
+  updateMainIndividualMetric(
+    "Engaged Views",
+    formatInteger(
+      summary.engagedViews
+    )
+  );
+
+  updateMainIndividualMetric(
+    "平均再生率",
+    formatPercent(
+      summary.averageViewPercentage
+    )
+  );
+
+  updateMainIndividualMetric(
+    "平均再生時間",
+    formatDuration(
+      summary.averageViewDuration
+    )
+  );
+
+  updateMainIndividualMetric(
+    "総再生時間",
+    formatWatchHours(
+      summary.watchMinutes
+    )
+  );
+
+
+  /*
+    初速
+  */
+
+  const day1 =
+    milestones.day1 || null;
+
+  const day3 =
+    milestones.day3 || null;
+
+  const day7 =
+    milestones.day7 || null;
+
+
+  updateVelocityCard(
+    1,
+    day1
+  );
+
+  updateVelocityCard(
+    3,
+    day3
+  );
+
+  updateVelocityCard(
+    7,
+    day7
+  );
+
+
+  updateVelocityIncrease(
+    0,
+    day1,
+    day3
+  );
+
+  updateVelocityIncrease(
+    1,
+    day3,
+    day7
+  );
+
+
+  /*
+    WATCH PERFORMANCE
+  */
+
+  updateIndividualMiniMetric(
+    "総再生時間",
+    summary.watchMinutes === null ||
+    summary.watchMinutes === undefined
+      ? "—"
+      : `${formatWatchHours(
+          summary.watchMinutes
+        )}時間`
+  );
+
+  updateIndividualMiniMetric(
+    "平均再生時間",
+    formatDuration(
+      summary.averageViewDuration
+    )
+  );
+
+  updateIndividualMiniMetric(
+    "平均再生率",
+    formatPercent(
+      summary.averageViewPercentage
+    )
+  );
+
+
+  /*
+    平均再生時間マーカー
+  */
+
+  const retentionMarker =
+    document.querySelector(
+      "#retentionAverageTimeMarker strong"
+    );
+
+  if(retentionMarker){
+
+    retentionMarker.textContent =
+      formatDuration(
+        summary.averageViewDuration
+      );
+  }
+
+
+  /*
+    ENGAGEMENT
+
+    高評価率は現データだけでは
+    正しく算出できないのでまだ触らない。
+
+    終了画面もReporting API待ち。
+  */
+
+  updateIndividualMiniMetric(
+    "高評価数",
+    formatInteger(
+      summary.likes
+    )
+  );
+
+  updateIndividualMiniMetric(
+    "コメント数",
+    formatInteger(
+      summary.comments
+    )
+  );
+
+  updateIndividualMiniMetric(
+    "登録者獲得",
+    summary.subscribersGained === null ||
+    summary.subscribersGained === undefined
+      ? "—"
+      : `+${Number(
+          summary.subscribersGained
+        ).toLocaleString("ja-JP")}`
+  );
+}
+
 function setIndividualVideo(
   video
 ){
 
   selectedIndividualVideoId =
     video.id;
+
+　renderIndividualRealMetrics();
 
   const title =
     document.getElementById(
