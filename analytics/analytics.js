@@ -4851,6 +4851,686 @@ function updateVelocityIncrease(
     `+${increase.toLocaleString("ja-JP")}`;
 }
 
+/* =========================================================
+   INDIVIDUAL AVERAGE / RANK
+========================================================= */
+
+/*
+  動画から比較用の指標値を取得
+*/
+function getIndividualMetricValue(
+  video,
+  metric
+){
+
+  const summary =
+    video?.analytics?.summary || {};
+
+
+  switch(metric){
+
+    case "views":
+      return Number.isFinite(
+        Number(summary.views)
+      )
+        ? Number(summary.views)
+        : null;
+
+
+    case "engagedViews":
+      return Number.isFinite(
+        Number(summary.engagedViews)
+      )
+        ? Number(summary.engagedViews)
+        : null;
+
+
+    case "watchMinutes":
+      return Number.isFinite(
+        Number(summary.watchMinutes)
+      )
+        ? Number(summary.watchMinutes)
+        : null;
+
+
+    case "averageViewDuration":
+      return Number.isFinite(
+        Number(summary.averageViewDuration)
+      )
+        ? Number(summary.averageViewDuration)
+        : null;
+
+
+    case "averageViewPercentage":
+      return Number.isFinite(
+        Number(summary.averageViewPercentage)
+      )
+        ? Number(summary.averageViewPercentage)
+        : null;
+
+
+    case "likes":
+      return Number.isFinite(
+        Number(summary.likes)
+      )
+        ? Number(summary.likes)
+        : null;
+
+
+    case "comments":
+      return Number.isFinite(
+        Number(summary.comments)
+      )
+        ? Number(summary.comments)
+        : null;
+
+
+    case "subscribersGained":
+      return Number.isFinite(
+        Number(summary.subscribersGained)
+      )
+        ? Number(summary.subscribersGained)
+        : null;
+
+
+    default:
+      return null;
+  }
+}
+
+
+/*
+  全動画平均を計算
+*/
+function getIndividualMetricAverage(
+  metric
+){
+
+  const values =
+    REAL_VIDEOS
+      .map(video =>
+        getIndividualMetricValue(
+          video,
+          metric
+        )
+      )
+      .filter(value =>
+        value !== null &&
+        Number.isFinite(value)
+      );
+
+
+  if(!values.length){
+    return null;
+  }
+
+
+  return (
+    values.reduce(
+      (sum,value) =>
+        sum + value,
+      0
+    ) /
+    values.length
+  );
+}
+
+
+/*
+  選択動画の順位を計算
+
+  大きい数字ほど上位。
+  同値の場合は同順位。
+*/
+function getIndividualMetricRank(
+  video,
+  metric
+){
+
+  const selectedValue =
+    getIndividualMetricValue(
+      video,
+      metric
+    );
+
+
+  if(selectedValue === null){
+    return null;
+  }
+
+
+  const values =
+    REAL_VIDEOS
+      .map(item =>
+        getIndividualMetricValue(
+          item,
+          metric
+        )
+      )
+      .filter(value =>
+        value !== null &&
+        Number.isFinite(value)
+      );
+
+
+  if(!values.length){
+    return null;
+  }
+
+
+  const rank =
+    1 +
+    values.filter(
+      value =>
+        value > selectedValue
+    ).length;
+
+
+  return {
+    rank,
+    total:values.length
+  };
+}
+
+/*
+  INDIVIDUAL上部カードの
+  全動画平均・順位を更新
+*/
+function updateIndividualAverageRank(
+  label,
+  metric,
+  formatter
+){
+
+  const video =
+    getSelectedIndividualVideo();
+
+  if(!video){
+    return;
+  }
+
+
+  const card =
+    findMetricCard(
+      "#individualMode .individual-metric-grid .metric-card",
+      label
+    );
+
+  if(!card){
+    return;
+  }
+
+
+  const average =
+    getIndividualMetricAverage(
+      metric
+    );
+
+  const rank =
+    getIndividualMetricRank(
+      video,
+      metric
+    );
+
+
+  /*
+    カード内の
+    「全動画平均」
+  */
+ const averageElement =
+  card.querySelector(
+    ".metric-average, .metric-context-average, [data-role='average']"
+  );
+
+  if(averageElement){
+
+    averageElement.textContent =
+      average === null
+        ? "全動画平均 —"
+        : `全動画平均 ${formatter(
+            average
+          )}`;
+  }
+
+
+  /*
+    カード内の
+    「○位 / ○本」
+  */
+  const rankElement =
+  card.querySelector(
+    ".metric-rank, .metric-context-rank, [data-role='rank']"
+  );
+
+  if(rankElement){
+
+    rankElement.textContent =
+      rank
+        ? `${rank.rank}位 / ${rank.total}本`
+        : "—";
+  }
+}
+
+
+/*
+  選択動画の上部カードについて
+  平均・順位をまとめて更新
+*/
+function renderIndividualAverageRanks(){
+
+  updateIndividualAverageRank(
+    "再生数",
+    "views",
+    value =>
+      formatInteger(
+        Math.round(value)
+      )
+  );
+
+
+  updateIndividualAverageRank(
+    "Engaged Views",
+    "engagedViews",
+    value =>
+      formatInteger(
+        Math.round(value)
+      )
+  );
+
+
+  updateIndividualAverageRank(
+    "平均再生率",
+    "averageViewPercentage",
+    value =>
+      formatPercent(value)
+  );
+
+
+  updateIndividualAverageRank(
+    "平均再生時間",
+    "averageViewDuration",
+    value =>
+      formatDuration(value)
+  );
+
+
+  updateIndividualAverageRank(
+    "総再生時間",
+    "watchMinutes",
+    value =>
+      `${formatWatchHours(value)}時間`
+  );
+
+}
+
+/* =========================================================
+   INDIVIDUAL VELOCITY AVERAGE / RANK
+========================================================= */
+
+/*
+  指定DAYのmilestone値を取得
+*/
+function getVelocityMetricValue(
+  video,
+  day
+){
+
+  const milestone =
+    video?.analytics
+      ?.milestones
+      ?.[`day${day}`];
+
+  if(
+    !milestone ||
+    milestone.views === null ||
+    milestone.views === undefined
+  ){
+    return null;
+  }
+
+
+  const value =
+    Number(
+      milestone.views
+    );
+
+
+  return Number.isFinite(value)
+    ? value
+    : null;
+}
+
+
+/*
+  DAY1 / DAY3 / DAY7の
+  全動画平均・順位を取得
+*/
+function getVelocityAverageRank(
+  selectedVideo,
+  day
+){
+
+  const selectedValue =
+    getVelocityMetricValue(
+      selectedVideo,
+      day
+    );
+
+
+  const values =
+    REAL_VIDEOS
+      .map(video =>
+        getVelocityMetricValue(
+          video,
+          day
+        )
+      )
+      .filter(value =>
+        value !== null &&
+        Number.isFinite(value)
+      );
+
+
+  if(
+    selectedValue === null ||
+    !values.length
+  ){
+
+    return {
+      average:null,
+      rank:null,
+      total:values.length
+    };
+  }
+
+
+  const average =
+    values.reduce(
+      (sum,value) =>
+        sum + value,
+      0
+    ) /
+    values.length;
+
+
+  const rank =
+    1 +
+    values.filter(
+      value =>
+        value > selectedValue
+    ).length;
+
+
+  return {
+    average,
+    rank,
+    total:values.length
+  };
+}
+
+
+/*
+  DAYカードの平均・順位表示
+*/
+function renderVelocityAverageRanks(){
+
+  const video =
+    getSelectedIndividualVideo();
+
+  if(!video){
+    return;
+  }
+
+
+  const cards =
+    document.querySelectorAll(
+      "#individualMode .velocity-card"
+    );
+
+
+  [1,3,7].forEach(day => {
+
+    const card =
+      [...cards].find(item => {
+
+        const label =
+          item.querySelector(
+            "span"
+          );
+
+        return (
+          label &&
+          label.textContent
+            .trim() === `DAY ${day}`
+        );
+      });
+
+
+    if(!card){
+      return;
+    }
+
+
+    const result =
+      getVelocityAverageRank(
+        video,
+        day
+      );
+
+
+    /*
+      全動画平均
+    */
+    const averageElement =
+      card.querySelector(
+        ".velocity-average"
+      );
+
+
+    if(averageElement){
+
+      averageElement.textContent =
+        result.average === null
+          ? "全動画平均 —"
+          : `全動画平均 ${formatInteger(
+              Math.round(
+                result.average
+              )
+            )}`;
+    }
+
+
+    /*
+      順位
+    */
+    const rankElement =
+      card.querySelector(
+        ".velocity-rank"
+      );
+
+
+    if(rankElement){
+
+      rankElement.textContent =
+        result.rank === null
+          ? "—"
+          : `${result.rank}位 / ${result.total}本`;
+    }
+
+  });
+}
+/* =========================================================
+   INDIVIDUAL DETAIL AVERAGE / RANK
+========================================================= */
+
+/*
+  mini-metric の
+  平均・順位を更新
+*/
+function updateIndividualMiniAverageRank(
+  label,
+  metric,
+  formatter
+){
+
+  const video =
+    getSelectedIndividualVideo();
+
+  if(!video){
+    return;
+  }
+
+
+  const cards =
+    document.querySelectorAll(
+      "#individualMode .mini-metric"
+    );
+
+
+  const card =
+    [...cards].find(item => {
+
+      const name =
+        item.querySelector("span");
+
+      return (
+        name &&
+        name.textContent
+          .trim() === label
+      );
+    });
+
+
+  if(!card){
+    return;
+  }
+
+
+  const average =
+    getIndividualMetricAverage(
+      metric
+    );
+
+  const rank =
+    getIndividualMetricRank(
+      video,
+      metric
+    );
+
+
+  /*
+    平均
+  */
+  const averageElement =
+    card.querySelector(
+      ".mini-metric-average, .metric-average"
+    );
+
+
+  if(averageElement){
+
+    averageElement.textContent =
+      average === null
+        ? "全動画平均 —"
+        : `全動画平均 ${formatter(
+            average
+          )}`;
+  }
+
+
+  /*
+    順位
+  */
+  const rankElement =
+    card.querySelector(
+      ".mini-metric-rank, .metric-rank"
+    );
+
+
+  if(rankElement){
+
+    rankElement.textContent =
+      rank
+        ? `${rank.rank}位 / ${rank.total}本`
+        : "—";
+  }
+}
+
+
+/*
+  WATCH PERFORMANCE
+  ENGAGEMENT
+  の平均・順位をまとめて更新
+*/
+function renderIndividualDetailAverageRanks(){
+
+  /*
+    WATCH PERFORMANCE
+  */
+
+  updateIndividualMiniAverageRank(
+    "総再生時間",
+    "watchMinutes",
+    value =>
+      `${formatWatchHours(value)}時間`
+  );
+
+
+  updateIndividualMiniAverageRank(
+    "平均再生時間",
+    "averageViewDuration",
+    value =>
+      formatDuration(value)
+  );
+
+
+  updateIndividualMiniAverageRank(
+    "平均再生率",
+    "averageViewPercentage",
+    value =>
+      formatPercent(value)
+  );
+
+
+  /*
+    ENGAGEMENT
+  */
+
+  updateIndividualMiniAverageRank(
+    "高評価数",
+    "likes",
+    value =>
+      formatInteger(
+        Math.round(value)
+      )
+  );
+
+
+  updateIndividualMiniAverageRank(
+    "コメント数",
+    "comments",
+    value =>
+      formatInteger(
+        Math.round(value)
+      )
+  );
+
+
+  updateIndividualMiniAverageRank(
+    "登録者獲得",
+    "subscribersGained",
+    value => {
+
+      const rounded =
+        Math.round(value);
+
+      return rounded > 0
+        ? `+${formatInteger(rounded)}`
+        : formatInteger(rounded);
+    }
+  );
+
+}
 
 /*
   選択動画の実データを画面へ反映
@@ -5041,6 +5721,12 @@ function renderIndividualRealMetrics(){
           summary.subscribersGained
         ).toLocaleString("ja-JP")}`
   );
+     /*
+    全動画平均・順位
+  */
+  renderIndividualAverageRanks();
+　renderVelocityAverageRanks();
+　renderIndividualDetailAverageRanks();
 }
 
 function setIndividualVideo(
@@ -5759,6 +6445,7 @@ renderOverviewRanking();
   setupChartDefaults();
 
   renderInitialVideoSelections();
+   renderIndividualRealMetrics();
 
 
   /*
