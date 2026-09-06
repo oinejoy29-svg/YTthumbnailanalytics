@@ -208,10 +208,9 @@ def create_summary(rows):
         "subscribersGained": subscribers_gained,
         "subscribersLost": subscribers_lost,
     }
-    def create_milestones(rows, published_date):
+ def create_milestones(rows, published_date):
     """
-    投稿日をDAY1として、
-    DAY1 / DAY3 / DAY7終了時点までの累計成績を作る。
+    DAY1 / DAY3 / DAY7 を作成
     """
 
     published = date.fromisoformat(published_date)
