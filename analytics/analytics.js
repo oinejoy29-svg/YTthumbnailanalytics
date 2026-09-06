@@ -1997,21 +1997,20 @@ function renderOverviewPeriodChanges(){
 
 
   /*
-    累計の場合
-    → 前期間比を完全に非表示
+    累計
+    → 前期間比そのものを完全に消す
   */
   if(currentPeriod === "all"){
 
     cards.forEach(card => {
 
-      const change =
+      const context =
         card.querySelector(
-          ".metric-change"
+          ".metric-context"
         );
 
-      if(change){
-        change.style.display =
-          "none";
+      if(context){
+        context.style.display = "none";
       }
 
     });
@@ -2023,41 +2022,67 @@ function renderOverviewPeriodChanges(){
   const currentSummary =
     calculateOverviewSummary();
 
-  const previousRows =
-    getOverviewPreviousPeriodRows();
-
   const previousSummary =
     calculateOverviewSummaryFromRows(
-      previousRows
+      getOverviewPreviousPeriodRows()
     );
 
 
   const metrics = {
 
-    "総再生数":[
-      currentSummary.views,
-      previousSummary.views
-    ],
+    "総再生数":{
+      current:
+        currentSummary.views,
 
-    "Engaged Views":[
-      currentSummary.engagedViews,
-      previousSummary.engagedViews
-    ],
+      previous:
+        previousSummary.views,
 
-    "総再生時間":[
-      currentSummary.watchMinutes,
-      previousSummary.watchMinutes
-    ],
+      type:"percent"
+    },
 
-    "平均再生時間":[
-      currentSummary.averageViewDuration,
-      previousSummary.averageViewDuration
-    ],
 
-    "平均再生率":[
-      currentSummary.averageViewPercentage,
-      previousSummary.averageViewPercentage
-    ]
+    "Engaged Views":{
+      current:
+        currentSummary.engagedViews,
+
+      previous:
+        previousSummary.engagedViews,
+
+      type:"percent"
+    },
+
+
+    "総再生時間":{
+      current:
+        currentSummary.watchMinutes,
+
+      previous:
+        previousSummary.watchMinutes,
+
+      type:"percent"
+    },
+
+
+    "平均再生時間":{
+      current:
+        currentSummary.averageViewDuration,
+
+      previous:
+        previousSummary.averageViewDuration,
+
+      type:"duration"
+    },
+
+
+    "平均再生率":{
+      current:
+        currentSummary.averageViewPercentage,
+
+      previous:
+        previousSummary.averageViewPercentage,
+
+      type:"point"
+    }
 
   };
 
@@ -2069,14 +2094,15 @@ function renderOverviewPeriodChanges(){
         ".metric-name"
       );
 
-    const change =
+    const context =
       card.querySelector(
-        ".metric-change"
+        ".metric-context"
       );
+
 
     if(
       !name ||
-      !change
+      !context
     ){
       return;
     }
@@ -2087,79 +2113,172 @@ function renderOverviewPeriodChanges(){
 
 
     /*
-      平均クリック率はまだ実データなし
-      → 前期間比を表示しない
+      クリック率はReporting API待ち
     */
     if(
       label === "平均クリック率" ||
       !metrics[label]
     ){
 
-      change.style.display =
+      context.style.display =
         "none";
 
       return;
     }
 
 
-    const [
-      currentValue,
-      previousValue
-    ] = metrics[label];
+    const metric =
+      metrics[label];
+
+    const current =
+      Number(metric.current);
+
+    const previous =
+      Number(metric.previous);
 
 
-    const percent =
-      calculatePeriodChange(
-        currentValue,
-        previousValue
-      );
+    if(
+      !Number.isFinite(current) ||
+      !Number.isFinite(previous)
+    ){
 
-
-    if(percent === null){
-
-      change.style.display =
+      context.style.display =
         "none";
 
       return;
     }
 
 
-    change.style.display = "";
-
-    const sign =
-      percent > 0
-        ? "+"
-        : "";
-
-    change.textContent =
-      `前期間比 ${sign}${percent.toFixed(1)}%`;
+    let difference;
+    let text;
 
 
     /*
-      既存の増減用classがあれば更新
+      再生数 / Engaged Views / 総再生時間
+      → %比較
     */
-    change.classList.remove(
+    if(metric.type === "percent"){
+
+      if(previous === 0){
+
+        context.style.display =
+          "none";
+
+        return;
+      }
+
+
+      difference =
+        (
+          (current - previous) /
+          previous
+        ) * 100;
+
+
+      const arrow =
+        difference > 0
+          ? "↑"
+          : difference < 0
+            ? "↓"
+            : "→";
+
+
+      text =
+        `${arrow} ${Math.abs(
+          difference
+        ).toFixed(1)}%`;
+    }
+
+
+    /*
+      平均再生時間
+      → 秒差
+    */
+    else if(metric.type === "duration"){
+
+      difference =
+        current - previous;
+
+
+      const arrow =
+        difference > 0
+          ? "↑"
+          : difference < 0
+            ? "↓"
+            : "→";
+
+
+      text =
+        `${arrow} ${formatDuration(
+          Math.abs(difference)
+        )}`;
+    }
+
+
+    /*
+      平均再生率
+      → pt差
+    */
+    else{
+
+      difference =
+        current - previous;
+
+
+      const arrow =
+        difference > 0
+          ? "↑"
+          : difference < 0
+            ? "↓"
+            : "→";
+
+
+      text =
+        `${arrow} ${Math.abs(
+          difference
+        ).toFixed(1)}pt`;
+    }
+
+
+    /*
+      表示を復活
+    */
+    context.style.display = "";
+
+
+    /*
+      色
+    */
+    context.classList.remove(
       "positive",
       "negative"
     );
 
-    if(percent > 0){
 
-      change.classList.add(
+    if(difference > 0){
+
+      context.classList.add(
         "positive"
       );
 
-    }else if(percent < 0){
+    }else if(difference < 0){
 
-      change.classList.add(
+      context.classList.add(
         "negative"
       );
 
     }
 
+
+    /*
+      HTML構造を維持して
+      数字 + 「前期間比」
+    */
+    context.innerHTML =
+      `${text}<span>前期間比</span>`;
+
   });
 }
-
 function findOverviewMetricCard(
   label
 ){
