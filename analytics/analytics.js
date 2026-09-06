@@ -1103,40 +1103,41 @@ function lineChartOptions({
 
 function getOverviewSeries(metric){
 
-  const source =
-    DUMMY.overview;
+  const daily =
+    Array.isArray(
+      ANALYTICS_DATA?.channelDaily
+    )
+      ? ANALYTICS_DATA.channelDaily
+      : [];
 
 
-  let values;
-  let average;
-  let percent = false;
+  /*
+    Analytics APIで現在取得済みなのは
+    views / engagedViews。
+
+    impressions / クリック率は
+    Reporting API接続後に実データ化する。
+  */
+  const useRealData =
+    metric === "views" ||
+    metric === "engaged";
 
 
-  switch(metric){
+  /*
+    まだ取得していない指標は、
+    現段階では既存表示を維持。
+  */
+  if(!useRealData){
 
-    case "engaged":
+    const source =
+      DUMMY.overview;
 
-      values =
-        cumulative(source.engaged);
-
-      average =
-        cumulative(source.averageEngaged);
-
-      break;
-
-
-    case "impressions":
-
-      values =
-        [...source.impressions];
-
-      average =
-        [...source.averageImpressions];
-
-      break;
+    let values;
+    let average;
+    let percent = false;
 
 
-    case "ctr":
+    if(metric === "ctr"){
 
       values =
         [...source.ctr];
@@ -1146,41 +1147,146 @@ function getOverviewSeries(metric){
 
       percent = true;
 
-      break;
-
-
-    case "views":
-    default:
+    }else{
 
       values =
-        cumulative(source.views);
+        [...source.impressions];
 
       average =
-        cumulative(source.averageViews);
+        [...source.averageImpressions];
+    }
 
-      break;
+
+    const count =
+      currentPeriod === "all"
+        ? "all"
+        : Math.min(
+            Number(currentPeriod),
+            source.labels.length
+          );
+
+
+    return {
+
+      labels:
+        sliceLast(
+          source.labels,
+          count
+        ),
+
+      values:
+        sliceLast(
+          values,
+          count
+        ),
+
+      average:
+        sliceLast(
+          average,
+          count
+        ),
+
+      percent
+    };
   }
 
 
-  let count =
-    currentPeriod;
+  /*
+    =========================
+    REAL ANALYTICS DATA
+    =========================
+  */
 
+  const labels =
+    daily.map(row => {
 
-  if(currentPeriod !== "all"){
+      if(!row.date){
+        return "";
+      }
 
-    count =
-      Math.min(
-        Number(currentPeriod),
-        source.labels.length
+      const parts =
+        row.date.split("-");
+
+      return (
+        parts.length === 3
+          ? `${Number(parts[1])}/${Number(parts[2])}`
+          : row.date
       );
-  }
+    });
+
+
+  const rawValues =
+    daily.map(row => {
+
+      if(metric === "engaged"){
+
+        return (
+          row.engagedViews === null ||
+          row.engagedViews === undefined
+        )
+          ? null
+          : Number(
+              row.engagedViews
+            );
+      }
+
+
+      return (
+        row.views === null ||
+        row.views === undefined
+      )
+        ? null
+        : Number(
+            row.views
+          );
+    });
+
+
+  /*
+    OVERVIEWの再生数 / Engaged Viewsは
+    累計表示なので日別値を累積する。
+
+    nullは欠損として保持する。
+  */
+
+  let runningTotal = 0;
+
+  const values =
+    rawValues.map(value => {
+
+      if(value === null){
+        return null;
+      }
+
+      runningTotal += value;
+
+      return runningTotal;
+    });
+
+
+  /*
+    全動画平均線はまだ実データ計算へ
+    接続していないため、一旦非表示。
+  */
+
+  const average =
+    values.map(() => null);
+
+
+  const count =
+    currentPeriod === "all"
+      ? "all"
+      : Math.min(
+          Number(currentPeriod),
+          labels.length
+        );
 
 
   return {
 
     labels:
       sliceLast(
-        source.labels,
+        labels,
         count
       ),
 
@@ -1196,7 +1302,7 @@ function getOverviewSeries(metric){
         count
       ),
 
-    percent
+    percent:false
   };
 }
 
