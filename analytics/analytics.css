@@ -3298,3 +3298,46 @@ button.individual-video-hero{
     margin-top:5px;
   }
 }
+/* =========================================
+   VIDEO PICKER
+   PC / スマホ共通：タイトル非表示
+========================================= */
+
+.video-picker-item > span {
+  display: none;
+}
+
+
+/* =========================================
+   MOBILE VIDEO PICKER
+   スマホのみ：サムネイル3列
+========================================= */
+
+@media (max-width: 800px) {
+
+  .video-picker-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
+  }
+
+  .video-picker-item {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .video-picker-item img,
+  .video-picker-placeholder {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    margin: 0;
+    border-radius: 8px;
+  }
+}
