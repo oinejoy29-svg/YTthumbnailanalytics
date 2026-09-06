@@ -1352,13 +1352,84 @@ function renderIndividualViewsChart(
   }
 
 
-  destroyChart(
-    "individualViews"
-  );
+  const video =
+    getSelectedIndividualVideo();
+
+  if(!video){
+    console.warn(
+      "Selected individual video not found"
+    );
+    return;
+  }
+
+
+  const daily =
+    Array.isArray(video.daily)
+      ? video.daily
+      : [];
 
 
   const engaged =
     metric === "engaged";
+
+
+  const labels =
+    daily.map((row,index) => {
+
+      /*
+        投稿日をDAY 1として表示。
+        データ欠損日があっても
+        日付差からDAY番号を計算する。
+      */
+
+      if(
+        row.date &&
+        video.publishedDate
+      ){
+
+        const current =
+          new Date(
+            `${row.date}T00:00:00Z`
+          );
+
+        const published =
+          new Date(
+            `${video.publishedDate}T00:00:00Z`
+          );
+
+        const diff =
+          Math.round(
+            (
+              current.getTime() -
+              published.getTime()
+            ) / 86400000
+          );
+
+        return `DAY ${diff + 1}`;
+      }
+
+      return `DAY ${index + 1}`;
+    });
+
+
+  const values =
+    daily.map(row => {
+
+      if(engaged){
+        return Number(
+          row.engagedViews ?? 0
+        );
+      }
+
+      return Number(
+        row.views ?? 0
+      );
+    });
+
+
+  destroyChart(
+    "individualViews"
+  );
 
 
   CHARTS.individualViews =
@@ -1370,20 +1441,17 @@ function renderIndividualViewsChart(
 
         data:{
 
-          labels:
-            DUMMY.individual.labels,
+          labels,
 
           datasets:[
             {
+
               label:
                 engaged
                   ? "Engaged Views"
                   : "再生数",
 
-              data:
-                engaged
-                  ? DUMMY.individual.engaged
-                  : DUMMY.individual.views,
+              data:values,
 
               borderColor:
                 COLORS.chartYellow,
@@ -1402,7 +1470,9 @@ function renderIndividualViewsChart(
 
               borderWidth:3,
 
-              tension:.28
+              tension:.28,
+
+              spanGaps:false
             }
           ]
         },
@@ -1412,7 +1482,6 @@ function renderIndividualViewsChart(
       }
     );
 }
-
 
 /* =========================================================
    RETENTION
@@ -3109,6 +3178,9 @@ function applyPickedVideo(
 function setIndividualVideo(
   video
 ){
+
+  selectedIndividualVideoId =
+    video.id;
 
   const title =
     document.getElementById(
