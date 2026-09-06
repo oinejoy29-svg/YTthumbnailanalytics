@@ -1100,6 +1100,245 @@ function lineChartOptions({
 /* =========================================================
    OVERVIEW PERIOD DATA
 ========================================================= */
+/* =========================================================
+   OVERVIEW REAL SUMMARY
+========================================================= */
+
+function getOverviewPeriodRows(){
+
+  const daily =
+    Array.isArray(
+      ANALYTICS_DATA?.channelDaily
+    )
+      ? ANALYTICS_DATA.channelDaily
+      : [];
+
+  if(currentPeriod === "all"){
+    return daily;
+  }
+
+  const count =
+    Number(currentPeriod);
+
+  return daily.slice(
+    -count
+  );
+}
+
+
+function calculateOverviewSummary(){
+
+  const rows =
+    getOverviewPeriodRows();
+
+
+  let views = 0;
+  let engagedViews = 0;
+  let watchMinutes = 0;
+
+  let weightedDuration = 0;
+  let durationWeight = 0;
+
+  let weightedPercentage = 0;
+  let percentageWeight = 0;
+
+
+  rows.forEach(row => {
+
+    const rowViews =
+      Number(row.views);
+
+    const rowEngaged =
+      Number(row.engagedViews);
+
+    const rowWatch =
+      Number(row.watchMinutes);
+
+    const rowDuration =
+      Number(row.averageViewDuration);
+
+    const rowPercentage =
+      Number(row.averageViewPercentage);
+
+
+    if(Number.isFinite(rowViews)){
+      views += rowViews;
+    }
+
+    if(Number.isFinite(rowEngaged)){
+      engagedViews += rowEngaged;
+    }
+
+    if(Number.isFinite(rowWatch)){
+      watchMinutes += rowWatch;
+    }
+
+
+    /*
+      平均再生時間・平均再生率は
+      単純平均ではなく再生数で加重平均
+    */
+
+    if(
+      Number.isFinite(rowViews) &&
+      rowViews > 0 &&
+      Number.isFinite(rowDuration)
+    ){
+      weightedDuration +=
+        rowDuration * rowViews;
+
+      durationWeight +=
+        rowViews;
+    }
+
+
+    if(
+      Number.isFinite(rowViews) &&
+      rowViews > 0 &&
+      Number.isFinite(rowPercentage)
+    ){
+      weightedPercentage +=
+        rowPercentage * rowViews;
+
+      percentageWeight +=
+        rowViews;
+    }
+
+  });
+
+
+  return {
+
+    views,
+
+    engagedViews,
+
+    watchMinutes,
+
+    averageViewDuration:
+      durationWeight > 0
+        ? weightedDuration /
+          durationWeight
+        : null,
+
+    averageViewPercentage:
+      percentageWeight > 0
+        ? weightedPercentage /
+          percentageWeight
+        : null
+
+  };
+}
+
+
+function findOverviewMetricCard(
+  label
+){
+
+  const cards =
+    document.querySelectorAll(
+      "#overviewMode .metric-card"
+    );
+
+
+  return [...cards].find(
+    card => {
+
+      const name =
+        card.querySelector(
+          ".metric-name"
+        );
+
+      return (
+        name &&
+        name.textContent
+          .trim() === label
+      );
+    }
+  );
+}
+
+
+function setOverviewMetric(
+  label,
+  value
+){
+
+  const card =
+    findOverviewMetricCard(
+      label
+    );
+
+  if(!card){
+    return;
+  }
+
+
+  const valueElement =
+    card.querySelector(
+      ".metric-value"
+    );
+
+  if(valueElement){
+    valueElement.textContent =
+      value;
+  }
+}
+
+
+function renderOverviewRealSummary(){
+
+  const summary =
+    calculateOverviewSummary();
+
+
+  setOverviewMetric(
+    "総再生数",
+    formatInteger(
+      summary.views
+    )
+  );
+
+
+  setOverviewMetric(
+    "Engaged Views",
+    formatInteger(
+      summary.engagedViews
+    )
+  );
+
+
+  setOverviewMetric(
+    "総再生時間",
+    summary.watchMinutes === null
+      ? "—"
+      : `${formatWatchHours(
+          summary.watchMinutes
+        )}時間`
+  );
+
+
+  /*
+    平均クリック率は
+    Reporting API接続まで触らない
+  */
+
+
+  setOverviewMetric(
+    "平均再生時間",
+    formatDuration(
+      summary.averageViewDuration
+    )
+  );
+
+
+  setOverviewMetric(
+    "平均再生率",
+    formatPercent(
+      summary.averageViewPercentage
+    )
+  );
+}
 
 function getOverviewSeries(metric){
 
@@ -2656,16 +2895,17 @@ function initPeriodButtons(){
         );
 
 
-        currentPeriod =
-          button.dataset.period ||
-          "all";
+     currentPeriod =
+  button.dataset.period ||
+  "all";
 
+renderOverviewRealSummary();
 
-        renderOverviewDailyChart(
-          getActiveMetric(
-            "overviewDaily"
-          ) || "views"
-        );
+renderOverviewDailyChart(
+  getActiveMetric(
+    "overviewDaily"
+  ) || "views"
+);
       }
     );
   });
@@ -4447,7 +4687,9 @@ async function init(){
 
   await loadAnalyticsData();
 
-  buildRealVideoPicker();
+　buildRealVideoPicker();
+
+　renderOverviewRealSummary();
 
   renderHeader();
 
