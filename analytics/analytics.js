@@ -1355,6 +1355,12 @@ function renderIndividualReachChart(
 
   const isCtr =
     metric === "ctr";
+   
+   const fixedYMax = isCtr
+  ? Math.ceil(Math.max(...DUMMY.individual.ctr))
+  : Math.ceil(
+      Math.max(...DUMMY.individual.impressions) / 5000
+    ) * 5000;
 
 
   CHARTS.individualReach =
@@ -1404,11 +1410,29 @@ function renderIndividualReachChart(
         },
 
 
-        options:
-          lineChartOptions({
-            percent:isCtr,
-            beginAtZero:!isCtr
-          })
+      options:{
+  ...lineChartOptions({
+    percent:isCtr,
+    beginAtZero:!isCtr
+  }),
+
+  scales:{
+    ...lineChartOptions({
+      percent:isCtr,
+      beginAtZero:!isCtr
+    }).scales,
+
+    y:{
+      ...lineChartOptions({
+        percent:isCtr,
+        beginAtZero:!isCtr
+      }).scales.y,
+
+      min:0,
+      max:fixedYMax
+    }
+  }
+}
       }
     );
 
