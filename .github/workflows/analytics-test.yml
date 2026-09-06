@@ -35,6 +35,13 @@ jobs:
           YT_ANALYTICS_CLIENT_SECRET: ${{ secrets.YT_ANALYTICS_CLIENT_SECRET }}
           YT_ANALYTICS_REFRESH_TOKEN: ${{ secrets.YT_ANALYTICS_REFRESH_TOKEN }}
         run: python analytics/update_analytics.py
+
+      - name: Test YouTube Reporting API
+        env:
+          YT_ANALYTICS_CLIENT_ID: ${{ secrets.YT_ANALYTICS_CLIENT_ID }}
+          YT_ANALYTICS_CLIENT_SECRET: ${{ secrets.YT_ANALYTICS_CLIENT_SECRET }}
+          YT_ANALYTICS_REFRESH_TOKEN: ${{ secrets.YT_ANALYTICS_REFRESH_TOKEN }}
+        run: python analytics/reporting_setup.py
         
       - name: Commit analytics data
         run: |
