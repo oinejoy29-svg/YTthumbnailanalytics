@@ -1,9 +1,20 @@
 import os
 import json
 from datetime import date, timedelta
+from pathlib import Path
 
 from google.oauth2.credentials import Credentials
 from googleapiclient.discovery import build
+
+
+# =========================================================
+# SETTINGS
+# =========================================================
+
+START_DATE = "2026-04-03"
+
+BASE_DIR = Path(__file__).resolve().parent
+OUTPUT_FILE = BASE_DIR / "analytics_data.json"
 
 
 # =========================================================
@@ -32,72 +43,218 @@ credentials = Credentials(
 # YouTube Analytics API
 # =========================================================
 
-youtube_analytics = build(
+analytics = build(
     "youtubeAnalytics",
     "v2",
-    credentials=credentials
+    credentials=credentials,
+    cache_discovery=False
 )
 
 
 # =========================================================
-# TEST QUERY
-# まずは直近7日間の日別データを取得
+# DATE RANGE
+# YouTube Analyticsはデータ確定に少し時間がかかるため
+# まず昨日までを問い合わせる
 # =========================================================
 
-end_date = date.today() - timedelta(days=1)
-start_date = end_date - timedelta(days=6)
+end_date = str(date.today() - timedelta(days=1))
 
 print("========================================")
-print("YouTube Analytics API TEST")
-print(f"期間: {start_date} ～ {end_date}")
+print("YouTube Analytics DATA UPDATE")
+print(f"期間: {START_DATE} ～ {end_date}")
 print("========================================")
 
 
-response = youtube_analytics.reports().query(
+# =========================================================
+# CHANNEL DAILY DATA
+# =========================================================
+
+metrics = ",".join([
+    "views",
+    "engagedViews",
+    "estimatedMinutesWatched",
+    "averageViewDuration",
+    "averageViewPercentage",
+    "likes",
+    "comments",
+    "shares",
+    "subscribersGained",
+    "subscribersLost",
+])
+
+response = analytics.reports().query(
     ids="channel==MINE",
-    startDate=str(start_date),
-    endDate=str(end_date),
-
-    metrics=(
-        "views,"
-        "estimatedMinutesWatched,"
-        "averageViewDuration,"
-        "subscribersGained"
-    ),
-
+    startDate=START_DATE,
+    endDate=end_date,
+    metrics=metrics,
     dimensions="day",
     sort="day"
 ).execute()
 
 
 # =========================================================
-# RESULT
+# CONVERT RESPONSE
 # =========================================================
-
-print("\nAPI RESPONSE:")
-print(json.dumps(
-    response,
-    ensure_ascii=False,
-    indent=2
-))
-
-
-print("\n========================================")
-print("取得結果")
-print("========================================")
 
 headers = [
     column["name"]
     for column in response.get("columnHeaders", [])
 ]
 
-print(" | ".join(headers))
+channel_daily = []
 
 for row in response.get("rows", []):
-    print(" | ".join(map(str, row)))
+    raw = dict(zip(headers, row))
+
+    channel_daily.append({
+        "date": raw.get("day"),
+        "views": raw.get("views", 0),
+        "engagedViews": raw.get("engagedViews", 0),
+        "watchMinutes": raw.get("estimatedMinutesWatched", 0),
+        "averageViewDuration": raw.get("averageViewDuration", 0),
+        "averageViewPercentage": raw.get("averageViewPercentage", 0),
+        "likes": raw.get("likes", 0),
+        "comments": raw.get("comments", 0),
+        "shares": raw.get("shares", 0),
+        "subscribersGained": raw.get("subscribersGained", 0),
+        "subscribersLost": raw.get("subscribersLost", 0),
+    })
 
 
-print("\n========================================")
+# =========================================================
+# SUMMARY
+# =========================================================
+
+total_views = sum(
+    row["views"]
+    for row in channel_daily
+)
+
+total_engaged_views = sum(
+    row["engagedViews"]
+    for row in channel_daily
+)
+
+total_watch_minutes = sum(
+    row["watchMinutes"]
+    for row in channel_daily
+)
+
+total_likes = sum(
+    row["likes"]
+    for row in channel_daily
+)
+
+total_comments = sum(
+    row["comments"]
+    for row in channel_daily
+)
+
+total_shares = sum(
+    row["shares"]
+    for row in channel_daily
+)
+
+total_subscribers_gained = sum(
+    row["subscribersGained"]
+    for row in channel_daily
+)
+
+total_subscribers_lost = sum(
+    row["subscribersLost"]
+    for row in channel_daily
+)
+
+
+# 加重平均
+if total_views > 0:
+
+    average_view_duration = (
+        sum(
+            row["averageViewDuration"] * row["views"]
+            for row in channel_daily
+        )
+        / total_views
+    )
+
+    average_view_percentage = (
+        sum(
+            row["averageViewPercentage"] * row["views"]
+            for row in channel_daily
+        )
+        / total_views
+    )
+
+else:
+
+    average_view_duration = 0
+    average_view_percentage = 0
+
+
+# =========================================================
+# FINAL JSON
+# =========================================================
+
+output = {
+
+    "meta": {
+        "generatedAt": date.today().isoformat(),
+        "startDate": START_DATE,
+        "endDate": end_date
+    },
+
+    "summary": {
+        "views": total_views,
+        "engagedViews": total_engaged_views,
+        "watchMinutes": round(total_watch_minutes, 2),
+        "averageViewDuration": round(average_view_duration, 2),
+        "averageViewPercentage": round(average_view_percentage, 2),
+        "likes": total_likes,
+        "comments": total_comments,
+        "shares": total_shares,
+        "subscribersGained": total_subscribers_gained,
+        "subscribersLost": total_subscribers_lost
+    },
+
+    "channelDaily": channel_daily,
+
+    # 次の段階でここに動画別データを入れる
+    "videos": {}
+}
+
+
+# =========================================================
+# SAVE
+# =========================================================
+
+with open(
+    OUTPUT_FILE,
+    "w",
+    encoding="utf-8"
+) as f:
+
+    json.dump(
+        output,
+        f,
+        ensure_ascii=False,
+        indent=2
+    )
+
+
+print()
+print(f"日別データ: {len(channel_daily)} 日")
+print(f"総再生数: {total_views}")
+print(f"Engaged Views: {total_engaged_views}")
+print(f"総再生時間: {round(total_watch_minutes, 2)} 分")
+print(f"平均再生時間: {round(average_view_duration, 2)} 秒")
+print(f"平均再生率: {round(average_view_percentage, 2)} %")
+print(f"登録者獲得: {total_subscribers_gained}")
+
+print()
+print(f"保存先: {OUTPUT_FILE}")
+
+print()
+print("========================================")
 print("SUCCESS")
-print("YouTube Analytics APIへの接続に成功しました")
+print("analytics_data.json を生成しました")
 print("========================================")
