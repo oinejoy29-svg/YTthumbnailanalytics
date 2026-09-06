@@ -412,8 +412,7 @@ if reports:
             )
     )
 
-    download_url =
-        latest_report.get(
+    download_url = latest_report.get(
             "downloadUrl"
         )
 
