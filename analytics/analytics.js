@@ -735,6 +735,8 @@ function renderOverviewRanking(){
 }
 
 
+
+
 /* =========================================================
    BUILD REAL VIDEO PICKER
 ========================================================= */
@@ -1809,6 +1811,354 @@ function calculateOverviewSummary(){
   };
 }
 
+/* =========================================================
+   OVERVIEW PREVIOUS PERIOD
+========================================================= */
+
+function getOverviewPreviousPeriodRows(){
+
+  const daily =
+    Array.isArray(
+      ANALYTICS_DATA?.channelDaily
+    )
+      ? ANALYTICS_DATA.channelDaily
+      : [];
+
+  /*
+    累計では前期間比較をしない
+  */
+  if(currentPeriod === "all"){
+    return [];
+  }
+
+  const days =
+    Number(currentPeriod);
+
+  if(
+    !Number.isFinite(days) ||
+    days <= 0
+  ){
+    return [];
+  }
+
+  /*
+    最新期間の直前、同じ日数を取得
+
+    例：
+    7日表示
+    → 最新7日のさらに前の7日
+  */
+  const end =
+    Math.max(
+      0,
+      daily.length - days
+    );
+
+  const start =
+    Math.max(
+      0,
+      end - days
+    );
+
+  return daily.slice(
+    start,
+    end
+  );
+}
+
+function calculateOverviewSummaryFromRows(
+  rows
+){
+
+  let views = 0;
+  let engagedViews = 0;
+  let watchMinutes = 0;
+
+  let weightedDuration = 0;
+  let durationWeight = 0;
+
+  let weightedPercentage = 0;
+  let percentageWeight = 0;
+
+
+  rows.forEach(row => {
+
+    const rowViews =
+      Number(row.views);
+
+    const rowEngaged =
+      Number(row.engagedViews);
+
+    const rowWatch =
+      Number(row.watchMinutes);
+
+    const rowDuration =
+      Number(row.averageViewDuration);
+
+    const rowPercentage =
+      Number(row.averageViewPercentage);
+
+
+    if(Number.isFinite(rowViews)){
+      views += rowViews;
+    }
+
+    if(Number.isFinite(rowEngaged)){
+      engagedViews += rowEngaged;
+    }
+
+    if(Number.isFinite(rowWatch)){
+      watchMinutes += rowWatch;
+    }
+
+
+    if(
+      Number.isFinite(rowViews) &&
+      rowViews > 0 &&
+      Number.isFinite(rowDuration)
+    ){
+      weightedDuration +=
+        rowDuration * rowViews;
+
+      durationWeight +=
+        rowViews;
+    }
+
+
+    if(
+      Number.isFinite(rowViews) &&
+      rowViews > 0 &&
+      Number.isFinite(rowPercentage)
+    ){
+      weightedPercentage +=
+        rowPercentage * rowViews;
+
+      percentageWeight +=
+        rowViews;
+    }
+  });
+
+
+  return {
+
+    views,
+
+    engagedViews,
+
+    watchMinutes,
+
+    averageViewDuration:
+      durationWeight > 0
+        ? weightedDuration /
+          durationWeight
+        : null,
+
+    averageViewPercentage:
+      percentageWeight > 0
+        ? weightedPercentage /
+          percentageWeight
+        : null
+
+  };
+}
+
+
+function calculatePeriodChange(
+  currentValue,
+  previousValue
+){
+
+  if(
+    currentValue === null ||
+    previousValue === null ||
+    !Number.isFinite(Number(currentValue)) ||
+    !Number.isFinite(Number(previousValue)) ||
+    Number(previousValue) === 0
+  ){
+    return null;
+  }
+
+
+  return (
+    (
+      Number(currentValue) -
+      Number(previousValue)
+    ) /
+    Number(previousValue)
+  ) * 100;
+}
+
+function renderOverviewPeriodChanges(){
+
+  const cards =
+    document.querySelectorAll(
+      "#overviewMode .metric-card"
+    );
+
+
+  /*
+    累計の場合
+    → 前期間比を完全に非表示
+  */
+  if(currentPeriod === "all"){
+
+    cards.forEach(card => {
+
+      const change =
+        card.querySelector(
+          ".metric-change"
+        );
+
+      if(change){
+        change.style.display =
+          "none";
+      }
+
+    });
+
+    return;
+  }
+
+
+  const currentSummary =
+    calculateOverviewSummary();
+
+  const previousRows =
+    getOverviewPreviousPeriodRows();
+
+  const previousSummary =
+    calculateOverviewSummaryFromRows(
+      previousRows
+    );
+
+
+  const metrics = {
+
+    "総再生数":[
+      currentSummary.views,
+      previousSummary.views
+    ],
+
+    "Engaged Views":[
+      currentSummary.engagedViews,
+      previousSummary.engagedViews
+    ],
+
+    "総再生時間":[
+      currentSummary.watchMinutes,
+      previousSummary.watchMinutes
+    ],
+
+    "平均再生時間":[
+      currentSummary.averageViewDuration,
+      previousSummary.averageViewDuration
+    ],
+
+    "平均再生率":[
+      currentSummary.averageViewPercentage,
+      previousSummary.averageViewPercentage
+    ]
+
+  };
+
+
+  cards.forEach(card => {
+
+    const name =
+      card.querySelector(
+        ".metric-name"
+      );
+
+    const change =
+      card.querySelector(
+        ".metric-change"
+      );
+
+    if(
+      !name ||
+      !change
+    ){
+      return;
+    }
+
+
+    const label =
+      name.textContent.trim();
+
+
+    /*
+      平均クリック率はまだ実データなし
+      → 前期間比を表示しない
+    */
+    if(
+      label === "平均クリック率" ||
+      !metrics[label]
+    ){
+
+      change.style.display =
+        "none";
+
+      return;
+    }
+
+
+    const [
+      currentValue,
+      previousValue
+    ] = metrics[label];
+
+
+    const percent =
+      calculatePeriodChange(
+        currentValue,
+        previousValue
+      );
+
+
+    if(percent === null){
+
+      change.style.display =
+        "none";
+
+      return;
+    }
+
+
+    change.style.display = "";
+
+    const sign =
+      percent > 0
+        ? "+"
+        : "";
+
+    change.textContent =
+      `前期間比 ${sign}${percent.toFixed(1)}%`;
+
+
+    /*
+      既存の増減用classがあれば更新
+    */
+    change.classList.remove(
+      "positive",
+      "negative"
+    );
+
+    if(percent > 0){
+
+      change.classList.add(
+        "positive"
+      );
+
+    }else if(percent < 0){
+
+      change.classList.add(
+        "negative"
+      );
+
+    }
+
+  });
+}
 
 function findOverviewMetricCard(
   label
@@ -3479,6 +3829,8 @@ function initPeriodButtons(){
   "all";
 
 renderOverviewRealSummary();
+
+renderOverviewPeriodChanges();
 
 renderOverviewDailyChart(
   getActiveMetric(
@@ -5271,13 +5623,15 @@ function renderInitialCharts(){
 
 async function init(){
 
-  await loadAnalyticsData();
+await loadAnalyticsData();
 
 await loadRootVideoData();
 
 buildRealVideoPicker();
 
 renderOverviewRealSummary();
+
+renderOverviewPeriodChanges();
 
 renderOverviewRanking();
 
