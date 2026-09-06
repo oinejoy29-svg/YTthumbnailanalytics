@@ -120,30 +120,106 @@ row.count || 0
 }
 
 /* =========================================================
-Video tags
+   Video tags
 ========================================================= */
 
+const VIDEO_TAG_OVERRIDES_KEY =
+  "joyVideoTagOverridesV1";
+
+
 function detectTags(video) {
-return MEMBERS.filter(
-member =>
-String(video.title || "")
-.includes(member)
-);
+  return MEMBERS.filter(
+    member =>
+      String(video.title || "")
+        .includes(member)
+  );
 }
 
-function normalizeVideos() {
-DATA.videos =
-(DATA.videos || []).map(
-video => ({
-...video,
 
-tags:
-Array.isArray(video.tags) &&
-video.tags.length
-? video.tags
-: detectTags(video)
-})
-);
+function getVideoTagOverrides() {
+  try {
+    return JSON.parse(
+      localStorage.getItem(
+        VIDEO_TAG_OVERRIDES_KEY
+      ) || "{}"
+    );
+  } catch {
+    return {};
+  }
+}
+
+
+function saveVideoTagOverride(
+  videoId,
+  tags
+) {
+  const overrides =
+    getVideoTagOverrides();
+
+  /*
+    空配列 [] も保存する。
+
+    これが重要。
+    「タイトルに髙橋舞とあるけど
+    手動で髙橋舞タグを消した」
+    という状態も維持できる。
+  */
+  overrides[String(videoId)] =
+    [...tags];
+
+  localStorage.setItem(
+    VIDEO_TAG_OVERRIDES_KEY,
+    JSON.stringify(overrides)
+  );
+}
+
+
+function normalizeVideos() {
+  const overrides =
+    getVideoTagOverrides();
+
+  DATA.videos =
+    (DATA.videos || []).map(
+      video => {
+        const id =
+          String(video.id || "");
+
+        /*
+          手動設定が存在する場合は
+          data.jsonやタイトル自動判定より
+          必ず手動設定を優先。
+        */
+        if (
+          Object.prototype.hasOwnProperty.call(
+            overrides,
+            id
+          )
+        ) {
+          return {
+            ...video,
+            tags:
+              Array.isArray(
+                overrides[id]
+              )
+                ? overrides[id]
+                : []
+          };
+        }
+
+        /*
+          まだ一度も手動編集していない動画だけ
+          data.jsonのタグ → タイトル判定
+          の順で使用。
+        */
+        return {
+          ...video,
+          tags:
+            Array.isArray(video.tags)
+              ? video.tags
+              : detectTags(video)
+        };
+      }
+    );
 }
 
 /* =========================================================
@@ -395,14 +471,48 @@ Video list
 ========================================================= */
 
 function renderTags() {
-$("tagSelect").innerHTML =
-'<option value="">すべてのメンバー</option>' +
-MEMBERS
-.map(
-member =>
-`<option value="${escapeHtml(member)}">${escapeHtml(member)}</option>`
-)
-.join("");
+
+  /* 既存JS互換用のhidden select */
+  $("tagSelect").innerHTML =
+    '<option value="">すべてのメンバー</option>' +
+    MEMBERS
+      .map(
+        member =>
+          `<option value="${escapeHtml(member)}">${escapeHtml(member)}</option>`
+      )
+      .join("");
+
+
+  /* 独自デザイン側 */
+  const menu =
+    $("tagSelectMenu");
+
+  if (!menu) {
+    return;
+  }
+
+  menu.innerHTML = `
+    <button
+      type="button"
+      data-value=""
+      class="selected"
+    >
+      すべてのメンバー
+    </button>
+
+    ${MEMBERS
+      .map(
+        member => `
+          <button
+            type="button"
+            data-value="${escapeHtml(member)}"
+          >
+            ${escapeHtml(member)}
+          </button>
+        `
+      )
+      .join("")}
+  `;
 }
 
 function durationNum(video) {
@@ -653,26 +763,8 @@ function calculatePopularRankUps(
 /*
   サイトを開いた時に一度実行。
 
-  仕様：
 
-  ・前回サイトを開いた時の順位
-    ↓
-    現在順位
 
-    でUPを計算。
-
-  ・一度確認しても
-    同じAPI更新回の間は
-    ↑○ UPを残し続ける。
-
-  ・次のAPI更新が来た時、
-    前回サイトを開いた時の順位を
-    新しい比較基準として使う。
-
-  ・サイトを長期間開かなかった場合は、
-    途中のAPI更新回数に関係なく、
-    最後にサイトを開いた時から
-    現在までの変動を表示する。
 */
 function syncPopularRankingState() {
   const currentRanks =
@@ -851,36 +943,18 @@ function hasUnseenPopularRankingChange() {
   ソートselect右上の緑丸。
 */
 function ensureSortUpdateDot() {
-  const select =
-    $("sortSelect");
+  const trigger =
+    $("sortSelectTrigger");
 
-  if (!select) {
+  if (!trigger) {
     return null;
   }
 
-  let wrap =
-    select.closest(
-      ".sort-select-wrap"
-    );
+  const wrap =
+    $("sortCustomSelect");
 
   if (!wrap) {
-    wrap =
-      document.createElement(
-        "span"
-      );
-
-    wrap.className =
-      "sort-select-wrap";
-
-    select.parentNode
-      .insertBefore(
-        wrap,
-        select
-      );
-
-    wrap.appendChild(
-      select
-    );
+    return null;
   }
 
   let dot =
@@ -905,14 +979,11 @@ function ensureSortUpdateDot() {
     dot.title =
       "前回サイト閲覧時から人気順に順位変動があります";
 
-    wrap.appendChild(
-      dot
-    );
+    wrap.appendChild(dot);
   }
 
   return dot;
 }
-
 
 /*
   緑丸表示更新。
@@ -1527,50 +1598,147 @@ function closeVideoDetail() {
     );
 }
 
-function editVideoTags(
-  video
-) {
+let editingTagVideo = null;
+
+
+function editVideoTags(video) {
+  editingTagVideo =
+    video;
+
   const currentTags =
-    Array.isArray(
-      video.tags
-    )
+    Array.isArray(video.tags)
       ? video.tags
       : detectTags(video);
 
-  const input =
-    prompt(
-      "タグを編集してください。\n\nメンバー名を「、」で区切って入力してください。",
-      currentTags.join("、")
+  const choices =
+    $("tagEditChoices");
+
+  choices.innerHTML =
+    MEMBERS
+      .map(
+        member => {
+          const selected =
+            currentTags.includes(
+              member
+            );
+
+          return `
+            <button
+              type="button"
+              class="tag-edit-choice ${
+                selected
+                  ? "selected"
+                  : ""
+              }"
+              data-member="${escapeHtml(member)}"
+              aria-pressed="${
+                selected
+                  ? "true"
+                  : "false"
+              }"
+            >
+              ${escapeHtml(member)}
+            </button>
+          `;
+        }
+      )
+      .join("");
+
+
+  choices
+    .querySelectorAll(
+      ".tag-edit-choice"
+    )
+    .forEach(
+      button => {
+        button.onclick =
+          () => {
+            const selected =
+              button.classList.toggle(
+                "selected"
+              );
+
+            button.setAttribute(
+              "aria-pressed",
+              selected
+                ? "true"
+                : "false"
+            );
+          };
+      }
     );
 
-  if (
-    input === null
-  ) {
+
+  $("tagEditModal")
+    .classList
+    .add("open");
+
+  $("tagEditModal")
+    .setAttribute(
+      "aria-hidden",
+      "false"
+    );
+}
+
+
+function closeTagEdit() {
+  $("tagEditModal")
+    .classList
+    .remove("open");
+
+  $("tagEditModal")
+    .setAttribute(
+      "aria-hidden",
+      "true"
+    );
+
+  editingTagVideo = null;
+}
+
+
+function saveEditingVideoTags() {
+  if (!editingTagVideo) {
     return;
   }
 
   const tags =
-    input
-      .split(/[、,，]/)
+    [
+      ...$("tagEditChoices")
+        .querySelectorAll(
+          ".tag-edit-choice.selected"
+        )
+    ]
       .map(
-        tag =>
-          tag.trim()
+        button =>
+          button.dataset.member
       )
-      .filter(Boolean)
-      .filter(
-        tag =>
-          MEMBERS.includes(
-            tag
-          )
-      );
+      .filter(Boolean);
 
-  video.tags = tags;
+
+  editingTagVideo.tags =
+    tags;
+
+  /*
+    動画ID単位で手動設定を保存。
+    [] も保存される。
+  */
+  saveVideoTagOverride(
+    editingTagVideo.id,
+    tags
+  );
+
+
+  const video =
+    editingTagVideo;
+
+  closeTagEdit();
 
   renderVideos();
 
-  openVideoDetail(
-    video
-  );
+  /*
+    動画詳細も新しいタグで更新
+  */
+  openVideoDetail(video);
 }
 
 /* =========================================================
@@ -4557,35 +4725,234 @@ if (
   setupSubscriberHistory();
   setupMobileChartTooltipClose();
 
- $("sortSelect")
-  .onchange =
-  () => {
-    const isPopular =
-      $("sortSelect").value ===
-      "popular";
+/* =========================================================
+   Custom selects
+========================================================= */
 
-    /*
-      重要：
-      先に描画する。
+const sortTrigger =
+  $("sortSelectTrigger");
 
-      ここで
-      「前回ユーザーが確認した順位」
-      との差から ↑○ UP が表示される。
-    */
-    renderVideos();
+const sortMenu =
+  $("sortSelectMenu");
 
-    if (isPopular) {
-      /*
-        UPを画面に出した後で、
-        現在順位を次回比較用として保存。
-      */
-      markPopularRankingAsSeen();
+const sortCustom =
+  $("sortCustomSelect");
+
+const tagTrigger =
+  $("tagSelectTrigger");
+
+const tagMenu =
+  $("tagSelectMenu");
+
+const tagCustom =
+  $("tagCustomSelect");
+
+
+function closeCustomSelects() {
+  sortCustom?.classList.remove(
+    "open"
+  );
+
+  tagCustom?.classList.remove(
+    "open"
+  );
+
+  sortTrigger?.setAttribute(
+    "aria-expanded",
+    "false"
+  );
+
+  tagTrigger?.setAttribute(
+    "aria-expanded",
+    "false"
+  );
+}
+
+
+/* 並び替えを開く */
+sortTrigger.onclick =
+  event => {
+    event.stopPropagation();
+
+    const willOpen =
+      !sortCustom.classList.contains(
+        "open"
+      );
+
+    closeCustomSelects();
+
+    if (willOpen) {
+      sortCustom.classList.add(
+        "open"
+      );
+
+      sortTrigger.setAttribute(
+        "aria-expanded",
+        "true"
+      );
     }
   };
 
-  $("tagSelect")
-    .onchange =
-    renderVideos;
+
+/* 並び替え選択 */
+sortMenu
+  .querySelectorAll(
+    "button[data-value]"
+  )
+  .forEach(
+    button => {
+      button.onclick =
+        event => {
+          event.stopPropagation();
+
+          const value =
+            button.dataset.value;
+
+          $("sortSelect").value =
+            value;
+
+          $("sortSelectLabel")
+            .textContent =
+            button.textContent.trim();
+
+
+          sortMenu
+            .querySelectorAll(
+              "button"
+            )
+            .forEach(
+              item =>
+                item.classList.remove(
+                  "selected"
+                )
+            );
+
+          button.classList.add(
+            "selected"
+          );
+
+
+          closeCustomSelects();
+
+          /*
+            既存の人気順ロジックを維持
+          */
+          renderVideos();
+
+          if (
+            value === "popular"
+          ) {
+            markPopularRankingAsSeen();
+          }
+        };
+    }
+  );
+
+
+/* タグ絞り込みを開く */
+tagTrigger.onclick =
+  event => {
+    event.stopPropagation();
+
+    const willOpen =
+      !tagCustom.classList.contains(
+        "open"
+      );
+
+    closeCustomSelects();
+
+    if (willOpen) {
+      tagCustom.classList.add(
+        "open"
+      );
+
+      tagTrigger.setAttribute(
+        "aria-expanded",
+        "true"
+      );
+    }
+  };
+
+
+/* タグ選択 */
+tagMenu
+  .querySelectorAll(
+    "button[data-value]"
+  )
+  .forEach(
+    button => {
+      button.onclick =
+        event => {
+          event.stopPropagation();
+
+          const value =
+            button.dataset.value;
+
+          $("tagSelect").value =
+            value;
+
+          $("tagSelectLabel")
+            .textContent =
+            button.textContent.trim();
+
+
+          tagMenu
+            .querySelectorAll(
+              "button"
+            )
+            .forEach(
+              item =>
+                item.classList.remove(
+                  "selected"
+                )
+            );
+
+          button.classList.add(
+            "selected"
+          );
+
+          closeCustomSelects();
+
+          renderVideos();
+        };
+    }
+  );
+
+
+/* 外側を押したら閉じる */
+document.addEventListener(
+  "click",
+  closeCustomSelects
+);
+
+
+/* =========================================================
+   Tag edit modal
+========================================================= */
+
+$("closeTagEdit").onclick =
+  closeTagEdit;
+
+$("cancelTagEdit").onclick =
+  closeTagEdit;
+
+$("saveTagEdit").onclick =
+  saveEditingVideoTags;
+
+
+/* モーダル背景を押して閉じる */
+$("tagEditModal")
+  .addEventListener(
+    "click",
+    event => {
+      if (
+        event.target ===
+        $("tagEditModal")
+      ) {
+        closeTagEdit();
+      }
+    }
+  );
 
   $("openCollage")
     .onclick =
