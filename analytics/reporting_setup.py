@@ -121,3 +121,157 @@ print(
     "analytics/report_types.json "
     "を保存しました"
 )
+# =========================================================
+# CREATE / FIND REACH REPORT JOB
+# =========================================================
+
+TARGET_REPORT_TYPE = "channel_reach_combined_a1"
+
+print()
+print(
+    f"対象レポート: {TARGET_REPORT_TYPE}"
+)
+
+
+# 既存ジョブを取得
+jobs_response = (
+    reporting
+    .jobs()
+    .list(
+        includeSystemManaged=True
+    )
+    .execute()
+)
+
+jobs = jobs_response.get(
+    "jobs",
+    []
+)
+
+
+existing_job = None
+
+
+for job in jobs:
+
+    if (
+        job.get("reportTypeId")
+        == TARGET_REPORT_TYPE
+    ):
+
+        existing_job = job
+        break
+
+
+# =========================================================
+# 既存ジョブがあれば再利用
+# =========================================================
+
+if existing_job:
+
+    print()
+    print(
+        "既存のReachジョブが見つかりました"
+    )
+
+    print(
+        "Job ID:",
+        existing_job.get("id")
+    )
+
+    print(
+        "Job Name:",
+        existing_job.get("name")
+    )
+
+
+# =========================================================
+# なければ新規作成
+# =========================================================
+
+else:
+
+    print()
+    print(
+        "Reachジョブがないため新規作成します"
+    )
+
+    created_job = (
+        reporting
+        .jobs()
+        .create(
+            body={
+                "reportTypeId":
+                    TARGET_REPORT_TYPE,
+
+                "name":
+                    "YT Analytics Reach"
+            }
+        )
+        .execute()
+    )
+
+
+    existing_job = created_job
+
+
+    print()
+    print(
+        "Reachジョブ作成成功"
+    )
+
+    print(
+        "Job ID:",
+        created_job.get("id")
+    )
+
+    print(
+        "Job Name:",
+        created_job.get("name")
+    )
+
+
+# =========================================================
+# JOB情報保存
+# =========================================================
+
+job_info = {
+
+    "id":
+        existing_job.get("id"),
+
+    "name":
+        existing_job.get("name"),
+
+    "reportTypeId":
+        existing_job.get(
+            "reportTypeId"
+        ),
+
+    "createTime":
+        existing_job.get(
+            "createTime"
+        )
+
+}
+
+
+with open(
+    "analytics/reporting_job.json",
+    "w",
+    encoding="utf-8"
+) as f:
+
+    json.dump(
+        job_info,
+        f,
+        ensure_ascii=False,
+        indent=2
+    )
+
+
+print()
+print(
+    "analytics/reporting_job.json "
+    "を保存しました"
+)
