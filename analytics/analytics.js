@@ -156,6 +156,110 @@ async function loadAnalyticsData(){
   }
 }
 
+/* =========================================================
+   BUILD REAL VIDEO PICKER
+========================================================= */
+
+function buildRealVideoPicker(){
+
+  const container =
+    document.querySelector(
+      ".video-picker-list"
+    );
+
+  if(!container){
+    console.warn(
+      "video-picker-list not found"
+    );
+    return;
+  }
+
+  if(!REAL_VIDEOS.length){
+    return;
+  }
+
+  container.innerHTML = "";
+
+  REAL_VIDEOS.forEach(video => {
+
+    const item =
+      document.createElement(
+        "button"
+      );
+
+    item.type = "button";
+
+    item.className =
+      "video-picker-item";
+
+    item.dataset.videoId =
+      video.id;
+
+    item.dataset.videoTitle =
+      video.title;
+
+
+    const thumbnail =
+      document.createElement(
+        "img"
+      );
+
+    thumbnail.src =
+      video.thumbnail;
+
+    thumbnail.alt = "";
+
+    thumbnail.loading =
+      "lazy";
+
+
+    const text =
+      document.createElement(
+        "div"
+      );
+
+    text.className =
+      "video-picker-item-text";
+
+
+    const title =
+      document.createElement(
+        "strong"
+      );
+
+    title.textContent =
+      video.title;
+
+
+    const date =
+      document.createElement(
+        "span"
+      );
+
+    date.textContent =
+      video.date
+        ? video.date.replaceAll("-","/")
+        : "";
+
+
+    text.append(
+      title,
+      date
+    );
+
+    item.append(
+      thumbnail,
+      text
+    );
+
+    container.appendChild(
+      item
+    );
+
+  });
+
+}
+
 
 /* =========================================================
    GET REAL VIDEO
@@ -2883,41 +2987,40 @@ function initVideoPicker(){
   );
 
 
-  document
-    .querySelectorAll(
-      ".video-picker-item"
-    )
-    .forEach(item => {
+modal.addEventListener(
+  "click",
+  event => {
 
-      item.addEventListener(
-        "click",
-        () => {
-
-          const id =
-            item.dataset.videoId;
-
-          const video =
-            VIDEOS.find(
-              videoItem =>
-                videoItem.id === id
-            );
-
-
-          if(!video){
-            return;
-          }
-
-
-          applyPickedVideo(
-            currentPickerTarget,
-            video
-          );
-
-
-          closePicker();
-        }
+    const item =
+      event.target.closest(
+        ".video-picker-item"
       );
-    });
+
+    if(!item){
+      return;
+    }
+
+    const id =
+      item.dataset.videoId;
+
+    const video =
+      REAL_VIDEOS.find(
+        videoItem =>
+          videoItem.id === id
+      );
+
+    if(!video){
+      return;
+    }
+
+    applyPickedVideo(
+      currentPickerTarget,
+      video
+    );
+
+    closePicker();
+  }
+);
 }
 
 
@@ -3591,13 +3694,13 @@ function initResizeHandler(){
 function renderInitialVideoSelections(){
 
   const individualVideo =
-    VIDEOS[0];
+  REAL_VIDEOS[0];
 
-  const compareVideoA =
-    VIDEOS[0];
+const compareVideoA =
+  REAL_VIDEOS[0];
 
-  const compareVideoB =
-    VIDEOS[1];
+const compareVideoB =
+  REAL_VIDEOS[1];
 
 
   if(individualVideo){
@@ -3649,6 +3752,17 @@ function renderInitialVideoSelections(){
         );
     }
   }
+     selectedIndividualVideoId =
+    individualVideo?.id ||
+    null;
+
+  selectedCompareVideoAId =
+    compareVideoA?.id ||
+    null;
+
+  selectedCompareVideoBId =
+    compareVideoB?.id ||
+    null;
 }
 
 
@@ -3687,6 +3801,8 @@ function renderInitialCharts(){
 async function init(){
 
   await loadAnalyticsData();
+
+  buildRealVideoPicker();
 
   renderHeader();
 
