@@ -27,3 +27,17 @@ jobs:
           YT_ANALYTICS_CLIENT_SECRET: ${{ secrets.YT_ANALYTICS_CLIENT_SECRET }}
           YT_ANALYTICS_REFRESH_TOKEN: ${{ secrets.YT_ANALYTICS_REFRESH_TOKEN }}
         run: python analytics/update_analytics.py
+        
+      - name: Commit analytics data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add analytics/analytics_data.json
+
+          if git diff --cached --quiet; then
+            echo "No analytics changes"
+          else
+            git commit -m "Update YouTube Analytics data"
+            git push
+          fi
