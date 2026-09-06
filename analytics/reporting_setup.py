@@ -391,3 +391,165 @@ else:
     print(
         "まだReachレポートは生成されていません"
     )
+# =========================================================
+# DOWNLOAD LATEST REACH REPORT
+# =========================================================
+
+import csv
+import io
+import requests
+
+
+if reports:
+
+    # createTimeが新しいものを優先
+    latest_report = max(
+        reports,
+        key=lambda report:
+            report.get(
+                "createTime",
+                ""
+            )
+    )
+
+    download_url =
+        latest_report.get(
+            "downloadUrl"
+        )
+
+    if not download_url:
+
+        print()
+        print(
+            "最新レポートに "
+            "Download URL がありません"
+        )
+
+    else:
+
+        print()
+        print(
+            "最新Reachレポートを"
+            "ダウンロードします"
+        )
+
+        # OAuthアクセストークンを更新
+        from google.auth.transport.requests import Request
+
+        credentials.refresh(
+            Request()
+        )
+
+        response = requests.get(
+            download_url,
+            headers={
+                "Authorization":
+                    f"Bearer {credentials.token}"
+            },
+            timeout=60
+        )
+
+        response.raise_for_status()
+
+        csv_text =
+            response.text
+
+
+        # =====================================================
+        # RAW CSV保存
+        # =====================================================
+
+        with open(
+            "analytics/reach_report.csv",
+            "w",
+            encoding="utf-8",
+            newline=""
+        ) as f:
+
+            f.write(
+                csv_text
+            )
+
+
+        print(
+            "analytics/reach_report.csv "
+            "を保存しました"
+        )
+
+
+        # =====================================================
+        # CSV → JSON
+        # =====================================================
+
+        reader =
+            csv.DictReader(
+                io.StringIO(
+                    csv_text
+                )
+            )
+
+        reach_rows =
+            list(reader)
+
+
+        with open(
+            "analytics/reach_report.json",
+            "w",
+            encoding="utf-8"
+        ) as f:
+
+            json.dump(
+                reach_rows,
+                f,
+                ensure_ascii=False,
+                indent=2
+            )
+
+
+        print(
+            "analytics/reach_report.json "
+            "を保存しました"
+        )
+
+        print()
+        print(
+            f"Reachデータ: "
+            f"{len(reach_rows)}行"
+        )
+
+
+        # =====================================================
+        # COLUMN確認
+        # =====================================================
+
+        if reach_rows:
+
+            print()
+            print(
+                "取得できたカラム:"
+            )
+
+            for column in (
+                reach_rows[0]
+                .keys()
+            ):
+
+                print(
+                    f"  - {column}"
+                )
+
+        else:
+
+            print()
+            print(
+                "CSV内にデータ行がありません"
+            )
+
+
+else:
+
+    print()
+    print(
+        "レポート生成待ちのため"
+        "ダウンロード処理はスキップします"
+    )
