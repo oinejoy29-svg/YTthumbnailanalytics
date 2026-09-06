@@ -163,13 +163,13 @@ async function loadAnalyticsData(){
 function buildRealVideoPicker(){
 
   const container =
-    document.querySelector(
-      ".video-picker-list"
+    document.getElementById(
+      "videoPickerGrid"
     );
 
   if(!container){
     console.warn(
-      "video-picker-list not found"
+      "videoPickerGrid not found"
     );
     return;
   }
