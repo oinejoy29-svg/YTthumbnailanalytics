@@ -103,21 +103,101 @@
             <h2>Videos</h2>
           </div>
 
-          <div class="filters">
-           <select id="sortSelect" aria-label="並び替え">
-  <option value="popular">人気順</option>
-  <option value="increase">増加順</option>
-  <option value="newest" selected>新しい順</option>
-  <option value="oldest">古い順</option>
-  <option value="longest">再生時間が長い順</option>
-  <option value="shortest">再生時間が短い順</option>
-</select>
+<div class="filters">
 
-            <select id="tagSelect" aria-label="メンバー絞り込み">
-              <option value="">すべてのメンバー</option>
-            </select>
-          </div>
-        </div>
+  <!-- 並び替え -->
+  <div class="custom-select" id="sortCustomSelect">
+
+    <button
+      class="custom-select-trigger"
+      id="sortSelectTrigger"
+      type="button"
+      aria-haspopup="listbox"
+      aria-expanded="false"
+    >
+      <span id="sortSelectLabel">新しい順</span>
+      <span class="custom-select-arrow" aria-hidden="true">⌄</span>
+    </button>
+
+    <div
+      class="custom-select-menu"
+      id="sortSelectMenu"
+      role="listbox"
+      aria-label="並び替え"
+    >
+      <button type="button" data-value="popular">
+        人気順
+      </button>
+
+      <button type="button" data-value="increase">
+        増加順
+      </button>
+
+      <button
+        type="button"
+        data-value="newest"
+        class="selected"
+      >
+        新しい順
+      </button>
+
+      <button type="button" data-value="oldest">
+        古い順
+      </button>
+
+      <button type="button" data-value="longest">
+        再生時間が長い順
+      </button>
+
+      <button type="button" data-value="shortest">
+        再生時間が短い順
+      </button>
+    </div>
+
+  </div>
+
+
+  <!-- メンバー絞り込み -->
+  <div class="custom-select" id="tagCustomSelect">
+
+    <button
+      class="custom-select-trigger"
+      id="tagSelectTrigger"
+      type="button"
+      aria-haspopup="listbox"
+      aria-expanded="false"
+    >
+      <span id="tagSelectLabel">すべてのメンバー</span>
+      <span class="custom-select-arrow" aria-hidden="true">⌄</span>
+    </button>
+
+    <div
+      class="custom-select-menu"
+      id="tagSelectMenu"
+      role="listbox"
+      aria-label="メンバー絞り込み"
+    >
+      <!-- script.jsで生成 -->
+    </div>
+
+  </div>
+
+
+  <!-- JS互換用。画面には表示しない -->
+  <select id="sortSelect" hidden>
+    <option value="popular">人気順</option>
+    <option value="increase">増加順</option>
+    <option value="newest" selected>新しい順</option>
+    <option value="oldest">古い順</option>
+    <option value="longest">再生時間が長い順</option>
+    <option value="shortest">再生時間が短い順</option>
+  </select>
+
+  <select id="tagSelect" hidden>
+    <option value="">すべてのメンバー</option>
+  </select>
+
+</div>        </div>
 
         <div id="videoGrid" class="video-grid"></div>
 
@@ -365,7 +445,70 @@
 
   </div>
 
+<!-- =========================
+     TAG EDIT MODAL
+========================== -->
+<div
+  id="tagEditModal"
+  class="modal tag-edit-modal"
+  aria-hidden="true"
+>
+  <div class="modal-inner tag-edit-inner">
 
+    <div class="modal-head">
+
+      <div>
+        <span class="section-kicker">EDIT TAGS</span>
+        <h2>タグ編集</h2>
+      </div>
+
+      <button
+        id="closeTagEdit"
+        class="close-btn"
+        type="button"
+        aria-label="閉じる"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <p class="tag-edit-description">
+      この動画に設定するメンバーを選択
+    </p>
+
+
+    <div
+      id="tagEditChoices"
+      class="tag-edit-choices"
+    >
+      <!-- script.jsで生成 -->
+    </div>
+
+
+    <div class="tag-edit-actions">
+
+      <button
+        id="cancelTagEdit"
+        class="tag-edit-cancel"
+        type="button"
+      >
+        キャンセル
+      </button>
+
+      <button
+        id="saveTagEdit"
+        class="tag-edit-save"
+        type="button"
+      >
+        保存
+      </button>
+
+    </div>
+
+  </div>
+</div>
 
   <!-- =========================
        COLLAGE MODAL
