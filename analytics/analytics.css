@@ -3191,3 +3191,110 @@ button.individual-video-hero{
   }
 
 }
+
+/* =========================================================
+   2026-09-06 COMPARE / STICKY / META REFINEMENT
+========================================================= */
+
+/* "動画を変更" ラベルは廃止 */
+.video-picker-change,
+.compare-video-change{
+  display:none !important;
+}
+
+/* 公開日時 */
+.individual-video-meta,
+.compare-video-published{
+  color:var(--muted);
+  font-size:11px;
+  font-weight:800;
+}
+
+.compare-video-published{
+  display:block;
+  margin:8px 2px 1px;
+}
+
+/* COMPARE: A / VS / B を1つの箱に統合 */
+.compare-video-selector-grid{
+  position:sticky;
+  top:10px;
+  z-index:100;
+
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 76px minmax(0,1fr);
+  gap:12px;
+  align-items:stretch;
+
+  margin-bottom:18px;
+  padding:12px;
+
+  background:#fff;
+  border:2px solid var(--line);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+}
+
+/* 外側が箱になるので、A/Bそれぞれの箱は消す */
+.compare-video-picker-card{
+  min-width:0;
+  padding:0;
+  border:0;
+  border-radius:0;
+  background:transparent;
+  box-shadow:none;
+}
+
+.compare-video-picker-card:hover{
+  transform:none;
+}
+
+/* VSも同じ1つの箱の中にいるようにする */
+.compare-vs-column{
+  border:0;
+  background:transparent;
+  box-shadow:none;
+}
+
+/* 旧sticky用のベージュ背景・余白を打ち消す */
+.compare-video-selector-grid{
+  padding-top:12px;
+  padding-bottom:12px;
+}
+
+/* INDIVIDUALはカード自身だけがsticky */
+.individual-video-hero{
+  position:sticky;
+  top:10px;
+  z-index:100;
+  background:#fff;
+}
+
+@media(max-width:800px){
+  .individual-video-hero,
+  .compare-video-selector-grid{
+    top:6px;
+  }
+
+  .compare-video-selector-grid{
+    grid-template-columns:minmax(0,1fr) 34px minmax(0,1fr);
+    gap:6px;
+    margin-bottom:12px;
+    padding:7px;
+    border-radius:15px;
+  }
+
+  .compare-video-picker-card{
+    padding:0;
+  }
+
+  .individual-video-meta,
+  .compare-video-published{
+    font-size:7.5px;
+    line-height:1.35;
+  }
+
+  .compare-video-published{
+    margin-top:5px;
+  }
+}
