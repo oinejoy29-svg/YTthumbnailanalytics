@@ -208,7 +208,7 @@ def create_summary(rows):
         "subscribersGained": subscribers_gained,
         "subscribersLost": subscribers_lost,
     }
- def create_milestones(rows, published_date):
+def create_milestones(rows, published_date):
     """
     DAY1 / DAY3 / DAY7 を作成
     """
