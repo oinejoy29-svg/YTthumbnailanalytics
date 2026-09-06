@@ -3,6 +3,11 @@ name: YouTube Analytics API Test
 on:
   workflow_dispatch:
 
+  schedule:
+    # 毎日 JST 12:00
+    # UTC 03:00
+    - cron: "30 3 * * *"
+
 permissions:
   contents: write
 
