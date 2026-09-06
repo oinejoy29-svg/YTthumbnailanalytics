@@ -6,7 +6,7 @@ on:
   schedule:
     # 毎日 JST 12:00
     # UTC 03:00
-    - cron: "30 3 * * *"
+    - cron: "00 3 * * *"
 
 permissions:
   contents: write
