@@ -2,9 +2,10 @@
    VIDEO ANALYTICS
    analytics/analytics.js
 
-   Phase 1:
-   外観確認用ダミーデータ
-   後から YouTube Analytics / Reporting API に置換
+   Phase 2 prototype
+   - UI / chart behavior
+   - Dummy analytics data
+   - Later replaced by YouTube Analytics / Reporting API
 ========================================================= */
 
 "use strict";
@@ -23,20 +24,87 @@ const COLORS = {
   green: "#35C759",
   paper: "#FFFFFF",
   grid: "rgba(17,17,17,.10)",
-  average: "rgba(17,17,17,.25)"
+  average: "rgba(17,17,17,.22)",
+  averageFill: "rgba(17,17,17,.055)"
 };
 
 const CHARTS = {};
 
 let currentMode = "overview";
-let currentPeriod = "30";
+let currentPeriod = "all";
 
+let currentReachWindow = "first14";
+let currentReachStart = 0;
+
+let currentPickerTarget = null;
 
 
 /* =========================================================
-   DUMMY DATA
+   VIDEO DUMMY DATA
+========================================================= */
 
-   API接続時は、この部分を取得データに置き換える。
+const VIDEOS = [
+  {
+    id: "B75t0LqJUSg",
+    title: "浴衣の着付けで恐ろしい額を請求されてしまった髙橋舞【ニアジョイ】",
+    shortTitle: "浴衣の着付けで恐ろしい額を請求されてしまった髙橋舞",
+    date: "2026/8/26",
+    thumbnail: "https://i.ytimg.com/vi/B75t0LqJUSg/hqdefault.jpg"
+  },
+  {
+    id: "sample2",
+    title: "サンプル動画 2",
+    shortTitle: "サンプル動画 2",
+    date: "2026/8/24",
+    thumbnail: ""
+  },
+  {
+    id: "sample3",
+    title: "サンプル動画 3",
+    shortTitle: "サンプル動画 3",
+    date: "2026/8/22",
+    thumbnail: ""
+  },
+  {
+    id: "sample4",
+    title: "サンプル動画 4",
+    shortTitle: "サンプル動画 4",
+    date: "2026/8/20",
+    thumbnail: ""
+  },
+  {
+    id: "sample5",
+    title: "サンプル動画 5",
+    shortTitle: "サンプル動画 5",
+    date: "2026/8/18",
+    thumbnail: ""
+  },
+  {
+    id: "sample6",
+    title: "サンプル動画 6",
+    shortTitle: "サンプル動画 6",
+    date: "2026/8/16",
+    thumbnail: ""
+  },
+  {
+    id: "sample7",
+    title: "サンプル動画 7",
+    shortTitle: "サンプル動画 7",
+    date: "2026/8/14",
+    thumbnail: ""
+  },
+  {
+    id: "sample8",
+    title: "サンプル動画 8",
+    shortTitle: "サンプル動画 8",
+    date: "2026/8/12",
+    thumbnail: ""
+  }
+];
+
+
+/* =========================================================
+   DUMMY ANALYTICS
 ========================================================= */
 
 const DUMMY = {
@@ -51,40 +119,82 @@ const DUMMY = {
       "9/5","9/6"
     ],
 
+    /*
+      OVERVIEW:
+      views / engaged は「その日の値」。
+      描画時に累計化する。
+    */
+
     views: [
-      9140, 10240, 8810, 12420, 10780,
-      11940, 12820, 11140, 13840, 14920,
-      13310, 15780, 14120, 16920, 15810,
-      17480, 19020, 18210, 24910, 22180,
-      19820, 20710, 21940, 22820, 24120,
-      23680, 25210, 26340, 24820, 27910
+      9140,10240,8810,12420,10780,
+      11940,12820,11140,13840,14920,
+      13310,15780,14120,16920,15810,
+      17480,19020,18210,24910,22180,
+      19820,20710,21940,22820,24120,
+      23680,25210,26340,24820,27910
     ],
 
     engaged: [
-      7310, 8260, 7040, 10020, 8610,
-      9480, 10320, 8950, 11120, 11980,
-      10620, 12720, 11310, 13640, 12780,
-      14120, 15320, 14720, 20180, 17840,
-      16020, 16780, 17720, 18540, 19520,
-      19080, 20420, 21410, 20080, 22640
+      7310,8260,7040,10020,8610,
+      9480,10320,8950,11120,11980,
+      10620,12720,11310,13640,12780,
+      14120,15320,14720,20180,17840,
+      16020,16780,17720,18540,19520,
+      19080,20420,21410,20080,22640
     ],
 
     impressions: [
-      81200, 89400, 77400, 103400, 91200,
-      98800, 105200, 93100, 112400, 120800,
-      108200, 126400, 116200, 135400, 128100,
-      141200, 151800, 147400, 194200, 181600,
-      163400, 169800, 178200, 184800, 194600,
-      190400, 201200, 209800, 202400, 218600
+      81200,89400,77400,103400,91200,
+      98800,105200,93100,112400,120800,
+      108200,126400,116200,135400,128100,
+      141200,151800,147400,194200,181600,
+      163400,169800,178200,184800,194600,
+      190400,201200,209800,202400,218600
     ],
 
     ctr: [
-      7.3, 7.7, 7.1, 8.0, 7.5,
-      7.8, 8.1, 7.6, 8.2, 8.4,
-      7.9, 8.5, 8.1, 8.7, 8.3,
-      8.6, 8.8, 8.4, 9.2, 8.9,
-      8.5, 8.6, 8.7, 8.8, 8.9,
-      8.7, 9.0, 9.1, 8.8, 9.2
+      7.3,7.7,7.1,8.0,7.5,
+      7.8,8.1,7.6,8.2,8.4,
+      7.9,8.5,8.1,8.7,8.3,
+      8.6,8.8,8.4,9.2,8.9,
+      8.5,8.6,8.7,8.8,8.9,
+      8.7,9.0,9.1,8.8,9.2
+    ],
+
+    averageViews: [
+      7050,7410,7660,7900,8120,
+      8360,8600,8840,9080,9310,
+      9540,9770,10020,10280,10530,
+      10780,11050,11320,11600,11870,
+      12150,12420,12700,12980,13260,
+      13540,13820,14110,14400,14690
+    ],
+
+    averageEngaged: [
+      5680,5930,6170,6400,6620,
+      6840,7060,7280,7500,7720,
+      7940,8160,8380,8600,8820,
+      9040,9260,9480,9700,9920,
+      10140,10360,10580,10800,11020,
+      11240,11460,11680,11900,12120
+    ],
+
+    averageImpressions: [
+      67000,69000,71000,73000,75000,
+      77000,79000,81000,83000,85000,
+      87000,89000,91000,93000,95000,
+      97000,99000,101000,103000,105000,
+      107000,109000,111000,113000,115000,
+      117000,119000,121000,123000,125000
+    ],
+
+    averageCtr: [
+      7.0,7.1,7.0,7.2,7.1,
+      7.2,7.3,7.2,7.3,7.4,
+      7.3,7.4,7.3,7.5,7.4,
+      7.5,7.6,7.5,7.7,7.6,
+      7.6,7.7,7.7,7.8,7.8,
+      7.8,7.9,7.9,7.9,8.0
     ]
   },
 
@@ -92,117 +202,79 @@ const DUMMY = {
   individual: {
 
     labels: [
-      "DAY 1",
-      "DAY 2",
-      "DAY 3",
-      "DAY 4",
-      "DAY 5",
-      "DAY 6",
-      "DAY 7",
-      "DAY 8",
-      "DAY 9",
-      "DAY 10",
-      "DAY 11",
-      "DAY 12",
-      "DAY 13",
-      "DAY 14"
+      "DAY 1","DAY 2","DAY 3","DAY 4","DAY 5","DAY 6","DAY 7",
+      "DAY 8","DAY 9","DAY 10","DAY 11","DAY 12","DAY 13","DAY 14"
     ],
 
+    /*
+      INDIVIDUALは累計ではなく
+      その日単体の数字。
+    */
+
     views: [
-      1824,
-      1211,
-      906,
-      742,
-      614,
-      523,
-      472,
-      391,
-      337,
-      301,
-      268,
-      244,
-      219,
-      198
+      1824,1211,906,742,614,523,472,
+      391,337,301,268,244,219,198
     ],
 
     engaged: [
-      1518,
-      1012,
-      771,
-      631,
-      522,
-      446,
-      399,
-      331,
-      286,
-      254,
-      227,
-      207,
-      186,
-      168
+      1518,1012,771,631,522,446,399,
+      331,286,254,227,207,186,168
     ],
 
-    impressions: [
-      19240,
-      15180,
-      12640,
-      10820,
-      9240,
-      8160,
-      7380,
-      6420,
-      5780,
-      5210,
-      4810,
-      4460,
-      4180,
-      3910
-    ],
 
-    ctr: [
-      9.42,
-      9.18,
-      8.94,
-      8.61,
-      8.43,
-      8.21,
-      8.09,
-      7.94,
-      7.81,
-      7.72,
-      7.64,
-      7.57,
-      7.49,
-      7.41
-    ],
+    /* 視聴維持率 */
 
     retentionLabels: [
-      "0%",
-      "10%",
-      "20%",
-      "30%",
-      "40%",
-      "50%",
-      "60%",
-      "70%",
-      "80%",
-      "90%",
-      "100%"
+      "0:00",
+      "0:20",
+      "0:40",
+      "1:00",
+      "1:20",
+      "1:40",
+      "2:00",
+      "2:20",
+      "2:40",
+      "3:00",
+      "3:26"
     ],
 
     retention: [
-      100,
-      87,
-      81,
-      77,
-      73,
-      69,
-      66,
-      62,
-      58,
-      53,
-      47
+      100,87,81,77,73,69,66,62,58,53,47
     ],
+
+    averageRetention: [
+      100,84,78,73,69,65,61,57,53,48,43
+    ],
+
+
+    /*
+      REACH
+      42日分用意して14日ずつ移動可能
+    */
+
+    reachLabels: Array.from(
+      {length:42},
+      (_,i) => `DAY ${i + 1}`
+    ),
+
+    impressions: [
+      19240,15180,12640,10820,9240,8160,7380,
+      6420,5780,5210,4810,4460,4180,3910,
+      3680,3490,3310,3150,3010,2880,2760,
+      2650,2550,2460,2370,2290,2210,2140,
+      2070,2010,1950,1890,1840,1790,1740,
+      1690,1650,1610,1570,1530,1490,1450
+    ],
+
+    ctr: [
+      9.42,9.18,8.94,8.61,8.43,8.21,8.09,
+      7.94,7.81,7.72,7.64,7.57,7.49,7.41,
+      7.36,7.32,7.29,7.25,7.21,7.18,7.16,
+      7.14,7.12,7.10,7.08,7.06,7.05,7.03,
+      7.02,7.01,7.00,7.01,7.03,7.04,7.06,
+      7.08,7.10,7.12,7.14,7.15,7.17,7.18
+    ],
+
 
     trafficLabels: [
       "ブラウジング機能",
@@ -237,156 +309,120 @@ const DUMMY = {
     ],
 
     dailyViewsA: [
-      1824,
-      1211,
-      906,
-      742,
-      614,
-      523,
-      472
+      1824,1211,906,742,614,523,472
     ],
 
     dailyViewsB: [
-      1411,
-      1328,
-      1081,
-      921,
-      842,
-      811,
-      817
+      1411,1328,1081,921,842,811,817
     ],
 
     averageDailyViews: [
-      1310,
-      1050,
-      742,
-      610,
-      528,
-      471,
-      429
+      1310,1050,742,610,528,471,429
     ],
 
-
     impressionsA: [
-      19240,
-      15180,
-      12640,
-      10820,
-      9240,
-      8160,
-      7380
+      19240,15180,12640,10820,9240,8160,7380
     ],
 
     impressionsB: [
-      18100,
-      16900,
-      15200,
-      13800,
-      12700,
-      11900,
-      11200
+      18100,16900,15200,13800,12700,11900,11200
     ],
 
     averageImpressions: [
-      14800,
-      12900,
-      11100,
-      9800,
-      8900,
-      8100,
-      7500
+      14800,12900,11100,9800,8900,8100,7500
     ],
 
-
     ctrA: [
-      9.42,
-      9.18,
-      8.94,
-      8.61,
-      8.43,
-      8.21,
-      8.09
+      9.42,9.18,8.94,8.61,8.43,8.21,8.09
     ],
 
     ctrB: [
-      7.84,
-      7.91,
-      8.03,
-      8.10,
-      8.17,
-      8.24,
-      8.31
+      7.84,7.91,8.03,8.10,8.17,8.24,8.31
     ],
 
     averageCtr: [
-      7.18,
-      7.21,
-      7.24,
-      7.28,
-      7.31,
-      7.34,
-      7.37
+      7.18,7.21,7.24,7.28,7.31,7.34,7.37
     ],
 
-
     retentionLabels: [
-      "0%",
-      "10%",
-      "20%",
-      "30%",
-      "40%",
-      "50%",
-      "60%",
-      "70%",
-      "80%",
-      "90%",
-      "100%"
+      "0:00",
+      "0:20",
+      "0:40",
+      "1:00",
+      "1:20",
+      "1:40",
+      "2:00",
+      "2:20",
+      "2:40",
+      "3:00",
+      "3:26"
     ],
 
     retentionA: [
-      100,
-      87,
-      81,
-      77,
-      73,
-      69,
-      66,
-      62,
-      58,
-      53,
-      47
+      100,87,81,77,73,69,66,62,58,53,47
     ],
 
     retentionB: [
-      100,
-      91,
-      86,
-      82,
-      79,
-      76,
-      73,
-      70,
-      66,
-      62,
-      57
+      100,91,86,82,79,76,73,70,66,62,57
     ],
 
     averageRetention: [
-      100,
-      85,
-      79,
-      74,
-      70,
-      66,
-      62,
-      58,
-      54,
-      49,
-      44
+      100,85,79,74,70,66,62,58,54,49,44
     ]
   }
 };
 
+
+/* =========================================================
+   FORMAT
+========================================================= */
+
+function compactNumber(value){
+
+  const number = Number(value || 0);
+
+  if(number >= 1000000){
+    return `${(number / 1000000)
+      .toFixed(1)
+      .replace(".0","")}M`;
+  }
+
+  if(number >= 1000){
+    return `${(number / 1000)
+      .toFixed(1)
+      .replace(".0","")}k`;
+  }
+
+  return number.toLocaleString();
+}
+
+
+function cumulative(values){
+
+  let total = 0;
+
+  return values.map(value => {
+
+    total += Number(value || 0);
+
+    return total;
+  });
+}
+
+
+function sliceLast(array,count){
+
+  if(count === "all"){
+    return [...array];
+  }
+
+  return array.slice(
+    Math.max(
+      0,
+      array.length - Number(count)
+    )
+  );
+}
 
 
 /* =========================================================
@@ -395,22 +431,33 @@ const DUMMY = {
 
 function formatDateJP(date){
 
-  const y = date.getFullYear();
-  const m = date.getMonth() + 1;
-  const d = date.getDate();
-
-  return `${y}/${m}/${d}`;
+  return [
+    date.getFullYear(),
+    date.getMonth() + 1,
+    date.getDate()
+  ].join("/");
 }
 
 
 function formatDateTimeJP(date){
 
   const y = date.getFullYear();
-  const m = String(date.getMonth() + 1).padStart(2, "0");
-  const d = String(date.getDate()).padStart(2, "0");
 
-  const h = String(date.getHours()).padStart(2, "0");
-  const min = String(date.getMinutes()).padStart(2, "0");
+  const m =
+    String(date.getMonth() + 1)
+      .padStart(2,"0");
+
+  const d =
+    String(date.getDate())
+      .padStart(2,"0");
+
+  const h =
+    String(date.getHours())
+      .padStart(2,"0");
+
+  const min =
+    String(date.getMinutes())
+      .padStart(2,"0");
 
   return `${y}/${m}/${d} ${h}:${min}`;
 }
@@ -418,8 +465,11 @@ function formatDateTimeJP(date){
 
 function getDaysSinceStart(){
 
-  const start = new Date(`${START_DATE}T00:00:00`);
-  const now = new Date();
+  const start =
+    new Date(`${START_DATE}T00:00:00`);
+
+  const now =
+    new Date();
 
   const diff =
     now.getTime() -
@@ -434,19 +484,28 @@ function getDaysSinceStart(){
 
 function renderHeader(){
 
-  const now = new Date();
+  const now =
+    new Date();
 
   const periodText =
-    document.getElementById("periodText");
+    document.getElementById(
+      "periodText"
+    );
 
   const dayCount =
-    document.getElementById("dayCount");
+    document.getElementById(
+      "dayCount"
+    );
 
   const updatedDesktop =
-    document.getElementById("updatedAtDesktop");
+    document.getElementById(
+      "updatedAtDesktop"
+    );
 
   const updatedMobile =
-    document.getElementById("updatedAtMobile");
+    document.getElementById(
+      "updatedAtMobile"
+    );
 
 
   if(periodText){
@@ -468,23 +527,18 @@ function renderHeader(){
 
 
   if(updatedDesktop){
-
-    updatedDesktop.textContent =
-      updated;
+    updatedDesktop.textContent = updated;
   }
 
 
   if(updatedMobile){
-
-    updatedMobile.textContent =
-      updated;
+    updatedMobile.textContent = updated;
   }
 }
 
 
-
 /* =========================================================
-   CHART DEFAULTS
+   CHART DEFAULT
 ========================================================= */
 
 function setupChartDefaults(){
@@ -493,7 +547,6 @@ function setupChartDefaults(){
     return;
   }
 
-
   Chart.defaults.font.family =
     'Inter, "Noto Sans JP", sans-serif';
 
@@ -501,7 +554,7 @@ function setupChartDefaults(){
     COLORS.muted;
 
   Chart.defaults.animation.duration =
-    280;
+    250;
 
   Chart.defaults.responsive =
     true;
@@ -511,14 +564,30 @@ function setupChartDefaults(){
 }
 
 
+/* =========================================================
+   DESTROY
+========================================================= */
+
+function destroyChart(name){
+
+  if(!CHARTS[name]){
+    return;
+  }
+
+  CHARTS[name].destroy();
+
+  delete CHARTS[name];
+}
+
 
 /* =========================================================
-   COMMON CHART OPTIONS
+   COMMON LINE OPTIONS
 ========================================================= */
 
 function lineChartOptions({
   percent = false,
-  beginAtZero = true
+  beginAtZero = true,
+  showLegend = false
 } = {}){
 
   return {
@@ -535,7 +604,7 @@ function lineChartOptions({
     plugins:{
 
       legend:{
-        display:false
+        display:showLegend
       },
 
       tooltip:{
@@ -547,7 +616,7 @@ function lineChartOptions({
 
         padding:10,
 
-        displayColors:false,
+        displayColors:true,
 
         callbacks:{
 
@@ -556,12 +625,16 @@ function lineChartOptions({
             const value =
               context.parsed.y;
 
-            if(percent){
+            const label =
+              context.dataset.label
+                ? `${context.dataset.label}: `
+                : "";
 
-              return `${value.toLocaleString()}%`;
+            if(percent){
+              return `${label}${value}%`;
             }
 
-            return value.toLocaleString();
+            return `${label}${Number(value).toLocaleString()}`;
           }
         }
       }
@@ -581,9 +654,8 @@ function lineChartOptions({
 
         ticks:{
 
-          maxRotation:0,
-
           autoSkip:true,
+          maxRotation:0,
 
           maxTicksLimit:
             window.innerWidth <= 800
@@ -595,7 +667,6 @@ function lineChartOptions({
               window.innerWidth <= 800
                 ? 8
                 : 10,
-
             weight:"700"
           }
         }
@@ -623,14 +694,12 @@ function lineChartOptions({
               window.innerWidth <= 800
                 ? 8
                 : 10,
-
             weight:"700"
           },
 
           callback(value){
 
             if(percent){
-
               return `${value}%`;
             }
 
@@ -643,53 +712,125 @@ function lineChartOptions({
 }
 
 
-
 /* =========================================================
-   FORMAT
+   OVERVIEW PERIOD DATA
 ========================================================= */
 
-function compactNumber(value){
+function getOverviewSeries(metric){
 
-  const number =
-    Number(value || 0);
+  const source =
+    DUMMY.overview;
 
-  if(number >= 1000000){
 
-    return `${(number / 1000000)
-      .toFixed(1)
-      .replace(".0","")}M`;
+  let values;
+  let average;
+  let percent = false;
+
+
+  switch(metric){
+
+    case "engaged":
+
+      /*
+        OVERVIEWは累計
+      */
+
+      values =
+        cumulative(source.engaged);
+
+      average =
+        cumulative(source.averageEngaged);
+
+      break;
+
+
+    case "impressions":
+
+      /*
+        インプレッションは
+        今回は日別値として表示。
+      */
+
+      values =
+        [...source.impressions];
+
+      average =
+        [...source.averageImpressions];
+
+      break;
+
+
+    case "ctr":
+
+      values =
+        [...source.ctr];
+
+      average =
+        [...source.averageCtr];
+
+      percent = true;
+
+      break;
+
+
+    case "views":
+    default:
+
+      /*
+        OVERVIEW再生数は累計
+      */
+
+      values =
+        cumulative(source.views);
+
+      average =
+        cumulative(source.averageViews);
+
+      break;
   }
 
-  if(number >= 1000){
 
-    return `${(number / 1000)
-      .toFixed(1)
-      .replace(".0","")}k`;
+  let count =
+    currentPeriod;
+
+
+  if(currentPeriod !== "all"){
+
+    count =
+      Math.min(
+        Number(currentPeriod),
+        source.labels.length
+      );
   }
 
-  return number.toLocaleString();
+
+  return {
+
+    labels:
+      sliceLast(
+        source.labels,
+        count
+      ),
+
+    values:
+      sliceLast(
+        values,
+        count
+      ),
+
+    average:
+      sliceLast(
+        average,
+        count
+      ),
+
+    percent
+  };
 }
 
 
-
 /* =========================================================
-   CHART DESTROY
-========================================================= */
-
-function destroyChart(name){
-
-  if(CHARTS[name]){
-
-    CHARTS[name].destroy();
-
-    delete CHARTS[name];
-  }
-}
-
-
-
-/* =========================================================
-   OVERVIEW DAILY CHART
+   OVERVIEW CHART
 ========================================================= */
 
 function renderOverviewDailyChart(
@@ -701,7 +842,10 @@ function renderOverviewDailyChart(
       "overviewDailyChart"
     );
 
-  if(!canvas){
+  if(
+    !canvas ||
+    typeof Chart === "undefined"
+  ){
     return;
   }
 
@@ -711,55 +855,40 @@ function renderOverviewDailyChart(
   );
 
 
-  const config = {
+  const series =
+    getOverviewSeries(metric);
 
-    views:{
-      label:"再生数",
-      values:DUMMY.overview.views,
-      percent:false
-    },
 
-    engaged:{
-      label:"Engaged Views",
-      values:DUMMY.overview.engaged,
-      percent:false
-    },
+  const labels = {
 
-    impressions:{
-      label:"インプレッション",
-      values:DUMMY.overview.impressions,
-      percent:false
-    },
-
-    ctr:{
-      label:"CTR",
-      values:DUMMY.overview.ctr,
-      percent:true
-    }
+    views:"再生数",
+    engaged:"Engaged Views",
+    impressions:"インプレッション",
+    ctr:"クリック率"
   };
-
-
-  const selected =
-    config[metric] ||
-    config.views;
 
 
   CHARTS.overviewDaily =
     new Chart(
       canvas,
       {
+
         type:"line",
 
         data:{
 
           labels:
-            DUMMY.overview.labels,
+            series.labels,
 
           datasets:[
-            {
-              label:selected.label,
 
-              data:selected.values,
+            {
+              label:
+                labels[metric] ||
+                "再生数",
+
+              data:
+                series.values,
 
               borderColor:
                 COLORS.ink,
@@ -784,23 +913,50 @@ function renderOverviewDailyChart(
 
               borderWidth:3,
 
-              tension:.32,
+              tension:.3,
+
+              fill:false
+            },
+
+
+            {
+              label:"全動画平均",
+
+              data:
+                series.average,
+
+              borderColor:
+                COLORS.average,
+
+              backgroundColor:
+                COLORS.averageFill,
+
+              pointRadius:0,
+
+              borderWidth:2,
+
+              borderDash:[5,5],
+
+              tension:.3,
 
               fill:false
             }
+
           ]
         },
 
+
         options:
           lineChartOptions({
-            percent:selected.percent,
+            percent:
+              series.percent,
             beginAtZero:
-              !selected.percent
+              !series.percent,
+            showLegend:false
           })
       }
     );
 }
-
 
 
 /* =========================================================
@@ -816,7 +972,10 @@ function renderIndividualViewsChart(
       "individualViewsChart"
     );
 
-  if(!canvas){
+  if(
+    !canvas ||
+    typeof Chart === "undefined"
+  ){
     return;
   }
 
@@ -826,7 +985,7 @@ function renderIndividualViewsChart(
   );
 
 
-  const isEngaged =
+  const engaged =
     metric === "engaged";
 
 
@@ -834,6 +993,7 @@ function renderIndividualViewsChart(
     new Chart(
       canvas,
       {
+
         type:"line",
 
         data:{
@@ -844,20 +1004,17 @@ function renderIndividualViewsChart(
           datasets:[
             {
               label:
-                isEngaged
+                engaged
                   ? "Engaged Views"
                   : "再生数",
 
               data:
-                isEngaged
+                engaged
                   ? DUMMY.individual.engaged
                   : DUMMY.individual.views,
 
               borderColor:
                 COLORS.ink,
-
-              backgroundColor:
-                COLORS.yellow,
 
               pointBackgroundColor:
                 COLORS.paper,
@@ -873,7 +1030,7 @@ function renderIndividualViewsChart(
 
               borderWidth:3,
 
-              tension:.3
+              tension:.28
             }
           ]
         },
@@ -883,7 +1040,6 @@ function renderIndividualViewsChart(
       }
     );
 }
-
 
 
 /* =========================================================
@@ -897,7 +1053,10 @@ function renderRetentionChart(){
       "retentionChart"
     );
 
-  if(!canvas){
+  if(
+    !canvas ||
+    typeof Chart === "undefined"
+  ){
     return;
   }
 
@@ -911,6 +1070,7 @@ function renderRetentionChart(){
     new Chart(
       canvas,
       {
+
         type:"line",
 
         data:{
@@ -920,8 +1080,9 @@ function renderRetentionChart(){
               .retentionLabels,
 
           datasets:[
+
             {
-              label:"視聴維持率",
+              label:"この動画",
 
               data:
                 DUMMY.individual
@@ -929,9 +1090,6 @@ function renderRetentionChart(){
 
               borderColor:
                 COLORS.ink,
-
-              backgroundColor:
-                COLORS.yellow,
 
               pointBackgroundColor:
                 COLORS.paper,
@@ -947,22 +1105,63 @@ function renderRetentionChart(){
 
               borderWidth:3,
 
-              tension:.36,
+              tension:.36
+            },
 
-              fill:false
+
+            {
+              label:"全動画平均",
+
+              data:
+                DUMMY.individual
+                  .averageRetention,
+
+              borderColor:
+                COLORS.average,
+
+              pointRadius:0,
+
+              borderWidth:2,
+
+              borderDash:[5,5],
+
+              tension:.36
             }
+
           ]
         },
 
+
         options:{
+
           ...lineChartOptions({
-            percent:true,
-            beginAtZero:true
+            percent:true
           }),
+
+          plugins:{
+
+            legend:{
+              display:false
+            },
+
+            tooltip:{
+              backgroundColor:"#111",
+              titleColor:"#fff",
+              bodyColor:"#fff",
+              displayColors:true,
+
+              callbacks:{
+                label(context){
+                  return `${context.dataset.label}: ${context.parsed.y}%`;
+                }
+              }
+            }
+          },
 
           scales:{
 
             x:{
+
               grid:{
                 display:false
               },
@@ -985,7 +1184,9 @@ function renderRetentionChart(){
               }
             },
 
+
             y:{
+
               min:0,
               max:100,
 
@@ -1001,6 +1202,10 @@ function renderRetentionChart(){
 
                 stepSize:20,
 
+                callback(value){
+                  return `${value}%`;
+                },
+
                 font:{
                   size:
                     window.innerWidth <= 800
@@ -1008,10 +1213,6 @@ function renderRetentionChart(){
                       : 10,
 
                   weight:"700"
-                },
-
-                callback(value){
-                  return `${value}%`;
                 }
               }
             }
@@ -1021,6 +1222,95 @@ function renderRetentionChart(){
     );
 }
 
+
+/* =========================================================
+   REACH DATA
+========================================================= */
+
+function getReachSlice(){
+
+  const total =
+    DUMMY.individual
+      .reachLabels.length;
+
+
+  /*
+    current を押した時は
+    最新14日へ
+  */
+
+  if(currentReachWindow === "current"){
+
+    currentReachStart =
+      Math.max(
+        0,
+        total - 14
+      );
+  }
+
+
+  const start =
+    Math.max(
+      0,
+      Math.min(
+        currentReachStart,
+        total - 14
+      )
+    );
+
+
+  const end =
+    Math.min(
+      total,
+      start + 14
+    );
+
+
+  return {
+    start,
+    end,
+
+    labels:
+      DUMMY.individual
+        .reachLabels
+        .slice(start,end),
+
+    impressions:
+      DUMMY.individual
+        .impressions
+        .slice(start,end),
+
+    ctr:
+      DUMMY.individual
+        .ctr
+        .slice(start,end)
+  };
+}
+
+
+/* =========================================================
+   REACH LABEL
+========================================================= */
+
+function updateReachWindowLabel(){
+
+  const label =
+    document.getElementById(
+      "reachWindowLabel"
+    );
+
+  if(!label){
+    return;
+  }
+
+
+  const slice =
+    getReachSlice();
+
+
+  label.textContent =
+    `DAY ${slice.start + 1} – DAY ${slice.end}`;
+}
 
 
 /* =========================================================
@@ -1036,7 +1326,10 @@ function renderIndividualReachChart(
       "individualReachChart"
     );
 
-  if(!canvas){
+  if(
+    !canvas ||
+    typeof Chart === "undefined"
+  ){
     return;
   }
 
@@ -1044,6 +1337,10 @@ function renderIndividualReachChart(
   destroyChart(
     "individualReach"
   );
+
+
+  const slice =
+    getReachSlice();
 
 
   const isCtr =
@@ -1054,30 +1351,28 @@ function renderIndividualReachChart(
     new Chart(
       canvas,
       {
+
         type:"line",
 
         data:{
 
           labels:
-            DUMMY.individual.labels,
+            slice.labels,
 
           datasets:[
             {
               label:
                 isCtr
-                  ? "CTR"
+                  ? "クリック率"
                   : "インプレッション",
 
               data:
                 isCtr
-                  ? DUMMY.individual.ctr
-                  : DUMMY.individual.impressions,
+                  ? slice.ctr
+                  : slice.impressions,
 
               borderColor:
                 COLORS.ink,
-
-              backgroundColor:
-                COLORS.yellow,
 
               pointBackgroundColor:
                 COLORS.paper,
@@ -1093,10 +1388,11 @@ function renderIndividualReachChart(
 
               borderWidth:3,
 
-              tension:.32
+              tension:.3
             }
           ]
         },
+
 
         options:
           lineChartOptions({
@@ -1105,8 +1401,81 @@ function renderIndividualReachChart(
           })
       }
     );
+
+
+  updateReachWindowLabel();
 }
 
+
+/* =========================================================
+   TRAFFIC PERCENT LABEL PLUGIN
+========================================================= */
+
+const trafficValuePlugin = {
+
+  id:"trafficValuePlugin",
+
+  afterDatasetsDraw(chart){
+
+    if(chart.canvas.id !== "trafficSourceChart"){
+      return;
+    }
+
+
+    const {
+      ctx,
+      data
+    } = chart;
+
+
+    const meta =
+      chart.getDatasetMeta(0);
+
+
+    ctx.save();
+
+    ctx.fillStyle =
+      COLORS.ink;
+
+    ctx.font =
+      window.innerWidth <= 800
+        ? '700 9px Inter, sans-serif'
+        : '800 11px Inter, sans-serif';
+
+    ctx.textBaseline =
+      "middle";
+
+
+    meta.data.forEach(
+      (bar,index) => {
+
+        const value =
+          data.datasets[0]
+            .data[index];
+
+        const text =
+          `${value}%`;
+
+
+        const x =
+          Math.min(
+            chart.chartArea.right - 30,
+            bar.x + 8
+          );
+
+
+        ctx.fillText(
+          text,
+          x,
+          bar.y
+        );
+      }
+    );
+
+
+    ctx.restore();
+  }
+};
 
 
 /* =========================================================
@@ -1120,7 +1489,10 @@ function renderTrafficSourceChart(){
       "trafficSourceChart"
     );
 
-  if(!canvas){
+  if(
+    !canvas ||
+    typeof Chart === "undefined"
+  ){
     return;
   }
 
@@ -1134,7 +1506,12 @@ function renderTrafficSourceChart(){
     new Chart(
       canvas,
       {
+
         type:"bar",
+
+        plugins:[
+          trafficValuePlugin
+        ],
 
         data:{
 
@@ -1166,6 +1543,7 @@ function renderTrafficSourceChart(){
           ]
         },
 
+
         options:{
 
           indexAxis:"y",
@@ -1173,6 +1551,12 @@ function renderTrafficSourceChart(){
           responsive:true,
 
           maintainAspectRatio:false,
+
+          layout:{
+            padding:{
+              right:45
+            }
+          },
 
           plugins:{
 
@@ -1187,20 +1571,21 @@ function renderTrafficSourceChart(){
               displayColors:false,
 
               callbacks:{
-
                 label(context){
-
                   return `${context.parsed.x}%`;
                 }
               }
             }
           },
 
+
           scales:{
 
             x:{
 
               beginAtZero:true,
+
+              suggestedMax:55,
 
               grid:{
                 color:COLORS.grid
@@ -1226,6 +1611,7 @@ function renderTrafficSourceChart(){
                 }
               }
             },
+
 
             y:{
 
@@ -1258,27 +1644,8 @@ function renderTrafficSourceChart(){
 }
 
 
-
 /* =========================================================
-   COMPARE HELPERS
-========================================================= */
-
-function cumulative(values){
-
-  let total = 0;
-
-  return values.map(value => {
-
-    total += value;
-
-    return total;
-  });
-}
-
-
-
-/* =========================================================
-   COMPARE CHART
+   COMPARE
 ========================================================= */
 
 function renderCompareChart(
@@ -1290,7 +1657,10 @@ function renderCompareChart(
       "compareChart"
     );
 
-  if(!canvas){
+  if(
+    !canvas ||
+    typeof Chart === "undefined"
+  ){
     return;
   }
 
@@ -1433,7 +1803,7 @@ function renderCompareChart(
 
       borderWidth:3,
 
-      tension:.32
+      tension:.3
     },
 
 
@@ -1462,33 +1832,31 @@ function renderCompareChart(
 
       borderWidth:3,
 
-      tension:.32
+      tension:.3
     }
   ];
 
 
   if(showAverage){
 
-    datasets.push({
+    datasets.push(
+      {
+        label:"全動画平均",
 
-      label:"全動画平均",
+        data:average,
 
-      data:average,
+        borderColor:
+          COLORS.average,
 
-      borderColor:
-        COLORS.average,
+        pointRadius:0,
 
-      backgroundColor:
-        COLORS.average,
+        borderWidth:2,
 
-      pointRadius:0,
+        borderDash:[5,5],
 
-      borderWidth:2,
-
-      borderDash:[5,5],
-
-      tension:.32
-    });
+        tension:.3
+      }
+    );
   }
 
 
@@ -1496,7 +1864,8 @@ function renderCompareChart(
     lineChartOptions({
       percent,
       beginAtZero:
-        metric !== "retention"
+        metric !== "retention",
+      showLegend:true
     });
 
 
@@ -1545,6 +1914,7 @@ function renderCompareChart(
     new Chart(
       canvas,
       {
+
         type:"line",
 
         data:{
@@ -1558,42 +1928,40 @@ function renderCompareChart(
 }
 
 
-
 /* =========================================================
    MODE SWITCH
 ========================================================= */
 
 function initModeSwitch(){
 
-  const buttons =
-    document.querySelectorAll(
+  document
+    .querySelectorAll(
       ".analytics-mode-btn"
-    );
+    )
+    .forEach(button => {
 
+      button.addEventListener(
+        "click",
+        () => {
 
-  buttons.forEach(button => {
+          const mode =
+            button.dataset.mode;
 
-    button.addEventListener(
-      "click",
-      () => {
+          if(!mode){
+            return;
+          }
 
-        const mode =
-          button.dataset.mode;
-
-        if(!mode){
-          return;
+          setMode(mode);
         }
-
-        setMode(mode);
-      }
-    );
-  });
+      );
+    });
 }
 
 
 function setMode(mode){
 
-  currentMode = mode;
+  currentMode =
+    mode;
 
 
   document
@@ -1635,34 +2003,24 @@ function setMode(mode){
   }
 
 
-  /*
-    display:none → block の後で
-    Chart.js のサイズを再計算
-  */
+  requestAnimationFrame(
+    () => {
 
-  requestAnimationFrame(() => {
+      Object.values(CHARTS)
+        .forEach(chart => {
 
-    Object.values(CHARTS)
-      .forEach(chart => {
+          chart?.resize();
+        });
+    }
+  );
 
-        if(chart){
-          chart.resize();
-        }
-      });
-  });
-
-
-  /*
-    URLにも残す。
-    API接続後、
-    Video collections → Individual
-    へ直接飛ばすのにも使える。
-  */
 
   try{
 
     const url =
-      new URL(window.location.href);
+      new URL(
+        window.location.href
+      );
 
     url.searchParams.set(
       "mode",
@@ -1676,14 +2034,13 @@ function setMode(mode){
     );
 
   }catch(error){
-    // 無視
+    /* no-op */
   }
 }
 
 
-
 /* =========================================================
-   PERIOD BUTTON
+   PERIOD BUTTONS
 ========================================================= */
 
 function initPeriodButtons(){
@@ -1715,21 +2072,13 @@ function initPeriodButtons(){
 
         currentPeriod =
           button.dataset.period ||
-          "30";
+          "all";
 
-
-        /*
-          Phase 1では見た目確認のみ。
-
-          API接続後はここで
-          7 / 30 / 90 / 累計
-          の実データを再描画する。
-        */
 
         renderOverviewDailyChart(
           getActiveMetric(
             "overviewDaily"
-          )
+          ) || "views"
         );
       }
     );
@@ -1737,118 +2086,975 @@ function initPeriodButtons(){
 }
 
 
-
 /* =========================================================
-   CHART SWITCHES
+   CHART SWITCH
 ========================================================= */
 
 function initChartSwitches(){
 
-  const switchGroups =
-    document.querySelectorAll(
+  document
+    .querySelectorAll(
       "[data-chart-switch]"
+    )
+    .forEach(group => {
+
+      const buttons =
+        group.querySelectorAll(
+          ".chart-switch-btn"
+        );
+
+
+      buttons.forEach(button => {
+
+        button.addEventListener(
+          "click",
+          () => {
+
+            buttons.forEach(item => {
+
+              item.classList.remove(
+                "active"
+              );
+            });
+
+
+            button.classList.add(
+              "active"
+            );
+
+
+            const groupName =
+              group.dataset
+                .chartSwitch;
+
+            const metric =
+              button.dataset.metric;
+
+
+            switch(groupName){
+
+
+              case "overviewDaily":
+
+                renderOverviewDailyChart(
+                  metric
+                );
+
+                break;
+
+
+              case "individualViews":
+
+                renderIndividualViewsChart(
+                  metric
+                );
+
+                break;
+
+
+              case "individualReach":
+
+                renderIndividualReachChart(
+                  metric
+                );
+
+                break;
+
+
+              case "compare":
+
+                renderCompareChart(
+                  metric
+                );
+
+                break;
+            }
+          }
+        );
+      });
+    });
+}
+
+
+function getActiveMetric(
+  groupName
+){
+
+  return document
+    .querySelector(
+      `[data-chart-switch="${groupName}"] .chart-switch-btn.active`
+    )
+    ?.dataset.metric ||
+    null;
+}
+
+
+/* =========================================================
+   PERFORMANCE COMPACT MENUS
+========================================================= */
+
+function closeAllCompactMenus(
+  except = null
+){
+
+  document
+    .querySelectorAll(
+      ".compact-menu-panel"
+    )
+    .forEach(panel => {
+
+      if(panel !== except){
+        panel.hidden = true;
+      }
+    });
+
+
+  document
+    .querySelectorAll(
+      ".compact-menu-btn"
+    )
+    .forEach(button => {
+
+      const panelId =
+        button.id === "memberFilterButton"
+          ? "memberFilterPanel"
+          : "rankingMetricPanel";
+
+      const panel =
+        document.getElementById(
+          panelId
+        );
+
+      button.setAttribute(
+        "aria-expanded",
+        panel && !panel.hidden
+          ? "true"
+          : "false"
+      );
+    });
+}
+
+
+function initCompactMenus(){
+
+  const memberButton =
+    document.getElementById(
+      "memberFilterButton"
+    );
+
+  const memberPanel =
+    document.getElementById(
+      "memberFilterPanel"
+    );
+
+  const rankingButton =
+    document.getElementById(
+      "rankingMetricButton"
+    );
+
+  const rankingPanel =
+    document.getElementById(
+      "rankingMetricPanel"
     );
 
 
-  switchGroups.forEach(group => {
+  function togglePanel(
+    button,
+    panel
+  ){
 
-    const buttons =
-      group.querySelectorAll(
-        ".chart-switch-btn"
+    if(
+      !button ||
+      !panel
+    ){
+      return;
+    }
+
+
+    const willOpen =
+      panel.hidden;
+
+
+    closeAllCompactMenus(
+      willOpen
+        ? panel
+        : null
+    );
+
+
+    panel.hidden =
+      !willOpen;
+
+
+    button.setAttribute(
+      "aria-expanded",
+      willOpen
+        ? "true"
+        : "false"
+    );
+  }
+
+
+  memberButton?.addEventListener(
+    "click",
+    event => {
+
+      event.stopPropagation();
+
+      togglePanel(
+        memberButton,
+        memberPanel
       );
+    }
+  );
 
 
-    buttons.forEach(button => {
+  rankingButton?.addEventListener(
+    "click",
+    event => {
 
-      button.addEventListener(
+      event.stopPropagation();
+
+      togglePanel(
+        rankingButton,
+        rankingPanel
+      );
+    }
+  );
+
+
+  memberPanel
+    ?.querySelectorAll(
+      ".compact-menu-option"
+    )
+    .forEach(option => {
+
+      option.addEventListener(
         "click",
         () => {
 
-          buttons.forEach(item => {
+          memberPanel
+            .querySelectorAll(
+              ".compact-menu-option"
+            )
+            .forEach(item => {
 
-            item.classList.remove(
-              "active"
-            );
-          });
+              item.classList.remove(
+                "active"
+              );
+            });
 
 
-          button.classList.add(
+          option.classList.add(
             "active"
           );
 
 
-          const groupName =
-            group.dataset.chartSwitch;
-
-          const metric =
-            button.dataset.metric;
-
-
-          switch(groupName){
+          const label =
+            document.getElementById(
+              "memberFilterLabel"
+            );
 
 
-            case "overviewDaily":
+          if(label){
 
-              renderOverviewDailyChart(
-                metric
+            label.textContent =
+              option.dataset.member ||
+              "すべて";
+          }
+
+
+          closeAllCompactMenus();
+        }
+      );
+    });
+
+
+  rankingPanel
+    ?.querySelectorAll(
+      ".compact-menu-option"
+    )
+    .forEach(option => {
+
+      option.addEventListener(
+        "click",
+        () => {
+
+          rankingPanel
+            .querySelectorAll(
+              ".compact-menu-option"
+            )
+            .forEach(item => {
+
+              item.classList.remove(
+                "active"
               );
-
-              break;
-
-
-            case "individualViews":
-
-              renderIndividualViewsChart(
-                metric
-              );
-
-              break;
+            });
 
 
-            case "individualReach":
-
-              renderIndividualReachChart(
-                metric
-              );
-
-              break;
+          option.classList.add(
+            "active"
+          );
 
 
-            case "compare":
+          const label =
+            document.getElementById(
+              "rankingMetricLabel"
+            );
 
-              renderCompareChart(
-                metric
-              );
 
-              break;
+          if(label){
+
+            label.textContent =
+              option.textContent
+                .trim();
+          }
+
+
+          /*
+            ダミー段階では
+            値の入れ替えは未実装。
+            API接続後にランキングデータを
+            本当にソートする。
+          */
+
+          closeAllCompactMenus();
+        }
+      );
+    });
+
+
+  document.addEventListener(
+    "click",
+    event => {
+
+      if(
+        !event.target.closest(
+          ".compact-menu"
+        )
+      ){
+
+        closeAllCompactMenus();
+      }
+    }
+  );
+}
+
+
+/* =========================================================
+   VIDEO PICKER
+========================================================= */
+
+function initVideoPicker(){
+
+  const modal =
+    document.getElementById(
+      "videoPickerModal"
+    );
+
+  const closeButton =
+    document.getElementById(
+      "videoPickerClose"
+    );
+
+  const search =
+    document.getElementById(
+      "videoPickerSearch"
+    );
+
+  if(!modal){
+    return;
+  }
+
+
+  document
+    .querySelectorAll(
+      ".video-picker-trigger"
+    )
+    .forEach(trigger => {
+
+      trigger.addEventListener(
+        "click",
+        () => {
+
+          currentPickerTarget =
+            trigger.dataset
+              .pickerTarget ||
+            null;
+
+
+          modal.classList.add(
+            "open"
+          );
+
+          modal.setAttribute(
+            "aria-hidden",
+            "false"
+          );
+
+          document.body.style
+            .overflow =
+            "hidden";
+
+
+          if(search){
+
+            search.value = "";
+
+            filterVideoPicker(
+              ""
+            );
           }
         }
       );
     });
+
+
+  function closePicker(){
+
+    modal.classList.remove(
+      "open"
+    );
+
+    modal.setAttribute(
+      "aria-hidden",
+      "true"
+    );
+
+    document.body.style
+      .overflow = "";
+
+    currentPickerTarget =
+      null;
+  }
+
+
+  closeButton?.addEventListener(
+    "click",
+    closePicker
+  );
+
+
+  modal.addEventListener(
+    "click",
+    event => {
+
+      if(event.target === modal){
+
+        closePicker();
+      }
+    }
+  );
+
+
+  document.addEventListener(
+    "keydown",
+    event => {
+
+      if(
+        event.key === "Escape" &&
+        modal.classList.contains(
+          "open"
+        )
+      ){
+
+        closePicker();
+      }
+    }
+  );
+
+
+  search?.addEventListener(
+    "input",
+    () => {
+
+      filterVideoPicker(
+        search.value
+      );
+    }
+  );
+
+
+  document
+    .querySelectorAll(
+      ".video-picker-item"
+    )
+    .forEach(item => {
+
+      item.addEventListener(
+        "click",
+        () => {
+
+          const id =
+            item.dataset.videoId;
+
+          const video =
+            VIDEOS.find(
+              item =>
+                item.id === id
+            );
+
+
+          if(!video){
+            return;
+          }
+
+
+          applyPickedVideo(
+            currentPickerTarget,
+            video
+          );
+
+
+          closePicker();
+        }
+      );
+    });
+}
+
+
+function filterVideoPicker(
+  query
+){
+
+  const normalized =
+    String(query || "")
+      .trim()
+      .toLowerCase();
+
+
+  document
+    .querySelectorAll(
+      ".video-picker-item"
+    )
+    .forEach(item => {
+
+      const title =
+        String(
+          item.dataset.videoTitle ||
+          item.textContent ||
+          ""
+        )
+        .toLowerCase();
+
+
+      item.hidden =
+        normalized !== "" &&
+        !title.includes(
+          normalized
+        );
+    });
+}
+
+
+/* =========================================================
+   PICKED VIDEO
+========================================================= */
+
+function applyPickedVideo(
+  target,
+  video
+){
+
+  if(target === "individual"){
+
+    setIndividualVideo(
+      video
+    );
+
+    return;
+  }
+
+
+  if(target === "compareA"){
+
+    setCompareVideo(
+      "A",
+      video
+    );
+
+    return;
+  }
+
+
+  if(target === "compareB"){
+
+    setCompareVideo(
+      "B",
+      video
+    );
+  }
+}
+
+
+function setIndividualVideo(
+  video
+){
+
+  const title =
+    document.getElementById(
+      "individualSelectedTitle"
+    );
+
+  const date =
+    document.getElementById(
+      "individualSelectedDate"
+    );
+
+  const thumb =
+    document.querySelector(
+      "#individualVideoPickerTrigger .individual-video-thumb"
+    );
+
+
+  if(title){
+    title.textContent =
+      video.title;
+  }
+
+
+  if(date){
+    date.textContent =
+      `${video.date} 公開`;
+  }
+
+
+  if(
+    thumb &&
+    video.thumbnail
+  ){
+
+    thumb.src =
+      video.thumbnail;
+  }
+
+
+  /*
+    ダミー段階では全動画で
+    同じAnalytics値を表示。
+  */
+
+  renderIndividualViewsChart(
+    getActiveMetric(
+      "individualViews"
+    ) || "views"
+  );
+
+  renderRetentionChart();
+
+  renderIndividualReachChart(
+    getActiveMetric(
+      "individualReach"
+    ) || "impressions"
+  );
+
+  renderTrafficSourceChart();
+}
+
+
+function setCompareVideo(
+  side,
+  video
+){
+
+  const title =
+    document.getElementById(
+      `compareVideo${side}Title`
+    );
+
+
+  if(title){
+    title.textContent =
+      video.shortTitle ||
+      video.title;
+  }
+
+
+  const card =
+    document.getElementById(
+      `compareVideo${side}Trigger`
+    );
+
+
+  if(card){
+
+    const existingImage =
+      card.querySelector(
+        ".compare-video-thumb"
+      );
+
+    const placeholder =
+      card.querySelector(
+        ".compare-thumb-placeholder"
+      );
+
+
+    if(video.thumbnail){
+
+      if(existingImage){
+
+        existingImage.src =
+          video.thumbnail;
+
+      }else{
+
+        const img =
+          document.createElement(
+            "img"
+          );
+
+        img.className =
+          "compare-video-thumb";
+
+        img.src =
+          video.thumbnail;
+
+        img.alt = "";
+
+
+        placeholder?.replaceWith(
+          img
+        );
+      }
+
+    }else{
+
+      if(existingImage){
+
+        const replacement =
+          document.createElement(
+            "div"
+          );
+
+        replacement.className =
+          "compare-thumb-placeholder";
+
+        replacement.textContent =
+          `VIDEO ${side}`;
+
+        existingImage.replaceWith(
+          replacement
+        );
+      }
+    }
+  }
+
+
+  renderCompareChart(
+    getActiveMetric(
+      "compare"
+    ) || "dailyViews"
+  );
+}
+
+
+/* =========================================================
+   REACH WINDOW BUTTON
+========================================================= */
+
+function initReachWindowButtons(){
+
+  const buttons =
+    document.querySelectorAll(
+      ".reach-window-btn"
+    );
+
+
+  buttons.forEach(button => {
+
+    button.addEventListener(
+      "click",
+      () => {
+
+        buttons.forEach(item => {
+
+          item.classList.remove(
+            "active"
+          );
+        });
+
+
+        button.classList.add(
+          "active"
+        );
+
+
+        currentReachWindow =
+          button.dataset
+            .reachWindow ||
+          "first14";
+
+
+        if(
+          currentReachWindow ===
+          "first14"
+        ){
+
+          currentReachStart = 0;
+
+        }else{
+
+          currentReachStart =
+            Math.max(
+              0,
+              DUMMY.individual
+                .reachLabels
+                .length -
+              14
+            );
+        }
+
+
+        renderIndividualReachChart(
+          getActiveMetric(
+            "individualReach"
+          ) ||
+          "impressions"
+        );
+      }
+    );
   });
 }
 
 
-function getActiveMetric(groupName){
+/* =========================================================
+   REACH ARROWS
+========================================================= */
 
-  const group =
-    document.querySelector(
-      `[data-chart-switch="${groupName}"]`
+function initReachNavigation(){
+
+  const prev =
+    document.getElementById(
+      "reachScrollPrev"
+    );
+
+  const next =
+    document.getElementById(
+      "reachScrollNext"
     );
 
 
-  if(!group){
-    return null;
+  prev?.addEventListener(
+    "click",
+    () => {
+
+      currentReachWindow =
+        "custom";
+
+
+      currentReachStart =
+        Math.max(
+          0,
+          currentReachStart - 14
+        );
+
+
+      updateReachWindowButtons();
+
+
+      renderIndividualReachChart(
+        getActiveMetric(
+          "individualReach"
+        ) ||
+        "impressions"
+      );
+    }
+  );
+
+
+  next?.addEventListener(
+    "click",
+    () => {
+
+      currentReachWindow =
+        "custom";
+
+
+      const maxStart =
+        Math.max(
+          0,
+          DUMMY.individual
+            .reachLabels
+            .length -
+          14
+        );
+
+
+      currentReachStart =
+        Math.min(
+          maxStart,
+          currentReachStart + 14
+        );
+
+
+      updateReachWindowButtons();
+
+
+      renderIndividualReachChart(
+        getActiveMetric(
+          "individualReach"
+        ) ||
+        "impressions"
+      );
+    }
+  );
+}
+
+
+function updateReachWindowButtons(){
+
+  const buttons =
+    document.querySelectorAll(
+      ".reach-window-btn"
+    );
+
+
+  buttons.forEach(button => {
+
+    button.classList.remove(
+      "active"
+    );
+  });
+
+
+  if(currentReachStart === 0){
+
+    document
+      .querySelector(
+        '[data-reach-window="first14"]'
+      )
+      ?.classList.add(
+        "active"
+      );
+
+    return;
   }
 
 
-  return group
-    .querySelector(
-      ".chart-switch-btn.active"
-    )
-    ?.dataset.metric || null;
-}
+  const maxStart =
+    Math.max(
+      0,
+      DUMMY.individual
+        .reachLabels
+        .length -
+      14
+    );
 
+
+  if(
+    currentReachStart ===
+    maxStart
+  ){
+
+    document
+      .querySelector(
+        '[data-reach-window="current"]'
+      )
+      ?.classList.add(
+        "active"
+      );
+  }
+}
 
 
 /* =========================================================
@@ -1863,313 +3069,23 @@ function initAverageToggle(){
     );
 
 
-  if(!checkbox){
-    return;
-  }
-
-
-  checkbox.addEventListener(
+  checkbox?.addEventListener(
     "change",
     () => {
 
       renderCompareChart(
         getActiveMetric(
           "compare"
-        ) || "dailyViews"
+        ) ||
+        "dailyViews"
       );
     }
   );
 }
 
 
-
 /* =========================================================
-   HELP CONTENT
-========================================================= */
-
-const HELP_CONTENT = {
-
-  engagedViews:{
-
-    title:"Engaged Views",
-
-    text:
-      "動画が再生開始直後だけで終わらず、実際の視聴としてカウントされた回数を見るための指標です。通常の再生数とあわせて見ることで、再生がどれだけ実質的な視聴につながったかを確認できます。"
-  },
-
-
-  impressions:{
-
-    title:"インプレッション",
-
-    text:
-      "YouTube上で動画のサムネイルが視聴者に表示された回数です。ホーム画面や検索結果、関連動画などで、動画がどれだけ視聴候補として露出したかを見るために使います。"
-  },
-
-
-  ctr:{
-
-    title:"CTR",
-
-    text:
-      "サムネイルが表示された回数のうち、どれくらいの割合が視聴につながったかを示す指標です。サムネイルやタイトルが視聴者の興味を引けているかを見る目安になります。"
-  },
-
-
-  averagePercentageViewed:{
-
-    title:"平均再生率",
-
-    text:
-      "動画全体の長さに対して、視聴者が平均して何％まで視聴したかを示します。長さの違う動画同士でも、視聴の深さを比較しやすい指標です。"
-  },
-
-
-  retention:{
-
-    title:"視聴維持率",
-
-    text:
-      "動画の各地点で、視聴者がどれくらい残っているかを表します。グラフが大きく下がった場所では離脱が多く、維持されている場所では視聴が続いていると考えられます。"
-  },
-
-
-  trafficSource:{
-
-    title:"流入元",
-
-    text:
-      "視聴者がどこから動画へたどり着いたかを示します。ホームなどのブラウジング機能、関連動画、YouTube検索、外部サイトなどに分けて確認できます。"
-  },
-
-
-  endScreenCtr:{
-
-    title:"終了画面CTR",
-
-    text:
-      "動画の終了画面に表示した要素が、どれくらいクリックされたかを見るための割合です。動画を見終えた視聴者を次の動画へ誘導できているかを見る目安になります。"
-  }
-};
-
-
-
-/* =========================================================
-   HELP MODAL
-========================================================= */
-
-function initHelpModal(){
-
-  const modal =
-    document.getElementById(
-      "helpModal"
-    );
-
-  const title =
-    document.getElementById(
-      "helpModalTitle"
-    );
-
-  const text =
-    document.getElementById(
-      "helpModalText"
-    );
-
-  const close =
-    document.getElementById(
-      "closeHelpModal"
-    );
-
-
-  if(
-    !modal ||
-    !title ||
-    !text
-  ){
-    return;
-  }
-
-
-  document
-    .querySelectorAll(
-      ".help-btn"
-    )
-    .forEach(button => {
-
-      button.addEventListener(
-        "click",
-        event => {
-
-          event.stopPropagation();
-
-
-          const key =
-            button.dataset.help;
-
-          const content =
-            HELP_CONTENT[key];
-
-
-          if(!content){
-            return;
-          }
-
-
-          title.textContent =
-            content.title;
-
-          text.textContent =
-            content.text;
-
-
-          modal.classList.add(
-            "open"
-          );
-
-          modal.setAttribute(
-            "aria-hidden",
-            "false"
-          );
-
-          document.body.style.overflow =
-            "hidden";
-        }
-      );
-    });
-
-
-  function closeModal(){
-
-    modal.classList.remove(
-      "open"
-    );
-
-    modal.setAttribute(
-      "aria-hidden",
-      "true"
-    );
-
-    document.body.style.overflow =
-      "";
-  }
-
-
-  close?.addEventListener(
-    "click",
-    closeModal
-  );
-
-
-  modal.addEventListener(
-    "click",
-    event => {
-
-      if(event.target === modal){
-
-        closeModal();
-      }
-    }
-  );
-
-
-  document.addEventListener(
-    "keydown",
-    event => {
-
-      if(
-        event.key === "Escape" &&
-        modal.classList.contains("open")
-      ){
-
-        closeModal();
-      }
-    }
-  );
-}
-
-
-
-/* =========================================================
-   VIDEO SELECT DUMMY INTERACTION
-========================================================= */
-
-function initVideoSelectors(){
-
-  const individual =
-    document.getElementById(
-      "individualVideoSelect"
-    );
-
-
-  /*
-    Phase 1では選択UIの動作確認だけ。
-
-    API接続後は、
-    videoId → analytics data
-    を読み込んで全セクションを更新。
-  */
-
-  individual?.addEventListener(
-    "change",
-    () => {
-
-      renderIndividualViewsChart(
-        getActiveMetric(
-          "individualViews"
-        ) || "views"
-      );
-
-      renderIndividualReachChart(
-        getActiveMetric(
-          "individualReach"
-        ) || "impressions"
-      );
-
-      renderRetentionChart();
-      renderTrafficSourceChart();
-    }
-  );
-
-
-  const compareA =
-    document.getElementById(
-      "compareVideoA"
-    );
-
-  const compareB =
-    document.getElementById(
-      "compareVideoB"
-    );
-
-
-  function refreshCompare(){
-
-    renderCompareChart(
-      getActiveMetric(
-        "compare"
-      ) || "dailyViews"
-    );
-  }
-
-
-  compareA?.addEventListener(
-    "change",
-    refreshCompare
-  );
-
-  compareB?.addEventListener(
-    "change",
-    refreshCompare
-  );
-}
-
-
-
-/* =========================================================
-   MOBILE TOOLTIP DISMISS
-
-   グラフ外をタップしたら
-   Chart.js tooltip を即閉じる。
+   OUTSIDE TOOLTIP DISMISS
 ========================================================= */
 
 function initOutsideTooltipDismiss(){
@@ -2178,13 +3094,11 @@ function initOutsideTooltipDismiss(){
     "pointerdown",
     event => {
 
-      const clickedCanvas =
+      if(
         event.target.closest?.(
-          ".analytics-chart-wrap canvas"
-        );
-
-
-      if(clickedCanvas){
+          "canvas"
+        )
+      ){
         return;
       }
 
@@ -2206,10 +3120,11 @@ function initOutsideTooltipDismiss(){
 
             if(chart.tooltip){
 
-              chart.tooltip.setActiveElements(
-                [],
-                {x:0,y:0}
-              );
+              chart.tooltip
+                .setActiveElements(
+                  [],
+                  {x:0,y:0}
+                );
             }
 
 
@@ -2218,7 +3133,8 @@ function initOutsideTooltipDismiss(){
             );
 
           }catch(error){
-            // Chart.js の状態差は無視
+
+            /* no-op */
           }
         });
     }
@@ -2226,17 +3142,8 @@ function initOutsideTooltipDismiss(){
 }
 
 
-
 /* =========================================================
    URL MODE
-
-   analytics.html?mode=individual
-   analytics.html?mode=compare
-   に対応。
-
-   後で
-   ?mode=individual&video=VIDEO_ID
-   に発展できる。
 ========================================================= */
 
 function applyModeFromUrl(){
@@ -2250,7 +3157,9 @@ function applyModeFromUrl(){
 
 
     const mode =
-      params.get("mode");
+      params.get(
+        "mode"
+      );
 
 
     if(
@@ -2259,21 +3168,20 @@ function applyModeFromUrl(){
       mode === "compare"
     ){
 
-      setMode(mode);
+      setMode(
+        mode
+      );
     }
 
   }catch(error){
-    // 無視
+
+    /* no-op */
   }
 }
 
 
-
 /* =========================================================
    RESIZE
-
-   PC ↔ スマホでサイズを変えたときに
-   グラフを再計算。
 ========================================================= */
 
 let resizeTimer = null;
@@ -2294,7 +3202,8 @@ function initResizeHandler(){
         setTimeout(
           () => {
 
-            Object.values(CHARTS)
+            Object
+              .values(CHARTS)
               .forEach(chart => {
 
                 chart?.resize();
@@ -2308,9 +3217,8 @@ function initResizeHandler(){
 }
 
 
-
 /* =========================================================
-   INITIAL RENDER
+   INITIAL CHARTS
 ========================================================= */
 
 function renderInitialCharts(){
@@ -2337,7 +3245,6 @@ function renderInitialCharts(){
 }
 
 
-
 /* =========================================================
    INIT
 ========================================================= */
@@ -2348,23 +3255,50 @@ function init(){
 
   setupChartDefaults();
 
+
+  /*
+    UIイベントを先に登録。
+    Chartエラーが起きても
+    ページ切替などが死なないようにする。
+  */
+
   initModeSwitch();
 
   initPeriodButtons();
 
   initChartSwitches();
 
+  initCompactMenus();
+
+  initVideoPicker();
+
+  initReachWindowButtons();
+
+  initReachNavigation();
+
   initAverageToggle();
-
-  initHelpModal();
-
-  initVideoSelectors();
 
   initOutsideTooltipDismiss();
 
   initResizeHandler();
 
-  renderInitialCharts();
+
+  /*
+    グラフは最後。
+  */
+
+  try{
+
+    renderInitialCharts();
+
+  }catch(error){
+
+    console.error(
+      "Analytics chart error:",
+      error
+    );
+  }
+
 
   applyModeFromUrl();
 }
