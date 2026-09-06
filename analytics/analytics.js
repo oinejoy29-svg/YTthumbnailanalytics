@@ -37,6 +37,238 @@ const COLORS = {
 
 const CHARTS = {};
 
+/* =========================================================
+   REAL ANALYTICS DATA
+========================================================= */
+
+let ANALYTICS_DATA = null;
+
+let REAL_VIDEOS = [];
+
+let selectedIndividualVideoId = null;
+let selectedCompareVideoAId = null;
+let selectedCompareVideoBId = null;
+
+
+/* =========================================================
+   LOAD ANALYTICS DATA
+========================================================= */
+
+async function loadAnalyticsData(){
+
+  try{
+
+    const response =
+      await fetch(
+        "./analytics_data.json",
+        {
+          cache:"no-store"
+        }
+      );
+
+    if(!response.ok){
+      throw new Error(
+        `analytics_data.json: ${response.status}`
+      );
+    }
+
+    ANALYTICS_DATA =
+      await response.json();
+
+
+    const videos =
+      ANALYTICS_DATA?.videos || {};
+
+
+    REAL_VIDEOS =
+      Object.entries(videos)
+        .map(([id,data]) => ({
+
+          id,
+
+          title:
+            data.title ||
+            id,
+
+          shortTitle:
+            data.title ||
+            id,
+
+          date:
+            data.publishedDate ||
+            "",
+
+          publishedAt:
+            data.publishedDate
+              ? `${data.publishedDate}T00:00:00+09:00`
+              : null,
+
+          thumbnail:
+            data.thumbnail ||
+            `https://i.ytimg.com/vi/${id}/hqdefault.jpg`,
+
+          analytics:data
+
+        }))
+        .sort((a,b) => {
+
+          return String(
+            b.date
+          ).localeCompare(
+            String(a.date)
+          );
+
+        });
+
+
+    selectedIndividualVideoId =
+      REAL_VIDEOS[0]?.id ||
+      null;
+
+    selectedCompareVideoAId =
+      REAL_VIDEOS[0]?.id ||
+      null;
+
+    selectedCompareVideoBId =
+      REAL_VIDEOS[1]?.id ||
+      REAL_VIDEOS[0]?.id ||
+      null;
+
+
+    console.log(
+      `Analytics loaded: ${REAL_VIDEOS.length} videos`
+    );
+
+    return true;
+
+
+  }catch(error){
+
+    console.error(
+      "analytics_data.json load error:",
+      error
+    );
+
+    ANALYTICS_DATA = null;
+    REAL_VIDEOS = [];
+
+    return false;
+  }
+}
+
+
+/* =========================================================
+   GET REAL VIDEO
+========================================================= */
+
+function getRealVideo(videoId){
+
+  if(!videoId){
+    return null;
+  }
+
+  return REAL_VIDEOS.find(
+    video =>
+      video.id === videoId
+  ) || null;
+}
+
+
+/* =========================================================
+   SELECTED INDIVIDUAL
+========================================================= */
+
+function getSelectedIndividualVideo(){
+
+  return getRealVideo(
+    selectedIndividualVideoId
+  );
+}
+
+
+/* =========================================================
+   VIDEO DAILY SERIES
+========================================================= */
+
+function getVideoDailySeries(
+  videoId,
+  metric = "views"
+){
+
+  const video =
+    getRealVideo(videoId);
+
+  const daily =
+    video?.analytics?.daily || [];
+
+
+  return {
+
+    labels:
+      daily.map(
+        (_,index) =>
+          `DAY ${index + 1}`
+      ),
+
+    values:
+      daily.map(row => {
+
+        if(metric === "engaged"){
+          return Number(
+            row.engagedViews || 0
+          );
+        }
+
+        return Number(
+          row.views || 0
+        );
+
+      })
+
+  };
+}
+
+
+/* =========================================================
+   MILESTONES
+========================================================= */
+
+function getVideoMilestone(
+  videoId,
+  day
+){
+
+  const video =
+    getRealVideo(videoId);
+
+  if(!video){
+    return null;
+  }
+
+  return (
+    video.analytics
+      ?.milestones
+      ?.[`day${day}`] ||
+    null
+  );
+}
+
+
+/* =========================================================
+   VIDEO SUMMARY
+========================================================= */
+
+function getVideoSummary(videoId){
+
+  const video =
+    getRealVideo(videoId);
+
+  return (
+    video?.analytics?.summary ||
+    null
+  );
+}
+
 let currentMode = "overview";
 let currentPeriod = "all";
 
@@ -3452,7 +3684,9 @@ function renderInitialCharts(){
    INIT
 ========================================================= */
 
-function init(){
+async function init(){
+
+  await loadAnalyticsData();
 
   renderHeader();
 
