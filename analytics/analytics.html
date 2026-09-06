@@ -1,1 +1,2250 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  >
+  <meta name="theme-color" content="#EFEAE3">
 
+  <title>Video analytics | #切り抜くぞニアジョイ</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&family=Noto+Sans+JP:wght@500;600;700;800;900&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="analytics.css">
+</head>
+
+<body>
+
+  <!-- =====================================================
+       HEADER
+  ====================================================== -->
+
+  <header class="site-header">
+
+    <div class="brand-block">
+      <div class="eyebrow">
+        ≒JOY / YouTube archive &amp; analytics
+      </div>
+
+      <h1>#切り抜くぞニアジョイ</h1>
+    </div>
+
+
+    <div class="header-info">
+
+      <div class="analytics-label">
+        <span class="desktop-analytics">
+          YouTube analytics
+        </span>
+
+        <span class="mobile-analytics">
+          YouTube archive &amp; analytics
+        </span>
+      </div>
+
+
+      <div class="header-meta">
+
+        <span id="periodText">
+          2026/4/3～—
+        </span>
+
+        <span id="dayCount">
+          （—日）
+        </span>
+
+        <span class="updated">
+          <span class="updated-label">
+            最終更新:
+          </span>
+
+          <span id="updatedAtDesktop">
+            —
+          </span>
+
+          <span id="updatedAtMobile">
+            —
+          </span>
+        </span>
+
+      </div>
+
+    </div>
+
+  </header>
+
+
+
+  <!-- =====================================================
+       GLOBAL NAV
+  ====================================================== -->
+
+  <nav
+    class="page-switch"
+    aria-label="ページ切り替え"
+  >
+
+    <a
+      class="switch-btn"
+      href="../index.html"
+    >
+      Video collections
+    </a>
+
+
+    <a
+      class="switch-btn"
+      href="../index.html#analytics"
+    >
+      Subscriber analytics
+    </a>
+
+
+    <a
+      class="switch-btn active"
+      href="analytics.html"
+      aria-current="page"
+    >
+      Video analytics
+    </a>
+
+
+    <a
+      class="switch-btn"
+      href="../future/future.html"
+    >
+      Future outlook
+    </a>
+
+  </nav>
+
+
+
+  <!-- =====================================================
+       PAGE
+  ====================================================== -->
+
+  <main class="analytics-page">
+
+
+    <!-- ===================================================
+         PAGE TITLE
+    ==================================================== -->
+
+    <section class="analytics-page-head">
+
+      <div>
+        <span class="section-kicker">
+          VIDEO ANALYTICS
+        </span>
+
+        <h2>Video analytics</h2>
+
+        <p class="page-description">
+          動画の再生・視聴・リーチ・流入を詳しく分析
+        </p>
+      </div>
+
+    </section>
+
+
+
+    <!-- ===================================================
+         MODE SWITCH
+    ==================================================== -->
+
+    <nav
+      class="analytics-mode-switch"
+      aria-label="動画分析モード"
+    >
+
+      <button
+        type="button"
+        class="analytics-mode-btn active"
+        data-mode="overview"
+      >
+        OVERVIEW
+      </button>
+
+      <button
+        type="button"
+        class="analytics-mode-btn"
+        data-mode="individual"
+      >
+        INDIVIDUAL
+      </button>
+
+      <button
+        type="button"
+        class="analytics-mode-btn"
+        data-mode="compare"
+      >
+        COMPARE
+      </button>
+
+    </nav>
+
+
+
+
+    <!-- ===================================================
+         OVERVIEW
+    ==================================================== -->
+
+    <section
+      id="overviewMode"
+      class="analytics-mode active"
+    >
+
+      <!-- PERIOD -->
+
+      <div class="analytics-range-head">
+
+        <div>
+          <span class="section-kicker">
+            CHANNEL PERFORMANCE
+          </span>
+
+          <h3>パフォーマンス概要</h3>
+        </div>
+
+
+        <div class="period-buttons">
+
+          <button
+            type="button"
+            class="period-btn"
+            data-period="7"
+          >
+            7日
+          </button>
+
+          <button
+            type="button"
+            class="period-btn active"
+            data-period="30"
+          >
+            30日
+          </button>
+
+          <button
+            type="button"
+            class="period-btn"
+            data-period="90"
+          >
+            90日
+          </button>
+
+          <button
+            type="button"
+            class="period-btn"
+            data-period="all"
+          >
+            累計
+          </button>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- =================================================
+           TOP METRICS
+      ================================================== -->
+
+      <div class="metric-grid overview-metric-grid">
+
+
+        <article class="metric-card">
+
+          <div class="metric-name">
+            総再生数
+          </div>
+
+          <strong class="metric-value">
+            482,931
+          </strong>
+
+          <div class="metric-context positive">
+            ↑ 12.4%
+            <span>前期間比</span>
+          </div>
+
+        </article>
+
+
+
+        <article class="metric-card">
+
+          <div class="metric-name">
+
+            Engaged Views
+
+            <button
+              class="help-btn"
+              type="button"
+              data-help="engagedViews"
+              aria-label="Engaged Viewsとは"
+            >
+              ?
+            </button>
+
+          </div>
+
+          <strong class="metric-value">
+            391,248
+          </strong>
+
+          <div class="metric-context positive">
+            ↑ 9.8%
+            <span>前期間比</span>
+          </div>
+
+        </article>
+
+
+
+        <article class="metric-card">
+
+          <div class="metric-name">
+            総再生時間
+          </div>
+
+          <strong class="metric-value">
+            18,421
+          </strong>
+
+          <div class="metric-unit">
+            時間
+          </div>
+
+          <div class="metric-context positive">
+            ↑ 16.2%
+            <span>前期間比</span>
+          </div>
+
+        </article>
+
+
+
+        <article class="metric-card">
+
+          <div class="metric-name">
+
+            平均CTR
+
+            <button
+              class="help-btn"
+              type="button"
+              data-help="ctr"
+              aria-label="CTRとは"
+            >
+              ?
+            </button>
+
+          </div>
+
+          <strong class="metric-value">
+            8.41%
+          </strong>
+
+          <div class="metric-context positive">
+            ↑ 0.69pt
+            <span>前期間比</span>
+          </div>
+
+        </article>
+
+
+
+        <article class="metric-card">
+
+          <div class="metric-name">
+            平均再生時間
+          </div>
+
+          <strong class="metric-value">
+            2:41
+          </strong>
+
+          <div class="metric-context positive">
+            ↑ 0:08
+            <span>前期間比</span>
+          </div>
+
+        </article>
+
+
+
+        <article class="metric-card">
+
+          <div class="metric-name">
+
+            平均再生率
+
+            <button
+              class="help-btn"
+              type="button"
+              data-help="averagePercentageViewed"
+              aria-label="平均再生率とは"
+            >
+              ?
+            </button>
+
+          </div>
+
+          <strong class="metric-value">
+            62.8%
+          </strong>
+
+          <div class="metric-context negative">
+            ↓ 1.4pt
+            <span>前期間比</span>
+          </div>
+
+        </article>
+
+      </div>
+
+
+
+      <!-- =================================================
+           DAILY PERFORMANCE
+      ================================================== -->
+
+      <article class="analytics-card">
+
+        <div class="analytics-card-head">
+
+          <div>
+
+            <span class="section-kicker">
+              DAILY PERFORMANCE
+            </span>
+
+            <h3>日別パフォーマンス</h3>
+
+          </div>
+
+        </div>
+
+
+        <div
+          class="chart-metric-switch"
+          data-chart-switch="overviewDaily"
+        >
+
+          <button
+            type="button"
+            class="chart-switch-btn active"
+            data-metric="views"
+          >
+            再生数
+          </button>
+
+          <button
+            type="button"
+            class="chart-switch-btn"
+            data-metric="engaged"
+          >
+            Engaged Views
+          </button>
+
+          <button
+            type="button"
+            class="chart-switch-btn"
+            data-metric="impressions"
+          >
+            インプレッション
+          </button>
+
+          <button
+            type="button"
+            class="chart-switch-btn"
+            data-metric="ctr"
+          >
+            CTR
+          </button>
+
+        </div>
+
+
+        <div class="analytics-chart-wrap large-chart">
+
+          <canvas id="overviewDailyChart"></canvas>
+
+        </div>
+
+      </article>
+
+
+
+      <!-- =================================================
+           VIDEO PERFORMANCE
+      ================================================== -->
+
+      <section class="analytics-card video-performance-card">
+
+        <div class="analytics-card-head performance-head">
+
+          <div>
+
+            <span class="section-kicker">
+              VIDEO PERFORMANCE
+            </span>
+
+            <h3>動画パフォーマンス</h3>
+
+          </div>
+
+
+          <div class="performance-filters">
+
+            <select
+              id="overviewMemberFilter"
+              aria-label="メンバー絞り込み"
+            >
+              <option value="">
+                すべてのメンバー
+              </option>
+
+              <option>
+                逢田珠里依
+              </option>
+
+              <option>
+                市原愛弓
+              </option>
+
+              <option>
+                江角怜音
+              </option>
+
+              <option>
+                大信田美月
+              </option>
+
+              <option>
+                大西葵
+              </option>
+
+              <option>
+                小澤愛実
+              </option>
+
+              <option>
+                髙橋舞
+              </option>
+
+              <option>
+                藤沢莉子
+              </option>
+
+              <option>
+                村山結香
+              </option>
+
+              <option>
+                山田杏佳
+              </option>
+
+            </select>
+
+
+            <select
+              id="overviewRankingMetric"
+              aria-label="ランキング指標"
+            >
+
+              <option value="views">
+                再生数
+              </option>
+
+              <option value="engagedViews">
+                Engaged Views
+              </option>
+
+              <option value="ctr">
+                CTR
+              </option>
+
+              <option value="averagePercentageViewed">
+                平均再生率
+              </option>
+
+              <option value="likeRate">
+                高評価率
+              </option>
+
+              <option value="subscribersGained">
+                登録者獲得
+              </option>
+
+              <option value="watchTime">
+                総再生時間
+              </option>
+
+            </select>
+
+          </div>
+
+        </div>
+
+
+
+        <div class="video-ranking">
+
+
+          <article class="ranking-item">
+
+            <div class="ranking-position">
+              1
+            </div>
+
+            <img
+              src="https://i.ytimg.com/vi/B75t0LqJUSg/hqdefault.jpg"
+              alt=""
+            >
+
+            <div class="ranking-video-info">
+
+              <div class="ranking-title">
+                浴衣の着付けで恐ろしい額を請求されてしまった髙橋舞【ニアジョイ】
+              </div>
+
+              <div class="ranking-meta">
+                2026/8/26
+              </div>
+
+            </div>
+
+            <div class="ranking-score">
+
+              <strong>
+                12,842
+              </strong>
+
+              <small>
+                平均 4,921
+              </small>
+
+            </div>
+
+          </article>
+
+
+
+          <article class="ranking-item">
+
+            <div class="ranking-position">
+              2
+            </div>
+
+            <div class="ranking-thumb-placeholder">
+              VIDEO
+            </div>
+
+            <div class="ranking-video-info">
+
+              <div class="ranking-title">
+                サンプル動画タイトル
+              </div>
+
+              <div class="ranking-meta">
+                2026/8/24
+              </div>
+
+            </div>
+
+            <div class="ranking-score">
+
+              <strong>
+                10,291
+              </strong>
+
+              <small>
+                平均 4,921
+              </small>
+
+            </div>
+
+          </article>
+
+
+
+          <article class="ranking-item">
+
+            <div class="ranking-position">
+              3
+            </div>
+
+            <div class="ranking-thumb-placeholder">
+              VIDEO
+            </div>
+
+            <div class="ranking-video-info">
+
+              <div class="ranking-title">
+                サンプル動画タイトル
+              </div>
+
+              <div class="ranking-meta">
+                2026/8/22
+              </div>
+
+            </div>
+
+            <div class="ranking-score">
+
+              <strong>
+                9,804
+              </strong>
+
+              <small>
+                平均 4,921
+              </small>
+
+            </div>
+
+          </article>
+
+
+        </div>
+
+      </section>
+
+    </section>
+
+
+
+
+    <!-- ===================================================
+         INDIVIDUAL
+    ==================================================== -->
+
+    <section
+      id="individualMode"
+      class="analytics-mode"
+    >
+
+
+      <!-- VIDEO SELECT -->
+
+      <section class="analytics-card video-selector-card">
+
+        <span class="section-kicker">
+          SELECT VIDEO
+        </span>
+
+        <h3>分析する動画</h3>
+
+
+        <select
+          id="individualVideoSelect"
+          class="large-select"
+        >
+
+          <option>
+            浴衣の着付けで恐ろしい額を請求されてしまった髙橋舞【ニアジョイ】
+          </option>
+
+          <option>
+            サンプル動画 2
+          </option>
+
+          <option>
+            サンプル動画 3
+          </option>
+
+        </select>
+
+      </section>
+
+
+
+      <!-- VIDEO HERO -->
+
+      <section class="individual-video-hero">
+
+        <img
+          class="individual-video-thumb"
+          src="https://i.ytimg.com/vi/B75t0LqJUSg/hqdefault.jpg"
+          alt=""
+        >
+
+
+        <div class="individual-video-info">
+
+          <span class="section-kicker">
+            SELECTED VIDEO
+          </span>
+
+          <h3>
+            浴衣の着付けで恐ろしい額を請求されてしまった髙橋舞【ニアジョイ】
+          </h3>
+
+          <div class="individual-video-meta">
+            2026/8/26 公開
+          </div>
+
+        </div>
+
+      </section>
+
+
+
+      <!-- INDIVIDUAL METRICS -->
+
+      <div class="metric-grid individual-metric-grid">
+
+
+        <article class="metric-card">
+
+          <div class="metric-name">
+            再生数
+          </div>
+
+          <strong class="metric-value">
+            12,842
+          </strong>
+
+          <div class="metric-rank">
+            平均 4,921
+            <b>8位 / 103本</b>
+          </div>
+
+        </article>
+
+
+
+        <article class="metric-card">
+
+          <div class="metric-name">
+
+            Engaged Views
+
+            <button
+              class="help-btn"
+              type="button"
+              data-help="engagedViews"
+            >
+              ?
+            </button>
+
+          </div>
+
+          <strong class="metric-value">
+            10,821
+          </strong>
+
+          <div class="metric-rank">
+            平均 3,912
+            <b>6位 / 103本</b>
+          </div>
+
+        </article>
+
+
+
+        <article class="metric-card">
+
+          <div class="metric-name">
+
+            CTR
+
+            <button
+              class="help-btn"
+              type="button"
+              data-help="ctr"
+            >
+              ?
+            </button>
+
+          </div>
+
+          <strong class="metric-value">
+            9.42%
+          </strong>
+
+          <div class="metric-rank">
+            平均 7.18%
+            <b>4位 / 103本</b>
+          </div>
+
+        </article>
+
+
+
+        <article class="metric-card">
+
+          <div class="metric-name">
+
+            平均再生率
+
+            <button
+              class="help-btn"
+              type="button"
+              data-help="averagePercentageViewed"
+            >
+              ?
+            </button>
+
+          </div>
+
+          <strong class="metric-value">
+            68.4%
+          </strong>
+
+          <div class="metric-rank">
+            平均 61.2%
+            <b>11位 / 103本</b>
+          </div>
+
+        </article>
+
+
+
+        <article class="metric-card">
+
+          <div class="metric-name">
+            平均再生時間
+          </div>
+
+          <strong class="metric-value">
+            2:48
+          </strong>
+
+          <div class="metric-rank">
+            平均 2:31
+            <b>17位 / 103本</b>
+          </div>
+
+        </article>
+
+
+
+        <article class="metric-card">
+
+          <div class="metric-name">
+            総再生時間
+          </div>
+
+          <strong class="metric-value">
+            598
+          </strong>
+
+          <div class="metric-unit">
+            時間
+          </div>
+
+          <div class="metric-rank">
+            平均 241時間
+            <b>7位 / 103本</b>
+          </div>
+
+        </article>
+
+      </div>
+
+
+
+      <!-- =================================================
+           INITIAL VELOCITY
+      ================================================== -->
+
+      <section class="analytics-card">
+
+        <div class="analytics-card-head">
+
+          <div>
+            <span class="section-kicker">
+              INITIAL VELOCITY
+            </span>
+
+            <h3>初速</h3>
+          </div>
+
+        </div>
+
+
+        <div class="velocity-grid">
+
+
+          <article class="velocity-card">
+
+            <span>
+              DAY 1
+            </span>
+
+            <strong>
+              1,824
+            </strong>
+
+            <small>
+              平均 1,310
+            </small>
+
+            <b>
+              18位
+            </b>
+
+          </article>
+
+
+
+          <article class="velocity-card">
+
+            <span>
+              DAY 3
+            </span>
+
+            <strong>
+              3,941
+            </strong>
+
+            <small>
+              平均 3,102
+            </small>
+
+            <b>
+              11位
+            </b>
+
+          </article>
+
+
+
+          <article class="velocity-card">
+
+            <span>
+              DAY 7
+            </span>
+
+            <strong>
+              6,920
+            </strong>
+
+            <small>
+              平均 5,280
+            </small>
+
+            <b>
+              8位
+            </b>
+
+          </article>
+
+
+        </div>
+
+      </section>
+
+
+
+      <!-- =================================================
+           DAILY VIEWS
+      ================================================== -->
+
+      <article class="analytics-card">
+
+        <div class="analytics-card-head">
+
+          <div>
+
+            <span class="section-kicker">
+              DAILY VIEWS
+            </span>
+
+            <h3>日別再生</h3>
+
+          </div>
+
+        </div>
+
+
+        <div
+          class="chart-metric-switch"
+          data-chart-switch="individualViews"
+        >
+
+          <button
+            type="button"
+            class="chart-switch-btn active"
+            data-metric="views"
+          >
+            再生数
+          </button>
+
+          <button
+            type="button"
+            class="chart-switch-btn"
+            data-metric="engaged"
+          >
+            Engaged Views
+          </button>
+
+        </div>
+
+
+        <div class="analytics-chart-wrap large-chart">
+
+          <canvas id="individualViewsChart"></canvas>
+
+        </div>
+
+      </article>
+
+
+
+      <!-- =================================================
+           WATCH PERFORMANCE
+      ================================================== -->
+
+      <section class="analytics-card">
+
+        <div class="analytics-card-head">
+
+          <div>
+
+            <span class="section-kicker">
+              WATCH PERFORMANCE
+            </span>
+
+            <h3>視聴パフォーマンス</h3>
+
+          </div>
+
+        </div>
+
+
+        <div class="mini-metric-grid">
+
+
+          <article class="mini-metric">
+
+            <span>
+              総再生時間
+            </span>
+
+            <strong>
+              598時間
+            </strong>
+
+            <small>
+              平均 241時間
+            </small>
+
+          </article>
+
+
+
+          <article class="mini-metric">
+
+            <span>
+              平均再生時間
+            </span>
+
+            <strong>
+              2:48
+            </strong>
+
+            <small>
+              平均 2:31
+            </small>
+
+          </article>
+
+
+
+          <article class="mini-metric">
+
+            <span>
+
+              平均再生率
+
+              <button
+                class="help-btn"
+                type="button"
+                data-help="averagePercentageViewed"
+              >
+                ?
+              </button>
+
+            </span>
+
+            <strong>
+              68.4%
+            </strong>
+
+            <small>
+              11位 / 103本
+            </small>
+
+          </article>
+
+
+        </div>
+
+
+
+        <div class="sub-chart-heading">
+
+          <div>
+
+            <h4>
+              視聴維持率
+
+              <button
+                class="help-btn"
+                type="button"
+                data-help="retention"
+              >
+                ?
+              </button>
+
+            </h4>
+
+            <small>
+              動画の進行に対して視聴者がどれだけ残っているか
+            </small>
+
+          </div>
+
+        </div>
+
+
+        <div class="analytics-chart-wrap retention-chart">
+
+          <canvas id="retentionChart"></canvas>
+
+        </div>
+
+      </section>
+
+
+
+      <!-- =================================================
+           REACH
+      ================================================== -->
+
+      <section class="analytics-card">
+
+        <div class="analytics-card-head">
+
+          <div>
+
+            <span class="section-kicker">
+              REACH
+            </span>
+
+            <h3>リーチ</h3>
+
+          </div>
+
+        </div>
+
+
+        <div class="mini-metric-grid reach-summary">
+
+
+          <article class="mini-metric">
+
+            <span>
+
+              インプレッション
+
+              <button
+                class="help-btn"
+                type="button"
+                data-help="impressions"
+              >
+                ?
+              </button>
+
+            </span>
+
+            <strong>
+              124,821
+            </strong>
+
+            <small>
+              平均 82,410
+              ・ 12位 / 103本
+            </small>
+
+          </article>
+
+
+
+          <article class="mini-metric">
+
+            <span>
+
+              CTR
+
+              <button
+                class="help-btn"
+                type="button"
+                data-help="ctr"
+              >
+                ?
+              </button>
+
+            </span>
+
+            <strong>
+              8.21%
+            </strong>
+
+            <small>
+              平均 7.18%
+              ・ 9位 / 103本
+            </small>
+
+          </article>
+
+
+        </div>
+
+
+
+        <div class="sub-chart-heading">
+
+          <h4>
+            日別リーチ
+          </h4>
+
+        </div>
+
+
+        <div
+          class="chart-metric-switch"
+          data-chart-switch="individualReach"
+        >
+
+          <button
+            type="button"
+            class="chart-switch-btn active"
+            data-metric="impressions"
+          >
+            インプレッション
+          </button>
+
+          <button
+            type="button"
+            class="chart-switch-btn"
+            data-metric="ctr"
+          >
+            CTR
+          </button>
+
+        </div>
+
+
+        <div class="analytics-chart-wrap large-chart">
+
+          <canvas id="individualReachChart"></canvas>
+
+        </div>
+
+      </section>
+
+
+
+      <!-- =================================================
+           ENGAGEMENT
+      ================================================== -->
+
+      <section class="analytics-card">
+
+        <div class="analytics-card-head">
+
+          <div>
+
+            <span class="section-kicker">
+              ENGAGEMENT
+            </span>
+
+            <h3>エンゲージメント</h3>
+
+          </div>
+
+        </div>
+
+
+        <div class="engagement-grid">
+
+
+          <article class="mini-metric">
+
+            <span>
+              高評価数
+            </span>
+
+            <strong>
+              421
+            </strong>
+
+            <small>
+              平均 184
+            </small>
+
+          </article>
+
+
+
+          <article class="mini-metric">
+
+            <span>
+              高評価率
+            </span>
+
+            <strong>
+              96.8%
+            </strong>
+
+            <small>
+              14位 / 103本
+            </small>
+
+          </article>
+
+
+
+          <article class="mini-metric">
+
+            <span>
+              コメント数
+            </span>
+
+            <strong>
+              18
+            </strong>
+
+            <small>
+              平均 7
+            </small>
+
+          </article>
+
+
+
+          <article class="mini-metric">
+
+            <span>
+              登録者獲得
+            </span>
+
+            <strong>
+              +34
+            </strong>
+
+            <small>
+              5位 / 103本
+            </small>
+
+          </article>
+
+
+
+          <article class="mini-metric">
+
+            <span>
+
+              終了画面CTR
+
+              <button
+                class="help-btn"
+                type="button"
+                data-help="endScreenCtr"
+              >
+                ?
+              </button>
+
+            </span>
+
+            <strong>
+              3.8%
+            </strong>
+
+            <small>
+              平均 2.6%
+            </small>
+
+          </article>
+
+
+        </div>
+
+      </section>
+
+
+
+      <!-- =================================================
+           TRAFFIC SOURCES
+      ================================================== -->
+
+      <section class="analytics-card">
+
+        <div class="analytics-card-head">
+
+          <div>
+
+            <span class="section-kicker">
+              TRAFFIC SOURCES
+            </span>
+
+            <h3>
+              流入元
+
+              <button
+                class="help-btn"
+                type="button"
+                data-help="trafficSource"
+              >
+                ?
+              </button>
+
+            </h3>
+
+          </div>
+
+        </div>
+
+
+        <div class="analytics-chart-wrap traffic-chart">
+
+          <canvas id="trafficSourceChart"></canvas>
+
+        </div>
+
+      </section>
+
+
+
+      <!-- SEARCH / EXTERNAL -->
+
+      <div class="detail-two-column">
+
+
+        <section class="analytics-card">
+
+          <div class="analytics-card-head">
+
+            <div>
+
+              <span class="section-kicker">
+                YOUTUBE SEARCH
+              </span>
+
+              <h3>検索語</h3>
+
+            </div>
+
+          </div>
+
+
+          <div class="simple-ranking-list">
+
+            <div>
+              <span>1</span>
+              <b>ニアジョイ</b>
+              <strong>31.4%</strong>
+            </div>
+
+            <div>
+              <span>2</span>
+              <b>髙橋舞</b>
+              <strong>18.2%</strong>
+            </div>
+
+            <div>
+              <span>3</span>
+              <b>ニアジョイ 切り抜き</b>
+              <strong>12.9%</strong>
+            </div>
+
+          </div>
+
+        </section>
+
+
+
+        <section class="analytics-card">
+
+          <div class="analytics-card-head">
+
+            <div>
+
+              <span class="section-kicker">
+                EXTERNAL
+              </span>
+
+              <h3>外部サイト</h3>
+
+            </div>
+
+          </div>
+
+
+          <div class="simple-ranking-list">
+
+            <div>
+              <span>1</span>
+              <b>X / Twitter</b>
+              <strong>42.1%</strong>
+            </div>
+
+            <div>
+              <span>2</span>
+              <b>Google</b>
+              <strong>23.8%</strong>
+            </div>
+
+            <div>
+              <span>3</span>
+              <b>LINE</b>
+              <strong>9.7%</strong>
+            </div>
+
+          </div>
+
+        </section>
+
+
+      </div>
+
+
+
+      <!-- =================================================
+           SHARES
+      ================================================== -->
+
+      <section class="analytics-card">
+
+        <div class="analytics-card-head">
+
+          <div>
+
+            <span class="section-kicker">
+              SHARES
+            </span>
+
+            <h3>シェア先</h3>
+
+          </div>
+
+        </div>
+
+
+        <div class="share-grid">
+
+
+          <article class="share-card">
+
+            <span>
+              X / Twitter
+            </span>
+
+            <strong>
+              38
+            </strong>
+
+          </article>
+
+
+
+          <article class="share-card">
+
+            <span>
+              LINE
+            </span>
+
+            <strong>
+              14
+            </strong>
+
+          </article>
+
+
+
+          <article class="share-card">
+
+            <span>
+              その他
+            </span>
+
+            <strong>
+              9
+            </strong>
+
+          </article>
+
+
+        </div>
+
+      </section>
+
+
+    </section>
+
+
+
+
+    <!-- ===================================================
+         COMPARE
+    ==================================================== -->
+
+    <section
+      id="compareMode"
+      class="analytics-mode"
+    >
+
+
+      <!-- VIDEO SELECT -->
+
+      <section class="compare-selector">
+
+        <div class="compare-video-select">
+
+          <span class="section-kicker">
+            VIDEO A
+          </span>
+
+          <select id="compareVideoA">
+
+            <option>
+              浴衣の着付けで恐ろしい額を請求されてしまった髙橋舞
+            </option>
+
+            <option>
+              サンプル動画2
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <div class="compare-vs">
+          VS
+        </div>
+
+
+        <div class="compare-video-select">
+
+          <span class="section-kicker">
+            VIDEO B
+          </span>
+
+          <select id="compareVideoB">
+
+            <option>
+              サンプル動画2
+            </option>
+
+            <option>
+              浴衣の着付けで恐ろしい額を請求されてしまった髙橋舞
+            </option>
+
+          </select>
+
+        </div>
+
+      </section>
+
+
+
+      <!-- VIDEO HEADS -->
+
+      <div class="compare-video-heads">
+
+
+        <article class="compare-video-head video-a">
+
+          <div class="compare-label">
+            VIDEO A
+          </div>
+
+          <div class="compare-thumb-placeholder">
+            VIDEO A
+          </div>
+
+          <h3>
+            浴衣の着付けで恐ろしい額を請求されてしまった髙橋舞
+          </h3>
+
+        </article>
+
+
+
+        <article class="compare-video-head video-b">
+
+          <div class="compare-label">
+            VIDEO B
+          </div>
+
+          <div class="compare-thumb-placeholder">
+            VIDEO B
+          </div>
+
+          <h3>
+            サンプル比較動画タイトル
+          </h3>
+
+        </article>
+
+
+      </div>
+
+
+
+      <!-- =================================================
+           COMPARE NUMBERS
+      ================================================== -->
+
+      <section class="analytics-card">
+
+        <div class="analytics-card-head">
+
+          <div>
+
+            <span class="section-kicker">
+              PERFORMANCE COMPARISON
+            </span>
+
+            <h3>数値比較</h3>
+
+          </div>
+
+        </div>
+
+
+        <div class="comparison-table">
+
+
+          <div class="comparison-row comparison-header">
+
+            <div>
+              指標
+            </div>
+
+            <div>
+              VIDEO A
+            </div>
+
+            <div>
+              VIDEO B
+            </div>
+
+          </div>
+
+
+
+          <div class="comparison-row">
+
+            <div>
+              DAY 1
+            </div>
+
+            <strong>
+              1,824
+            </strong>
+
+            <strong>
+              1,411
+            </strong>
+
+          </div>
+
+
+
+          <div class="comparison-row">
+
+            <div>
+              DAY 3
+            </div>
+
+            <strong>
+              3,941
+            </strong>
+
+            <strong>
+              3,820
+            </strong>
+
+          </div>
+
+
+
+          <div class="comparison-row">
+
+            <div>
+              DAY 7
+            </div>
+
+            <strong>
+              6,920
+            </strong>
+
+            <strong>
+              7,211
+            </strong>
+
+          </div>
+
+
+
+          <div class="comparison-row">
+
+            <div>
+
+              CTR
+
+              <button
+                class="help-btn"
+                type="button"
+                data-help="ctr"
+              >
+                ?
+              </button>
+
+            </div>
+
+            <strong>
+              9.42%
+            </strong>
+
+            <strong>
+              7.84%
+            </strong>
+
+          </div>
+
+
+
+          <div class="comparison-row">
+
+            <div>
+
+              平均再生率
+
+              <button
+                class="help-btn"
+                type="button"
+                data-help="averagePercentageViewed"
+              >
+                ?
+              </button>
+
+            </div>
+
+            <strong>
+              68.4%
+            </strong>
+
+            <strong>
+              74.6%
+            </strong>
+
+          </div>
+
+
+
+          <div class="comparison-row">
+
+            <div>
+              高評価率
+            </div>
+
+            <strong>
+              96.8%
+            </strong>
+
+            <strong>
+              97.4%
+            </strong>
+
+          </div>
+
+
+
+          <div class="comparison-row">
+
+            <div>
+              登録者獲得
+            </div>
+
+            <strong>
+              +34
+            </strong>
+
+            <strong>
+              +27
+            </strong>
+
+          </div>
+
+
+        </div>
+
+      </section>
+
+
+
+      <!-- =================================================
+           COMPARE GRAPH
+      ================================================== -->
+
+      <section class="analytics-card">
+
+        <div class="analytics-card-head">
+
+          <div>
+
+            <span class="section-kicker">
+              PERFORMANCE GRAPH
+            </span>
+
+            <h3>推移比較</h3>
+
+          </div>
+
+        </div>
+
+
+        <div
+          class="chart-metric-switch compare-chart-switch"
+          data-chart-switch="compare"
+        >
+
+          <button
+            type="button"
+            class="chart-switch-btn active"
+            data-metric="dailyViews"
+          >
+            日別再生
+          </button>
+
+          <button
+            type="button"
+            class="chart-switch-btn"
+            data-metric="cumulativeViews"
+          >
+            累計再生
+          </button>
+
+          <button
+            type="button"
+            class="chart-switch-btn"
+            data-metric="ctr"
+          >
+            CTR
+          </button>
+
+          <button
+            type="button"
+            class="chart-switch-btn"
+            data-metric="impressions"
+          >
+            インプレッション
+          </button>
+
+          <button
+            type="button"
+            class="chart-switch-btn"
+            data-metric="retention"
+          >
+            視聴維持率
+          </button>
+
+        </div>
+
+
+        <label class="average-toggle">
+
+          <input
+            type="checkbox"
+            id="showAverageLine"
+          >
+
+          <span>
+            全動画平均を表示
+          </span>
+
+        </label>
+
+
+        <div class="analytics-chart-wrap compare-main-chart">
+
+          <canvas id="compareChart"></canvas>
+
+        </div>
+
+      </section>
+
+
+
+      <!-- =================================================
+           COMPARE SUMMARY
+      ================================================== -->
+
+      <div class="compare-summary-grid">
+
+
+        <article class="compare-summary-card">
+
+          <span>
+            初速
+          </span>
+
+          <strong>
+            VIDEO A
+          </strong>
+
+          <p>
+            DAY1ではAが+29.3%
+          </p>
+
+        </article>
+
+
+
+        <article class="compare-summary-card">
+
+          <span>
+            サムネイル
+          </span>
+
+          <strong>
+            VIDEO A
+          </strong>
+
+          <p>
+            CTRはAが+1.58pt
+          </p>
+
+        </article>
+
+
+
+        <article class="compare-summary-card">
+
+          <span>
+            視聴維持
+          </span>
+
+          <strong>
+            VIDEO B
+          </strong>
+
+          <p>
+            平均再生率はBが+6.2pt
+          </p>
+
+        </article>
+
+
+      </div>
+
+
+
+      <!-- =================================================
+           AI ANALYSIS
+      ================================================== -->
+
+      <section class="compare-ai-analysis">
+
+        <span class="section-kicker">
+          AI ANALYSIS
+        </span>
+
+        <p id="compareAiText">
+          動画Aは動画Bより初日の再生数が多く、
+          特にCTRの高さが初速の差につながっています。
+          一方で平均再生率は動画Bが上回っており、
+          視聴開始後の強さでは動画Bが優勢です。
+        </p>
+
+      </section>
+
+
+    </section>
+
+
+  </main>
+
+
+
+
+  <!-- =====================================================
+       HELP MODAL
+  ====================================================== -->
+
+  <div
+    id="helpModal"
+    class="help-modal"
+    aria-hidden="true"
+  >
+
+    <div class="help-modal-inner">
+
+      <div class="help-modal-head">
+
+        <div>
+
+          <span class="section-kicker">
+            ANALYTICS GUIDE
+          </span>
+
+          <h3 id="helpModalTitle">
+            指標について
+          </h3>
+
+        </div>
+
+
+        <button
+          id="closeHelpModal"
+          class="close-btn"
+          type="button"
+          aria-label="閉じる"
+        >
+          ×
+        </button>
+
+      </div>
+
+
+      <p id="helpModalText">
+        指標の説明がここに表示されます。
+      </p>
+
+    </div>
+
+  </div>
+
+
+
+
+  <!-- =====================================================
+       SCRIPT
+  ====================================================== -->
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"
+  ></script>
+
+  <script src="analytics.js"></script>
+
+</body>
+</html>
