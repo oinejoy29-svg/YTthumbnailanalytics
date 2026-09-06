@@ -3,7 +3,7 @@ name: YouTube Analytics API Test
 on:
   workflow_dispatch:
 
-  permissions:
+permissions:
   contents: write
 
 jobs:
