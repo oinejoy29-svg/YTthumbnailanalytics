@@ -275,3 +275,119 @@ print(
     "analytics/reporting_job.json "
     "を保存しました"
 )
+# =========================================================
+# LIST GENERATED REPORTS
+# =========================================================
+
+job_id = existing_job.get("id")
+
+print()
+print("生成済みReachレポートを確認します")
+
+
+reports_response = (
+    reporting
+    .jobs()
+    .reports()
+    .list(
+        jobId=job_id
+    )
+    .execute()
+)
+
+
+reports = reports_response.get(
+    "reports",
+    []
+)
+
+
+print()
+print(
+    f"生成済みレポート: {len(reports)}件"
+)
+
+
+report_list = []
+
+
+for report in reports:
+
+    report_info = {
+
+        "id":
+            report.get("id"),
+
+        "startTime":
+            report.get("startTime"),
+
+        "endTime":
+            report.get("endTime"),
+
+        "createTime":
+            report.get("createTime"),
+
+        "downloadUrl":
+            report.get("downloadUrl")
+
+    }
+
+    report_list.append(
+        report_info
+    )
+
+
+    print()
+    print(
+        "期間:",
+        report.get("startTime"),
+        "～",
+        report.get("endTime")
+    )
+
+    print(
+        "Download URL:",
+        "あり"
+        if report.get("downloadUrl")
+        else "なし"
+    )
+
+
+# =========================================================
+# SAVE REPORT LIST
+# =========================================================
+
+with open(
+    "analytics/reporting_reports.json",
+    "w",
+    encoding="utf-8"
+) as f:
+
+    json.dump(
+        report_list,
+        f,
+        ensure_ascii=False,
+        indent=2
+    )
+
+
+print()
+print(
+    "analytics/reporting_reports.json "
+    "を保存しました"
+)
+
+
+if reports:
+
+    print()
+    print(
+        "Reachレポート取得準備OK"
+    )
+
+else:
+
+    print()
+    print(
+        "まだReachレポートは生成されていません"
+    )
