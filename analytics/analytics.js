@@ -45,6 +45,11 @@ let ANALYTICS_DATA = null;
 
 let REAL_VIDEOS = [];
 
+let ROOT_VIDEO_DATA = [];
+
+let currentRankingMetric = "views";
+let currentRankingMember = "";
+
 let selectedIndividualVideoId = null;
 let selectedCompareVideoAId = null;
 let selectedCompareVideoBId = null;
@@ -155,6 +160,580 @@ async function loadAnalyticsData(){
     return false;
   }
 }
+
+/* =========================================================
+   LOAD ROOT VIDEO DATA
+   メンバータグ取得用
+========================================================= */
+
+async function loadRootVideoData(){
+
+  try{
+
+    const response =
+      await fetch(
+        "../data.json",
+        {
+          cache:"no-store"
+        }
+      );
+
+    if(!response.ok){
+      throw new Error(
+        `data.json: ${response.status}`
+      );
+    }
+
+    const data =
+      await response.json();
+
+    ROOT_VIDEO_DATA =
+      Array.isArray(data?.videos)
+        ? data.videos
+        : [];
+
+
+    const rootMap =
+      new Map(
+        ROOT_VIDEO_DATA.map(
+          video => [
+            video.id,
+            video
+          ]
+        )
+      );
+
+
+    REAL_VIDEOS.forEach(video => {
+
+      const rootVideo =
+        rootMap.get(
+          video.id
+        );
+
+      video.tags =
+        Array.isArray(rootVideo?.tags)
+          ? rootVideo.tags
+          : [];
+
+    });
+
+
+    console.log(
+      `Root video data loaded: ${ROOT_VIDEO_DATA.length} videos`
+    );
+
+    return true;
+
+
+  }catch(error){
+
+    console.error(
+      "data.json load error:",
+      error
+    );
+
+    ROOT_VIDEO_DATA = [];
+
+    REAL_VIDEOS.forEach(video => {
+      video.tags = [];
+    });
+
+    return false;
+  }
+}
+/* =========================================================
+   OVERVIEW REAL VIDEO RANKING
+========================================================= */
+
+function getRankingMetricValue(
+  video,
+  metric
+){
+
+  const summary =
+    video?.analytics?.summary || {};
+
+
+  switch(metric){
+
+    case "views":
+      return Number.isFinite(
+        Number(summary.views)
+      )
+        ? Number(summary.views)
+        : null;
+
+
+    case "engagedViews":
+      return Number.isFinite(
+        Number(summary.engagedViews)
+      )
+        ? Number(summary.engagedViews)
+        : null;
+
+
+    case "averagePercentageViewed":
+      return Number.isFinite(
+        Number(summary.averageViewPercentage)
+      )
+        ? Number(summary.averageViewPercentage)
+        : null;
+
+
+    case "subscribersGained":
+      return Number.isFinite(
+        Number(summary.subscribersGained)
+      )
+        ? Number(summary.subscribersGained)
+        : null;
+
+
+    case "watchTime":
+      return Number.isFinite(
+        Number(summary.watchMinutes)
+      )
+        ? Number(summary.watchMinutes)
+        : null;
+
+
+    /*
+      Reporting APIなどで
+      実データを取得するまで未対応
+    */
+    case "ctr":
+    case "likeRate":
+      return null;
+
+
+    default:
+      return null;
+  }
+}
+
+
+function formatRankingMetricValue(
+  value,
+  metric
+){
+
+  if(
+    value === null ||
+    value === undefined ||
+    !Number.isFinite(Number(value))
+  ){
+    return "—";
+  }
+
+
+  const number =
+    Number(value);
+
+
+  switch(metric){
+
+    case "averagePercentageViewed":
+      return `${number.toFixed(1)}%`;
+
+
+    case "subscribersGained":
+      return number > 0
+        ? `+${formatInteger(number)}`
+        : formatInteger(number);
+
+
+    case "watchTime":
+
+      /*
+        APIでは分単位なので
+        ランキングでは時間表示
+      */
+      return `${(
+        number / 60
+      ).toLocaleString(
+        "ja-JP",
+        {
+          maximumFractionDigits:1
+        }
+      )}時間`;
+
+
+    default:
+      return formatInteger(
+        number
+      );
+  }
+}
+
+
+function getRankingVideos(){
+
+  let videos =
+    [...REAL_VIDEOS];
+
+
+  /*
+    メンバー絞り込み
+  */
+  if(currentRankingMember){
+
+    videos =
+      videos.filter(video => {
+
+        return Array.isArray(
+          video.tags
+        ) &&
+        video.tags.includes(
+          currentRankingMember
+        );
+
+      });
+
+  }
+
+
+  /*
+    クリック率・高評価率は
+    まだ実データがないので
+    偽の順位を作らない。
+  */
+  if(
+    currentRankingMetric === "ctr" ||
+    currentRankingMetric === "likeRate"
+  ){
+
+    return videos.sort(
+      (a,b) =>
+        String(b.date)
+          .localeCompare(
+            String(a.date)
+          )
+    );
+  }
+
+
+  /*
+    実データの大きい順
+  */
+  videos.sort(
+    (a,b) => {
+
+      const valueA =
+        getRankingMetricValue(
+          a,
+          currentRankingMetric
+        );
+
+      const valueB =
+        getRankingMetricValue(
+          b,
+          currentRankingMetric
+        );
+
+
+      if(
+        valueA === null &&
+        valueB === null
+      ){
+        return 0;
+      }
+
+      if(valueA === null){
+        return 1;
+      }
+
+      if(valueB === null){
+        return -1;
+      }
+
+      return valueB - valueA;
+    }
+  );
+
+
+  return videos;
+}
+
+
+function renderOverviewRanking(){
+
+  const container =
+    document.querySelector(
+      "#overviewMode .video-ranking"
+    );
+
+  if(!container){
+    return;
+  }
+
+
+  const videos =
+    getRankingVideos();
+
+
+  /*
+    全動画平均
+  */
+  const availableValues =
+    videos
+      .map(video =>
+        getRankingMetricValue(
+          video,
+          currentRankingMetric
+        )
+      )
+      .filter(value =>
+        value !== null &&
+        Number.isFinite(
+          Number(value)
+        )
+      );
+
+
+  const averageElement =
+    document.querySelector(
+      "#overviewRankingAverage strong"
+    );
+
+
+  if(averageElement){
+
+    if(availableValues.length){
+
+      const average =
+        availableValues.reduce(
+          (sum,value) =>
+            sum + Number(value),
+          0
+        ) /
+        availableValues.length;
+
+
+      averageElement.textContent =
+        formatRankingMetricValue(
+          average,
+          currentRankingMetric
+        );
+
+    }else{
+
+      averageElement.textContent =
+        "—";
+
+    }
+  }
+
+
+  container.innerHTML = "";
+
+
+  if(!videos.length){
+
+    const empty =
+      document.createElement(
+        "div"
+      );
+
+    empty.className =
+      "ranking-empty";
+
+    empty.textContent =
+      "該当する動画がありません";
+
+    container.appendChild(
+      empty
+    );
+
+    return;
+  }
+
+
+  videos.forEach(
+    (video,index) => {
+
+      const value =
+        getRankingMetricValue(
+          video,
+          currentRankingMetric
+        );
+
+
+      const article =
+        document.createElement(
+          "article"
+        );
+
+      article.className =
+        "ranking-item";
+
+      article.dataset.videoId =
+        video.id;
+
+
+      /*
+        順位
+        未取得指標では順位を表示しない
+      */
+      const position =
+        document.createElement(
+          "div"
+        );
+
+      position.className =
+        "ranking-position";
+
+      position.textContent =
+        value === null
+          ? "—"
+          : String(index + 1);
+
+
+      /*
+        サムネイル
+      */
+      const thumbnail =
+        document.createElement(
+          "img"
+        );
+
+      thumbnail.src =
+        video.thumbnail;
+
+      thumbnail.alt = "";
+
+      thumbnail.loading =
+        "lazy";
+
+
+      /*
+        動画情報
+      */
+      const info =
+        document.createElement(
+          "div"
+        );
+
+      info.className =
+        "ranking-video-info";
+
+
+      const title =
+        document.createElement(
+          "div"
+        );
+
+      title.className =
+        "ranking-title";
+
+      title.textContent =
+        video.title;
+
+
+      const meta =
+        document.createElement(
+          "div"
+        );
+
+      meta.className =
+        "ranking-meta";
+
+      meta.textContent =
+        video.date
+          ? video.date.replaceAll(
+              "-",
+              "/"
+            )
+          : "";
+
+
+      info.append(
+        title,
+        meta
+      );
+
+
+      /*
+        指標値
+      */
+      const score =
+        document.createElement(
+          "div"
+        );
+
+      score.className =
+        "ranking-score";
+
+
+      const strong =
+        document.createElement(
+          "strong"
+        );
+
+      strong.textContent =
+        formatRankingMetricValue(
+          value,
+          currentRankingMetric
+        );
+
+
+      score.appendChild(
+        strong
+      );
+
+
+      article.append(
+        position,
+        thumbnail,
+        info,
+        score
+      );
+
+
+      /*
+        ランキング動画クリック
+        → INDIVIDUALへ移動
+      */
+      article.style.cursor =
+        "pointer";
+
+      article.addEventListener(
+        "click",
+        () => {
+
+          const realVideo =
+            getRealVideo(
+              video.id
+            );
+
+          if(!realVideo){
+            return;
+          }
+
+          setIndividualVideo(
+            realVideo
+          );
+
+          setMode(
+            "individual"
+          );
+
+          window.scrollTo({
+            top:0,
+            behavior:"smooth"
+          });
+
+        }
+      );
+
+
+      container.appendChild(
+        article
+      );
+
+    }
+  );
+}
+
 
 /* =========================================================
    BUILD REAL VIDEO PICKER
@@ -3186,15 +3765,21 @@ function initCompactMenus(){
             );
 
 
-          if(label){
+if(label){
 
-            label.textContent =
-              option.dataset.member ||
-              "すべて";
-          }
+  label.textContent =
+    option.dataset.member ||
+    "すべて";
+}
 
 
-          closeAllCompactMenus();
+currentRankingMember =
+  option.dataset.member ||
+  "";
+
+renderOverviewRanking();
+
+closeAllCompactMenus();
         }
       );
     });
@@ -3241,12 +3826,13 @@ function initCompactMenus(){
           }
 
 
-          /*
-            ダミー段階では値の入れ替えは未実装。
-            API接続後に実データでソートする。
-          */
+         currentRankingMetric =
+  option.dataset.rankingMetric ||
+  "views";
 
-          closeAllCompactMenus();
+renderOverviewRanking();
+
+closeAllCompactMenus();
         }
       );
     });
@@ -4687,9 +5273,13 @@ async function init(){
 
   await loadAnalyticsData();
 
-　buildRealVideoPicker();
+await loadRootVideoData();
 
-　renderOverviewRealSummary();
+buildRealVideoPicker();
+
+renderOverviewRealSummary();
+
+renderOverviewRanking();
 
   renderHeader();
 
