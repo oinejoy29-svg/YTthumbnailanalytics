@@ -1998,32 +1998,3 @@ body > *{
     background-size:100% auto;
   }
 }
-/* =========================================================
-   STICKY VIDEO SELECTOR
-========================================================= */
-
-.individual-video-hero,
-.compare-video-selector-grid{
-  position:sticky;
-  top:10px;
-  z-index:100;
-}
-
-/* sticky中に後ろの内容が見えにくくならないように */
-.individual-video-hero{
-  background:#fff;
-}
-
-.compare-video-selector-grid{
-  background:var(--bg);
-  padding-top:8px;
-  padding-bottom:8px;
-}
-@media(max-width:800px){
-
-  .individual-video-hero,
-  .compare-video-selector-grid{
-    top:6px;
-  }
-
-}
