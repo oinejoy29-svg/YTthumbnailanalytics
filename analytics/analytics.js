@@ -1363,11 +1363,10 @@ function renderIndividualViewsChart(
   }
 
 
-  const daily =
-    Array.isArray(video.daily)
-      ? video.daily
-      : [];
-
+const daily =
+  Array.isArray(video.analytics?.daily)
+    ? video.analytics.daily
+    : [];
 
   const engaged =
     metric === "engaged";
