@@ -208,6 +208,47 @@ def create_summary(rows):
         "subscribersGained": subscribers_gained,
         "subscribersLost": subscribers_lost,
     }
+    def create_milestones(rows, published_date):
+    """
+    投稿日をDAY1として、
+    DAY1 / DAY3 / DAY7終了時点までの累計成績を作る。
+    """
+
+    published = date.fromisoformat(published_date)
+
+    milestones = {}
+
+    for days in [1, 3, 7]:
+
+        cutoff = published + timedelta(days=days - 1)
+
+        target_rows = [
+            row
+            for row in rows
+            if date.fromisoformat(row["date"]) <= cutoff
+        ]
+
+        # まだその日数に到達していない動画
+        if date.fromisoformat(END_DATE) < cutoff:
+            milestones[f"day{days}"] = None
+            continue
+
+        summary = create_summary(target_rows)
+
+        milestones[f"day{days}"] = {
+            "throughDate": cutoff.isoformat(),
+            "views": summary["views"],
+            "engagedViews": summary["engagedViews"],
+            "watchMinutes": summary["watchMinutes"],
+            "averageViewDuration": summary["averageViewDuration"],
+            "averageViewPercentage": summary["averageViewPercentage"],
+            "likes": summary["likes"],
+            "comments": summary["comments"],
+            "shares": summary["shares"],
+            "subscribersGained": summary["subscribersGained"]
+        }
+
+    return milestones
 
 
 # =========================================================
@@ -322,20 +363,24 @@ for index, video in enumerate(
             response
         )
 
-        videos[video_id] = {
-            "title": title,
-            "publishedDate": upload_date,
-            "thumbnail": video.get(
-                "thumbnail"
-            ),
-            "duration": video.get(
-                "duration"
-            ),
-            "summary": create_summary(
-                daily
-            ),
-            "daily": daily
-        }
+   videos[video_id] = {
+    "title": title,
+    "publishedDate": upload_date,
+    "thumbnail": video.get(
+        "thumbnail"
+    ),
+    "duration": video.get(
+        "duration"
+    ),
+    "summary": create_summary(
+        daily
+    ),
+    "milestones": create_milestones(
+        daily,
+        upload_date
+    ),
+    "daily": daily
+}
 
         success_count += 1
 
