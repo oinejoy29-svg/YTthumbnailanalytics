@@ -1,19 +1,110 @@
 import os
 import json
+import csv
+import io
+import requests
+
+from collections import defaultdict
 
 from google.oauth2.credentials import Credentials
+from google.auth.transport.requests import Request
 from googleapiclient.discovery import build
 
+
+# =========================================================
+# SETTINGS
+# =========================================================
 
 CLIENT_ID = os.environ["YT_ANALYTICS_CLIENT_ID"]
 CLIENT_SECRET = os.environ["YT_ANALYTICS_CLIENT_SECRET"]
 REFRESH_TOKEN = os.environ["YT_ANALYTICS_REFRESH_TOKEN"]
 
-
 SCOPES = [
     "https://www.googleapis.com/auth/yt-analytics.readonly"
 ]
 
+TARGET_REPORT_TYPE = "channel_reach_combined_a1"
+
+REPORT_TYPES_PATH = "analytics/report_types.json"
+JOB_PATH = "analytics/reporting_job.json"
+REPORT_LIST_PATH = "analytics/reporting_reports.json"
+
+# 全レポートの生データ
+RAW_ROWS_PATH = "analytics/reach_report.json"
+
+# サイトで使いやすい動画×日付集約データ
+DAILY_PATH = "analytics/reach_daily.json"
+
+
+# =========================================================
+# HELPERS
+# =========================================================
+
+def safe_int(value):
+    try:
+        return int(value)
+    except (TypeError, ValueError):
+        return 0
+
+
+def safe_float(value):
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return 0.0
+
+
+def normalize_date(value):
+    """
+    Reporting API:
+    20260903
+
+    ↓
+
+    2026-09-03
+    """
+
+    value = str(value or "").strip()
+
+    if len(value) == 8 and value.isdigit():
+        return (
+            f"{value[0:4]}-"
+            f"{value[4:6]}-"
+            f"{value[6:8]}"
+        )
+
+    return value
+
+
+def download_report(download_url, credentials):
+    """
+    Reporting APIのCSVをダウンロードして
+    DictReaderの行一覧として返す。
+    """
+
+    response = requests.get(
+        download_url,
+        headers={
+            "Authorization":
+                f"Bearer {credentials.token}"
+        },
+        timeout=120
+    )
+
+    response.raise_for_status()
+
+    csv_text = response.text
+
+    reader = csv.DictReader(
+        io.StringIO(csv_text)
+    )
+
+    return list(reader)
+
+
+# =========================================================
+# AUTH
+# =========================================================
 
 credentials = Credentials(
     token=None,
@@ -61,7 +152,6 @@ print(
 print()
 
 
-# Reach系だけ表示
 reach_reports = []
 
 
@@ -76,7 +166,6 @@ for report in report_types:
         "name",
         ""
     )
-
 
     if "reach" in report_id.lower():
 
@@ -101,9 +190,8 @@ print(
 )
 
 
-# 確認用JSON
 with open(
-    "analytics/report_types.json",
+    REPORT_TYPES_PATH,
     "w",
     encoding="utf-8"
 ) as f:
@@ -118,22 +206,22 @@ with open(
 
 print()
 print(
-    "analytics/report_types.json "
+    f"{REPORT_TYPES_PATH} "
     "を保存しました"
 )
+
+
 # =========================================================
 # CREATE / FIND REACH REPORT JOB
 # =========================================================
 
-TARGET_REPORT_TYPE = "channel_reach_combined_a1"
-
 print()
 print(
-    f"対象レポート: {TARGET_REPORT_TYPE}"
+    f"対象レポート: "
+    f"{TARGET_REPORT_TYPE}"
 )
 
 
-# 既存ジョブを取得
 jobs_response = (
     reporting
     .jobs()
@@ -142,6 +230,7 @@ jobs_response = (
     )
     .execute()
 )
+
 
 jobs = jobs_response.get(
     "jobs",
@@ -164,7 +253,7 @@ for job in jobs:
 
 
 # =========================================================
-# 既存ジョブがあれば再利用
+# EXISTING JOB
 # =========================================================
 
 if existing_job:
@@ -186,14 +275,15 @@ if existing_job:
 
 
 # =========================================================
-# なければ新規作成
+# CREATE JOB
 # =========================================================
 
 else:
 
     print()
     print(
-        "Reachジョブがないため新規作成します"
+        "Reachジョブがないため"
+        "新規作成します"
     )
 
     created_job = (
@@ -211,9 +301,7 @@ else:
         .execute()
     )
 
-
     existing_job = created_job
-
 
     print()
     print(
@@ -232,7 +320,7 @@ else:
 
 
 # =========================================================
-# JOB情報保存
+# SAVE JOB
 # =========================================================
 
 job_info = {
@@ -252,12 +340,11 @@ job_info = {
         existing_job.get(
             "createTime"
         )
-
 }
 
 
 with open(
-    "analytics/reporting_job.json",
+    JOB_PATH,
     "w",
     encoding="utf-8"
 ) as f:
@@ -272,41 +359,131 @@ with open(
 
 print()
 print(
-    "analytics/reporting_job.json "
+    f"{JOB_PATH} "
     "を保存しました"
 )
+
+
 # =========================================================
-# LIST GENERATED REPORTS
+# LIST ALL GENERATED REPORTS
 # =========================================================
 
 job_id = existing_job.get("id")
 
+
 print()
-print("生成済みReachレポートを確認します")
+print(
+    "生成済みReachレポートを確認します"
+)
 
 
-reports_response = (
-    reporting
-    .jobs()
-    .reports()
-    .list(
-        jobId=job_id
+reports = []
+page_token = None
+
+
+while True:
+
+    request_args = {
+        "jobId": job_id
+    }
+
+    if page_token:
+        request_args["pageToken"] = page_token
+
+    reports_response = (
+        reporting
+        .jobs()
+        .reports()
+        .list(
+            **request_args
+        )
+        .execute()
     )
-    .execute()
-)
 
+    reports.extend(
+        reports_response.get(
+            "reports",
+            []
+        )
+    )
 
-reports = reports_response.get(
-    "reports",
-    []
-)
+    page_token = (
+        reports_response.get(
+            "nextPageToken"
+        )
+    )
+
+    if not page_token:
+        break
 
 
 print()
 print(
-    f"生成済みレポート: {len(reports)}件"
+    f"生成済みレポート: "
+    f"{len(reports)}件"
 )
 
+
+# =========================================================
+# 同じ期間のレポートが複数ある場合、
+# createTimeが新しい方を採用
+# =========================================================
+
+latest_by_period = {}
+
+
+for report in reports:
+
+    period_key = (
+        report.get("startTime"),
+        report.get("endTime")
+    )
+
+    previous = (
+        latest_by_period.get(
+            period_key
+        )
+    )
+
+    if (
+        previous is None
+        or report.get(
+            "createTime",
+            ""
+        )
+        > previous.get(
+            "createTime",
+            ""
+        )
+    ):
+        latest_by_period[
+            period_key
+        ] = report
+
+
+reports = list(
+    latest_by_period.values()
+)
+
+
+reports.sort(
+    key=lambda report:
+        report.get(
+            "startTime",
+            ""
+        )
+)
+
+
+print(
+    "期間重複整理後:",
+    f"{len(reports)}件"
+)
+
+
+# =========================================================
+# SAVE REPORT LIST
+# =========================================================
 
 report_list = []
 
@@ -329,7 +506,6 @@ for report in reports:
 
         "downloadUrl":
             report.get("downloadUrl")
-
     }
 
     report_list.append(
@@ -337,28 +513,8 @@ for report in reports:
     )
 
 
-    print()
-    print(
-        "期間:",
-        report.get("startTime"),
-        "～",
-        report.get("endTime")
-    )
-
-    print(
-        "Download URL:",
-        "あり"
-        if report.get("downloadUrl")
-        else "なし"
-    )
-
-
-# =========================================================
-# SAVE REPORT LIST
-# =========================================================
-
 with open(
-    "analytics/reporting_reports.json",
+    REPORT_LIST_PATH,
     "w",
     encoding="utf-8"
 ) as f:
@@ -373,179 +529,546 @@ with open(
 
 print()
 print(
-    "analytics/reporting_reports.json "
+    f"{REPORT_LIST_PATH} "
     "を保存しました"
 )
 
 
-if reports:
+# =========================================================
+# NO REPORT
+# =========================================================
+
+if not reports:
 
     print()
     print(
-        "Reachレポート取得準備OK"
+        "まだReachレポートは"
+        "生成されていません"
     )
 
-else:
+    raise SystemExit(0)
 
-    print()
-    print(
-        "まだReachレポートは生成されていません"
-    )
+
 # =========================================================
-# DOWNLOAD LATEST REACH REPORT
+# REFRESH ACCESS TOKEN
 # =========================================================
 
-import csv
-import io
-import requests
+credentials.refresh(
+    Request()
+)
 
 
-if reports:
+# =========================================================
+# DOWNLOAD ALL REPORTS
+# =========================================================
 
-    # createTimeが新しいものを優先
-    latest_report = max(
-        reports,
-        key=lambda report:
-            report.get(
-                "createTime",
-                ""
-            )
+print()
+print(
+    "Reachレポートを"
+    "すべて取得します"
+)
+
+
+all_rows = []
+
+successful_reports = 0
+failed_reports = 0
+
+
+for index, report in enumerate(
+    reports,
+    start=1
+):
+
+    download_url = report.get(
+        "downloadUrl"
     )
 
-    download_url = latest_report.get(
-            "downloadUrl"
-        )
+    start_time = report.get(
+        "startTime",
+        ""
+    )
 
     if not download_url:
 
+        print(
+            f"[{index}/{len(reports)}] "
+            f"{start_time} "
+            "Download URLなし"
+        )
+
+        continue
+
+    try:
+
+        rows = download_report(
+            download_url,
+            credentials
+        )
+
+        all_rows.extend(
+            rows
+        )
+
+        successful_reports += 1
+
+        print(
+            f"[{index}/{len(reports)}] "
+            f"{start_time} "
+            f"{len(rows)}行"
+        )
+
+    except Exception as error:
+
+        failed_reports += 1
+
+        print(
+            f"[{index}/{len(reports)}] "
+            f"{start_time} "
+            "取得失敗:"
+        )
+
+        print(
+            f"  {error}"
+        )
+
+
+print()
+print(
+    f"取得成功: "
+    f"{successful_reports}件"
+)
+
+print(
+    f"取得失敗: "
+    f"{failed_reports}件"
+)
+
+print(
+    f"RAWデータ総数: "
+    f"{len(all_rows)}行"
+)
+
+
+# =========================================================
+# SAVE ALL RAW ROWS
+# =========================================================
+
+with open(
+    RAW_ROWS_PATH,
+    "w",
+    encoding="utf-8"
+) as f:
+
+    json.dump(
+        all_rows,
+        f,
+        ensure_ascii=False,
+        indent=2
+    )
+
+
+print()
+print(
+    f"{RAW_ROWS_PATH} "
+    "を保存しました"
+)
+
+
+# =========================================================
+# VALIDATE COLUMNS
+# =========================================================
+
+required_columns = {
+    "date",
+    "video_id",
+    "video_thumbnail_impressions",
+    "video_thumbnail_impressions_ctr"
+}
+
+
+if all_rows:
+
+    actual_columns = set(
+        all_rows[0].keys()
+    )
+
+    missing_columns = (
+        required_columns
+        - actual_columns
+    )
+
+    if missing_columns:
+
         print()
         print(
-            "最新レポートに "
-            "Download URL がありません"
+            "必要なカラムがありません:"
+        )
+
+        for column in sorted(
+            missing_columns
+        ):
+            print(
+                f"  - {column}"
+            )
+
+        raise RuntimeError(
+            "Reach report column error"
+        )
+
+
+# =========================================================
+# AGGREGATE
+#
+# date × video_id
+#
+# impressions:
+#   合計
+#
+# click rate:
+#   impressions加重平均
+#
+# CTR raw value:
+#   0 ～ 1
+#
+# 例:
+#   0.1111 = 11.11%
+# =========================================================
+
+aggregate = defaultdict(
+    lambda: {
+        "impressions": 0,
+        "weightedClickRate": 0.0
+    }
+)
+
+
+for row in all_rows:
+
+    date_value = normalize_date(
+        row.get("date")
+    )
+
+    video_id = str(
+        row.get(
+            "video_id",
+            ""
+        )
+    ).strip()
+
+    if (
+        not date_value
+        or not video_id
+    ):
+        continue
+
+    impressions = safe_int(
+        row.get(
+            "video_thumbnail_impressions"
+        )
+    )
+
+    click_rate = safe_float(
+        row.get(
+            "video_thumbnail_impressions_ctr"
+        )
+    )
+
+    key = (
+        date_value,
+        video_id
+    )
+
+    aggregate[
+        key
+    ][
+        "impressions"
+    ] += impressions
+
+    aggregate[
+        key
+    ][
+        "weightedClickRate"
+    ] += (
+        impressions
+        * click_rate
+    )
+
+
+# =========================================================
+# CREATE DAILY OUTPUT
+# =========================================================
+
+daily_rows = []
+
+
+for (
+    date_value,
+    video_id
+), values in aggregate.items():
+
+    impressions = values[
+        "impressions"
+    ]
+
+    if impressions > 0:
+
+        click_rate = (
+            values[
+                "weightedClickRate"
+            ]
+            / impressions
         )
 
     else:
 
-        print()
-        print(
-            "最新Reachレポートを"
-            "ダウンロードします"
-        )
-
-        # OAuthアクセストークンを更新
-        from google.auth.transport.requests import Request
-
-        credentials.refresh(
-            Request()
-        )
-
-        response = requests.get(
-            download_url,
-            headers={
-                "Authorization":
-                    f"Bearer {credentials.token}"
-            },
-            timeout=60
-        )
-
-        response.raise_for_status()
-
-        csv_text = response.text
+        click_rate = 0.0
 
 
-        # =====================================================
-        # RAW CSV保存
-        # =====================================================
+    daily_rows.append(
+        {
+            "date":
+                date_value,
 
-        with open(
-            "analytics/reach_report.csv",
-            "w",
-            encoding="utf-8",
-            newline=""
-        ) as f:
+            "videoId":
+                video_id,
 
-            f.write(
-                csv_text
-            )
+            "thumbnailImpressions":
+                impressions,
 
+            # 0～1
+            "thumbnailClickRate":
+                round(
+                    click_rate,
+                    8
+                ),
 
-        print(
-            "analytics/reach_report.csv "
-            "を保存しました"
-        )
-
-
-        # =====================================================
-        # CSV → JSON
-        # =====================================================
-
-        reader = csv.DictReader(
-                io.StringIO(
-                    csv_text
+            # サイト表示用 %
+            "thumbnailClickRatePercent":
+                round(
+                    click_rate * 100,
+                    2
                 )
-            )
-
-        reach_rows = list(reader)
-
-
-        with open(
-            "analytics/reach_report.json",
-            "w",
-            encoding="utf-8"
-        ) as f:
-
-            json.dump(
-                reach_rows,
-                f,
-                ensure_ascii=False,
-                indent=2
-            )
+        }
+    )
 
 
-        print(
-            "analytics/reach_report.json "
-            "を保存しました"
+daily_rows.sort(
+    key=lambda row: (
+        row["date"],
+        row["videoId"]
+    )
+)
+
+
+# =========================================================
+# VIDEO SUMMARY
+# =========================================================
+
+video_summary_temp = defaultdict(
+    lambda: {
+        "impressions": 0,
+        "weightedClickRate": 0.0
+    }
+)
+
+
+for row in daily_rows:
+
+    video_id = row[
+        "videoId"
+    ]
+
+    impressions = row[
+        "thumbnailImpressions"
+    ]
+
+    click_rate = row[
+        "thumbnailClickRate"
+    ]
+
+    video_summary_temp[
+        video_id
+    ][
+        "impressions"
+    ] += impressions
+
+    video_summary_temp[
+        video_id
+    ][
+        "weightedClickRate"
+    ] += (
+        impressions
+        * click_rate
+    )
+
+
+video_summary = {}
+
+
+for (
+    video_id,
+    values
+) in video_summary_temp.items():
+
+    impressions = values[
+        "impressions"
+    ]
+
+    if impressions > 0:
+
+        click_rate = (
+            values[
+                "weightedClickRate"
+            ]
+            / impressions
         )
 
-        print()
-        print(
-            f"Reachデータ: "
-            f"{len(reach_rows)}行"
-        )
+    else:
+
+        click_rate = 0.0
 
 
-        # =====================================================
-        # COLUMN確認
-        # =====================================================
+    video_summary[
+        video_id
+    ] = {
+        "thumbnailImpressions":
+            impressions,
 
-        if reach_rows:
+        "thumbnailClickRate":
+            round(
+                click_rate,
+                8
+            ),
 
-            print()
-            print(
-                "取得できたカラム:"
+        "thumbnailClickRatePercent":
+            round(
+                click_rate * 100,
+                2
             )
-
-            for column in (
-                reach_rows[0]
-                .keys()
-            ):
-
-                print(
-                    f"  - {column}"
-                )
-
-        else:
-
-            print()
-            print(
-                "CSV内にデータ行がありません"
-            )
+    }
 
 
-else:
+# =========================================================
+# SAVE SITE DATA
+# =========================================================
 
-    print()
+dates = [
+    row["date"]
+    for row in daily_rows
+]
+
+
+output = {
+
+    "meta": {
+        "reportType":
+            TARGET_REPORT_TYPE,
+
+        "reportCount":
+            len(reports),
+
+        "successfulReports":
+            successful_reports,
+
+        "failedReports":
+            failed_reports,
+
+        "rawRowCount":
+            len(all_rows),
+
+        "dailyRowCount":
+            len(daily_rows),
+
+        "firstDate":
+            min(dates)
+            if dates
+            else None,
+
+        "lastDate":
+            max(dates)
+            if dates
+            else None,
+
+        "clickRateScale":
+            "ratio_0_to_1"
+    },
+
+    "daily":
+        daily_rows,
+
+    "videos":
+        video_summary
+}
+
+
+with open(
+    DAILY_PATH,
+    "w",
+    encoding="utf-8"
+) as f:
+
+    json.dump(
+        output,
+        f,
+        ensure_ascii=False,
+        indent=2
+    )
+
+
+print()
+print(
+    f"{DAILY_PATH} "
+    "を保存しました"
+)
+
+
+# =========================================================
+# RESULT
+# =========================================================
+
+print()
+print(
+    "================================"
+)
+
+print(
+    "Reachデータ更新完了"
+)
+
+print(
+    "================================"
+)
+
+print(
+    "対象レポート:",
+    len(reports),
+    "件"
+)
+
+print(
+    "RAW行数:",
+    len(all_rows)
+)
+
+print(
+    "動画×日付:",
+    len(daily_rows),
+    "行"
+)
+
+print(
+    "動画数:",
+    len(video_summary),
+    "本"
+)
+
+
+if dates:
+
     print(
-        "レポート生成待ちのため"
-        "ダウンロード処理はスキップします"
+        "データ期間:",
+        min(dates),
+        "～",
+        max(dates)
     )
