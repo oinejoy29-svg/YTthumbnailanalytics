@@ -4017,7 +4017,68 @@ const trafficValuePlugin = {
     ctx.restore();
   }
 };
+/* =========================================================
+   REAL TRAFFIC DATA
+========================================================= */
 
+const TRAFFIC_SOURCE_LABELS = {
+  "RELATED_VIDEO": "関連動画",
+  "YT_SEARCH": "YouTube検索",
+  "EXT_URL": "外部",
+  "SUBSCRIBER": "登録チャンネル",
+  "YT_CHANNEL": "チャンネルページ",
+  "YT_PLAYLIST_PAGE": "再生リスト",
+  "PLAYLIST": "再生リスト",
+  "NO_LINK_OTHER": "その他",
+  "NO_LINK_EMBEDDED": "埋め込み",
+  "ANNOTATION": "アノテーション",
+  "END_SCREEN": "終了画面",
+  "NOTIFICATION": "通知",
+  "SHORTS": "ショートフィード",
+  "SOUND_PAGE": "サウンドページ",
+  "HASHTAGS": "ハッシュタグ",
+  "LIVE_REDIRECT": "ライブリダイレクト"
+};
+
+
+function getSelectedVideoTraffic(){
+
+  const video =
+    getSelectedIndividualVideo();
+
+  const traffic =
+    video?.analytics?.traffic;
+
+  return {
+    sources:
+      Array.isArray(traffic?.sources)
+        ? traffic.sources
+        : [],
+
+    searchTerms:
+      Array.isArray(traffic?.searchTerms)
+        ? traffic.searchTerms
+        : [],
+
+    externalSites:
+      Array.isArray(traffic?.externalSites)
+        ? traffic.externalSites
+        : []
+  };
+}
+
+
+function getTrafficSourceLabel(source){
+
+  if(!source){
+    return "その他";
+  }
+
+  return (
+    TRAFFIC_SOURCE_LABELS[source] ||
+    String(source)
+  );
+}
 
 /* =========================================================
    TRAFFIC SOURCE
@@ -4039,47 +4100,69 @@ function renderTrafficSourceChart(){
 
 
   destroyChart(
-    "trafficSource"
+    "traffic"
   );
 
 
-  CHARTS.trafficSource =
+  const traffic =
+    getSelectedVideoTraffic();
+
+  const sources =
+    [...traffic.sources]
+      .filter(row =>
+        Number.isFinite(
+          Number(row.percentage)
+        )
+      )
+      .sort(
+        (a,b) =>
+          Number(b.percentage) -
+          Number(a.percentage)
+      );
+
+
+  const labels =
+    sources.map(row =>
+      getTrafficSourceLabel(
+        row.source
+      )
+    );
+
+
+  const values =
+    sources.map(row =>
+      Number(row.percentage)
+    );
+
+
+  CHARTS.traffic =
     new Chart(
       canvas,
       {
 
         type:"bar",
 
-        plugins:[
-          trafficValuePlugin
-        ],
-
         data:{
 
-          labels:
-            DUMMY.individual
-              .trafficLabels,
+          labels,
 
           datasets:[
             {
-              data:
-                DUMMY.individual
-                  .traffic,
+              label:"流入割合",
+
+              data:values,
 
               backgroundColor:
-                COLORS.chartYellowAlt,
-
-              borderColor:
                 COLORS.chartYellow,
 
-              borderWidth:2,
+              borderWidth:0,
 
-              borderRadius:8,
+              borderRadius:6,
 
               barThickness:
                 window.innerWidth <= 800
-                  ? 18
-                  : 25
+                  ? 15
+                  : 19
             }
           ]
         },
@@ -4093,11 +4176,7 @@ function renderTrafficSourceChart(){
 
           maintainAspectRatio:false,
 
-          layout:{
-            padding:{
-              right:45
-            }
-          },
+          animation:false,
 
           plugins:{
 
@@ -4109,11 +4188,54 @@ function renderTrafficSourceChart(){
 
               backgroundColor:"#111",
 
+              titleColor:"#fff",
+
+              bodyColor:"#fff",
+
               displayColors:false,
 
               callbacks:{
+
                 label(context){
-                  return `${context.parsed.x}%`;
+
+                  const row =
+                    sources[
+                      context.dataIndex
+                    ];
+
+                  const percentage =
+                    Number(
+                      row?.percentage
+                    );
+
+                  const views =
+                    Number(
+                      row?.views
+                    );
+
+                  const parts = [];
+
+                  if(
+                    Number.isFinite(
+                      percentage
+                    )
+                  ){
+                    parts.push(
+                      `${percentage.toFixed(1)}%`
+                    );
+                  }
+
+                  if(
+                    Number.isFinite(
+                      views
+                    )
+                  ){
+                    parts.push(
+                      `${views.toLocaleString("ja-JP")}回`
+                    );
+                  }
+
+                  return parts.join(" / ");
                 }
               }
             }
@@ -4126,7 +4248,7 @@ function renderTrafficSourceChart(){
 
               beginAtZero:true,
 
-              suggestedMax:55,
+              suggestedMax:100,
 
               grid:{
                 color:COLORS.grid
@@ -4166,13 +4288,11 @@ function renderTrafficSourceChart(){
 
               ticks:{
 
-                color:COLORS.ink,
-
                 font:{
                   size:
                     window.innerWidth <= 800
-                      ? 8
-                      : 10,
+                      ? 9
+                      : 11,
 
                   weight:"800"
                 }
@@ -4184,6 +4304,201 @@ function renderTrafficSourceChart(){
     );
 }
 
+/* =========================================================
+   SEARCH / EXTERNAL DETAIL
+========================================================= */
+
+function createTrafficDetailRow(
+  row,
+  index
+){
+
+  const element =
+    document.createElement(
+      "div"
+    );
+
+  element.className =
+    "percentage-ranking-row";
+
+
+  const percentage =
+    Number(
+      row?.percentage
+    );
+
+
+  const safePercentage =
+    Number.isFinite(percentage)
+      ? Math.max(
+          0,
+          Math.min(
+            100,
+            percentage
+          )
+        )
+      : 0;
+
+
+  element.style.setProperty(
+    "--bar-percent",
+    `${safePercentage}%`
+  );
+
+
+  const bar =
+    document.createElement(
+      "span"
+    );
+
+  bar.className =
+    "percentage-ranking-bar";
+
+
+  const position =
+    document.createElement(
+      "span"
+    );
+
+  position.className =
+    "percentage-ranking-position";
+
+  position.textContent =
+    String(index + 1);
+
+
+  const name =
+    document.createElement(
+      "b"
+    );
+
+  name.textContent =
+    row?.detail || "—";
+
+
+  const value =
+    document.createElement(
+      "strong"
+    );
+
+  value.textContent =
+    Number.isFinite(percentage)
+      ? `${percentage.toFixed(1)}%`
+      : "—";
+
+
+  element.append(
+    bar,
+    position,
+    name,
+    value
+  );
+
+
+  return element;
+}
+
+
+function renderTrafficDetailList(
+  container,
+  rows
+){
+
+  if(!container){
+    return;
+  }
+
+
+  container.innerHTML = "";
+
+
+  const sorted =
+    [...rows]
+      .filter(row =>
+        row &&
+        row.detail
+      )
+      .sort(
+        (a,b) =>
+          Number(b.views || 0) -
+          Number(a.views || 0)
+      );
+
+
+  if(!sorted.length){
+
+    const empty =
+      document.createElement(
+        "div"
+      );
+
+    empty.className =
+      "traffic-detail-empty";
+
+    empty.textContent =
+      "データなし";
+
+    container.appendChild(
+      empty
+    );
+
+    return;
+  }
+
+
+  sorted.forEach(
+    (row,index) => {
+
+      container.appendChild(
+        createTrafficDetailRow(
+          row,
+          index
+        )
+      );
+    }
+  );
+}
+
+
+function renderTrafficDetails(){
+
+  const traffic =
+    getSelectedVideoTraffic();
+
+
+  /*
+    HTML上では
+
+    1個目 = 検索語
+    2個目 = 外部サイト
+
+    の順番。
+  */
+
+  const lists =
+    document.querySelectorAll(
+      "#individualMode .detail-two-column .percentage-ranking-list"
+    );
+
+
+  const searchContainer =
+    lists[0];
+
+  const externalContainer =
+    lists[1];
+
+
+  renderTrafficDetailList(
+    searchContainer,
+    traffic.searchTerms
+  );
+
+
+  renderTrafficDetailList(
+    externalContainer,
+    traffic.externalSites
+  );
+}
 
 /* =========================================================
    COMPARE
@@ -6641,7 +6956,8 @@ function setIndividualVideo(
     ) || "impressions"
   );
 
-  renderTrafficSourceChart();
+　renderTrafficSourceChart();
+　renderTrafficDetails();
 }
 
 
@@ -7243,7 +7559,8 @@ function renderInitialCharts(){
     "impressions"
   );
 
-  renderTrafficSourceChart();
+　renderTrafficSourceChart();
+　renderTrafficDetails();
 
   renderCompareChart(
     "dailyViews"
