@@ -4177,6 +4177,112 @@ const TRAFFIC_SOURCE_LABELS = {
   "LIVE_REDIRECT": "ライブリダイレクト"
 };
 
+function renderIndividualShares(){
+
+  const video =
+    getSelectedIndividualVideo();
+
+  const container =
+    document.querySelector(
+      "#individualMode .share-grid"
+    );
+
+  if(!container){
+    return;
+  }
+
+
+  const rows =
+    Array.isArray(
+      video?.analytics?.sharingServices
+    )
+      ? video.analytics.sharingServices
+      : [];
+
+
+  container.innerHTML = "";
+
+
+  if(!rows.length){
+
+    const card =
+      document.createElement(
+        "article"
+      );
+
+    card.className =
+      "share-card";
+
+    card.innerHTML = `
+      <span>シェア先データ</span>
+      <strong>—</strong>
+    `;
+
+    container.appendChild(card);
+
+    return;
+  }
+
+
+  rows
+    .filter(row =>
+      row?.service !== null &&
+      row?.service !== undefined &&
+      row?.shares !== null &&
+      row?.shares !== undefined &&
+      Number.isFinite(
+        Number(row.shares)
+      )
+    )
+    .sort(
+      (a,b) =>
+        Number(b.shares) -
+        Number(a.shares)
+    )
+    .forEach(row => {
+
+      const card =
+        document.createElement(
+          "article"
+        );
+
+      card.className =
+        "share-card";
+
+
+      const name =
+        document.createElement(
+          "span"
+        );
+
+      name.textContent =
+        String(row.service);
+
+
+      const value =
+        document.createElement(
+          "strong"
+        );
+
+      value.textContent =
+        Number(row.shares)
+          .toLocaleString(
+            "ja-JP"
+          );
+
+
+      card.append(
+        name,
+        value
+      );
+
+      container.appendChild(
+        card
+      );
+
+    });
+
+}
 
 function getSelectedVideoTraffic(){
 
@@ -7131,6 +7237,7 @@ function setIndividualVideo(
 
 　renderTrafficSourceChart();
 　renderTrafficDetails();
+  renderIndividualShares();
 }
 
 
