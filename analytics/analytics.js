@@ -497,32 +497,47 @@ function getRankingMetricValue(
 
 
     case "engagedViews":
-      return Number.isFinite(
-        Number(summary.engagedViews)
+      return (
+        summary.engagedViews !== null &&
+        summary.engagedViews !== undefined &&
+        Number.isFinite(
+          Number(summary.engagedViews)
+        )
       )
         ? Number(summary.engagedViews)
         : null;
 
-
     case "averagePercentageViewed":
-      return Number.isFinite(
-        Number(summary.averageViewPercentage)
+      return (
+        summary.averageViewPercentage !== null &&
+        summary.averageViewPercentage !== undefined &&
+        Number.isFinite(
+          Number(summary.averageViewPercentage)
+        )
       )
         ? Number(summary.averageViewPercentage)
         : null;
 
 
     case "subscribersGained":
-      return Number.isFinite(
-        Number(summary.subscribersGained)
+      return (
+        summary.subscribersGained !== null &&
+        summary.subscribersGained !== undefined &&
+        Number.isFinite(
+          Number(summary.subscribersGained)
+        )
       )
         ? Number(summary.subscribersGained)
         : null;
 
 
     case "watchTime":
-      return Number.isFinite(
-        Number(summary.watchMinutes)
+      return (
+        summary.watchMinutes !== null &&
+        summary.watchMinutes !== undefined &&
+        Number.isFinite(
+          Number(summary.watchMinutes)
+        )
       )
         ? Number(summary.watchMinutes)
         : null;
@@ -1590,21 +1605,6 @@ const DUMMY = {
 function compactNumber(value){
 
   const number = Number(value || 0);
-
-  if(number >= 1000000){
-    return `${(number / 1000000)
-      .toFixed(1)
-      .replace(".0","")}M`;
-  }
-
-  if(number >= 1000){
-    return `${(number / 1000)
-      .toFixed(1)
-      .replace(".0","")}k`;
-  }
-
-  return number.toLocaleString();
-}
 
 
 function cumulative(values){
@@ -6754,9 +6754,14 @@ function renderIndividualRealMetrics(){
     );
 
   const averageViewDuration =
-    Number(
-      summary.averageViewDuration
-    );
+    (
+      summary.averageViewDuration !== null &&
+      summary.averageViewDuration !== undefined
+    )
+      ? Number(
+          summary.averageViewDuration
+        )
+      : null;
 
   const durationSeconds =
     Number(
@@ -6781,9 +6786,14 @@ function renderIndividualRealMetrics(){
   if(retentionMarker){
 
     let averagePosition =
-      Number(
-        summary.averageViewPercentage
-      );
+      (
+        summary.averageViewPercentage !== null &&
+        summary.averageViewPercentage !== undefined
+      )
+        ? Number(
+            summary.averageViewPercentage
+          )
+        : null;
 
     /*
       平均再生率が取れない場合だけ、
