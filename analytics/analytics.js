@@ -2211,6 +2211,10 @@ function calculateOverviewSummaryFromRows(
   rows
 ){
 
+  let views = 0;
+  let engagedViews = 0;
+  let watchMinutes = 0;
+
   let viewsCount = 0;
   let engagedViewsCount = 0;
   let watchMinutesCount = 0;
@@ -2225,22 +2229,50 @@ function calculateOverviewSummaryFromRows(
   rows.forEach(row => {
 
     const rowViews =
-      Number(row.views);
+      row.views === null ||
+      row.views === undefined
+        ? null
+        : Number(row.views);
 
     const rowEngaged =
-      Number(row.engagedViews);
+      row.engagedViews === null ||
+      row.engagedViews === undefined
+        ? null
+        : Number(row.engagedViews);
 
     const rowWatch =
-      Number(row.watchMinutes);
+      row.watchMinutes === null ||
+      row.watchMinutes === undefined
+        ? null
+        : Number(row.watchMinutes);
 
     const rowDuration =
-      Number(row.averageViewDuration);
+      row.averageViewDuration === null ||
+      row.averageViewDuration === undefined
+        ? null
+        : Number(row.averageViewDuration);
 
     const rowPercentage =
-      Number(row.averageViewPercentage);
+      row.averageViewPercentage === null ||
+      row.averageViewPercentage === undefined
+        ? null
+        : Number(row.averageViewPercentage);
 
 
-if(Number.isFinite(rowViews
+    if(Number.isFinite(rowViews)){
+      views += rowViews;
+      viewsCount += 1;
+    }
+
+    if(Number.isFinite(rowEngaged)){
+      engagedViews += rowEngaged;
+      engagedViewsCount += 1;
+    }
+
+    if(Number.isFinite(rowWatch)){
+      watchMinutes += rowWatch;
+      watchMinutesCount += 1;
+    }
 
 
     if(
@@ -2272,7 +2304,20 @@ if(Number.isFinite(rowViews
 
   return {
 
-if(Number.isFinite(rowViews
+    views:
+      viewsCount > 0
+        ? views
+        : null,
+
+    engagedViews:
+      engagedViewsCount > 0
+        ? engagedViews
+        : null,
+
+    watchMinutes:
+      watchMinutesCount > 0
+        ? watchMinutes
+        : null,
 
     averageViewDuration:
       durationWeight > 0
