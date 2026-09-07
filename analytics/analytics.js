@@ -6990,22 +6990,79 @@ function renderIndividualDetailAverageRanks(){
     REACH
   */
 
-  updateIndividualMiniAverageRank(
-    "インプレッション",
-    "impressions",
-    value =>
-      formatInteger(
-        Math.round(value)
-      )
-  );
+  const reachCards =
+    document.querySelectorAll(
+      "#individualMode .reach-summary .mini-metric"
+    );
 
 
-  updateIndividualMiniAverageRank(
-    "クリック率",
-    "ctr",
-    value =>
-      `${Number(value).toFixed(2)}%`
-  );
+  [
+    {
+      label:"インプレッション",
+      metric:"impressions",
+      formatter:value =>
+        formatInteger(
+          Math.round(value)
+        )
+    },
+    {
+      label:"クリック率",
+      metric:"ctr",
+      formatter:value =>
+        `${Number(value).toFixed(2)}%`
+    }
+  ].forEach(config => {
+
+    const card =
+      [...reachCards].find(item =>
+        item.querySelector("span")
+          ?.textContent.trim() ===
+        config.label
+      );
+
+    if(!card){
+      return;
+    }
+
+
+    const average =
+      getIndividualMetricAverage(
+        config.metric
+      );
+
+    const rank =
+      getIndividualMetricRank(
+        getSelectedIndividualVideo(),
+        config.metric
+      );
+
+
+    const small =
+      card.querySelector("small");
+
+    if(!small){
+      return;
+    }
+
+
+    const averageText =
+      average === null
+        ? "平均 —"
+        : `平均 ${config.formatter(
+            average
+          )}`;
+
+
+    const rankText =
+      rank
+        ? `${rank.rank}位 / ${rank.total}本`
+        : "—";
+
+
+    small.textContent =
+      `${averageText} ・ ${rankText}`;
+
+  });
 
 
   /*
