@@ -7242,16 +7242,13 @@ function renderIndividualRealMetrics(){
   const video =
     getSelectedIndividualVideo();
 
-  if(
-    !video ||
-    !video.analytics
-  ){
+  if(!video){
     return;
   }
 
 
   const summary =
-    video.analytics.summary || {};
+    video.analytics?.summary || {};
 
 　const dataApi =
     video.dataApi || {};
@@ -7316,7 +7313,7 @@ function renderIndividualRealMetrics(){
 
 
   const milestones =
-    video.analytics.milestones || {};
+    video.analytics?.milestones || {};
 
 
   /*
