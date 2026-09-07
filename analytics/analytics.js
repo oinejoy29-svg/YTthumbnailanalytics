@@ -3933,6 +3933,206 @@ function updateReachWindowLabel(){
 
 
 /* =========================================================
+   INDIVIDUAL REACH SUMMARY
+========================================================= */
+
+function renderIndividualReachSummary(){
+
+  const video =
+    getSelectedIndividualVideo();
+
+  if(!video){
+    return;
+  }
+
+
+  const current =
+    getVideoReachSummary(
+      video.id
+    );
+
+
+  const cards =
+    document.querySelectorAll(
+      "#individualMode .reach-summary .mini-metric"
+    );
+
+
+  const summaries =
+    REAL_VIDEOS
+      .map(item => ({
+        id:item.id,
+        data:getVideoReachSummary(
+          item.id
+        )
+      }))
+      .filter(item =>
+        item.data !== null
+      );
+
+
+  cards.forEach(card => {
+
+    const label =
+      card.querySelector(
+        "span"
+      )?.textContent.trim();
+
+    const strong =
+      card.querySelector(
+        "strong"
+      );
+
+    const small =
+      card.querySelector(
+        "small"
+      );
+
+
+    if(
+      !label ||
+      !strong ||
+      !small
+    ){
+      return;
+    }
+
+
+    let currentValue = null;
+    let values = [];
+    let formatter = value => String(value);
+
+
+    if(
+      label ===
+      "インプレッション"
+    ){
+
+      currentValue =
+        current?.impressions ??
+        null;
+
+      values =
+        summaries
+          .map(item =>
+            item.data?.impressions
+          )
+          .filter(value =>
+            value !== null &&
+            value !== undefined &&
+            Number.isFinite(
+              Number(value)
+            )
+          )
+          .map(Number);
+
+      formatter =
+        value =>
+          formatInteger(
+            Math.round(value)
+          );
+
+    }else if(
+      label ===
+      "クリック率"
+    ){
+
+      currentValue =
+        current?.clickRate ??
+        null;
+
+      values =
+        summaries
+          .map(item =>
+            item.data?.clickRate
+          )
+          .filter(value =>
+            value !== null &&
+            value !== undefined &&
+            Number.isFinite(
+              Number(value)
+            )
+          )
+          .map(Number);
+
+      formatter =
+        value =>
+          `${Number(value)
+            .toFixed(2)}%`;
+
+    }else{
+      return;
+    }
+
+
+    if(
+      currentValue === null ||
+      currentValue === undefined ||
+      !Number.isFinite(
+        Number(currentValue)
+      )
+    ){
+
+      strong.textContent = "—";
+      small.textContent = "—";
+
+      return;
+    }
+
+
+    const numericCurrent =
+      Number(currentValue);
+
+
+    strong.textContent =
+      formatter(
+        numericCurrent
+      );
+
+
+    if(!values.length){
+
+      small.textContent = "—";
+
+      return;
+    }
+
+
+    const average =
+      values.reduce(
+        (sum,value) =>
+          sum + value,
+        0
+      ) /
+      values.length;
+
+
+    const sorted =
+      [...values].sort(
+        (a,b) => b - a
+      );
+
+
+    const rank =
+      sorted.findIndex(
+        value =>
+          value === numericCurrent
+      ) + 1;
+
+
+    small.textContent =
+      `平均 ${formatter(average)} ・ ${
+        rank > 0
+          ? `${rank}位 / ${values.length}本`
+          : "—"
+      }`;
+
+  });
+
+}
+
+
+/* =========================================================
    INDIVIDUAL REACH
 ========================================================= */
 
