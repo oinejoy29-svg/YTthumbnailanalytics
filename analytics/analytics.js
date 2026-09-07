@@ -273,7 +273,14 @@ function getVideoReachSummary(videoId){
       Number(row.thumbnailImpressions);
 
     const ctr =
-      Number(row.thumbnailClickRatePercent);
+      (
+        row.thumbnailClickRatePercent !== null &&
+        row.thumbnailClickRatePercent !== undefined
+      )
+        ? Number(
+            row.thumbnailClickRatePercent
+          )
+        : null;
 
 
     if(
@@ -284,11 +291,10 @@ function getVideoReachSummary(videoId){
     }
 
 
-    totalImpressions +=
-      impressions;
-
-
     if(Number.isFinite(ctr)){
+
+      totalImpressions +=
+        impressions;
 
       weightedCtr +=
         impressions * ctr;
