@@ -5,12 +5,12 @@
     "endDate": "2026-09-06",
     "videoCount": 23,
     "videoSuccessCount": 23,
-    "videoErrorCount": 0
+    "videoErrorCount": 1
   },
   "summary": {
     "views": 160318,
     "engagedViews": 134912,
-    "watchMinutes": 559138,
+    "watchMinutes": 559137,
     "averageViewDuration": 236.24,
     "averageViewPercentage": 36.79,
     "likes": 3539,
@@ -1987,7 +1987,7 @@
       "date": "2026-09-01",
       "views": 4369,
       "engagedViews": 2072,
-      "watchMinutes": 5988,
+      "watchMinutes": 5987,
       "averageViewDuration": 171,
       "averageViewPercentage": 36.33,
       "likes": 52,
@@ -4108,6 +4108,408 @@
           "subscribersGained": 0,
           "subscribersLost": 0
         }
+      ],
+      "retention": [
+        {
+          "position": 1.0,
+          "watchRatio": 81.04
+        },
+        {
+          "position": 2.0,
+          "watchRatio": 46.82
+        },
+        {
+          "position": 3.0,
+          "watchRatio": 40.57
+        },
+        {
+          "position": 4.0,
+          "watchRatio": 37.11
+        },
+        {
+          "position": 5.0,
+          "watchRatio": 35.07
+        },
+        {
+          "position": 6.0,
+          "watchRatio": 33.51
+        },
+        {
+          "position": 7.0,
+          "watchRatio": 32.74
+        },
+        {
+          "position": 8.0,
+          "watchRatio": 36.83
+        },
+        {
+          "position": 9.0,
+          "watchRatio": 32.31
+        },
+        {
+          "position": 10.0,
+          "watchRatio": 30.85
+        },
+        {
+          "position": 11.0,
+          "watchRatio": 30.24
+        },
+        {
+          "position": 12.0,
+          "watchRatio": 29.91
+        },
+        {
+          "position": 13.0,
+          "watchRatio": 27.97
+        },
+        {
+          "position": 14.0,
+          "watchRatio": 26.72
+        },
+        {
+          "position": 15.0,
+          "watchRatio": 26.3
+        },
+        {
+          "position": 16.0,
+          "watchRatio": 25.81
+        },
+        {
+          "position": 17.0,
+          "watchRatio": 30.7
+        },
+        {
+          "position": 18.0,
+          "watchRatio": 28.11
+        },
+        {
+          "position": 19.0,
+          "watchRatio": 25.93
+        },
+        {
+          "position": 20.0,
+          "watchRatio": 24.93
+        },
+        {
+          "position": 21.0,
+          "watchRatio": 28.8
+        },
+        {
+          "position": 22.0,
+          "watchRatio": 25.39
+        },
+        {
+          "position": 23.0,
+          "watchRatio": 24.07
+        },
+        {
+          "position": 24.0,
+          "watchRatio": 23.51
+        },
+        {
+          "position": 25.0,
+          "watchRatio": 23.15
+        },
+        {
+          "position": 26.0,
+          "watchRatio": 22.67
+        },
+        {
+          "position": 27.0,
+          "watchRatio": 23.22
+        },
+        {
+          "position": 28.0,
+          "watchRatio": 21.25
+        },
+        {
+          "position": 29.0,
+          "watchRatio": 20.87
+        },
+        {
+          "position": 30.0,
+          "watchRatio": 20.32
+        },
+        {
+          "position": 31.0,
+          "watchRatio": 19.92
+        },
+        {
+          "position": 32.0,
+          "watchRatio": 20.19
+        },
+        {
+          "position": 33.0,
+          "watchRatio": 19.28
+        },
+        {
+          "position": 34.0,
+          "watchRatio": 18.75
+        },
+        {
+          "position": 35.0,
+          "watchRatio": 18.3
+        },
+        {
+          "position": 36.0,
+          "watchRatio": 18.09
+        },
+        {
+          "position": 37.0,
+          "watchRatio": 17.83
+        },
+        {
+          "position": 38.0,
+          "watchRatio": 18.06
+        },
+        {
+          "position": 39.0,
+          "watchRatio": 20.64
+        },
+        {
+          "position": 40.0,
+          "watchRatio": 17.65
+        },
+        {
+          "position": 41.0,
+          "watchRatio": 16.92
+        },
+        {
+          "position": 42.0,
+          "watchRatio": 16.22
+        },
+        {
+          "position": 43.0,
+          "watchRatio": 16.07
+        },
+        {
+          "position": 44.0,
+          "watchRatio": 15.74
+        },
+        {
+          "position": 45.0,
+          "watchRatio": 15.66
+        },
+        {
+          "position": 46.0,
+          "watchRatio": 15.18
+        },
+        {
+          "position": 47.0,
+          "watchRatio": 14.73
+        },
+        {
+          "position": 48.0,
+          "watchRatio": 14.85
+        },
+        {
+          "position": 49.0,
+          "watchRatio": 14.47
+        },
+        {
+          "position": 50.0,
+          "watchRatio": 14.57
+        },
+        {
+          "position": 51.0,
+          "watchRatio": 15.4
+        },
+        {
+          "position": 52.0,
+          "watchRatio": 14.11
+        },
+        {
+          "position": 53.0,
+          "watchRatio": 14.01
+        },
+        {
+          "position": 54.0,
+          "watchRatio": 13.69
+        },
+        {
+          "position": 55.0,
+          "watchRatio": 13.26
+        },
+        {
+          "position": 56.0,
+          "watchRatio": 13.46
+        },
+        {
+          "position": 57.0,
+          "watchRatio": 13.22
+        },
+        {
+          "position": 58.0,
+          "watchRatio": 12.96
+        },
+        {
+          "position": 59.0,
+          "watchRatio": 13.02
+        },
+        {
+          "position": 60.0,
+          "watchRatio": 13.6
+        },
+        {
+          "position": 61.0,
+          "watchRatio": 17.59
+        },
+        {
+          "position": 62.0,
+          "watchRatio": 16.96
+        },
+        {
+          "position": 63.0,
+          "watchRatio": 15.97
+        },
+        {
+          "position": 64.0,
+          "watchRatio": 15.45
+        },
+        {
+          "position": 65.0,
+          "watchRatio": 14.91
+        },
+        {
+          "position": 66.0,
+          "watchRatio": 14.57
+        },
+        {
+          "position": 67.0,
+          "watchRatio": 14.54
+        },
+        {
+          "position": 68.0,
+          "watchRatio": 18.18
+        },
+        {
+          "position": 69.0,
+          "watchRatio": 16.9
+        },
+        {
+          "position": 70.0,
+          "watchRatio": 16.19
+        },
+        {
+          "position": 71.0,
+          "watchRatio": 15.67
+        },
+        {
+          "position": 72.0,
+          "watchRatio": 15.19
+        },
+        {
+          "position": 73.0,
+          "watchRatio": 14.76
+        },
+        {
+          "position": 74.0,
+          "watchRatio": 14.36
+        },
+        {
+          "position": 75.0,
+          "watchRatio": 14.2
+        },
+        {
+          "position": 76.0,
+          "watchRatio": 14.12
+        },
+        {
+          "position": 77.0,
+          "watchRatio": 18.66
+        },
+        {
+          "position": 78.0,
+          "watchRatio": 18.08
+        },
+        {
+          "position": 79.0,
+          "watchRatio": 16.89
+        },
+        {
+          "position": 80.0,
+          "watchRatio": 15.64
+        },
+        {
+          "position": 81.0,
+          "watchRatio": 15.49
+        },
+        {
+          "position": 82.0,
+          "watchRatio": 15.12
+        },
+        {
+          "position": 83.0,
+          "watchRatio": 14.64
+        },
+        {
+          "position": 84.0,
+          "watchRatio": 15.0
+        },
+        {
+          "position": 85.0,
+          "watchRatio": 14.3
+        },
+        {
+          "position": 86.0,
+          "watchRatio": 14.01
+        },
+        {
+          "position": 87.0,
+          "watchRatio": 13.57
+        },
+        {
+          "position": 88.0,
+          "watchRatio": 13.51
+        },
+        {
+          "position": 89.0,
+          "watchRatio": 13.13
+        },
+        {
+          "position": 90.0,
+          "watchRatio": 13.96
+        },
+        {
+          "position": 91.0,
+          "watchRatio": 12.37
+        },
+        {
+          "position": 92.0,
+          "watchRatio": 12.25
+        },
+        {
+          "position": 93.0,
+          "watchRatio": 11.92
+        },
+        {
+          "position": 94.0,
+          "watchRatio": 11.94
+        },
+        {
+          "position": 95.0,
+          "watchRatio": 11.55
+        },
+        {
+          "position": 96.0,
+          "watchRatio": 11.37
+        },
+        {
+          "position": 97.0,
+          "watchRatio": 11.98
+        },
+        {
+          "position": 98.0,
+          "watchRatio": 11.09
+        },
+        {
+          "position": 99.0,
+          "watchRatio": 7.67
+        },
+        {
+          "position": 100.0,
+          "watchRatio": 6.29
+        }
       ]
     },
     "PmD_nggctn4": {
@@ -5882,6 +6284,408 @@
           "subscribersGained": 0,
           "subscribersLost": 0
         }
+      ],
+      "retention": [
+        {
+          "position": 1.0,
+          "watchRatio": 92.21
+        },
+        {
+          "position": 2.0,
+          "watchRatio": 76.11
+        },
+        {
+          "position": 3.0,
+          "watchRatio": 70.87
+        },
+        {
+          "position": 4.0,
+          "watchRatio": 70.36
+        },
+        {
+          "position": 5.0,
+          "watchRatio": 68.82
+        },
+        {
+          "position": 6.0,
+          "watchRatio": 68.32
+        },
+        {
+          "position": 7.0,
+          "watchRatio": 71.19
+        },
+        {
+          "position": 8.0,
+          "watchRatio": 69.5
+        },
+        {
+          "position": 9.0,
+          "watchRatio": 67.89
+        },
+        {
+          "position": 10.0,
+          "watchRatio": 67.34
+        },
+        {
+          "position": 11.0,
+          "watchRatio": 65.95
+        },
+        {
+          "position": 12.0,
+          "watchRatio": 65.99
+        },
+        {
+          "position": 13.0,
+          "watchRatio": 64.23
+        },
+        {
+          "position": 14.0,
+          "watchRatio": 61.89
+        },
+        {
+          "position": 15.0,
+          "watchRatio": 62.0
+        },
+        {
+          "position": 16.0,
+          "watchRatio": 65.54
+        },
+        {
+          "position": 17.0,
+          "watchRatio": 65.18
+        },
+        {
+          "position": 18.0,
+          "watchRatio": 62.35
+        },
+        {
+          "position": 19.0,
+          "watchRatio": 63.21
+        },
+        {
+          "position": 20.0,
+          "watchRatio": 62.07
+        },
+        {
+          "position": 21.0,
+          "watchRatio": 61.7
+        },
+        {
+          "position": 22.0,
+          "watchRatio": 59.23
+        },
+        {
+          "position": 23.0,
+          "watchRatio": 57.02
+        },
+        {
+          "position": 24.0,
+          "watchRatio": 55.46
+        },
+        {
+          "position": 25.0,
+          "watchRatio": 56.35
+        },
+        {
+          "position": 26.0,
+          "watchRatio": 56.53
+        },
+        {
+          "position": 27.0,
+          "watchRatio": 61.61
+        },
+        {
+          "position": 28.0,
+          "watchRatio": 58.66
+        },
+        {
+          "position": 29.0,
+          "watchRatio": 54.68
+        },
+        {
+          "position": 30.0,
+          "watchRatio": 53.04
+        },
+        {
+          "position": 31.0,
+          "watchRatio": 53.64
+        },
+        {
+          "position": 32.0,
+          "watchRatio": 52.44
+        },
+        {
+          "position": 33.0,
+          "watchRatio": 53.23
+        },
+        {
+          "position": 34.0,
+          "watchRatio": 57.03
+        },
+        {
+          "position": 35.0,
+          "watchRatio": 55.49
+        },
+        {
+          "position": 36.0,
+          "watchRatio": 53.35
+        },
+        {
+          "position": 37.0,
+          "watchRatio": 54.69
+        },
+        {
+          "position": 38.0,
+          "watchRatio": 52.59
+        },
+        {
+          "position": 39.0,
+          "watchRatio": 50.76
+        },
+        {
+          "position": 40.0,
+          "watchRatio": 51.36
+        },
+        {
+          "position": 41.0,
+          "watchRatio": 49.34
+        },
+        {
+          "position": 42.0,
+          "watchRatio": 48.65
+        },
+        {
+          "position": 43.0,
+          "watchRatio": 49.23
+        },
+        {
+          "position": 44.0,
+          "watchRatio": 46.52
+        },
+        {
+          "position": 45.0,
+          "watchRatio": 45.99
+        },
+        {
+          "position": 46.0,
+          "watchRatio": 47.25
+        },
+        {
+          "position": 47.0,
+          "watchRatio": 45.55
+        },
+        {
+          "position": 48.0,
+          "watchRatio": 45.74
+        },
+        {
+          "position": 49.0,
+          "watchRatio": 46.05
+        },
+        {
+          "position": 50.0,
+          "watchRatio": 44.37
+        },
+        {
+          "position": 51.0,
+          "watchRatio": 43.6
+        },
+        {
+          "position": 52.0,
+          "watchRatio": 44.44
+        },
+        {
+          "position": 53.0,
+          "watchRatio": 43.14
+        },
+        {
+          "position": 54.0,
+          "watchRatio": 42.44
+        },
+        {
+          "position": 55.0,
+          "watchRatio": 43.19
+        },
+        {
+          "position": 56.0,
+          "watchRatio": 41.52
+        },
+        {
+          "position": 57.0,
+          "watchRatio": 40.23
+        },
+        {
+          "position": 58.0,
+          "watchRatio": 42.12
+        },
+        {
+          "position": 59.0,
+          "watchRatio": 40.57
+        },
+        {
+          "position": 60.0,
+          "watchRatio": 42.44
+        },
+        {
+          "position": 61.0,
+          "watchRatio": 43.3
+        },
+        {
+          "position": 62.0,
+          "watchRatio": 41.7
+        },
+        {
+          "position": 63.0,
+          "watchRatio": 40.38
+        },
+        {
+          "position": 64.0,
+          "watchRatio": 40.54
+        },
+        {
+          "position": 65.0,
+          "watchRatio": 39.36
+        },
+        {
+          "position": 66.0,
+          "watchRatio": 38.62
+        },
+        {
+          "position": 67.0,
+          "watchRatio": 39.14
+        },
+        {
+          "position": 68.0,
+          "watchRatio": 37.83
+        },
+        {
+          "position": 69.0,
+          "watchRatio": 37.52
+        },
+        {
+          "position": 70.0,
+          "watchRatio": 38.85
+        },
+        {
+          "position": 71.0,
+          "watchRatio": 37.88
+        },
+        {
+          "position": 72.0,
+          "watchRatio": 38.24
+        },
+        {
+          "position": 73.0,
+          "watchRatio": 41.88
+        },
+        {
+          "position": 74.0,
+          "watchRatio": 41.26
+        },
+        {
+          "position": 75.0,
+          "watchRatio": 39.25
+        },
+        {
+          "position": 76.0,
+          "watchRatio": 39.47
+        },
+        {
+          "position": 77.0,
+          "watchRatio": 38.83
+        },
+        {
+          "position": 78.0,
+          "watchRatio": 38.01
+        },
+        {
+          "position": 79.0,
+          "watchRatio": 38.65
+        },
+        {
+          "position": 80.0,
+          "watchRatio": 37.72
+        },
+        {
+          "position": 81.0,
+          "watchRatio": 36.88
+        },
+        {
+          "position": 82.0,
+          "watchRatio": 38.36
+        },
+        {
+          "position": 83.0,
+          "watchRatio": 38.31
+        },
+        {
+          "position": 84.0,
+          "watchRatio": 39.19
+        },
+        {
+          "position": 85.0,
+          "watchRatio": 41.43
+        },
+        {
+          "position": 86.0,
+          "watchRatio": 42.21
+        },
+        {
+          "position": 87.0,
+          "watchRatio": 50.91
+        },
+        {
+          "position": 88.0,
+          "watchRatio": 43.52
+        },
+        {
+          "position": 89.0,
+          "watchRatio": 39.05
+        },
+        {
+          "position": 90.0,
+          "watchRatio": 37.42
+        },
+        {
+          "position": 91.0,
+          "watchRatio": 36.27
+        },
+        {
+          "position": 92.0,
+          "watchRatio": 34.44
+        },
+        {
+          "position": 93.0,
+          "watchRatio": 32.84
+        },
+        {
+          "position": 94.0,
+          "watchRatio": 32.1
+        },
+        {
+          "position": 95.0,
+          "watchRatio": 30.7
+        },
+        {
+          "position": 96.0,
+          "watchRatio": 29.8
+        },
+        {
+          "position": 97.0,
+          "watchRatio": 29.22
+        },
+        {
+          "position": 98.0,
+          "watchRatio": 30.26
+        },
+        {
+          "position": 99.0,
+          "watchRatio": 28.11
+        },
+        {
+          "position": 100.0,
+          "watchRatio": 25.32
+        }
       ]
     },
     "a1tQY33iFmM": {
@@ -7474,6 +8278,408 @@
           "subscribersGained": 0,
           "subscribersLost": 0
         }
+      ],
+      "retention": [
+        {
+          "position": 1.0,
+          "watchRatio": 95.58
+        },
+        {
+          "position": 2.0,
+          "watchRatio": 85.17
+        },
+        {
+          "position": 3.0,
+          "watchRatio": 81.62
+        },
+        {
+          "position": 4.0,
+          "watchRatio": 78.19
+        },
+        {
+          "position": 5.0,
+          "watchRatio": 75.35
+        },
+        {
+          "position": 6.0,
+          "watchRatio": 73.99
+        },
+        {
+          "position": 7.0,
+          "watchRatio": 72.74
+        },
+        {
+          "position": 8.0,
+          "watchRatio": 71.37
+        },
+        {
+          "position": 9.0,
+          "watchRatio": 70.17
+        },
+        {
+          "position": 10.0,
+          "watchRatio": 68.81
+        },
+        {
+          "position": 11.0,
+          "watchRatio": 65.32
+        },
+        {
+          "position": 12.0,
+          "watchRatio": 64.67
+        },
+        {
+          "position": 13.0,
+          "watchRatio": 63.09
+        },
+        {
+          "position": 14.0,
+          "watchRatio": 61.5
+        },
+        {
+          "position": 15.0,
+          "watchRatio": 59.71
+        },
+        {
+          "position": 16.0,
+          "watchRatio": 57.69
+        },
+        {
+          "position": 17.0,
+          "watchRatio": 56.71
+        },
+        {
+          "position": 18.0,
+          "watchRatio": 55.18
+        },
+        {
+          "position": 19.0,
+          "watchRatio": 53.76
+        },
+        {
+          "position": 20.0,
+          "watchRatio": 53.27
+        },
+        {
+          "position": 21.0,
+          "watchRatio": 52.29
+        },
+        {
+          "position": 22.0,
+          "watchRatio": 51.64
+        },
+        {
+          "position": 23.0,
+          "watchRatio": 50.93
+        },
+        {
+          "position": 24.0,
+          "watchRatio": 50.0
+        },
+        {
+          "position": 25.0,
+          "watchRatio": 48.75
+        },
+        {
+          "position": 26.0,
+          "watchRatio": 47.98
+        },
+        {
+          "position": 27.0,
+          "watchRatio": 47.55
+        },
+        {
+          "position": 28.0,
+          "watchRatio": 46.62
+        },
+        {
+          "position": 29.0,
+          "watchRatio": 45.91
+        },
+        {
+          "position": 30.0,
+          "watchRatio": 45.58
+        },
+        {
+          "position": 31.0,
+          "watchRatio": 43.84
+        },
+        {
+          "position": 32.0,
+          "watchRatio": 43.68
+        },
+        {
+          "position": 33.0,
+          "watchRatio": 43.13
+        },
+        {
+          "position": 34.0,
+          "watchRatio": 43.08
+        },
+        {
+          "position": 35.0,
+          "watchRatio": 42.75
+        },
+        {
+          "position": 36.0,
+          "watchRatio": 42.97
+        },
+        {
+          "position": 37.0,
+          "watchRatio": 42.69
+        },
+        {
+          "position": 38.0,
+          "watchRatio": 42.26
+        },
+        {
+          "position": 39.0,
+          "watchRatio": 41.88
+        },
+        {
+          "position": 40.0,
+          "watchRatio": 40.29
+        },
+        {
+          "position": 41.0,
+          "watchRatio": 39.15
+        },
+        {
+          "position": 42.0,
+          "watchRatio": 38.66
+        },
+        {
+          "position": 43.0,
+          "watchRatio": 38.44
+        },
+        {
+          "position": 44.0,
+          "watchRatio": 37.57
+        },
+        {
+          "position": 45.0,
+          "watchRatio": 37.24
+        },
+        {
+          "position": 46.0,
+          "watchRatio": 36.86
+        },
+        {
+          "position": 47.0,
+          "watchRatio": 36.42
+        },
+        {
+          "position": 48.0,
+          "watchRatio": 36.37
+        },
+        {
+          "position": 49.0,
+          "watchRatio": 36.04
+        },
+        {
+          "position": 50.0,
+          "watchRatio": 35.66
+        },
+        {
+          "position": 51.0,
+          "watchRatio": 35.39
+        },
+        {
+          "position": 52.0,
+          "watchRatio": 34.9
+        },
+        {
+          "position": 53.0,
+          "watchRatio": 34.95
+        },
+        {
+          "position": 54.0,
+          "watchRatio": 34.68
+        },
+        {
+          "position": 55.0,
+          "watchRatio": 34.51
+        },
+        {
+          "position": 56.0,
+          "watchRatio": 33.97
+        },
+        {
+          "position": 57.0,
+          "watchRatio": 33.59
+        },
+        {
+          "position": 58.0,
+          "watchRatio": 33.37
+        },
+        {
+          "position": 59.0,
+          "watchRatio": 33.04
+        },
+        {
+          "position": 60.0,
+          "watchRatio": 33.04
+        },
+        {
+          "position": 61.0,
+          "watchRatio": 32.88
+        },
+        {
+          "position": 62.0,
+          "watchRatio": 32.39
+        },
+        {
+          "position": 63.0,
+          "watchRatio": 32.28
+        },
+        {
+          "position": 64.0,
+          "watchRatio": 32.06
+        },
+        {
+          "position": 65.0,
+          "watchRatio": 31.57
+        },
+        {
+          "position": 66.0,
+          "watchRatio": 31.35
+        },
+        {
+          "position": 67.0,
+          "watchRatio": 30.81
+        },
+        {
+          "position": 68.0,
+          "watchRatio": 30.26
+        },
+        {
+          "position": 69.0,
+          "watchRatio": 29.5
+        },
+        {
+          "position": 70.0,
+          "watchRatio": 29.5
+        },
+        {
+          "position": 71.0,
+          "watchRatio": 29.06
+        },
+        {
+          "position": 72.0,
+          "watchRatio": 28.95
+        },
+        {
+          "position": 73.0,
+          "watchRatio": 28.68
+        },
+        {
+          "position": 74.0,
+          "watchRatio": 28.57
+        },
+        {
+          "position": 75.0,
+          "watchRatio": 28.63
+        },
+        {
+          "position": 76.0,
+          "watchRatio": 28.35
+        },
+        {
+          "position": 77.0,
+          "watchRatio": 28.03
+        },
+        {
+          "position": 78.0,
+          "watchRatio": 27.64
+        },
+        {
+          "position": 79.0,
+          "watchRatio": 27.7
+        },
+        {
+          "position": 80.0,
+          "watchRatio": 27.54
+        },
+        {
+          "position": 81.0,
+          "watchRatio": 27.32
+        },
+        {
+          "position": 82.0,
+          "watchRatio": 26.99
+        },
+        {
+          "position": 83.0,
+          "watchRatio": 26.83
+        },
+        {
+          "position": 84.0,
+          "watchRatio": 26.55
+        },
+        {
+          "position": 85.0,
+          "watchRatio": 26.44
+        },
+        {
+          "position": 86.0,
+          "watchRatio": 26.28
+        },
+        {
+          "position": 87.0,
+          "watchRatio": 26.28
+        },
+        {
+          "position": 88.0,
+          "watchRatio": 26.17
+        },
+        {
+          "position": 89.0,
+          "watchRatio": 25.9
+        },
+        {
+          "position": 90.0,
+          "watchRatio": 26.06
+        },
+        {
+          "position": 91.0,
+          "watchRatio": 25.79
+        },
+        {
+          "position": 92.0,
+          "watchRatio": 25.14
+        },
+        {
+          "position": 93.0,
+          "watchRatio": 25.35
+        },
+        {
+          "position": 94.0,
+          "watchRatio": 24.75
+        },
+        {
+          "position": 95.0,
+          "watchRatio": 24.92
+        },
+        {
+          "position": 96.0,
+          "watchRatio": 24.65
+        },
+        {
+          "position": 97.0,
+          "watchRatio": 24.43
+        },
+        {
+          "position": 98.0,
+          "watchRatio": 23.99
+        },
+        {
+          "position": 99.0,
+          "watchRatio": 23.5
+        },
+        {
+          "position": 100.0,
+          "watchRatio": 22.96
+        }
       ]
     },
     "2b_XBGYqJVU": {
@@ -8676,6 +9882,408 @@
           "subscribersGained": 0,
           "subscribersLost": 0
         }
+      ],
+      "retention": [
+        {
+          "position": 1.0,
+          "watchRatio": 87.07
+        },
+        {
+          "position": 2.0,
+          "watchRatio": 54.42
+        },
+        {
+          "position": 3.0,
+          "watchRatio": 49.21
+        },
+        {
+          "position": 4.0,
+          "watchRatio": 43.31
+        },
+        {
+          "position": 5.0,
+          "watchRatio": 40.36
+        },
+        {
+          "position": 6.0,
+          "watchRatio": 39.68
+        },
+        {
+          "position": 7.0,
+          "watchRatio": 38.32
+        },
+        {
+          "position": 8.0,
+          "watchRatio": 38.32
+        },
+        {
+          "position": 9.0,
+          "watchRatio": 39.0
+        },
+        {
+          "position": 10.0,
+          "watchRatio": 36.96
+        },
+        {
+          "position": 11.0,
+          "watchRatio": 34.92
+        },
+        {
+          "position": 12.0,
+          "watchRatio": 37.87
+        },
+        {
+          "position": 13.0,
+          "watchRatio": 34.92
+        },
+        {
+          "position": 14.0,
+          "watchRatio": 35.15
+        },
+        {
+          "position": 15.0,
+          "watchRatio": 34.92
+        },
+        {
+          "position": 16.0,
+          "watchRatio": 32.43
+        },
+        {
+          "position": 17.0,
+          "watchRatio": 32.2
+        },
+        {
+          "position": 18.0,
+          "watchRatio": 30.61
+        },
+        {
+          "position": 19.0,
+          "watchRatio": 30.16
+        },
+        {
+          "position": 20.0,
+          "watchRatio": 30.84
+        },
+        {
+          "position": 21.0,
+          "watchRatio": 29.93
+        },
+        {
+          "position": 22.0,
+          "watchRatio": 30.61
+        },
+        {
+          "position": 23.0,
+          "watchRatio": 30.61
+        },
+        {
+          "position": 24.0,
+          "watchRatio": 26.3
+        },
+        {
+          "position": 25.0,
+          "watchRatio": 25.85
+        },
+        {
+          "position": 26.0,
+          "watchRatio": 25.17
+        },
+        {
+          "position": 27.0,
+          "watchRatio": 24.04
+        },
+        {
+          "position": 28.0,
+          "watchRatio": 24.04
+        },
+        {
+          "position": 29.0,
+          "watchRatio": 23.13
+        },
+        {
+          "position": 30.0,
+          "watchRatio": 23.13
+        },
+        {
+          "position": 31.0,
+          "watchRatio": 23.36
+        },
+        {
+          "position": 32.0,
+          "watchRatio": 23.58
+        },
+        {
+          "position": 33.0,
+          "watchRatio": 22.9
+        },
+        {
+          "position": 34.0,
+          "watchRatio": 21.54
+        },
+        {
+          "position": 35.0,
+          "watchRatio": 22.0
+        },
+        {
+          "position": 36.0,
+          "watchRatio": 21.09
+        },
+        {
+          "position": 37.0,
+          "watchRatio": 26.3
+        },
+        {
+          "position": 38.0,
+          "watchRatio": 26.53
+        },
+        {
+          "position": 39.0,
+          "watchRatio": 24.94
+        },
+        {
+          "position": 40.0,
+          "watchRatio": 24.04
+        },
+        {
+          "position": 41.0,
+          "watchRatio": 24.04
+        },
+        {
+          "position": 42.0,
+          "watchRatio": 23.58
+        },
+        {
+          "position": 43.0,
+          "watchRatio": 22.9
+        },
+        {
+          "position": 44.0,
+          "watchRatio": 22.22
+        },
+        {
+          "position": 45.0,
+          "watchRatio": 22.68
+        },
+        {
+          "position": 46.0,
+          "watchRatio": 21.54
+        },
+        {
+          "position": 47.0,
+          "watchRatio": 21.09
+        },
+        {
+          "position": 48.0,
+          "watchRatio": 21.54
+        },
+        {
+          "position": 49.0,
+          "watchRatio": 20.18
+        },
+        {
+          "position": 50.0,
+          "watchRatio": 18.82
+        },
+        {
+          "position": 51.0,
+          "watchRatio": 18.37
+        },
+        {
+          "position": 52.0,
+          "watchRatio": 19.95
+        },
+        {
+          "position": 53.0,
+          "watchRatio": 18.59
+        },
+        {
+          "position": 54.0,
+          "watchRatio": 17.69
+        },
+        {
+          "position": 55.0,
+          "watchRatio": 18.59
+        },
+        {
+          "position": 56.0,
+          "watchRatio": 17.91
+        },
+        {
+          "position": 57.0,
+          "watchRatio": 16.33
+        },
+        {
+          "position": 58.0,
+          "watchRatio": 16.55
+        },
+        {
+          "position": 59.0,
+          "watchRatio": 15.42
+        },
+        {
+          "position": 60.0,
+          "watchRatio": 15.87
+        },
+        {
+          "position": 61.0,
+          "watchRatio": 16.1
+        },
+        {
+          "position": 62.0,
+          "watchRatio": 16.1
+        },
+        {
+          "position": 63.0,
+          "watchRatio": 18.37
+        },
+        {
+          "position": 64.0,
+          "watchRatio": 17.23
+        },
+        {
+          "position": 65.0,
+          "watchRatio": 16.78
+        },
+        {
+          "position": 66.0,
+          "watchRatio": 15.19
+        },
+        {
+          "position": 67.0,
+          "watchRatio": 15.19
+        },
+        {
+          "position": 68.0,
+          "watchRatio": 15.42
+        },
+        {
+          "position": 69.0,
+          "watchRatio": 15.42
+        },
+        {
+          "position": 70.0,
+          "watchRatio": 14.97
+        },
+        {
+          "position": 71.0,
+          "watchRatio": 15.19
+        },
+        {
+          "position": 72.0,
+          "watchRatio": 14.29
+        },
+        {
+          "position": 73.0,
+          "watchRatio": 14.74
+        },
+        {
+          "position": 74.0,
+          "watchRatio": 14.97
+        },
+        {
+          "position": 75.0,
+          "watchRatio": 14.51
+        },
+        {
+          "position": 76.0,
+          "watchRatio": 14.97
+        },
+        {
+          "position": 77.0,
+          "watchRatio": 15.65
+        },
+        {
+          "position": 78.0,
+          "watchRatio": 14.74
+        },
+        {
+          "position": 79.0,
+          "watchRatio": 14.51
+        },
+        {
+          "position": 80.0,
+          "watchRatio": 14.51
+        },
+        {
+          "position": 81.0,
+          "watchRatio": 14.29
+        },
+        {
+          "position": 82.0,
+          "watchRatio": 14.51
+        },
+        {
+          "position": 83.0,
+          "watchRatio": 13.83
+        },
+        {
+          "position": 84.0,
+          "watchRatio": 13.15
+        },
+        {
+          "position": 85.0,
+          "watchRatio": 13.15
+        },
+        {
+          "position": 86.0,
+          "watchRatio": 12.93
+        },
+        {
+          "position": 87.0,
+          "watchRatio": 12.47
+        },
+        {
+          "position": 88.0,
+          "watchRatio": 12.7
+        },
+        {
+          "position": 89.0,
+          "watchRatio": 12.24
+        },
+        {
+          "position": 90.0,
+          "watchRatio": 12.93
+        },
+        {
+          "position": 91.0,
+          "watchRatio": 12.7
+        },
+        {
+          "position": 92.0,
+          "watchRatio": 12.24
+        },
+        {
+          "position": 93.0,
+          "watchRatio": 12.02
+        },
+        {
+          "position": 94.0,
+          "watchRatio": 12.24
+        },
+        {
+          "position": 95.0,
+          "watchRatio": 12.47
+        },
+        {
+          "position": 96.0,
+          "watchRatio": 13.61
+        },
+        {
+          "position": 97.0,
+          "watchRatio": 13.38
+        },
+        {
+          "position": 98.0,
+          "watchRatio": 13.15
+        },
+        {
+          "position": 99.0,
+          "watchRatio": 13.38
+        },
+        {
+          "position": 100.0,
+          "watchRatio": 12.24
+        }
       ]
     },
     "LMDZec3o3-g": {
@@ -9631,6 +11239,408 @@
           "subscribersGained": 0,
           "subscribersLost": 0
         }
+      ],
+      "retention": [
+        {
+          "position": 1.0,
+          "watchRatio": 96.44
+        },
+        {
+          "position": 2.0,
+          "watchRatio": 89.19
+        },
+        {
+          "position": 3.0,
+          "watchRatio": 85.63
+        },
+        {
+          "position": 4.0,
+          "watchRatio": 81.04
+        },
+        {
+          "position": 5.0,
+          "watchRatio": 76.44
+        },
+        {
+          "position": 6.0,
+          "watchRatio": 73.78
+        },
+        {
+          "position": 7.0,
+          "watchRatio": 71.41
+        },
+        {
+          "position": 8.0,
+          "watchRatio": 70.22
+        },
+        {
+          "position": 9.0,
+          "watchRatio": 68.74
+        },
+        {
+          "position": 10.0,
+          "watchRatio": 67.11
+        },
+        {
+          "position": 11.0,
+          "watchRatio": 65.19
+        },
+        {
+          "position": 12.0,
+          "watchRatio": 63.56
+        },
+        {
+          "position": 13.0,
+          "watchRatio": 62.96
+        },
+        {
+          "position": 14.0,
+          "watchRatio": 62.81
+        },
+        {
+          "position": 15.0,
+          "watchRatio": 61.63
+        },
+        {
+          "position": 16.0,
+          "watchRatio": 60.44
+        },
+        {
+          "position": 17.0,
+          "watchRatio": 58.81
+        },
+        {
+          "position": 18.0,
+          "watchRatio": 57.93
+        },
+        {
+          "position": 19.0,
+          "watchRatio": 56.74
+        },
+        {
+          "position": 20.0,
+          "watchRatio": 56.89
+        },
+        {
+          "position": 21.0,
+          "watchRatio": 55.85
+        },
+        {
+          "position": 22.0,
+          "watchRatio": 55.26
+        },
+        {
+          "position": 23.0,
+          "watchRatio": 54.52
+        },
+        {
+          "position": 24.0,
+          "watchRatio": 53.19
+        },
+        {
+          "position": 25.0,
+          "watchRatio": 52.74
+        },
+        {
+          "position": 26.0,
+          "watchRatio": 52.89
+        },
+        {
+          "position": 27.0,
+          "watchRatio": 53.04
+        },
+        {
+          "position": 28.0,
+          "watchRatio": 51.7
+        },
+        {
+          "position": 29.0,
+          "watchRatio": 51.11
+        },
+        {
+          "position": 30.0,
+          "watchRatio": 51.56
+        },
+        {
+          "position": 31.0,
+          "watchRatio": 51.41
+        },
+        {
+          "position": 32.0,
+          "watchRatio": 51.11
+        },
+        {
+          "position": 33.0,
+          "watchRatio": 50.67
+        },
+        {
+          "position": 34.0,
+          "watchRatio": 49.78
+        },
+        {
+          "position": 35.0,
+          "watchRatio": 50.37
+        },
+        {
+          "position": 36.0,
+          "watchRatio": 50.37
+        },
+        {
+          "position": 37.0,
+          "watchRatio": 50.67
+        },
+        {
+          "position": 38.0,
+          "watchRatio": 49.48
+        },
+        {
+          "position": 39.0,
+          "watchRatio": 50.07
+        },
+        {
+          "position": 40.0,
+          "watchRatio": 49.33
+        },
+        {
+          "position": 41.0,
+          "watchRatio": 48.3
+        },
+        {
+          "position": 42.0,
+          "watchRatio": 47.41
+        },
+        {
+          "position": 43.0,
+          "watchRatio": 46.52
+        },
+        {
+          "position": 44.0,
+          "watchRatio": 46.07
+        },
+        {
+          "position": 45.0,
+          "watchRatio": 45.33
+        },
+        {
+          "position": 46.0,
+          "watchRatio": 44.44
+        },
+        {
+          "position": 47.0,
+          "watchRatio": 44.44
+        },
+        {
+          "position": 48.0,
+          "watchRatio": 43.85
+        },
+        {
+          "position": 49.0,
+          "watchRatio": 43.7
+        },
+        {
+          "position": 50.0,
+          "watchRatio": 43.7
+        },
+        {
+          "position": 51.0,
+          "watchRatio": 44.15
+        },
+        {
+          "position": 52.0,
+          "watchRatio": 43.85
+        },
+        {
+          "position": 53.0,
+          "watchRatio": 43.26
+        },
+        {
+          "position": 54.0,
+          "watchRatio": 42.96
+        },
+        {
+          "position": 55.0,
+          "watchRatio": 42.52
+        },
+        {
+          "position": 56.0,
+          "watchRatio": 42.67
+        },
+        {
+          "position": 57.0,
+          "watchRatio": 41.78
+        },
+        {
+          "position": 58.0,
+          "watchRatio": 41.48
+        },
+        {
+          "position": 59.0,
+          "watchRatio": 41.63
+        },
+        {
+          "position": 60.0,
+          "watchRatio": 41.19
+        },
+        {
+          "position": 61.0,
+          "watchRatio": 40.59
+        },
+        {
+          "position": 62.0,
+          "watchRatio": 40.89
+        },
+        {
+          "position": 63.0,
+          "watchRatio": 40.74
+        },
+        {
+          "position": 64.0,
+          "watchRatio": 40.89
+        },
+        {
+          "position": 65.0,
+          "watchRatio": 40.59
+        },
+        {
+          "position": 66.0,
+          "watchRatio": 40.74
+        },
+        {
+          "position": 67.0,
+          "watchRatio": 39.41
+        },
+        {
+          "position": 68.0,
+          "watchRatio": 39.11
+        },
+        {
+          "position": 69.0,
+          "watchRatio": 38.96
+        },
+        {
+          "position": 70.0,
+          "watchRatio": 38.67
+        },
+        {
+          "position": 71.0,
+          "watchRatio": 38.96
+        },
+        {
+          "position": 72.0,
+          "watchRatio": 38.81
+        },
+        {
+          "position": 73.0,
+          "watchRatio": 38.07
+        },
+        {
+          "position": 74.0,
+          "watchRatio": 37.33
+        },
+        {
+          "position": 75.0,
+          "watchRatio": 37.04
+        },
+        {
+          "position": 76.0,
+          "watchRatio": 37.19
+        },
+        {
+          "position": 77.0,
+          "watchRatio": 36.44
+        },
+        {
+          "position": 78.0,
+          "watchRatio": 36.15
+        },
+        {
+          "position": 79.0,
+          "watchRatio": 35.7
+        },
+        {
+          "position": 80.0,
+          "watchRatio": 35.26
+        },
+        {
+          "position": 81.0,
+          "watchRatio": 35.26
+        },
+        {
+          "position": 82.0,
+          "watchRatio": 34.96
+        },
+        {
+          "position": 83.0,
+          "watchRatio": 35.11
+        },
+        {
+          "position": 84.0,
+          "watchRatio": 34.96
+        },
+        {
+          "position": 85.0,
+          "watchRatio": 34.22
+        },
+        {
+          "position": 86.0,
+          "watchRatio": 34.22
+        },
+        {
+          "position": 87.0,
+          "watchRatio": 33.63
+        },
+        {
+          "position": 88.0,
+          "watchRatio": 33.48
+        },
+        {
+          "position": 89.0,
+          "watchRatio": 33.63
+        },
+        {
+          "position": 90.0,
+          "watchRatio": 33.78
+        },
+        {
+          "position": 91.0,
+          "watchRatio": 33.93
+        },
+        {
+          "position": 92.0,
+          "watchRatio": 33.48
+        },
+        {
+          "position": 93.0,
+          "watchRatio": 32.89
+        },
+        {
+          "position": 94.0,
+          "watchRatio": 32.44
+        },
+        {
+          "position": 95.0,
+          "watchRatio": 32.15
+        },
+        {
+          "position": 96.0,
+          "watchRatio": 32.0
+        },
+        {
+          "position": 97.0,
+          "watchRatio": 31.41
+        },
+        {
+          "position": 98.0,
+          "watchRatio": 30.52
+        },
+        {
+          "position": 99.0,
+          "watchRatio": 29.04
+        },
+        {
+          "position": 100.0,
+          "watchRatio": 27.11
+        }
       ]
     },
     "lcTtcqjTLlI": {
@@ -10417,6 +12427,408 @@
           "subscribersGained": 0,
           "subscribersLost": 0
         }
+      ],
+      "retention": [
+        {
+          "position": 1.0,
+          "watchRatio": 94.95
+        },
+        {
+          "position": 2.0,
+          "watchRatio": 82.99
+        },
+        {
+          "position": 3.0,
+          "watchRatio": 78.47
+        },
+        {
+          "position": 4.0,
+          "watchRatio": 73.34
+        },
+        {
+          "position": 5.0,
+          "watchRatio": 69.83
+        },
+        {
+          "position": 6.0,
+          "watchRatio": 67.33
+        },
+        {
+          "position": 7.0,
+          "watchRatio": 65.73
+        },
+        {
+          "position": 8.0,
+          "watchRatio": 63.79
+        },
+        {
+          "position": 9.0,
+          "watchRatio": 63.68
+        },
+        {
+          "position": 10.0,
+          "watchRatio": 62.45
+        },
+        {
+          "position": 11.0,
+          "watchRatio": 61.72
+        },
+        {
+          "position": 12.0,
+          "watchRatio": 60.01
+        },
+        {
+          "position": 13.0,
+          "watchRatio": 59.02
+        },
+        {
+          "position": 14.0,
+          "watchRatio": 58.74
+        },
+        {
+          "position": 15.0,
+          "watchRatio": 58.41
+        },
+        {
+          "position": 16.0,
+          "watchRatio": 57.65
+        },
+        {
+          "position": 17.0,
+          "watchRatio": 57.68
+        },
+        {
+          "position": 18.0,
+          "watchRatio": 57.23
+        },
+        {
+          "position": 19.0,
+          "watchRatio": 56.86
+        },
+        {
+          "position": 20.0,
+          "watchRatio": 56.13
+        },
+        {
+          "position": 21.0,
+          "watchRatio": 55.09
+        },
+        {
+          "position": 22.0,
+          "watchRatio": 54.7
+        },
+        {
+          "position": 23.0,
+          "watchRatio": 53.97
+        },
+        {
+          "position": 24.0,
+          "watchRatio": 53.69
+        },
+        {
+          "position": 25.0,
+          "watchRatio": 52.68
+        },
+        {
+          "position": 26.0,
+          "watchRatio": 52.37
+        },
+        {
+          "position": 27.0,
+          "watchRatio": 51.84
+        },
+        {
+          "position": 28.0,
+          "watchRatio": 51.14
+        },
+        {
+          "position": 29.0,
+          "watchRatio": 50.63
+        },
+        {
+          "position": 30.0,
+          "watchRatio": 50.58
+        },
+        {
+          "position": 31.0,
+          "watchRatio": 50.94
+        },
+        {
+          "position": 32.0,
+          "watchRatio": 50.8
+        },
+        {
+          "position": 33.0,
+          "watchRatio": 50.94
+        },
+        {
+          "position": 34.0,
+          "watchRatio": 49.37
+        },
+        {
+          "position": 35.0,
+          "watchRatio": 48.55
+        },
+        {
+          "position": 36.0,
+          "watchRatio": 47.88
+        },
+        {
+          "position": 37.0,
+          "watchRatio": 48.11
+        },
+        {
+          "position": 38.0,
+          "watchRatio": 47.91
+        },
+        {
+          "position": 39.0,
+          "watchRatio": 48.86
+        },
+        {
+          "position": 40.0,
+          "watchRatio": 49.56
+        },
+        {
+          "position": 41.0,
+          "watchRatio": 49.09
+        },
+        {
+          "position": 42.0,
+          "watchRatio": 49.06
+        },
+        {
+          "position": 43.0,
+          "watchRatio": 48.86
+        },
+        {
+          "position": 44.0,
+          "watchRatio": 48.53
+        },
+        {
+          "position": 45.0,
+          "watchRatio": 48.41
+        },
+        {
+          "position": 46.0,
+          "watchRatio": 48.61
+        },
+        {
+          "position": 47.0,
+          "watchRatio": 48.41
+        },
+        {
+          "position": 48.0,
+          "watchRatio": 48.05
+        },
+        {
+          "position": 49.0,
+          "watchRatio": 48.08
+        },
+        {
+          "position": 50.0,
+          "watchRatio": 47.26
+        },
+        {
+          "position": 51.0,
+          "watchRatio": 47.26
+        },
+        {
+          "position": 52.0,
+          "watchRatio": 46.87
+        },
+        {
+          "position": 53.0,
+          "watchRatio": 46.53
+        },
+        {
+          "position": 54.0,
+          "watchRatio": 46.31
+        },
+        {
+          "position": 55.0,
+          "watchRatio": 46.11
+        },
+        {
+          "position": 56.0,
+          "watchRatio": 45.1
+        },
+        {
+          "position": 57.0,
+          "watchRatio": 44.74
+        },
+        {
+          "position": 58.0,
+          "watchRatio": 44.26
+        },
+        {
+          "position": 59.0,
+          "watchRatio": 43.81
+        },
+        {
+          "position": 60.0,
+          "watchRatio": 43.84
+        },
+        {
+          "position": 61.0,
+          "watchRatio": 43.61
+        },
+        {
+          "position": 62.0,
+          "watchRatio": 43.42
+        },
+        {
+          "position": 63.0,
+          "watchRatio": 43.22
+        },
+        {
+          "position": 64.0,
+          "watchRatio": 43.05
+        },
+        {
+          "position": 65.0,
+          "watchRatio": 42.91
+        },
+        {
+          "position": 66.0,
+          "watchRatio": 42.72
+        },
+        {
+          "position": 67.0,
+          "watchRatio": 42.69
+        },
+        {
+          "position": 68.0,
+          "watchRatio": 42.58
+        },
+        {
+          "position": 69.0,
+          "watchRatio": 42.63
+        },
+        {
+          "position": 70.0,
+          "watchRatio": 42.07
+        },
+        {
+          "position": 71.0,
+          "watchRatio": 41.93
+        },
+        {
+          "position": 72.0,
+          "watchRatio": 41.71
+        },
+        {
+          "position": 73.0,
+          "watchRatio": 41.48
+        },
+        {
+          "position": 74.0,
+          "watchRatio": 41.76
+        },
+        {
+          "position": 75.0,
+          "watchRatio": 41.54
+        },
+        {
+          "position": 76.0,
+          "watchRatio": 41.59
+        },
+        {
+          "position": 77.0,
+          "watchRatio": 41.71
+        },
+        {
+          "position": 78.0,
+          "watchRatio": 41.54
+        },
+        {
+          "position": 79.0,
+          "watchRatio": 41.34
+        },
+        {
+          "position": 80.0,
+          "watchRatio": 41.29
+        },
+        {
+          "position": 81.0,
+          "watchRatio": 41.65
+        },
+        {
+          "position": 82.0,
+          "watchRatio": 42.24
+        },
+        {
+          "position": 83.0,
+          "watchRatio": 42.52
+        },
+        {
+          "position": 84.0,
+          "watchRatio": 42.07
+        },
+        {
+          "position": 85.0,
+          "watchRatio": 40.86
+        },
+        {
+          "position": 86.0,
+          "watchRatio": 39.85
+        },
+        {
+          "position": 87.0,
+          "watchRatio": 38.9
+        },
+        {
+          "position": 88.0,
+          "watchRatio": 38.2
+        },
+        {
+          "position": 89.0,
+          "watchRatio": 37.64
+        },
+        {
+          "position": 90.0,
+          "watchRatio": 36.88
+        },
+        {
+          "position": 91.0,
+          "watchRatio": 36.51
+        },
+        {
+          "position": 92.0,
+          "watchRatio": 36.18
+        },
+        {
+          "position": 93.0,
+          "watchRatio": 35.5
+        },
+        {
+          "position": 94.0,
+          "watchRatio": 34.35
+        },
+        {
+          "position": 95.0,
+          "watchRatio": 33.88
+        },
+        {
+          "position": 96.0,
+          "watchRatio": 33.23
+        },
+        {
+          "position": 97.0,
+          "watchRatio": 32.44
+        },
+        {
+          "position": 98.0,
+          "watchRatio": 31.18
+        },
+        {
+          "position": 99.0,
+          "watchRatio": 29.86
+        },
+        {
+          "position": 100.0,
+          "watchRatio": 28.49
+        }
       ]
     },
     "DdvR0LbYUjQ": {
@@ -11177,6 +13589,408 @@
           "subscribersGained": 0,
           "subscribersLost": 0
         }
+      ],
+      "retention": [
+        {
+          "position": 1.0,
+          "watchRatio": 89.34
+        },
+        {
+          "position": 2.0,
+          "watchRatio": 72.63
+        },
+        {
+          "position": 3.0,
+          "watchRatio": 65.9
+        },
+        {
+          "position": 4.0,
+          "watchRatio": 62.05
+        },
+        {
+          "position": 5.0,
+          "watchRatio": 60.3
+        },
+        {
+          "position": 6.0,
+          "watchRatio": 58.19
+        },
+        {
+          "position": 7.0,
+          "watchRatio": 56.87
+        },
+        {
+          "position": 8.0,
+          "watchRatio": 54.45
+        },
+        {
+          "position": 9.0,
+          "watchRatio": 53.42
+        },
+        {
+          "position": 10.0,
+          "watchRatio": 52.83
+        },
+        {
+          "position": 11.0,
+          "watchRatio": 52.18
+        },
+        {
+          "position": 12.0,
+          "watchRatio": 51.46
+        },
+        {
+          "position": 13.0,
+          "watchRatio": 50.81
+        },
+        {
+          "position": 14.0,
+          "watchRatio": 49.69
+        },
+        {
+          "position": 15.0,
+          "watchRatio": 48.25
+        },
+        {
+          "position": 16.0,
+          "watchRatio": 47.84
+        },
+        {
+          "position": 17.0,
+          "watchRatio": 46.77
+        },
+        {
+          "position": 18.0,
+          "watchRatio": 45.81
+        },
+        {
+          "position": 19.0,
+          "watchRatio": 45.04
+        },
+        {
+          "position": 20.0,
+          "watchRatio": 44.56
+        },
+        {
+          "position": 21.0,
+          "watchRatio": 44.13
+        },
+        {
+          "position": 22.0,
+          "watchRatio": 43.58
+        },
+        {
+          "position": 23.0,
+          "watchRatio": 43.39
+        },
+        {
+          "position": 24.0,
+          "watchRatio": 43.73
+        },
+        {
+          "position": 25.0,
+          "watchRatio": 43.18
+        },
+        {
+          "position": 26.0,
+          "watchRatio": 42.5
+        },
+        {
+          "position": 27.0,
+          "watchRatio": 41.95
+        },
+        {
+          "position": 28.0,
+          "watchRatio": 40.9
+        },
+        {
+          "position": 29.0,
+          "watchRatio": 41.26
+        },
+        {
+          "position": 30.0,
+          "watchRatio": 40.59
+        },
+        {
+          "position": 31.0,
+          "watchRatio": 40.37
+        },
+        {
+          "position": 32.0,
+          "watchRatio": 40.06
+        },
+        {
+          "position": 33.0,
+          "watchRatio": 39.27
+        },
+        {
+          "position": 34.0,
+          "watchRatio": 38.96
+        },
+        {
+          "position": 35.0,
+          "watchRatio": 38.86
+        },
+        {
+          "position": 36.0,
+          "watchRatio": 38.17
+        },
+        {
+          "position": 37.0,
+          "watchRatio": 37.76
+        },
+        {
+          "position": 38.0,
+          "watchRatio": 37.28
+        },
+        {
+          "position": 39.0,
+          "watchRatio": 37.0
+        },
+        {
+          "position": 40.0,
+          "watchRatio": 36.83
+        },
+        {
+          "position": 41.0,
+          "watchRatio": 37.02
+        },
+        {
+          "position": 42.0,
+          "watchRatio": 37.14
+        },
+        {
+          "position": 43.0,
+          "watchRatio": 38.31
+        },
+        {
+          "position": 44.0,
+          "watchRatio": 40.85
+        },
+        {
+          "position": 45.0,
+          "watchRatio": 43.25
+        },
+        {
+          "position": 46.0,
+          "watchRatio": 43.27
+        },
+        {
+          "position": 47.0,
+          "watchRatio": 40.88
+        },
+        {
+          "position": 48.0,
+          "watchRatio": 39.8
+        },
+        {
+          "position": 49.0,
+          "watchRatio": 39.39
+        },
+        {
+          "position": 50.0,
+          "watchRatio": 38.24
+        },
+        {
+          "position": 51.0,
+          "watchRatio": 36.81
+        },
+        {
+          "position": 52.0,
+          "watchRatio": 36.14
+        },
+        {
+          "position": 53.0,
+          "watchRatio": 35.75
+        },
+        {
+          "position": 54.0,
+          "watchRatio": 35.08
+        },
+        {
+          "position": 55.0,
+          "watchRatio": 34.51
+        },
+        {
+          "position": 56.0,
+          "watchRatio": 33.72
+        },
+        {
+          "position": 57.0,
+          "watchRatio": 33.55
+        },
+        {
+          "position": 58.0,
+          "watchRatio": 33.45
+        },
+        {
+          "position": 59.0,
+          "watchRatio": 34.75
+        },
+        {
+          "position": 60.0,
+          "watchRatio": 34.41
+        },
+        {
+          "position": 61.0,
+          "watchRatio": 33.0
+        },
+        {
+          "position": 62.0,
+          "watchRatio": 32.97
+        },
+        {
+          "position": 63.0,
+          "watchRatio": 32.73
+        },
+        {
+          "position": 64.0,
+          "watchRatio": 31.87
+        },
+        {
+          "position": 65.0,
+          "watchRatio": 31.35
+        },
+        {
+          "position": 66.0,
+          "watchRatio": 31.51
+        },
+        {
+          "position": 67.0,
+          "watchRatio": 30.99
+        },
+        {
+          "position": 68.0,
+          "watchRatio": 30.22
+        },
+        {
+          "position": 69.0,
+          "watchRatio": 30.34
+        },
+        {
+          "position": 70.0,
+          "watchRatio": 29.91
+        },
+        {
+          "position": 71.0,
+          "watchRatio": 30.96
+        },
+        {
+          "position": 72.0,
+          "watchRatio": 29.79
+        },
+        {
+          "position": 73.0,
+          "watchRatio": 29.79
+        },
+        {
+          "position": 74.0,
+          "watchRatio": 29.17
+        },
+        {
+          "position": 75.0,
+          "watchRatio": 28.62
+        },
+        {
+          "position": 76.0,
+          "watchRatio": 28.14
+        },
+        {
+          "position": 77.0,
+          "watchRatio": 27.61
+        },
+        {
+          "position": 78.0,
+          "watchRatio": 27.11
+        },
+        {
+          "position": 79.0,
+          "watchRatio": 26.94
+        },
+        {
+          "position": 80.0,
+          "watchRatio": 26.58
+        },
+        {
+          "position": 81.0,
+          "watchRatio": 26.27
+        },
+        {
+          "position": 82.0,
+          "watchRatio": 25.93
+        },
+        {
+          "position": 83.0,
+          "watchRatio": 25.53
+        },
+        {
+          "position": 84.0,
+          "watchRatio": 25.17
+        },
+        {
+          "position": 85.0,
+          "watchRatio": 24.88
+        },
+        {
+          "position": 86.0,
+          "watchRatio": 24.5
+        },
+        {
+          "position": 87.0,
+          "watchRatio": 24.23
+        },
+        {
+          "position": 88.0,
+          "watchRatio": 23.52
+        },
+        {
+          "position": 89.0,
+          "watchRatio": 23.47
+        },
+        {
+          "position": 90.0,
+          "watchRatio": 23.3
+        },
+        {
+          "position": 91.0,
+          "watchRatio": 22.73
+        },
+        {
+          "position": 92.0,
+          "watchRatio": 22.46
+        },
+        {
+          "position": 93.0,
+          "watchRatio": 22.32
+        },
+        {
+          "position": 94.0,
+          "watchRatio": 21.98
+        },
+        {
+          "position": 95.0,
+          "watchRatio": 22.2
+        },
+        {
+          "position": 96.0,
+          "watchRatio": 21.67
+        },
+        {
+          "position": 97.0,
+          "watchRatio": 21.34
+        },
+        {
+          "position": 98.0,
+          "watchRatio": 20.98
+        },
+        {
+          "position": 99.0,
+          "watchRatio": 20.91
+        },
+        {
+          "position": 100.0,
+          "watchRatio": 20.16
+        }
       ]
     },
     "JVNpkPsotMU": {
@@ -11872,6 +14686,408 @@
           "subscribersGained": 0,
           "subscribersLost": 0
         }
+      ],
+      "retention": [
+        {
+          "position": 1.0,
+          "watchRatio": 98.26
+        },
+        {
+          "position": 2.0,
+          "watchRatio": 88.31
+        },
+        {
+          "position": 3.0,
+          "watchRatio": 79.26
+        },
+        {
+          "position": 4.0,
+          "watchRatio": 75.36
+        },
+        {
+          "position": 5.0,
+          "watchRatio": 71.64
+        },
+        {
+          "position": 6.0,
+          "watchRatio": 68.94
+        },
+        {
+          "position": 7.0,
+          "watchRatio": 67.57
+        },
+        {
+          "position": 8.0,
+          "watchRatio": 66.37
+        },
+        {
+          "position": 9.0,
+          "watchRatio": 62.47
+        },
+        {
+          "position": 10.0,
+          "watchRatio": 59.35
+        },
+        {
+          "position": 11.0,
+          "watchRatio": 56.59
+        },
+        {
+          "position": 12.0,
+          "watchRatio": 57.25
+        },
+        {
+          "position": 13.0,
+          "watchRatio": 55.16
+        },
+        {
+          "position": 14.0,
+          "watchRatio": 52.52
+        },
+        {
+          "position": 15.0,
+          "watchRatio": 55.16
+        },
+        {
+          "position": 16.0,
+          "watchRatio": 56.77
+        },
+        {
+          "position": 17.0,
+          "watchRatio": 55.82
+        },
+        {
+          "position": 18.0,
+          "watchRatio": 52.82
+        },
+        {
+          "position": 19.0,
+          "watchRatio": 52.94
+        },
+        {
+          "position": 20.0,
+          "watchRatio": 53.12
+        },
+        {
+          "position": 21.0,
+          "watchRatio": 51.56
+        },
+        {
+          "position": 22.0,
+          "watchRatio": 50.78
+        },
+        {
+          "position": 23.0,
+          "watchRatio": 49.52
+        },
+        {
+          "position": 24.0,
+          "watchRatio": 50.0
+        },
+        {
+          "position": 25.0,
+          "watchRatio": 48.14
+        },
+        {
+          "position": 26.0,
+          "watchRatio": 48.26
+        },
+        {
+          "position": 27.0,
+          "watchRatio": 46.04
+        },
+        {
+          "position": 28.0,
+          "watchRatio": 48.56
+        },
+        {
+          "position": 29.0,
+          "watchRatio": 46.76
+        },
+        {
+          "position": 30.0,
+          "watchRatio": 47.18
+        },
+        {
+          "position": 31.0,
+          "watchRatio": 45.14
+        },
+        {
+          "position": 32.0,
+          "watchRatio": 44.78
+        },
+        {
+          "position": 33.0,
+          "watchRatio": 46.46
+        },
+        {
+          "position": 34.0,
+          "watchRatio": 46.82
+        },
+        {
+          "position": 35.0,
+          "watchRatio": 45.02
+        },
+        {
+          "position": 36.0,
+          "watchRatio": 44.54
+        },
+        {
+          "position": 37.0,
+          "watchRatio": 46.76
+        },
+        {
+          "position": 38.0,
+          "watchRatio": 45.2
+        },
+        {
+          "position": 39.0,
+          "watchRatio": 42.39
+        },
+        {
+          "position": 40.0,
+          "watchRatio": 43.41
+        },
+        {
+          "position": 41.0,
+          "watchRatio": 42.33
+        },
+        {
+          "position": 42.0,
+          "watchRatio": 45.68
+        },
+        {
+          "position": 43.0,
+          "watchRatio": 44.54
+        },
+        {
+          "position": 44.0,
+          "watchRatio": 42.69
+        },
+        {
+          "position": 45.0,
+          "watchRatio": 44.12
+        },
+        {
+          "position": 46.0,
+          "watchRatio": 42.93
+        },
+        {
+          "position": 47.0,
+          "watchRatio": 46.7
+        },
+        {
+          "position": 48.0,
+          "watchRatio": 44.9
+        },
+        {
+          "position": 49.0,
+          "watchRatio": 43.29
+        },
+        {
+          "position": 50.0,
+          "watchRatio": 43.65
+        },
+        {
+          "position": 51.0,
+          "watchRatio": 41.61
+        },
+        {
+          "position": 52.0,
+          "watchRatio": 45.62
+        },
+        {
+          "position": 53.0,
+          "watchRatio": 40.47
+        },
+        {
+          "position": 54.0,
+          "watchRatio": 41.97
+        },
+        {
+          "position": 55.0,
+          "watchRatio": 41.13
+        },
+        {
+          "position": 56.0,
+          "watchRatio": 43.94
+        },
+        {
+          "position": 57.0,
+          "watchRatio": 40.95
+        },
+        {
+          "position": 58.0,
+          "watchRatio": 42.33
+        },
+        {
+          "position": 59.0,
+          "watchRatio": 42.21
+        },
+        {
+          "position": 60.0,
+          "watchRatio": 46.76
+        },
+        {
+          "position": 61.0,
+          "watchRatio": 43.76
+        },
+        {
+          "position": 62.0,
+          "watchRatio": 44.48
+        },
+        {
+          "position": 63.0,
+          "watchRatio": 43.29
+        },
+        {
+          "position": 64.0,
+          "watchRatio": 48.14
+        },
+        {
+          "position": 65.0,
+          "watchRatio": 48.08
+        },
+        {
+          "position": 66.0,
+          "watchRatio": 46.16
+        },
+        {
+          "position": 67.0,
+          "watchRatio": 48.32
+        },
+        {
+          "position": 68.0,
+          "watchRatio": 47.9
+        },
+        {
+          "position": 69.0,
+          "watchRatio": 52.58
+        },
+        {
+          "position": 70.0,
+          "watchRatio": 52.34
+        },
+        {
+          "position": 71.0,
+          "watchRatio": 53.54
+        },
+        {
+          "position": 72.0,
+          "watchRatio": 52.76
+        },
+        {
+          "position": 73.0,
+          "watchRatio": 51.2
+        },
+        {
+          "position": 74.0,
+          "watchRatio": 52.04
+        },
+        {
+          "position": 75.0,
+          "watchRatio": 49.82
+        },
+        {
+          "position": 76.0,
+          "watchRatio": 49.28
+        },
+        {
+          "position": 77.0,
+          "watchRatio": 47.72
+        },
+        {
+          "position": 78.0,
+          "watchRatio": 47.48
+        },
+        {
+          "position": 79.0,
+          "watchRatio": 45.68
+        },
+        {
+          "position": 80.0,
+          "watchRatio": 46.58
+        },
+        {
+          "position": 81.0,
+          "watchRatio": 44.9
+        },
+        {
+          "position": 82.0,
+          "watchRatio": 43.41
+        },
+        {
+          "position": 83.0,
+          "watchRatio": 43.53
+        },
+        {
+          "position": 84.0,
+          "watchRatio": 42.33
+        },
+        {
+          "position": 85.0,
+          "watchRatio": 42.21
+        },
+        {
+          "position": 86.0,
+          "watchRatio": 41.25
+        },
+        {
+          "position": 87.0,
+          "watchRatio": 40.53
+        },
+        {
+          "position": 88.0,
+          "watchRatio": 38.85
+        },
+        {
+          "position": 89.0,
+          "watchRatio": 37.77
+        },
+        {
+          "position": 90.0,
+          "watchRatio": 37.23
+        },
+        {
+          "position": 91.0,
+          "watchRatio": 37.89
+        },
+        {
+          "position": 92.0,
+          "watchRatio": 36.69
+        },
+        {
+          "position": 93.0,
+          "watchRatio": 36.57
+        },
+        {
+          "position": 94.0,
+          "watchRatio": 36.21
+        },
+        {
+          "position": 95.0,
+          "watchRatio": 35.49
+        },
+        {
+          "position": 96.0,
+          "watchRatio": 34.53
+        },
+        {
+          "position": 97.0,
+          "watchRatio": 33.75
+        },
+        {
+          "position": 98.0,
+          "watchRatio": 34.05
+        },
+        {
+          "position": 99.0,
+          "watchRatio": 32.55
+        },
+        {
+          "position": 100.0,
+          "watchRatio": 30.34
+        }
       ]
     },
     "3AQw6eUmK58": {
@@ -12476,6 +15692,408 @@
           "subscribersGained": 0,
           "subscribersLost": 0
         }
+      ],
+      "retention": [
+        {
+          "position": 1.0,
+          "watchRatio": 95.15
+        },
+        {
+          "position": 2.0,
+          "watchRatio": 82.14
+        },
+        {
+          "position": 3.0,
+          "watchRatio": 78.8
+        },
+        {
+          "position": 4.0,
+          "watchRatio": 74.07
+        },
+        {
+          "position": 5.0,
+          "watchRatio": 70.96
+        },
+        {
+          "position": 6.0,
+          "watchRatio": 68.09
+        },
+        {
+          "position": 7.0,
+          "watchRatio": 66.27
+        },
+        {
+          "position": 8.0,
+          "watchRatio": 65.45
+        },
+        {
+          "position": 9.0,
+          "watchRatio": 63.9
+        },
+        {
+          "position": 10.0,
+          "watchRatio": 62.31
+        },
+        {
+          "position": 11.0,
+          "watchRatio": 61.41
+        },
+        {
+          "position": 12.0,
+          "watchRatio": 59.67
+        },
+        {
+          "position": 13.0,
+          "watchRatio": 58.07
+        },
+        {
+          "position": 14.0,
+          "watchRatio": 57.41
+        },
+        {
+          "position": 15.0,
+          "watchRatio": 56.52
+        },
+        {
+          "position": 16.0,
+          "watchRatio": 56.17
+        },
+        {
+          "position": 17.0,
+          "watchRatio": 55.32
+        },
+        {
+          "position": 18.0,
+          "watchRatio": 54.77
+        },
+        {
+          "position": 19.0,
+          "watchRatio": 52.68
+        },
+        {
+          "position": 20.0,
+          "watchRatio": 52.25
+        },
+        {
+          "position": 21.0,
+          "watchRatio": 51.86
+        },
+        {
+          "position": 22.0,
+          "watchRatio": 51.55
+        },
+        {
+          "position": 23.0,
+          "watchRatio": 50.04
+        },
+        {
+          "position": 24.0,
+          "watchRatio": 49.53
+        },
+        {
+          "position": 25.0,
+          "watchRatio": 49.38
+        },
+        {
+          "position": 26.0,
+          "watchRatio": 49.03
+        },
+        {
+          "position": 27.0,
+          "watchRatio": 48.95
+        },
+        {
+          "position": 28.0,
+          "watchRatio": 48.02
+        },
+        {
+          "position": 29.0,
+          "watchRatio": 47.83
+        },
+        {
+          "position": 30.0,
+          "watchRatio": 47.17
+        },
+        {
+          "position": 31.0,
+          "watchRatio": 46.89
+        },
+        {
+          "position": 32.0,
+          "watchRatio": 46.35
+        },
+        {
+          "position": 33.0,
+          "watchRatio": 46.39
+        },
+        {
+          "position": 34.0,
+          "watchRatio": 45.57
+        },
+        {
+          "position": 35.0,
+          "watchRatio": 45.03
+        },
+        {
+          "position": 36.0,
+          "watchRatio": 44.45
+        },
+        {
+          "position": 37.0,
+          "watchRatio": 43.87
+        },
+        {
+          "position": 38.0,
+          "watchRatio": 43.71
+        },
+        {
+          "position": 39.0,
+          "watchRatio": 43.71
+        },
+        {
+          "position": 40.0,
+          "watchRatio": 44.6
+        },
+        {
+          "position": 41.0,
+          "watchRatio": 45.42
+        },
+        {
+          "position": 42.0,
+          "watchRatio": 46.74
+        },
+        {
+          "position": 43.0,
+          "watchRatio": 46.12
+        },
+        {
+          "position": 44.0,
+          "watchRatio": 44.91
+        },
+        {
+          "position": 45.0,
+          "watchRatio": 43.94
+        },
+        {
+          "position": 46.0,
+          "watchRatio": 41.81
+        },
+        {
+          "position": 47.0,
+          "watchRatio": 41.15
+        },
+        {
+          "position": 48.0,
+          "watchRatio": 40.92
+        },
+        {
+          "position": 49.0,
+          "watchRatio": 40.06
+        },
+        {
+          "position": 50.0,
+          "watchRatio": 39.83
+        },
+        {
+          "position": 51.0,
+          "watchRatio": 39.79
+        },
+        {
+          "position": 52.0,
+          "watchRatio": 39.36
+        },
+        {
+          "position": 53.0,
+          "watchRatio": 39.13
+        },
+        {
+          "position": 54.0,
+          "watchRatio": 38.35
+        },
+        {
+          "position": 55.0,
+          "watchRatio": 38.28
+        },
+        {
+          "position": 56.0,
+          "watchRatio": 38.04
+        },
+        {
+          "position": 57.0,
+          "watchRatio": 38.16
+        },
+        {
+          "position": 58.0,
+          "watchRatio": 37.69
+        },
+        {
+          "position": 59.0,
+          "watchRatio": 37.73
+        },
+        {
+          "position": 60.0,
+          "watchRatio": 37.5
+        },
+        {
+          "position": 61.0,
+          "watchRatio": 37.62
+        },
+        {
+          "position": 62.0,
+          "watchRatio": 37.58
+        },
+        {
+          "position": 63.0,
+          "watchRatio": 37.31
+        },
+        {
+          "position": 64.0,
+          "watchRatio": 36.96
+        },
+        {
+          "position": 65.0,
+          "watchRatio": 36.49
+        },
+        {
+          "position": 66.0,
+          "watchRatio": 36.26
+        },
+        {
+          "position": 67.0,
+          "watchRatio": 36.53
+        },
+        {
+          "position": 68.0,
+          "watchRatio": 36.06
+        },
+        {
+          "position": 69.0,
+          "watchRatio": 35.91
+        },
+        {
+          "position": 70.0,
+          "watchRatio": 34.63
+        },
+        {
+          "position": 71.0,
+          "watchRatio": 34.01
+        },
+        {
+          "position": 72.0,
+          "watchRatio": 33.89
+        },
+        {
+          "position": 73.0,
+          "watchRatio": 33.54
+        },
+        {
+          "position": 74.0,
+          "watchRatio": 32.96
+        },
+        {
+          "position": 75.0,
+          "watchRatio": 32.76
+        },
+        {
+          "position": 76.0,
+          "watchRatio": 32.49
+        },
+        {
+          "position": 77.0,
+          "watchRatio": 32.38
+        },
+        {
+          "position": 78.0,
+          "watchRatio": 30.4
+        },
+        {
+          "position": 79.0,
+          "watchRatio": 30.16
+        },
+        {
+          "position": 80.0,
+          "watchRatio": 29.5
+        },
+        {
+          "position": 81.0,
+          "watchRatio": 28.84
+        },
+        {
+          "position": 82.0,
+          "watchRatio": 28.61
+        },
+        {
+          "position": 83.0,
+          "watchRatio": 27.8
+        },
+        {
+          "position": 84.0,
+          "watchRatio": 27.25
+        },
+        {
+          "position": 85.0,
+          "watchRatio": 26.98
+        },
+        {
+          "position": 86.0,
+          "watchRatio": 26.51
+        },
+        {
+          "position": 87.0,
+          "watchRatio": 26.13
+        },
+        {
+          "position": 88.0,
+          "watchRatio": 25.39
+        },
+        {
+          "position": 89.0,
+          "watchRatio": 25.39
+        },
+        {
+          "position": 90.0,
+          "watchRatio": 25.0
+        },
+        {
+          "position": 91.0,
+          "watchRatio": 24.96
+        },
+        {
+          "position": 92.0,
+          "watchRatio": 24.5
+        },
+        {
+          "position": 93.0,
+          "watchRatio": 24.57
+        },
+        {
+          "position": 94.0,
+          "watchRatio": 24.11
+        },
+        {
+          "position": 95.0,
+          "watchRatio": 23.68
+        },
+        {
+          "position": 96.0,
+          "watchRatio": 23.52
+        },
+        {
+          "position": 97.0,
+          "watchRatio": 23.49
+        },
+        {
+          "position": 98.0,
+          "watchRatio": 23.18
+        },
+        {
+          "position": 99.0,
+          "watchRatio": 22.98
+        },
+        {
+          "position": 100.0,
+          "watchRatio": 21.78
+        }
       ]
     },
     "_l7l5BH4h_s": {
@@ -13054,6 +16672,408 @@
           "subscribersGained": 0,
           "subscribersLost": 0
         }
+      ],
+      "retention": [
+        {
+          "position": 1.0,
+          "watchRatio": 92.38
+        },
+        {
+          "position": 2.0,
+          "watchRatio": 75.94
+        },
+        {
+          "position": 3.0,
+          "watchRatio": 69.63
+        },
+        {
+          "position": 4.0,
+          "watchRatio": 60.43
+        },
+        {
+          "position": 5.0,
+          "watchRatio": 52.76
+        },
+        {
+          "position": 6.0,
+          "watchRatio": 47.15
+        },
+        {
+          "position": 7.0,
+          "watchRatio": 43.31
+        },
+        {
+          "position": 8.0,
+          "watchRatio": 40.86
+        },
+        {
+          "position": 9.0,
+          "watchRatio": 38.5
+        },
+        {
+          "position": 10.0,
+          "watchRatio": 36.2
+        },
+        {
+          "position": 11.0,
+          "watchRatio": 34.72
+        },
+        {
+          "position": 12.0,
+          "watchRatio": 33.54
+        },
+        {
+          "position": 13.0,
+          "watchRatio": 32.52
+        },
+        {
+          "position": 14.0,
+          "watchRatio": 31.49
+        },
+        {
+          "position": 15.0,
+          "watchRatio": 30.67
+        },
+        {
+          "position": 16.0,
+          "watchRatio": 29.72
+        },
+        {
+          "position": 17.0,
+          "watchRatio": 29.27
+        },
+        {
+          "position": 18.0,
+          "watchRatio": 28.37
+        },
+        {
+          "position": 19.0,
+          "watchRatio": 27.92
+        },
+        {
+          "position": 20.0,
+          "watchRatio": 27.31
+        },
+        {
+          "position": 21.0,
+          "watchRatio": 26.76
+        },
+        {
+          "position": 22.0,
+          "watchRatio": 25.92
+        },
+        {
+          "position": 23.0,
+          "watchRatio": 25.52
+        },
+        {
+          "position": 24.0,
+          "watchRatio": 25.12
+        },
+        {
+          "position": 25.0,
+          "watchRatio": 24.63
+        },
+        {
+          "position": 26.0,
+          "watchRatio": 24.1
+        },
+        {
+          "position": 27.0,
+          "watchRatio": 23.64
+        },
+        {
+          "position": 28.0,
+          "watchRatio": 23.41
+        },
+        {
+          "position": 29.0,
+          "watchRatio": 23.34
+        },
+        {
+          "position": 30.0,
+          "watchRatio": 23.03
+        },
+        {
+          "position": 31.0,
+          "watchRatio": 24.86
+        },
+        {
+          "position": 32.0,
+          "watchRatio": 24.08
+        },
+        {
+          "position": 33.0,
+          "watchRatio": 23.28
+        },
+        {
+          "position": 34.0,
+          "watchRatio": 22.58
+        },
+        {
+          "position": 35.0,
+          "watchRatio": 22.01
+        },
+        {
+          "position": 36.0,
+          "watchRatio": 21.49
+        },
+        {
+          "position": 37.0,
+          "watchRatio": 20.87
+        },
+        {
+          "position": 38.0,
+          "watchRatio": 20.58
+        },
+        {
+          "position": 39.0,
+          "watchRatio": 20.22
+        },
+        {
+          "position": 40.0,
+          "watchRatio": 19.97
+        },
+        {
+          "position": 41.0,
+          "watchRatio": 19.9
+        },
+        {
+          "position": 42.0,
+          "watchRatio": 22.46
+        },
+        {
+          "position": 43.0,
+          "watchRatio": 21.27
+        },
+        {
+          "position": 44.0,
+          "watchRatio": 20.96
+        },
+        {
+          "position": 45.0,
+          "watchRatio": 20.28
+        },
+        {
+          "position": 46.0,
+          "watchRatio": 20.01
+        },
+        {
+          "position": 47.0,
+          "watchRatio": 19.71
+        },
+        {
+          "position": 48.0,
+          "watchRatio": 19.73
+        },
+        {
+          "position": 49.0,
+          "watchRatio": 19.08
+        },
+        {
+          "position": 50.0,
+          "watchRatio": 18.24
+        },
+        {
+          "position": 51.0,
+          "watchRatio": 17.77
+        },
+        {
+          "position": 52.0,
+          "watchRatio": 17.9
+        },
+        {
+          "position": 53.0,
+          "watchRatio": 17.58
+        },
+        {
+          "position": 54.0,
+          "watchRatio": 17.41
+        },
+        {
+          "position": 55.0,
+          "watchRatio": 17.05
+        },
+        {
+          "position": 56.0,
+          "watchRatio": 16.95
+        },
+        {
+          "position": 57.0,
+          "watchRatio": 19.52
+        },
+        {
+          "position": 58.0,
+          "watchRatio": 18.93
+        },
+        {
+          "position": 59.0,
+          "watchRatio": 18.34
+        },
+        {
+          "position": 60.0,
+          "watchRatio": 17.79
+        },
+        {
+          "position": 61.0,
+          "watchRatio": 17.52
+        },
+        {
+          "position": 62.0,
+          "watchRatio": 17.07
+        },
+        {
+          "position": 63.0,
+          "watchRatio": 16.82
+        },
+        {
+          "position": 64.0,
+          "watchRatio": 16.57
+        },
+        {
+          "position": 65.0,
+          "watchRatio": 16.34
+        },
+        {
+          "position": 66.0,
+          "watchRatio": 15.89
+        },
+        {
+          "position": 67.0,
+          "watchRatio": 15.85
+        },
+        {
+          "position": 68.0,
+          "watchRatio": 15.64
+        },
+        {
+          "position": 69.0,
+          "watchRatio": 16.99
+        },
+        {
+          "position": 70.0,
+          "watchRatio": 16.55
+        },
+        {
+          "position": 71.0,
+          "watchRatio": 15.93
+        },
+        {
+          "position": 72.0,
+          "watchRatio": 15.41
+        },
+        {
+          "position": 73.0,
+          "watchRatio": 15.09
+        },
+        {
+          "position": 74.0,
+          "watchRatio": 14.88
+        },
+        {
+          "position": 75.0,
+          "watchRatio": 14.5
+        },
+        {
+          "position": 76.0,
+          "watchRatio": 14.31
+        },
+        {
+          "position": 77.0,
+          "watchRatio": 14.14
+        },
+        {
+          "position": 78.0,
+          "watchRatio": 13.95
+        },
+        {
+          "position": 79.0,
+          "watchRatio": 13.82
+        },
+        {
+          "position": 80.0,
+          "watchRatio": 13.68
+        },
+        {
+          "position": 81.0,
+          "watchRatio": 13.68
+        },
+        {
+          "position": 82.0,
+          "watchRatio": 13.55
+        },
+        {
+          "position": 83.0,
+          "watchRatio": 13.49
+        },
+        {
+          "position": 84.0,
+          "watchRatio": 14.56
+        },
+        {
+          "position": 85.0,
+          "watchRatio": 14.44
+        },
+        {
+          "position": 86.0,
+          "watchRatio": 13.93
+        },
+        {
+          "position": 87.0,
+          "watchRatio": 13.47
+        },
+        {
+          "position": 88.0,
+          "watchRatio": 13.11
+        },
+        {
+          "position": 89.0,
+          "watchRatio": 12.9
+        },
+        {
+          "position": 90.0,
+          "watchRatio": 12.47
+        },
+        {
+          "position": 91.0,
+          "watchRatio": 12.18
+        },
+        {
+          "position": 92.0,
+          "watchRatio": 11.84
+        },
+        {
+          "position": 93.0,
+          "watchRatio": 11.61
+        },
+        {
+          "position": 94.0,
+          "watchRatio": 11.63
+        },
+        {
+          "position": 95.0,
+          "watchRatio": 11.52
+        },
+        {
+          "position": 96.0,
+          "watchRatio": 11.21
+        },
+        {
+          "position": 97.0,
+          "watchRatio": 11.36
+        },
+        {
+          "position": 98.0,
+          "watchRatio": 11.42
+        },
+        {
+          "position": 99.0,
+          "watchRatio": 11.48
+        },
+        {
+          "position": 100.0,
+          "watchRatio": 10.85
+        }
       ]
     },
     "dhys8ycR5Iw": {
@@ -13534,7 +17554,7 @@
           "engagedViews": 100,
           "watchMinutes": 449,
           "averageViewDuration": 268,
-          "averageViewPercentage": 28.71,
+          "averageViewPercentage": 28.7,
           "likes": 2,
           "comments": 0,
           "shares": 0,
@@ -13579,6 +17599,408 @@
           "shares": 0,
           "subscribersGained": 0,
           "subscribersLost": 0
+        }
+      ],
+      "retention": [
+        {
+          "position": 1.0,
+          "watchRatio": 93.05
+        },
+        {
+          "position": 2.0,
+          "watchRatio": 80.63
+        },
+        {
+          "position": 3.0,
+          "watchRatio": 74.11
+        },
+        {
+          "position": 4.0,
+          "watchRatio": 71.14
+        },
+        {
+          "position": 5.0,
+          "watchRatio": 68.19
+        },
+        {
+          "position": 6.0,
+          "watchRatio": 65.7
+        },
+        {
+          "position": 7.0,
+          "watchRatio": 64.25
+        },
+        {
+          "position": 8.0,
+          "watchRatio": 63.52
+        },
+        {
+          "position": 9.0,
+          "watchRatio": 62.93
+        },
+        {
+          "position": 10.0,
+          "watchRatio": 61.19
+        },
+        {
+          "position": 11.0,
+          "watchRatio": 60.11
+        },
+        {
+          "position": 12.0,
+          "watchRatio": 57.73
+        },
+        {
+          "position": 13.0,
+          "watchRatio": 56.57
+        },
+        {
+          "position": 14.0,
+          "watchRatio": 55.62
+        },
+        {
+          "position": 15.0,
+          "watchRatio": 54.57
+        },
+        {
+          "position": 16.0,
+          "watchRatio": 53.89
+        },
+        {
+          "position": 17.0,
+          "watchRatio": 53.67
+        },
+        {
+          "position": 18.0,
+          "watchRatio": 53.14
+        },
+        {
+          "position": 19.0,
+          "watchRatio": 50.79
+        },
+        {
+          "position": 20.0,
+          "watchRatio": 49.11
+        },
+        {
+          "position": 21.0,
+          "watchRatio": 48.16
+        },
+        {
+          "position": 22.0,
+          "watchRatio": 47.5
+        },
+        {
+          "position": 23.0,
+          "watchRatio": 46.71
+        },
+        {
+          "position": 24.0,
+          "watchRatio": 46.2
+        },
+        {
+          "position": 25.0,
+          "watchRatio": 45.48
+        },
+        {
+          "position": 26.0,
+          "watchRatio": 44.67
+        },
+        {
+          "position": 27.0,
+          "watchRatio": 44.41
+        },
+        {
+          "position": 28.0,
+          "watchRatio": 43.93
+        },
+        {
+          "position": 29.0,
+          "watchRatio": 43.36
+        },
+        {
+          "position": 30.0,
+          "watchRatio": 43.1
+        },
+        {
+          "position": 31.0,
+          "watchRatio": 42.47
+        },
+        {
+          "position": 32.0,
+          "watchRatio": 41.97
+        },
+        {
+          "position": 33.0,
+          "watchRatio": 41.53
+        },
+        {
+          "position": 34.0,
+          "watchRatio": 41.33
+        },
+        {
+          "position": 35.0,
+          "watchRatio": 41.97
+        },
+        {
+          "position": 36.0,
+          "watchRatio": 41.72
+        },
+        {
+          "position": 37.0,
+          "watchRatio": 39.14
+        },
+        {
+          "position": 38.0,
+          "watchRatio": 39.6
+        },
+        {
+          "position": 39.0,
+          "watchRatio": 39.5
+        },
+        {
+          "position": 40.0,
+          "watchRatio": 38.89
+        },
+        {
+          "position": 41.0,
+          "watchRatio": 37.89
+        },
+        {
+          "position": 42.0,
+          "watchRatio": 37.29
+        },
+        {
+          "position": 43.0,
+          "watchRatio": 36.76
+        },
+        {
+          "position": 44.0,
+          "watchRatio": 36.12
+        },
+        {
+          "position": 45.0,
+          "watchRatio": 35.28
+        },
+        {
+          "position": 46.0,
+          "watchRatio": 35.02
+        },
+        {
+          "position": 47.0,
+          "watchRatio": 34.21
+        },
+        {
+          "position": 48.0,
+          "watchRatio": 34.01
+        },
+        {
+          "position": 49.0,
+          "watchRatio": 33.68
+        },
+        {
+          "position": 50.0,
+          "watchRatio": 33.21
+        },
+        {
+          "position": 51.0,
+          "watchRatio": 33.12
+        },
+        {
+          "position": 52.0,
+          "watchRatio": 32.92
+        },
+        {
+          "position": 53.0,
+          "watchRatio": 32.7
+        },
+        {
+          "position": 54.0,
+          "watchRatio": 32.51
+        },
+        {
+          "position": 55.0,
+          "watchRatio": 32.21
+        },
+        {
+          "position": 56.0,
+          "watchRatio": 32.01
+        },
+        {
+          "position": 57.0,
+          "watchRatio": 31.66
+        },
+        {
+          "position": 58.0,
+          "watchRatio": 31.2
+        },
+        {
+          "position": 59.0,
+          "watchRatio": 31.02
+        },
+        {
+          "position": 60.0,
+          "watchRatio": 30.75
+        },
+        {
+          "position": 61.0,
+          "watchRatio": 30.47
+        },
+        {
+          "position": 62.0,
+          "watchRatio": 30.36
+        },
+        {
+          "position": 63.0,
+          "watchRatio": 30.39
+        },
+        {
+          "position": 64.0,
+          "watchRatio": 29.68
+        },
+        {
+          "position": 65.0,
+          "watchRatio": 29.46
+        },
+        {
+          "position": 66.0,
+          "watchRatio": 29.22
+        },
+        {
+          "position": 67.0,
+          "watchRatio": 29.08
+        },
+        {
+          "position": 68.0,
+          "watchRatio": 28.4
+        },
+        {
+          "position": 69.0,
+          "watchRatio": 28.03
+        },
+        {
+          "position": 70.0,
+          "watchRatio": 27.71
+        },
+        {
+          "position": 71.0,
+          "watchRatio": 27.29
+        },
+        {
+          "position": 72.0,
+          "watchRatio": 26.82
+        },
+        {
+          "position": 73.0,
+          "watchRatio": 26.84
+        },
+        {
+          "position": 74.0,
+          "watchRatio": 26.65
+        },
+        {
+          "position": 75.0,
+          "watchRatio": 26.49
+        },
+        {
+          "position": 76.0,
+          "watchRatio": 26.33
+        },
+        {
+          "position": 77.0,
+          "watchRatio": 26.07
+        },
+        {
+          "position": 78.0,
+          "watchRatio": 26.06
+        },
+        {
+          "position": 79.0,
+          "watchRatio": 25.91
+        },
+        {
+          "position": 80.0,
+          "watchRatio": 25.64
+        },
+        {
+          "position": 81.0,
+          "watchRatio": 25.58
+        },
+        {
+          "position": 82.0,
+          "watchRatio": 26.47
+        },
+        {
+          "position": 83.0,
+          "watchRatio": 24.84
+        },
+        {
+          "position": 84.0,
+          "watchRatio": 24.64
+        },
+        {
+          "position": 85.0,
+          "watchRatio": 24.46
+        },
+        {
+          "position": 86.0,
+          "watchRatio": 24.09
+        },
+        {
+          "position": 87.0,
+          "watchRatio": 23.85
+        },
+        {
+          "position": 88.0,
+          "watchRatio": 23.54
+        },
+        {
+          "position": 89.0,
+          "watchRatio": 23.44
+        },
+        {
+          "position": 90.0,
+          "watchRatio": 23.0
+        },
+        {
+          "position": 91.0,
+          "watchRatio": 22.93
+        },
+        {
+          "position": 92.0,
+          "watchRatio": 22.58
+        },
+        {
+          "position": 93.0,
+          "watchRatio": 22.5
+        },
+        {
+          "position": 94.0,
+          "watchRatio": 22.45
+        },
+        {
+          "position": 95.0,
+          "watchRatio": 22.2
+        },
+        {
+          "position": 96.0,
+          "watchRatio": 21.95
+        },
+        {
+          "position": 97.0,
+          "watchRatio": 21.65
+        },
+        {
+          "position": 98.0,
+          "watchRatio": 21.32
+        },
+        {
+          "position": 99.0,
+          "watchRatio": 21.01
+        },
+        {
+          "position": 100.0,
+          "watchRatio": 20.52
         }
       ]
     },
@@ -14093,6 +18515,408 @@
           "subscribersGained": 0,
           "subscribersLost": 0
         }
+      ],
+      "retention": [
+        {
+          "position": 1.0,
+          "watchRatio": 90.16
+        },
+        {
+          "position": 2.0,
+          "watchRatio": 82.44
+        },
+        {
+          "position": 3.0,
+          "watchRatio": 72.23
+        },
+        {
+          "position": 4.0,
+          "watchRatio": 67.34
+        },
+        {
+          "position": 5.0,
+          "watchRatio": 64.0
+        },
+        {
+          "position": 6.0,
+          "watchRatio": 61.41
+        },
+        {
+          "position": 7.0,
+          "watchRatio": 59.16
+        },
+        {
+          "position": 8.0,
+          "watchRatio": 57.57
+        },
+        {
+          "position": 9.0,
+          "watchRatio": 56.0
+        },
+        {
+          "position": 10.0,
+          "watchRatio": 52.83
+        },
+        {
+          "position": 11.0,
+          "watchRatio": 51.81
+        },
+        {
+          "position": 12.0,
+          "watchRatio": 49.92
+        },
+        {
+          "position": 13.0,
+          "watchRatio": 49.23
+        },
+        {
+          "position": 14.0,
+          "watchRatio": 48.65
+        },
+        {
+          "position": 15.0,
+          "watchRatio": 46.25
+        },
+        {
+          "position": 16.0,
+          "watchRatio": 45.02
+        },
+        {
+          "position": 17.0,
+          "watchRatio": 44.9
+        },
+        {
+          "position": 18.0,
+          "watchRatio": 44.21
+        },
+        {
+          "position": 19.0,
+          "watchRatio": 42.3
+        },
+        {
+          "position": 20.0,
+          "watchRatio": 44.57
+        },
+        {
+          "position": 21.0,
+          "watchRatio": 42.07
+        },
+        {
+          "position": 22.0,
+          "watchRatio": 41.14
+        },
+        {
+          "position": 23.0,
+          "watchRatio": 39.94
+        },
+        {
+          "position": 24.0,
+          "watchRatio": 39.15
+        },
+        {
+          "position": 25.0,
+          "watchRatio": 38.87
+        },
+        {
+          "position": 26.0,
+          "watchRatio": 43.58
+        },
+        {
+          "position": 27.0,
+          "watchRatio": 42.91
+        },
+        {
+          "position": 28.0,
+          "watchRatio": 43.23
+        },
+        {
+          "position": 29.0,
+          "watchRatio": 42.67
+        },
+        {
+          "position": 30.0,
+          "watchRatio": 42.54
+        },
+        {
+          "position": 31.0,
+          "watchRatio": 45.12
+        },
+        {
+          "position": 32.0,
+          "watchRatio": 45.76
+        },
+        {
+          "position": 33.0,
+          "watchRatio": 43.34
+        },
+        {
+          "position": 34.0,
+          "watchRatio": 41.49
+        },
+        {
+          "position": 35.0,
+          "watchRatio": 43.07
+        },
+        {
+          "position": 36.0,
+          "watchRatio": 41.39
+        },
+        {
+          "position": 37.0,
+          "watchRatio": 40.78
+        },
+        {
+          "position": 38.0,
+          "watchRatio": 40.73
+        },
+        {
+          "position": 39.0,
+          "watchRatio": 40.42
+        },
+        {
+          "position": 40.0,
+          "watchRatio": 41.11
+        },
+        {
+          "position": 41.0,
+          "watchRatio": 39.02
+        },
+        {
+          "position": 42.0,
+          "watchRatio": 37.46
+        },
+        {
+          "position": 43.0,
+          "watchRatio": 36.97
+        },
+        {
+          "position": 44.0,
+          "watchRatio": 36.56
+        },
+        {
+          "position": 45.0,
+          "watchRatio": 36.82
+        },
+        {
+          "position": 46.0,
+          "watchRatio": 36.61
+        },
+        {
+          "position": 47.0,
+          "watchRatio": 35.5
+        },
+        {
+          "position": 48.0,
+          "watchRatio": 35.54
+        },
+        {
+          "position": 49.0,
+          "watchRatio": 34.8
+        },
+        {
+          "position": 50.0,
+          "watchRatio": 34.52
+        },
+        {
+          "position": 51.0,
+          "watchRatio": 34.72
+        },
+        {
+          "position": 52.0,
+          "watchRatio": 34.19
+        },
+        {
+          "position": 53.0,
+          "watchRatio": 34.02
+        },
+        {
+          "position": 54.0,
+          "watchRatio": 34.59
+        },
+        {
+          "position": 55.0,
+          "watchRatio": 33.84
+        },
+        {
+          "position": 56.0,
+          "watchRatio": 33.33
+        },
+        {
+          "position": 57.0,
+          "watchRatio": 32.51
+        },
+        {
+          "position": 58.0,
+          "watchRatio": 30.54
+        },
+        {
+          "position": 59.0,
+          "watchRatio": 29.98
+        },
+        {
+          "position": 60.0,
+          "watchRatio": 29.24
+        },
+        {
+          "position": 61.0,
+          "watchRatio": 28.82
+        },
+        {
+          "position": 62.0,
+          "watchRatio": 28.36
+        },
+        {
+          "position": 63.0,
+          "watchRatio": 28.07
+        },
+        {
+          "position": 64.0,
+          "watchRatio": 27.95
+        },
+        {
+          "position": 65.0,
+          "watchRatio": 27.9
+        },
+        {
+          "position": 66.0,
+          "watchRatio": 28.14
+        },
+        {
+          "position": 67.0,
+          "watchRatio": 28.07
+        },
+        {
+          "position": 68.0,
+          "watchRatio": 27.51
+        },
+        {
+          "position": 69.0,
+          "watchRatio": 27.58
+        },
+        {
+          "position": 70.0,
+          "watchRatio": 27.26
+        },
+        {
+          "position": 71.0,
+          "watchRatio": 26.97
+        },
+        {
+          "position": 72.0,
+          "watchRatio": 27.04
+        },
+        {
+          "position": 73.0,
+          "watchRatio": 26.58
+        },
+        {
+          "position": 74.0,
+          "watchRatio": 26.44
+        },
+        {
+          "position": 75.0,
+          "watchRatio": 25.94
+        },
+        {
+          "position": 76.0,
+          "watchRatio": 25.76
+        },
+        {
+          "position": 77.0,
+          "watchRatio": 25.12
+        },
+        {
+          "position": 78.0,
+          "watchRatio": 24.69
+        },
+        {
+          "position": 79.0,
+          "watchRatio": 24.61
+        },
+        {
+          "position": 80.0,
+          "watchRatio": 25.0
+        },
+        {
+          "position": 81.0,
+          "watchRatio": 26.05
+        },
+        {
+          "position": 82.0,
+          "watchRatio": 25.29
+        },
+        {
+          "position": 83.0,
+          "watchRatio": 24.92
+        },
+        {
+          "position": 84.0,
+          "watchRatio": 23.89
+        },
+        {
+          "position": 85.0,
+          "watchRatio": 22.94
+        },
+        {
+          "position": 86.0,
+          "watchRatio": 22.48
+        },
+        {
+          "position": 87.0,
+          "watchRatio": 21.92
+        },
+        {
+          "position": 88.0,
+          "watchRatio": 21.55
+        },
+        {
+          "position": 89.0,
+          "watchRatio": 20.78
+        },
+        {
+          "position": 90.0,
+          "watchRatio": 20.78
+        },
+        {
+          "position": 91.0,
+          "watchRatio": 20.52
+        },
+        {
+          "position": 92.0,
+          "watchRatio": 20.14
+        },
+        {
+          "position": 93.0,
+          "watchRatio": 19.61
+        },
+        {
+          "position": 94.0,
+          "watchRatio": 19.54
+        },
+        {
+          "position": 95.0,
+          "watchRatio": 19.35
+        },
+        {
+          "position": 96.0,
+          "watchRatio": 19.3
+        },
+        {
+          "position": 97.0,
+          "watchRatio": 18.88
+        },
+        {
+          "position": 98.0,
+          "watchRatio": 18.27
+        },
+        {
+          "position": 99.0,
+          "watchRatio": 18.72
+        },
+        {
+          "position": 100.0,
+          "watchRatio": 17.69
+        }
       ]
     },
     "HgCgwKqeJBI": {
@@ -14567,6 +19391,408 @@
           "subscribersGained": 0,
           "subscribersLost": 0
         }
+      ],
+      "retention": [
+        {
+          "position": 1.0,
+          "watchRatio": 97.56
+        },
+        {
+          "position": 2.0,
+          "watchRatio": 91.07
+        },
+        {
+          "position": 3.0,
+          "watchRatio": 87.92
+        },
+        {
+          "position": 4.0,
+          "watchRatio": 83.7
+        },
+        {
+          "position": 5.0,
+          "watchRatio": 78.35
+        },
+        {
+          "position": 6.0,
+          "watchRatio": 74.26
+        },
+        {
+          "position": 7.0,
+          "watchRatio": 70.87
+        },
+        {
+          "position": 8.0,
+          "watchRatio": 68.33
+        },
+        {
+          "position": 9.0,
+          "watchRatio": 66.72
+        },
+        {
+          "position": 10.0,
+          "watchRatio": 65.57
+        },
+        {
+          "position": 11.0,
+          "watchRatio": 63.3
+        },
+        {
+          "position": 12.0,
+          "watchRatio": 62.09
+        },
+        {
+          "position": 13.0,
+          "watchRatio": 60.7
+        },
+        {
+          "position": 14.0,
+          "watchRatio": 59.25
+        },
+        {
+          "position": 15.0,
+          "watchRatio": 58.79
+        },
+        {
+          "position": 16.0,
+          "watchRatio": 57.11
+        },
+        {
+          "position": 17.0,
+          "watchRatio": 56.54
+        },
+        {
+          "position": 18.0,
+          "watchRatio": 55.86
+        },
+        {
+          "position": 19.0,
+          "watchRatio": 54.57
+        },
+        {
+          "position": 20.0,
+          "watchRatio": 53.66
+        },
+        {
+          "position": 21.0,
+          "watchRatio": 53.15
+        },
+        {
+          "position": 22.0,
+          "watchRatio": 51.96
+        },
+        {
+          "position": 23.0,
+          "watchRatio": 51.16
+        },
+        {
+          "position": 24.0,
+          "watchRatio": 50.79
+        },
+        {
+          "position": 25.0,
+          "watchRatio": 49.27
+        },
+        {
+          "position": 26.0,
+          "watchRatio": 48.38
+        },
+        {
+          "position": 27.0,
+          "watchRatio": 47.76
+        },
+        {
+          "position": 28.0,
+          "watchRatio": 46.98
+        },
+        {
+          "position": 29.0,
+          "watchRatio": 46.53
+        },
+        {
+          "position": 30.0,
+          "watchRatio": 46.03
+        },
+        {
+          "position": 31.0,
+          "watchRatio": 44.67
+        },
+        {
+          "position": 32.0,
+          "watchRatio": 44.5
+        },
+        {
+          "position": 33.0,
+          "watchRatio": 43.99
+        },
+        {
+          "position": 34.0,
+          "watchRatio": 43.1
+        },
+        {
+          "position": 35.0,
+          "watchRatio": 42.46
+        },
+        {
+          "position": 36.0,
+          "watchRatio": 42.02
+        },
+        {
+          "position": 37.0,
+          "watchRatio": 41.15
+        },
+        {
+          "position": 38.0,
+          "watchRatio": 41.66
+        },
+        {
+          "position": 39.0,
+          "watchRatio": 40.94
+        },
+        {
+          "position": 40.0,
+          "watchRatio": 40.41
+        },
+        {
+          "position": 41.0,
+          "watchRatio": 40.6
+        },
+        {
+          "position": 42.0,
+          "watchRatio": 40.28
+        },
+        {
+          "position": 43.0,
+          "watchRatio": 39.43
+        },
+        {
+          "position": 44.0,
+          "watchRatio": 39.24
+        },
+        {
+          "position": 45.0,
+          "watchRatio": 39.05
+        },
+        {
+          "position": 46.0,
+          "watchRatio": 38.29
+        },
+        {
+          "position": 47.0,
+          "watchRatio": 38.12
+        },
+        {
+          "position": 48.0,
+          "watchRatio": 37.57
+        },
+        {
+          "position": 49.0,
+          "watchRatio": 36.93
+        },
+        {
+          "position": 50.0,
+          "watchRatio": 36.93
+        },
+        {
+          "position": 51.0,
+          "watchRatio": 36.65
+        },
+        {
+          "position": 52.0,
+          "watchRatio": 36.34
+        },
+        {
+          "position": 53.0,
+          "watchRatio": 35.72
+        },
+        {
+          "position": 54.0,
+          "watchRatio": 35.59
+        },
+        {
+          "position": 55.0,
+          "watchRatio": 35.36
+        },
+        {
+          "position": 56.0,
+          "watchRatio": 35.0
+        },
+        {
+          "position": 57.0,
+          "watchRatio": 35.06
+        },
+        {
+          "position": 58.0,
+          "watchRatio": 34.56
+        },
+        {
+          "position": 59.0,
+          "watchRatio": 34.0
+        },
+        {
+          "position": 60.0,
+          "watchRatio": 34.24
+        },
+        {
+          "position": 61.0,
+          "watchRatio": 33.86
+        },
+        {
+          "position": 62.0,
+          "watchRatio": 33.75
+        },
+        {
+          "position": 63.0,
+          "watchRatio": 33.81
+        },
+        {
+          "position": 64.0,
+          "watchRatio": 33.79
+        },
+        {
+          "position": 65.0,
+          "watchRatio": 33.26
+        },
+        {
+          "position": 66.0,
+          "watchRatio": 33.94
+        },
+        {
+          "position": 67.0,
+          "watchRatio": 33.75
+        },
+        {
+          "position": 68.0,
+          "watchRatio": 33.28
+        },
+        {
+          "position": 69.0,
+          "watchRatio": 32.9
+        },
+        {
+          "position": 70.0,
+          "watchRatio": 32.61
+        },
+        {
+          "position": 71.0,
+          "watchRatio": 31.93
+        },
+        {
+          "position": 72.0,
+          "watchRatio": 31.91
+        },
+        {
+          "position": 73.0,
+          "watchRatio": 31.72
+        },
+        {
+          "position": 74.0,
+          "watchRatio": 31.12
+        },
+        {
+          "position": 75.0,
+          "watchRatio": 30.99
+        },
+        {
+          "position": 76.0,
+          "watchRatio": 30.59
+        },
+        {
+          "position": 77.0,
+          "watchRatio": 30.23
+        },
+        {
+          "position": 78.0,
+          "watchRatio": 30.04
+        },
+        {
+          "position": 79.0,
+          "watchRatio": 29.96
+        },
+        {
+          "position": 80.0,
+          "watchRatio": 29.47
+        },
+        {
+          "position": 81.0,
+          "watchRatio": 29.34
+        },
+        {
+          "position": 82.0,
+          "watchRatio": 28.75
+        },
+        {
+          "position": 83.0,
+          "watchRatio": 28.45
+        },
+        {
+          "position": 84.0,
+          "watchRatio": 28.3
+        },
+        {
+          "position": 85.0,
+          "watchRatio": 28.2
+        },
+        {
+          "position": 86.0,
+          "watchRatio": 27.52
+        },
+        {
+          "position": 87.0,
+          "watchRatio": 27.71
+        },
+        {
+          "position": 88.0,
+          "watchRatio": 27.35
+        },
+        {
+          "position": 89.0,
+          "watchRatio": 26.75
+        },
+        {
+          "position": 90.0,
+          "watchRatio": 26.67
+        },
+        {
+          "position": 91.0,
+          "watchRatio": 26.31
+        },
+        {
+          "position": 92.0,
+          "watchRatio": 25.65
+        },
+        {
+          "position": 93.0,
+          "watchRatio": 25.31
+        },
+        {
+          "position": 94.0,
+          "watchRatio": 25.27
+        },
+        {
+          "position": 95.0,
+          "watchRatio": 24.7
+        },
+        {
+          "position": 96.0,
+          "watchRatio": 24.68
+        },
+        {
+          "position": 97.0,
+          "watchRatio": 24.46
+        },
+        {
+          "position": 98.0,
+          "watchRatio": 24.0
+        },
+        {
+          "position": 99.0,
+          "watchRatio": 23.85
+        },
+        {
+          "position": 100.0,
+          "watchRatio": 23.38
+        }
       ]
     },
     "g1GPX8SlOmU": {
@@ -14989,6 +20215,408 @@
           "subscribersGained": 0,
           "subscribersLost": 0
         }
+      ],
+      "retention": [
+        {
+          "position": 1.0,
+          "watchRatio": 94.32
+        },
+        {
+          "position": 2.0,
+          "watchRatio": 85.05
+        },
+        {
+          "position": 3.0,
+          "watchRatio": 83.12
+        },
+        {
+          "position": 4.0,
+          "watchRatio": 77.4
+        },
+        {
+          "position": 5.0,
+          "watchRatio": 74.83
+        },
+        {
+          "position": 6.0,
+          "watchRatio": 71.67
+        },
+        {
+          "position": 7.0,
+          "watchRatio": 68.47
+        },
+        {
+          "position": 8.0,
+          "watchRatio": 65.43
+        },
+        {
+          "position": 9.0,
+          "watchRatio": 62.76
+        },
+        {
+          "position": 10.0,
+          "watchRatio": 60.73
+        },
+        {
+          "position": 11.0,
+          "watchRatio": 59.5
+        },
+        {
+          "position": 12.0,
+          "watchRatio": 57.82
+        },
+        {
+          "position": 13.0,
+          "watchRatio": 56.03
+        },
+        {
+          "position": 14.0,
+          "watchRatio": 54.13
+        },
+        {
+          "position": 15.0,
+          "watchRatio": 53.33
+        },
+        {
+          "position": 16.0,
+          "watchRatio": 52.39
+        },
+        {
+          "position": 17.0,
+          "watchRatio": 50.76
+        },
+        {
+          "position": 18.0,
+          "watchRatio": 49.8
+        },
+        {
+          "position": 19.0,
+          "watchRatio": 49.28
+        },
+        {
+          "position": 20.0,
+          "watchRatio": 48.44
+        },
+        {
+          "position": 21.0,
+          "watchRatio": 47.79
+        },
+        {
+          "position": 22.0,
+          "watchRatio": 46.69
+        },
+        {
+          "position": 23.0,
+          "watchRatio": 45.92
+        },
+        {
+          "position": 24.0,
+          "watchRatio": 45.36
+        },
+        {
+          "position": 25.0,
+          "watchRatio": 44.52
+        },
+        {
+          "position": 26.0,
+          "watchRatio": 44.12
+        },
+        {
+          "position": 27.0,
+          "watchRatio": 43.32
+        },
+        {
+          "position": 28.0,
+          "watchRatio": 43.02
+        },
+        {
+          "position": 29.0,
+          "watchRatio": 42.71
+        },
+        {
+          "position": 30.0,
+          "watchRatio": 42.11
+        },
+        {
+          "position": 31.0,
+          "watchRatio": 42.02
+        },
+        {
+          "position": 32.0,
+          "watchRatio": 41.44
+        },
+        {
+          "position": 33.0,
+          "watchRatio": 40.29
+        },
+        {
+          "position": 34.0,
+          "watchRatio": 39.71
+        },
+        {
+          "position": 35.0,
+          "watchRatio": 39.18
+        },
+        {
+          "position": 36.0,
+          "watchRatio": 38.99
+        },
+        {
+          "position": 37.0,
+          "watchRatio": 38.66
+        },
+        {
+          "position": 38.0,
+          "watchRatio": 38.31
+        },
+        {
+          "position": 39.0,
+          "watchRatio": 37.54
+        },
+        {
+          "position": 40.0,
+          "watchRatio": 37.26
+        },
+        {
+          "position": 41.0,
+          "watchRatio": 37.17
+        },
+        {
+          "position": 42.0,
+          "watchRatio": 35.84
+        },
+        {
+          "position": 43.0,
+          "watchRatio": 35.31
+        },
+        {
+          "position": 44.0,
+          "watchRatio": 35.08
+        },
+        {
+          "position": 45.0,
+          "watchRatio": 34.75
+        },
+        {
+          "position": 46.0,
+          "watchRatio": 34.8
+        },
+        {
+          "position": 47.0,
+          "watchRatio": 34.33
+        },
+        {
+          "position": 48.0,
+          "watchRatio": 33.96
+        },
+        {
+          "position": 49.0,
+          "watchRatio": 33.59
+        },
+        {
+          "position": 50.0,
+          "watchRatio": 33.01
+        },
+        {
+          "position": 51.0,
+          "watchRatio": 32.63
+        },
+        {
+          "position": 52.0,
+          "watchRatio": 32.58
+        },
+        {
+          "position": 53.0,
+          "watchRatio": 32.04
+        },
+        {
+          "position": 54.0,
+          "watchRatio": 31.99
+        },
+        {
+          "position": 55.0,
+          "watchRatio": 32.27
+        },
+        {
+          "position": 56.0,
+          "watchRatio": 32.19
+        },
+        {
+          "position": 57.0,
+          "watchRatio": 31.89
+        },
+        {
+          "position": 58.0,
+          "watchRatio": 31.73
+        },
+        {
+          "position": 59.0,
+          "watchRatio": 31.96
+        },
+        {
+          "position": 60.0,
+          "watchRatio": 31.71
+        },
+        {
+          "position": 61.0,
+          "watchRatio": 30.59
+        },
+        {
+          "position": 62.0,
+          "watchRatio": 29.9
+        },
+        {
+          "position": 63.0,
+          "watchRatio": 29.5
+        },
+        {
+          "position": 64.0,
+          "watchRatio": 29.22
+        },
+        {
+          "position": 65.0,
+          "watchRatio": 29.06
+        },
+        {
+          "position": 66.0,
+          "watchRatio": 28.3
+        },
+        {
+          "position": 67.0,
+          "watchRatio": 28.24
+        },
+        {
+          "position": 68.0,
+          "watchRatio": 27.72
+        },
+        {
+          "position": 69.0,
+          "watchRatio": 27.77
+        },
+        {
+          "position": 70.0,
+          "watchRatio": 27.48
+        },
+        {
+          "position": 71.0,
+          "watchRatio": 27.2
+        },
+        {
+          "position": 72.0,
+          "watchRatio": 27.03
+        },
+        {
+          "position": 73.0,
+          "watchRatio": 26.8
+        },
+        {
+          "position": 74.0,
+          "watchRatio": 26.57
+        },
+        {
+          "position": 75.0,
+          "watchRatio": 26.14
+        },
+        {
+          "position": 76.0,
+          "watchRatio": 26.46
+        },
+        {
+          "position": 77.0,
+          "watchRatio": 26.44
+        },
+        {
+          "position": 78.0,
+          "watchRatio": 25.24
+        },
+        {
+          "position": 79.0,
+          "watchRatio": 24.98
+        },
+        {
+          "position": 80.0,
+          "watchRatio": 24.91
+        },
+        {
+          "position": 81.0,
+          "watchRatio": 24.51
+        },
+        {
+          "position": 82.0,
+          "watchRatio": 24.33
+        },
+        {
+          "position": 83.0,
+          "watchRatio": 24.09
+        },
+        {
+          "position": 84.0,
+          "watchRatio": 23.97
+        },
+        {
+          "position": 85.0,
+          "watchRatio": 23.79
+        },
+        {
+          "position": 86.0,
+          "watchRatio": 24.02
+        },
+        {
+          "position": 87.0,
+          "watchRatio": 23.99
+        },
+        {
+          "position": 88.0,
+          "watchRatio": 23.87
+        },
+        {
+          "position": 89.0,
+          "watchRatio": 23.54
+        },
+        {
+          "position": 90.0,
+          "watchRatio": 23.26
+        },
+        {
+          "position": 91.0,
+          "watchRatio": 23.18
+        },
+        {
+          "position": 92.0,
+          "watchRatio": 22.72
+        },
+        {
+          "position": 93.0,
+          "watchRatio": 22.64
+        },
+        {
+          "position": 94.0,
+          "watchRatio": 22.37
+        },
+        {
+          "position": 95.0,
+          "watchRatio": 22.29
+        },
+        {
+          "position": 96.0,
+          "watchRatio": 21.96
+        },
+        {
+          "position": 97.0,
+          "watchRatio": 21.35
+        },
+        {
+          "position": 98.0,
+          "watchRatio": 21.11
+        },
+        {
+          "position": 99.0,
+          "watchRatio": 20.73
+        },
+        {
+          "position": 100.0,
+          "watchRatio": 20.45
+        }
       ]
     },
     "S4tXGHeKBHs": {
@@ -15001,7 +20629,7 @@
         "engagedViews": 4806,
         "watchMinutes": 17915,
         "averageViewDuration": 222.98,
-        "averageViewPercentage": 38.56,
+        "averageViewPercentage": 38.55,
         "likes": 175,
         "comments": 9,
         "shares": 26,
@@ -15325,8 +20953,8 @@
           "views": 29,
           "engagedViews": 21,
           "watchMinutes": 68,
-          "averageViewDuration": 195,
-          "averageViewPercentage": 33.71,
+          "averageViewDuration": 194,
+          "averageViewPercentage": 33.52,
           "likes": 0,
           "comments": 0,
           "shares": 0,
@@ -15371,6 +20999,408 @@
           "shares": 0,
           "subscribersGained": 0,
           "subscribersLost": 0
+        }
+      ],
+      "retention": [
+        {
+          "position": 1.0,
+          "watchRatio": 90.54
+        },
+        {
+          "position": 2.0,
+          "watchRatio": 79.05
+        },
+        {
+          "position": 3.0,
+          "watchRatio": 72.82
+        },
+        {
+          "position": 4.0,
+          "watchRatio": 67.82
+        },
+        {
+          "position": 5.0,
+          "watchRatio": 65.72
+        },
+        {
+          "position": 6.0,
+          "watchRatio": 64.61
+        },
+        {
+          "position": 7.0,
+          "watchRatio": 64.11
+        },
+        {
+          "position": 8.0,
+          "watchRatio": 61.82
+        },
+        {
+          "position": 9.0,
+          "watchRatio": 58.72
+        },
+        {
+          "position": 10.0,
+          "watchRatio": 58.47
+        },
+        {
+          "position": 11.0,
+          "watchRatio": 56.82
+        },
+        {
+          "position": 12.0,
+          "watchRatio": 55.97
+        },
+        {
+          "position": 13.0,
+          "watchRatio": 56.53
+        },
+        {
+          "position": 14.0,
+          "watchRatio": 55.61
+        },
+        {
+          "position": 15.0,
+          "watchRatio": 54.32
+        },
+        {
+          "position": 16.0,
+          "watchRatio": 53.59
+        },
+        {
+          "position": 17.0,
+          "watchRatio": 53.2
+        },
+        {
+          "position": 18.0,
+          "watchRatio": 51.99
+        },
+        {
+          "position": 19.0,
+          "watchRatio": 52.53
+        },
+        {
+          "position": 20.0,
+          "watchRatio": 51.64
+        },
+        {
+          "position": 21.0,
+          "watchRatio": 50.66
+        },
+        {
+          "position": 22.0,
+          "watchRatio": 49.2
+        },
+        {
+          "position": 23.0,
+          "watchRatio": 49.72
+        },
+        {
+          "position": 24.0,
+          "watchRatio": 48.24
+        },
+        {
+          "position": 25.0,
+          "watchRatio": 48.45
+        },
+        {
+          "position": 26.0,
+          "watchRatio": 50.7
+        },
+        {
+          "position": 27.0,
+          "watchRatio": 50.89
+        },
+        {
+          "position": 28.0,
+          "watchRatio": 50.7
+        },
+        {
+          "position": 29.0,
+          "watchRatio": 48.28
+        },
+        {
+          "position": 30.0,
+          "watchRatio": 50.47
+        },
+        {
+          "position": 31.0,
+          "watchRatio": 47.97
+        },
+        {
+          "position": 32.0,
+          "watchRatio": 51.2
+        },
+        {
+          "position": 33.0,
+          "watchRatio": 51.01
+        },
+        {
+          "position": 34.0,
+          "watchRatio": 50.39
+        },
+        {
+          "position": 35.0,
+          "watchRatio": 49.18
+        },
+        {
+          "position": 36.0,
+          "watchRatio": 50.47
+        },
+        {
+          "position": 37.0,
+          "watchRatio": 47.57
+        },
+        {
+          "position": 38.0,
+          "watchRatio": 50.3
+        },
+        {
+          "position": 39.0,
+          "watchRatio": 50.93
+        },
+        {
+          "position": 40.0,
+          "watchRatio": 50.22
+        },
+        {
+          "position": 41.0,
+          "watchRatio": 51.05
+        },
+        {
+          "position": 42.0,
+          "watchRatio": 50.64
+        },
+        {
+          "position": 43.0,
+          "watchRatio": 50.16
+        },
+        {
+          "position": 44.0,
+          "watchRatio": 49.03
+        },
+        {
+          "position": 45.0,
+          "watchRatio": 49.26
+        },
+        {
+          "position": 46.0,
+          "watchRatio": 47.64
+        },
+        {
+          "position": 47.0,
+          "watchRatio": 46.41
+        },
+        {
+          "position": 48.0,
+          "watchRatio": 46.01
+        },
+        {
+          "position": 49.0,
+          "watchRatio": 45.22
+        },
+        {
+          "position": 50.0,
+          "watchRatio": 46.09
+        },
+        {
+          "position": 51.0,
+          "watchRatio": 49.03
+        },
+        {
+          "position": 52.0,
+          "watchRatio": 48.47
+        },
+        {
+          "position": 53.0,
+          "watchRatio": 46.37
+        },
+        {
+          "position": 54.0,
+          "watchRatio": 45.09
+        },
+        {
+          "position": 55.0,
+          "watchRatio": 43.74
+        },
+        {
+          "position": 56.0,
+          "watchRatio": 44.24
+        },
+        {
+          "position": 57.0,
+          "watchRatio": 44.07
+        },
+        {
+          "position": 58.0,
+          "watchRatio": 43.2
+        },
+        {
+          "position": 59.0,
+          "watchRatio": 42.55
+        },
+        {
+          "position": 60.0,
+          "watchRatio": 40.89
+        },
+        {
+          "position": 61.0,
+          "watchRatio": 40.51
+        },
+        {
+          "position": 62.0,
+          "watchRatio": 39.41
+        },
+        {
+          "position": 63.0,
+          "watchRatio": 39.41
+        },
+        {
+          "position": 64.0,
+          "watchRatio": 39.91
+        },
+        {
+          "position": 65.0,
+          "watchRatio": 39.12
+        },
+        {
+          "position": 66.0,
+          "watchRatio": 39.18
+        },
+        {
+          "position": 67.0,
+          "watchRatio": 37.93
+        },
+        {
+          "position": 68.0,
+          "watchRatio": 36.7
+        },
+        {
+          "position": 69.0,
+          "watchRatio": 35.68
+        },
+        {
+          "position": 70.0,
+          "watchRatio": 35.81
+        },
+        {
+          "position": 71.0,
+          "watchRatio": 35.33
+        },
+        {
+          "position": 72.0,
+          "watchRatio": 33.72
+        },
+        {
+          "position": 73.0,
+          "watchRatio": 32.99
+        },
+        {
+          "position": 74.0,
+          "watchRatio": 31.83
+        },
+        {
+          "position": 75.0,
+          "watchRatio": 30.99
+        },
+        {
+          "position": 76.0,
+          "watchRatio": 31.37
+        },
+        {
+          "position": 77.0,
+          "watchRatio": 31.64
+        },
+        {
+          "position": 78.0,
+          "watchRatio": 31.76
+        },
+        {
+          "position": 79.0,
+          "watchRatio": 31.16
+        },
+        {
+          "position": 80.0,
+          "watchRatio": 29.99
+        },
+        {
+          "position": 81.0,
+          "watchRatio": 29.72
+        },
+        {
+          "position": 82.0,
+          "watchRatio": 28.64
+        },
+        {
+          "position": 83.0,
+          "watchRatio": 29.45
+        },
+        {
+          "position": 84.0,
+          "watchRatio": 28.97
+        },
+        {
+          "position": 85.0,
+          "watchRatio": 28.39
+        },
+        {
+          "position": 86.0,
+          "watchRatio": 27.64
+        },
+        {
+          "position": 87.0,
+          "watchRatio": 27.04
+        },
+        {
+          "position": 88.0,
+          "watchRatio": 27.06
+        },
+        {
+          "position": 89.0,
+          "watchRatio": 27.02
+        },
+        {
+          "position": 90.0,
+          "watchRatio": 26.93
+        },
+        {
+          "position": 91.0,
+          "watchRatio": 26.54
+        },
+        {
+          "position": 92.0,
+          "watchRatio": 25.66
+        },
+        {
+          "position": 93.0,
+          "watchRatio": 24.7
+        },
+        {
+          "position": 94.0,
+          "watchRatio": 24.58
+        },
+        {
+          "position": 95.0,
+          "watchRatio": 24.02
+        },
+        {
+          "position": 96.0,
+          "watchRatio": 23.75
+        },
+        {
+          "position": 97.0,
+          "watchRatio": 23.35
+        },
+        {
+          "position": 98.0,
+          "watchRatio": 22.97
+        },
+        {
+          "position": 99.0,
+          "watchRatio": 22.6
+        },
+        {
+          "position": 100.0,
+          "watchRatio": 20.6
         }
       ]
     },
@@ -15716,6 +21746,408 @@
           "subscribersGained": 0,
           "subscribersLost": 0
         }
+      ],
+      "retention": [
+        {
+          "position": 1.0,
+          "watchRatio": 91.86
+        },
+        {
+          "position": 2.0,
+          "watchRatio": 82.73
+        },
+        {
+          "position": 3.0,
+          "watchRatio": 78.77
+        },
+        {
+          "position": 4.0,
+          "watchRatio": 74.14
+        },
+        {
+          "position": 5.0,
+          "watchRatio": 69.6
+        },
+        {
+          "position": 6.0,
+          "watchRatio": 66.26
+        },
+        {
+          "position": 7.0,
+          "watchRatio": 64.32
+        },
+        {
+          "position": 8.0,
+          "watchRatio": 62.81
+        },
+        {
+          "position": 9.0,
+          "watchRatio": 60.99
+        },
+        {
+          "position": 10.0,
+          "watchRatio": 59.43
+        },
+        {
+          "position": 11.0,
+          "watchRatio": 58.22
+        },
+        {
+          "position": 12.0,
+          "watchRatio": 57.24
+        },
+        {
+          "position": 13.0,
+          "watchRatio": 56.29
+        },
+        {
+          "position": 14.0,
+          "watchRatio": 54.94
+        },
+        {
+          "position": 15.0,
+          "watchRatio": 53.58
+        },
+        {
+          "position": 16.0,
+          "watchRatio": 52.92
+        },
+        {
+          "position": 17.0,
+          "watchRatio": 52.62
+        },
+        {
+          "position": 18.0,
+          "watchRatio": 52.72
+        },
+        {
+          "position": 19.0,
+          "watchRatio": 51.6
+        },
+        {
+          "position": 20.0,
+          "watchRatio": 50.55
+        },
+        {
+          "position": 21.0,
+          "watchRatio": 50.53
+        },
+        {
+          "position": 22.0,
+          "watchRatio": 49.9
+        },
+        {
+          "position": 23.0,
+          "watchRatio": 49.76
+        },
+        {
+          "position": 24.0,
+          "watchRatio": 48.98
+        },
+        {
+          "position": 25.0,
+          "watchRatio": 47.72
+        },
+        {
+          "position": 26.0,
+          "watchRatio": 47.31
+        },
+        {
+          "position": 27.0,
+          "watchRatio": 46.84
+        },
+        {
+          "position": 28.0,
+          "watchRatio": 46.8
+        },
+        {
+          "position": 29.0,
+          "watchRatio": 45.52
+        },
+        {
+          "position": 30.0,
+          "watchRatio": 45.07
+        },
+        {
+          "position": 31.0,
+          "watchRatio": 45.05
+        },
+        {
+          "position": 32.0,
+          "watchRatio": 44.09
+        },
+        {
+          "position": 33.0,
+          "watchRatio": 43.41
+        },
+        {
+          "position": 34.0,
+          "watchRatio": 42.88
+        },
+        {
+          "position": 35.0,
+          "watchRatio": 42.16
+        },
+        {
+          "position": 36.0,
+          "watchRatio": 42.01
+        },
+        {
+          "position": 37.0,
+          "watchRatio": 41.6
+        },
+        {
+          "position": 38.0,
+          "watchRatio": 41.29
+        },
+        {
+          "position": 39.0,
+          "watchRatio": 41.14
+        },
+        {
+          "position": 40.0,
+          "watchRatio": 40.97
+        },
+        {
+          "position": 41.0,
+          "watchRatio": 40.39
+        },
+        {
+          "position": 42.0,
+          "watchRatio": 40.42
+        },
+        {
+          "position": 43.0,
+          "watchRatio": 39.99
+        },
+        {
+          "position": 44.0,
+          "watchRatio": 39.4
+        },
+        {
+          "position": 45.0,
+          "watchRatio": 39.9
+        },
+        {
+          "position": 46.0,
+          "watchRatio": 39.44
+        },
+        {
+          "position": 47.0,
+          "watchRatio": 39.69
+        },
+        {
+          "position": 48.0,
+          "watchRatio": 39.52
+        },
+        {
+          "position": 49.0,
+          "watchRatio": 39.07
+        },
+        {
+          "position": 50.0,
+          "watchRatio": 39.44
+        },
+        {
+          "position": 51.0,
+          "watchRatio": 39.52
+        },
+        {
+          "position": 52.0,
+          "watchRatio": 40.05
+        },
+        {
+          "position": 53.0,
+          "watchRatio": 40.6
+        },
+        {
+          "position": 54.0,
+          "watchRatio": 40.18
+        },
+        {
+          "position": 55.0,
+          "watchRatio": 41.02
+        },
+        {
+          "position": 56.0,
+          "watchRatio": 41.38
+        },
+        {
+          "position": 57.0,
+          "watchRatio": 41.4
+        },
+        {
+          "position": 58.0,
+          "watchRatio": 41.07
+        },
+        {
+          "position": 59.0,
+          "watchRatio": 39.75
+        },
+        {
+          "position": 60.0,
+          "watchRatio": 38.92
+        },
+        {
+          "position": 61.0,
+          "watchRatio": 37.64
+        },
+        {
+          "position": 62.0,
+          "watchRatio": 37.22
+        },
+        {
+          "position": 63.0,
+          "watchRatio": 36.96
+        },
+        {
+          "position": 64.0,
+          "watchRatio": 36.2
+        },
+        {
+          "position": 65.0,
+          "watchRatio": 35.58
+        },
+        {
+          "position": 66.0,
+          "watchRatio": 34.82
+        },
+        {
+          "position": 67.0,
+          "watchRatio": 34.43
+        },
+        {
+          "position": 68.0,
+          "watchRatio": 33.7
+        },
+        {
+          "position": 69.0,
+          "watchRatio": 33.21
+        },
+        {
+          "position": 70.0,
+          "watchRatio": 33.18
+        },
+        {
+          "position": 71.0,
+          "watchRatio": 32.78
+        },
+        {
+          "position": 72.0,
+          "watchRatio": 33.56
+        },
+        {
+          "position": 73.0,
+          "watchRatio": 34.11
+        },
+        {
+          "position": 74.0,
+          "watchRatio": 34.13
+        },
+        {
+          "position": 75.0,
+          "watchRatio": 33.7
+        },
+        {
+          "position": 76.0,
+          "watchRatio": 31.67
+        },
+        {
+          "position": 77.0,
+          "watchRatio": 30.9
+        },
+        {
+          "position": 78.0,
+          "watchRatio": 30.65
+        },
+        {
+          "position": 79.0,
+          "watchRatio": 30.45
+        },
+        {
+          "position": 80.0,
+          "watchRatio": 30.58
+        },
+        {
+          "position": 81.0,
+          "watchRatio": 30.07
+        },
+        {
+          "position": 82.0,
+          "watchRatio": 29.84
+        },
+        {
+          "position": 83.0,
+          "watchRatio": 29.4
+        },
+        {
+          "position": 84.0,
+          "watchRatio": 29.3
+        },
+        {
+          "position": 85.0,
+          "watchRatio": 29.1
+        },
+        {
+          "position": 86.0,
+          "watchRatio": 29.16
+        },
+        {
+          "position": 87.0,
+          "watchRatio": 29.54
+        },
+        {
+          "position": 88.0,
+          "watchRatio": 28.95
+        },
+        {
+          "position": 89.0,
+          "watchRatio": 28.03
+        },
+        {
+          "position": 90.0,
+          "watchRatio": 27.32
+        },
+        {
+          "position": 91.0,
+          "watchRatio": 26.75
+        },
+        {
+          "position": 92.0,
+          "watchRatio": 26.6
+        },
+        {
+          "position": 93.0,
+          "watchRatio": 26.21
+        },
+        {
+          "position": 94.0,
+          "watchRatio": 26.03
+        },
+        {
+          "position": 95.0,
+          "watchRatio": 25.84
+        },
+        {
+          "position": 96.0,
+          "watchRatio": 25.64
+        },
+        {
+          "position": 97.0,
+          "watchRatio": 25.5
+        },
+        {
+          "position": 98.0,
+          "watchRatio": 24.76
+        },
+        {
+          "position": 99.0,
+          "watchRatio": 24.14
+        },
+        {
+          "position": 100.0,
+          "watchRatio": 22.52
+        }
       ]
     },
     "pE6Pi35mojw": {
@@ -15724,7 +22156,7 @@
       "thumbnail": "https://i.ytimg.com/vi/pE6Pi35mojw/hqdefault.jpg",
       "duration": "5:05",
       "summary": {
-        "views": 8046,
+        "views": 8045,
         "engagedViews": 7345,
         "watchMinutes": 17039,
         "averageViewDuration": 139.37,
@@ -15984,7 +22416,7 @@
         },
         {
           "date": "2026-09-01",
-          "views": 138,
+          "views": 137,
           "engagedViews": 68,
           "watchMinutes": 175,
           "averageViewDuration": 153,
@@ -16033,6 +22465,408 @@
           "shares": 0,
           "subscribersGained": 0,
           "subscribersLost": 0
+        }
+      ],
+      "retention": [
+        {
+          "position": 1.0,
+          "watchRatio": 94.95
+        },
+        {
+          "position": 2.0,
+          "watchRatio": 89.33
+        },
+        {
+          "position": 3.0,
+          "watchRatio": 84.96
+        },
+        {
+          "position": 4.0,
+          "watchRatio": 82.74
+        },
+        {
+          "position": 5.0,
+          "watchRatio": 80.12
+        },
+        {
+          "position": 6.0,
+          "watchRatio": 76.44
+        },
+        {
+          "position": 7.0,
+          "watchRatio": 74.01
+        },
+        {
+          "position": 8.0,
+          "watchRatio": 70.91
+        },
+        {
+          "position": 9.0,
+          "watchRatio": 70.53
+        },
+        {
+          "position": 10.0,
+          "watchRatio": 69.41
+        },
+        {
+          "position": 11.0,
+          "watchRatio": 67.64
+        },
+        {
+          "position": 12.0,
+          "watchRatio": 67.68
+        },
+        {
+          "position": 13.0,
+          "watchRatio": 66.56
+        },
+        {
+          "position": 14.0,
+          "watchRatio": 66.67
+        },
+        {
+          "position": 15.0,
+          "watchRatio": 65.86
+        },
+        {
+          "position": 16.0,
+          "watchRatio": 65.08
+        },
+        {
+          "position": 17.0,
+          "watchRatio": 64.96
+        },
+        {
+          "position": 18.0,
+          "watchRatio": 63.24
+        },
+        {
+          "position": 19.0,
+          "watchRatio": 63.16
+        },
+        {
+          "position": 20.0,
+          "watchRatio": 62.57
+        },
+        {
+          "position": 21.0,
+          "watchRatio": 60.94
+        },
+        {
+          "position": 22.0,
+          "watchRatio": 59.67
+        },
+        {
+          "position": 23.0,
+          "watchRatio": 59.38
+        },
+        {
+          "position": 24.0,
+          "watchRatio": 58.6
+        },
+        {
+          "position": 25.0,
+          "watchRatio": 57.69
+        },
+        {
+          "position": 26.0,
+          "watchRatio": 56.71
+        },
+        {
+          "position": 27.0,
+          "watchRatio": 57.17
+        },
+        {
+          "position": 28.0,
+          "watchRatio": 57.06
+        },
+        {
+          "position": 29.0,
+          "watchRatio": 56.17
+        },
+        {
+          "position": 30.0,
+          "watchRatio": 56.73
+        },
+        {
+          "position": 31.0,
+          "watchRatio": 55.7
+        },
+        {
+          "position": 32.0,
+          "watchRatio": 56.05
+        },
+        {
+          "position": 33.0,
+          "watchRatio": 56.38
+        },
+        {
+          "position": 34.0,
+          "watchRatio": 55.4
+        },
+        {
+          "position": 35.0,
+          "watchRatio": 55.21
+        },
+        {
+          "position": 36.0,
+          "watchRatio": 54.45
+        },
+        {
+          "position": 37.0,
+          "watchRatio": 54.77
+        },
+        {
+          "position": 38.0,
+          "watchRatio": 54.05
+        },
+        {
+          "position": 39.0,
+          "watchRatio": 53.1
+        },
+        {
+          "position": 40.0,
+          "watchRatio": 52.98
+        },
+        {
+          "position": 41.0,
+          "watchRatio": 52.19
+        },
+        {
+          "position": 42.0,
+          "watchRatio": 51.08
+        },
+        {
+          "position": 43.0,
+          "watchRatio": 51.15
+        },
+        {
+          "position": 44.0,
+          "watchRatio": 50.1
+        },
+        {
+          "position": 45.0,
+          "watchRatio": 49.83
+        },
+        {
+          "position": 46.0,
+          "watchRatio": 49.79
+        },
+        {
+          "position": 47.0,
+          "watchRatio": 49.19
+        },
+        {
+          "position": 48.0,
+          "watchRatio": 49.09
+        },
+        {
+          "position": 49.0,
+          "watchRatio": 47.96
+        },
+        {
+          "position": 50.0,
+          "watchRatio": 48.44
+        },
+        {
+          "position": 51.0,
+          "watchRatio": 48.29
+        },
+        {
+          "position": 52.0,
+          "watchRatio": 47.89
+        },
+        {
+          "position": 53.0,
+          "watchRatio": 48.16
+        },
+        {
+          "position": 54.0,
+          "watchRatio": 47.35
+        },
+        {
+          "position": 55.0,
+          "watchRatio": 47.46
+        },
+        {
+          "position": 56.0,
+          "watchRatio": 47.13
+        },
+        {
+          "position": 57.0,
+          "watchRatio": 46.3
+        },
+        {
+          "position": 58.0,
+          "watchRatio": 46.32
+        },
+        {
+          "position": 59.0,
+          "watchRatio": 45.46
+        },
+        {
+          "position": 60.0,
+          "watchRatio": 45.71
+        },
+        {
+          "position": 61.0,
+          "watchRatio": 45.75
+        },
+        {
+          "position": 62.0,
+          "watchRatio": 44.48
+        },
+        {
+          "position": 63.0,
+          "watchRatio": 44.37
+        },
+        {
+          "position": 64.0,
+          "watchRatio": 43.73
+        },
+        {
+          "position": 65.0,
+          "watchRatio": 42.87
+        },
+        {
+          "position": 66.0,
+          "watchRatio": 42.41
+        },
+        {
+          "position": 67.0,
+          "watchRatio": 41.48
+        },
+        {
+          "position": 68.0,
+          "watchRatio": 41.27
+        },
+        {
+          "position": 69.0,
+          "watchRatio": 41.07
+        },
+        {
+          "position": 70.0,
+          "watchRatio": 40.81
+        },
+        {
+          "position": 71.0,
+          "watchRatio": 40.07
+        },
+        {
+          "position": 72.0,
+          "watchRatio": 39.19
+        },
+        {
+          "position": 73.0,
+          "watchRatio": 39.13
+        },
+        {
+          "position": 74.0,
+          "watchRatio": 38.67
+        },
+        {
+          "position": 75.0,
+          "watchRatio": 38.22
+        },
+        {
+          "position": 76.0,
+          "watchRatio": 38.01
+        },
+        {
+          "position": 77.0,
+          "watchRatio": 36.95
+        },
+        {
+          "position": 78.0,
+          "watchRatio": 36.65
+        },
+        {
+          "position": 79.0,
+          "watchRatio": 36.42
+        },
+        {
+          "position": 80.0,
+          "watchRatio": 35.72
+        },
+        {
+          "position": 81.0,
+          "watchRatio": 35.99
+        },
+        {
+          "position": 82.0,
+          "watchRatio": 35.63
+        },
+        {
+          "position": 83.0,
+          "watchRatio": 35.35
+        },
+        {
+          "position": 84.0,
+          "watchRatio": 34.85
+        },
+        {
+          "position": 85.0,
+          "watchRatio": 33.82
+        },
+        {
+          "position": 86.0,
+          "watchRatio": 33.74
+        },
+        {
+          "position": 87.0,
+          "watchRatio": 33.78
+        },
+        {
+          "position": 88.0,
+          "watchRatio": 33.52
+        },
+        {
+          "position": 89.0,
+          "watchRatio": 32.96
+        },
+        {
+          "position": 90.0,
+          "watchRatio": 32.31
+        },
+        {
+          "position": 91.0,
+          "watchRatio": 32.04
+        },
+        {
+          "position": 92.0,
+          "watchRatio": 31.55
+        },
+        {
+          "position": 93.0,
+          "watchRatio": 30.97
+        },
+        {
+          "position": 94.0,
+          "watchRatio": 30.78
+        },
+        {
+          "position": 95.0,
+          "watchRatio": 29.79
+        },
+        {
+          "position": 96.0,
+          "watchRatio": 28.31
+        },
+        {
+          "position": 97.0,
+          "watchRatio": 27.28
+        },
+        {
+          "position": 98.0,
+          "watchRatio": 26.13
+        },
+        {
+          "position": 99.0,
+          "watchRatio": 24.9
+        },
+        {
+          "position": 100.0,
+          "watchRatio": 22.62
         }
       ]
     },
@@ -16274,6 +23108,408 @@
           "subscribersGained": 1,
           "subscribersLost": 0
         }
+      ],
+      "retention": [
+        {
+          "position": 1.0,
+          "watchRatio": 93.39
+        },
+        {
+          "position": 2.0,
+          "watchRatio": 86.17
+        },
+        {
+          "position": 3.0,
+          "watchRatio": 83.3
+        },
+        {
+          "position": 4.0,
+          "watchRatio": 82.98
+        },
+        {
+          "position": 5.0,
+          "watchRatio": 79.97
+        },
+        {
+          "position": 6.0,
+          "watchRatio": 77.4
+        },
+        {
+          "position": 7.0,
+          "watchRatio": 76.26
+        },
+        {
+          "position": 8.0,
+          "watchRatio": 75.19
+        },
+        {
+          "position": 9.0,
+          "watchRatio": 73.06
+        },
+        {
+          "position": 10.0,
+          "watchRatio": 72.29
+        },
+        {
+          "position": 11.0,
+          "watchRatio": 70.81
+        },
+        {
+          "position": 12.0,
+          "watchRatio": 69.39
+        },
+        {
+          "position": 13.0,
+          "watchRatio": 68.47
+        },
+        {
+          "position": 14.0,
+          "watchRatio": 66.94
+        },
+        {
+          "position": 15.0,
+          "watchRatio": 66.46
+        },
+        {
+          "position": 16.0,
+          "watchRatio": 65.48
+        },
+        {
+          "position": 17.0,
+          "watchRatio": 64.82
+        },
+        {
+          "position": 18.0,
+          "watchRatio": 64.6
+        },
+        {
+          "position": 19.0,
+          "watchRatio": 63.53
+        },
+        {
+          "position": 20.0,
+          "watchRatio": 62.92
+        },
+        {
+          "position": 21.0,
+          "watchRatio": 62.09
+        },
+        {
+          "position": 22.0,
+          "watchRatio": 62.03
+        },
+        {
+          "position": 23.0,
+          "watchRatio": 60.57
+        },
+        {
+          "position": 24.0,
+          "watchRatio": 60.19
+        },
+        {
+          "position": 25.0,
+          "watchRatio": 58.87
+        },
+        {
+          "position": 26.0,
+          "watchRatio": 58.39
+        },
+        {
+          "position": 27.0,
+          "watchRatio": 57.96
+        },
+        {
+          "position": 28.0,
+          "watchRatio": 57.18
+        },
+        {
+          "position": 29.0,
+          "watchRatio": 56.72
+        },
+        {
+          "position": 30.0,
+          "watchRatio": 56.98
+        },
+        {
+          "position": 31.0,
+          "watchRatio": 55.95
+        },
+        {
+          "position": 32.0,
+          "watchRatio": 55.74
+        },
+        {
+          "position": 33.0,
+          "watchRatio": 55.39
+        },
+        {
+          "position": 34.0,
+          "watchRatio": 54.47
+        },
+        {
+          "position": 35.0,
+          "watchRatio": 54.28
+        },
+        {
+          "position": 36.0,
+          "watchRatio": 55.02
+        },
+        {
+          "position": 37.0,
+          "watchRatio": 53.47
+        },
+        {
+          "position": 38.0,
+          "watchRatio": 52.78
+        },
+        {
+          "position": 39.0,
+          "watchRatio": 51.81
+        },
+        {
+          "position": 40.0,
+          "watchRatio": 51.94
+        },
+        {
+          "position": 41.0,
+          "watchRatio": 50.97
+        },
+        {
+          "position": 42.0,
+          "watchRatio": 50.13
+        },
+        {
+          "position": 43.0,
+          "watchRatio": 49.81
+        },
+        {
+          "position": 44.0,
+          "watchRatio": 50.1
+        },
+        {
+          "position": 45.0,
+          "watchRatio": 49.51
+        },
+        {
+          "position": 46.0,
+          "watchRatio": 49.25
+        },
+        {
+          "position": 47.0,
+          "watchRatio": 48.9
+        },
+        {
+          "position": 48.0,
+          "watchRatio": 47.75
+        },
+        {
+          "position": 49.0,
+          "watchRatio": 48.37
+        },
+        {
+          "position": 50.0,
+          "watchRatio": 47.91
+        },
+        {
+          "position": 51.0,
+          "watchRatio": 47.45
+        },
+        {
+          "position": 52.0,
+          "watchRatio": 46.86
+        },
+        {
+          "position": 53.0,
+          "watchRatio": 47.34
+        },
+        {
+          "position": 54.0,
+          "watchRatio": 47.14
+        },
+        {
+          "position": 55.0,
+          "watchRatio": 46.65
+        },
+        {
+          "position": 56.0,
+          "watchRatio": 46.85
+        },
+        {
+          "position": 57.0,
+          "watchRatio": 46.46
+        },
+        {
+          "position": 58.0,
+          "watchRatio": 46.3
+        },
+        {
+          "position": 59.0,
+          "watchRatio": 45.62
+        },
+        {
+          "position": 60.0,
+          "watchRatio": 45.85
+        },
+        {
+          "position": 61.0,
+          "watchRatio": 45.24
+        },
+        {
+          "position": 62.0,
+          "watchRatio": 44.86
+        },
+        {
+          "position": 63.0,
+          "watchRatio": 44.73
+        },
+        {
+          "position": 64.0,
+          "watchRatio": 44.73
+        },
+        {
+          "position": 65.0,
+          "watchRatio": 43.85
+        },
+        {
+          "position": 66.0,
+          "watchRatio": 43.34
+        },
+        {
+          "position": 67.0,
+          "watchRatio": 43.29
+        },
+        {
+          "position": 68.0,
+          "watchRatio": 43.17
+        },
+        {
+          "position": 69.0,
+          "watchRatio": 43.26
+        },
+        {
+          "position": 70.0,
+          "watchRatio": 42.6
+        },
+        {
+          "position": 71.0,
+          "watchRatio": 42.82
+        },
+        {
+          "position": 72.0,
+          "watchRatio": 42.04
+        },
+        {
+          "position": 73.0,
+          "watchRatio": 41.53
+        },
+        {
+          "position": 74.0,
+          "watchRatio": 41.68
+        },
+        {
+          "position": 75.0,
+          "watchRatio": 41.11
+        },
+        {
+          "position": 76.0,
+          "watchRatio": 40.52
+        },
+        {
+          "position": 77.0,
+          "watchRatio": 40.48
+        },
+        {
+          "position": 78.0,
+          "watchRatio": 40.95
+        },
+        {
+          "position": 79.0,
+          "watchRatio": 40.49
+        },
+        {
+          "position": 80.0,
+          "watchRatio": 40.51
+        },
+        {
+          "position": 81.0,
+          "watchRatio": 40.2
+        },
+        {
+          "position": 82.0,
+          "watchRatio": 40.23
+        },
+        {
+          "position": 83.0,
+          "watchRatio": 40.28
+        },
+        {
+          "position": 84.0,
+          "watchRatio": 39.88
+        },
+        {
+          "position": 85.0,
+          "watchRatio": 39.99
+        },
+        {
+          "position": 86.0,
+          "watchRatio": 40.37
+        },
+        {
+          "position": 87.0,
+          "watchRatio": 40.61
+        },
+        {
+          "position": 88.0,
+          "watchRatio": 41.11
+        },
+        {
+          "position": 89.0,
+          "watchRatio": 41.57
+        },
+        {
+          "position": 90.0,
+          "watchRatio": 41.6
+        },
+        {
+          "position": 91.0,
+          "watchRatio": 41.76
+        },
+        {
+          "position": 92.0,
+          "watchRatio": 41.84
+        },
+        {
+          "position": 93.0,
+          "watchRatio": 41.17
+        },
+        {
+          "position": 94.0,
+          "watchRatio": 40.24
+        },
+        {
+          "position": 95.0,
+          "watchRatio": 39.69
+        },
+        {
+          "position": 96.0,
+          "watchRatio": 39.61
+        },
+        {
+          "position": 97.0,
+          "watchRatio": 39.4
+        },
+        {
+          "position": 98.0,
+          "watchRatio": 39.01
+        },
+        {
+          "position": 99.0,
+          "watchRatio": 36.95
+        },
+        {
+          "position": 100.0,
+          "watchRatio": 33.16
+        }
       ]
     },
     "a9U4uap71ME": {
@@ -16488,6 +23724,408 @@
           "subscribersGained": 0,
           "subscribersLost": 0
         }
+      ],
+      "retention": [
+        {
+          "position": 1.0,
+          "watchRatio": 96.88
+        },
+        {
+          "position": 2.0,
+          "watchRatio": 91.74
+        },
+        {
+          "position": 3.0,
+          "watchRatio": 88.93
+        },
+        {
+          "position": 4.0,
+          "watchRatio": 87.23
+        },
+        {
+          "position": 5.0,
+          "watchRatio": 86.92
+        },
+        {
+          "position": 6.0,
+          "watchRatio": 85.4
+        },
+        {
+          "position": 7.0,
+          "watchRatio": 82.9
+        },
+        {
+          "position": 8.0,
+          "watchRatio": 81.74
+        },
+        {
+          "position": 9.0,
+          "watchRatio": 79.82
+        },
+        {
+          "position": 10.0,
+          "watchRatio": 79.24
+        },
+        {
+          "position": 11.0,
+          "watchRatio": 77.86
+        },
+        {
+          "position": 12.0,
+          "watchRatio": 77.59
+        },
+        {
+          "position": 13.0,
+          "watchRatio": 76.96
+        },
+        {
+          "position": 14.0,
+          "watchRatio": 75.85
+        },
+        {
+          "position": 15.0,
+          "watchRatio": 75.98
+        },
+        {
+          "position": 16.0,
+          "watchRatio": 74.91
+        },
+        {
+          "position": 17.0,
+          "watchRatio": 74.2
+        },
+        {
+          "position": 18.0,
+          "watchRatio": 73.17
+        },
+        {
+          "position": 19.0,
+          "watchRatio": 71.83
+        },
+        {
+          "position": 20.0,
+          "watchRatio": 71.38
+        },
+        {
+          "position": 21.0,
+          "watchRatio": 69.64
+        },
+        {
+          "position": 22.0,
+          "watchRatio": 69.6
+        },
+        {
+          "position": 23.0,
+          "watchRatio": 68.88
+        },
+        {
+          "position": 24.0,
+          "watchRatio": 69.24
+        },
+        {
+          "position": 25.0,
+          "watchRatio": 68.84
+        },
+        {
+          "position": 26.0,
+          "watchRatio": 67.95
+        },
+        {
+          "position": 27.0,
+          "watchRatio": 67.63
+        },
+        {
+          "position": 28.0,
+          "watchRatio": 66.88
+        },
+        {
+          "position": 29.0,
+          "watchRatio": 66.96
+        },
+        {
+          "position": 30.0,
+          "watchRatio": 66.92
+        },
+        {
+          "position": 31.0,
+          "watchRatio": 66.79
+        },
+        {
+          "position": 32.0,
+          "watchRatio": 66.47
+        },
+        {
+          "position": 33.0,
+          "watchRatio": 66.25
+        },
+        {
+          "position": 34.0,
+          "watchRatio": 66.34
+        },
+        {
+          "position": 35.0,
+          "watchRatio": 65.98
+        },
+        {
+          "position": 36.0,
+          "watchRatio": 66.07
+        },
+        {
+          "position": 37.0,
+          "watchRatio": 65.67
+        },
+        {
+          "position": 38.0,
+          "watchRatio": 65.18
+        },
+        {
+          "position": 39.0,
+          "watchRatio": 65.27
+        },
+        {
+          "position": 40.0,
+          "watchRatio": 64.87
+        },
+        {
+          "position": 41.0,
+          "watchRatio": 65.13
+        },
+        {
+          "position": 42.0,
+          "watchRatio": 64.78
+        },
+        {
+          "position": 43.0,
+          "watchRatio": 65.13
+        },
+        {
+          "position": 44.0,
+          "watchRatio": 64.6
+        },
+        {
+          "position": 45.0,
+          "watchRatio": 63.62
+        },
+        {
+          "position": 46.0,
+          "watchRatio": 63.48
+        },
+        {
+          "position": 47.0,
+          "watchRatio": 63.3
+        },
+        {
+          "position": 48.0,
+          "watchRatio": 63.44
+        },
+        {
+          "position": 49.0,
+          "watchRatio": 62.99
+        },
+        {
+          "position": 50.0,
+          "watchRatio": 62.68
+        },
+        {
+          "position": 51.0,
+          "watchRatio": 62.95
+        },
+        {
+          "position": 52.0,
+          "watchRatio": 62.59
+        },
+        {
+          "position": 53.0,
+          "watchRatio": 62.46
+        },
+        {
+          "position": 54.0,
+          "watchRatio": 61.92
+        },
+        {
+          "position": 55.0,
+          "watchRatio": 61.65
+        },
+        {
+          "position": 56.0,
+          "watchRatio": 60.94
+        },
+        {
+          "position": 57.0,
+          "watchRatio": 60.58
+        },
+        {
+          "position": 58.0,
+          "watchRatio": 59.87
+        },
+        {
+          "position": 59.0,
+          "watchRatio": 59.33
+        },
+        {
+          "position": 60.0,
+          "watchRatio": 59.33
+        },
+        {
+          "position": 61.0,
+          "watchRatio": 58.75
+        },
+        {
+          "position": 62.0,
+          "watchRatio": 58.75
+        },
+        {
+          "position": 63.0,
+          "watchRatio": 58.17
+        },
+        {
+          "position": 64.0,
+          "watchRatio": 57.19
+        },
+        {
+          "position": 65.0,
+          "watchRatio": 56.83
+        },
+        {
+          "position": 66.0,
+          "watchRatio": 56.43
+        },
+        {
+          "position": 67.0,
+          "watchRatio": 56.52
+        },
+        {
+          "position": 68.0,
+          "watchRatio": 55.63
+        },
+        {
+          "position": 69.0,
+          "watchRatio": 54.64
+        },
+        {
+          "position": 70.0,
+          "watchRatio": 54.73
+        },
+        {
+          "position": 71.0,
+          "watchRatio": 54.02
+        },
+        {
+          "position": 72.0,
+          "watchRatio": 54.46
+        },
+        {
+          "position": 73.0,
+          "watchRatio": 53.79
+        },
+        {
+          "position": 74.0,
+          "watchRatio": 53.53
+        },
+        {
+          "position": 75.0,
+          "watchRatio": 53.21
+        },
+        {
+          "position": 76.0,
+          "watchRatio": 51.79
+        },
+        {
+          "position": 77.0,
+          "watchRatio": 51.65
+        },
+        {
+          "position": 78.0,
+          "watchRatio": 50.49
+        },
+        {
+          "position": 79.0,
+          "watchRatio": 50.98
+        },
+        {
+          "position": 80.0,
+          "watchRatio": 50.4
+        },
+        {
+          "position": 81.0,
+          "watchRatio": 49.69
+        },
+        {
+          "position": 82.0,
+          "watchRatio": 49.02
+        },
+        {
+          "position": 83.0,
+          "watchRatio": 48.26
+        },
+        {
+          "position": 84.0,
+          "watchRatio": 48.26
+        },
+        {
+          "position": 85.0,
+          "watchRatio": 47.63
+        },
+        {
+          "position": 86.0,
+          "watchRatio": 47.46
+        },
+        {
+          "position": 87.0,
+          "watchRatio": 47.1
+        },
+        {
+          "position": 88.0,
+          "watchRatio": 46.25
+        },
+        {
+          "position": 89.0,
+          "watchRatio": 45.89
+        },
+        {
+          "position": 90.0,
+          "watchRatio": 45.13
+        },
+        {
+          "position": 91.0,
+          "watchRatio": 45.36
+        },
+        {
+          "position": 92.0,
+          "watchRatio": 44.82
+        },
+        {
+          "position": 93.0,
+          "watchRatio": 44.69
+        },
+        {
+          "position": 94.0,
+          "watchRatio": 44.06
+        },
+        {
+          "position": 95.0,
+          "watchRatio": 43.39
+        },
+        {
+          "position": 96.0,
+          "watchRatio": 42.81
+        },
+        {
+          "position": 97.0,
+          "watchRatio": 41.74
+        },
+        {
+          "position": 98.0,
+          "watchRatio": 40.94
+        },
+        {
+          "position": 99.0,
+          "watchRatio": 38.35
+        },
+        {
+          "position": 100.0,
+          "watchRatio": 35.71
+        }
       ]
     },
     "B75t0LqJUSg": {
@@ -16676,6 +24314,408 @@
           "subscribersGained": 0,
           "subscribersLost": 0
         }
+      ],
+      "retention": [
+        {
+          "position": 1.0,
+          "watchRatio": 94.49
+        },
+        {
+          "position": 2.0,
+          "watchRatio": 89.51
+        },
+        {
+          "position": 3.0,
+          "watchRatio": 85.31
+        },
+        {
+          "position": 4.0,
+          "watchRatio": 81.97
+        },
+        {
+          "position": 5.0,
+          "watchRatio": 81.64
+        },
+        {
+          "position": 6.0,
+          "watchRatio": 79.74
+        },
+        {
+          "position": 7.0,
+          "watchRatio": 75.8
+        },
+        {
+          "position": 8.0,
+          "watchRatio": 75.8
+        },
+        {
+          "position": 9.0,
+          "watchRatio": 73.9
+        },
+        {
+          "position": 10.0,
+          "watchRatio": 74.36
+        },
+        {
+          "position": 11.0,
+          "watchRatio": 72.2
+        },
+        {
+          "position": 12.0,
+          "watchRatio": 70.16
+        },
+        {
+          "position": 13.0,
+          "watchRatio": 69.51
+        },
+        {
+          "position": 14.0,
+          "watchRatio": 68.79
+        },
+        {
+          "position": 15.0,
+          "watchRatio": 68.39
+        },
+        {
+          "position": 16.0,
+          "watchRatio": 66.62
+        },
+        {
+          "position": 17.0,
+          "watchRatio": 65.44
+        },
+        {
+          "position": 18.0,
+          "watchRatio": 64.79
+        },
+        {
+          "position": 19.0,
+          "watchRatio": 64.66
+        },
+        {
+          "position": 20.0,
+          "watchRatio": 65.51
+        },
+        {
+          "position": 21.0,
+          "watchRatio": 63.02
+        },
+        {
+          "position": 22.0,
+          "watchRatio": 63.08
+        },
+        {
+          "position": 23.0,
+          "watchRatio": 62.82
+        },
+        {
+          "position": 24.0,
+          "watchRatio": 61.64
+        },
+        {
+          "position": 25.0,
+          "watchRatio": 63.15
+        },
+        {
+          "position": 26.0,
+          "watchRatio": 61.9
+        },
+        {
+          "position": 27.0,
+          "watchRatio": 62.69
+        },
+        {
+          "position": 28.0,
+          "watchRatio": 61.64
+        },
+        {
+          "position": 29.0,
+          "watchRatio": 60.98
+        },
+        {
+          "position": 30.0,
+          "watchRatio": 63.54
+        },
+        {
+          "position": 31.0,
+          "watchRatio": 62.49
+        },
+        {
+          "position": 32.0,
+          "watchRatio": 63.02
+        },
+        {
+          "position": 33.0,
+          "watchRatio": 62.95
+        },
+        {
+          "position": 34.0,
+          "watchRatio": 63.87
+        },
+        {
+          "position": 35.0,
+          "watchRatio": 63.48
+        },
+        {
+          "position": 36.0,
+          "watchRatio": 62.43
+        },
+        {
+          "position": 37.0,
+          "watchRatio": 61.7
+        },
+        {
+          "position": 38.0,
+          "watchRatio": 61.05
+        },
+        {
+          "position": 39.0,
+          "watchRatio": 61.64
+        },
+        {
+          "position": 40.0,
+          "watchRatio": 61.38
+        },
+        {
+          "position": 41.0,
+          "watchRatio": 60.33
+        },
+        {
+          "position": 42.0,
+          "watchRatio": 61.18
+        },
+        {
+          "position": 43.0,
+          "watchRatio": 60.26
+        },
+        {
+          "position": 44.0,
+          "watchRatio": 60.52
+        },
+        {
+          "position": 45.0,
+          "watchRatio": 59.87
+        },
+        {
+          "position": 46.0,
+          "watchRatio": 58.95
+        },
+        {
+          "position": 47.0,
+          "watchRatio": 58.36
+        },
+        {
+          "position": 48.0,
+          "watchRatio": 58.1
+        },
+        {
+          "position": 49.0,
+          "watchRatio": 58.3
+        },
+        {
+          "position": 50.0,
+          "watchRatio": 58.03
+        },
+        {
+          "position": 51.0,
+          "watchRatio": 58.36
+        },
+        {
+          "position": 52.0,
+          "watchRatio": 57.77
+        },
+        {
+          "position": 53.0,
+          "watchRatio": 56.26
+        },
+        {
+          "position": 54.0,
+          "watchRatio": 55.87
+        },
+        {
+          "position": 55.0,
+          "watchRatio": 54.56
+        },
+        {
+          "position": 56.0,
+          "watchRatio": 53.57
+        },
+        {
+          "position": 57.0,
+          "watchRatio": 52.59
+        },
+        {
+          "position": 58.0,
+          "watchRatio": 50.82
+        },
+        {
+          "position": 59.0,
+          "watchRatio": 49.9
+        },
+        {
+          "position": 60.0,
+          "watchRatio": 48.2
+        },
+        {
+          "position": 61.0,
+          "watchRatio": 47.08
+        },
+        {
+          "position": 62.0,
+          "watchRatio": 46.03
+        },
+        {
+          "position": 63.0,
+          "watchRatio": 44.72
+        },
+        {
+          "position": 64.0,
+          "watchRatio": 45.18
+        },
+        {
+          "position": 65.0,
+          "watchRatio": 44.59
+        },
+        {
+          "position": 66.0,
+          "watchRatio": 44.39
+        },
+        {
+          "position": 67.0,
+          "watchRatio": 43.48
+        },
+        {
+          "position": 68.0,
+          "watchRatio": 43.21
+        },
+        {
+          "position": 69.0,
+          "watchRatio": 43.08
+        },
+        {
+          "position": 70.0,
+          "watchRatio": 41.77
+        },
+        {
+          "position": 71.0,
+          "watchRatio": 41.97
+        },
+        {
+          "position": 72.0,
+          "watchRatio": 40.92
+        },
+        {
+          "position": 73.0,
+          "watchRatio": 41.25
+        },
+        {
+          "position": 74.0,
+          "watchRatio": 40.98
+        },
+        {
+          "position": 75.0,
+          "watchRatio": 39.93
+        },
+        {
+          "position": 76.0,
+          "watchRatio": 40.26
+        },
+        {
+          "position": 77.0,
+          "watchRatio": 39.93
+        },
+        {
+          "position": 78.0,
+          "watchRatio": 39.74
+        },
+        {
+          "position": 79.0,
+          "watchRatio": 38.82
+        },
+        {
+          "position": 80.0,
+          "watchRatio": 38.03
+        },
+        {
+          "position": 81.0,
+          "watchRatio": 38.1
+        },
+        {
+          "position": 82.0,
+          "watchRatio": 37.25
+        },
+        {
+          "position": 83.0,
+          "watchRatio": 37.25
+        },
+        {
+          "position": 84.0,
+          "watchRatio": 36.39
+        },
+        {
+          "position": 85.0,
+          "watchRatio": 35.67
+        },
+        {
+          "position": 86.0,
+          "watchRatio": 35.34
+        },
+        {
+          "position": 87.0,
+          "watchRatio": 35.02
+        },
+        {
+          "position": 88.0,
+          "watchRatio": 35.54
+        },
+        {
+          "position": 89.0,
+          "watchRatio": 35.02
+        },
+        {
+          "position": 90.0,
+          "watchRatio": 34.36
+        },
+        {
+          "position": 91.0,
+          "watchRatio": 34.36
+        },
+        {
+          "position": 92.0,
+          "watchRatio": 33.57
+        },
+        {
+          "position": 93.0,
+          "watchRatio": 32.79
+        },
+        {
+          "position": 94.0,
+          "watchRatio": 32.39
+        },
+        {
+          "position": 95.0,
+          "watchRatio": 31.74
+        },
+        {
+          "position": 96.0,
+          "watchRatio": 31.02
+        },
+        {
+          "position": 97.0,
+          "watchRatio": 30.1
+        },
+        {
+          "position": 98.0,
+          "watchRatio": 29.38
+        },
+        {
+          "position": 99.0,
+          "watchRatio": 28.07
+        },
+        {
+          "position": 100.0,
+          "watchRatio": 26.49
+        }
       ]
     },
     "SlDTZdCoX7w": {
@@ -16684,10 +24724,10 @@
       "thumbnail": "https://i.ytimg.com/vi/SlDTZdCoX7w/hqdefault.jpg",
       "duration": "5:48",
       "summary": {
-        "views": 20051,
+        "views": 20052,
         "engagedViews": 9569,
         "watchMinutes": 21217,
-        "averageViewDuration": 130.27,
+        "averageViewDuration": 130.19,
         "averageViewPercentage": 37.56,
         "likes": 244,
         "comments": 4,
@@ -16722,10 +24762,10 @@
         },
         "day7": {
           "throughDate": "2026-09-03",
-          "views": 19680,
+          "views": 19681,
           "engagedViews": 9396,
           "watchMinutes": 20884,
-          "averageViewDuration": 130.6,
+          "averageViewDuration": 130.51,
           "averageViewPercentage": 37.65,
           "likes": 240,
           "comments": 4,
@@ -16788,11 +24828,11 @@
         },
         {
           "date": "2026-09-01",
-          "views": 1698,
+          "views": 1699,
           "engagedViews": 778,
           "watchMinutes": 1557,
-          "averageViewDuration": 118,
-          "averageViewPercentage": 33.91,
+          "averageViewDuration": 117,
+          "averageViewPercentage": 33.9,
           "likes": 21,
           "comments": 0,
           "shares": 1,
@@ -16837,6 +24877,408 @@
           "shares": 0,
           "subscribersGained": 0,
           "subscribersLost": 0
+        }
+      ],
+      "retention": [
+        {
+          "position": 1.0,
+          "watchRatio": 97.18
+        },
+        {
+          "position": 2.0,
+          "watchRatio": 91.33
+        },
+        {
+          "position": 3.0,
+          "watchRatio": 85.61
+        },
+        {
+          "position": 4.0,
+          "watchRatio": 82.42
+        },
+        {
+          "position": 5.0,
+          "watchRatio": 80.11
+        },
+        {
+          "position": 6.0,
+          "watchRatio": 78.36
+        },
+        {
+          "position": 7.0,
+          "watchRatio": 75.56
+        },
+        {
+          "position": 8.0,
+          "watchRatio": 75.19
+        },
+        {
+          "position": 9.0,
+          "watchRatio": 73.66
+        },
+        {
+          "position": 10.0,
+          "watchRatio": 70.67
+        },
+        {
+          "position": 11.0,
+          "watchRatio": 70.23
+        },
+        {
+          "position": 12.0,
+          "watchRatio": 68.25
+        },
+        {
+          "position": 13.0,
+          "watchRatio": 65.77
+        },
+        {
+          "position": 14.0,
+          "watchRatio": 63.31
+        },
+        {
+          "position": 15.0,
+          "watchRatio": 61.96
+        },
+        {
+          "position": 16.0,
+          "watchRatio": 60.37
+        },
+        {
+          "position": 17.0,
+          "watchRatio": 58.41
+        },
+        {
+          "position": 18.0,
+          "watchRatio": 57.08
+        },
+        {
+          "position": 19.0,
+          "watchRatio": 56.38
+        },
+        {
+          "position": 20.0,
+          "watchRatio": 54.76
+        },
+        {
+          "position": 21.0,
+          "watchRatio": 54.3
+        },
+        {
+          "position": 22.0,
+          "watchRatio": 53.84
+        },
+        {
+          "position": 23.0,
+          "watchRatio": 52.57
+        },
+        {
+          "position": 24.0,
+          "watchRatio": 51.25
+        },
+        {
+          "position": 25.0,
+          "watchRatio": 50.16
+        },
+        {
+          "position": 26.0,
+          "watchRatio": 49.02
+        },
+        {
+          "position": 27.0,
+          "watchRatio": 47.61
+        },
+        {
+          "position": 28.0,
+          "watchRatio": 47.33
+        },
+        {
+          "position": 29.0,
+          "watchRatio": 46.95
+        },
+        {
+          "position": 30.0,
+          "watchRatio": 45.42
+        },
+        {
+          "position": 31.0,
+          "watchRatio": 44.72
+        },
+        {
+          "position": 32.0,
+          "watchRatio": 43.92
+        },
+        {
+          "position": 33.0,
+          "watchRatio": 42.33
+        },
+        {
+          "position": 34.0,
+          "watchRatio": 41.68
+        },
+        {
+          "position": 35.0,
+          "watchRatio": 40.73
+        },
+        {
+          "position": 36.0,
+          "watchRatio": 41.88
+        },
+        {
+          "position": 37.0,
+          "watchRatio": 40.76
+        },
+        {
+          "position": 38.0,
+          "watchRatio": 40.12
+        },
+        {
+          "position": 39.0,
+          "watchRatio": 39.52
+        },
+        {
+          "position": 40.0,
+          "watchRatio": 38.57
+        },
+        {
+          "position": 41.0,
+          "watchRatio": 38.09
+        },
+        {
+          "position": 42.0,
+          "watchRatio": 37.53
+        },
+        {
+          "position": 43.0,
+          "watchRatio": 36.62
+        },
+        {
+          "position": 44.0,
+          "watchRatio": 35.98
+        },
+        {
+          "position": 45.0,
+          "watchRatio": 35.72
+        },
+        {
+          "position": 46.0,
+          "watchRatio": 35.6
+        },
+        {
+          "position": 47.0,
+          "watchRatio": 35.16
+        },
+        {
+          "position": 48.0,
+          "watchRatio": 35.16
+        },
+        {
+          "position": 49.0,
+          "watchRatio": 34.91
+        },
+        {
+          "position": 50.0,
+          "watchRatio": 34.38
+        },
+        {
+          "position": 51.0,
+          "watchRatio": 34.14
+        },
+        {
+          "position": 52.0,
+          "watchRatio": 33.68
+        },
+        {
+          "position": 53.0,
+          "watchRatio": 33.41
+        },
+        {
+          "position": 54.0,
+          "watchRatio": 33.27
+        },
+        {
+          "position": 55.0,
+          "watchRatio": 32.94
+        },
+        {
+          "position": 56.0,
+          "watchRatio": 32.08
+        },
+        {
+          "position": 57.0,
+          "watchRatio": 31.95
+        },
+        {
+          "position": 58.0,
+          "watchRatio": 31.65
+        },
+        {
+          "position": 59.0,
+          "watchRatio": 31.59
+        },
+        {
+          "position": 60.0,
+          "watchRatio": 31.37
+        },
+        {
+          "position": 61.0,
+          "watchRatio": 31.16
+        },
+        {
+          "position": 62.0,
+          "watchRatio": 30.78
+        },
+        {
+          "position": 63.0,
+          "watchRatio": 30.37
+        },
+        {
+          "position": 64.0,
+          "watchRatio": 30.12
+        },
+        {
+          "position": 65.0,
+          "watchRatio": 30.12
+        },
+        {
+          "position": 66.0,
+          "watchRatio": 29.6
+        },
+        {
+          "position": 67.0,
+          "watchRatio": 29.52
+        },
+        {
+          "position": 68.0,
+          "watchRatio": 29.47
+        },
+        {
+          "position": 69.0,
+          "watchRatio": 29.16
+        },
+        {
+          "position": 70.0,
+          "watchRatio": 28.78
+        },
+        {
+          "position": 71.0,
+          "watchRatio": 28.41
+        },
+        {
+          "position": 72.0,
+          "watchRatio": 28.14
+        },
+        {
+          "position": 73.0,
+          "watchRatio": 27.69
+        },
+        {
+          "position": 74.0,
+          "watchRatio": 27.32
+        },
+        {
+          "position": 75.0,
+          "watchRatio": 27.13
+        },
+        {
+          "position": 76.0,
+          "watchRatio": 26.62
+        },
+        {
+          "position": 77.0,
+          "watchRatio": 26.61
+        },
+        {
+          "position": 78.0,
+          "watchRatio": 26.47
+        },
+        {
+          "position": 79.0,
+          "watchRatio": 25.72
+        },
+        {
+          "position": 80.0,
+          "watchRatio": 25.71
+        },
+        {
+          "position": 81.0,
+          "watchRatio": 25.44
+        },
+        {
+          "position": 82.0,
+          "watchRatio": 25.18
+        },
+        {
+          "position": 83.0,
+          "watchRatio": 24.66
+        },
+        {
+          "position": 84.0,
+          "watchRatio": 24.58
+        },
+        {
+          "position": 85.0,
+          "watchRatio": 24.28
+        },
+        {
+          "position": 86.0,
+          "watchRatio": 23.87
+        },
+        {
+          "position": 87.0,
+          "watchRatio": 23.84
+        },
+        {
+          "position": 88.0,
+          "watchRatio": 23.63
+        },
+        {
+          "position": 89.0,
+          "watchRatio": 23.22
+        },
+        {
+          "position": 90.0,
+          "watchRatio": 23.3
+        },
+        {
+          "position": 91.0,
+          "watchRatio": 23.06
+        },
+        {
+          "position": 92.0,
+          "watchRatio": 22.86
+        },
+        {
+          "position": 93.0,
+          "watchRatio": 22.6
+        },
+        {
+          "position": 94.0,
+          "watchRatio": 22.42
+        },
+        {
+          "position": 95.0,
+          "watchRatio": 22.19
+        },
+        {
+          "position": 96.0,
+          "watchRatio": 21.89
+        },
+        {
+          "position": 97.0,
+          "watchRatio": 21.63
+        },
+        {
+          "position": 98.0,
+          "watchRatio": 21.26
+        },
+        {
+          "position": 99.0,
+          "watchRatio": 20.74
+        },
+        {
+          "position": 100.0,
+          "watchRatio": 19.39
         }
       ]
     },
@@ -16961,6 +25403,408 @@
           "subscribersGained": 0,
           "subscribersLost": 0
         }
+      ],
+      "retention": [
+        {
+          "position": 1.0,
+          "watchRatio": 96.03
+        },
+        {
+          "position": 2.0,
+          "watchRatio": 90.93
+        },
+        {
+          "position": 3.0,
+          "watchRatio": 87.44
+        },
+        {
+          "position": 4.0,
+          "watchRatio": 87.23
+        },
+        {
+          "position": 5.0,
+          "watchRatio": 84.39
+        },
+        {
+          "position": 6.0,
+          "watchRatio": 82.0
+        },
+        {
+          "position": 7.0,
+          "watchRatio": 79.71
+        },
+        {
+          "position": 8.0,
+          "watchRatio": 78.46
+        },
+        {
+          "position": 9.0,
+          "watchRatio": 77.48
+        },
+        {
+          "position": 10.0,
+          "watchRatio": 76.02
+        },
+        {
+          "position": 11.0,
+          "watchRatio": 75.07
+        },
+        {
+          "position": 12.0,
+          "watchRatio": 73.66
+        },
+        {
+          "position": 13.0,
+          "watchRatio": 73.08
+        },
+        {
+          "position": 14.0,
+          "watchRatio": 72.07
+        },
+        {
+          "position": 15.0,
+          "watchRatio": 71.95
+        },
+        {
+          "position": 16.0,
+          "watchRatio": 69.63
+        },
+        {
+          "position": 17.0,
+          "watchRatio": 69.54
+        },
+        {
+          "position": 18.0,
+          "watchRatio": 68.71
+        },
+        {
+          "position": 19.0,
+          "watchRatio": 67.83
+        },
+        {
+          "position": 20.0,
+          "watchRatio": 67.64
+        },
+        {
+          "position": 21.0,
+          "watchRatio": 66.18
+        },
+        {
+          "position": 22.0,
+          "watchRatio": 66.39
+        },
+        {
+          "position": 23.0,
+          "watchRatio": 65.75
+        },
+        {
+          "position": 24.0,
+          "watchRatio": 66.79
+        },
+        {
+          "position": 25.0,
+          "watchRatio": 65.35
+        },
+        {
+          "position": 26.0,
+          "watchRatio": 65.75
+        },
+        {
+          "position": 27.0,
+          "watchRatio": 66.51
+        },
+        {
+          "position": 28.0,
+          "watchRatio": 65.87
+        },
+        {
+          "position": 29.0,
+          "watchRatio": 66.33
+        },
+        {
+          "position": 30.0,
+          "watchRatio": 65.66
+        },
+        {
+          "position": 31.0,
+          "watchRatio": 65.87
+        },
+        {
+          "position": 32.0,
+          "watchRatio": 64.59
+        },
+        {
+          "position": 33.0,
+          "watchRatio": 65.35
+        },
+        {
+          "position": 34.0,
+          "watchRatio": 64.74
+        },
+        {
+          "position": 35.0,
+          "watchRatio": 63.89
+        },
+        {
+          "position": 36.0,
+          "watchRatio": 64.74
+        },
+        {
+          "position": 37.0,
+          "watchRatio": 63.21
+        },
+        {
+          "position": 38.0,
+          "watchRatio": 62.85
+        },
+        {
+          "position": 39.0,
+          "watchRatio": 61.53
+        },
+        {
+          "position": 40.0,
+          "watchRatio": 61.5
+        },
+        {
+          "position": 41.0,
+          "watchRatio": 59.91
+        },
+        {
+          "position": 42.0,
+          "watchRatio": 59.98
+        },
+        {
+          "position": 43.0,
+          "watchRatio": 60.49
+        },
+        {
+          "position": 44.0,
+          "watchRatio": 59.95
+        },
+        {
+          "position": 45.0,
+          "watchRatio": 59.95
+        },
+        {
+          "position": 46.0,
+          "watchRatio": 59.03
+        },
+        {
+          "position": 47.0,
+          "watchRatio": 59.58
+        },
+        {
+          "position": 48.0,
+          "watchRatio": 59.03
+        },
+        {
+          "position": 49.0,
+          "watchRatio": 60.04
+        },
+        {
+          "position": 50.0,
+          "watchRatio": 58.75
+        },
+        {
+          "position": 51.0,
+          "watchRatio": 59.15
+        },
+        {
+          "position": 52.0,
+          "watchRatio": 59.43
+        },
+        {
+          "position": 53.0,
+          "watchRatio": 59.03
+        },
+        {
+          "position": 54.0,
+          "watchRatio": 58.72
+        },
+        {
+          "position": 55.0,
+          "watchRatio": 58.02
+        },
+        {
+          "position": 56.0,
+          "watchRatio": 58.17
+        },
+        {
+          "position": 57.0,
+          "watchRatio": 57.07
+        },
+        {
+          "position": 58.0,
+          "watchRatio": 56.74
+        },
+        {
+          "position": 59.0,
+          "watchRatio": 56.13
+        },
+        {
+          "position": 60.0,
+          "watchRatio": 55.73
+        },
+        {
+          "position": 61.0,
+          "watchRatio": 55.67
+        },
+        {
+          "position": 62.0,
+          "watchRatio": 55.27
+        },
+        {
+          "position": 63.0,
+          "watchRatio": 54.9
+        },
+        {
+          "position": 64.0,
+          "watchRatio": 54.26
+        },
+        {
+          "position": 65.0,
+          "watchRatio": 54.08
+        },
+        {
+          "position": 66.0,
+          "watchRatio": 53.07
+        },
+        {
+          "position": 67.0,
+          "watchRatio": 53.8
+        },
+        {
+          "position": 68.0,
+          "watchRatio": 52.89
+        },
+        {
+          "position": 69.0,
+          "watchRatio": 52.12
+        },
+        {
+          "position": 70.0,
+          "watchRatio": 52.31
+        },
+        {
+          "position": 71.0,
+          "watchRatio": 51.67
+        },
+        {
+          "position": 72.0,
+          "watchRatio": 50.78
+        },
+        {
+          "position": 73.0,
+          "watchRatio": 50.14
+        },
+        {
+          "position": 74.0,
+          "watchRatio": 50.05
+        },
+        {
+          "position": 75.0,
+          "watchRatio": 49.16
+        },
+        {
+          "position": 76.0,
+          "watchRatio": 49.43
+        },
+        {
+          "position": 77.0,
+          "watchRatio": 49.25
+        },
+        {
+          "position": 78.0,
+          "watchRatio": 48.06
+        },
+        {
+          "position": 79.0,
+          "watchRatio": 47.94
+        },
+        {
+          "position": 80.0,
+          "watchRatio": 47.05
+        },
+        {
+          "position": 81.0,
+          "watchRatio": 47.11
+        },
+        {
+          "position": 82.0,
+          "watchRatio": 46.56
+        },
+        {
+          "position": 83.0,
+          "watchRatio": 46.65
+        },
+        {
+          "position": 84.0,
+          "watchRatio": 46.78
+        },
+        {
+          "position": 85.0,
+          "watchRatio": 46.56
+        },
+        {
+          "position": 86.0,
+          "watchRatio": 46.23
+        },
+        {
+          "position": 87.0,
+          "watchRatio": 45.92
+        },
+        {
+          "position": 88.0,
+          "watchRatio": 45.37
+        },
+        {
+          "position": 89.0,
+          "watchRatio": 44.7
+        },
+        {
+          "position": 90.0,
+          "watchRatio": 44.79
+        },
+        {
+          "position": 91.0,
+          "watchRatio": 43.42
+        },
+        {
+          "position": 92.0,
+          "watchRatio": 42.8
+        },
+        {
+          "position": 93.0,
+          "watchRatio": 42.41
+        },
+        {
+          "position": 94.0,
+          "watchRatio": 41.64
+        },
+        {
+          "position": 95.0,
+          "watchRatio": 41.0
+        },
+        {
+          "position": 96.0,
+          "watchRatio": 40.09
+        },
+        {
+          "position": 97.0,
+          "watchRatio": 39.54
+        },
+        {
+          "position": 98.0,
+          "watchRatio": 38.44
+        },
+        {
+          "position": 99.0,
+          "watchRatio": 37.64
+        },
+        {
+          "position": 100.0,
+          "watchRatio": 36.39
+        }
       ]
     },
     "HJbI9RGGR2s": {
@@ -17020,6 +25864,408 @@
           "shares": 1,
           "subscribersGained": 1,
           "subscribersLost": 0
+        }
+      ],
+      "retention": [
+        {
+          "position": 1.0,
+          "watchRatio": 95.77
+        },
+        {
+          "position": 2.0,
+          "watchRatio": 88.79
+        },
+        {
+          "position": 3.0,
+          "watchRatio": 85.66
+        },
+        {
+          "position": 4.0,
+          "watchRatio": 83.82
+        },
+        {
+          "position": 5.0,
+          "watchRatio": 82.08
+        },
+        {
+          "position": 6.0,
+          "watchRatio": 80.33
+        },
+        {
+          "position": 7.0,
+          "watchRatio": 80.24
+        },
+        {
+          "position": 8.0,
+          "watchRatio": 78.86
+        },
+        {
+          "position": 9.0,
+          "watchRatio": 78.31
+        },
+        {
+          "position": 10.0,
+          "watchRatio": 77.57
+        },
+        {
+          "position": 11.0,
+          "watchRatio": 77.3
+        },
+        {
+          "position": 12.0,
+          "watchRatio": 75.09
+        },
+        {
+          "position": 13.0,
+          "watchRatio": 74.08
+        },
+        {
+          "position": 14.0,
+          "watchRatio": 73.9
+        },
+        {
+          "position": 15.0,
+          "watchRatio": 71.32
+        },
+        {
+          "position": 16.0,
+          "watchRatio": 71.88
+        },
+        {
+          "position": 17.0,
+          "watchRatio": 70.86
+        },
+        {
+          "position": 18.0,
+          "watchRatio": 71.14
+        },
+        {
+          "position": 19.0,
+          "watchRatio": 70.77
+        },
+        {
+          "position": 20.0,
+          "watchRatio": 70.68
+        },
+        {
+          "position": 21.0,
+          "watchRatio": 71.97
+        },
+        {
+          "position": 22.0,
+          "watchRatio": 70.68
+        },
+        {
+          "position": 23.0,
+          "watchRatio": 71.78
+        },
+        {
+          "position": 24.0,
+          "watchRatio": 70.59
+        },
+        {
+          "position": 25.0,
+          "watchRatio": 72.61
+        },
+        {
+          "position": 26.0,
+          "watchRatio": 73.81
+        },
+        {
+          "position": 27.0,
+          "watchRatio": 74.17
+        },
+        {
+          "position": 28.0,
+          "watchRatio": 75.0
+        },
+        {
+          "position": 29.0,
+          "watchRatio": 73.99
+        },
+        {
+          "position": 30.0,
+          "watchRatio": 71.51
+        },
+        {
+          "position": 31.0,
+          "watchRatio": 70.13
+        },
+        {
+          "position": 32.0,
+          "watchRatio": 70.22
+        },
+        {
+          "position": 33.0,
+          "watchRatio": 69.58
+        },
+        {
+          "position": 34.0,
+          "watchRatio": 68.47
+        },
+        {
+          "position": 35.0,
+          "watchRatio": 68.47
+        },
+        {
+          "position": 36.0,
+          "watchRatio": 67.56
+        },
+        {
+          "position": 37.0,
+          "watchRatio": 67.1
+        },
+        {
+          "position": 38.0,
+          "watchRatio": 66.27
+        },
+        {
+          "position": 39.0,
+          "watchRatio": 66.08
+        },
+        {
+          "position": 40.0,
+          "watchRatio": 66.27
+        },
+        {
+          "position": 41.0,
+          "watchRatio": 65.35
+        },
+        {
+          "position": 42.0,
+          "watchRatio": 64.71
+        },
+        {
+          "position": 43.0,
+          "watchRatio": 63.88
+        },
+        {
+          "position": 44.0,
+          "watchRatio": 60.57
+        },
+        {
+          "position": 45.0,
+          "watchRatio": 59.74
+        },
+        {
+          "position": 46.0,
+          "watchRatio": 58.55
+        },
+        {
+          "position": 47.0,
+          "watchRatio": 58.36
+        },
+        {
+          "position": 48.0,
+          "watchRatio": 56.71
+        },
+        {
+          "position": 49.0,
+          "watchRatio": 55.7
+        },
+        {
+          "position": 50.0,
+          "watchRatio": 55.24
+        },
+        {
+          "position": 51.0,
+          "watchRatio": 54.78
+        },
+        {
+          "position": 52.0,
+          "watchRatio": 53.86
+        },
+        {
+          "position": 53.0,
+          "watchRatio": 52.94
+        },
+        {
+          "position": 54.0,
+          "watchRatio": 52.39
+        },
+        {
+          "position": 55.0,
+          "watchRatio": 51.75
+        },
+        {
+          "position": 56.0,
+          "watchRatio": 51.47
+        },
+        {
+          "position": 57.0,
+          "watchRatio": 50.83
+        },
+        {
+          "position": 58.0,
+          "watchRatio": 50.18
+        },
+        {
+          "position": 59.0,
+          "watchRatio": 50.09
+        },
+        {
+          "position": 60.0,
+          "watchRatio": 48.25
+        },
+        {
+          "position": 61.0,
+          "watchRatio": 48.25
+        },
+        {
+          "position": 62.0,
+          "watchRatio": 47.61
+        },
+        {
+          "position": 63.0,
+          "watchRatio": 46.32
+        },
+        {
+          "position": 64.0,
+          "watchRatio": 46.78
+        },
+        {
+          "position": 65.0,
+          "watchRatio": 45.77
+        },
+        {
+          "position": 66.0,
+          "watchRatio": 45.68
+        },
+        {
+          "position": 67.0,
+          "watchRatio": 44.3
+        },
+        {
+          "position": 68.0,
+          "watchRatio": 44.03
+        },
+        {
+          "position": 69.0,
+          "watchRatio": 42.46
+        },
+        {
+          "position": 70.0,
+          "watchRatio": 43.47
+        },
+        {
+          "position": 71.0,
+          "watchRatio": 43.66
+        },
+        {
+          "position": 72.0,
+          "watchRatio": 42.1
+        },
+        {
+          "position": 73.0,
+          "watchRatio": 40.9
+        },
+        {
+          "position": 74.0,
+          "watchRatio": 40.53
+        },
+        {
+          "position": 75.0,
+          "watchRatio": 39.89
+        },
+        {
+          "position": 76.0,
+          "watchRatio": 40.07
+        },
+        {
+          "position": 77.0,
+          "watchRatio": 39.52
+        },
+        {
+          "position": 78.0,
+          "watchRatio": 39.61
+        },
+        {
+          "position": 79.0,
+          "watchRatio": 38.24
+        },
+        {
+          "position": 80.0,
+          "watchRatio": 37.22
+        },
+        {
+          "position": 81.0,
+          "watchRatio": 37.41
+        },
+        {
+          "position": 82.0,
+          "watchRatio": 36.4
+        },
+        {
+          "position": 83.0,
+          "watchRatio": 36.21
+        },
+        {
+          "position": 84.0,
+          "watchRatio": 35.02
+        },
+        {
+          "position": 85.0,
+          "watchRatio": 35.11
+        },
+        {
+          "position": 86.0,
+          "watchRatio": 34.74
+        },
+        {
+          "position": 87.0,
+          "watchRatio": 33.73
+        },
+        {
+          "position": 88.0,
+          "watchRatio": 33.09
+        },
+        {
+          "position": 89.0,
+          "watchRatio": 32.54
+        },
+        {
+          "position": 90.0,
+          "watchRatio": 32.44
+        },
+        {
+          "position": 91.0,
+          "watchRatio": 31.25
+        },
+        {
+          "position": 92.0,
+          "watchRatio": 31.25
+        },
+        {
+          "position": 93.0,
+          "watchRatio": 31.71
+        },
+        {
+          "position": 94.0,
+          "watchRatio": 30.97
+        },
+        {
+          "position": 95.0,
+          "watchRatio": 30.88
+        },
+        {
+          "position": 96.0,
+          "watchRatio": 30.06
+        },
+        {
+          "position": 97.0,
+          "watchRatio": 29.5
+        },
+        {
+          "position": 98.0,
+          "watchRatio": 28.86
+        },
+        {
+          "position": 99.0,
+          "watchRatio": 28.58
+        },
+        {
+          "position": 100.0,
+          "watchRatio": 27.21
         }
       ]
     }
