@@ -429,6 +429,26 @@ def get_all_videos(
                         )
                     ),
 
+                "likeCount":
+                    int(
+                        item[
+                            "statistics"
+                        ].get(
+                            "likeCount",
+                            0,
+                        )
+                    ),
+
+                "commentCount":
+                    int(
+                        item[
+                            "statistics"
+                        ].get(
+                            "commentCount",
+                            0,
+                        )
+                    ),
+
                 "tags": [
                     member
                     for member
