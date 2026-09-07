@@ -249,6 +249,83 @@ def create_milestones(rows, published_date):
 
     return milestones
 
+def get_video_retention(video_id, start_date, end_date):
+    """
+    動画の視聴維持率カーブを取得する。
+
+    elapsedVideoTimeRatio:
+        動画の0.0～1.0の位置
+
+    audienceWatchRatio:
+        その位置での相対的な視聴量
+    """
+
+    try:
+
+        response = analytics.reports().query(
+            ids="channel==MINE",
+            startDate=start_date,
+            endDate=end_date,
+            metrics="audienceWatchRatio",
+            dimensions="elapsedVideoTimeRatio",
+            filters=f"video=={video_id}",
+            sort="elapsedVideoTimeRatio"
+        ).execute()
+
+        headers = [
+            column["name"]
+            for column in response.get(
+                "columnHeaders",
+                []
+            )
+        ]
+
+        result = []
+
+        for row in response.get(
+            "rows",
+            []
+        ):
+
+            raw = dict(
+                zip(headers, row)
+            )
+
+            position = raw.get(
+                "elapsedVideoTimeRatio"
+            )
+
+            ratio = raw.get(
+                "audienceWatchRatio"
+            )
+
+            if (
+                position is None or
+                ratio is None
+            ):
+                continue
+
+            result.append({
+                "position": round(
+                    float(position) * 100,
+                    2
+                ),
+                "watchRatio": round(
+                    float(ratio) * 100,
+                    2
+                )
+            })
+
+        return result
+
+    except HttpError as error:
+
+        print(
+            f"  RETENTION ERROR: {error}"
+        )
+
+        return []
+
 
 # =========================================================
 # LOAD data.json
@@ -362,6 +439,18 @@ for index, video in enumerate(
             response
         )
 
+        retention = get_video_retention(
+            video_id,
+            video_start_date,
+            END_DATE
+        )
+
+        print(
+            f"  → 視聴維持率 {len(retention)} 点取得"
+        )
+
+        time.sleep(0.1)
+
         videos[video_id] = {
             "title": title,
             "publishedDate": upload_date,
@@ -378,7 +467,8 @@ for index, video in enumerate(
                 daily,
                 upload_date
             ),
-            "daily": daily
+            "daily": daily,
+            "retention": retention
         }
 
         success_count += 1
