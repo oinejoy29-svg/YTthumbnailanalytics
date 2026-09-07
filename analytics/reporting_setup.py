@@ -450,8 +450,7 @@ if reports:
 
         response.raise_for_status()
 
-        csv_text =
-            response.text
+        csv_text = response.text
 
 
         # =====================================================
