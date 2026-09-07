@@ -2299,6 +2299,7 @@ function calculateOverviewSummaryFromRows(
       percentageWeight +=
         rowViews;
     }
+
   });
 
 
@@ -2333,6 +2334,8 @@ function calculateOverviewSummaryFromRows(
 
   };
 }
+
+
 
 
 function calculatePeriodChange(
