@@ -243,6 +243,77 @@ function getSelectedVideoReachData(){
     );
 }
 
+function getVideoReachSummary(videoId){
+
+  if(
+    !videoId ||
+    !REACH_DATA ||
+    !Array.isArray(REACH_DATA.daily)
+  ){
+    return null;
+  }
+
+  const rows =
+    REACH_DATA.daily.filter(
+      row => row.videoId === videoId
+    );
+
+  if(!rows.length){
+    return null;
+  }
+
+
+  let totalImpressions = 0;
+  let weightedCtr = 0;
+
+
+  rows.forEach(row => {
+
+    const impressions =
+      Number(row.thumbnailImpressions);
+
+    const ctr =
+      Number(row.thumbnailClickRatePercent);
+
+
+    if(
+      !Number.isFinite(impressions) ||
+      impressions <= 0
+    ){
+      return;
+    }
+
+
+    totalImpressions +=
+      impressions;
+
+
+    if(Number.isFinite(ctr)){
+
+      weightedCtr +=
+        impressions * ctr;
+    }
+
+  });
+
+
+  if(totalImpressions <= 0){
+    return null;
+  }
+
+
+  return {
+
+    impressions:
+      totalImpressions,
+
+    clickRate:
+      weightedCtr /
+      totalImpressions
+
+  };
+}
+
 function parseDateOnly(value){
 
   if(!value){
@@ -457,11 +528,24 @@ function getRankingMetricValue(
         : null;
 
 
-    /*
-      Reporting APIなどで
-      実データを取得するまで未対応
-    */
-    case "ctr":
+    case "ctr": {
+
+      const reach =
+        getVideoReachSummary(
+          video.id
+        );
+
+      return (
+        reach &&
+        Number.isFinite(
+          reach.clickRate
+        )
+      )
+        ? reach.clickRate
+        : null;
+    }
+
+
     case "likeRate":
       return null;
 
@@ -5453,6 +5537,13 @@ function renderIndividualAverageRanks(){
       `${formatWatchHours(value)}時間`
   );
 
+  updateIndividualAverageRank(
+    "クリック率",
+    "ctr",
+    value =>
+      `${Number(value).toFixed(2)}%`
+  );
+
 }
 
 /* =========================================================
@@ -5846,6 +5937,11 @@ function renderIndividualRealMetrics(){
 　const dataApi =
     video.dataApi || {};
 
+  const reachSummary =
+    getVideoReachSummary(
+      video.id
+    );
+
 
   const milestones =
     video.analytics.milestones || {};
@@ -5853,9 +5949,6 @@ function renderIndividualRealMetrics(){
 
   /*
     上6カード
-
-    クリック率はまだReporting API側なので
-    この段階では触らない。
   */
 
   updateMainIndividualMetric(
@@ -5866,6 +5959,16 @@ function renderIndividualRealMetrics(){
       : formatInteger(
           dataApi.viewCount
         )
+  );
+   
+  updateMainIndividualMetric(
+    "クリック率",
+    reachSummary &&
+    Number.isFinite(
+      reachSummary.clickRate
+    )
+      ? `${reachSummary.clickRate.toFixed(2)}%`
+      : "—"
   );
 
   updateMainIndividualMetric(
