@@ -599,8 +599,10 @@ function formatRankingMetricValue(
 
   switch(metric){
 
-    case "averagePercentageViewed":
-      return `${number.toFixed(1)}%`;
+ 　 case "ctr":
+ 　 case "likeRate":
+ 　 case "averagePercentageViewed":
+    　return `${number.toFixed(1)}%`;
 
 
     case "subscribersGained":
@@ -659,24 +661,7 @@ function getRankingVideos(){
   }
 
 
-  /*
-    クリック率・高評価率は
-    まだ実データがないので
-    偽の順位を作らない。
-  */
-  if(
-    currentRankingMetric === "ctr" ||
-    currentRankingMetric === "likeRate"
-  ){
 
-    return videos.sort(
-      (a,b) =>
-        String(b.date)
-          .localeCompare(
-            String(a.date)
-          )
-    );
-  }
 
 
   /*
@@ -1166,14 +1151,40 @@ function getVideoDailySeries(
       daily.map(row => {
 
         if(metric === "engaged"){
-          return Number(
-            row.engagedViews || 0
-          );
+
+          if(
+            row.engagedViews === null ||
+            row.engagedViews === undefined
+          ){
+            return null;
+          }
+
+          const value =
+            Number(
+              row.engagedViews
+            );
+
+          return Number.isFinite(value)
+            ? value
+            : null;
         }
 
-        return Number(
-          row.views || 0
-        );
+
+        if(
+          row.views === null ||
+          row.views === undefined
+        ){
+          return null;
+        }
+
+        const value =
+          Number(
+            row.views
+          );
+
+        return Number.isFinite(value)
+          ? value
+          : null;
 
       })
 
@@ -5840,13 +5851,40 @@ function updateVelocityIncrease(
   }
 
 
+  if(
+    from.views === null ||
+    from.views === undefined ||
+    to.views === null ||
+    to.views === undefined
+  ){
+    strong.textContent = "—";
+    return;
+  }
+
+
+  const fromViews =
+    Number(from.views);
+
+  const toViews =
+    Number(to.views);
+
+
+  if(
+    !Number.isFinite(fromViews) ||
+    !Number.isFinite(toViews)
+  ){
+    strong.textContent = "—";
+    return;
+  }
+
+
   const increase =
-    Number(to.views || 0) -
-    Number(from.views || 0);
+    toViews -
+    fromViews;
 
 
   strong.textContent =
-    `+${increase.toLocaleString("ja-JP")}`;
+    `${increase >= 0 ? "+" : ""}${increase.toLocaleString("ja-JP")}`;
 }
 
 /* =========================================================
@@ -5867,72 +5905,64 @@ function getIndividualMetricValue(
 
   switch(metric){
 
-    case "views":
-      return Number.isFinite(
-        Number(summary.views)
-      )
-        ? Number(summary.views)
-        : null;
+　　case "views":
+  　　return (
+   　　 summary.views !== null &&
+   　　 summary.views !== undefined &&
+   　　 Number.isFinite(Number(summary.views))
+ 　　 )
+    　　? Number(summary.views)
+    　　: null;
 
 
-    case "engagedViews":
-      return Number.isFinite(
-        Number(summary.engagedViews)
-      )
-        ? Number(summary.engagedViews)
-        : null;
+　　case "engagedViews":
+  　　return (
+   　　 summary.engagedViews !== null &&
+   　　 summary.engagedViews !== undefined &&
+  　　  Number.isFinite(Number(summary.engagedViews))
+　　  )
+  　　  ? Number(summary.engagedViews)
+  　　  : null;
 
 
-    case "watchMinutes":
-      return Number.isFinite(
-        Number(summary.watchMinutes)
-      )
-        ? Number(summary.watchMinutes)
-        : null;
+　　case "watchMinutes":
+ 　　 return (
+   　　 summary.watchMinutes !== null &&
+　　    summary.watchMinutes !== undefined &&
+   　　 Number.isFinite(Number(summary.watchMinutes))
+　　  )
+　　    ? Number(summary.watchMinutes)
+   　　 : null;
 
 
-    case "averageViewDuration":
-      return Number.isFinite(
-        Number(summary.averageViewDuration)
-      )
-        ? Number(summary.averageViewDuration)
-        : null;
+　　case "averageViewDuration":
+ 　　 return (
+    　　summary.averageViewDuration !== null &&
+    　　summary.averageViewDuration !== undefined &&
+  　　  Number.isFinite(Number(summary.averageViewDuration))
+　　  )
+  　　  ? Number(summary.averageViewDuration)
+    　　: null;
 
 
-    case "averageViewPercentage":
-      return Number.isFinite(
-        Number(summary.averageViewPercentage)
-      )
-        ? Number(summary.averageViewPercentage)
-        : null;
+　　case "averageViewPercentage":
+  　　return (
+   　　 summary.averageViewPercentage !== null &&
+   　　 summary.averageViewPercentage !== undefined &&
+ 　　   Number.isFinite(Number(summary.averageViewPercentage))
+ 　　 )
+  　　  ? Number(summary.averageViewPercentage)
+   　　 : null;
 
 
-    case "likes":
-      return (
-        video?.dataApi?.likeCount !== null &&
-        video?.dataApi?.likeCount !== undefined &&
-        Number.isFinite(Number(video.dataApi.likeCount))
-      )
-        ? Number(video.dataApi.likeCount)
-        : null;
-
-
-    case "comments":
-      return (
-        video?.dataApi?.commentCount !== null &&
-        video?.dataApi?.commentCount !== undefined &&
-        Number.isFinite(Number(video.dataApi.commentCount))
-      )
-        ? Number(video.dataApi.commentCount)
-        : null;
-
-
-    case "subscribersGained":
-      return Number.isFinite(
-        Number(summary.subscribersGained)
-      )
-        ? Number(summary.subscribersGained)
-        : null;
+　　case "subscribersGained":
+ 　　 return (
+   　　 summary.subscribersGained !== null &&
+   　　 summary.subscribersGained !== undefined &&
+  　　  Number.isFinite(Number(summary.subscribersGained))
+　　  )
+　　    ? Number(summary.subscribersGained)
+ 　　   : null;
 
 
     default:
