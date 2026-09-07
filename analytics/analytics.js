@@ -546,8 +546,31 @@ function getRankingMetricValue(
     }
 
 
-    case "likeRate":
-      return null;
+    case "likeRate": {
+
+      const likes =
+        video?.dataApi?.likeCount;
+
+      const views =
+        video?.dataApi?.viewCount;
+
+      if(
+        likes === null ||
+        likes === undefined ||
+        views === null ||
+        views === undefined ||
+        !Number.isFinite(Number(likes)) ||
+        !Number.isFinite(Number(views)) ||
+        Number(views) <= 0
+      ){
+        return null;
+      }
+
+      return (
+        Number(likes) /
+        Number(views)
+      ) * 100;
+    }
 
 
     default:
@@ -5887,6 +5910,13 @@ function renderIndividualDetailAverageRanks(){
         Math.round(value)
       )
   );
+   
+  updateIndividualMiniAverageRank(
+    "高評価率",
+    "likeRate",
+    value =>
+      `${Number(value).toFixed(2)}%`
+  );
 
 
   updateIndividualMiniAverageRank(
@@ -6107,6 +6137,19 @@ function renderIndividualRealMetrics(){
       : formatInteger(
           dataApi.likeCount
         )
+  );
+
+     const likeRate =
+    getIndividualMetricValue(
+      video,
+      "likeRate"
+    );
+
+  updateIndividualMiniMetric(
+    "高評価率",
+    likeRate === null
+      ? "—"
+      : `${likeRate.toFixed(2)}%`
   );
 
   updateIndividualMiniMetric(
