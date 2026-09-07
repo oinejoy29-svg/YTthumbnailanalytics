@@ -1,8 +1,8 @@
 {
   "meta": {
-    "generatedAt": "2026-09-06",
+    "generatedAt": "2026-09-07",
     "startDate": "2026-04-03",
-    "endDate": "2026-09-05",
+    "endDate": "2026-09-06",
     "videoCount": 23,
     "videoSuccessCount": 23,
     "videoErrorCount": 0
@@ -16882,7 +16882,18 @@
           "shares": 3,
           "subscribersGained": 3
         },
-        "day7": null
+        "day7": {
+          "throughDate": "2026-09-06",
+          "views": 7317,
+          "engagedViews": 3279,
+          "watchMinutes": 8515,
+          "averageViewDuration": 151.43,
+          "averageViewPercentage": 54.19,
+          "likes": 83,
+          "comments": 4,
+          "shares": 3,
+          "subscribersGained": 3
+        }
       },
       "daily": [
         {
@@ -16982,7 +16993,18 @@
           "shares": 1,
           "subscribersGained": 1
         },
-        "day3": null,
+        "day3": {
+          "throughDate": "2026-09-06",
+          "views": 2466,
+          "engagedViews": 1090,
+          "watchMinutes": 2749,
+          "averageViewDuration": 148.0,
+          "averageViewPercentage": 51.19,
+          "likes": 23,
+          "comments": 1,
+          "shares": 1,
+          "subscribersGained": 1
+        },
         "day7": null
       },
       "daily": [
