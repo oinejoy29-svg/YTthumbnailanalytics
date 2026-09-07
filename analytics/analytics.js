@@ -45,8 +45,6 @@ let ANALYTICS_DATA = null;
 
 let REACH_DATA = null;
 
-let END_SCREEN_DATA = null;
-
 let REAL_VIDEOS = [];
 
 let ROOT_VIDEO_DATA = [];
@@ -220,41 +218,7 @@ async function loadReachData(){
   }
 }
 
-async function loadEndScreenData(){
 
-  try{
-
-    const response =
-      await fetch(
-        "./end_screen_daily.json",
-        {
-          cache:"no-store"
-        }
-      );
-
-    if(!response.ok){
-      throw new Error(
-        `end_screen_daily.json: ${response.status}`
-      );
-    }
-
-    END_SCREEN_DATA =
-      await response.json();
-
-    return true;
-
-  }catch(error){
-
-    console.error(
-      "end_screen_daily.json load error:",
-      error
-    );
-
-    END_SCREEN_DATA = null;
-
-    return false;
-  }
-}
 
 
 function getVideoEndScreenSummary(
