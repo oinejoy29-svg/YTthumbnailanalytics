@@ -45,6 +45,8 @@ let ANALYTICS_DATA = null;
 
 let REACH_DATA = null;
 
+let END_SCREEN_DATA = null;
+
 let REAL_VIDEOS = [];
 
 let ROOT_VIDEO_DATA = [];
@@ -218,6 +220,65 @@ async function loadReachData(){
   }
 }
 
+async function loadEndScreenData(){
+
+  try{
+
+    const response =
+      await fetch(
+        "./end_screen_daily.json",
+        {
+          cache:"no-store"
+        }
+      );
+
+    if(!response.ok){
+      throw new Error(
+        `end_screen_daily.json: ${response.status}`
+      );
+    }
+
+    END_SCREEN_DATA =
+      await response.json();
+
+    return true;
+
+  }catch(error){
+
+    console.error(
+      "end_screen_daily.json load error:",
+      error
+    );
+
+    END_SCREEN_DATA = null;
+
+    return false;
+  }
+}
+
+
+function getVideoEndScreenSummary(
+  videoId
+){
+
+  if(
+    !videoId ||
+    !END_SCREEN_DATA
+  ){
+    return null;
+  }
+
+  const row =
+    END_SCREEN_DATA
+      ?.videos
+      ?.[videoId];
+
+  if(!row){
+    return null;
+  }
+
+  return row;
+}
 
 /* =========================================================
    INDIVIDUAL REACH REAL DATA
@@ -6196,12 +6257,54 @@ function getIndividualMetricValue(
 
 　　case "subscribersGained":
  　　 return (
-   　　 summary.subscribersGained !== null &&
-   　　 summary.subscribersGained !== undefined &&
-  　　  Number.isFinite(Number(summary.subscribersGained))
-　　  )
+　　    summary.subscribersGained !== null &&
+　　    summary.subscribersGained !== undefined &&
+　　    Number.isFinite(Number(summary.subscribersGained))
+　  )
 　　    ? Number(summary.subscribersGained)
- 　　   : null;
+  　　   : null;
+
+
+    case "endScreenClicks": {
+
+      const endScreen =
+        getVideoEndScreenSummary(
+          video?.id
+        );
+
+      return (
+        endScreen?.clicks !== null &&
+        endScreen?.clicks !== undefined &&
+        Number.isFinite(
+          Number(endScreen.clicks)
+        )
+      )
+        ? Number(endScreen.clicks)
+        : null;
+    }
+
+
+    case "endScreenClickRate": {
+
+      const endScreen =
+        getVideoEndScreenSummary(
+          video?.id
+        );
+
+      return (
+        endScreen?.clickRatePercent !== null &&
+        endScreen?.clickRatePercent !== undefined &&
+        Number.isFinite(
+          Number(
+            endScreen.clickRatePercent
+          )
+        )
+      )
+        ? Number(
+            endScreen.clickRatePercent
+          )
+        : null;
+    }
 
 
     default:
@@ -6815,6 +6918,24 @@ function renderIndividualDetailAverageRanks(){
     }
   );
 
+
+  updateIndividualMiniAverageRank(
+    "終了画面クリック数",
+    "endScreenClicks",
+    value =>
+      formatInteger(
+        Math.round(value)
+      )
+  );
+
+
+  updateIndividualMiniAverageRank(
+    "終了画面クリック率",
+    "endScreenClickRate",
+    value =>
+      `${Number(value).toFixed(2)}%`
+  );
+
 }
 
 /*
@@ -7138,6 +7259,34 @@ function renderIndividualRealMetrics(){
       : `+${Number(
           summary.subscribersGained
         ).toLocaleString("ja-JP")}`
+  );
+
+
+  const endScreen =
+    getVideoEndScreenSummary(
+      video.id
+    );
+
+
+  updateIndividualMiniMetric(
+    "終了画面クリック数",
+    endScreen?.clicks !== null &&
+    endScreen?.clicks !== undefined
+      ? formatInteger(
+          endScreen.clicks
+        )
+      : "—"
+  );
+
+
+  updateIndividualMiniMetric(
+    "終了画面クリック率",
+    endScreen?.clickRatePercent !== null &&
+    endScreen?.clickRatePercent !== undefined
+      ? `${Number(
+          endScreen.clickRatePercent
+        ).toFixed(2)}%`
+      : "—"
   );
      /*
     全動画平均・順位
@@ -7859,6 +8008,8 @@ await loadAnalyticsData();
 await loadRootVideoData();
 
 await loadReachData();
+
+await loadEndScreenData();
 
 buildRealVideoPicker();
 
