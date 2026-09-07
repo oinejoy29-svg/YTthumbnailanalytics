@@ -326,6 +326,283 @@ def get_video_retention(video_id, start_date, end_date):
 
         return []
 
+def get_video_traffic_sources(
+    video_id,
+    start_date,
+    end_date
+):
+    """
+    動画の流入元を取得する。
+    """
+
+    try:
+
+        response = analytics.reports().query(
+            ids="channel==MINE",
+            startDate=start_date,
+            endDate=end_date,
+            metrics="views,engagedViews,estimatedMinutesWatched",
+            dimensions="insightTrafficSourceType",
+            filters=f"video=={video_id}",
+            sort="-views"
+        ).execute()
+
+        headers = [
+            column["name"]
+            for column in response.get(
+                "columnHeaders",
+                []
+            )
+        ]
+
+        rows = []
+
+        for row in response.get(
+            "rows",
+            []
+        ):
+
+            raw = dict(
+                zip(headers, row)
+            )
+
+            source = raw.get(
+                "insightTrafficSourceType"
+            )
+
+            views = raw.get(
+                "views"
+            )
+
+            if source is None:
+                continue
+
+            rows.append({
+                "source": source,
+                "views": (
+                    int(views)
+                    if views is not None
+                    else 0
+                ),
+                "engagedViews": (
+                    int(
+                        raw.get(
+                            "engagedViews",
+                            0
+                        )
+                    )
+                ),
+                "watchMinutes": round(
+                    float(
+                        raw.get(
+                            "estimatedMinutesWatched",
+                            0
+                        )
+                    ),
+                    2
+                )
+            })
+
+
+        total_views = sum(
+            row["views"]
+            for row in rows
+        )
+
+
+        for row in rows:
+
+            row["percentage"] = (
+                round(
+                    (
+                        row["views"] /
+                        total_views
+                    ) * 100,
+                    2
+                )
+                if total_views > 0
+                else 0
+            )
+
+
+        return rows
+
+
+    except HttpError as error:
+
+        print(
+            f"  TRAFFIC SOURCE ERROR: {error}"
+        )
+
+        return []
+
+
+def get_video_traffic_detail(
+    video_id,
+    start_date,
+    end_date,
+    source_type
+):
+    """
+    指定した流入元の詳細を取得する。
+
+    YT_SEARCH:
+        YouTube検索語
+
+    EXT_URL:
+        外部サイト / 外部URL
+    """
+
+    try:
+
+        response = analytics.reports().query(
+            ids="channel==MINE",
+            startDate=start_date,
+            endDate=end_date,
+            metrics="views,engagedViews,estimatedMinutesWatched",
+            dimensions="insightTrafficSourceDetail",
+            filters=(
+                f"video=={video_id};"
+                f"insightTrafficSourceType=={source_type}"
+            ),
+            sort="-views",
+            maxResults=25
+        ).execute()
+
+
+        headers = [
+            column["name"]
+            for column in response.get(
+                "columnHeaders",
+                []
+            )
+        ]
+
+
+        rows = []
+
+        for row in response.get(
+            "rows",
+            []
+        ):
+
+            raw = dict(
+                zip(headers, row)
+            )
+
+            detail = raw.get(
+                "insightTrafficSourceDetail"
+            )
+
+            views = raw.get(
+                "views"
+            )
+
+            if detail is None:
+                continue
+
+
+            rows.append({
+                "detail": str(detail),
+                "views": (
+                    int(views)
+                    if views is not None
+                    else 0
+                ),
+                "engagedViews": int(
+                    raw.get(
+                        "engagedViews",
+                        0
+                    )
+                ),
+                "watchMinutes": round(
+                    float(
+                        raw.get(
+                            "estimatedMinutesWatched",
+                            0
+                        )
+                    ),
+                    2
+                )
+            })
+
+
+        total_views = sum(
+            row["views"]
+            for row in rows
+        )
+
+
+        for row in rows:
+
+            row["percentage"] = (
+                round(
+                    (
+                        row["views"] /
+                        total_views
+                    ) * 100,
+                    2
+                )
+                if total_views > 0
+                else 0
+            )
+
+
+        return rows
+
+
+    except HttpError as error:
+
+        print(
+            f"  {source_type} DETAIL ERROR: "
+            f"{error}"
+        )
+
+        return []
+
+
+def get_video_traffic(
+    video_id,
+    start_date,
+    end_date
+):
+    """
+    流入元・検索語・外部サイトを
+    一括取得する。
+    """
+
+    sources = get_video_traffic_sources(
+        video_id,
+        start_date,
+        end_date
+    )
+
+
+    search_terms = (
+        get_video_traffic_detail(
+            video_id,
+            start_date,
+            end_date,
+            "YT_SEARCH"
+        )
+    )
+
+
+    external_sites = (
+        get_video_traffic_detail(
+            video_id,
+            start_date,
+            end_date,
+            "EXT_URL"
+        )
+    )
+
+
+    return {
+        "sources": sources,
+        "searchTerms": search_terms,
+        "externalSites": external_sites
+    }
 
 # =========================================================
 # LOAD data.json
@@ -450,6 +727,28 @@ for index, video in enumerate(
         )
 
         time.sleep(0.1)
+        traffic = get_video_traffic(
+            video_id,
+            video_start_date,
+            END_DATE
+        )
+
+        print(
+            f"  → 流入元 "
+            f"{len(traffic['sources'])} 件取得"
+        )
+
+        print(
+            f"  → 検索語 "
+            f"{len(traffic['searchTerms'])} 件取得"
+        )
+
+        print(
+            f"  → 外部サイト "
+            f"{len(traffic['externalSites'])} 件取得"
+        )
+
+        time.sleep(0.1)
 
         videos[video_id] = {
             "title": title,
@@ -468,7 +767,8 @@ for index, video in enumerate(
                 upload_date
             ),
             "daily": daily,
-            "retention": retention
+            "retention": retention,
+            "traffic": traffic
         }
 
         success_count += 1
