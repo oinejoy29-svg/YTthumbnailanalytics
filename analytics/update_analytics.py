@@ -604,6 +604,106 @@ def get_video_traffic(
         "externalSites": external_sites
     }
 
+def get_video_sharing_services(
+    video_id,
+    start_date,
+    end_date
+):
+    """
+    動画のシェア先を取得する。
+
+    sharingService:
+        シェアされたサービス
+
+    shares:
+        シェア回数
+    """
+
+    try:
+
+        response = analytics.reports().query(
+            ids="channel==MINE",
+            startDate=start_date,
+            endDate=end_date,
+            metrics="shares",
+            dimensions="sharingService",
+            filters=f"video=={video_id}",
+            sort="-shares"
+        ).execute()
+
+        headers = [
+            column["name"]
+            for column in response.get(
+                "columnHeaders",
+                []
+            )
+        ]
+
+        result = []
+
+        for row in response.get(
+            "rows",
+            []
+        ):
+
+            raw = dict(
+                zip(headers, row)
+            )
+
+            service = raw.get(
+                "sharingService"
+            )
+
+            shares = raw.get(
+                "shares"
+            )
+
+            if service is None:
+                continue
+
+            try:
+                share_count = int(shares)
+            except (TypeError, ValueError):
+                continue
+
+            result.append({
+                "service": str(service),
+                "shares": share_count
+            })
+
+
+        total_shares = sum(
+            row["shares"]
+            for row in result
+        )
+
+
+        for row in result:
+
+            row["percentage"] = (
+                round(
+                    (
+                        row["shares"]
+                        / total_shares
+                    ) * 100,
+                    2
+                )
+                if total_shares > 0
+                else None
+            )
+
+
+        return result
+
+
+    except HttpError as error:
+
+        print(
+            f"  SHARING SERVICE ERROR: {error}"
+        )
+
+        return []
+
 # =========================================================
 # LOAD data.json
 # =========================================================
@@ -749,6 +849,21 @@ for index, video in enumerate(
         )
 
         time.sleep(0.1)
+        
+        sharing_services = (
+            get_video_sharing_services(
+                video_id,
+                video_start_date,
+                END_DATE
+            )
+        )
+
+        print(
+            f"  → シェア先 "
+            f"{len(sharing_services)} 件取得"
+        )
+
+        time.sleep(0.1)
 
         videos[video_id] = {
             "title": title,
@@ -768,7 +883,8 @@ for index, video in enumerate(
             ),
             "daily": daily,
             "retention": retention,
-            "traffic": traffic
+            "traffic": traffic,
+            "sharingServices": sharing_services
         }
 
         success_count += 1
