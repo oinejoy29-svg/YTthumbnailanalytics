@@ -479,15 +479,13 @@ if reports:
         # CSV → JSON
         # =====================================================
 
-        reader =
-            csv.DictReader(
+        reader = csv.DictReader(
                 io.StringIO(
                     csv_text
                 )
             )
 
-        reach_rows =
-            list(reader)
+        reach_rows = list(reader)
 
 
         with open(
