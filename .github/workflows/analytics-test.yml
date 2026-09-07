@@ -42,6 +42,13 @@ jobs:
           YT_ANALYTICS_CLIENT_SECRET: ${{ secrets.YT_ANALYTICS_CLIENT_SECRET }}
           YT_ANALYTICS_REFRESH_TOKEN: ${{ secrets.YT_ANALYTICS_REFRESH_TOKEN }}
         run: python analytics/reporting_setup.py
+
+      - name: Update YouTube End Screen Data
+        env:
+          YT_ANALYTICS_CLIENT_ID: ${{ secrets.YT_ANALYTICS_CLIENT_ID }}
+          YT_ANALYTICS_CLIENT_SECRET: ${{ secrets.YT_ANALYTICS_CLIENT_SECRET }}
+          YT_ANALYTICS_REFRESH_TOKEN: ${{ secrets.YT_ANALYTICS_REFRESH_TOKEN }}
+        run: python analytics/reporting_end_screen.py
         
       - name: Commit analytics data
         run: |
@@ -55,6 +62,7 @@ jobs:
           [ -f analytics/reporting_reports.json ] && git add analytics/reporting_reports.json
           [ -f analytics/reach_report.csv ] && git add analytics/reach_report.csv
           [ -f analytics/reach_report.json ] && git add analytics/reach_report.json
+           [ -f analytics/end_screen_daily.json ] && git add analytics/end_screen_daily.json
 
         
           if git diff --cached --quiet; then
