@@ -8009,8 +8009,6 @@ await loadRootVideoData();
 
 await loadReachData();
 
-await loadEndScreenData();
-
 buildRealVideoPicker();
 
 renderOverviewRealSummary();
