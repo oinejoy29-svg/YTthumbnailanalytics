@@ -243,6 +243,60 @@ function getSelectedVideoReachData(){
     );
 }
 
+function parseDateOnly(value){
+
+  if(!value){
+    return null;
+  }
+
+  const match =
+    String(value).match(
+      /^(\d{4})-(\d{2})-(\d{2})/
+    );
+
+  if(!match){
+    return null;
+  }
+
+  return Date.UTC(
+    Number(match[1]),
+    Number(match[2]) - 1,
+    Number(match[3])
+  );
+}
+
+
+function getReachDayNumber(
+  publishedDate,
+  reachDate
+){
+
+  const published =
+    parseDateOnly(publishedDate);
+
+  const reach =
+    parseDateOnly(reachDate);
+
+  if(
+    published === null ||
+    reach === null
+  ){
+    return null;
+  }
+
+  const difference =
+    Math.floor(
+      (reach - published) /
+      86400000
+    );
+
+  /*
+    投稿日 = DAY1
+    翌日   = DAY2
+  */
+  return difference + 1;
+}
+
 /* =========================================================
    LOAD ROOT VIDEO DATA
    メンバータグ取得用
@@ -3166,11 +3220,33 @@ function renderRetentionChart(){
 
 function getReachSlice(){
 
+  const video =
+    getSelectedIndividualVideo();
+
   const rows =
-    getSelectedVideoReachData();
+    getSelectedVideoReachData()
+      .map(row => ({
+
+        ...row,
+
+        dayNumber:
+          getReachDayNumber(
+            video?.date,
+            row.date
+          )
+
+      }))
+      .filter(row =>
+        Number.isFinite(
+          row.dayNumber
+        ) &&
+        row.dayNumber >= 1
+      );
+
 
   const total =
     rows.length;
+
 
   if(!total){
 
@@ -3179,7 +3255,8 @@ function getReachSlice(){
       end:0,
       labels:[],
       impressions:[],
-      ctr:[]
+      ctr:[],
+      dayNumbers:[]
     };
   }
 
@@ -3233,9 +3310,13 @@ function getReachSlice(){
     end,
 
     labels:
-      slicedRows.map(
-        (_,index) =>
-          `DAY ${start + index + 1}`
+      slicedRows.map(row =>
+        `DAY ${row.dayNumber}`
+      ),
+
+    dayNumbers:
+      slicedRows.map(row =>
+        row.dayNumber
       ),
 
     impressions:
@@ -3268,7 +3349,6 @@ function getReachSlice(){
   };
 }
 
-
 /* =========================================================
    REACH LABEL
 ========================================================= */
@@ -3284,11 +3364,36 @@ function updateReachWindowLabel(){
     return;
   }
 
+
   const slice =
     getReachSlice();
 
+
+  if(
+    !slice.dayNumbers ||
+    !slice.dayNumbers.length
+  ){
+
+    label.textContent =
+      "データなし";
+
+    return;
+  }
+
+
+  const firstDay =
+    slice.dayNumbers[0];
+
+  const lastDay =
+    slice.dayNumbers[
+      slice.dayNumbers.length - 1
+    ];
+
+
   label.textContent =
-    `DAY ${slice.start + 1} – DAY ${slice.end}`;
+    firstDay === lastDay
+      ? `DAY ${firstDay}`
+      : `DAY ${firstDay} – DAY ${lastDay}`;
 }
 
 
@@ -5935,7 +6040,14 @@ function setIndividualVideo(
   selectedIndividualVideoId =
     video.id;
 
- renderIndividualRealMetrics();
+  currentReachWindow =
+    "first14";
+
+  currentReachStart = 0;
+
+  updateReachWindowButtons();
+
+  renderIndividualRealMetrics();
 
   const title =
     document.getElementById(
