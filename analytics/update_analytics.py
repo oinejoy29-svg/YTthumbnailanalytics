@@ -1030,38 +1030,39 @@ for index, video in enumerate(
         continue
 
     title = video.get("title", "")
+
     upload_date = video.get(
         "date",
         START_DATE
     )
-published_at = video.get(
-    "publishedAt"
-)
 
-published_pacific_date = (
-    get_pacific_publish_date(
-        published_at,
-        upload_date
+    published_at = video.get(
+        "publishedAt"
     )
-)
 
-video_start_date = (
-    published_pacific_date.isoformat()
-    if published_pacific_date
-    else max(
-        upload_date,
+    published_pacific_date = (
+        get_pacific_publish_date(
+            published_at,
+            upload_date
+        )
+    )
+
+    video_start_date = (
+        published_pacific_date.isoformat()
+        if published_pacific_date
+        else max(
+            upload_date,
+            START_DATE
+        )
+    )
+
+    video_start_date = max(
+        video_start_date,
         START_DATE
     )
-)
-
-video_start_date = max(
-    video_start_date,
-    START_DATE
-)
-
-
 
     print()
+
     print(
         f"[{index}/{len(source_videos)}] "
         f"{video_id}"
@@ -1098,6 +1099,7 @@ video_start_date = max(
         )
 
         time.sleep(0.1)
+
         traffic = get_video_traffic(
             video_id,
             video_start_date,
