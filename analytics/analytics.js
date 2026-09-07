@@ -43,6 +43,8 @@ const CHARTS = {};
 
 let ANALYTICS_DATA = null;
 
+let REACH_DATA = null;
+
 let REAL_VIDEOS = [];
 
 let ROOT_VIDEO_DATA = [];
@@ -159,6 +161,86 @@ async function loadAnalyticsData(){
 
     return false;
   }
+}
+
+/* =========================================================
+   LOAD REPORTING REACH DATA
+========================================================= */
+
+async function loadReachData(){
+
+  try{
+
+    const response =
+      await fetch(
+        "./reach_daily.json",
+        {
+          cache:"no-store"
+        }
+      );
+
+    if(!response.ok){
+      throw new Error(
+        `reach_daily.json: ${response.status}`
+      );
+    }
+
+    REACH_DATA =
+      await response.json();
+
+    console.log(
+      `Reach data loaded: ${
+        REACH_DATA?.daily?.length || 0
+      } rows`
+    );
+
+    return true;
+
+  }catch(error){
+
+    console.error(
+      "reach_daily.json load error:",
+      error
+    );
+
+    REACH_DATA = null;
+
+    return false;
+  }
+}
+
+
+/* =========================================================
+   INDIVIDUAL REACH REAL DATA
+========================================================= */
+
+function getSelectedVideoReachData(){
+
+  const video =
+    getSelectedIndividualVideo();
+
+  if(
+    !video ||
+    !REACH_DATA
+  ){
+    return [];
+  }
+
+  const rows =
+    Array.isArray(REACH_DATA.daily)
+      ? REACH_DATA.daily
+      : [];
+
+  return rows
+    .filter(row =>
+      row.videoId === video.id
+    )
+    .sort((a,b) =>
+      String(a.date)
+        .localeCompare(
+          String(b.date)
+        )
+    );
 }
 
 /* =========================================================
@@ -3084,11 +3166,28 @@ function renderRetentionChart(){
 
 function getReachSlice(){
 
-  const total =
-    DUMMY.individual
-      .reachLabels.length;
+  const rows =
+    getSelectedVideoReachData();
 
-  if(currentReachWindow === "current"){
+  const total =
+    rows.length;
+
+  if(!total){
+
+    return {
+      start:0,
+      end:0,
+      labels:[],
+      impressions:[],
+      ctr:[]
+    };
+  }
+
+
+  if(
+    currentReachWindow ===
+    "current"
+  ){
 
     currentReachStart =
       Math.max(
@@ -3098,12 +3197,19 @@ function getReachSlice(){
   }
 
 
+  const maxStart =
+    Math.max(
+      0,
+      total - 14
+    );
+
+
   const start =
     Math.max(
       0,
       Math.min(
         currentReachStart,
-        total - 14
+        maxStart
       )
     );
 
@@ -3115,24 +3221,50 @@ function getReachSlice(){
     );
 
 
+  const slicedRows =
+    rows.slice(
+      start,
+      end
+    );
+
+
   return {
     start,
     end,
 
     labels:
-      DUMMY.individual
-        .reachLabels
-        .slice(start,end),
+      slicedRows.map(
+        (_,index) =>
+          `DAY ${start + index + 1}`
+      ),
 
     impressions:
-      DUMMY.individual
-        .impressions
-        .slice(start,end),
+      slicedRows.map(row => {
+
+        const value =
+          row.thumbnailImpressions;
+
+        return (
+          value === null ||
+          value === undefined
+        )
+          ? null
+          : Number(value);
+      }),
 
     ctr:
-      DUMMY.individual
-        .ctr
-        .slice(start,end)
+      slicedRows.map(row => {
+
+        const value =
+          row.thumbnailClickRatePercent;
+
+        return (
+          value === null ||
+          value === undefined
+        )
+          ? null
+          : Number(value);
+      })
   };
 }
 
@@ -3196,18 +3328,45 @@ function renderIndividualReachChart(
     表示する14日間を移動しても
     Y軸の最大値は変えない。
   */
+  const allReachRows =
+    getSelectedVideoReachData();
+
+  const allValues =
+    isCtr
+      ? allReachRows
+          .map(row =>
+            Number(
+              row.thumbnailClickRatePercent
+            )
+          )
+          .filter(Number.isFinite)
+      : allReachRows
+          .map(row =>
+            Number(
+              row.thumbnailImpressions
+            )
+          )
+          .filter(Number.isFinite);
+
+
+  const rawMax =
+    allValues.length
+      ? Math.max(...allValues)
+      : 1;
+
+
   const fixedYMax =
     isCtr
-      ? Math.ceil(
-          Math.max(
-            ...DUMMY.individual.ctr
-          )
+      ? Math.max(
+          1,
+          Math.ceil(rawMax)
         )
-      : Math.ceil(
-          Math.max(
-            ...DUMMY.individual.impressions
-          ) / 5000
-        ) * 5000;
+      : Math.max(
+          1,
+          Math.ceil(
+            rawMax / 100
+          ) * 100
+        );
 
 
   const baseOptions =
@@ -6018,8 +6177,7 @@ function initReachWindowButtons(){
           currentReachStart =
             Math.max(
               0,
-              DUMMY.individual
-                .reachLabels
+              getSelectedVideoReachData()
                 .length -
               14
             );
@@ -6094,8 +6252,7 @@ function initReachNavigation(){
       const maxStart =
         Math.max(
           0,
-          DUMMY.individual
-            .reachLabels
+          getSelectedVideoReachData()
             .length -
           14
         );
@@ -6471,6 +6628,8 @@ async function init(){
 await loadAnalyticsData();
 
 await loadRootVideoData();
+
+await loadReachData();
 
 buildRealVideoPicker();
 
