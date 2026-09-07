@@ -466,6 +466,97 @@ async function loadRootVideoData(){
     });
 
 
+    const existingIds =
+      new Set(
+        REAL_VIDEOS.map(
+          video => video.id
+        )
+      );
+
+
+    ROOT_VIDEO_DATA.forEach(rootVideo => {
+
+      if(
+        !rootVideo?.id ||
+        existingIds.has(rootVideo.id)
+      ){
+        return;
+      }
+
+
+      REAL_VIDEOS.push({
+
+        id:
+          rootVideo.id,
+
+        title:
+          rootVideo.title ||
+          rootVideo.id,
+
+        shortTitle:
+          rootVideo.title ||
+          rootVideo.id,
+
+        date:
+          rootVideo.date ||
+          "",
+
+        publishedDate:
+          rootVideo.date ||
+          "",
+
+        publishedPacificDate:
+          rootVideo.date ||
+          "",
+
+        publishedAt:
+          rootVideo.publishedAt ||
+          null,
+
+        thumbnail:
+          rootVideo.thumbnail ||
+          `https://i.ytimg.com/vi/${rootVideo.id}/hqdefault.jpg`,
+
+        tags:
+          Array.isArray(rootVideo.tags)
+            ? rootVideo.tags
+            : [],
+
+        dataApi:{
+          viewCount:
+            rootVideo.viewCount === null ||
+            rootVideo.viewCount === undefined
+              ? null
+              : Number(rootVideo.viewCount),
+
+          likeCount:
+            rootVideo.likeCount === null ||
+            rootVideo.likeCount === undefined
+              ? null
+              : Number(rootVideo.likeCount),
+
+          commentCount:
+            rootVideo.commentCount === null ||
+            rootVideo.commentCount === undefined
+              ? null
+              : Number(rootVideo.commentCount)
+        },
+
+        analytics:null
+
+      });
+
+    });
+
+
+    REAL_VIDEOS.sort(
+      (a,b) =>
+        String(b.date || "")
+          .localeCompare(
+            String(a.date || "")
+          )
+    );
+
     console.log(
       `Root video data loaded: ${ROOT_VIDEO_DATA.length} videos`
     );
