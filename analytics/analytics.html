@@ -2604,18 +2604,62 @@
 
 
 
-      <div class="video-picker-search-wrap">
+      <div class="video-picker-controls">
 
-        <input
-          type="search"
-          id="videoPickerSearch"
-          class="video-picker-search"
-          placeholder="動画タイトルを検索"
-          autocomplete="off"
-        >
+        <div class="video-picker-control">
+
+          <button
+            type="button"
+            class="video-picker-control-btn"
+            id="videoPickerSortButton"
+          >
+            並び替え：新しい順
+          </button>
+
+          <div
+            class="video-picker-control-panel"
+            id="videoPickerSortPanel"
+            hidden
+          >
+
+            <button
+              type="button"
+              data-picker-sort="newest"
+            >
+              新しい順
+            </button>
+
+            <button
+              type="button"
+              data-picker-sort="popular"
+            >
+              人気順
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <div class="video-picker-control">
+
+          <button
+            type="button"
+            class="video-picker-control-btn"
+            id="videoPickerFilterButton"
+          >
+            絞り込み：すべて
+          </button>
+
+          <div
+            class="video-picker-control-panel"
+            id="videoPickerFilterPanel"
+            hidden
+          ></div>
+
+        </div>
 
       </div>
-
 
 
       <div
