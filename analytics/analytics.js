@@ -6394,17 +6394,103 @@ function renderIndividualRealMetrics(){
     平均再生時間マーカー
   */
 
+  /*
+    平均再生時間マーカー
+  */
+
   const retentionMarker =
-    document.querySelector(
-      "#retentionAverageTimeMarker strong"
+    document.getElementById(
+      "retentionAverageTimeMarker"
     );
+
+  const retentionMarkerValue =
+    retentionMarker?.querySelector(
+      "strong"
+    );
+
+  const averageViewDuration =
+    Number(
+      summary.averageViewDuration
+    );
+
+  const durationSeconds =
+    Number(
+      video?.analytics?.duration ||
+      video?.dataApi?.durationSeconds ||
+      0
+    );
+
+  if(retentionMarkerValue){
+
+    retentionMarkerValue.textContent =
+      Number.isFinite(
+        averageViewDuration
+      )
+        ? formatDuration(
+            averageViewDuration
+          )
+        : "—";
+  }
+
 
   if(retentionMarker){
 
-    retentionMarker.textContent =
-      formatDuration(
-        summary.averageViewDuration
+    let averagePosition =
+      Number(
+        summary.averageViewPercentage
       );
+
+    /*
+      平均再生率が取れない場合だけ、
+      平均再生時間 ÷ 動画尺で計算
+    */
+    if(
+      !Number.isFinite(
+        averagePosition
+      ) &&
+      Number.isFinite(
+        averageViewDuration
+      ) &&
+      Number.isFinite(
+        durationSeconds
+      ) &&
+      durationSeconds > 0
+    ){
+
+      averagePosition =
+        (
+          averageViewDuration /
+          durationSeconds
+        ) * 100;
+    }
+
+
+    if(
+      Number.isFinite(
+        averagePosition
+      )
+    ){
+
+      averagePosition =
+        Math.max(
+          0,
+          Math.min(
+            100,
+            averagePosition
+          )
+        );
+
+      retentionMarker.style.left =
+        `${averagePosition}%`;
+
+      retentionMarker.style.display =
+        "";
+
+    }else{
+
+      retentionMarker.style.display =
+        "none";
+    }
   }
 
 
