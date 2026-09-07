@@ -6397,19 +6397,54 @@ function getIndividualMetricValue(
    　　 : null;
 
 
-　　case "subscribersGained":
- 　　 return (
-　　    summary.subscribersGained !== null &&
-　　    summary.subscribersGained !== undefined &&
-　　    Number.isFinite(Number(summary.subscribersGained))
-　  )
-　　    ? Number(summary.subscribersGained)
-  　　   : null;
+ 　　case "subscribersGained":
+  　　 return (
+ 　　    summary.subscribersGained !== null &&
+ 　　    summary.subscribersGained !== undefined &&
+ 　　    Number.isFinite(Number(summary.subscribersGained))
+ 　  )
+ 　　    ? Number(summary.subscribersGained)
+   　　   : null;
 
 
+    case "impressions": {
+
+      const reach =
+        getVideoReachSummary(
+          video?.id
+        );
+
+      return (
+        reach &&
+        reach.impressions !== null &&
+        reach.impressions !== undefined &&
+        Number.isFinite(
+          Number(reach.impressions)
+        )
+      )
+        ? Number(reach.impressions)
+        : null;
+    }
 
 
+    case "ctr": {
 
+      const reach =
+        getVideoReachSummary(
+          video?.id
+        );
+
+      return (
+        reach &&
+        reach.clickRate !== null &&
+        reach.clickRate !== undefined &&
+        Number.isFinite(
+          Number(reach.clickRate)
+        )
+      )
+        ? Number(reach.clickRate)
+        : null;
+    }
 
 
     default:
@@ -6943,12 +6978,35 @@ function updateIndividualMiniAverageRank(
 }
 
 
-/*
-  WATCH PERFORMANCE
-  ENGAGEMENT
-  の平均・順位をまとめて更新
-*/
+  /*
+    WATCH PERFORMANCE
+    ENGAGEMENT
+    REACH
+    の平均・順位をまとめて更新
+  */
 function renderIndividualDetailAverageRanks(){
+
+  /*
+    REACH
+  */
+
+  updateIndividualMiniAverageRank(
+    "インプレッション",
+    "impressions",
+    value =>
+      formatInteger(
+        Math.round(value)
+      )
+  );
+
+
+  updateIndividualMiniAverageRank(
+    "クリック率",
+    "ctr",
+    value =>
+      `${Number(value).toFixed(2)}%`
+  );
+
 
   /*
     WATCH PERFORMANCE
