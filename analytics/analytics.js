@@ -221,28 +221,6 @@ async function loadReachData(){
 
 
 
-function getVideoEndScreenSummary(
-  videoId
-){
-
-  if(
-    !videoId ||
-    !END_SCREEN_DATA
-  ){
-    return null;
-  }
-
-  const row =
-    END_SCREEN_DATA
-      ?.videos
-      ?.[videoId];
-
-  if(!row){
-    return null;
-  }
-
-  return row;
-}
 
 /* =========================================================
    INDIVIDUAL REACH REAL DATA
@@ -6229,46 +6207,9 @@ function getIndividualMetricValue(
   　　   : null;
 
 
-    case "endScreenClicks": {
-
-      const endScreen =
-        getVideoEndScreenSummary(
-          video?.id
-        );
-
-      return (
-        endScreen?.clicks !== null &&
-        endScreen?.clicks !== undefined &&
-        Number.isFinite(
-          Number(endScreen.clicks)
-        )
-      )
-        ? Number(endScreen.clicks)
-        : null;
-    }
 
 
-    case "endScreenClickRate": {
 
-      const endScreen =
-        getVideoEndScreenSummary(
-          video?.id
-        );
-
-      return (
-        endScreen?.clickRatePercent !== null &&
-        endScreen?.clickRatePercent !== undefined &&
-        Number.isFinite(
-          Number(
-            endScreen.clickRatePercent
-          )
-        )
-      )
-        ? Number(
-            endScreen.clickRatePercent
-          )
-        : null;
-    }
 
 
     default:
@@ -7226,32 +7167,7 @@ function renderIndividualRealMetrics(){
   );
 
 
-  const endScreen =
-    getVideoEndScreenSummary(
-      video.id
-    );
 
-
-  updateIndividualMiniMetric(
-    "終了画面クリック数",
-    endScreen?.clicks !== null &&
-    endScreen?.clicks !== undefined
-      ? formatInteger(
-          endScreen.clicks
-        )
-      : "—"
-  );
-
-
-  updateIndividualMiniMetric(
-    "終了画面クリック率",
-    endScreen?.clickRatePercent !== null &&
-    endScreen?.clickRatePercent !== undefined
-      ? `${Number(
-          endScreen.clickRatePercent
-        ).toFixed(2)}%`
-      : "—"
-  );
      /*
     全動画平均・順位
   */
