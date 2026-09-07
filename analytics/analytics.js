@@ -216,6 +216,28 @@ async function loadRootVideoData(){
           ? rootVideo.tags
           : [];
 
+      video.dataApi = rootVideo
+        ? {
+            viewCount:
+              rootVideo.viewCount === null ||
+              rootVideo.viewCount === undefined
+                ? null
+                : Number(rootVideo.viewCount),
+
+            likeCount:
+              rootVideo.likeCount === null ||
+              rootVideo.likeCount === undefined
+                ? null
+                : Number(rootVideo.likeCount),
+
+            commentCount:
+              rootVideo.commentCount === null ||
+              rootVideo.commentCount === undefined
+                ? null
+                : Number(rootVideo.commentCount)
+          }
+        : null;
+
     });
 
 
@@ -258,10 +280,12 @@ function getRankingMetricValue(
   switch(metric){
 
     case "views":
-      return Number.isFinite(
-        Number(summary.views)
+      return (
+        video?.dataApi?.viewCount !== null &&
+        video?.dataApi?.viewCount !== undefined &&
+        Number.isFinite(Number(video.dataApi.viewCount))
       )
-        ? Number(summary.views)
+        ? Number(video.dataApi.viewCount)
         : null;
 
 
@@ -4910,18 +4934,22 @@ function getIndividualMetricValue(
 
 
     case "likes":
-      return Number.isFinite(
-        Number(summary.likes)
+      return (
+        video?.dataApi?.likeCount !== null &&
+        video?.dataApi?.likeCount !== undefined &&
+        Number.isFinite(Number(video.dataApi.likeCount))
       )
-        ? Number(summary.likes)
+        ? Number(video.dataApi.likeCount)
         : null;
 
 
     case "comments":
-      return Number.isFinite(
-        Number(summary.comments)
+      return (
+        video?.dataApi?.commentCount !== null &&
+        video?.dataApi?.commentCount !== undefined &&
+        Number.isFinite(Number(video.dataApi.commentCount))
       )
-        ? Number(summary.comments)
+        ? Number(video.dataApi.commentCount)
         : null;
 
 
@@ -5551,6 +5579,9 @@ function renderIndividualRealMetrics(){
   const summary =
     video.analytics.summary || {};
 
+　const dataApi =
+    video.dataApi || {};
+
 
   const milestones =
     video.analytics.milestones || {};
@@ -5565,9 +5596,12 @@ function renderIndividualRealMetrics(){
 
   updateMainIndividualMetric(
     "再生数",
-    formatInteger(
-      summary.views
-    )
+    dataApi.viewCount === null ||
+    dataApi.viewCount === undefined
+      ? "—"
+      : formatInteger(
+          dataApi.viewCount
+        )
   );
 
   updateMainIndividualMetric(
@@ -5700,16 +5734,22 @@ function renderIndividualRealMetrics(){
 
   updateIndividualMiniMetric(
     "高評価数",
-    formatInteger(
-      summary.likes
-    )
+    dataApi.likeCount === null ||
+    dataApi.likeCount === undefined
+      ? "—"
+      : formatInteger(
+          dataApi.likeCount
+        )
   );
 
   updateIndividualMiniMetric(
     "コメント数",
-    formatInteger(
-      summary.comments
-    )
+    dataApi.commentCount === null ||
+    dataApi.commentCount === undefined
+      ? "—"
+      : formatInteger(
+          dataApi.commentCount
+        )
   );
 
   updateIndividualMiniMetric(
@@ -5724,9 +5764,9 @@ function renderIndividualRealMetrics(){
      /*
     全動画平均・順位
   */
-  renderIndividualAverageRanks();
-　renderVelocityAverageRanks();
-　renderIndividualDetailAverageRanks();
+ renderIndividualAverageRanks();
+ renderVelocityAverageRanks();
+ renderIndividualDetailAverageRanks();
 }
 
 function setIndividualVideo(
