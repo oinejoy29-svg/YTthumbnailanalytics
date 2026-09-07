@@ -7627,6 +7627,19 @@ function setIndividualVideo(
   selectedIndividualVideoId =
     video.id;
 
+
+  try{
+
+    localStorage.setItem(
+      "analyticsIndividualVideoId",
+      video.id
+    );
+
+  }catch(error){
+    /* no-op */
+  }
+
+
   currentReachWindow =
     "first14";
 
@@ -7722,6 +7735,40 @@ function setCompareVideo(
   side,
   video
 ){
+
+  if(side === "A"){
+
+    selectedCompareVideoAId =
+      video.id;
+
+    try{
+
+      localStorage.setItem(
+        "analyticsCompareVideoAId",
+        video.id
+      );
+
+    }catch(error){
+      /* no-op */
+    }
+
+  }else if(side === "B"){
+
+    selectedCompareVideoBId =
+      video.id;
+
+    try{
+
+      localStorage.setItem(
+        "analyticsCompareVideoBId",
+        video.id
+      );
+
+    }catch(error){
+      /* no-op */
+    }
+  }
+
 
   const title =
     document.getElementById(
@@ -8219,76 +8266,110 @@ function initResizeHandler(){
 
 function renderInitialVideoSelections(){
 
+  if(!REAL_VIDEOS.length){
+    return;
+  }
+
+
+  const sortedVideos =
+    [...REAL_VIDEOS].sort(
+      (a,b) =>
+        String(
+          b.publishedAt ||
+          b.date ||
+          ""
+        ).localeCompare(
+          String(
+            a.publishedAt ||
+            a.date ||
+            ""
+          )
+        )
+    );
+
+
+  let savedIndividualId = null;
+  let savedCompareAId = null;
+  let savedCompareBId = null;
+
+
+  try{
+
+    savedIndividualId =
+      localStorage.getItem(
+        "analyticsIndividualVideoId"
+      );
+
+    savedCompareAId =
+      localStorage.getItem(
+        "analyticsCompareVideoAId"
+      );
+
+    savedCompareBId =
+      localStorage.getItem(
+        "analyticsCompareVideoBId"
+      );
+
+  }catch(error){
+    /* no-op */
+  }
+
+
   const individualVideo =
-  REAL_VIDEOS[0];
+    sortedVideos.find(
+      video =>
+        video.id ===
+        savedIndividualId
+    ) ||
+    sortedVideos[0] ||
+    null;
 
-const compareVideoA =
-  REAL_VIDEOS[0];
 
-const compareVideoB =
-  REAL_VIDEOS[1];
+  const compareVideoA =
+    sortedVideos.find(
+      video =>
+        video.id ===
+        savedCompareAId
+    ) ||
+    sortedVideos[0] ||
+    null;
+
+
+  const compareVideoB =
+    sortedVideos.find(
+      video =>
+        video.id ===
+        savedCompareBId
+    ) ||
+    sortedVideos[1] ||
+    sortedVideos[0] ||
+    null;
 
 
   if(individualVideo){
 
-    const individualDate =
-      document.getElementById(
-        "individualSelectedDate"
-      );
-
-    if(individualDate){
-
-      individualDate.textContent =
-        formatPublishedAtJP(
-          individualVideo.publishedAt
-        );
-    }
+    setIndividualVideo(
+      individualVideo
+    );
   }
 
 
   if(compareVideoA){
 
-    const dateA =
-      document.getElementById(
-        "compareVideoADate"
-      );
-
-    if(dateA){
-
-      dateA.textContent =
-        formatPublishedAtJP(
-          compareVideoA.publishedAt
-        );
-    }
+    setCompareVideo(
+      "A",
+      compareVideoA
+    );
   }
 
 
   if(compareVideoB){
 
-    const dateB =
-      document.getElementById(
-        "compareVideoBDate"
-      );
-
-    if(dateB){
-
-      dateB.textContent =
-        formatPublishedAtJP(
-          compareVideoB.publishedAt
-        );
-    }
+    setCompareVideo(
+      "B",
+      compareVideoB
+    );
   }
-     selectedIndividualVideoId =
-    individualVideo?.id ||
-    null;
-
-  selectedCompareVideoAId =
-    compareVideoA?.id ||
-    null;
-
-  selectedCompareVideoBId =
-    compareVideoB?.id ||
-    null;
 }
 
 
