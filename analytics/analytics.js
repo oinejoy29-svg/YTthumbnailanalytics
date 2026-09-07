@@ -102,14 +102,23 @@ async function loadAnalyticsData(){
             id,
 
           date:
+            data.publishedPacificDate ||
+            data.publishedDate ||
+            "",
+
+          publishedDate:
+            data.publishedPacificDate ||
+            data.publishedDate ||
+            "",
+
+          publishedPacificDate:
+            data.publishedPacificDate ||
             data.publishedDate ||
             "",
 
           publishedAt:
-            data.publishedDate
-              ? `${data.publishedDate}T00:00:00+09:00`
-              : null,
-
+            data.publishedAt ||
+            null,
           thumbnail:
             data.thumbnail ||
             `https://i.ytimg.com/vi/${id}/hqdefault.jpg`,
@@ -3153,7 +3162,7 @@ const daily =
 
       if(
         row.date &&
-        video.publishedDate
+        video.publishedPacificDate
       ){
 
         const current =
@@ -3163,7 +3172,7 @@ const daily =
 
         const published =
           new Date(
-            `${video.publishedDate}T00:00:00Z`
+            `${video.publishedPacificDate}T00:00:00Z`
           );
 
         const diff =
