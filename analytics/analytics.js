@@ -3142,6 +3142,192 @@ const daily =
     );
 }
 
+function getVideoRetention(video){
+
+  const rows =
+    video?.analytics?.retention;
+
+  if(!Array.isArray(rows)){
+    return [];
+  }
+
+  return rows
+    .map(row => {
+
+      const position =
+        Number(row.position);
+
+      const watchRatio =
+        Number(row.watchRatio);
+
+      if(
+        !Number.isFinite(position) ||
+        !Number.isFinite(watchRatio)
+      ){
+        return null;
+      }
+
+      return {
+        position,
+        watchRatio
+      };
+    })
+    .filter(Boolean)
+    .sort(
+      (a,b) =>
+        a.position - b.position
+    );
+}
+
+
+function interpolateRetention(
+  retention,
+  targetPosition
+){
+
+  if(!retention.length){
+    return null;
+  }
+
+  const exact =
+    retention.find(
+      row =>
+        row.position ===
+        targetPosition
+    );
+
+  if(exact){
+    return exact.watchRatio;
+  }
+
+
+  let before = null;
+  let after = null;
+
+  for(const row of retention){
+
+    if(row.position < targetPosition){
+      before = row;
+      continue;
+    }
+
+    if(row.position > targetPosition){
+      after = row;
+      break;
+    }
+  }
+
+
+  if(!before && after){
+    return after.watchRatio;
+  }
+
+  if(before && !after){
+    return before.watchRatio;
+  }
+
+  if(!before || !after){
+    return null;
+  }
+
+
+  const distance =
+    after.position -
+    before.position;
+
+  if(distance <= 0){
+    return before.watchRatio;
+  }
+
+
+  const progress =
+    (
+      targetPosition -
+      before.position
+    ) /
+    distance;
+
+
+  return (
+    before.watchRatio +
+    (
+      after.watchRatio -
+      before.watchRatio
+    ) *
+    progress
+  );
+}
+
+
+function getAverageRetention(){
+
+  const videos =
+    REAL_VIDEOS
+      .map(video => ({
+        video,
+        retention:
+          getVideoRetention(video)
+      }))
+      .filter(
+        item =>
+          item.retention.length
+      );
+
+
+  if(!videos.length){
+    return [];
+  }
+
+
+  /*
+    0～100%を1%刻みで比較。
+    動画尺が違っても
+    同じ動画進行位置で平均する。
+  */
+  return Array.from(
+    {length:101},
+    (_,position) => {
+
+      const values =
+        videos
+          .map(item =>
+            interpolateRetention(
+              item.retention,
+              position
+            )
+          )
+          .filter(value =>
+            value !== null &&
+            Number.isFinite(value)
+          );
+
+
+      if(!values.length){
+
+        return {
+          position,
+          watchRatio:null
+        };
+      }
+
+
+      const average =
+        values.reduce(
+          (sum,value) =>
+            sum + value,
+          0
+        ) /
+        values.length;
+
+
+      return {
+        position,
+        watchRatio:average
+      };
+    }
+  );
+}
+
 /* =========================================================
    RETENTION
 ========================================================= */
@@ -3166,6 +3352,63 @@ function renderRetentionChart(){
   );
 
 
+  const video =
+    getSelectedIndividualVideo();
+
+  const retention =
+    getVideoRetention(
+      video
+    );
+
+  const averageRetention =
+    getAverageRetention();
+
+
+  /*
+    選択動画に維持率データがない場合も
+    ダミーデータは表示しない。
+  */
+  if(!retention.length){
+
+    CHARTS.retention = null;
+
+    return;
+  }
+
+
+  /*
+    APIから取得した100点前後を
+    動画進行率0～100%として表示。
+  */
+  const labels =
+    retention.map(
+      row =>
+        `${Math.round(
+          row.position
+        )}%`
+    );
+
+
+  const videoValues =
+    retention.map(
+      row =>
+        row.watchRatio
+    );
+
+
+  /*
+    全動画平均を、
+    選択動画と同じX位置へ補間。
+  */
+  const averageValues =
+    retention.map(row =>
+      interpolateRetention(
+        averageRetention,
+        row.position
+      )
+  );
+
+
   CHARTS.retention =
     new Chart(
       canvas,
@@ -3175,9 +3418,7 @@ function renderRetentionChart(){
 
         data:{
 
-          labels:
-            DUMMY.individual
-              .retentionLabels,
+          labels,
 
           datasets:[
 
@@ -3185,8 +3426,7 @@ function renderRetentionChart(){
               label:"この動画",
 
               data:
-                DUMMY.individual
-                  .retention,
+                videoValues,
 
               borderColor:
                 COLORS.chartYellow,
@@ -3199,22 +3439,25 @@ function renderRetentionChart(){
 
               pointBorderWidth:2,
 
-              pointRadius:3,
+              pointRadius:
+                window.innerWidth <= 800
+                  ? 0
+                  : 2,
 
               pointHoverRadius:5,
 
               borderWidth:3,
 
-              tension:.36
-            },
+              tension:.25,
 
+              spanGaps:false
+            },
 
             {
               label:"全動画平均",
 
               data:
-                DUMMY.individual
-                  .averageRetention,
+                averageValues,
 
               borderColor:
                 COLORS.average,
@@ -3225,7 +3468,9 @@ function renderRetentionChart(){
 
               borderDash:[5,5],
 
-              tension:.36
+              tension:.25,
+
+              spanGaps:false
             }
 
           ]
@@ -3238,6 +3483,11 @@ function renderRetentionChart(){
             percent:true
           }),
 
+          interaction:{
+            mode:"index",
+            intersect:false
+          },
+
           plugins:{
 
             legend:{
@@ -3245,18 +3495,47 @@ function renderRetentionChart(){
             },
 
             tooltip:{
+
               backgroundColor:"#111",
+
               titleColor:"#fff",
+
               bodyColor:"#fff",
+
               displayColors:true,
 
               callbacks:{
+
+                title(items){
+
+                  if(!items.length){
+                    return "";
+                  }
+
+                  return `動画位置 ${items[0].label}`;
+                },
+
                 label(context){
-                  return `${context.dataset.label}: ${context.parsed.y}%`;
+
+                  const value =
+                    context.parsed.y;
+
+                  if(
+                    value === null ||
+                    !Number.isFinite(value)
+                  ){
+                    return `${context.dataset.label}: —`;
+                  }
+
+                  return (
+                    `${context.dataset.label}: ` +
+                    `${value.toFixed(1)}%`
+                  );
                 }
               }
             }
           },
+
 
           scales:{
 
@@ -3271,7 +3550,15 @@ function renderRetentionChart(){
               },
 
               ticks:{
+
                 maxRotation:0,
+
+                autoSkip:true,
+
+                maxTicksLimit:
+                  window.innerWidth <= 800
+                    ? 6
+                    : 11,
 
                 font:{
                   size:
@@ -3288,6 +3575,7 @@ function renderRetentionChart(){
             y:{
 
               min:0,
+
               max:100,
 
               grid:{
