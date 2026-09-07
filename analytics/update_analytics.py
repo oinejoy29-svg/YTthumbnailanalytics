@@ -1,7 +1,8 @@
 import os
 import json
 import time
-from datetime import date, timedelta
+from datetime import date, datetime, timedelta, timezone
+from zoneinfo import ZoneInfo
 from pathlib import Path
 
 from google.oauth2.credentials import Credentials
@@ -12,6 +13,9 @@ from googleapiclient.errors import HttpError
 # =========================================================
 # SETTINGS
 # =========================================================
+
+PACIFIC = ZoneInfo("America/Los_Angeles")
+UTC = timezone.utc
 
 START_DATE = "2026-04-03"
 
@@ -100,151 +104,398 @@ def response_to_rows(response):
 
         result.append({
             "date": raw.get("day"),
-            "views": raw.get("views", 0),
-            "engagedViews": raw.get("engagedViews", 0),
+            "views": raw.get("views"),
+            "engagedViews": raw.get("engagedViews"),
             "watchMinutes": raw.get(
-                "estimatedMinutesWatched", 0
+                "estimatedMinutesWatched"
             ),
             "averageViewDuration": raw.get(
-                "averageViewDuration", 0
+                "averageViewDuration"
             ),
             "averageViewPercentage": raw.get(
-                "averageViewPercentage", 0
+                "averageViewPercentage"
             ),
-            "likes": raw.get("likes", 0),
-            "comments": raw.get("comments", 0),
-            "shares": raw.get("shares", 0),
+            "likes": raw.get("likes"),
+            "comments": raw.get("comments"),
+            "shares": raw.get("shares"),
             "subscribersGained": raw.get(
-                "subscribersGained", 0
+                "subscribersGained"
             ),
             "subscribersLost": raw.get(
-                "subscribersLost", 0
+                "subscribersLost"
             ),
         })
 
     return result
 
+def number_or_none(value):
+
+    if value is None:
+        return None
+
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return None
+
+
+def sum_metric(rows, metric):
+
+    values = [
+        number_or_none(row.get(metric))
+        for row in rows
+    ]
+
+    values = [
+        value
+        for value in values
+        if value is not None
+    ]
+
+    if not values:
+        return None
+
+    return sum(values)
+
+
+def weighted_average(rows, metric, weight_metric):
+
+    pairs = []
+
+    for row in rows:
+
+        value = number_or_none(
+            row.get(metric)
+        )
+
+        weight = number_or_none(
+            row.get(weight_metric)
+        )
+
+        if (
+            value is None
+            or weight is None
+            or weight <= 0
+        ):
+            continue
+
+        pairs.append(
+            (value, weight)
+        )
+
+    if not pairs:
+        return None
+
+    total_weight = sum(
+        weight
+        for _, weight in pairs
+    )
+
+    if total_weight <= 0:
+        return None
+
+    return (
+        sum(
+            value * weight
+            for value, weight in pairs
+        )
+        / total_weight
+    )
+
+
+def parse_published_at(value):
+
+    if not value:
+        return None
+
+    try:
+
+        text = str(value)
+
+        if text.endswith("Z"):
+            text = (
+                text[:-1]
+                + "+00:00"
+            )
+
+        parsed = datetime.fromisoformat(
+            text
+        )
+
+        if parsed.tzinfo is None:
+            parsed = parsed.replace(
+                tzinfo=UTC
+            )
+
+        return parsed
+
+    except (TypeError, ValueError):
+        return None
+
+
+def get_pacific_publish_date(
+    published_at,
+    fallback_date=None
+):
+
+    parsed = parse_published_at(
+        published_at
+    )
+
+    if parsed is not None:
+
+        return (
+            parsed
+            .astimezone(PACIFIC)
+            .date()
+        )
+
+    if fallback_date:
+
+        try:
+            return date.fromisoformat(
+                str(fallback_date)[:10]
+            )
+        except (TypeError, ValueError):
+            pass
+
+    return None
+
 
 def create_summary(rows):
 
-    total_views = sum(
-        row["views"]
-        for row in rows
+    total_views = sum_metric(
+        rows,
+        "views"
     )
 
-    total_engaged = sum(
-        row["engagedViews"]
-        for row in rows
+    total_engaged = sum_metric(
+        rows,
+        "engagedViews"
     )
 
-    total_watch = sum(
-        row["watchMinutes"]
-        for row in rows
+    total_watch = sum_metric(
+        rows,
+        "watchMinutes"
     )
 
-    total_likes = sum(
-        row["likes"]
-        for row in rows
+    total_likes = sum_metric(
+        rows,
+        "likes"
     )
 
-    total_comments = sum(
-        row["comments"]
-        for row in rows
+    total_comments = sum_metric(
+        rows,
+        "comments"
     )
 
-    total_shares = sum(
-        row["shares"]
-        for row in rows
+    total_shares = sum_metric(
+        rows,
+        "shares"
     )
 
-    subscribers_gained = sum(
-        row["subscribersGained"]
-        for row in rows
+    subscribers_gained = sum_metric(
+        rows,
+        "subscribersGained"
     )
 
-    subscribers_lost = sum(
-        row["subscribersLost"]
-        for row in rows
+    subscribers_lost = sum_metric(
+        rows,
+        "subscribersLost"
     )
 
-    if total_views > 0:
+    average_duration = weighted_average(
+        rows,
+        "averageViewDuration",
+        "views"
+    )
 
-        average_duration = (
-            sum(
-                row["averageViewDuration"]
-                * row["views"]
-                for row in rows
-            )
-            / total_views
-        )
-
-        average_percentage = (
-            sum(
-                row["averageViewPercentage"]
-                * row["views"]
-                for row in rows
-            )
-            / total_views
-        )
-
-    else:
-
-        average_duration = 0
-        average_percentage = 0
+    average_percentage = weighted_average(
+        rows,
+        "averageViewPercentage",
+        "views"
+    )
 
     return {
-        "views": total_views,
-        "engagedViews": total_engaged,
-        "watchMinutes": round(total_watch, 2),
-        "averageViewDuration": round(
-            average_duration, 2
+        "views": (
+            int(total_views)
+            if total_views is not None
+            else None
         ),
-        "averageViewPercentage": round(
-            average_percentage, 2
+        "engagedViews": (
+            int(total_engaged)
+            if total_engaged is not None
+            else None
         ),
-        "likes": total_likes,
-        "comments": total_comments,
-        "shares": total_shares,
-        "subscribersGained": subscribers_gained,
-        "subscribersLost": subscribers_lost,
+        "watchMinutes": (
+            round(total_watch, 2)
+            if total_watch is not None
+            else None
+        ),
+        "averageViewDuration": (
+            round(average_duration, 2)
+            if average_duration is not None
+            else None
+        ),
+        "averageViewPercentage": (
+            round(average_percentage, 2)
+            if average_percentage is not None
+            else None
+        ),
+        "likes": (
+            int(total_likes)
+            if total_likes is not None
+            else None
+        ),
+        "comments": (
+            int(total_comments)
+            if total_comments is not None
+            else None
+        ),
+        "shares": (
+            int(total_shares)
+            if total_shares is not None
+            else None
+        ),
+        "subscribersGained": (
+            int(subscribers_gained)
+            if subscribers_gained is not None
+            else None
+        ),
+        "subscribersLost": (
+            int(subscribers_lost)
+            if subscribers_lost is not None
+            else None
+        ),
     }
-def create_milestones(rows, published_date):
+    
+def create_milestones(
+    rows,
+    published_at,
+    fallback_date=None
+):
     """
-    DAY1 / DAY3 / DAY7 を作成
+    DAY1 / DAY3 / DAY7 を作成。
+
+    YouTube Analyticsの日次データに合わせて、
+    publishedAtをPacific Timeの日付へ変換し、
+    その暦日をDAY1として扱う。
     """
 
-    published = date.fromisoformat(published_date)
+    published = get_pacific_publish_date(
+        published_at,
+        fallback_date
+    )
+
+    if published is None:
+        return {
+            "day1": None,
+            "day3": None,
+            "day7": None,
+        }
 
     milestones = {}
 
+    analytics_end_date = (
+        date.fromisoformat(
+            END_DATE
+        )
+    )
+
     for days in [1, 3, 7]:
 
-        cutoff = published + timedelta(days=days - 1)
+        cutoff = (
+            published
+            + timedelta(
+                days=days - 1
+            )
+        )
 
-        target_rows = [
-            row
-            for row in rows
-            if date.fromisoformat(row["date"]) <= cutoff
-        ]
+        if analytics_end_date < cutoff:
 
-        # まだその日数に到達していない動画
-        if date.fromisoformat(END_DATE) < cutoff:
-            milestones[f"day{days}"] = None
+            milestones[
+                f"day{days}"
+            ] = None
+
             continue
 
-        summary = create_summary(target_rows)
+        target_rows = []
 
-        milestones[f"day{days}"] = {
-            "throughDate": cutoff.isoformat(),
-            "views": summary["views"],
-            "engagedViews": summary["engagedViews"],
-            "watchMinutes": summary["watchMinutes"],
-            "averageViewDuration": summary["averageViewDuration"],
-            "averageViewPercentage": summary["averageViewPercentage"],
-            "likes": summary["likes"],
-            "comments": summary["comments"],
-            "shares": summary["shares"],
-            "subscribersGained": summary["subscribersGained"]
+        for row in rows:
+
+            row_date = row.get(
+                "date"
+            )
+
+            if not row_date:
+                continue
+
+            try:
+                parsed_row_date = (
+                    date.fromisoformat(
+                        row_date
+                    )
+                )
+            except (
+                TypeError,
+                ValueError
+            ):
+                continue
+
+            if (
+                published
+                <= parsed_row_date
+                <= cutoff
+            ):
+                target_rows.append(
+                    row
+                )
+
+        summary = create_summary(
+            target_rows
+        )
+
+        milestones[
+            f"day{days}"
+        ] = {
+            "throughDate":
+                cutoff.isoformat(),
+
+            "publishedPacificDate":
+                published.isoformat(),
+
+            "views":
+                summary["views"],
+
+            "engagedViews":
+                summary["engagedViews"],
+
+            "watchMinutes":
+                summary["watchMinutes"],
+
+            "averageViewDuration":
+                summary[
+                    "averageViewDuration"
+                ],
+
+            "averageViewPercentage":
+                summary[
+                    "averageViewPercentage"
+                ],
+
+            "likes":
+                summary["likes"],
+
+            "comments":
+                summary["comments"],
+
+            "shares":
+                summary["shares"],
+
+            "subscribersGained":
+                summary[
+                    "subscribersGained"
+                ],
         }
 
     return milestones
@@ -783,12 +1034,32 @@ for index, video in enumerate(
         "date",
         START_DATE
     )
+published_at = video.get(
+    "publishedAt"
+)
 
-    # 動画公開前の日付を問い合わせる必要はない
-    video_start_date = max(
+published_pacific_date = (
+    get_pacific_publish_date(
+        published_at,
+        upload_date
+    )
+)
+
+video_start_date = (
+    published_pacific_date.isoformat()
+    if published_pacific_date
+    else max(
         upload_date,
         START_DATE
     )
+)
+
+video_start_date = max(
+    video_start_date,
+    START_DATE
+)
+
+
 
     print()
     print(
@@ -865,27 +1136,34 @@ for index, video in enumerate(
 
         time.sleep(0.1)
 
-        videos[video_id] = {
-            "title": title,
-            "publishedDate": upload_date,
-            "thumbnail": video.get(
-                "thumbnail"
-            ),
-            "duration": video.get(
-                "duration"
-            ),
-            "summary": create_summary(
-                daily
-            ),
-            "milestones": create_milestones(
-                daily,
-                upload_date
-            ),
-            "daily": daily,
-            "retention": retention,
-            "traffic": traffic,
-            "sharingServices": sharing_services
-        }
+videos[video_id] = {
+    "title": title,
+    "publishedDate": upload_date,
+    "publishedAt": published_at,
+    "publishedPacificDate": (
+        published_pacific_date.isoformat()
+        if published_pacific_date
+        else None
+    ),
+    "thumbnail": video.get(
+        "thumbnail"
+    ),
+    "duration": video.get(
+        "duration"
+    ),
+    "summary": create_summary(
+        daily
+    ),
+    "milestones": create_milestones(
+        daily,
+        published_at,
+        upload_date
+    ),
+    "daily": daily,
+    "retention": retention,
+    "traffic": traffic,
+    "sharingServices": sharing_services
+}
 
         success_count += 1
         print(
