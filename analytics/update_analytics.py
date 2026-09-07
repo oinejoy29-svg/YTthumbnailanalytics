@@ -1138,35 +1138,34 @@ for index, video in enumerate(
 
         time.sleep(0.1)
 
-videos[video_id] = {
-    "title": title,
-    "publishedDate": upload_date,
-    "publishedAt": published_at,
-    "publishedPacificDate": (
-        published_pacific_date.isoformat()
-        if published_pacific_date
-        else None
-    ),
-    "thumbnail": video.get(
-        "thumbnail"
-    ),
-    "duration": video.get(
-        "duration"
-    ),
-    "summary": create_summary(
-        daily
-    ),
-    "milestones": create_milestones(
-        daily,
-        published_at,
-        upload_date
-    ),
-    "daily": daily,
-    "retention": retention,
-    "traffic": traffic,
-    "sharingServices": sharing_services
-}
-
+        videos[video_id] = {
+            "title": title,
+            "publishedDate": upload_date,
+            "publishedAt": published_at,
+            "publishedPacificDate": (
+                published_pacific_date.isoformat()
+                if published_pacific_date
+                else None
+            ),
+            "thumbnail": video.get(
+                "thumbnail"
+            ),
+            "duration": video.get(
+                "duration"
+            ),
+            "summary": create_summary(
+                daily
+            ),
+            "milestones": create_milestones(
+                daily,
+                published_at,
+                upload_date
+            ),
+            "daily": daily,
+            "retention": retention,
+            "traffic": traffic,
+            "sharingServices": sharing_services
+        }
         success_count += 1
         print(
             f"  → {len(daily)} 日取得"
