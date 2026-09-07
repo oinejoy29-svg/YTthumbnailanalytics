@@ -2821,19 +2821,66 @@ button.individual-video-hero{
   line-height:1;
 }
 
-.video-picker-search-wrap{
+.video-picker-controls{
+  display:flex;
+  gap:8px;
   margin-bottom:12px;
 }
 
-.video-picker-search{
+.video-picker-control{
+  position:relative;
+  flex:1;
+}
+
+.video-picker-control-btn{
   width:100%;
-  padding:11px 13px;
+  padding:10px 12px;
   border:2px solid var(--line);
   border-radius:12px;
   background:#fff;
-  outline:none;
-  font-size:12px;
-  font-weight:700;
+  color:var(--ink);
+  font-size:11px;
+  font-weight:900;
+  text-align:left;
+}
+
+.video-picker-control-btn:hover{
+  background:var(--yellow);
+}
+
+.video-picker-control-panel{
+  position:absolute;
+  top:calc(100% + 6px);
+  left:0;
+  z-index:30;
+  width:100%;
+  max-height:280px;
+  overflow:auto;
+  padding:6px;
+  border:2px solid var(--line);
+  border-radius:12px;
+  background:#fff;
+  box-shadow:6px 6px 0 rgba(17,17,17,.18);
+}
+
+.video-picker-control-panel[hidden]{
+  display:none;
+}
+
+.video-picker-control-panel button{
+  width:100%;
+  padding:9px 10px;
+  border:0;
+  border-radius:8px;
+  background:transparent;
+  color:var(--ink);
+  text-align:left;
+  font-size:10px;
+  font-weight:800;
+}
+
+.video-picker-control-panel button:hover{
+  background:var(--yellow);
 }
 
 .video-picker-grid{
