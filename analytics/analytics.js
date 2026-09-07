@@ -1131,13 +1131,105 @@ function buildRealVideoPicker(){
     return;
   }
 
-  if(!REAL_VIDEOS.length){
-    return;
+
+  let videos =
+    [...REAL_VIDEOS];
+
+
+  /*
+    メンバー絞り込み
+  */
+
+  if(currentPickerMember){
+
+    videos =
+      videos.filter(video =>
+        Array.isArray(video.tags) &&
+        video.tags.includes(
+          currentPickerMember
+        )
+      );
   }
+
+
+  /*
+    並び替え
+  */
+
+  videos.sort((a,b) => {
+
+    if(
+      currentPickerSort ===
+      "popular"
+    ){
+
+      const viewsA =
+        a?.dataApi?.viewCount;
+
+      const viewsB =
+        b?.dataApi?.viewCount;
+
+
+      const validA =
+        viewsA !== null &&
+        viewsA !== undefined &&
+        Number.isFinite(
+          Number(viewsA)
+        );
+
+      const validB =
+        viewsB !== null &&
+        viewsB !== undefined &&
+        Number.isFinite(
+          Number(viewsB)
+        );
+
+
+      if(!validA && !validB){
+        return 0;
+      }
+
+      if(!validA){
+        return 1;
+      }
+
+      if(!validB){
+        return -1;
+      }
+
+
+      return (
+        Number(viewsB) -
+        Number(viewsA)
+      );
+    }
+
+
+    const dateA =
+      String(
+        a.publishedAt ||
+        a.date ||
+        ""
+      );
+
+    const dateB =
+      String(
+        b.publishedAt ||
+        b.date ||
+        ""
+      );
+
+
+    return dateB.localeCompare(
+      dateA
+    );
+  });
+
 
   container.innerHTML = "";
 
-  REAL_VIDEOS.forEach(video => {
+
+  videos.forEach(video => {
 
     const item =
       document.createElement(
@@ -1195,7 +1287,10 @@ function buildRealVideoPicker(){
 
     date.textContent =
       video.date
-        ? video.date.replaceAll("-","/")
+        ? video.date.replaceAll(
+            "-",
+            "/"
+          )
         : "";
 
 
@@ -1364,6 +1459,11 @@ let currentReachStart = 0;
 
 let currentPickerTarget = null;
 
+let currentPickerSort =
+  "newest";
+
+let currentPickerMember =
+  "";
 
 /* =========================================================
    VIDEO DUMMY DATA
@@ -5882,9 +5982,24 @@ function initVideoPicker(){
       "videoPickerClose"
     );
 
-  const search =
+  const sortButton =
     document.getElementById(
-      "videoPickerSearch"
+      "videoPickerSortButton"
+    );
+
+  const sortPanel =
+    document.getElementById(
+      "videoPickerSortPanel"
+    );
+
+  const filterButton =
+    document.getElementById(
+      "videoPickerFilterButton"
+    );
+
+  const filterPanel =
+    document.getElementById(
+      "videoPickerFilterPanel"
     );
 
   if(!modal){
@@ -5922,14 +6037,15 @@ function initVideoPicker(){
             "hidden";
 
 
-          if(search){
-
-            search.value = "";
-
-            filterVideoPicker(
-              ""
-            );
+          if(sortPanel){
+            sortPanel.hidden = true;
           }
+
+          if(filterPanel){
+            filterPanel.hidden = true;
+          }
+
+          buildRealVideoPicker();
         }
       );
     });
@@ -5989,13 +6105,223 @@ function initVideoPicker(){
   );
 
 
-  search?.addEventListener(
-    "input",
-    () => {
+  const members =
+    [
+      ...new Set(
+        REAL_VIDEOS.flatMap(
+          video =>
+            Array.isArray(video.tags)
+              ? video.tags
+              : []
+        )
+      )
+    ].sort(
+      (a,b) =>
+        String(a).localeCompare(
+          String(b),
+          "ja"
+        )
+    );
 
-      filterVideoPicker(
-        search.value
+
+  if(filterPanel){
+
+    filterPanel.innerHTML = "";
+
+
+    const allButton =
+      document.createElement(
+        "button"
       );
+
+    allButton.type =
+      "button";
+
+    allButton.dataset
+      .pickerMember = "";
+
+    allButton.textContent =
+      "すべて";
+
+    filterPanel.appendChild(
+      allButton
+    );
+
+
+    members.forEach(member => {
+
+      const button =
+        document.createElement(
+          "button"
+        );
+
+      button.type =
+        "button";
+
+      button.dataset
+        .pickerMember =
+        member;
+
+      button.textContent =
+        member;
+
+      filterPanel.appendChild(
+        button
+      );
+
+    });
+  }
+
+
+  /*
+    並び替えボタン
+  */
+
+  sortButton?.addEventListener(
+    "click",
+    event => {
+
+      event.stopPropagation();
+
+      sortPanel.hidden =
+        !sortPanel.hidden;
+
+      if(filterPanel){
+        filterPanel.hidden = true;
+      }
+    }
+  );
+
+
+  /*
+    絞り込みボタン
+  */
+
+  filterButton?.addEventListener(
+    "click",
+    event => {
+
+      event.stopPropagation();
+
+      filterPanel.hidden =
+        !filterPanel.hidden;
+
+      if(sortPanel){
+        sortPanel.hidden = true;
+      }
+    }
+  );
+
+
+  /*
+    新しい順 / 人気順
+  */
+
+  sortPanel?.addEventListener(
+    "click",
+    event => {
+
+      const button =
+        event.target.closest(
+          "[data-picker-sort]"
+        );
+
+      if(!button){
+        return;
+      }
+
+
+      currentPickerSort =
+        button.dataset
+          .pickerSort;
+
+
+      const labels = {
+
+        newest:
+          "新しい順",
+
+        popular:
+          "人気順"
+
+      };
+
+
+      sortButton.textContent =
+        `並び替え：${
+          labels[
+            currentPickerSort
+          ] ||
+          "新しい順"
+        }`;
+
+
+      sortPanel.hidden = true;
+
+      buildRealVideoPicker();
+    }
+  );
+
+
+  /*
+    メンバー絞り込み
+  */
+
+  filterPanel?.addEventListener(
+    "click",
+    event => {
+
+      const button =
+        event.target.closest(
+          "[data-picker-member]"
+        );
+
+      if(!button){
+        return;
+      }
+
+
+      currentPickerMember =
+        button.dataset
+          .pickerMember ||
+        "";
+
+
+      filterButton.textContent =
+        currentPickerMember
+          ? `絞り込み：${currentPickerMember}`
+          : "絞り込み：すべて";
+
+
+      filterPanel.hidden = true;
+
+      buildRealVideoPicker();
+    }
+  );
+
+
+  /*
+    外側クリックでメニューを閉じる
+  */
+
+  document.addEventListener(
+    "click",
+    event => {
+
+      if(
+        !event.target.closest(
+          ".video-picker-control"
+        )
+      ){
+
+        if(sortPanel){
+          sortPanel.hidden = true;
+        }
+
+        if(filterPanel){
+          filterPanel.hidden = true;
+        }
+      }
     }
   );
 
