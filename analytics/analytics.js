@@ -7056,6 +7056,59 @@ function renderIndividualRealMetrics(){
     );
 
 
+  const reachCards =
+    document.querySelectorAll(
+      "#individualMode .reach-summary .mini-metric"
+    );
+
+  reachCards.forEach(card => {
+
+    const label =
+      card.querySelector("span")
+        ?.textContent.trim();
+
+    const strong =
+      card.querySelector("strong");
+
+
+    if(!strong){
+      return;
+    }
+
+
+    if(label === "インプレッション"){
+
+      strong.textContent =
+        reachSummary &&
+        reachSummary.impressions !== null &&
+        reachSummary.impressions !== undefined
+          ? formatInteger(
+              reachSummary.impressions
+            )
+          : "—";
+
+    }
+
+
+    if(label === "クリック率"){
+
+      strong.textContent =
+        reachSummary &&
+        reachSummary.clickRate !== null &&
+        reachSummary.clickRate !== undefined &&
+        Number.isFinite(
+          Number(reachSummary.clickRate)
+        )
+          ? `${Number(
+              reachSummary.clickRate
+            ).toFixed(2)}%`
+          : "—";
+
+    }
+
+  });
+
+
   const milestones =
     video.analytics.milestones || {};
 
