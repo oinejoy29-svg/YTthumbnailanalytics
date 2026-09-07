@@ -2027,6 +2027,10 @@ function calculateOverviewSummary(){
   let engagedViews = 0;
   let watchMinutes = 0;
 
+  let viewsCount = 0;
+  let engagedViewsCount = 0;
+  let watchMinutesCount = 0;
+
   let weightedDuration = 0;
   let durationWeight = 0;
 
@@ -2037,31 +2041,49 @@ function calculateOverviewSummary(){
   rows.forEach(row => {
 
     const rowViews =
-      Number(row.views);
+      row.views === null ||
+      row.views === undefined
+        ? null
+        : Number(row.views);
 
     const rowEngaged =
-      Number(row.engagedViews);
+      row.engagedViews === null ||
+      row.engagedViews === undefined
+        ? null
+        : Number(row.engagedViews);
 
     const rowWatch =
-      Number(row.watchMinutes);
+      row.watchMinutes === null ||
+      row.watchMinutes === undefined
+        ? null
+        : Number(row.watchMinutes);
 
     const rowDuration =
-      Number(row.averageViewDuration);
+      row.averageViewDuration === null ||
+      row.averageViewDuration === undefined
+        ? null
+        : Number(row.averageViewDuration);
 
     const rowPercentage =
-      Number(row.averageViewPercentage);
+      row.averageViewPercentage === null ||
+      row.averageViewPercentage === undefined
+        ? null
+        : Number(row.averageViewPercentage);
 
 
     if(Number.isFinite(rowViews)){
       views += rowViews;
+      viewsCount += 1;
     }
 
     if(Number.isFinite(rowEngaged)){
       engagedViews += rowEngaged;
+      engagedViewsCount += 1;
     }
 
     if(Number.isFinite(rowWatch)){
       watchMinutes += rowWatch;
+      watchMinutesCount += 1;
     }
 
 
@@ -2100,11 +2122,20 @@ function calculateOverviewSummary(){
 
   return {
 
-    views,
+    views:
+      viewsCount > 0
+        ? views
+        : null,
 
-    engagedViews,
+    engagedViews:
+      engagedViewsCount > 0
+        ? engagedViews
+        : null,
 
-    watchMinutes,
+    watchMinutes:
+      watchMinutesCount > 0
+        ? watchMinutes
+        : null,
 
     averageViewDuration:
       durationWeight > 0
@@ -2180,9 +2211,9 @@ function calculateOverviewSummaryFromRows(
   rows
 ){
 
-  let views = 0;
-  let engagedViews = 0;
-  let watchMinutes = 0;
+  let viewsCount = 0;
+  let engagedViewsCount = 0;
+  let watchMinutesCount = 0;
 
   let weightedDuration = 0;
   let durationWeight = 0;
@@ -2209,17 +2240,7 @@ function calculateOverviewSummaryFromRows(
       Number(row.averageViewPercentage);
 
 
-    if(Number.isFinite(rowViews)){
-      views += rowViews;
-    }
-
-    if(Number.isFinite(rowEngaged)){
-      engagedViews += rowEngaged;
-    }
-
-    if(Number.isFinite(rowWatch)){
-      watchMinutes += rowWatch;
-    }
+if(Number.isFinite(rowViews
 
 
     if(
@@ -2251,11 +2272,7 @@ function calculateOverviewSummaryFromRows(
 
   return {
 
-    views,
-
-    engagedViews,
-
-    watchMinutes,
+if(Number.isFinite(rowViews
 
     averageViewDuration:
       durationWeight > 0
@@ -3117,15 +3134,24 @@ const daily =
   const values =
     daily.map(row => {
 
-      if(engaged){
-        return Number(
-          row.engagedViews ?? 0
-        );
+      const value =
+        engaged
+          ? row.engagedViews
+          : row.views;
+
+      if(
+        value === null ||
+        value === undefined
+      ){
+        return null;
       }
 
-      return Number(
-        row.views ?? 0
-      );
+      const number =
+        Number(value);
+
+      return Number.isFinite(number)
+        ? number
+        : null;
     });
 
 
@@ -3196,6 +3222,15 @@ function getVideoRetention(video){
 
   return rows
     .map(row => {
+
+      if(
+        row.position === null ||
+        row.position === undefined ||
+        row.watchRatio === null ||
+        row.watchRatio === undefined
+      ){
+        return null;
+      }
 
       const position =
         Number(row.position);
@@ -4153,6 +4188,8 @@ function renderTrafficSourceChart(){
   const sources =
     [...traffic.sources]
       .filter(row =>
+        row.percentage !== null &&
+        row.percentage !== undefined &&
         Number.isFinite(
           Number(row.percentage)
         )
@@ -4252,9 +4289,14 @@ function renderTrafficSourceChart(){
                     );
 
                   const views =
-                    Number(
-                      row?.views
-                    );
+                    (
+                      row?.views !== null &&
+                      row?.views !== undefined
+                    )
+                      ? Number(
+                          row.views
+                        )
+                      : null;
 
                   const parts = [];
 
