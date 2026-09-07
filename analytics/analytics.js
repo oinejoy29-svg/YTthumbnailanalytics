@@ -6824,22 +6824,7 @@ function renderIndividualDetailAverageRanks(){
   );
 
 
-  updateIndividualMiniAverageRank(
-    "終了画面クリック数",
-    "endScreenClicks",
-    value =>
-      formatInteger(
-        Math.round(value)
-      )
-  );
 
-
-  updateIndividualMiniAverageRank(
-    "終了画面クリック率",
-    "endScreenClickRate",
-    value =>
-      `${Number(value).toFixed(2)}%`
-  );
 
 }
 
