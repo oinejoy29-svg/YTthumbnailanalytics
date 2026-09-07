@@ -144,6 +144,79 @@ print(
     "終了画面データ取得開始"
 )
 
+# =========================================================
+# VERIFY REPORT TYPE
+# =========================================================
+
+report_types_response = (
+    reporting
+    .reportTypes()
+    .list()
+    .execute()
+)
+
+report_types = (
+    report_types_response.get(
+        "reportTypes",
+        []
+    )
+)
+
+available_report_type_ids = {
+    report.get("id")
+    for report in report_types
+    if report.get("id")
+}
+
+print()
+print("利用可能な終了画面系レポート:")
+
+end_screen_report_types = []
+
+for report in report_types:
+
+    report_id = report.get("id", "")
+    report_name = report.get("name", "")
+
+    if (
+        "end_screen" in report_id.lower()
+        or "end screen" in report_name.lower()
+    ):
+
+        end_screen_report_types.append(
+            report
+        )
+
+        print(
+            f"  {report_id} | {report_name}"
+        )
+
+
+if (
+    TARGET_REPORT_TYPE
+    not in available_report_type_ids
+):
+
+    print()
+    print(
+        f"{TARGET_REPORT_TYPE} は"
+        "このチャンネルで利用可能な"
+        "reportTypes一覧にありません。"
+    )
+
+    print(
+        "存在しないジョブを作成しないため、"
+        "ここで終了します。"
+    )
+
+    raise SystemExit(0)
+
+
+print()
+print(
+    f"{TARGET_REPORT_TYPE} の"
+    "利用可能性を確認しました"
+)
 
 # =========================================================
 # FIND / CREATE JOB
