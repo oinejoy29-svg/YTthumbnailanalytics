@@ -50,11 +50,13 @@ jobs:
 
           git add analytics/analytics_data.json
 
+           [ -f analytics/reach_daily.json ] && git add analytics/reach_daily.json
           [ -f analytics/reporting_job.json ] && git add analytics/reporting_job.json
           [ -f analytics/reporting_reports.json ] && git add analytics/reporting_reports.json
           [ -f analytics/reach_report.csv ] && git add analytics/reach_report.csv
           [ -f analytics/reach_report.json ] && git add analytics/reach_report.json
 
+        
           if git diff --cached --quiet; then
             echo "No analytics changes"
           else
