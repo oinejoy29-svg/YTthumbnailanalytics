@@ -2338,6 +2338,8 @@ function calculateOverviewSummaryFromRows(
 
 
 
+
+
 function calculatePeriodChange(
   currentValue,
   previousValue
