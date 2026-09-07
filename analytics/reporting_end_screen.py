@@ -34,7 +34,7 @@ SCOPES = [
 
 
 TARGET_REPORT_TYPE = (
-    "channel_end_screens_a2"
+    "channel_end_screens_a1"
 )
 
 
