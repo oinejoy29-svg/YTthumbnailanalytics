@@ -453,12 +453,13 @@ $(`lane${index}`)
 twice
 .map(
 video => `
-<img
-class="thumb-roll"
-src="${escapeHtml(video.thumbnail || "")}"
-alt=""
-loading="lazy"
->
+              <img
+                class="thumb-roll"
+                src="${escapeHtml(video.thumbnail || "")}"
+                alt=""
+                loading="eager"
+                decoding="async"
+              >
 `
 )
 .join("");
