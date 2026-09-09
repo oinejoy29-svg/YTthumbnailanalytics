@@ -146,6 +146,117 @@
    HOME - TRENDING NOW
 ========================= */
 
+.home-trending{
+  margin:0 0 48px;
+}
+
+.home-trending h2{
+  margin:5px 0 18px;
+  font-size:28px;
+  line-height:1.2;
+}
+
+.home-trending-card{
+  display:grid;
+  grid-template-columns:minmax(260px, 420px) minmax(0, 1fr);
+  gap:22px;
+  align-items:center;
+
+  padding:18px;
+
+  background:#fff;
+  border:2px solid var(--line);
+  border-radius:20px;
+  box-shadow:5px 5px 0 var(--ink);
+}
+
+.home-trending-thumbnail{
+  width:100%;
+  aspect-ratio:16 / 9;
+  object-fit:cover;
+  display:block;
+
+  border-radius:12px;
+}
+
+.home-trending-info{
+  min-width:0;
+}
+
+.home-trending-info h3{
+  margin:0 0 18px;
+
+  font-size:20px;
+  font-weight:900;
+  line-height:1.45;
+}
+
+.home-trending-views{
+  margin-bottom:8px;
+
+  font-size:22px;
+  font-weight:900;
+}
+
+.home-trending-growth{
+  margin-bottom:3px;
+
+  font-size:15px;
+  font-weight:800;
+}
+
+.home-trending-ratio{
+  font-size:12px;
+  font-weight:800;
+  color:var(--muted);
+}
+
+
+@media (max-width:768px){
+
+  .home-trending{
+    margin-bottom:38px;
+  }
+
+  .home-trending h2{
+    margin-bottom:14px;
+    font-size:23px;
+  }
+
+  .home-trending-card{
+    grid-template-columns:1fr;
+    gap:14px;
+
+    padding:14px;
+
+    border-radius:16px;
+    box-shadow:4px 4px 0 var(--ink);
+  }
+
+  .home-trending-thumbnail{
+    border-radius:9px;
+  }
+
+  .home-trending-info h3{
+    margin-bottom:13px;
+    font-size:16px;
+  }
+
+  .home-trending-views{
+    margin-bottom:6px;
+    font-size:19px;
+  }
+
+  .home-trending-growth{
+    font-size:14px;
+  }
+
+  .home-trending-ratio{
+    font-size:11px;
+  }
+
+}
+
 
 /* =========================
    HOME - NEXT MILESTONE
