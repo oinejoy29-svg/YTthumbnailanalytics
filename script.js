@@ -467,6 +467,106 @@ video => `
 );
 }
 
+let rollingAnimationFrame = null;
+
+function startRollingAnimation() {
+  if (
+    rollingAnimationFrame !==
+    null
+  ) {
+    cancelAnimationFrame(
+      rollingAnimationFrame
+    );
+  }
+
+  const lanes = [
+    document.getElementById("lane0"),
+    document.getElementById("lane1"),
+    document.getElementById("lane2")
+  ];
+
+  if (
+    lanes.some(
+      lane => !lane
+    )
+  ) {
+    return;
+  }
+
+  const positions =
+    [0, 0, 0];
+
+  const speeds =
+    [0.32, -0.27, 0.35];
+
+  let lastTime =
+    performance.now();
+
+  function animate(now) {
+    const delta =
+      Math.min(
+        now - lastTime,
+        40
+      );
+
+    lastTime = now;
+
+    lanes.forEach(
+      (lane, index) => {
+        const halfWidth =
+          lane.scrollWidth / 2;
+
+        if (
+          !halfWidth
+        ) {
+          return;
+        }
+
+        positions[index] +=
+          speeds[index] *
+          delta;
+
+        if (
+          speeds[index] > 0 &&
+          positions[index] >=
+          halfWidth
+        ) {
+          positions[index] -=
+            halfWidth;
+        }
+
+        if (
+          speeds[index] < 0 &&
+          positions[index] <=
+          -halfWidth
+        ) {
+          positions[index] +=
+            halfWidth;
+        }
+
+        const x =
+          speeds[index] > 0
+            ? positions[index] -
+              halfWidth
+            : positions[index];
+
+        lane.style.transform =
+          `translate3d(${x}px, 0, 0)`;
+      }
+    );
+
+    rollingAnimationFrame =
+      requestAnimationFrame(
+        animate
+      );
+  }
+
+  rollingAnimationFrame =
+    requestAnimationFrame(
+      animate
+    );
+}
+
 function restartRollingAnimation() {
   const lanes =
     document.querySelectorAll(
@@ -4751,6 +4851,7 @@ if (
   refreshSortUpdateDot();
 
   buildRolling();
+  startRollingAnimation();
   renderTrendAnalysis();
   renderSubscriberHistory();
 
