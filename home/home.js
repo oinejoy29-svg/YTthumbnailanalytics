@@ -1000,6 +1000,11 @@ function renderHomeQuickAnalytics(){
             {
               label:"Subscribers",
               data:values,
+              borderColor:"#f2c94c",
+              backgroundColor:"#f2c94c",
+              pointBackgroundColor:"#f2c94c",
+              pointBorderColor:"#fff",
+              pointBorderWidth:2,
               borderWidth:3,
               pointRadius:2,
               pointHoverRadius:5,
