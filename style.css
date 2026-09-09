@@ -1113,8 +1113,17 @@ select:focus{
   /* video */
 
   .section-heading{
+    position:relative;
     align-items:flex-start;
     flex-direction:column;
+  }
+
+  .section-heading .video-view-switch{
+    position:absolute;
+    right:0;
+    bottom:calc(100% - 58px);
+
+    margin:0;
   }
 
   .filters{
@@ -2418,7 +2427,9 @@ body > *{
   display:flex;
   justify-content:flex-end;
   gap:6px;
-  margin:0 0 14px;
+  margin-left:auto;
+  margin-right:8px;
+  margin-bottom:0;
 }
 
 .video-view-btn{
