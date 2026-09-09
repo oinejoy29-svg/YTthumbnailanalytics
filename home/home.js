@@ -157,7 +157,7 @@ function renderHomeSummary(){
   const cards = [
 
     {
-      label:"SUBSCRIBERS",
+      label:"現在の登録者数",
       value:
         Number.isFinite(
           Number(latestSubscriber)
@@ -170,7 +170,7 @@ function renderHomeSummary(){
     },
 
     {
-      label:"VIDEOS",
+      label:"動画本数",
       value:
         Number.isFinite(
           Number(videoCount)
@@ -183,7 +183,7 @@ function renderHomeSummary(){
     },
 
     {
-      label:"TOTAL VIEWS",
+      label:"総再生回数",
       value:
         totalViews !== null
           ? totalViews
