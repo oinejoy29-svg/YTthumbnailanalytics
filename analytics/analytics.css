@@ -2018,12 +2018,7 @@ select{
 
 @media(max-width:420px){
 
-  .switch-btn{
-    padding-left:2px;
-    padding-right:2px;
 
-    font-size:7.8px;
-  }
 
   .metric-card{
     min-height:118px;
