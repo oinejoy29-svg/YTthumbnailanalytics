@@ -6141,6 +6141,173 @@ function renderCompareChart(
     );
 
 
+  function buildAverageReachValues(
+    key
+  ){
+
+    const rows =
+      Array.isArray(
+        REACH_DATA?.daily
+      )
+        ? REACH_DATA.daily
+        : [];
+
+
+    return Array.from(
+      {length:reachMaxDay},
+      (_,index) => {
+
+        const dayNumber =
+          index + 1;
+
+
+        const values =
+          REAL_VIDEOS
+            .map(video => {
+
+              const videoRows =
+                rows.filter(row =>
+                  row.videoId ===
+                  video.id &&
+                  getReachDayNumber(
+                    video.date,
+                    row.date
+                  ) === dayNumber
+                );
+
+
+              if(!videoRows.length){
+                return null;
+              }
+
+
+              if(
+                key ===
+                "thumbnailImpressions"
+              ){
+
+                const impressions =
+                  videoRows
+                    .map(row =>
+                      Number(
+                        row.thumbnailImpressions
+                      )
+                    )
+                    .filter(
+                      Number.isFinite
+                    );
+
+
+                if(!impressions.length){
+                  return null;
+                }
+
+
+                return impressions.reduce(
+                  (sum,value) =>
+                    sum + value,
+                  0
+                );
+              }
+
+
+              if(
+                key ===
+                "thumbnailClickRatePercent"
+              ){
+
+                let totalImpressions = 0;
+                let weightedClicks = 0;
+
+
+                videoRows.forEach(row => {
+
+                  const impressions =
+                    Number(
+                      row.thumbnailImpressions
+                    );
+
+                  const ctr =
+                    Number(
+                      row.thumbnailClickRatePercent
+                    );
+
+
+                  if(
+                    !Number.isFinite(
+                      impressions
+                    ) ||
+                    !Number.isFinite(
+                      ctr
+                    )
+                  ){
+                    return;
+                  }
+
+
+                  totalImpressions +=
+                    impressions;
+
+                  weightedClicks +=
+                    impressions *
+                    ctr / 100;
+                });
+
+
+                if(
+                  totalImpressions <= 0
+                ){
+                  return null;
+                }
+
+
+                return (
+                  weightedClicks /
+                  totalImpressions
+                ) * 100;
+              }
+
+
+              return null;
+            })
+            .filter(value =>
+              value !== null &&
+              Number.isFinite(
+                Number(value)
+              )
+            );
+
+
+        if(!values.length){
+          return null;
+        }
+
+
+        return (
+          values.reduce(
+            (sum,value) =>
+              sum + Number(value),
+            0
+          ) /
+          values.length
+        );
+      }
+    );
+  }
+
+
+  const averageImpressions =
+    buildAverageReachValues(
+      "thumbnailImpressions"
+    );
+
+
+  const averageCtr =
+    buildAverageReachValues(
+      "thumbnailClickRatePercent"
+    );
+
+
   const averageDailyViews =
     Array.from(
       {length:maxDays},
@@ -6241,9 +6408,7 @@ function renderCompareChart(
         ctrB;
 
       average =
-        Array(
-          reachMaxDay
-        ).fill(null);
+        averageCtr;
 
       percent = true;
 
@@ -6266,9 +6431,7 @@ function renderCompareChart(
         impressionsB;
 
       average =
-        Array(
-          reachMaxDay
-        ).fill(null);
+        averageImpressions;
 
       break;
 
