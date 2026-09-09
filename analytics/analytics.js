@@ -5891,6 +5891,188 @@ function renderCompareSummary(){
 
 }
 
+function renderCompareAnalysis(){
+
+  const text =
+    document.getElementById(
+      "compareAiText"
+    );
+
+
+  if(!text){
+    return;
+  }
+
+
+  const videoA =
+    getRealVideo(
+      selectedCompareVideoAId
+    );
+
+  const videoB =
+    getRealVideo(
+      selectedCompareVideoBId
+    );
+
+
+  if(
+    !videoA ||
+    !videoB
+  ){
+
+    text.textContent =
+      "比較する動画を選択してください。";
+
+    return;
+  }
+
+
+  const sentences = [];
+
+
+  /*
+    DAY1再生数
+  */
+  const day1A =
+    getVelocityMetricValue(
+      videoA,
+      1
+    );
+
+  const day1B =
+    getVelocityMetricValue(
+      videoB,
+      1
+    );
+
+
+  if(
+    Number.isFinite(Number(day1A)) &&
+    Number.isFinite(Number(day1B))
+  ){
+
+    if(Number(day1A) > Number(day1B)){
+
+      sentences.push(
+        "DAY1再生数は動画Aが動画Bを上回っています。"
+      );
+
+    }else if(Number(day1B) > Number(day1A)){
+
+      sentences.push(
+        "DAY1再生数は動画Bが動画Aを上回っています。"
+      );
+
+    }else{
+
+      sentences.push(
+        "DAY1再生数は両動画で同じです。"
+      );
+    }
+  }
+
+
+  /*
+    クリック率
+  */
+  const reachA =
+    getVideoReachSummary(
+      videoA.id
+    );
+
+  const reachB =
+    getVideoReachSummary(
+      videoB.id
+    );
+
+
+  const ctrA =
+    reachA?.clickRate ?? null;
+
+  const ctrB =
+    reachB?.clickRate ?? null;
+
+
+  if(
+    Number.isFinite(Number(ctrA)) &&
+    Number.isFinite(Number(ctrB))
+  ){
+
+    if(Number(ctrA) > Number(ctrB)){
+
+      sentences.push(
+        "クリック率は動画Aの方が高くなっています。"
+      );
+
+    }else if(Number(ctrB) > Number(ctrA)){
+
+      sentences.push(
+        "クリック率は動画Bの方が高くなっています。"
+      );
+
+    }else{
+
+      sentences.push(
+        "クリック率は両動画で同じです。"
+      );
+    }
+  }
+
+
+  /*
+    平均再生率
+  */
+  const retentionA =
+    videoA?.analytics
+      ?.summary
+      ?.averageViewPercentage ??
+    null;
+
+  const retentionB =
+    videoB?.analytics
+      ?.summary
+      ?.averageViewPercentage ??
+    null;
+
+
+  if(
+    Number.isFinite(Number(retentionA)) &&
+    Number.isFinite(Number(retentionB))
+  ){
+
+    if(
+      Number(retentionA) >
+      Number(retentionB)
+    ){
+
+      sentences.push(
+        "平均再生率は動画Aが上回っています。"
+      );
+
+    }else if(
+      Number(retentionB) >
+      Number(retentionA)
+    ){
+
+      sentences.push(
+        "平均再生率は動画Bが上回っています。"
+      );
+
+    }else{
+
+      sentences.push(
+        "平均再生率は両動画で同じです。"
+      );
+    }
+  }
+
+
+  text.textContent =
+    sentences.length
+      ? sentences.join(" ")
+      : "比較できるデータがありません。";
+}
+
 function renderCompareChart(
   metric = "dailyViews"
 ){
@@ -9822,8 +10004,8 @@ function setCompareVideo(
 
   renderCompareNumbers();
   renderCompareSummary();
+  renderCompareAnalysis();
 }
-
 
 /* =========================================================
    REACH WINDOW BUTTON
