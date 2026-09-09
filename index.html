@@ -276,7 +276,31 @@
 
 </div>        </div>
 
-        <div id="videoGrid" class="video-grid"></div>
+        <div class="video-view-switch" aria-label="動画の表示形式">
+          <button
+            type="button"
+            class="video-view-btn active"
+            data-video-view="card"
+          >
+            カード
+          </button>
+
+          <button
+            type="button"
+            class="video-view-btn"
+            data-video-view="grid"
+          >
+            3列
+          </button>
+
+          <button
+            type="button"
+            class="video-view-btn"
+            data-video-view="wide"
+          >
+            1列
+          </button>
+        </div>
 
       </section>
     </section>
