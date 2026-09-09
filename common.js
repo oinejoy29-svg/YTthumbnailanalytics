@@ -517,3 +517,61 @@ document.addEventListener(
 
   }
 );
+
+/* =========================================================
+   SMOOTH PAGE TRANSITION
+========================================================= */
+
+document.addEventListener(
+  "click",
+  event => {
+
+    const link =
+      event.target.closest(
+        ".page-switch a"
+      );
+
+
+    if (
+      !link ||
+      event.ctrlKey ||
+      event.metaKey ||
+      event.shiftKey ||
+      event.altKey
+    ) {
+      return;
+    }
+
+
+    const href =
+      link.getAttribute(
+        "href"
+      );
+
+
+    if (
+      !href ||
+      href.startsWith("#")
+    ) {
+      return;
+    }
+
+
+    event.preventDefault();
+
+
+    document.body.classList.add(
+      "page-leaving"
+    );
+
+
+    setTimeout(
+      () => {
+        window.location.href =
+          link.href;
+      },
+      90
+    );
+
+  }
+);
