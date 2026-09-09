@@ -474,7 +474,7 @@ function renderHomeTrending(){
         </h3>
 
         <div class="home-trending-views">
-          ▶ ${
+          　${
             trending.currentViews !== null
               ? trending.currentViews
                   .toLocaleString("ja-JP")
