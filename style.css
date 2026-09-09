@@ -2423,22 +2423,67 @@ body > *{
 
 .video-view-btn{
   appearance:none;
-  padding:7px 12px;
+
+  width:70px;
+  height:40px;
+  padding:0;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
 
   background:#fff;
-  color:var(--ink);
 
   border:2px solid var(--line);
   border-radius:999px;
-
-  font-size:11px;
-  font-weight:800;
 
   cursor:pointer;
 }
 
 .video-view-btn.active{
   background:var(--yellow);
+}
+
+.view-icon{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.view-icon-card{
+  gap:4px;
+}
+
+.view-icon-card span:first-child{
+  width:24px;
+  height:15px;
+
+  border:2px solid var(--ink);
+}
+
+.view-icon-card span:last-child{
+  width:15px;
+  height:2px;
+
+  background:var(--ink);
+}
+
+.view-icon-wide{
+  width:32px;
+  height:18px;
+
+  border:2px solid var(--ink);
+}
+
+.view-icon-grid{
+  gap:3px;
+}
+
+.view-icon-grid span{
+  width:11px;
+  height:8px;
+
+  border:2px solid var(--ink);
 }
 
 
@@ -2465,6 +2510,8 @@ body > *{
 .video-grid.view-grid .video-card img{
   width:100%;
   aspect-ratio:16/9;
+
+  border:2px solid var(--line);
 }
 
 .video-grid.view-grid .video-info{
@@ -2495,6 +2542,8 @@ body > *{
 .video-grid.view-wide .video-card img{
   width:100%;
   aspect-ratio:16/9;
+
+  border:2px solid var(--line);
 }
 
 .video-grid.view-wide .video-info{
@@ -2522,4 +2571,9 @@ body > *{
     grid-template-columns:1fr;
     gap:10px;
   }
+}
+
+.video-grid.view-grid .video-status-sticker,
+.video-grid.view-wide .video-status-sticker{
+  display:none;
 }
