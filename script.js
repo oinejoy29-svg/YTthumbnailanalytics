@@ -1197,10 +1197,25 @@ function renderVideos() {
           )
         );
       }
+
       if (
-  sort ===
-  "increase"
-) {
+        sort ===
+        "likes"
+      ) {
+        return (
+          Number(
+            b.likeCount ?? -1
+          ) -
+          Number(
+            a.likeCount ?? -1
+          )
+        );
+      }
+
+      if (
+        sort ===
+        "increase"
+      ) {
   const increaseDiff =
     Number(
       b.viewCountIncrease || 0
@@ -1659,6 +1674,28 @@ function openVideoDetail(
               <span>再生回数</span>
               <strong>
                 ${fmt(video.viewCount)}回
+              </strong>
+            </div>
+
+            <div>
+              <span>高評価数</span>
+              <strong>
+                ${
+                  video.likeCount != null
+                    ? `${fmt(video.likeCount)}件`
+                    : "—"
+                }
+              </strong>
+            </div>
+
+            <div>
+              <span>コメント数</span>
+              <strong>
+                ${
+                  video.commentCount != null
+                    ? `${fmt(video.commentCount)}件`
+                    : "—"
+                }
               </strong>
             </div>
 
