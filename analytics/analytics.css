@@ -2982,6 +2982,16 @@ button.individual-video-hero{
     gap:4px;
   }
 
+  .performance-filter-buttons
+  .compact-menu:first-child{
+    order:2;
+  }
+
+  .performance-filter-buttons
+  .compact-menu:last-child{
+    order:1;
+  }
+
   .compact-menu-btn{
     min-width:92px;
     padding:7px 7px;
@@ -2998,14 +3008,23 @@ button.individual-video-hero{
   }
 
   .compact-menu-panel{
-    min-width:135px;
+    width:140px;
+    min-width:0;
+    max-width:calc(100vw - 24px);
+    max-height:190px;
+    padding:5px;
+    overflow-y:auto;
+    overflow-x:hidden;
   }
 
   .compact-menu-option{
+    width:100%;
+    min-height:0;
     padding:7px 8px;
     font-size:8px;
+    line-height:1.25;
+    white-space:nowrap;
   }
-
   .video-picker-change,
   .compare-video-change{
     margin-left:4px;
