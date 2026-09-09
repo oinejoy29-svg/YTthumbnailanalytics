@@ -277,31 +277,42 @@
 </div>        </div>
 
         <div class="video-view-switch" aria-label="動画の表示形式">
+
           <button
             type="button"
             class="video-view-btn active"
             data-video-view="card"
+            aria-label="カード表示"
           >
-            カード
-          </button>
-
-          <button
-            type="button"
-            class="video-view-btn"
-            data-video-view="grid"
-          >
-            3列
+            <span class="view-icon view-icon-card">
+              <span></span>
+              <span></span>
+            </span>
           </button>
 
           <button
             type="button"
             class="video-view-btn"
             data-video-view="wide"
+            aria-label="サムネイル1列表示"
           >
-            1列
+            <span class="view-icon view-icon-wide"></span>
           </button>
-        </div>
 
+          <button
+            type="button"
+            class="video-view-btn"
+            data-video-view="grid"
+            aria-label="サムネイル3列表示"
+          >
+            <span class="view-icon view-icon-grid">
+              <span></span>
+              <span></span>
+              <span></span>
+            </span>
+          </button>
+
+        </div>
         <div id="videoGrid" class="video-grid"></div>
 
       </section>
