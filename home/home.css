@@ -66,7 +66,13 @@
 
 .home-summary-card{
   min-width:0;
+  aspect-ratio:1.35 / 1;
+
   padding:22px 24px;
+
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
 
   background:#fff;
   border:2px solid var(--line);
