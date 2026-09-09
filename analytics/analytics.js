@@ -3157,38 +3157,137 @@ function getOverviewSeries(metric){
 
 
   /*
-    まだ取得していない指標は、
-    現段階では既存表示を維持。
+    =========================
+    REAL REACH DATA
+    =========================
+  */
+  if(metric === "impressions"){
+
+    const reachDaily =
+      Array.isArray(
+        REACH_DATA?.daily
+      )
+        ? REACH_DATA.daily
+        : [];
+
+
+    const totalsByDate =
+      new Map();
+
+
+    reachDaily.forEach(row => {
+
+      if(!row?.date){
+        return;
+      }
+
+
+      if(
+        row.impressions === null ||
+        row.impressions === undefined
+      ){
+        return;
+      }
+
+
+      const impressions =
+        Number(
+          row.impressions
+        );
+
+
+      if(
+        !Number.isFinite(
+          impressions
+        )
+      ){
+        return;
+      }
+
+
+      totalsByDate.set(
+        row.date,
+        (
+          totalsByDate.get(
+            row.date
+          ) || 0
+        ) + impressions
+      );
+
+    });
+
+
+    const dates =
+      [...totalsByDate.keys()]
+        .sort();
+
+
+    const labels =
+      dates.map(date => {
+
+        const parts =
+          date.split("-");
+
+        return (
+          parts.length === 3
+            ? `${Number(parts[1])}/${Number(parts[2])}`
+            : date
+        );
+      });
+
+
+    const values =
+      dates.map(date =>
+        totalsByDate.get(date)
+      );
+
+
+    const average =
+      values.map(() => null);
+
+
+    const count =
+      currentPeriod === "all"
+        ? "all"
+        : Math.min(
+            Number(currentPeriod),
+            labels.length
+          );
+
+
+    return {
+
+      labels:
+        sliceLast(
+          labels,
+          count
+        ),
+
+      values:
+        sliceLast(
+          values,
+          count
+        ),
+
+      average:
+        sliceLast(
+          average,
+          count
+        ),
+
+      percent:false
+    };
+  }
+
+
+  /*
+    CTRは次にReporting APIの
+    実データへ接続する。
   */
   if(!useRealData){
 
     const source =
       DUMMY.overview;
-
-    let values;
-    let average;
-    let percent = false;
-
-
-    if(metric === "ctr"){
-
-      values =
-        [...source.ctr];
-
-      average =
-        [...source.averageCtr];
-
-      percent = true;
-
-    }else{
-
-      values =
-        [...source.impressions];
-
-      average =
-        [...source.averageImpressions];
-    }
-
 
     const count =
       currentPeriod === "all"
@@ -3209,17 +3308,17 @@ function getOverviewSeries(metric){
 
       values:
         sliceLast(
-          values,
+          source.ctr,
           count
         ),
 
       average:
         sliceLast(
-          average,
+          source.averageCtr,
           count
         ),
 
-      percent
+      percent:true
     };
   }
 
