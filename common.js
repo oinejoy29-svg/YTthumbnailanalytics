@@ -451,7 +451,69 @@ function renderCommonHeader() {
 
 document.addEventListener(
   "DOMContentLoaded",
-  () => {
+  async () => {
+
     renderCommonHeader();
+
+
+    const path =
+      window.location.pathname;
+
+
+    const dataPath =
+      (
+        path.includes(
+          "/analytics/"
+        ) ||
+        path.includes(
+          "/future/"
+        )
+      )
+        ? "../data.json"
+        : "data.json";
+
+
+    try {
+
+      const response =
+        await fetch(
+          dataPath +
+          "?ts=" +
+          Date.now(),
+          {
+            cache:
+              "no-store"
+          }
+        );
+
+
+      if (
+        !response.ok
+      ) {
+        throw new Error(
+          `data.json: ${response.status}`
+        );
+      }
+
+
+      const data =
+        await response.json();
+
+
+      updateCommonHeader(
+        data
+      );
+
+    } catch (
+      error
+    ) {
+
+      console.error(
+        "Common header data load failed:",
+        error
+      );
+
+    }
+
   }
 );
