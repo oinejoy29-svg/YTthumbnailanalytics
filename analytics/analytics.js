@@ -579,8 +579,6 @@ async function loadRootVideoData(){
     const data =
       await response.json();
 
-    const data =
-      await response.json();
 
     ROOT_DATA =
       data;
