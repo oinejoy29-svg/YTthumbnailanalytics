@@ -201,23 +201,24 @@
 
   display:flex;
   flex-direction:column;
-  justify-content:center;
+  justify-content:space-between;
 
-  padding:14px 16px;
+  padding:10px 12px;
 }
 
 .home-trending-info h3{
-  margin:0 0 18px;
+  margin:0;
 
-  font-size:20px;
+  font-size:14px;
   font-weight:900;
-  line-height:1.45;
+  line-height:1.35;
 }
 
 .home-trending-views{
-  margin-bottom:8px;
+  margin-top:auto;
+  margin-bottom:2px;
 
-  font-size:22px;
+  font-size:20px;
   font-weight:900;
 }
 
@@ -247,19 +248,22 @@
   }
 
   .home-trending-card{
-    grid-template-columns:1fr;
-    gap:14px;
+    display:flex;
+    padding:0;
 
-    padding:14px;
-
-    border-radius:16px;
-    box-shadow:4px 4px 0 var(--ink);
+    border-radius:14px;
+    box-shadow:3px 3px 0 var(--ink);
   }
 
   .home-trending-thumbnail{
-    border-radius:9px;
-  }
+    width:42%;
+    aspect-ratio:16 / 9;
+    object-fit:cover;
+    align-self:flex-start;
+    flex:none;
 
+    border-radius:0;
+  }
   .home-trending-info h3{
     margin-bottom:13px;
     font-size:16px;
@@ -389,42 +393,60 @@
   }
 
   .home-milestone-card{
-    grid-template-columns:120px minmax(0, 1fr);
-    gap:13px;
+    display:flex;
+    padding:0;
 
-    padding:14px;
-
-    border-radius:16px;
-    box-shadow:4px 4px 0 var(--ink);
+    border-radius:14px;
+    box-shadow:3px 3px 0 var(--ink);
   }
 
   .home-milestone-thumbnail{
-    border-radius:8px;
+    width:42%;
+    aspect-ratio:16 / 9;
+    object-fit:cover;
+    align-self:flex-start;
+    flex:none;
+
+    border-radius:0;
+  }
+
+  .home-milestone-info{
+    min-width:0;
+    flex:1;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+
+    padding:10px 12px;
   }
 
   .home-milestone-info h3{
-    margin-bottom:10px;
+    margin:0;
 
     font-size:14px;
     line-height:1.35;
   }
 
-  .home-milestone-target{
-    font-size:20px;
+  .home-milestone-count{
+    margin-top:auto;
+    margin-bottom:6px;
+
+    font-size:18px;
+    line-height:1;
   }
 
-  .home-milestone-count{
-    margin-bottom:7px;
-    font-size:11px;
+  .home-milestone-progress-head{
+    margin-bottom:4px;
   }
 
   .home-milestone-progress{
-    height:10px;
-    margin-bottom:7px;
+    height:9px;
+    margin-bottom:0;
   }
 
   .home-milestone-remaining{
-    font-size:12px;
+    font-size:10px;
   }
 
 }
