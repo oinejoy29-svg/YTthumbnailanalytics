@@ -45,6 +45,8 @@ let ANALYTICS_DATA = null;
 
 let REACH_DATA = null;
 
+let END_SCREEN_DATA = null;
+
 let REAL_VIDEOS = [];
 
 let ROOT_VIDEO_DATA = [];
@@ -219,7 +221,58 @@ async function loadReachData(){
 }
 
 
+/* =========================================================
+   LOAD REPORTING END SCREEN DATA
+========================================================= */
 
+async function loadEndScreenData(){
+
+  try{
+
+    const response =
+      await fetch(
+        "./end_screen_daily.json",
+        {
+          cache:"no-store"
+        }
+      );
+
+
+    if(!response.ok){
+
+      throw new Error(
+        `end_screen_daily.json: ${response.status}`
+      );
+    }
+
+
+    END_SCREEN_DATA =
+      await response.json();
+
+
+    console.log(
+      `End screen data loaded: ${
+        END_SCREEN_DATA?.daily?.length || 0
+      } rows`
+    );
+
+
+    return true;
+
+
+  }catch(error){
+
+    console.error(
+      "end_screen_daily.json load error:",
+      error
+    );
+
+
+    END_SCREEN_DATA = null;
+
+    return false;
+  }
+}
 
 
 /* =========================================================
@@ -331,6 +384,119 @@ function getVideoReachSummary(videoId){
 
   };
 }
+
+
+/* =========================================================
+   INDIVIDUAL END SCREEN REAL DATA
+========================================================= */
+
+function getVideoEndScreenSummary(
+  videoId
+){
+
+  if(
+    !videoId ||
+    !END_SCREEN_DATA ||
+    !Array.isArray(
+      END_SCREEN_DATA.daily
+    )
+  ){
+    return null;
+  }
+
+
+  const rows =
+    END_SCREEN_DATA.daily.filter(
+      row =>
+        row.videoId === videoId
+    );
+
+
+  if(!rows.length){
+    return null;
+  }
+
+
+  let totalImpressions = 0;
+  let totalClicks = 0;
+
+  let impressionRows = 0;
+  let clickRows = 0;
+
+
+  rows.forEach(row => {
+
+    const impressions =
+      row.impressions === null ||
+      row.impressions === undefined
+        ? null
+        : Number(row.impressions);
+
+    const clicks =
+      row.clicks === null ||
+      row.clicks === undefined
+        ? null
+        : Number(row.clicks);
+
+
+    if(
+      Number.isFinite(impressions) &&
+      impressions >= 0
+    ){
+
+      totalImpressions +=
+        impressions;
+
+      impressionRows += 1;
+    }
+
+
+    if(
+      Number.isFinite(clicks) &&
+      clicks >= 0
+    ){
+
+      totalClicks +=
+        clicks;
+
+      clickRows += 1;
+    }
+
+  });
+
+
+  const impressions =
+    impressionRows > 0
+      ? totalImpressions
+      : null;
+
+
+  const clicks =
+    clickRows > 0
+      ? totalClicks
+      : null;
+
+
+  const clickRate =
+    impressions !== null &&
+    impressions > 0 &&
+    clicks !== null
+      ? (
+          clicks /
+          impressions
+        ) * 100
+      : null;
+
+
+  return {
+
+    impressions,
+    clicks,
+    clickRate
+
+  };
+}
+
 
 function parseDateOnly(value){
 
@@ -6864,6 +7030,46 @@ function getIndividualMetricValue(
     }
 
 
+    case "endScreenClicks": {
+
+      const endScreen =
+        getVideoEndScreenSummary(
+          video?.id
+        );
+
+      return (
+        endScreen &&
+        endScreen.clicks !== null &&
+        endScreen.clicks !== undefined &&
+        Number.isFinite(
+          Number(endScreen.clicks)
+        )
+      )
+        ? Number(endScreen.clicks)
+        : null;
+    }
+
+
+    case "endScreenClickRate": {
+
+      const endScreen =
+        getVideoEndScreenSummary(
+          video?.id
+        );
+
+      return (
+        endScreen &&
+        endScreen.clickRate !== null &&
+        endScreen.clickRate !== undefined &&
+        Number.isFinite(
+          Number(endScreen.clickRate)
+        )
+      )
+        ? Number(endScreen.clickRate)
+        : null;
+    }
+
+
     default:
       return null;
   }
@@ -7556,6 +7762,25 @@ function renderIndividualDetailAverageRanks(){
   );
 
 
+  updateIndividualMiniAverageRank(
+    "終了画面クリック数",
+    "endScreenClicks",
+    value =>
+      formatInteger(
+        Math.round(value)
+      )
+  );
+
+
+  updateIndividualMiniAverageRank(
+    "終了画面クリック率",
+    "endScreenClickRate",
+    value =>
+      `${Number(value).toFixed(2)}%`
+  );
+
+
+
 
 
 }
@@ -7931,6 +8156,41 @@ function renderIndividualRealMetrics(){
       : `+${Number(
           summary.subscribersGained
         ).toLocaleString("ja-JP")}`
+  );
+
+
+  const endScreenSummary =
+    getVideoEndScreenSummary(
+      video.id
+    );
+
+
+  updateIndividualMiniMetric(
+    "終了画面クリック数",
+    endScreenSummary &&
+    endScreenSummary.clicks !== null &&
+    endScreenSummary.clicks !== undefined
+      ? formatInteger(
+          endScreenSummary.clicks
+        )
+      : "—"
+  );
+
+
+  updateIndividualMiniMetric(
+    "終了画面クリック率",
+    endScreenSummary &&
+    endScreenSummary.clickRate !== null &&
+    endScreenSummary.clickRate !== undefined &&
+    Number.isFinite(
+      Number(
+        endScreenSummary.clickRate
+      )
+    )
+      ? `${Number(
+          endScreenSummary.clickRate
+        ).toFixed(2)}%`
+      : "—"
   );
 
 
@@ -8736,6 +8996,8 @@ await loadAnalyticsData();
 await loadRootVideoData();
 
 await loadReachData();
+
+await loadEndScreenData();
 
 buildRealVideoPicker();
 
