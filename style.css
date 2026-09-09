@@ -2599,3 +2599,16 @@ body > *{
 .video-grid.view-wide .video-card img{
   border-radius:0;
 }
+
+/* =========================
+   SMOOTH PAGE TRANSITION
+========================= */
+
+body{
+  opacity:1;
+  transition:opacity .12s ease;
+}
+
+body.page-leaving{
+  opacity:.82;
+}
