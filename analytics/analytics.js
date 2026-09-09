@@ -3281,20 +3281,143 @@ function getOverviewSeries(metric){
 
 
   /*
-    CTRは次にReporting APIの
-    実データへ接続する。
+    =========================
+    REAL REACH CTR DATA
+    =========================
   */
-  if(!useRealData){
+  if(metric === "ctr"){
 
-    const source =
-      DUMMY.overview;
+    const reachDaily =
+      Array.isArray(
+        REACH_DATA?.daily
+      )
+        ? REACH_DATA.daily
+        : [];
+
+
+    const totalsByDate =
+      new Map();
+
+
+    reachDaily.forEach(row => {
+
+      if(!row?.date){
+        return;
+      }
+
+
+      const impressions =
+        row.impressions === null ||
+        row.impressions === undefined
+          ? null
+          : Number(
+              row.impressions
+            );
+
+      const clickRate =
+        row.clickRate === null ||
+        row.clickRate === undefined
+          ? null
+          : Number(
+              row.clickRate
+            );
+
+
+      if(
+        impressions === null ||
+        clickRate === null ||
+        !Number.isFinite(impressions) ||
+        !Number.isFinite(clickRate) ||
+        impressions < 0
+      ){
+        return;
+      }
+
+
+      if(
+        !totalsByDate.has(
+          row.date
+        )
+      ){
+        totalsByDate.set(
+          row.date,
+          {
+            impressions:0,
+            weightedClicks:0
+          }
+        );
+      }
+
+
+      const totals =
+        totalsByDate.get(
+          row.date
+        );
+
+
+      totals.impressions +=
+        impressions;
+
+      totals.weightedClicks +=
+        impressions *
+        (
+          clickRate / 100
+        );
+
+    });
+
+
+    const dates =
+      [...totalsByDate.keys()]
+        .sort();
+
+
+    const labels =
+      dates.map(date => {
+
+        const parts =
+          date.split("-");
+
+        return (
+          parts.length === 3
+            ? `${Number(parts[1])}/${Number(parts[2])}`
+            : date
+        );
+      });
+
+
+    const values =
+      dates.map(date => {
+
+        const totals =
+          totalsByDate.get(date);
+
+
+        if(
+          !totals ||
+          totals.impressions <= 0
+        ){
+          return null;
+        }
+
+
+        return (
+          totals.weightedClicks /
+          totals.impressions
+        ) * 100;
+      });
+
+
+    const average =
+      values.map(() => null);
+
 
     const count =
       currentPeriod === "all"
         ? "all"
         : Math.min(
             Number(currentPeriod),
-            source.labels.length
+            labels.length
           );
 
 
@@ -3302,26 +3425,25 @@ function getOverviewSeries(metric){
 
       labels:
         sliceLast(
-          source.labels,
+          labels,
           count
         ),
 
       values:
         sliceLast(
-          source.ctr,
+          values,
           count
         ),
 
       average:
         sliceLast(
-          source.averageCtr,
+          average,
           count
         ),
 
       percent:true
     };
   }
-
 
   /*
     =========================
