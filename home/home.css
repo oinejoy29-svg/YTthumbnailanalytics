@@ -20,7 +20,7 @@
 
 .home-rolling .thumb-roll{
   width:230px;
-  border-radius:8px;
+  border-radius:0;
   overflow:hidden;
 }
 
