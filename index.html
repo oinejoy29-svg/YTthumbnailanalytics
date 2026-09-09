@@ -49,6 +49,10 @@
        PAGE SWITCH
   ========================== -->
   <nav class="page-switch" aria-label="ページ切り替え">
+  <button class="switch-btn active" data-page="home">
+    Home
+  </button>
+
   <button class="switch-btn" data-page="videos">
     Video collections
   </button>
@@ -76,16 +80,52 @@
   <main>
 
     <!-- =========================
-         VIDEO PAGE
+         HOME PAGE
     ========================== -->
-    <section id="videosPage" class="page ">
+    <section id="homePage" class="page active">
 
-      <div class="rolling" aria-label="動画サムネイル">
+      <div class="rolling home-rolling" aria-label="動画サムネイル">
         <div class="lane" id="lane0"></div>
         <div class="lane reverse" id="lane1"></div>
         <div class="lane" id="lane2"></div>
       </div>
 
+      <section class="home-summary">
+        <span class="section-kicker">CHANNEL SUMMARY</span>
+        <h2>Channel summary</h2>
+
+        <div class="home-summary-grid" id="homeSummaryGrid"></div>
+      </section>
+
+      <section class="home-trending" id="homeTrending" hidden>
+        <span class="section-kicker">TRENDING NOW</span>
+        <h2>Trending now</h2>
+
+        <div id="homeTrendingContent"></div>
+      </section>
+
+      <section class="home-milestones" id="homeMilestones" hidden>
+        <span class="section-kicker">NEXT MILESTONE</span>
+        <h2>Next milestone</h2>
+
+        <div id="homeMilestoneContent"></div>
+      </section>
+
+      <section class="home-quick-analytics">
+        <span class="section-kicker">QUICK ANALYTICS</span>
+        <h2>Quick analytics</h2>
+
+        <div id="homeQuickAnalytics"></div>
+      </section>
+
+    </section>
+
+
+    <!-- =========================
+         VIDEO PAGE
+    ========================== -->
+
+    <section id="videosPage" class="page">
 
       <!-- Thumbnail collection -->
       <button
