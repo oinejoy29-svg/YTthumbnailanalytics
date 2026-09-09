@@ -115,9 +115,39 @@
         <span class="section-kicker">QUICK ANALYTICS</span>
         <h2>Quick analytics</h2>
 
-        <div id="homeQuickAnalytics"></div>
-      </section>
+        <div class="home-quick-card">
 
+          <div class="home-quick-head">
+            <div>
+              <span class="home-quick-label">
+                SUBSCRIBERS
+              </span>
+
+              <strong id="homeQuickSubscriberCount">
+                —
+              </strong>
+            </div>
+
+            <select id="homeQuickRange" aria-label="表示期間">
+              <option value="30">30 DAYS</option>
+              <option value="90" selected>90 DAYS</option>
+              <option value="all">ALL</option>
+            </select>
+          </div>
+
+          <div class="home-quick-chart-wrap">
+            <canvas id="homeQuickSubscriberChart"></canvas>
+          </div>
+
+          <a
+            class="home-quick-link"
+            href="analytics/analytics.html"
+          >
+            VIEW ANALYTICS →
+          </a>
+
+        </div>
+      </section>
     </section>
 
 
