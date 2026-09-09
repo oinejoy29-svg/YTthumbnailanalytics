@@ -29,6 +29,12 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Update YouTube Data API
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+          YOUTUBE_CHANNEL_ID: ${{ secrets.YOUTUBE_CHANNEL_ID }}
+        run: python update_data.py
+
       - name: Test YouTube Analytics API
         env:
           YT_ANALYTICS_CLIENT_ID: ${{ secrets.YT_ANALYTICS_CLIENT_ID }}
@@ -55,14 +61,16 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
+          git add data.json
+          [ -f scenario_history.json ] && git add scenario_history.json
           git add analytics/analytics_data.json
 
-           [ -f analytics/reach_daily.json ] && git add analytics/reach_daily.json
+          [ -f analytics/reach_daily.json ] && git add analytics/reach_daily.json
           [ -f analytics/reporting_job.json ] && git add analytics/reporting_job.json
           [ -f analytics/reporting_reports.json ] && git add analytics/reporting_reports.json
           [ -f analytics/reach_report.csv ] && git add analytics/reach_report.csv
           [ -f analytics/reach_report.json ] && git add analytics/reach_report.json
-           [ -f analytics/end_screen_daily.json ] && git add analytics/end_screen_daily.json
+          [ -f analytics/end_screen_daily.json ] && git add analytics/end_screen_daily.json
 
         
           if git diff --cached --quiet; then
