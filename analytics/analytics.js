@@ -5702,12 +5702,93 @@ function renderCompareChart(
       ?.checked || false;
 
 
+  const videoA =
+    getRealVideo(
+      selectedCompareVideoAId
+    );
+
+  const videoB =
+    getRealVideo(
+      selectedCompareVideoBId
+    );
+
+
+  const dailyA =
+    Array.isArray(
+      videoA?.analytics?.daily
+    )
+      ? videoA.analytics.daily
+      : [];
+
+  const dailyB =
+    Array.isArray(
+      videoB?.analytics?.daily
+    )
+      ? videoB.analytics.daily
+      : [];
+
+
+  const maxDays =
+    Math.max(
+      dailyA.length,
+      dailyB.length
+    );
+
+
   let labels =
-    DUMMY.compare.dayLabels;
+    Array.from(
+      {length:maxDays},
+      (_,index) =>
+        `DAY ${index + 1}`
+    );
+
+
+  const dailyViewsA =
+    Array.from(
+      {length:maxDays},
+      (_,index) => {
+
+        const value =
+          dailyA[index]?.views;
+
+        return (
+          value !== null &&
+          value !== undefined &&
+          Number.isFinite(
+            Number(value)
+          )
+        )
+          ? Number(value)
+          : null;
+      }
+    );
+
+
+  const dailyViewsB =
+    Array.from(
+      {length:maxDays},
+      (_,index) => {
+
+        const value =
+          dailyB[index]?.views;
+
+        return (
+          value !== null &&
+          value !== undefined &&
+          Number.isFinite(
+            Number(value)
+          )
+        )
+          ? Number(value)
+          : null;
+      }
+    );
+
 
   let dataA;
   let dataB;
-  let average;
+  let average =
+    Array(maxDays).fill(null);
 
   let percent = false;
 
@@ -5719,17 +5800,12 @@ function renderCompareChart(
 
       dataA =
         cumulative(
-          DUMMY.compare.dailyViewsA
+          dailyViewsA
         );
 
       dataB =
         cumulative(
-          DUMMY.compare.dailyViewsB
-        );
-
-      average =
-        cumulative(
-          DUMMY.compare.averageDailyViews
+          dailyViewsB
         );
 
       break;
@@ -5792,13 +5868,10 @@ function renderCompareChart(
     default:
 
       dataA =
-        DUMMY.compare.dailyViewsA;
+        dailyViewsA;
 
       dataB =
-        DUMMY.compare.dailyViewsB;
-
-      average =
-        DUMMY.compare.averageDailyViews;
+        dailyViewsB;
 
       break;
   }
