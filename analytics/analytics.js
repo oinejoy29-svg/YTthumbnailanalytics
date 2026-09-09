@@ -9231,6 +9231,231 @@ function setIndividualVideo(
    COMPARE VIDEO
 ========================================================= */
 
+function renderCompareNumbers(){
+
+  const videoA =
+    getRealVideo(
+      selectedCompareVideoAId
+    );
+
+  const videoB =
+    getRealVideo(
+      selectedCompareVideoBId
+    );
+
+
+  if(
+    !videoA ||
+    !videoB
+  ){
+    return;
+  }
+
+
+  const rows =
+    document.querySelectorAll(
+      "#compareMode .comparison-row:not(.comparison-header)"
+    );
+
+
+  const reachA =
+    getVideoReachSummary(
+      videoA.id
+    );
+
+  const reachB =
+    getVideoReachSummary(
+      videoB.id
+    );
+
+
+  const metrics = [
+
+    {
+      a:getVelocityMetricValue(
+        videoA,
+        1
+      ),
+      b:getVelocityMetricValue(
+        videoB,
+        1
+      ),
+      format:value =>
+        formatInteger(value)
+    },
+
+    {
+      a:getVelocityMetricValue(
+        videoA,
+        3
+      ),
+      b:getVelocityMetricValue(
+        videoB,
+        3
+      ),
+      format:value =>
+        formatInteger(value)
+    },
+
+    {
+      a:getVelocityMetricValue(
+        videoA,
+        7
+      ),
+      b:getVelocityMetricValue(
+        videoB,
+        7
+      ),
+      format:value =>
+        formatInteger(value)
+    },
+
+    {
+      a:
+        reachA?.clickRate ??
+        null,
+
+      b:
+        reachB?.clickRate ??
+        null,
+
+      format:value =>
+        `${Number(value).toFixed(2)}%`
+    },
+
+    {
+      a:
+        videoA?.analytics
+          ?.summary
+          ?.averageViewPercentage ??
+        null,
+
+      b:
+        videoB?.analytics
+          ?.summary
+          ?.averageViewPercentage ??
+        null,
+
+      format:value =>
+        `${Number(value).toFixed(1)}%`
+    },
+
+    {
+      a:
+        videoA?.dataApi
+          ?.likeCount ??
+        null,
+
+      b:
+        videoB?.dataApi
+          ?.likeCount ??
+        null,
+
+      format:value =>
+        formatInteger(value)
+    },
+
+    {
+      a:
+        videoA?.analytics
+          ?.summary
+          ?.subscribersGained ??
+        null,
+
+      b:
+        videoB?.analytics
+          ?.summary
+          ?.subscribersGained ??
+        null,
+
+      format:value =>
+        `${Number(value) >= 0 ? "+" : ""}${formatInteger(value)}`
+    }
+
+  ];
+
+
+  rows.forEach(
+    (row,index) => {
+
+      const metric =
+        metrics[index];
+
+      if(!metric){
+        return;
+      }
+
+
+      const values =
+        row.querySelectorAll(
+          ".compare-value"
+        );
+
+
+      if(values.length < 2){
+        return;
+      }
+
+
+      const valueA =
+        metric.a === null ||
+        metric.a === undefined
+          ? null
+          : Number(metric.a);
+
+      const valueB =
+        metric.b === null ||
+        metric.b === undefined
+          ? null
+          : Number(metric.b);
+
+
+      values[0].classList.remove(
+        "compare-winner"
+      );
+
+      values[1].classList.remove(
+        "compare-winner"
+      );
+
+
+      values[0].textContent =
+        Number.isFinite(valueA)
+          ? metric.format(valueA)
+          : "—";
+
+      values[1].textContent =
+        Number.isFinite(valueB)
+          ? metric.format(valueB)
+          : "—";
+
+
+      if(
+        !Number.isFinite(valueA) ||
+        !Number.isFinite(valueB) ||
+        valueA === valueB
+      ){
+        return;
+      }
+
+
+      if(valueA > valueB){
+
+        values[0].classList.add(
+          "compare-winner"
+        );
+
+      }else{
+
+        values[1].classList.add(
+          "compare-winner"
+        );
+      }
+
+    }
+  );
+}
+
 function setCompareVideo(
   side,
   video
@@ -9618,13 +9843,14 @@ function initAverageToggle(){
     "change",
     () => {
 
-      renderCompareChart(
-        getActiveMetric(
-          "compare"
-        ) ||
-        "dailyViews"
-      );
-    }
+  renderCompareChart(
+    getActiveMetric(
+      "compare"
+    ) || "dailyViews"
+  );
+
+  renderCompareNumbers();
+}
   );
 }
 
