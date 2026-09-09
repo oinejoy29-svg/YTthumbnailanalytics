@@ -405,3 +405,141 @@
 /* =========================
    HOME - QUICK ANALYTICS
 ========================= */
+
+.home-quick-analytics{
+  margin:0 0 48px;
+}
+
+.home-quick-analytics h2{
+  margin:5px 0 18px;
+  font-size:28px;
+  line-height:1.2;
+}
+
+.home-quick-card{
+  padding:22px 24px;
+
+  background:#fff;
+  border:2px solid var(--line);
+  border-radius:20px;
+  box-shadow:5px 5px 0 var(--ink);
+}
+
+.home-quick-head{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:18px;
+
+  margin-bottom:20px;
+}
+
+.home-quick-head > div{
+  display:flex;
+  flex-direction:column;
+  gap:5px;
+}
+
+.home-quick-label{
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:.08em;
+  color:var(--muted);
+}
+
+#homeQuickSubscriberCount{
+  font-size:30px;
+  font-weight:900;
+  line-height:1;
+  letter-spacing:-.03em;
+}
+
+#homeQuickRange{
+  flex:none;
+
+  padding:8px 11px;
+
+  background:#fff;
+  border:2px solid var(--line);
+  border-radius:10px;
+
+  font:inherit;
+  font-size:12px;
+  font-weight:900;
+
+  cursor:pointer;
+}
+
+.home-quick-chart-wrap{
+  position:relative;
+
+  width:100%;
+  height:260px;
+
+  margin-bottom:18px;
+}
+
+.home-quick-chart-wrap canvas{
+  width:100% !important;
+  height:100% !important;
+}
+
+.home-quick-link{
+  display:inline-flex;
+  align-items:center;
+
+  color:var(--ink);
+  text-decoration:none;
+
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:.05em;
+}
+
+.home-quick-link:hover{
+  text-decoration:underline;
+}
+
+
+@media (max-width:768px){
+
+  .home-quick-analytics{
+    margin-bottom:38px;
+  }
+
+  .home-quick-analytics h2{
+    margin-bottom:14px;
+    font-size:23px;
+  }
+
+  .home-quick-card{
+    padding:17px 16px;
+
+    border-radius:16px;
+    box-shadow:4px 4px 0 var(--ink);
+  }
+
+  .home-quick-head{
+    align-items:center;
+    margin-bottom:16px;
+  }
+
+  #homeQuickSubscriberCount{
+    font-size:25px;
+  }
+
+  #homeQuickRange{
+    padding:7px 8px;
+    font-size:10px;
+  }
+
+  .home-quick-chart-wrap{
+    height:210px;
+    margin-bottom:14px;
+  }
+
+  .home-quick-link{
+    font-size:11px;
+  }
+
+}
