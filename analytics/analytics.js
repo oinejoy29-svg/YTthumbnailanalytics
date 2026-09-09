@@ -50,6 +50,7 @@ let END_SCREEN_DATA = null;
 let REAL_VIDEOS = [];
 
 let ROOT_VIDEO_DATA = [];
+let ROOT_DATA = null;
 
 let currentRankingMetric = "views";
 let currentRankingMember = "";
@@ -577,6 +578,12 @@ async function loadRootVideoData(){
 
     const data =
       await response.json();
+
+    const data =
+      await response.json();
+
+    ROOT_DATA =
+      data;
 
     ROOT_VIDEO_DATA =
       Array.isArray(data?.videos)
@@ -10502,7 +10509,15 @@ renderOverviewPeriodChanges();
 
 renderOverviewRanking();
 
-  renderHeader();
+  if (
+    typeof updateCommonHeader ===
+      "function" &&
+    ROOT_DATA
+  ) {
+    updateCommonHeader(
+      ROOT_DATA
+    );
+  }
 
   setupChartDefaults();
 
