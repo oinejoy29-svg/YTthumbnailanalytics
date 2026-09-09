@@ -4409,7 +4409,7 @@ function setupNav() {
 
       if (
         targetPage ===
-        "videos"
+        "home"
       ) {
 
         url.searchParams
