@@ -6980,18 +6980,84 @@ function getIndividualMetricValue(
    　　 : null;
 
 
- 　　case "subscribersGained":
-  　　 return (
- 　　    summary.subscribersGained !== null &&
- 　　    summary.subscribersGained !== undefined &&
- 　　    Number.isFinite(Number(summary.subscribersGained))
- 　  )
- 　　    ? Number(summary.subscribersGained)
-   　　   : null;
+  　　case "subscribersGained":
+   　　 return (
+  　　    summary.subscribersGained !== null &&
+  　　    summary.subscribersGained !== undefined &&
+  　　    Number.isFinite(Number(summary.subscribersGained))
+  　  )
+  　　    ? Number(summary.subscribersGained)
+    　　   : null;
+
+
+    case "likes":
+
+      return (
+        video?.dataApi?.likeCount !== null &&
+        video?.dataApi?.likeCount !== undefined &&
+        Number.isFinite(
+          Number(
+            video.dataApi.likeCount
+          )
+        )
+      )
+        ? Number(
+            video.dataApi.likeCount
+          )
+        : null;
+
+
+    case "comments":
+
+      return (
+        video?.dataApi?.commentCount !== null &&
+        video?.dataApi?.commentCount !== undefined &&
+        Number.isFinite(
+          Number(
+            video.dataApi.commentCount
+          )
+        )
+      )
+        ? Number(
+            video.dataApi.commentCount
+          )
+        : null;
+
+
+    case "likeRate": {
+
+      const likes =
+        video?.dataApi?.likeCount;
+
+      const views =
+        video?.dataApi?.viewCount;
+
+
+      if(
+        likes === null ||
+        likes === undefined ||
+        views === null ||
+        views === undefined ||
+        !Number.isFinite(
+          Number(likes)
+        ) ||
+        !Number.isFinite(
+          Number(views)
+        ) ||
+        Number(views) <= 0
+      ){
+        return null;
+      }
+
+
+      return (
+        Number(likes) /
+        Number(views)
+      ) * 100;
+    }
 
 
     case "impressions": {
-
       const reach =
         getVideoReachSummary(
           video?.id
