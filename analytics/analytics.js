@@ -2126,59 +2126,7 @@ function getDaysSinceStart(){
 }
 
 
-function renderHeader(){
 
-  const now =
-    new Date();
-
-  const periodText =
-    document.getElementById(
-      "periodText"
-    );
-
-  const dayCount =
-    document.getElementById(
-      "dayCount"
-    );
-
-  const updatedDesktop =
-    document.getElementById(
-      "updatedAtDesktop"
-    );
-
-  const updatedMobile =
-    document.getElementById(
-      "updatedAtMobile"
-    );
-
-
-  if(periodText){
-
-    periodText.textContent =
-      `2026/4/3～${formatDateJP(now)}`;
-  }
-
-
-  if(dayCount){
-
-    dayCount.textContent =
-      `（${getDaysSinceStart()}日）`;
-  }
-
-
-  const updated =
-    formatDateTimeJP(now);
-
-
-  if(updatedDesktop){
-    updatedDesktop.textContent = updated;
-  }
-
-
-  if(updatedMobile){
-    updatedMobile.textContent = updated;
-  }
-}
 
 
 /* =========================================================
