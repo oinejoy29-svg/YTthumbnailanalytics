@@ -5672,6 +5672,225 @@ function renderTrafficDetails(){
    COMPARE
 ========================================================= */
 
+function renderCompareSummary(){
+
+  const videoA =
+    getRealVideo(
+      selectedCompareVideoAId
+    );
+
+  const videoB =
+    getRealVideo(
+      selectedCompareVideoBId
+    );
+
+
+  const cards =
+    document.querySelectorAll(
+      "#compareMode .compare-summary-card"
+    );
+
+
+  if(
+    !videoA ||
+    !videoB ||
+    cards.length < 3
+  ){
+    return;
+  }
+
+
+  function updateCard(
+    card,
+    valueA,
+    valueB,
+    description,
+    type = "point"
+  ){
+
+    const strong =
+      card.querySelector(
+        "strong"
+      );
+
+    const text =
+      card.querySelector(
+        "p"
+      );
+
+
+    if(
+      !strong ||
+      !text
+    ){
+      return;
+    }
+
+
+    if(
+      valueA === null ||
+      valueB === null ||
+      !Number.isFinite(
+        Number(valueA)
+      ) ||
+      !Number.isFinite(
+        Number(valueB)
+      )
+    ){
+
+      strong.textContent =
+        "—";
+
+      text.textContent =
+        "比較できるデータがありません";
+
+      return;
+    }
+
+
+    const a =
+      Number(valueA);
+
+    const b =
+      Number(valueB);
+
+
+    if(a === b){
+
+      strong.textContent =
+        "同率";
+
+      text.textContent =
+        `${description}は同じ`;
+
+      return;
+    }
+
+
+    const winner =
+      a > b
+        ? "A"
+        : "B";
+
+
+    const larger =
+      Math.max(
+        a,
+        b
+      );
+
+    const smaller =
+      Math.min(
+        a,
+        b
+      );
+
+
+    strong.textContent =
+      `VIDEO ${winner}`;
+
+
+    if(type === "percentDifference"){
+
+      if(smaller <= 0){
+
+        text.textContent =
+          `${description}は${winner}が上`;
+
+        return;
+      }
+
+
+      const difference =
+        (
+          (
+            larger -
+            smaller
+          ) /
+          smaller
+        ) * 100;
+
+
+      text.textContent =
+        `${description}は${winner}が+${difference.toFixed(1)}%`;
+
+      return;
+    }
+
+
+    const difference =
+      larger -
+      smaller;
+
+
+    text.textContent =
+      `${description}は${winner}が+${difference.toFixed(2)}pt`;
+  }
+
+
+  /*
+    初速
+    DAY1再生数
+  */
+  updateCard(
+    cards[0],
+    getVelocityMetricValue(
+      videoA,
+      1
+    ),
+    getVelocityMetricValue(
+      videoB,
+      1
+    ),
+    "DAY1",
+    "percentDifference"
+  );
+
+
+  /*
+    サムネイル
+    クリック率
+  */
+  const reachA =
+    getVideoReachSummary(
+      videoA.id
+    );
+
+  const reachB =
+    getVideoReachSummary(
+      videoB.id
+    );
+
+
+  updateCard(
+    cards[1],
+    reachA?.clickRate ?? null,
+    reachB?.clickRate ?? null,
+    "クリック率",
+    "point"
+  );
+
+
+  /*
+    視聴維持
+    平均再生率
+  */
+  updateCard(
+    cards[2],
+    videoA?.analytics
+      ?.summary
+      ?.averageViewPercentage ??
+      null,
+    videoB?.analytics
+      ?.summary
+      ?.averageViewPercentage ??
+      null,
+    "平均再生率",
+    "point"
+  );
+
+}
+
 function renderCompareChart(
   metric = "dailyViews"
 ){
@@ -9154,6 +9373,8 @@ function setCompareVideo(
       "compare"
     ) || "dailyViews"
   );
+
+  renderCompareSummary();
 }
 
 
