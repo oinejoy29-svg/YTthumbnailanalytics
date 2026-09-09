@@ -1,0 +1,3706 @@
+{
+  "meta": {
+    "reportType": "channel_end_screens_a1",
+    "reportCount": 30,
+    "successfulReports": 27,
+    "failedReports": 3,
+    "rawRowCount": 1583,
+    "dailyRowCount": 444,
+    "firstDate": "2026-08-08",
+    "lastDate": "2026-09-05"
+  },
+  "daily": [
+    {
+      "date": "2026-08-08",
+      "videoId": "3AQw6eUmK58",
+      "impressions": 6,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-08",
+      "videoId": "DdvR0LbYUjQ",
+      "impressions": 20,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-08",
+      "videoId": "EvoV01i7fRw",
+      "impressions": 45,
+      "clicks": 3,
+      "clickRate": 0.06666667,
+      "clickRatePercent": 6.67
+    },
+    {
+      "date": "2026-08-08",
+      "videoId": "HgCgwKqeJBI",
+      "impressions": 32,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-08",
+      "videoId": "JVNpkPsotMU",
+      "impressions": 10,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-08",
+      "videoId": "LMDZec3o3-g",
+      "impressions": 2,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-08",
+      "videoId": "PmD_nggctn4",
+      "impressions": 120,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-08",
+      "videoId": "_l7l5BH4h_s",
+      "impressions": 16,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-08",
+      "videoId": "a1tQY33iFmM",
+      "impressions": 28,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-08",
+      "videoId": "dhys8ycR5Iw",
+      "impressions": 66,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-08",
+      "videoId": "g1GPX8SlOmU",
+      "impressions": 599,
+      "clicks": 1,
+      "clickRate": 0.00166945,
+      "clickRatePercent": 0.17
+    },
+    {
+      "date": "2026-08-08",
+      "videoId": "lcTtcqjTLlI",
+      "impressions": 2,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-09",
+      "videoId": "DdvR0LbYUjQ",
+      "impressions": 16,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-09",
+      "videoId": "EvoV01i7fRw",
+      "impressions": 58,
+      "clicks": 4,
+      "clickRate": 0.06896552,
+      "clickRatePercent": 6.9
+    },
+    {
+      "date": "2026-08-09",
+      "videoId": "HgCgwKqeJBI",
+      "impressions": 28,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-09",
+      "videoId": "JVNpkPsotMU",
+      "impressions": 12,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-09",
+      "videoId": "PmD_nggctn4",
+      "impressions": 138,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-09",
+      "videoId": "_l7l5BH4h_s",
+      "impressions": 10,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-09",
+      "videoId": "a1tQY33iFmM",
+      "impressions": 22,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-09",
+      "videoId": "dhys8ycR5Iw",
+      "impressions": 61,
+      "clicks": 1,
+      "clickRate": 0.01639344,
+      "clickRatePercent": 1.64
+    },
+    {
+      "date": "2026-08-09",
+      "videoId": "g1GPX8SlOmU",
+      "impressions": 371,
+      "clicks": 3,
+      "clickRate": 0.00808625,
+      "clickRatePercent": 0.81
+    },
+    {
+      "date": "2026-08-09",
+      "videoId": "lcTtcqjTLlI",
+      "impressions": 6,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-10",
+      "videoId": "2b_XBGYqJVU",
+      "impressions": 4,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-10",
+      "videoId": "3AQw6eUmK58",
+      "impressions": 2,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-10",
+      "videoId": "DdvR0LbYUjQ",
+      "impressions": 34,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-10",
+      "videoId": "EvoV01i7fRw",
+      "impressions": 18,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-10",
+      "videoId": "HgCgwKqeJBI",
+      "impressions": 20,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-10",
+      "videoId": "JVNpkPsotMU",
+      "impressions": 12,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-10",
+      "videoId": "K4mQYWHpcUI",
+      "impressions": 2,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-10",
+      "videoId": "PmD_nggctn4",
+      "impressions": 180,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-10",
+      "videoId": "S4tXGHeKBHs",
+      "impressions": 292,
+      "clicks": 3,
+      "clickRate": 0.01027397,
+      "clickRatePercent": 1.03
+    },
+    {
+      "date": "2026-08-10",
+      "videoId": "_l7l5BH4h_s",
+      "impressions": 6,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-10",
+      "videoId": "a1tQY33iFmM",
+      "impressions": 14,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-10",
+      "videoId": "dhys8ycR5Iw",
+      "impressions": 36,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-10",
+      "videoId": "g1GPX8SlOmU",
+      "impressions": 177,
+      "clicks": 1,
+      "clickRate": 0.00564972,
+      "clickRatePercent": 0.56
+    },
+    {
+      "date": "2026-08-10",
+      "videoId": "lcTtcqjTLlI",
+      "impressions": 6,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-11",
+      "videoId": "3AQw6eUmK58",
+      "impressions": 12,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-11",
+      "videoId": "DdvR0LbYUjQ",
+      "impressions": 54,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-11",
+      "videoId": "EvoV01i7fRw",
+      "impressions": 24,
+      "clicks": 2,
+      "clickRate": 0.08333333,
+      "clickRatePercent": 8.33
+    },
+    {
+      "date": "2026-08-11",
+      "videoId": "HgCgwKqeJBI",
+      "impressions": 10,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-11",
+      "videoId": "JVNpkPsotMU",
+      "impressions": 26,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-11",
+      "videoId": "LMDZec3o3-g",
+      "impressions": 6,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-11",
+      "videoId": "PmD_nggctn4",
+      "impressions": 192,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-11",
+      "videoId": "S4tXGHeKBHs",
+      "impressions": 1354,
+      "clicks": 10,
+      "clickRate": 0.00738552,
+      "clickRatePercent": 0.74
+    },
+    {
+      "date": "2026-08-11",
+      "videoId": "_l7l5BH4h_s",
+      "impressions": 4,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-11",
+      "videoId": "a1tQY33iFmM",
+      "impressions": 32,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-11",
+      "videoId": "dhys8ycR5Iw",
+      "impressions": 26,
+      "clicks": 1,
+      "clickRate": 0.03846154,
+      "clickRatePercent": 3.85
+    },
+    {
+      "date": "2026-08-11",
+      "videoId": "g1GPX8SlOmU",
+      "impressions": 122,
+      "clicks": 1,
+      "clickRate": 0.00819672,
+      "clickRatePercent": 0.82
+    },
+    {
+      "date": "2026-08-11",
+      "videoId": "lcTtcqjTLlI",
+      "impressions": 4,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-12",
+      "videoId": "3AQw6eUmK58",
+      "impressions": 4,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-12",
+      "videoId": "DdvR0LbYUjQ",
+      "impressions": 41,
+      "clicks": 1,
+      "clickRate": 0.02439024,
+      "clickRatePercent": 2.44
+    },
+    {
+      "date": "2026-08-12",
+      "videoId": "EvoV01i7fRw",
+      "impressions": 18,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-12",
+      "videoId": "HgCgwKqeJBI",
+      "impressions": 24,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-12",
+      "videoId": "JVNpkPsotMU",
+      "impressions": 6,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-12",
+      "videoId": "K4mQYWHpcUI",
+      "impressions": 2,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-12",
+      "videoId": "LMDZec3o3-g",
+      "impressions": 2,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-12",
+      "videoId": "PmD_nggctn4",
+      "impressions": 218,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-12",
+      "videoId": "S4tXGHeKBHs",
+      "impressions": 289,
+      "clicks": 2,
+      "clickRate": 0.00692042,
+      "clickRatePercent": 0.69
+    },
+    {
+      "date": "2026-08-12",
+      "videoId": "_l7l5BH4h_s",
+      "impressions": 6,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-12",
+      "videoId": "a1tQY33iFmM",
+      "impressions": 6,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-12",
+      "videoId": "dhys8ycR5Iw",
+      "impressions": 20,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-12",
+      "videoId": "g1GPX8SlOmU",
+      "impressions": 92,
+      "clicks": 1,
+      "clickRate": 0.01086957,
+      "clickRatePercent": 1.09
+    },
+    {
+      "date": "2026-08-12",
+      "videoId": "lcTtcqjTLlI",
+      "impressions": 4,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-13",
+      "videoId": "2b_XBGYqJVU",
+      "impressions": 2,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-13",
+      "videoId": "3AQw6eUmK58",
+      "impressions": 6,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-13",
+      "videoId": "D88Zd_OvaSs",
+      "impressions": 524,
+      "clicks": 9,
+      "clickRate": 0.01717557,
+      "clickRatePercent": 1.72
+    },
+    {
+      "date": "2026-08-13",
+      "videoId": "DdvR0LbYUjQ",
+      "impressions": 44,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-13",
+      "videoId": "EvoV01i7fRw",
+      "impressions": 17,
+      "clicks": 2,
+      "clickRate": 0.11764706,
+      "clickRatePercent": 11.76
+    },
+    {
+      "date": "2026-08-13",
+      "videoId": "HgCgwKqeJBI",
+      "impressions": 22,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-13",
+      "videoId": "JVNpkPsotMU",
+      "impressions": 2,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-13",
+      "videoId": "LMDZec3o3-g",
+      "impressions": 4,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-13",
+      "videoId": "PmD_nggctn4",
+      "impressions": 152,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-13",
+      "videoId": "S4tXGHeKBHs",
+      "impressions": 183,
+      "clicks": 2,
+      "clickRate": 0.01092896,
+      "clickRatePercent": 1.09
+    },
+    {
+      "date": "2026-08-13",
+      "videoId": "_l7l5BH4h_s",
+      "impressions": 4,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-13",
+      "videoId": "a1tQY33iFmM",
+      "impressions": 16,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-13",
+      "videoId": "dhys8ycR5Iw",
+      "impressions": 16,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-13",
+      "videoId": "g1GPX8SlOmU",
+      "impressions": 78,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-13",
+      "videoId": "lcTtcqjTLlI",
+      "impressions": 8,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-14",
+      "videoId": "2b_XBGYqJVU",
+      "impressions": 2,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-14",
+      "videoId": "3AQw6eUmK58",
+      "impressions": 2,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-14",
+      "videoId": "D88Zd_OvaSs",
+      "impressions": 1332,
+      "clicks": 21,
+      "clickRate": 0.01576577,
+      "clickRatePercent": 1.58
+    },
+    {
+      "date": "2026-08-14",
+      "videoId": "DdvR0LbYUjQ",
+      "impressions": 22,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-14",
+      "videoId": "EvoV01i7fRw",
+      "impressions": 35,
+      "clicks": 2,
+      "clickRate": 0.05714286,
+      "clickRatePercent": 5.71
+    },
+    {
+      "date": "2026-08-14",
+      "videoId": "HgCgwKqeJBI",
+      "impressions": 12,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-14",
+      "videoId": "JVNpkPsotMU",
+      "impressions": 6,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-14",
+      "videoId": "LMDZec3o3-g",
+      "impressions": 8,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-14",
+      "videoId": "PmD_nggctn4",
+      "impressions": 124,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-14",
+      "videoId": "S4tXGHeKBHs",
+      "impressions": 129,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-14",
+      "videoId": "_l7l5BH4h_s",
+      "impressions": 6,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-14",
+      "videoId": "a1tQY33iFmM",
+      "impressions": 20,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-14",
+      "videoId": "dhys8ycR5Iw",
+      "impressions": 30,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-14",
+      "videoId": "g1GPX8SlOmU",
+      "impressions": 88,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-14",
+      "videoId": "lcTtcqjTLlI",
+      "impressions": 4,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-15",
+      "videoId": "2b_XBGYqJVU",
+      "impressions": 2,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-15",
+      "videoId": "3AQw6eUmK58",
+      "impressions": 12,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-15",
+      "videoId": "D88Zd_OvaSs",
+      "impressions": 515,
+      "clicks": 6,
+      "clickRate": 0.01165049,
+      "clickRatePercent": 1.17
+    },
+    {
+      "date": "2026-08-15",
+      "videoId": "DdvR0LbYUjQ",
+      "impressions": 19,
+      "clicks": 1,
+      "clickRate": 0.05263158,
+      "clickRatePercent": 5.26
+    },
+    {
+      "date": "2026-08-15",
+      "videoId": "EvoV01i7fRw",
+      "impressions": 14,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-15",
+      "videoId": "HgCgwKqeJBI",
+      "impressions": 16,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-15",
+      "videoId": "JVNpkPsotMU",
+      "impressions": 12,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-15",
+      "videoId": "K4mQYWHpcUI",
+      "impressions": 2,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-15",
+      "videoId": "LMDZec3o3-g",
+      "impressions": 12,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-15",
+      "videoId": "PmD_nggctn4",
+      "impressions": 138,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-15",
+      "videoId": "S4tXGHeKBHs",
+      "impressions": 120,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-15",
+      "videoId": "_l7l5BH4h_s",
+      "impressions": 10,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-15",
+      "videoId": "a1tQY33iFmM",
+      "impressions": 14,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-15",
+      "videoId": "dhys8ycR5Iw",
+      "impressions": 36,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-15",
+      "videoId": "g1GPX8SlOmU",
+      "impressions": 50,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-15",
+      "videoId": "lcTtcqjTLlI",
+      "impressions": 4,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-15",
+      "videoId": "pE6Pi35mojw",
+      "impressions": 793,
+      "clicks": 5,
+      "clickRate": 0.00630517,
+      "clickRatePercent": 0.63
+    },
+    {
+      "date": "2026-08-16",
+      "videoId": "3AQw6eUmK58",
+      "impressions": 14,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-16",
+      "videoId": "D88Zd_OvaSs",
+      "impressions": 296,
+      "clicks": 8,
+      "clickRate": 0.02702703,
+      "clickRatePercent": 2.7
+    },
+    {
+      "date": "2026-08-16",
+      "videoId": "DdvR0LbYUjQ",
+      "impressions": 16,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-16",
+      "videoId": "EvoV01i7fRw",
+      "impressions": 28,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-16",
+      "videoId": "HgCgwKqeJBI",
+      "impressions": 14,
+      "clicks": 1,
+      "clickRate": 0.07142857,
+      "clickRatePercent": 7.14
+    },
+    {
+      "date": "2026-08-16",
+      "videoId": "JVNpkPsotMU",
+      "impressions": 8,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-16",
+      "videoId": "K4mQYWHpcUI",
+      "impressions": 2,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-16",
+      "videoId": "LMDZec3o3-g",
+      "impressions": 6,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-16",
+      "videoId": "PmD_nggctn4",
+      "impressions": 182,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-16",
+      "videoId": "S4tXGHeKBHs",
+      "impressions": 157,
+      "clicks": 1,
+      "clickRate": 0.00636943,
+      "clickRatePercent": 0.64
+    },
+    {
+      "date": "2026-08-16",
+      "videoId": "_l7l5BH4h_s",
+      "impressions": 22,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-16",
+      "videoId": "a1tQY33iFmM",
+      "impressions": 20,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-16",
+      "videoId": "dhys8ycR5Iw",
+      "impressions": 40,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-16",
+      "videoId": "g1GPX8SlOmU",
+      "impressions": 48,
+      "clicks": 2,
+      "clickRate": 0.04166667,
+      "clickRatePercent": 4.17
+    },
+    {
+      "date": "2026-08-16",
+      "videoId": "lcTtcqjTLlI",
+      "impressions": 6,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-16",
+      "videoId": "pE6Pi35mojw",
+      "impressions": 1280,
+      "clicks": 9,
+      "clickRate": 0.00703125,
+      "clickRatePercent": 0.7
+    },
+    {
+      "date": "2026-08-17",
+      "videoId": "2b_XBGYqJVU",
+      "impressions": 2,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-17",
+      "videoId": "3AQw6eUmK58",
+      "impressions": 6,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-17",
+      "videoId": "D88Zd_OvaSs",
+      "impressions": 205,
+      "clicks": 5,
+      "clickRate": 0.02439024,
+      "clickRatePercent": 2.44
+    },
+    {
+      "date": "2026-08-17",
+      "videoId": "DdvR0LbYUjQ",
+      "impressions": 22,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-17",
+      "videoId": "EvoV01i7fRw",
+      "impressions": 82,
+      "clicks": 4,
+      "clickRate": 0.04878049,
+      "clickRatePercent": 4.88
+    },
+    {
+      "date": "2026-08-17",
+      "videoId": "HgCgwKqeJBI",
+      "impressions": 16,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-17",
+      "videoId": "JVNpkPsotMU",
+      "impressions": 12,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-17",
+      "videoId": "K4mQYWHpcUI",
+      "impressions": 2,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-17",
+      "videoId": "LMDZec3o3-g",
+      "impressions": 6,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-17",
+      "videoId": "PmD_nggctn4",
+      "impressions": 219,
+      "clicks": 1,
+      "clickRate": 0.00456621,
+      "clickRatePercent": 0.46
+    },
+    {
+      "date": "2026-08-17",
+      "videoId": "S4tXGHeKBHs",
+      "impressions": 144,
+      "clicks": 1,
+      "clickRate": 0.00694444,
+      "clickRatePercent": 0.69
+    },
+    {
+      "date": "2026-08-17",
+      "videoId": "_l7l5BH4h_s",
+      "impressions": 14,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-17",
+      "videoId": "a1tQY33iFmM",
+      "impressions": 16,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-17",
+      "videoId": "dhys8ycR5Iw",
+      "impressions": 66,
+      "clicks": 4,
+      "clickRate": 0.06060606,
+      "clickRatePercent": 6.06
+    },
+    {
+      "date": "2026-08-17",
+      "videoId": "g1GPX8SlOmU",
+      "impressions": 39,
+      "clicks": 1,
+      "clickRate": 0.02564103,
+      "clickRatePercent": 2.56
+    },
+    {
+      "date": "2026-08-17",
+      "videoId": "lcTtcqjTLlI",
+      "impressions": 6,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-17",
+      "videoId": "pE6Pi35mojw",
+      "impressions": 429,
+      "clicks": 4,
+      "clickRate": 0.00932401,
+      "clickRatePercent": 0.93
+    },
+    {
+      "date": "2026-08-18",
+      "videoId": "2b_XBGYqJVU",
+      "impressions": 2,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-18",
+      "videoId": "3AQw6eUmK58",
+      "impressions": 8,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-18",
+      "videoId": "D88Zd_OvaSs",
+      "impressions": 147,
+      "clicks": 1,
+      "clickRate": 0.00680272,
+      "clickRatePercent": 0.68
+    },
+    {
+      "date": "2026-08-18",
+      "videoId": "DdvR0LbYUjQ",
+      "impressions": 20,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-18",
+      "videoId": "EvoV01i7fRw",
+      "impressions": 50,
+      "clicks": 4,
+      "clickRate": 0.08,
+      "clickRatePercent": 8.0
+    },
+    {
+      "date": "2026-08-18",
+      "videoId": "HgCgwKqeJBI",
+      "impressions": 6,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-18",
+      "videoId": "JVNpkPsotMU",
+      "impressions": 10,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-18",
+      "videoId": "K4mQYWHpcUI",
+      "impressions": 4,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-18",
+      "videoId": "LMDZec3o3-g",
+      "impressions": 10,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-18",
+      "videoId": "PmD_nggctn4",
+      "impressions": 132,
+      "clicks": 1,
+      "clickRate": 0.00757576,
+      "clickRatePercent": 0.76
+    },
+    {
+      "date": "2026-08-18",
+      "videoId": "S4tXGHeKBHs",
+      "impressions": 96,
+      "clicks": 1,
+      "clickRate": 0.01041667,
+      "clickRatePercent": 1.04
+    },
+    {
+      "date": "2026-08-18",
+      "videoId": "_l7l5BH4h_s",
+      "impressions": 12,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-18",
+      "videoId": "a1tQY33iFmM",
+      "impressions": 10,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-18",
+      "videoId": "dhys8ycR5Iw",
+      "impressions": 78,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-18",
+      "videoId": "g1GPX8SlOmU",
+      "impressions": 26,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-18",
+      "videoId": "pE6Pi35mojw",
+      "impressions": 301,
+      "clicks": 1,
+      "clickRate": 0.00332226,
+      "clickRatePercent": 0.33
+    },
+    {
+      "date": "2026-08-19",
+      "videoId": "D88Zd_OvaSs",
+      "impressions": 118,
+      "clicks": 2,
+      "clickRate": 0.01694915,
+      "clickRatePercent": 1.69
+    },
+    {
+      "date": "2026-08-19",
+      "videoId": "DdvR0LbYUjQ",
+      "impressions": 20,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-19",
+      "videoId": "EvoV01i7fRw",
+      "impressions": 39,
+      "clicks": 2,
+      "clickRate": 0.05128205,
+      "clickRatePercent": 5.13
+    },
+    {
+      "date": "2026-08-19",
+      "videoId": "HgCgwKqeJBI",
+      "impressions": 8,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-19",
+      "videoId": "JVNpkPsotMU",
+      "impressions": 6,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-19",
+      "videoId": "LMDZec3o3-g",
+      "impressions": 18,
+      "clicks": 1,
+      "clickRate": 0.05555556,
+      "clickRatePercent": 5.56
+    },
+    {
+      "date": "2026-08-19",
+      "videoId": "PmD_nggctn4",
+      "impressions": 186,
+      "clicks": 1,
+      "clickRate": 0.00537634,
+      "clickRatePercent": 0.54
+    },
+    {
+      "date": "2026-08-19",
+      "videoId": "S4tXGHeKBHs",
+      "impressions": 81,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-19",
+      "videoId": "_l7l5BH4h_s",
+      "impressions": 12,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-19",
+      "videoId": "a1tQY33iFmM",
+      "impressions": 4,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-19",
+      "videoId": "dhys8ycR5Iw",
+      "impressions": 47,
+      "clicks": 2,
+      "clickRate": 0.04255319,
+      "clickRatePercent": 4.26
+    },
+    {
+      "date": "2026-08-19",
+      "videoId": "g1GPX8SlOmU",
+      "impressions": 24,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-19",
+      "videoId": "pE6Pi35mojw",
+      "impressions": 204,
+      "clicks": 3,
+      "clickRate": 0.01470588,
+      "clickRatePercent": 1.47
+    },
+    {
+      "date": "2026-08-20",
+      "videoId": "3AQw6eUmK58",
+      "impressions": 10,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-20",
+      "videoId": "D88Zd_OvaSs",
+      "impressions": 161,
+      "clicks": 2,
+      "clickRate": 0.01242236,
+      "clickRatePercent": 1.24
+    },
+    {
+      "date": "2026-08-20",
+      "videoId": "DdvR0LbYUjQ",
+      "impressions": 28,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-20",
+      "videoId": "EvoV01i7fRw",
+      "impressions": 54,
+      "clicks": 1,
+      "clickRate": 0.01851852,
+      "clickRatePercent": 1.85
+    },
+    {
+      "date": "2026-08-20",
+      "videoId": "HgCgwKqeJBI",
+      "impressions": 10,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-20",
+      "videoId": "JVNpkPsotMU",
+      "impressions": 6,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-20",
+      "videoId": "K4mQYWHpcUI",
+      "impressions": 6,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-20",
+      "videoId": "LMDZec3o3-g",
+      "impressions": 10,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-20",
+      "videoId": "PmD_nggctn4",
+      "impressions": 182,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-20",
+      "videoId": "S4tXGHeKBHs",
+      "impressions": 45,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-20",
+      "videoId": "_l7l5BH4h_s",
+      "impressions": 8,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-20",
+      "videoId": "a1tQY33iFmM",
+      "impressions": 8,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-20",
+      "videoId": "dhys8ycR5Iw",
+      "impressions": 42,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-20",
+      "videoId": "g1GPX8SlOmU",
+      "impressions": 38,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-20",
+      "videoId": "lcTtcqjTLlI",
+      "impressions": 2,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-20",
+      "videoId": "pE6Pi35mojw",
+      "impressions": 208,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-21",
+      "videoId": "3AQw6eUmK58",
+      "impressions": 18,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-21",
+      "videoId": "D88Zd_OvaSs",
+      "impressions": 74,
+      "clicks": 1,
+      "clickRate": 0.01351351,
+      "clickRatePercent": 1.35
+    },
+    {
+      "date": "2026-08-21",
+      "videoId": "DdvR0LbYUjQ",
+      "impressions": 38,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-21",
+      "videoId": "EvoV01i7fRw",
+      "impressions": 22,
+      "clicks": 2,
+      "clickRate": 0.09090909,
+      "clickRatePercent": 9.09
+    },
+    {
+      "date": "2026-08-21",
+      "videoId": "HgCgwKqeJBI",
+      "impressions": 16,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-21",
+      "videoId": "JVNpkPsotMU",
+      "impressions": 12,
+      "clicks": 1,
+      "clickRate": 0.08333333,
+      "clickRatePercent": 8.33
+    },
+    {
+      "date": "2026-08-21",
+      "videoId": "LMDZec3o3-g",
+      "impressions": 4,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-21",
+      "videoId": "PmD_nggctn4",
+      "impressions": 182,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-21",
+      "videoId": "S4tXGHeKBHs",
+      "impressions": 42,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-21",
+      "videoId": "_l7l5BH4h_s",
+      "impressions": 16,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-21",
+      "videoId": "a1tQY33iFmM",
+      "impressions": 22,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-21",
+      "videoId": "dhys8ycR5Iw",
+      "impressions": 51,
+      "clicks": 1,
+      "clickRate": 0.01960784,
+      "clickRatePercent": 1.96
+    },
+    {
+      "date": "2026-08-21",
+      "videoId": "g1GPX8SlOmU",
+      "impressions": 26,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-21",
+      "videoId": "pE6Pi35mojw",
+      "impressions": 139,
+      "clicks": 1,
+      "clickRate": 0.00719424,
+      "clickRatePercent": 0.72
+    },
+    {
+      "date": "2026-08-21",
+      "videoId": "rSNhDgGJvPU",
+      "impressions": 1691,
+      "clicks": 7,
+      "clickRate": 0.00413956,
+      "clickRatePercent": 0.41
+    },
+    {
+      "date": "2026-08-22",
+      "videoId": "2b_XBGYqJVU",
+      "impressions": 2,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-22",
+      "videoId": "3AQw6eUmK58",
+      "impressions": 32,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-22",
+      "videoId": "D88Zd_OvaSs",
+      "impressions": 72,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-22",
+      "videoId": "DdvR0LbYUjQ",
+      "impressions": 6,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-22",
+      "videoId": "EvoV01i7fRw",
+      "impressions": 27,
+      "clicks": 3,
+      "clickRate": 0.11111111,
+      "clickRatePercent": 11.11
+    },
+    {
+      "date": "2026-08-22",
+      "videoId": "HgCgwKqeJBI",
+      "impressions": 26,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-22",
+      "videoId": "JVNpkPsotMU",
+      "impressions": 4,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-22",
+      "videoId": "LMDZec3o3-g",
+      "impressions": 4,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-22",
+      "videoId": "PmD_nggctn4",
+      "impressions": 169,
+      "clicks": 1,
+      "clickRate": 0.00591716,
+      "clickRatePercent": 0.59
+    },
+    {
+      "date": "2026-08-22",
+      "videoId": "S4tXGHeKBHs",
+      "impressions": 21,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-22",
+      "videoId": "_l7l5BH4h_s",
+      "impressions": 4,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-22",
+      "videoId": "a1tQY33iFmM",
+      "impressions": 14,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-22",
+      "videoId": "dhys8ycR5Iw",
+      "impressions": 42,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-22",
+      "videoId": "g1GPX8SlOmU",
+      "impressions": 38,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-22",
+      "videoId": "lcTtcqjTLlI",
+      "impressions": 2,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-22",
+      "videoId": "pE6Pi35mojw",
+      "impressions": 74,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-22",
+      "videoId": "rSNhDgGJvPU",
+      "impressions": 2214,
+      "clicks": 11,
+      "clickRate": 0.00496838,
+      "clickRatePercent": 0.5
+    },
+    {
+      "date": "2026-08-23",
+      "videoId": "3AQw6eUmK58",
+      "impressions": 10,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-23",
+      "videoId": "D88Zd_OvaSs",
+      "impressions": 47,
+      "clicks": 3,
+      "clickRate": 0.06382979,
+      "clickRatePercent": 6.38
+    },
+    {
+      "date": "2026-08-23",
+      "videoId": "DdvR0LbYUjQ",
+      "impressions": 4,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-23",
+      "videoId": "EvoV01i7fRw",
+      "impressions": 22,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-23",
+      "videoId": "HgCgwKqeJBI",
+      "impressions": 20,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-23",
+      "videoId": "JVNpkPsotMU",
+      "impressions": 6,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-23",
+      "videoId": "K4mQYWHpcUI",
+      "impressions": 2,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-23",
+      "videoId": "LMDZec3o3-g",
+      "impressions": 2,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-23",
+      "videoId": "PmD_nggctn4",
+      "impressions": 84,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-23",
+      "videoId": "S4tXGHeKBHs",
+      "impressions": 24,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-23",
+      "videoId": "_l7l5BH4h_s",
+      "impressions": 8,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-23",
+      "videoId": "a1tQY33iFmM",
+      "impressions": 10,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-23",
+      "videoId": "a9U4uap71ME",
+      "impressions": 473,
+      "clicks": 2,
+      "clickRate": 0.00422833,
+      "clickRatePercent": 0.42
+    },
+    {
+      "date": "2026-08-23",
+      "videoId": "dhys8ycR5Iw",
+      "impressions": 26,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-23",
+      "videoId": "g1GPX8SlOmU",
+      "impressions": 52,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-23",
+      "videoId": "lcTtcqjTLlI",
+      "impressions": 8,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-23",
+      "videoId": "pE6Pi35mojw",
+      "impressions": 62,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-23",
+      "videoId": "rSNhDgGJvPU",
+      "impressions": 829,
+      "clicks": 5,
+      "clickRate": 0.00603136,
+      "clickRatePercent": 0.6
+    },
+    {
+      "date": "2026-08-24",
+      "videoId": "2b_XBGYqJVU",
+      "impressions": 2,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-24",
+      "videoId": "3AQw6eUmK58",
+      "impressions": 94,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-24",
+      "videoId": "D88Zd_OvaSs",
+      "impressions": 56,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-24",
+      "videoId": "DdvR0LbYUjQ",
+      "impressions": 18,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-24",
+      "videoId": "EvoV01i7fRw",
+      "impressions": 39,
+      "clicks": 1,
+      "clickRate": 0.02564103,
+      "clickRatePercent": 2.56
+    },
+    {
+      "date": "2026-08-24",
+      "videoId": "HgCgwKqeJBI",
+      "impressions": 14,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-24",
+      "videoId": "JVNpkPsotMU",
+      "impressions": 8,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-24",
+      "videoId": "LMDZec3o3-g",
+      "impressions": 2,
+      "clicks": 1,
+      "clickRate": 0.5,
+      "clickRatePercent": 50.0
+    },
+    {
+      "date": "2026-08-24",
+      "videoId": "PmD_nggctn4",
+      "impressions": 168,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-24",
+      "videoId": "S4tXGHeKBHs",
+      "impressions": 36,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-24",
+      "videoId": "_l7l5BH4h_s",
+      "impressions": 18,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-24",
+      "videoId": "a1tQY33iFmM",
+      "impressions": 8,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-24",
+      "videoId": "a9U4uap71ME",
+      "impressions": 1134,
+      "clicks": 6,
+      "clickRate": 0.00529101,
+      "clickRatePercent": 0.53
+    },
+    {
+      "date": "2026-08-24",
+      "videoId": "dhys8ycR5Iw",
+      "impressions": 72,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-24",
+      "videoId": "g1GPX8SlOmU",
+      "impressions": 40,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-24",
+      "videoId": "lcTtcqjTLlI",
+      "impressions": 8,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-24",
+      "videoId": "pE6Pi35mojw",
+      "impressions": 38,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-24",
+      "videoId": "rSNhDgGJvPU",
+      "impressions": 458,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-25",
+      "videoId": "3AQw6eUmK58",
+      "impressions": 78,
+      "clicks": 1,
+      "clickRate": 0.01282051,
+      "clickRatePercent": 1.28
+    },
+    {
+      "date": "2026-08-25",
+      "videoId": "B75t0LqJUSg",
+      "impressions": 130,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-25",
+      "videoId": "D88Zd_OvaSs",
+      "impressions": 37,
+      "clicks": 1,
+      "clickRate": 0.02702703,
+      "clickRatePercent": 2.7
+    },
+    {
+      "date": "2026-08-25",
+      "videoId": "DdvR0LbYUjQ",
+      "impressions": 8,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-25",
+      "videoId": "EvoV01i7fRw",
+      "impressions": 23,
+      "clicks": 3,
+      "clickRate": 0.13043478,
+      "clickRatePercent": 13.04
+    },
+    {
+      "date": "2026-08-25",
+      "videoId": "HgCgwKqeJBI",
+      "impressions": 10,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-25",
+      "videoId": "K4mQYWHpcUI",
+      "impressions": 2,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-25",
+      "videoId": "PmD_nggctn4",
+      "impressions": 84,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-25",
+      "videoId": "S4tXGHeKBHs",
+      "impressions": 6,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-25",
+      "videoId": "_l7l5BH4h_s",
+      "impressions": 16,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-25",
+      "videoId": "a1tQY33iFmM",
+      "impressions": 12,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-25",
+      "videoId": "a9U4uap71ME",
+      "impressions": 178,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-25",
+      "videoId": "dhys8ycR5Iw",
+      "impressions": 40,
+      "clicks": 1,
+      "clickRate": 0.025,
+      "clickRatePercent": 2.5
+    },
+    {
+      "date": "2026-08-25",
+      "videoId": "g1GPX8SlOmU",
+      "impressions": 30,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-25",
+      "videoId": "lcTtcqjTLlI",
+      "impressions": 2,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-25",
+      "videoId": "pE6Pi35mojw",
+      "impressions": 44,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-25",
+      "videoId": "rSNhDgGJvPU",
+      "impressions": 282,
+      "clicks": 3,
+      "clickRate": 0.0106383,
+      "clickRatePercent": 1.06
+    },
+    {
+      "date": "2026-08-26",
+      "videoId": "3AQw6eUmK58",
+      "impressions": 44,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-26",
+      "videoId": "B75t0LqJUSg",
+      "impressions": 547,
+      "clicks": 4,
+      "clickRate": 0.00731261,
+      "clickRatePercent": 0.73
+    },
+    {
+      "date": "2026-08-26",
+      "videoId": "D88Zd_OvaSs",
+      "impressions": 46,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-26",
+      "videoId": "DdvR0LbYUjQ",
+      "impressions": 10,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-26",
+      "videoId": "EvoV01i7fRw",
+      "impressions": 29,
+      "clicks": 2,
+      "clickRate": 0.06896552,
+      "clickRatePercent": 6.9
+    },
+    {
+      "date": "2026-08-26",
+      "videoId": "HgCgwKqeJBI",
+      "impressions": 10,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-26",
+      "videoId": "JVNpkPsotMU",
+      "impressions": 2,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-26",
+      "videoId": "LMDZec3o3-g",
+      "impressions": 8,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-26",
+      "videoId": "PmD_nggctn4",
+      "impressions": 88,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-26",
+      "videoId": "S4tXGHeKBHs",
+      "impressions": 15,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-26",
+      "videoId": "_l7l5BH4h_s",
+      "impressions": 22,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-26",
+      "videoId": "a1tQY33iFmM",
+      "impressions": 8,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-26",
+      "videoId": "a9U4uap71ME",
+      "impressions": 114,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-26",
+      "videoId": "dhys8ycR5Iw",
+      "impressions": 30,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-26",
+      "videoId": "g1GPX8SlOmU",
+      "impressions": 36,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-26",
+      "videoId": "lcTtcqjTLlI",
+      "impressions": 6,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-26",
+      "videoId": "pE6Pi35mojw",
+      "impressions": 38,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-26",
+      "videoId": "rSNhDgGJvPU",
+      "impressions": 201,
+      "clicks": 1,
+      "clickRate": 0.00497512,
+      "clickRatePercent": 0.5
+    },
+    {
+      "date": "2026-08-27",
+      "videoId": "3AQw6eUmK58",
+      "impressions": 14,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-27",
+      "videoId": "B75t0LqJUSg",
+      "impressions": 81,
+      "clicks": 1,
+      "clickRate": 0.01234568,
+      "clickRatePercent": 1.23
+    },
+    {
+      "date": "2026-08-27",
+      "videoId": "D88Zd_OvaSs",
+      "impressions": 45,
+      "clicks": 1,
+      "clickRate": 0.02222222,
+      "clickRatePercent": 2.22
+    },
+    {
+      "date": "2026-08-27",
+      "videoId": "DdvR0LbYUjQ",
+      "impressions": 6,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-27",
+      "videoId": "EvoV01i7fRw",
+      "impressions": 16,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-27",
+      "videoId": "HgCgwKqeJBI",
+      "impressions": 4,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-27",
+      "videoId": "JVNpkPsotMU",
+      "impressions": 4,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-27",
+      "videoId": "PmD_nggctn4",
+      "impressions": 104,
+      "clicks": 1,
+      "clickRate": 0.00961538,
+      "clickRatePercent": 0.96
+    },
+    {
+      "date": "2026-08-27",
+      "videoId": "S4tXGHeKBHs",
+      "impressions": 21,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-27",
+      "videoId": "_l7l5BH4h_s",
+      "impressions": 18,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-27",
+      "videoId": "a1tQY33iFmM",
+      "impressions": 8,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-27",
+      "videoId": "a9U4uap71ME",
+      "impressions": 36,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-27",
+      "videoId": "dhys8ycR5Iw",
+      "impressions": 24,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-27",
+      "videoId": "g1GPX8SlOmU",
+      "impressions": 22,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-27",
+      "videoId": "lcTtcqjTLlI",
+      "impressions": 4,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-27",
+      "videoId": "pE6Pi35mojw",
+      "impressions": 26,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-27",
+      "videoId": "rSNhDgGJvPU",
+      "impressions": 92,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-28",
+      "videoId": "2b_XBGYqJVU",
+      "impressions": 4,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-28",
+      "videoId": "3AQw6eUmK58",
+      "impressions": 16,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-28",
+      "videoId": "B75t0LqJUSg",
+      "impressions": 98,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-28",
+      "videoId": "D88Zd_OvaSs",
+      "impressions": 40,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-28",
+      "videoId": "DdvR0LbYUjQ",
+      "impressions": 6,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-28",
+      "videoId": "EvoV01i7fRw",
+      "impressions": 18,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-28",
+      "videoId": "HgCgwKqeJBI",
+      "impressions": 14,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-28",
+      "videoId": "LMDZec3o3-g",
+      "impressions": 14,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-28",
+      "videoId": "PmD_nggctn4",
+      "impressions": 64,
+      "clicks": 2,
+      "clickRate": 0.03125,
+      "clickRatePercent": 3.12
+    },
+    {
+      "date": "2026-08-28",
+      "videoId": "S4tXGHeKBHs",
+      "impressions": 21,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-28",
+      "videoId": "SlDTZdCoX7w",
+      "impressions": 2581,
+      "clicks": 9,
+      "clickRate": 0.00348702,
+      "clickRatePercent": 0.35
+    },
+    {
+      "date": "2026-08-28",
+      "videoId": "_l7l5BH4h_s",
+      "impressions": 48,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-28",
+      "videoId": "a1tQY33iFmM",
+      "impressions": 20,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-28",
+      "videoId": "a9U4uap71ME",
+      "impressions": 24,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-28",
+      "videoId": "dhys8ycR5Iw",
+      "impressions": 68,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-28",
+      "videoId": "g1GPX8SlOmU",
+      "impressions": 22,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-28",
+      "videoId": "lcTtcqjTLlI",
+      "impressions": 8,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-28",
+      "videoId": "pE6Pi35mojw",
+      "impressions": 94,
+      "clicks": 1,
+      "clickRate": 0.0106383,
+      "clickRatePercent": 1.06
+    },
+    {
+      "date": "2026-08-28",
+      "videoId": "rSNhDgGJvPU",
+      "impressions": 111,
+      "clicks": 3,
+      "clickRate": 0.02702703,
+      "clickRatePercent": 2.7
+    },
+    {
+      "date": "2026-08-29",
+      "videoId": "2b_XBGYqJVU",
+      "impressions": 2,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-29",
+      "videoId": "3AQw6eUmK58",
+      "impressions": 18,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-29",
+      "videoId": "B75t0LqJUSg",
+      "impressions": 18,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-29",
+      "videoId": "D88Zd_OvaSs",
+      "impressions": 34,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-29",
+      "videoId": "DdvR0LbYUjQ",
+      "impressions": 8,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-29",
+      "videoId": "EvoV01i7fRw",
+      "impressions": 22,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-29",
+      "videoId": "HgCgwKqeJBI",
+      "impressions": 8,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-29",
+      "videoId": "JVNpkPsotMU",
+      "impressions": 2,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-29",
+      "videoId": "LMDZec3o3-g",
+      "impressions": 2,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-29",
+      "videoId": "PmD_nggctn4",
+      "impressions": 102,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-29",
+      "videoId": "S4tXGHeKBHs",
+      "impressions": 12,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-29",
+      "videoId": "SlDTZdCoX7w",
+      "impressions": 931,
+      "clicks": 2,
+      "clickRate": 0.00214823,
+      "clickRatePercent": 0.21
+    },
+    {
+      "date": "2026-08-29",
+      "videoId": "_l7l5BH4h_s",
+      "impressions": 22,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-29",
+      "videoId": "a1tQY33iFmM",
+      "impressions": 6,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-29",
+      "videoId": "a9U4uap71ME",
+      "impressions": 20,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-29",
+      "videoId": "dhys8ycR5Iw",
+      "impressions": 46,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-29",
+      "videoId": "g1GPX8SlOmU",
+      "impressions": 22,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-29",
+      "videoId": "pE6Pi35mojw",
+      "impressions": 50,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-29",
+      "videoId": "rSNhDgGJvPU",
+      "impressions": 72,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-30",
+      "videoId": "3AQw6eUmK58",
+      "impressions": 16,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-30",
+      "videoId": "B75t0LqJUSg",
+      "impressions": 6,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-30",
+      "videoId": "D88Zd_OvaSs",
+      "impressions": 36,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-30",
+      "videoId": "DdvR0LbYUjQ",
+      "impressions": 10,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-30",
+      "videoId": "EvoV01i7fRw",
+      "impressions": 21,
+      "clicks": 1,
+      "clickRate": 0.04761905,
+      "clickRatePercent": 4.76
+    },
+    {
+      "date": "2026-08-30",
+      "videoId": "HgCgwKqeJBI",
+      "impressions": 8,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-30",
+      "videoId": "JVNpkPsotMU",
+      "impressions": 4,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-30",
+      "videoId": "LMDZec3o3-g",
+      "impressions": 2,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-30",
+      "videoId": "PmD_nggctn4",
+      "impressions": 92,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-30",
+      "videoId": "S4tXGHeKBHs",
+      "impressions": 24,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-30",
+      "videoId": "SlDTZdCoX7w",
+      "impressions": 469,
+      "clicks": 3,
+      "clickRate": 0.00639659,
+      "clickRatePercent": 0.64
+    },
+    {
+      "date": "2026-08-30",
+      "videoId": "_l7l5BH4h_s",
+      "impressions": 16,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-30",
+      "videoId": "a1tQY33iFmM",
+      "impressions": 2,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-30",
+      "videoId": "a9U4uap71ME",
+      "impressions": 18,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-30",
+      "videoId": "dhys8ycR5Iw",
+      "impressions": 32,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-30",
+      "videoId": "g1GPX8SlOmU",
+      "impressions": 22,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-30",
+      "videoId": "pE6Pi35mojw",
+      "impressions": 42,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-30",
+      "videoId": "rSNhDgGJvPU",
+      "impressions": 112,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-31",
+      "videoId": "3AQw6eUmK58",
+      "impressions": 6,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-31",
+      "videoId": "B75t0LqJUSg",
+      "impressions": 10,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-31",
+      "videoId": "D88Zd_OvaSs",
+      "impressions": 22,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-31",
+      "videoId": "DdvR0LbYUjQ",
+      "impressions": 8,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-31",
+      "videoId": "EvoV01i7fRw",
+      "impressions": 22,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-31",
+      "videoId": "HgCgwKqeJBI",
+      "impressions": 6,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-31",
+      "videoId": "JVNpkPsotMU",
+      "impressions": 2,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-31",
+      "videoId": "LMDZec3o3-g",
+      "impressions": 4,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-31",
+      "videoId": "PiikNxCE5_Q",
+      "impressions": 2661,
+      "clicks": 10,
+      "clickRate": 0.00375799,
+      "clickRatePercent": 0.38
+    },
+    {
+      "date": "2026-08-31",
+      "videoId": "PmD_nggctn4",
+      "impressions": 91,
+      "clicks": 1,
+      "clickRate": 0.01098901,
+      "clickRatePercent": 1.1
+    },
+    {
+      "date": "2026-08-31",
+      "videoId": "S4tXGHeKBHs",
+      "impressions": 24,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-31",
+      "videoId": "SlDTZdCoX7w",
+      "impressions": 444,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-31",
+      "videoId": "_l7l5BH4h_s",
+      "impressions": 18,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-31",
+      "videoId": "a1tQY33iFmM",
+      "impressions": 2,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-31",
+      "videoId": "a9U4uap71ME",
+      "impressions": 40,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-31",
+      "videoId": "dhys8ycR5Iw",
+      "impressions": 34,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-31",
+      "videoId": "g1GPX8SlOmU",
+      "impressions": 4,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-31",
+      "videoId": "lcTtcqjTLlI",
+      "impressions": 14,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-31",
+      "videoId": "pE6Pi35mojw",
+      "impressions": 68,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-08-31",
+      "videoId": "rSNhDgGJvPU",
+      "impressions": 110,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-09-01",
+      "videoId": "3AQw6eUmK58",
+      "impressions": 2,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-09-01",
+      "videoId": "B75t0LqJUSg",
+      "impressions": 8,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-09-01",
+      "videoId": "D88Zd_OvaSs",
+      "impressions": 19,
+      "clicks": 1,
+      "clickRate": 0.05263158,
+      "clickRatePercent": 5.26
+    },
+    {
+      "date": "2026-09-01",
+      "videoId": "DdvR0LbYUjQ",
+      "impressions": 6,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-09-01",
+      "videoId": "EvoV01i7fRw",
+      "impressions": 19,
+      "clicks": 1,
+      "clickRate": 0.05263158,
+      "clickRatePercent": 5.26
+    },
+    {
+      "date": "2026-09-01",
+      "videoId": "HgCgwKqeJBI",
+      "impressions": 2,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-09-01",
+      "videoId": "LMDZec3o3-g",
+      "impressions": 6,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-09-01",
+      "videoId": "PiikNxCE5_Q",
+      "impressions": 370,
+      "clicks": 1,
+      "clickRate": 0.0027027,
+      "clickRatePercent": 0.27
+    },
+    {
+      "date": "2026-09-01",
+      "videoId": "PmD_nggctn4",
+      "impressions": 66,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-09-01",
+      "videoId": "S4tXGHeKBHs",
+      "impressions": 9,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-09-01",
+      "videoId": "SlDTZdCoX7w",
+      "impressions": 373,
+      "clicks": 2,
+      "clickRate": 0.00536193,
+      "clickRatePercent": 0.54
+    },
+    {
+      "date": "2026-09-01",
+      "videoId": "_l7l5BH4h_s",
+      "impressions": 14,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-09-01",
+      "videoId": "a1tQY33iFmM",
+      "impressions": 2,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-09-01",
+      "videoId": "a9U4uap71ME",
+      "impressions": 26,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-09-01",
+      "videoId": "dhys8ycR5Iw",
+      "impressions": 20,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-09-01",
+      "videoId": "g1GPX8SlOmU",
+      "impressions": 18,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-09-01",
+      "videoId": "lcTtcqjTLlI",
+      "impressions": 6,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-09-01",
+      "videoId": "pE6Pi35mojw",
+      "impressions": 40,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-09-01",
+      "videoId": "rSNhDgGJvPU",
+      "impressions": 88,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-09-02",
+      "videoId": "3AQw6eUmK58",
+      "impressions": 2,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-09-02",
+      "videoId": "B75t0LqJUSg",
+      "impressions": 6,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-09-02",
+      "videoId": "D88Zd_OvaSs",
+      "impressions": 23,
+      "clicks": 1,
+      "clickRate": 0.04347826,
+      "clickRatePercent": 4.35
+    },
+    {
+      "date": "2026-09-02",
+      "videoId": "DdvR0LbYUjQ",
+      "impressions": 6,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-09-02",
+      "videoId": "EvoV01i7fRw",
+      "impressions": 22,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-09-02",
+      "videoId": "HgCgwKqeJBI",
+      "impressions": 2,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-09-02",
+      "videoId": "JVNpkPsotMU",
+      "impressions": 2,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-09-02",
+      "videoId": "K4mQYWHpcUI",
+      "impressions": 2,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-09-02",
+      "videoId": "LMDZec3o3-g",
+      "impressions": 4,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-09-02",
+      "videoId": "PiikNxCE5_Q",
+      "impressions": 162,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-09-02",
+      "videoId": "PmD_nggctn4",
+      "impressions": 52,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-09-02",
+      "videoId": "SlDTZdCoX7w",
+      "impressions": 234,
+      "clicks": 2,
+      "clickRate": 0.00854701,
+      "clickRatePercent": 0.85
+    },
+    {
+      "date": "2026-09-02",
+      "videoId": "_l7l5BH4h_s",
+      "impressions": 14,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-09-02",
+      "videoId": "a1tQY33iFmM",
+      "impressions": 2,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-09-02",
+      "videoId": "a9U4uap71ME",
+      "impressions": 24,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-09-02",
+      "videoId": "dhys8ycR5Iw",
+      "impressions": 30,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-09-02",
+      "videoId": "g1GPX8SlOmU",
+      "impressions": 10,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-09-02",
+      "videoId": "lcTtcqjTLlI",
+      "impressions": 2,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-09-02",
+      "videoId": "pE6Pi35mojw",
+      "impressions": 50,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-09-02",
+      "videoId": "rSNhDgGJvPU",
+      "impressions": 52,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-09-05",
+      "videoId": "3AQw6eUmK58",
+      "impressions": 8,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-09-05",
+      "videoId": "B75t0LqJUSg",
+      "impressions": 2,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-09-05",
+      "videoId": "D88Zd_OvaSs",
+      "impressions": 33,
+      "clicks": 1,
+      "clickRate": 0.03030303,
+      "clickRatePercent": 3.03
+    },
+    {
+      "date": "2026-09-05",
+      "videoId": "DdvR0LbYUjQ",
+      "impressions": 4,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-09-05",
+      "videoId": "EvoV01i7fRw",
+      "impressions": 18,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-09-05",
+      "videoId": "HJbI9RGGR2s",
+      "impressions": 166,
+      "clicks": 1,
+      "clickRate": 0.0060241,
+      "clickRatePercent": 0.6
+    },
+    {
+      "date": "2026-09-05",
+      "videoId": "HgCgwKqeJBI",
+      "impressions": 4,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-09-05",
+      "videoId": "JVNpkPsotMU",
+      "impressions": 2,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-09-05",
+      "videoId": "LMDZec3o3-g",
+      "impressions": 4,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-09-05",
+      "videoId": "PiikNxCE5_Q",
+      "impressions": 27,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-09-05",
+      "videoId": "PmD_nggctn4",
+      "impressions": 66,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-09-05",
+      "videoId": "S4tXGHeKBHs",
+      "impressions": 9,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-09-05",
+      "videoId": "SlDTZdCoX7w",
+      "impressions": 45,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-09-05",
+      "videoId": "_l7l5BH4h_s",
+      "impressions": 10,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-09-05",
+      "videoId": "a1tQY33iFmM",
+      "impressions": 2,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-09-05",
+      "videoId": "a9U4uap71ME",
+      "impressions": 18,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-09-05",
+      "videoId": "dhys8ycR5Iw",
+      "impressions": 10,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-09-05",
+      "videoId": "g1GPX8SlOmU",
+      "impressions": 8,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-09-05",
+      "videoId": "lcTtcqjTLlI",
+      "impressions": 6,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-09-05",
+      "videoId": "pE6Pi35mojw",
+      "impressions": 30,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    {
+      "date": "2026-09-05",
+      "videoId": "rSNhDgGJvPU",
+      "impressions": 48,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    }
+  ],
+  "videos": {
+    "3AQw6eUmK58": {
+      "impressions": 440,
+      "clicks": 1,
+      "clickRate": 0.00227273,
+      "clickRatePercent": 0.23
+    },
+    "DdvR0LbYUjQ": {
+      "impressions": 494,
+      "clicks": 2,
+      "clickRate": 0.00404858,
+      "clickRatePercent": 0.4
+    },
+    "EvoV01i7fRw": {
+      "impressions": 802,
+      "clicks": 37,
+      "clickRate": 0.04613466,
+      "clickRatePercent": 4.61
+    },
+    "HgCgwKqeJBI": {
+      "impressions": 362,
+      "clicks": 1,
+      "clickRate": 0.00276243,
+      "clickRatePercent": 0.28
+    },
+    "JVNpkPsotMU": {
+      "impressions": 176,
+      "clicks": 1,
+      "clickRate": 0.00568182,
+      "clickRatePercent": 0.57
+    },
+    "LMDZec3o3-g": {
+      "impressions": 140,
+      "clicks": 2,
+      "clickRate": 0.01428571,
+      "clickRatePercent": 1.43
+    },
+    "PmD_nggctn4": {
+      "impressions": 3575,
+      "clicks": 8,
+      "clickRate": 0.00223776,
+      "clickRatePercent": 0.22
+    },
+    "_l7l5BH4h_s": {
+      "impressions": 374,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    "a1tQY33iFmM": {
+      "impressions": 328,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    "dhys8ycR5Iw": {
+      "impressions": 1089,
+      "clicks": 10,
+      "clickRate": 0.00918274,
+      "clickRatePercent": 0.92
+    },
+    "g1GPX8SlOmU": {
+      "impressions": 2102,
+      "clicks": 10,
+      "clickRate": 0.00475737,
+      "clickRatePercent": 0.48
+    },
+    "lcTtcqjTLlI": {
+      "impressions": 118,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    "2b_XBGYqJVU": {
+      "impressions": 24,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    "K4mQYWHpcUI": {
+      "impressions": 26,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
+    },
+    "S4tXGHeKBHs": {
+      "impressions": 3154,
+      "clicks": 20,
+      "clickRate": 0.00634115,
+      "clickRatePercent": 0.63
+    },
+    "D88Zd_OvaSs": {
+      "impressions": 3882,
+      "clicks": 63,
+      "clickRate": 0.01622875,
+      "clickRatePercent": 1.62
+    },
+    "pE6Pi35mojw": {
+      "impressions": 4010,
+      "clicks": 24,
+      "clickRate": 0.00598504,
+      "clickRatePercent": 0.6
+    },
+    "rSNhDgGJvPU": {
+      "impressions": 6360,
+      "clicks": 30,
+      "clickRate": 0.00471698,
+      "clickRatePercent": 0.47
+    },
+    "a9U4uap71ME": {
+      "impressions": 2105,
+      "clicks": 8,
+      "clickRate": 0.00380048,
+      "clickRatePercent": 0.38
+    },
+    "B75t0LqJUSg": {
+      "impressions": 906,
+      "clicks": 5,
+      "clickRate": 0.00551876,
+      "clickRatePercent": 0.55
+    },
+    "SlDTZdCoX7w": {
+      "impressions": 5077,
+      "clicks": 18,
+      "clickRate": 0.0035454,
+      "clickRatePercent": 0.35
+    },
+    "PiikNxCE5_Q": {
+      "impressions": 3220,
+      "clicks": 11,
+      "clickRate": 0.00341615,
+      "clickRatePercent": 0.34
+    },
+    "HJbI9RGGR2s": {
+      "impressions": 166,
+      "clicks": 1,
+      "clickRate": 0.0060241,
+      "clickRatePercent": 0.6
+    }
+  }
+}
