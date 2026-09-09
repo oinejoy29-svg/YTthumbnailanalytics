@@ -241,3 +241,217 @@ function updateCommonHeader(
   }
 
 }
+/* =========================================================
+   GLOBAL HEADER / NAV
+========================================================= */
+
+function renderCommonHeader() {
+
+  const root =
+    document.getElementById(
+      "globalHeader"
+    );
+
+
+  if (!root) {
+    return;
+  }
+
+
+  const path =
+    window.location.pathname;
+
+  const params =
+    new URLSearchParams(
+      window.location.search
+    );
+
+  const page =
+    params.get("page");
+
+
+  const isVideoAnalytics =
+    path.includes(
+      "/analytics/"
+    );
+
+  const isFuture =
+    path.includes(
+      "/future/"
+    );
+
+
+  let activePage =
+    "home";
+
+
+  if (isVideoAnalytics) {
+
+    activePage =
+      "videoAnalytics";
+
+  } else if (isFuture) {
+
+    activePage =
+      "future";
+
+  } else if (
+    page === "videos"
+  ) {
+
+    activePage =
+      "videos";
+
+  } else if (
+    page === "analytics"
+  ) {
+
+    activePage =
+      "subscriberAnalytics";
+
+  }
+
+
+  const rootPrefix =
+    isVideoAnalytics ||
+    isFuture
+      ? "../"
+      : "";
+
+
+  const navItem = (
+    href,
+    label,
+    key
+  ) => {
+
+    const active =
+      activePage === key;
+
+
+    return `
+      <a
+        class="switch-btn${active ? " active" : ""}"
+        href="${href}"
+        ${active ? 'aria-current="page"' : ""}
+      >
+        ${label}
+      </a>
+    `;
+
+  };
+
+
+  root.innerHTML = `
+    <header class="site-header">
+
+      <div class="brand-block">
+
+        <div class="eyebrow">
+          ≒JOY / YouTube archive &amp; analytics
+        </div>
+
+        <h1>
+          #切り抜くぞニアジョイ
+        </h1>
+
+      </div>
+
+
+      <div class="header-info">
+
+        <div class="analytics-label">
+
+          <span class="desktop-analytics">
+            YouTube analytics
+          </span>
+
+          <span class="mobile-analytics">
+            YouTube archive &amp; analytics
+          </span>
+
+        </div>
+
+
+        <div class="header-meta">
+
+          <span id="periodText">
+            2026/4/3～—
+          </span>
+
+          <span id="dayCount">
+            （—日）
+          </span>
+
+          <span class="updated">
+
+            <span class="updated-label">
+              最終更新:
+            </span>
+
+            <span id="updatedAtDesktop">
+              —
+            </span>
+
+            <span id="updatedAtMobile">
+              —
+            </span>
+
+          </span>
+
+        </div>
+
+      </div>
+
+    </header>
+
+
+    <nav
+      class="page-switch"
+      aria-label="ページ切り替え"
+    >
+
+      ${navItem(
+        `${rootPrefix}index.html`,
+        "Home",
+        "home"
+      )}
+
+      ${navItem(
+        `${rootPrefix}index.html?page=videos`,
+        "Video collections",
+        "videos"
+      )}
+
+      ${navItem(
+        `${rootPrefix}index.html?page=analytics`,
+        "Subscriber analytics",
+        "subscriberAnalytics"
+      )}
+
+      ${navItem(
+        `${rootPrefix}analytics/analytics.html`,
+        "Video analytics",
+        "videoAnalytics"
+      )}
+
+      ${navItem(
+        `${rootPrefix}future/future.html`,
+        "Future outlook",
+        "future"
+      )}
+
+    </nav>
+  `;
+
+}
+
+
+/* HTMLが読み込まれたら共通部分を生成 */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  () => {
+    renderCommonHeader();
+  }
+);
