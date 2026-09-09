@@ -176,30 +176,34 @@
 }
 
 .home-trending-card{
-  display:grid;
-  grid-template-columns:minmax(260px, 420px) minmax(0, 1fr);
-  gap:22px;
-  align-items:center;
-
-  padding:18px;
+  display:flex;
+  min-width:0;
+  overflow:hidden;
 
   background:#fff;
   border:2px solid var(--line);
-  border-radius:20px;
-  box-shadow:5px 5px 0 var(--ink);
+  border-radius:18px;
+  box-shadow:var(--shadow);
 }
 
 .home-trending-thumbnail{
-  width:100%;
+  width:42%;
   aspect-ratio:16 / 9;
   object-fit:cover;
+  align-self:flex-start;
+  flex:none;
   display:block;
-
-  border-radius:12px;
 }
 
 .home-trending-info{
   min-width:0;
+  flex:1;
+
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+
+  padding:14px 16px;
 }
 
 .home-trending-info h3{
@@ -292,36 +296,34 @@
 }
 
 .home-milestone-card{
-  display:grid;
-  grid-template-columns:220px minmax(0, 1fr);
-  gap:22px;
-  align-items:stretch;
-
-  padding:0 18px 0 0;
+  display:flex;
+  min-width:0;
   overflow:hidden;
 
   background:#fff;
   border:2px solid var(--line);
-  border-radius:20px;
-  box-shadow:5px 5px 0 var(--ink);
+  border-radius:18px;
+  box-shadow:var(--shadow);
 }
 
 .home-milestone-thumbnail{
-  width:100%;
-  height:100%;
-  min-height:150px;
+  width:42%;
+  aspect-ratio:16 / 9;
   object-fit:cover;
+  align-self:flex-start;
+  flex:none;
   display:block;
 }
 
 .home-milestone-info{
   min-width:0;
+  flex:1;
 
   display:flex;
   flex-direction:column;
   justify-content:center;
 
-  padding:18px 0;
+  padding:14px 16px;
 }
 
 .home-milestone-info h3{
