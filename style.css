@@ -181,16 +181,16 @@ h1{
   display:flex;
   width:max-content;
   gap:9px;
-  animation:marquee 70s linear infinite;
+
+  transform:translate3d(0, 0, 0);
 }
 
 .lane.reverse{
-  animation-name:marqueeReverse;
-  animation-duration:82s;
+  transform:translate3d(0, 0, 0);
 }
 
 .lane:nth-child(3){
-  animation-duration:64s;
+  transform:translate3d(0, 0, 0);
 }
 
 .thumb-roll{
