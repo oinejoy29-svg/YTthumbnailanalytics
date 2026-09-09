@@ -4345,8 +4345,9 @@ function setupNav() {
     const targetPage =
       pageName === "analytics"
         ? "analytics"
-        : "videos";
-
+        : pageName === "videos"
+          ? "videos"
+          : "home";
 
     buttons.forEach(
       button => {
@@ -4372,11 +4373,13 @@ function setupNav() {
             .remove("active")
       );
 
-
+     
     const targetId =
       targetPage === "analytics"
         ? "analyticsPage"
-        : "videosPage";
+        : targetPage === "videos"
+          ? "videosPage"
+          : "homePage";
 
 
     $(targetId)
@@ -4483,7 +4486,9 @@ function setupNav() {
   else {
 
     openPage(
-      "videos",
+      requestedPage === "videos"
+        ? "videos"
+        : "home",
       false
     );
 
