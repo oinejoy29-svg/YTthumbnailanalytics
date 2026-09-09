@@ -1388,6 +1388,68 @@ function renderVideos() {
     });
 }
 
+function setupVideoViewSwitch() {
+  const grid =
+    document.getElementById(
+      "videoGrid"
+    );
+
+  const buttons =
+    document.querySelectorAll(
+      ".video-view-btn"
+    );
+
+  if (
+    !grid ||
+    !buttons.length
+  ) {
+    return;
+  }
+
+  buttons.forEach(
+    button => {
+      button.addEventListener(
+        "click",
+        () => {
+          const view =
+            button.dataset.videoView;
+
+          grid.classList.remove(
+            "view-grid",
+            "view-wide"
+          );
+
+          if (
+            view ===
+            "grid"
+          ) {
+            grid.classList.add(
+              "view-grid"
+            );
+          }
+
+          if (
+            view ===
+            "wide"
+          ) {
+            grid.classList.add(
+              "view-wide"
+            );
+          }
+
+          buttons.forEach(
+            item =>
+              item.classList.toggle(
+                "active",
+                item === button
+              )
+          );
+        }
+      );
+    }
+  );
+}
+
 /* =========================================================
 Video detail modal
 ========================================================= */
@@ -4846,7 +4908,8 @@ if (
 
   renderSummary();
   renderTags();
-    renderVideos();
+  renderVideos();
+  setupVideoViewSwitch();
 
   refreshSortUpdateDot();
 
