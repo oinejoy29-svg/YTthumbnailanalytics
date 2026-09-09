@@ -5785,6 +5785,143 @@ function renderCompareChart(
     );
 
 
+  function getCompareReachSeries(
+    video
+  ){
+
+    const rows =
+      Array.isArray(
+        REACH_DATA?.daily
+      )
+        ? REACH_DATA.daily
+            .filter(row =>
+              row.videoId ===
+              video?.id
+            )
+            .map(row => ({
+
+              ...row,
+
+              dayNumber:
+                getReachDayNumber(
+                  video?.date,
+                  row.date
+                )
+
+            }))
+            .filter(row =>
+              Number.isFinite(
+                row.dayNumber
+              ) &&
+              row.dayNumber >= 1
+            )
+            .sort(
+              (a,b) =>
+                a.dayNumber -
+                b.dayNumber
+            )
+        : [];
+
+
+    return rows;
+  }
+
+
+  const reachA =
+    getCompareReachSeries(
+      videoA
+    );
+
+  const reachB =
+    getCompareReachSeries(
+      videoB
+    );
+
+
+  const reachMaxDay =
+    Math.max(
+      0,
+      ...reachA.map(
+        row => row.dayNumber
+      ),
+      ...reachB.map(
+        row => row.dayNumber
+      )
+    );
+
+
+  function buildReachValues(
+    rows,
+    key
+  ){
+
+    const map =
+      new Map(
+        rows.map(row => [
+          row.dayNumber,
+          row[key]
+        ])
+      );
+
+
+    return Array.from(
+      {length:reachMaxDay},
+      (_,index) => {
+
+        const value =
+          map.get(
+            index + 1
+          );
+
+
+        if(
+          value === null ||
+          value === undefined
+        ){
+          return null;
+        }
+
+
+        const number =
+          Number(value);
+
+
+        return Number.isFinite(
+          number
+        )
+          ? number
+          : null;
+      }
+    );
+  }
+
+
+  const impressionsA =
+    buildReachValues(
+      reachA,
+      "thumbnailImpressions"
+    );
+
+  const impressionsB =
+    buildReachValues(
+      reachB,
+      "thumbnailImpressions"
+    );
+
+
+  const ctrA =
+    buildReachValues(
+      reachA,
+      "thumbnailClickRatePercent"
+    );
+
+  const ctrB =
+    buildReachValues(
+      reachB,
+      "thumbnailClickRatePercent"
+    );
+
+
   let dataA;
   let dataB;
   let average =
@@ -5813,14 +5950,23 @@ function renderCompareChart(
 
     case "ctr":
 
+      labels =
+        Array.from(
+          {length:reachMaxDay},
+          (_,index) =>
+            `DAY ${index + 1}`
+        );
+
       dataA =
-        DUMMY.compare.ctrA;
+        ctrA;
 
       dataB =
-        DUMMY.compare.ctrB;
+        ctrB;
 
       average =
-        DUMMY.compare.averageCtr;
+        Array(
+          reachMaxDay
+        ).fill(null);
 
       percent = true;
 
@@ -5829,14 +5975,23 @@ function renderCompareChart(
 
     case "impressions":
 
+      labels =
+        Array.from(
+          {length:reachMaxDay},
+          (_,index) =>
+            `DAY ${index + 1}`
+        );
+
       dataA =
-        DUMMY.compare.impressionsA;
+        impressionsA;
 
       dataB =
-        DUMMY.compare.impressionsB;
+        impressionsB;
 
       average =
-        DUMMY.compare.averageImpressions;
+        Array(
+          reachMaxDay
+        ).fill(null);
 
       break;
 
