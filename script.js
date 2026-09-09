@@ -467,6 +467,39 @@ video => `
 );
 }
 
+function restartRollingAnimation() {
+  const lanes =
+    document.querySelectorAll(
+      ".home-rolling .lane"
+    );
+
+  if (!lanes.length) {
+    return;
+  }
+
+  lanes.forEach(
+    lane => {
+      lane.style.animation = "none";
+    }
+  );
+
+  void document.body.offsetWidth;
+
+  requestAnimationFrame(
+    () => {
+      requestAnimationFrame(
+        () => {
+          lanes.forEach(
+            lane => {
+              lane.style.animation = "";
+            }
+          );
+        }
+      );
+    }
+  );
+}
+
 /* =========================================================
 Video list
 ========================================================= */
@@ -4386,6 +4419,13 @@ function setupNav() {
     $(targetId)
       .classList
       .add("active");
+     
+    if (
+      targetPage ===
+      "home"
+    ) {
+      restartRollingAnimation();
+    }
 
 
     if (
@@ -5072,5 +5112,48 @@ document.addEventListener(
   },
   {
     passive: true
+  }
+);
+
+window.addEventListener(
+  "pageshow",
+  () => {
+    const homePage =
+      document.getElementById(
+        "homePage"
+      );
+
+    if (
+      homePage?.classList.contains(
+        "active"
+      )
+    ) {
+      restartRollingAnimation();
+    }
+  }
+);
+
+document.addEventListener(
+  "visibilitychange",
+  () => {
+    if (
+      document.visibilityState !==
+      "visible"
+    ) {
+      return;
+    }
+
+    const homePage =
+      document.getElementById(
+        "homePage"
+      );
+
+    if (
+      homePage?.classList.contains(
+        "active"
+      )
+    ) {
+      restartRollingAnimation();
+    }
   }
 );
