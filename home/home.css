@@ -264,24 +264,65 @@
 
     border-radius:0;
   }
+  .home-trending-info{
+    min-width:0;
+    flex:1;
+
+    display:grid;
+    grid-template-columns:minmax(0, 1fr) auto;
+    grid-template-rows:auto 1fr auto auto;
+    column-gap:10px;
+
+    padding:9px 12px;
+  }
+
   .home-trending-info h3{
+    grid-column:1 / -1;
+    grid-row:1;
+
     margin:0;
+
     font-size:12px;
     line-height:1.3;
-  } 
-
+  }
 
   .home-trending-views{
-    margin-bottom:6px;
+    grid-column:1;
+    grid-row:3;
+
+    align-self:end;
+
+    margin:0;
+
     font-size:19px;
+    line-height:1;
+    white-space:nowrap;
   }
 
   .home-trending-growth{
-    font-size:14px;
+    grid-column:2;
+    grid-row:3;
+
+    align-self:end;
+
+    margin:0;
+
+    font-size:12px;
+    line-height:1;
+    text-align:right;
+    white-space:nowrap;
   }
 
   .home-trending-ratio{
-    font-size:11px;
+    grid-column:2;
+    grid-row:4;
+
+    margin-top:3px;
+
+    font-size:9px;
+    line-height:1;
+    text-align:right;
+    white-space:nowrap;
   }
 
 }
