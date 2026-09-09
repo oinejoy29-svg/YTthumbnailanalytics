@@ -6141,10 +6141,63 @@ function renderCompareChart(
     );
 
 
+  const averageDailyViews =
+    Array.from(
+      {length:maxDays},
+      (_,index) => {
+
+        const values =
+          REAL_VIDEOS
+            .map(video => {
+
+              const value =
+                video?.analytics
+                  ?.daily
+                  ?.[index]
+                  ?.views;
+
+              if(
+                value === null ||
+                value === undefined
+              ){
+                return null;
+              }
+
+              const number =
+                Number(value);
+
+              return Number.isFinite(
+                number
+              )
+                ? number
+                : null;
+            })
+            .filter(value =>
+              value !== null
+            );
+
+
+        if(!values.length){
+          return null;
+        }
+
+
+        return (
+          values.reduce(
+            (sum,value) =>
+              sum + value,
+            0
+          ) /
+          values.length
+        );
+      }
+    );
+
+
   let dataA;
   let dataB;
   let average =
-    Array(maxDays).fill(null);
+    averageDailyViews;
 
   let percent = false;
 
@@ -6162,6 +6215,11 @@ function renderCompareChart(
       dataB =
         cumulative(
           dailyViewsB
+        );
+
+      average =
+        cumulative(
+          averageDailyViews
         );
 
       break;
