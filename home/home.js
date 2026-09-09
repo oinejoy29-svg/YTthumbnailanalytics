@@ -11,6 +11,7 @@
 
 let HOME_DATA = null;
 let HOME_ANALYTICS_DATA = null;
+let homeQuickSubscriberChart = null;
 
 
 /* =========================
@@ -68,6 +69,8 @@ async function initHome() {
     renderHomeSummary();
     renderHomeTrending();
     renderHomeMilestone();
+    renderHomeQuickAnalytics();
+    setupHomeQuickAnalytics();
 
   }
   catch(error){
@@ -796,5 +799,263 @@ function renderHomeMilestone(){
 
     </article>
   `;
+
+}
+/* =========================
+   QUICK ANALYTICS
+========================= */
+
+function setupHomeQuickAnalytics(){
+
+  const select =
+    document.getElementById(
+      "homeQuickRange"
+    );
+
+  if(!select){
+    return;
+  }
+
+  select.onchange =
+    renderHomeQuickAnalytics;
+
+}
+
+
+function renderHomeQuickAnalytics(){
+
+  const canvas =
+    document.getElementById(
+      "homeQuickSubscriberChart"
+    );
+
+  const countElement =
+    document.getElementById(
+      "homeQuickSubscriberCount"
+    );
+
+  const rangeSelect =
+    document.getElementById(
+      "homeQuickRange"
+    );
+
+  if(
+    !canvas ||
+    !countElement
+  ){
+    return;
+  }
+
+
+  const subscribers =
+    Array.isArray(
+      HOME_DATA?.subscribers
+    )
+      ? [...HOME_DATA.subscribers]
+      : [];
+
+
+  subscribers.sort(
+    (a,b) =>
+      String(a.date)
+        .localeCompare(
+          String(b.date)
+        )
+  );
+
+
+  const validRows =
+    subscribers.filter(row => {
+
+      if(
+        !row?.date ||
+        row?.count === null ||
+        row?.count === undefined
+      ){
+        return false;
+      }
+
+      return Number.isFinite(
+        Number(row.count)
+      );
+
+    });
+
+
+  if(!validRows.length){
+
+    countElement.textContent =
+      "—";
+
+    if(homeQuickSubscriberChart){
+
+      homeQuickSubscriberChart.destroy();
+      homeQuickSubscriberChart = null;
+
+    }
+
+    return;
+
+  }
+
+
+  const latest =
+    validRows[
+      validRows.length - 1
+    ];
+
+
+  countElement.textContent =
+    `${Number(latest.count).toLocaleString("ja-JP")} 人`;
+
+
+  const range =
+    rangeSelect?.value ||
+    "90";
+
+
+  let displayRows =
+    validRows;
+
+
+  if(range !== "all"){
+
+    const days =
+      Number(range);
+
+    const latestDate =
+      new Date(
+        `${latest.date}T00:00:00`
+      );
+
+    const startDate =
+      new Date(latestDate);
+
+    startDate.setDate(
+      latestDate.getDate() -
+      (days - 1)
+    );
+
+
+    displayRows =
+      validRows.filter(row => {
+
+        const date =
+          new Date(
+            `${row.date}T00:00:00`
+          );
+
+        return date >= startDate;
+
+      });
+
+  }
+
+
+  const labels =
+    displayRows.map(row => {
+
+      const parts =
+        String(row.date)
+          .split("-");
+
+      if(parts.length < 3){
+        return row.date;
+      }
+
+      return `${
+        Number(parts[1])
+      }/${
+        Number(parts[2])
+      }`;
+
+    });
+
+
+  const values =
+    displayRows.map(
+      row =>
+        Number(row.count)
+    );
+
+
+  if(homeQuickSubscriberChart){
+
+    homeQuickSubscriberChart.destroy();
+
+  }
+
+
+  homeQuickSubscriberChart =
+    new Chart(
+      canvas,
+      {
+
+        type:"line",
+
+        data:{
+          labels,
+
+          datasets:[
+            {
+              label:"Subscribers",
+              data:values,
+              borderWidth:3,
+              pointRadius:2,
+              pointHoverRadius:5,
+              tension:.28,
+              fill:false
+            }
+          ]
+        },
+
+        options:{
+
+          responsive:true,
+          maintainAspectRatio:false,
+
+          interaction:{
+            mode:"index",
+            intersect:false
+          },
+
+          plugins:{
+            legend:{
+              display:false
+            }
+          },
+
+          scales:{
+
+            x:{
+              grid:{
+                display:false
+              },
+
+              ticks:{
+                maxTicksLimit:7,
+                maxRotation:0
+              }
+            },
+
+            y:{
+              beginAtZero:false,
+
+              ticks:{
+                callback:
+                  value =>
+                    Number(value)
+                      .toLocaleString(
+                        "ja-JP"
+                      )
+              }
+            }
+
+          }
+
+        }
+
+      }
+    );
 
 }
