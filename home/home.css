@@ -38,7 +38,7 @@
 
   .home-rolling .thumb-roll{
     width:165px;
-    border-radius:6px;
+    border-radius:0;
   }
 
 }
