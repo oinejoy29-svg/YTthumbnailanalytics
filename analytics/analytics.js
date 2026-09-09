@@ -5996,27 +5996,73 @@ function renderCompareChart(
       break;
 
 
-    case "retention":
+
+    case "retention":  {
 
       /*
-        COMPAREでは動画尺が違っても
-        比較できるよう0～100%の進行率を使用。
+        動画尺が違うため、
+        0～100%の動画進行率で比較する。
       */
+
+      const retentionA =
+        getVideoRetention(
+          videoA
+        );
+
+      const retentionB =
+        getVideoRetention(
+          videoB
+        );
+
+      const averageRetention =
+        getAverageRetention();
+
+
       labels =
-        DUMMY.compare.retentionLabels;
+        Array.from(
+          {length:101},
+          (_,position) =>
+            `${position}%`
+        );
+
 
       dataA =
-        DUMMY.compare.retentionA;
+        Array.from(
+          {length:101},
+          (_,position) =>
+            interpolateRetention(
+              retentionA,
+              position
+            )
+        );
+
 
       dataB =
-        DUMMY.compare.retentionB;
+        Array.from(
+          {length:101},
+          (_,position) =>
+            interpolateRetention(
+              retentionB,
+              position
+            )
+        );
+
 
       average =
-        DUMMY.compare.averageRetention;
+        Array.from(
+          {length:101},
+          (_,position) =>
+            interpolateRetention(
+              averageRetention,
+              position
+            )
+        );
+
 
       percent = true;
 
       break;
+    }
 
 
     case "dailyViews":
