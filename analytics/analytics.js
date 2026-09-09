@@ -2385,6 +2385,110 @@ function getOverviewPeriodRows(){
   );
 }
 
+function calculateOverviewReachSummary(
+  rows = null
+){
+
+  const reachDaily =
+    Array.isArray(
+      REACH_DATA?.daily
+    )
+      ? REACH_DATA.daily
+      : [];
+
+
+  let targetDates = null;
+
+
+  if(Array.isArray(rows)){
+
+    targetDates =
+      new Set(
+        rows
+          .map(row => row?.date)
+          .filter(Boolean)
+      );
+  }
+
+
+  let totalImpressions = 0;
+  let weightedClicks = 0;
+  let validRows = 0;
+
+
+  reachDaily.forEach(row => {
+
+    if(
+      !row?.date ||
+      (
+        targetDates &&
+        !targetDates.has(row.date)
+      )
+    ){
+      return;
+    }
+
+
+    const impressions =
+      row.impressions === null ||
+      row.impressions === undefined
+        ? null
+        : Number(
+            row.impressions
+          );
+
+    const clickRate =
+      row.clickRate === null ||
+      row.clickRate === undefined
+        ? null
+        : Number(
+            row.clickRate
+          );
+
+
+    if(
+      impressions === null ||
+      clickRate === null ||
+      !Number.isFinite(impressions) ||
+      !Number.isFinite(clickRate) ||
+      impressions < 0
+    ){
+      return;
+    }
+
+
+    totalImpressions +=
+      impressions;
+
+    weightedClicks +=
+      impressions *
+      (
+        clickRate / 100
+      );
+
+    validRows += 1;
+
+  });
+
+
+  return {
+
+    impressions:
+      validRows > 0
+        ? totalImpressions
+        : null,
+
+    clickRate:
+      validRows > 0 &&
+      totalImpressions > 0
+        ? (
+            weightedClicks /
+            totalImpressions
+          ) * 100
+        : null
+
+  };
+}
 
 function calculateOverviewSummary(){
 
@@ -2768,9 +2872,25 @@ function renderOverviewPeriodChanges(){
   const currentSummary =
     calculateOverviewSummary();
 
+  const previousRows =
+    getOverviewPreviousPeriodRows();
+
+
   const previousSummary =
     calculateOverviewSummaryFromRows(
-      getOverviewPreviousPeriodRows()
+      previousRows
+    );
+
+
+  const currentReachSummary =
+    calculateOverviewReachSummary(
+      getOverviewPeriodRows()
+    );
+
+
+  const previousReachSummary =
+    calculateOverviewReachSummary(
+      previousRows
     );
 
 
@@ -2828,6 +2948,17 @@ function renderOverviewPeriodChanges(){
         previousSummary.averageViewPercentage,
 
       type:"point"
+    },
+
+
+    "平均クリック率":{
+      current:
+        currentReachSummary.clickRate,
+
+      previous:
+        previousReachSummary.clickRate,
+
+      type:"point"
     }
 
   };
@@ -2858,11 +2989,7 @@ function renderOverviewPeriodChanges(){
       name.textContent.trim();
 
 
-    /*
-      クリック率はReporting API待ち
-    */
     if(
-      label === "平均クリック率" ||
       !metrics[label]
     ){
 
@@ -3112,10 +3239,20 @@ function renderOverviewRealSummary(){
   );
 
 
-  /*
-    平均クリック率は
-    Reporting API接続まで触らない
-  */
+  const reachSummary =
+    calculateOverviewReachSummary(
+      getOverviewPeriodRows()
+    );
+
+
+  setOverviewMetric(
+    "平均クリック率",
+    reachSummary.clickRate === null
+      ? "—"
+      : `${Number(
+          reachSummary.clickRate
+        ).toFixed(2)}%`
+  );
 
 
   setOverviewMetric(
