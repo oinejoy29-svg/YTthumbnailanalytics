@@ -455,8 +455,9 @@
   display:flex;
   align-items:flex-start;
   justify-content:space-between;
-  gap:18px;
+  gap:12px;
 
+  min-width:0;
   margin-bottom:20px;
 }
 
@@ -481,9 +482,13 @@
 }
 
 #homeQuickRange{
-  flex:none;
+  flex:0 1 auto;
 
-  padding:8px 11px;
+  width:auto;
+  max-width:130px;
+  min-width:0;
+
+  padding:8px 28px 8px 10px;
 
   background:#fff;
   border:2px solid var(--line);
@@ -555,7 +560,10 @@
   }
 
   #homeQuickRange{
-    padding:7px 8px;
+    max-width:105px;
+
+    padding:7px 24px 7px 8px;
+
     font-size:10px;
   }
 
