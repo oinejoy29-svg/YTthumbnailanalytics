@@ -67,6 +67,7 @@ async function initHome() {
 
     renderHomeSummary();
     renderHomeTrending();
+    renderHomeMilestone();
 
   }
   catch(error){
@@ -524,5 +525,276 @@ function escapeHomeHtml(value){
     .replaceAll(">","&gt;")
     .replaceAll('"',"&quot;")
     .replaceAll("'","&#039;");
+
+}
+
+/* =========================
+   NEXT MILESTONE
+========================= */
+
+function renderHomeMilestone(){
+
+  const section =
+    document.getElementById(
+      "homeMilestones"
+    );
+
+  const container =
+    document.getElementById(
+      "homeMilestoneContent"
+    );
+
+  if(
+    !section ||
+    !container
+  ){
+    return;
+  }
+
+
+  const videos =
+    Array.isArray(
+      HOME_DATA?.videos
+    )
+      ? HOME_DATA.videos
+      : [];
+
+
+  const analyticsVideos =
+    HOME_ANALYTICS_DATA?.videos;
+
+
+  if(
+    !videos.length ||
+    !analyticsVideos ||
+    typeof analyticsVideos !== "object"
+  ){
+
+    section.hidden = true;
+    container.innerHTML = "";
+
+    return;
+
+  }
+
+
+  const candidates = [];
+
+
+  videos.forEach(video => {
+
+    const currentViews =
+      getValidHomeNumber(
+        video?.viewCount
+      );
+
+
+    if(
+      currentViews === null ||
+      currentViews < 0
+    ){
+      return;
+    }
+
+
+    const analytics =
+      analyticsVideos[
+        video.id
+      ];
+
+
+    const daily =
+      Array.isArray(
+        analytics?.daily
+      )
+        ? analytics.daily
+        : [];
+
+
+    /*
+      最近の伸びを見るため、
+      最大で直近3日分を使用
+    */
+
+    const recentViews =
+      daily
+        .slice(-3)
+        .map(
+          row =>
+            getValidHomeNumber(
+              row?.views
+            )
+        )
+        .filter(
+          value =>
+            value !== null
+        );
+
+
+    if(!recentViews.length){
+      return;
+    }
+
+
+    const recentAverage =
+      recentViews.reduce(
+        (sum, value) =>
+          sum + value,
+        0
+      ) /
+      recentViews.length;
+
+
+    if(recentAverage <= 0){
+      return;
+    }
+
+
+    /*
+      次の5,000回刻み
+    */
+
+    const target =
+      (
+        Math.floor(
+          currentViews / 5000
+        ) + 1
+      ) * 5000;
+
+
+    const remaining =
+      target -
+      currentViews;
+
+
+    const estimatedDays =
+      remaining /
+      recentAverage;
+
+
+    /*
+      約5日以内に到達見込みの
+      動画だけ候補にする
+    */
+
+    if(
+      estimatedDays > 5
+    ){
+      return;
+    }
+
+
+    candidates.push({
+
+      id:
+        video.id,
+
+      title:
+        video.title ||
+        analytics?.title ||
+        video.id,
+
+      thumbnail:
+        video.thumbnail ||
+        analytics?.thumbnail ||
+        `https://i.ytimg.com/vi/${video.id}/hqdefault.jpg`,
+
+      currentViews,
+
+      target,
+
+      remaining,
+
+      estimatedDays
+
+    });
+
+  });
+
+
+  if(!candidates.length){
+
+    section.hidden = true;
+    container.innerHTML = "";
+
+    return;
+
+  }
+
+
+  /*
+    到達が近い動画を優先
+  */
+
+  candidates.sort(
+    (a,b) =>
+      a.estimatedDays -
+      b.estimatedDays
+  );
+
+
+  const milestone =
+    candidates[0];
+
+
+  const progress =
+    Math.max(
+      0,
+      Math.min(
+        100,
+        (
+          milestone.currentViews /
+          milestone.target
+        ) * 100
+      )
+    );
+
+
+  section.hidden = false;
+
+
+  container.innerHTML = `
+    <article class="home-milestone-card">
+
+      <img
+        class="home-milestone-thumbnail"
+        src="${escapeHomeHtml(milestone.thumbnail)}"
+        alt=""
+      >
+
+      <div class="home-milestone-info">
+
+        <h3>
+          ${escapeHomeHtml(milestone.title)}
+        </h3>
+
+        <div class="home-milestone-target">
+          ${milestone.target.toLocaleString("ja-JP")} 回
+        </div>
+
+        <div class="home-milestone-count">
+          ${milestone.currentViews.toLocaleString("ja-JP")}
+          /
+          ${milestone.target.toLocaleString("ja-JP")}
+        </div>
+
+        <div
+          class="home-milestone-progress"
+          aria-label="マイルストーン進捗 ${progress.toFixed(0)}%"
+        >
+          <div
+            class="home-milestone-progress-bar"
+            style="width:${progress}%"
+          ></div>
+        </div>
+
+        <div class="home-milestone-remaining">
+          あと ${milestone.remaining.toLocaleString("ja-JP")} 回
+        </div>
+
+      </div>
+
+    </article>
+  `;
 
 }
