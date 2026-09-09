@@ -497,7 +497,7 @@ function startRollingAnimation() {
     [0, 0, 0];
 
   const speeds =
-    [0.32, -0.27, 0.35];
+    [0.055, -0.047, 0.060];
 
   let lastTime =
     performance.now();
