@@ -9599,6 +9599,7 @@ function setCompareVideo(
     ) || "dailyViews"
   );
 
+  renderCompareNumbers();
   renderCompareSummary();
 }
 
@@ -9843,14 +9844,12 @@ function initAverageToggle(){
     "change",
     () => {
 
-  renderCompareChart(
-    getActiveMetric(
-      "compare"
-    ) || "dailyViews"
-  );
-
-  renderCompareNumbers();
-}
+      renderCompareChart(
+        getActiveMetric(
+          "compare"
+        ) || "dailyViews"
+      );
+    }
   );
 }
 
