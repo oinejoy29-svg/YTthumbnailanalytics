@@ -417,7 +417,9 @@
     flex:1;
 
     display:grid;
-    grid-template-rows:auto 1fr auto auto auto;
+    grid-template-columns:minmax(0, 1fr) auto;
+    grid-template-rows:auto 1fr auto auto;
+    column-gap:8px;
 
     padding:9px 12px 0;
   }
@@ -430,22 +432,30 @@
   }
 
   .home-milestone-count{
+    grid-column:1;
     grid-row:3;
 
     margin:0 0 3px;
 
     font-size:18px;
     line-height:1;
+    white-space:nowrap;
   }
 
   .home-milestone-progress-head{
-    grid-row:4;
+    grid-column:2;
+    grid-row:3;
 
-    margin:0 0 2px;
+    align-self:end;
+
+    margin:0 0 3px;
   }
    
   .home-milestone-progress{
-    grid-row:5;
+    grid-column:1 / -1;
+    grid-row:4;
+
+    align-self:end;
 
     height:9px;
     margin:0;
