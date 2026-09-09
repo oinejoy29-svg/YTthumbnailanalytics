@@ -2577,3 +2577,14 @@ body > *{
 .video-grid.view-wide .video-status-sticker{
   display:none;
 }
+
+.video-grid.view-grid .video-card,
+.video-grid.view-wide .video-card{
+  border-radius:0;
+  overflow:visible;
+}
+
+.video-grid.view-grid .video-card img,
+.video-grid.view-wide .video-card img{
+  border-radius:0;
+}
