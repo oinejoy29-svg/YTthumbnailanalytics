@@ -416,11 +416,10 @@
     min-width:0;
     flex:1;
 
-    display:flex;
-    flex-direction:column;
-    justify-content:space-between;
+    display:grid;
+    grid-template-rows:auto 1fr auto auto auto;
 
-    padding:10px 12px;
+    padding:9px 12px 0;
   }
 
   .home-milestone-info h3{
@@ -431,20 +430,25 @@
   }
 
   .home-milestone-count{
-    margin-top:auto;
-    margin-bottom:6px;
+    grid-row:3;
+
+    margin:0 0 3px;
 
     font-size:18px;
     line-height:1;
   }
 
   .home-milestone-progress-head{
-    margin-bottom:4px;
-  }
+    grid-row:4;
 
+    margin:0 0 2px;
+  }
+   
   .home-milestone-progress{
+    grid-row:5;
+
     height:9px;
-    margin-bottom:0;
+    margin:0;
   }
 
   .home-milestone-remaining{
