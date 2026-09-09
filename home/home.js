@@ -771,14 +771,18 @@ function renderHomeMilestone(){
           ${escapeHomeHtml(milestone.title)}
         </h3>
 
-        <div class="home-milestone-target">
-          ${milestone.target.toLocaleString("ja-JP")} 回
-        </div>
-
         <div class="home-milestone-count">
           ${milestone.currentViews.toLocaleString("ja-JP")}
           /
           ${milestone.target.toLocaleString("ja-JP")}
+        </div>
+
+        <div class="home-milestone-progress-head">
+          <span></span>
+
+          <span class="home-milestone-remaining">
+            あと ${milestone.remaining.toLocaleString("ja-JP")} 回
+          </span>
         </div>
 
         <div
@@ -789,10 +793,6 @@ function renderHomeMilestone(){
             class="home-milestone-progress-bar"
             style="width:${progress}%"
           ></div>
-        </div>
-
-        <div class="home-milestone-remaining">
-          あと ${milestone.remaining.toLocaleString("ja-JP")} 回
         </div>
 
       </div>
