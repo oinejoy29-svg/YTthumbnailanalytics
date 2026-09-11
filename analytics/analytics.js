@@ -5293,6 +5293,14 @@ function getTrafficSourceLabel(source){
   );
 }
 
+if(
+  typeof Chart !== "undefined"
+){
+  Chart.register(
+    trafficValuePlugin
+  );
+}
+
 /* =========================================================
    TRAFFIC SOURCE
 ========================================================= */
