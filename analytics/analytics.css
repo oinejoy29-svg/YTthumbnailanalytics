@@ -113,6 +113,38 @@ select{
   font-weight:700;
 }
 
+/* =========================================================
+   API DATA STATUS
+========================================================= */
+
+.analytics-api-status{
+  display:flex;
+  align-items:center;
+  gap:14px;
+
+  margin:0 0 14px;
+
+  font-size:11px;
+  color:var(--muted);
+}
+
+.analytics-api-status-item{
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+
+.analytics-api-status-item strong{
+  color:var(--ink);
+  font-weight:800;
+}
+
+.analytics-api-status-divider{
+  width:1px;
+  height:14px;
+  background:rgba(17,17,17,.2);
+}
+
 
 /* =========================================================
    ANALYTICS MODE SWITCH
@@ -1376,6 +1408,24 @@ select{
 
 
   /* MODE */
+
+  .analytics-api-status{
+    align-items:flex-start;
+    flex-direction:column;
+    gap:3px;
+
+    margin-bottom:12px;
+
+    font-size:9px;
+  }
+
+  .analytics-api-status-item{
+    gap:5px;
+  }
+
+  .analytics-api-status-divider{
+    display:none;
+  }
 
   .analytics-mode-switch{
     gap:5px;
