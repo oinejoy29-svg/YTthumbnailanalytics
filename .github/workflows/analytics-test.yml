@@ -55,6 +55,46 @@ jobs:
           YT_ANALYTICS_CLIENT_SECRET: ${{ secrets.YT_ANALYTICS_CLIENT_SECRET }}
           YT_ANALYTICS_REFRESH_TOKEN: ${{ secrets.YT_ANALYTICS_REFRESH_TOKEN }}
         run: python analytics/reporting_end_screen.py
+
+      - name: Save analytics API status
+        run: |
+          python - <<'PY'
+          import json
+          from datetime import datetime
+          from zoneinfo import ZoneInfo
+
+          with open(
+              "analytics/analytics_data.json",
+              "r",
+              encoding="utf-8"
+          ) as f:
+              analytics_data = json.load(f)
+
+          status = {
+              "fetchedAt": datetime.now(
+                  ZoneInfo("Asia/Tokyo")
+              ).isoformat(),
+              "dataThrough": analytics_data.get(
+                  "meta",
+                  {}
+              ).get(
+                  "endDate"
+              )
+          }
+
+          with open(
+              "analytics/api_status.json",
+              "w",
+              encoding="utf-8"
+          ) as f:
+              json.dump(
+                  status,
+                  f,
+                  ensure_ascii=False,
+                  indent=2
+              )
+          PY
+          
         
       - name: Commit analytics data
         run: |
