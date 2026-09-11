@@ -47,6 +47,8 @@ let REACH_DATA = null;
 
 let END_SCREEN_DATA = null;
 
+let API_STATUS = null;
+
 let REAL_VIDEOS = [];
 
 let ROOT_VIDEO_DATA = [];
@@ -172,6 +174,105 @@ async function loadAnalyticsData(){
     REAL_VIDEOS = [];
 
     return false;
+  }
+}
+
+/* =========================================================
+   LOAD API STATUS
+========================================================= */
+
+async function loadApiStatus(){
+
+  try{
+
+    const response =
+      await fetch(
+        "./api_status.json",
+        {
+          cache:"no-store"
+        }
+      );
+
+    if(!response.ok){
+      throw new Error(
+        `api_status.json: ${response.status}`
+      );
+    }
+
+    API_STATUS =
+      await response.json();
+
+    return true;
+
+  }catch(error){
+
+    console.error(
+      "api_status.json load error:",
+      error
+    );
+
+    API_STATUS = null;
+
+    return false;
+  }
+}
+
+
+function renderApiStatus(){
+
+  const fetchedAtElement =
+    document.getElementById(
+      "analyticsApiFetchedAt"
+    );
+
+  const dataThroughElement =
+    document.getElementById(
+      "analyticsDataThrough"
+    );
+
+
+  if(
+    fetchedAtElement &&
+    API_STATUS?.fetchedAt
+  ){
+
+    const date =
+      new Date(
+        API_STATUS.fetchedAt
+      );
+
+    fetchedAtElement.textContent =
+      new Intl.DateTimeFormat(
+        "ja-JP",
+        {
+          year:"numeric",
+          month:"numeric",
+          day:"numeric",
+          hour:"2-digit",
+          minute:"2-digit",
+          hour12:false,
+          timeZone:"Asia/Tokyo"
+        }
+      ).format(date);
+
+  }
+
+
+  if(
+    dataThroughElement &&
+    API_STATUS?.dataThrough
+  ){
+
+    const [
+      year,
+      month,
+      day
+    ] =
+      API_STATUS.dataThrough
+        .split("-");
+
+    dataThroughElement.textContent =
+      `${Number(year)}/${Number(month)}/${Number(day)}まで`;
   }
 }
 
@@ -10496,6 +10597,10 @@ await loadAnalyticsData();
 await loadRootVideoData();
 
 await loadReachData();
+
+await loadApiStatus();
+
+renderApiStatus();
 
 await loadEndScreenData();
 
