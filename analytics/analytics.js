@@ -3284,12 +3284,10 @@ function renderOverviewRealSummary(){
 
 
   setOverviewMetric(
-    "総再生時間",
-    summary.watchMinutes === null
-      ? "—"
-      : `${formatWatchHours(
-          summary.watchMinutes
-        )}時間`
+    "動画本数",
+    formatInteger(
+      REAL_VIDEOS.length
+    )
   );
 
 
