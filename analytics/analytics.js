@@ -9854,6 +9854,11 @@ function renderCompareNumbers(){
           ".compare-value"
         );
 
+      const metricElement =
+        row.querySelector(
+          ".compare-metric"
+        );
+
 
       if(values.length < 2){
         return;
@@ -9891,6 +9896,52 @@ function renderCompareNumbers(){
         Number.isFinite(valueB)
           ? metric.format(valueB)
           : "—";
+
+
+      if(metricElement){
+
+        metricElement.style.background =
+          "";
+
+        if(
+          Number.isFinite(valueA) &&
+          Number.isFinite(valueB)
+        ){
+
+          const safeA =
+            Math.max(
+              0,
+              valueA
+            );
+
+          const safeB =
+            Math.max(
+              0,
+              valueB
+            );
+
+          const total =
+            safeA + safeB;
+
+          if(total > 0){
+
+            const ratioA =
+              (
+                safeA /
+                total
+              ) * 100;
+
+            metricElement.style.background =
+              `linear-gradient(
+                to right,
+                rgba(255, 220, 70, .28) 0%,
+                rgba(255, 220, 70, .28) ${ratioA}%,
+                rgba(201, 255, 184, .34) ${ratioA}%,
+                rgba(201, 255, 184, .34) 100%
+              )`;
+          }
+        }
+      }
 
 
       if(
