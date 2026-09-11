@@ -3372,8 +3372,8 @@ function getOverviewSeries(metric){
 
 
       if(
-        row.impressions === null ||
-        row.impressions === undefined
+        row.thumbnailImpressions === null ||
+        row.thumbnailImpressions === undefined
       ){
         return;
       }
@@ -3381,7 +3381,7 @@ function getOverviewSeries(metric){
 
       const impressions =
         Number(
-          row.impressions
+          row.thumbnailImpressions
         );
 
 
@@ -3496,19 +3496,19 @@ function getOverviewSeries(metric){
 
 
       const impressions =
-        row.impressions === null ||
-        row.impressions === undefined
+        row.thumbnailImpressions === null ||
+        row.thumbnailImpressions === undefined
           ? null
           : Number(
-              row.impressions
+              row.thumbnailImpressions
             );
 
       const clickRate =
-        row.clickRate === null ||
-        row.clickRate === undefined
+        row.thumbnailClickRatePercent === null ||
+        row.thumbnailClickRatePercent === undefined
           ? null
           : Number(
-              row.clickRate
+              row.thumbnailClickRatePercent
             );
 
 
