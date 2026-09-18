@@ -40,6 +40,9 @@ jobs:
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
         run: python creative/update_streams.py
 
+      - name: Update Creative Desk Schedule
+        run: python creative/update_schedule.py
+        
       - name: Test YouTube Analytics API
         env:
           YT_ANALYTICS_CLIENT_ID: ${{ secrets.YT_ANALYTICS_CLIENT_ID }}
@@ -110,6 +113,7 @@ jobs:
           [ -f scenario_history.json ] && git add scenario_history.json
           git add analytics/analytics_data.json
           [ -f creative/streams.json ] && git add creative/streams.json
+          [ -f creative/schedule.json ] && git add creative/schedule.json
 
           [ -f analytics/reach_daily.json ] && git add analytics/reach_daily.json
           [ -f analytics/reporting_job.json ] && git add analytics/reporting_job.json
