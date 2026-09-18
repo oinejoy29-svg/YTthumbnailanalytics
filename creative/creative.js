@@ -928,13 +928,13 @@ function renderScheduleCalendar() {
       0
     ).getDate();
 
-  const mondayFirstIndex =
-    (firstDay.getDay() + 6) % 7;
+  const firstDayIndex =
+    firstDay.getDay();
 
   const totalCells =
     Math.ceil(
       (
-        mondayFirstIndex +
+        firstDayIndex +
         lastDate
       ) / 7
     ) * 7;
@@ -947,7 +947,7 @@ function renderScheduleCalendar() {
 
     const day =
       cellIndex -
-      mondayFirstIndex +
+      firstDayIndex +
       1;
 
     const dayCell =
@@ -978,7 +978,21 @@ function renderScheduleCalendar() {
         dayNumber
       );
 
-         const dateKey =
+      const isToday =
+        scheduleCurrentYear ===
+          scheduleToday.getFullYear() &&
+        scheduleCurrentMonth ===
+          scheduleToday.getMonth() &&
+        day ===
+          scheduleToday.getDate();
+
+      if (isToday) {
+        dayCell.classList.add(
+          "today"
+        );
+      }
+
+      const dateKey =
         `${scheduleCurrentYear}-${String(
           scheduleCurrentMonth + 1
         ).padStart(2, "0")}-${String(
