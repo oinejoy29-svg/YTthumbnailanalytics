@@ -13,6 +13,61 @@ let streamClips = [];
 let streamSeenIds = new Set();
 
 
+async function loadStreamClips() {
+
+  try {
+
+    const response = await fetch(
+      "streams.json",
+      {
+        cache: "no-store"
+      }
+    );
+
+
+    if (!response.ok) {
+
+      throw new Error(
+        `HTTP ${response.status}`
+      );
+
+    }
+
+
+    const data =
+      await response.json();
+
+
+    streamClips =
+      Array.isArray(
+        data.videos
+      )
+        ? data.videos
+        : [];
+
+
+    loadStreamState();
+    renderStreamClips();
+    markCurrentStreamsAsSeen();
+
+
+  } catch (error) {
+
+    console.error(
+      "Stream clips load failed:",
+      error
+    );
+
+
+    streamClips = [];
+
+    renderStreamClips();
+
+  }
+
+}
+
+
 function loadStreamState() {
 
   try {
@@ -574,26 +629,27 @@ if (streamReviewedToggle) {
    START
 ========================================================= */
 
-loadStreamState();
-renderStreamClips();
+function markCurrentStreamsAsSeen() {
+
+  const unseenAtOpen =
+    streamClips
+      .filter(
+        clip =>
+          !streamSeenIds.has(
+            clip.id
+          )
+      )
+      .map(
+        clip => clip.id
+      );
 
 
-const unseenAtOpen =
-  streamClips
-    .filter(
-      clip =>
-        !streamSeenIds.has(
-          clip.id
-        )
-    )
-    .map(
-      clip => clip.id
-    );
+  if (
+    unseenAtOpen.length === 0
+  ) {
+    return;
+  }
 
-
-if (
-  unseenAtOpen.length > 0
-) {
 
   window.setTimeout(
     () => {
@@ -610,3 +666,6 @@ if (
   );
 
 }
+
+
+loadStreamClips();
