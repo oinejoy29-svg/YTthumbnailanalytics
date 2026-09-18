@@ -1316,8 +1316,6 @@ function renderScheduleDetail() {
           return;
         }
 
-scheduleTestEvents.indexOf(
-
         selectedScheduleEvent =
           null;
 
