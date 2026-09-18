@@ -32,14 +32,34 @@ EVENT_BLOCK_WORDS = [
 ]
 
 MEDIA_BLOCK_WORDS = [
+    # ラジオ
     "ラジオ",
     "radio",
-    "fm ",
-    "am ",
+    "fm大阪",
+    "fm osaka",
+    "mbsラジオ",
+
+    # SHOWROOM
+    "showroom",
+
+    # 不要なテレビ系
+    "ミュージック・ジャパンtv",
+    "music japan tv",
+
+    # 通常の雑誌・出版社系
+    "雑誌",
+    "magazine",
+    "白夜書房",
+    "竹書房",
+
+    # 通常の記事・インタビュー
     "インタビュー掲載",
     "インタビューが掲載",
+    "インタビュー記事",
     "記事掲載",
     "記事が掲載",
+    "web記事",
+    "webインタビュー",
 ]
 
 
@@ -266,6 +286,24 @@ def should_include(
 
     # メディア
     if category == "メディア":
+
+        important_book_words = [
+            "写真集",
+            "フォトブック",
+            "photo book",
+            "photobook",
+            "style book",
+            "stylebook",
+            "スタイルブック",
+            "公式ブック",
+            "公式book",
+        ]
+
+        if any(
+            word.lower() in text
+            for word in important_book_words
+        ):
+            return True
 
         if any(
             word.lower() in text
