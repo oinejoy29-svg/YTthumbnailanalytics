@@ -830,7 +830,7 @@ function markCurrentStreamsAsSeen() {
 }
 
 
-loadStreamClips
+loadStreamClips();
 
 /* =========================================================
    ≒JOY SCHEDULE
