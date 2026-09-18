@@ -435,7 +435,71 @@ function renderCommonHeader() {
       aria-label="ページ切り替え"
     >
 
-{rootPrefix}index.html
+      ${navItem(
+        `${rootPrefix}index.html?page=videos`,
+        "Video collections",
+        "videos",
+        `
+          <svg viewBox="0 0 24 24">
+            <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+            <path d="M10 9l5 3-5 3z"></path>
+          </svg>
+        `
+      )}
+
+      ${navItem(
+        `${rootPrefix}analytics/analytics.html`,
+        "Video analytics",
+        "videoAnalytics",
+        `
+          <svg viewBox="0 0 24 24">
+            <path d="M5 19V11"></path>
+            <path d="M12 19V5"></path>
+            <path d="M19 19V8"></path>
+          </svg>
+        `
+      )}
+
+      ${navItem(
+        `${rootPrefix}index.html?page=analytics`,
+        "Subscriber analytics",
+        "subscriberAnalytics",
+        `
+          <svg viewBox="0 0 24 24">
+            <circle cx="9" cy="8" r="3"></circle>
+            <path d="M3 19c0-3 2.5-5 6-5s6 2 6 5"></path>
+            <circle cx="17" cy="9" r="2"></circle>
+            <path d="M16 14c3 0 5 1.7 5 4"></path>
+          </svg>
+        `
+      )}
+
+      ${navItem(
+        `${rootPrefix}future/future.html`,
+        "Future outlook",
+        "future",
+        `
+          <svg viewBox="0 0 24 24">
+            <path d="M4 18l5-5 4 3 7-9"></path>
+            <path d="M15 7h5v5"></path>
+          </svg>
+        `
+      )}
+
+      ${navItem(
+        `${rootPrefix}creative/creative.html`,
+        "Creative desk",
+        "creativeDesk",
+        `
+          <svg viewBox="0 0 24 24">
+            <path d="M4 8h16"></path>
+            <path d="M6 8v11"></path>
+            <path d="M18 8v11"></path>
+            <path d="M3 19h18"></path>
+            <path d="M8 5h8"></path>
+          </svg>
+        `
+      )}
 
     </nav>
   `;
@@ -463,6 +527,9 @@ document.addEventListener(
         ) ||
         path.includes(
           "/future/"
+        ) ||
+        path.includes(
+          "/creative/"
         )
       )
         ? "../data.json"
