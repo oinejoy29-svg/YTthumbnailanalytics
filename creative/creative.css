@@ -301,24 +301,21 @@
   margin-top: 32px;
 }
 
-.schedule-calendar {
-  overflow: hidden;
-
-  background: #fff;
-  border: 1px solid rgba(0, 0, 0, 0.12);
-  border-radius: 16px;
+.schedule-section-head {
+  align-items: center;
 }
 
-.schedule-calendar-head {
-  display: grid;
-  grid-template-columns: 40px 1fr 40px;
+.schedule-month-nav {
+  display: flex;
   align-items: center;
-
-  padding: 14px 12px;
+  justify-content: center;
+  gap: 10px;
 }
 
 .schedule-month-title {
-  font-size: 16px;
+  min-width: 110px;
+
+  font-size: 14px;
   font-weight: 800;
   text-align: center;
 }
@@ -326,40 +323,61 @@
 .schedule-month-btn {
   appearance: none;
 
-  width: 34px;
-  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 32px;
+  height: 32px;
   padding: 0;
 
+  color: #222;
   font: inherit;
-  font-size: 24px;
+  font-size: 20px;
+  font-weight: 700;
   line-height: 1;
 
-  background: transparent;
-  border: 0;
+  background: #fff;
+  border: 2px solid #222;
   border-radius: 50%;
 
   cursor: pointer;
 }
 
 .schedule-month-btn:hover {
-  background: rgba(0, 0, 0, 0.05);
+  transform: translateY(-1px);
+}
+
+.schedule-calendar-card {
+  overflow: hidden;
+
+  background: #fff;
+  border: 2px solid #222;
+  border-radius: 16px;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.08);
 }
 
 .schedule-weekdays {
   display: grid;
   grid-template-columns: repeat(7, minmax(0, 1fr));
 
-  border-top: 1px solid rgba(0, 0, 0, 0.08);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  background: rgba(0, 0, 0, 0.035);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.14);
 }
 
 .schedule-weekdays > div {
-  padding: 7px 4px;
+  padding: 8px 4px;
 
-  color: #777;
+  color: #666;
   font-size: 11px;
-  font-weight: 700;
+  font-weight: 800;
   text-align: center;
+
+  border-right: 1px solid rgba(0, 0, 0, 0.10);
+}
+
+.schedule-weekdays > div:last-child {
+  border-right: 0;
 }
 
 .schedule-calendar-grid {
@@ -368,24 +386,48 @@
 }
 
 .schedule-day {
+  position: relative;
+
   min-width: 0;
-  min-height: 108px;
+  min-height: 125px;
   padding: 7px;
 
-  border-right: 1px solid rgba(0, 0, 0, 0.07);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+  background: #fff;
+  border-right: 1px solid rgba(0, 0, 0, 0.10);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.10);
 }
 
 .schedule-day:nth-child(7n) {
   border-right: 0;
 }
 
+.schedule-day.empty {
+  background: rgba(0, 0, 0, 0.018);
+}
+
 .schedule-day-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 24px;
+  height: 24px;
   margin-bottom: 5px;
 
   font-size: 11px;
-  font-weight: 700;
+  font-weight: 800;
+  line-height: 1;
+
+  border-radius: 50%;
 }
+
+.schedule-day.today .schedule-day-number {
+  color: #fff;
+  background: #222;
+}
+
+
+/* イベント */
 
 .schedule-event {
   appearance: none;
@@ -412,7 +454,7 @@
 }
 
 .schedule-event:hover {
-  background: rgba(0, 0, 0, 0.04);
+  background: rgba(0, 0, 0, 0.045);
 }
 
 .schedule-event-dot {
@@ -432,13 +474,17 @@
   white-space: nowrap;
 }
 
+
+/* 詳細 */
+
 .schedule-detail {
   margin-top: 12px;
   padding: 14px;
 
   background: #fff;
-  border: 1px solid rgba(0, 0, 0, 0.12);
+  border: 2px solid #222;
   border-radius: 14px;
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.07);
 }
 
 
@@ -452,51 +498,79 @@
     margin-top: 24px;
   }
 
-  .schedule-calendar {
-    border-radius: 13px;
+  .schedule-section-head {
+    display: block;
   }
 
-  .schedule-calendar-head {
-    padding: 10px 8px;
+  .schedule-month-nav {
+    margin-top: 10px;
   }
 
   .schedule-month-title {
-    font-size: 14px;
+    min-width: 100px;
+    font-size: 13px;
+  }
+
+  .schedule-month-btn {
+    width: 29px;
+    height: 29px;
+
+    font-size: 18px;
+  }
+
+  .schedule-calendar-card {
+    border-radius: 13px;
   }
 
   .schedule-weekdays > div {
     padding: 6px 2px;
-    font-size: 10px;
+    font-size: 9px;
   }
 
   .schedule-day {
-    min-height: 82px;
-    padding: 4px 3px;
+    min-height: 72px;
+    padding: 3px;
   }
 
   .schedule-day-number {
-    margin-bottom: 3px;
-    font-size: 10px;
+    width: 18px;
+    height: 18px;
+    margin-bottom: 2px;
+
+    font-size: 9px;
   }
 
   .schedule-event {
     gap: 2px;
 
-    margin: 2px 0;
-    padding: 2px 1px;
+    margin: 1px 0;
+    padding: 1px;
 
-    font-size: 8px;
+    font-size: 7px;
   }
 
   .schedule-event-dot {
-    width: 6px;
-    height: 6px;
+    width: 5px;
+    height: 5px;
   }
 
   .schedule-detail {
     margin-top: 9px;
     padding: 11px;
+
     border-radius: 12px;
+  }
+
+}
+
+@media (max-width: 380px) {
+
+  .schedule-day {
+    min-height: 63px;
+  }
+
+  .schedule-event {
+    font-size: 6.5px;
   }
 
 }
