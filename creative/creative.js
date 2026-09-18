@@ -1014,7 +1014,7 @@ async function loadScheduleEvents() {
           })
         );
 
-    renderScheduleCalendar();
+　　loadScheduleEvents();
 
   } catch (error) {
 
