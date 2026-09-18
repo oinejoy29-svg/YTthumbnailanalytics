@@ -129,5 +129,6 @@ jobs:
             echo "No analytics changes"
           else
             git commit -m "Update YouTube analytics data"
-            git push
+            git pull --rebase origin main
+            git push origin main
           fi
