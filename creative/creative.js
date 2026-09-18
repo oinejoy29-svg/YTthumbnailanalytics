@@ -865,6 +865,39 @@ let scheduleCurrentYear =
 let scheduleCurrentMonth =
   scheduleToday.getMonth();
 
+const scheduleTestEvents = [
+  {
+    date: "2026-09-20",
+    genre: "LIVE",
+    title: "≒JOY 全国ツアー 東京公演",
+    status: "default"
+  },
+  {
+    date: "2026-09-23",
+    genre: "BOOK",
+    title: "≒JOY STYLE BOOK 発売",
+    status: "selected"
+  },
+  {
+    date: "2026-09-23",
+    genre: "TV",
+    title: "音楽特番 出演",
+    status: "ready"
+  },
+  {
+    date: "2026-09-27",
+    genre: "RELEASE",
+    title: "≒JOY ニューシングル発売",
+    status: "default"
+  },
+  {
+    date: "2026-09-30",
+    genre: "BIRTHDAY",
+    title: "メンバー誕生日",
+    status: "selected"
+  }
+];
+
 
 function renderScheduleCalendar() {
 
@@ -943,6 +976,47 @@ function renderScheduleCalendar() {
 
       dayCell.appendChild(
         dayNumber
+      );
+
+         const dateKey =
+        `${scheduleCurrentYear}-${String(
+          scheduleCurrentMonth + 1
+        ).padStart(2, "0")}-${String(
+          day
+        ).padStart(2, "0")}`;
+
+      const dayEvents =
+        scheduleTestEvents.filter(
+          event =>
+            event.date ===
+            dateKey
+        );
+
+      dayEvents.forEach(
+        event => {
+
+          const eventButton =
+            document.createElement(
+              "button"
+            );
+
+          eventButton.type =
+            "button";
+
+          eventButton.className =
+            `schedule-event genre-${event.genre.toLowerCase()} status-${event.status}`;
+
+          eventButton.innerHTML =
+            `
+              <span class="schedule-event-dot"></span>
+              <span class="schedule-event-label">${event.genre}</span>
+            `;
+
+          dayCell.appendChild(
+            eventButton
+          );
+
+        }
       );
 
     } else {
