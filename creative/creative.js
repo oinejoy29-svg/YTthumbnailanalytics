@@ -8,9 +8,13 @@ const STREAM_STORAGE_KEY =
 const STREAM_SEEN_KEY =
   "creativeDeskSeenStreams";
 
+const STREAM_POSTED_KEY =
+  "creativeDeskPostedStreams";
+
 
 let streamClips = [];
 let streamSeenIds = new Set();
+let streamPostedIds = new Set();
 
 
 async function loadStreamClips() {
@@ -38,12 +42,38 @@ async function loadStreamClips() {
       await response.json();
 
 
+    try {
+
+      streamPostedIds =
+        new Set(
+          JSON.parse(
+            localStorage.getItem(
+              STREAM_POSTED_KEY
+            ) || "[]"
+          )
+        );
+
+    } catch (error) {
+
+      streamPostedIds =
+        new Set();
+
+    }
+
+
     streamClips =
-      Array.isArray(
-        data.videos
-      )
-        ? data.videos
-        : [];
+      (
+        Array.isArray(
+          data.videos
+        )
+          ? data.videos
+          : []
+      ).filter(
+        clip =>
+          !streamPostedIds.has(
+            clip.id
+          )
+      );
 
 
     loadStreamState();
@@ -321,6 +351,19 @@ function createStreamCard(
         if (!confirmed) {
           return;
         }
+
+
+        streamPostedIds.add(
+          clip.id
+        );
+
+
+        localStorage.setItem(
+          STREAM_POSTED_KEY,
+          JSON.stringify(
+            [...streamPostedIds]
+          )
+        );
 
 
         streamClips =
