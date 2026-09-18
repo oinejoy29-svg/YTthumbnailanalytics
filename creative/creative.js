@@ -830,4 +830,174 @@ function markCurrentStreamsAsSeen() {
 }
 
 
-loadStreamClips();
+loadStreamClips
+
+/* =========================================================
+   ≒JOY SCHEDULE
+========================================================= */
+
+const scheduleCalendarGrid =
+  document.getElementById(
+    "scheduleCalendarGrid"
+  );
+
+const scheduleMonthTitle =
+  document.getElementById(
+    "scheduleMonthTitle"
+  );
+
+const schedulePrevMonth =
+  document.getElementById(
+    "schedulePrevMonth"
+  );
+
+const scheduleNextMonth =
+  document.getElementById(
+    "scheduleNextMonth"
+  );
+
+const scheduleToday =
+  new Date();
+
+let scheduleCurrentYear =
+  scheduleToday.getFullYear();
+
+let scheduleCurrentMonth =
+  scheduleToday.getMonth();
+
+
+function renderScheduleCalendar() {
+
+  if (
+    !scheduleCalendarGrid ||
+    !scheduleMonthTitle
+  ) {
+    return;
+  }
+
+  scheduleMonthTitle.textContent =
+    `${scheduleCurrentYear}年${scheduleCurrentMonth + 1}月`;
+
+  scheduleCalendarGrid.innerHTML =
+    "";
+
+  const firstDay =
+    new Date(
+      scheduleCurrentYear,
+      scheduleCurrentMonth,
+      1
+    );
+
+  const lastDate =
+    new Date(
+      scheduleCurrentYear,
+      scheduleCurrentMonth + 1,
+      0
+    ).getDate();
+
+  const mondayFirstIndex =
+    (firstDay.getDay() + 6) % 7;
+
+  const totalCells =
+    Math.ceil(
+      (
+        mondayFirstIndex +
+        lastDate
+      ) / 7
+    ) * 7;
+
+  for (
+    let cellIndex = 0;
+    cellIndex < totalCells;
+    cellIndex += 1
+  ) {
+
+    const day =
+      cellIndex -
+      mondayFirstIndex +
+      1;
+
+    const dayCell =
+      document.createElement(
+        "div"
+      );
+
+    dayCell.className =
+      "schedule-day";
+
+    if (
+      day >= 1 &&
+      day <= lastDate
+    ) {
+
+      const dayNumber =
+        document.createElement(
+          "div"
+        );
+
+      dayNumber.className =
+        "schedule-day-number";
+
+      dayNumber.textContent =
+        day;
+
+      dayCell.appendChild(
+        dayNumber
+      );
+
+    } else {
+
+      dayCell.classList.add(
+        "empty"
+      );
+
+    }
+
+    scheduleCalendarGrid.appendChild(
+      dayCell
+    );
+
+  }
+
+}
+
+
+schedulePrevMonth?.addEventListener(
+  "click",
+  () => {
+
+    scheduleCurrentMonth -= 1;
+
+    if (
+      scheduleCurrentMonth < 0
+    ) {
+      scheduleCurrentMonth = 11;
+      scheduleCurrentYear -= 1;
+    }
+
+    renderScheduleCalendar();
+
+  }
+);
+
+
+scheduleNextMonth?.addEventListener(
+  "click",
+  () => {
+
+    scheduleCurrentMonth += 1;
+
+    if (
+      scheduleCurrentMonth > 11
+    ) {
+      scheduleCurrentMonth = 0;
+      scheduleCurrentYear += 1;
+    }
+
+    renderScheduleCalendar();
+
+  }
+);
+
+
+renderScheduleCalendar();
