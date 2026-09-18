@@ -5,11 +5,21 @@
     "channelId": "UCS7HVTPZ1h4vMz-3IX7rbTA",
     "channelTitle": "ノイジョイアーカイブ"
   },
-  "videos": [],
+  "videos": [
+    {
+      "id": "OV66PIWQZj0",
+      "displayTitle": "9/18 髙橋舞",
+      "sourceTitle": "髙橋舞_SHOWROOM_2026_09_18_21_00",
+      "publishedAt": "2026-09-18T13:29:59Z",
+      "thumbnail": "https://i.ytimg.com/vi/OV66PIWQZj0/hqdefault.jpg",
+      "url": "https://www.youtube.com/watch?v=OV66PIWQZj0"
+    }
+  ],
   "seenVideoIds": [
     "K0ejjmH0exM",
     "KO41vO7ylvo",
     "MlfysENoPLs",
+    "OV66PIWQZj0",
     "ShZPqsecHKE",
     "VZTpDW4KQTo",
     "WSudx9GMsjA",
