@@ -404,12 +404,22 @@ def fetch_schedule():
     events = []
     seen_ids = set()
 
-    links = soup.find_all(
+    print("===== SCHEDULE HTML CHECK =====")
+
+    for link in soup.find_all(
         "a",
         href=re.compile(
             r"/schedule/detail/\d+"
         )
-    )
+    )[:3]:
+
+        print(
+            link.parent.prettify()
+        )
+
+        print(
+            "----------"
+        )
 
     for link in links:
 
