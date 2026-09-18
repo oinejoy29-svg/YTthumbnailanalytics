@@ -292,3 +292,211 @@
   }
 
 }
+
+/* =========================================================
+   ≒JOY SCHEDULE
+========================================================= */
+
+.joy-schedule-section {
+  margin-top: 32px;
+}
+
+.schedule-calendar {
+  overflow: hidden;
+
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 16px;
+}
+
+.schedule-calendar-head {
+  display: grid;
+  grid-template-columns: 40px 1fr 40px;
+  align-items: center;
+
+  padding: 14px 12px;
+}
+
+.schedule-month-title {
+  font-size: 16px;
+  font-weight: 800;
+  text-align: center;
+}
+
+.schedule-month-btn {
+  appearance: none;
+
+  width: 34px;
+  height: 34px;
+  padding: 0;
+
+  font: inherit;
+  font-size: 24px;
+  line-height: 1;
+
+  background: transparent;
+  border: 0;
+  border-radius: 50%;
+
+  cursor: pointer;
+}
+
+.schedule-month-btn:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.schedule-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.schedule-weekdays > div {
+  padding: 7px 4px;
+
+  color: #777;
+  font-size: 11px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.schedule-calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+}
+
+.schedule-day {
+  min-width: 0;
+  min-height: 108px;
+  padding: 7px;
+
+  border-right: 1px solid rgba(0, 0, 0, 0.07);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+}
+
+.schedule-day:nth-child(7n) {
+  border-right: 0;
+}
+
+.schedule-day-number {
+  margin-bottom: 5px;
+
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.schedule-event {
+  appearance: none;
+
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  width: 100%;
+  min-width: 0;
+  margin: 3px 0;
+  padding: 2px 3px;
+
+  font: inherit;
+  font-size: 10px;
+  font-weight: 800;
+  text-align: left;
+
+  background: transparent;
+  border: 0;
+  border-radius: 5px;
+
+  cursor: pointer;
+}
+
+.schedule-event:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.schedule-event-dot {
+  flex: 0 0 auto;
+
+  width: 7px;
+  height: 7px;
+
+  background: #aaa;
+  border-radius: 50%;
+}
+
+.schedule-event-label {
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.schedule-detail {
+  margin-top: 12px;
+  padding: 14px;
+
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 14px;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+  .joy-schedule-section {
+    margin-top: 24px;
+  }
+
+  .schedule-calendar {
+    border-radius: 13px;
+  }
+
+  .schedule-calendar-head {
+    padding: 10px 8px;
+  }
+
+  .schedule-month-title {
+    font-size: 14px;
+  }
+
+  .schedule-weekdays > div {
+    padding: 6px 2px;
+    font-size: 10px;
+  }
+
+  .schedule-day {
+    min-height: 82px;
+    padding: 4px 3px;
+  }
+
+  .schedule-day-number {
+    margin-bottom: 3px;
+    font-size: 10px;
+  }
+
+  .schedule-event {
+    gap: 2px;
+
+    margin: 2px 0;
+    padding: 2px 1px;
+
+    font-size: 8px;
+  }
+
+  .schedule-event-dot {
+    width: 6px;
+    height: 6px;
+  }
+
+  .schedule-detail {
+    margin-top: 9px;
+    padding: 11px;
+    border-radius: 12px;
+  }
+
+}
