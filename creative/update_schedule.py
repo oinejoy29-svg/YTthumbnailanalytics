@@ -341,10 +341,54 @@ def fetch_detail(url):
             "html.parser"
         )
 
-        return soup.get_text(
+        body = soup.get_text(
             " ",
             strip=True
         )
+
+        header_match = re.search(
+            r"(\d{1,2})\.(\d{1,2})\s+"
+            r"[A-Z]{3}\.(\d{4})\s+"
+            r"(握手会|ライブ/イベント|メディア|リリース|誕生日|その他)",
+            body
+        )
+
+        if not header_match:
+            return {
+                "body": body,
+                "date": None,
+                "category": "その他",
+            }
+
+        month = int(
+            header_match.group(1)
+        )
+
+        day = int(
+            header_match.group(2)
+        )
+
+        year = int(
+            header_match.group(3)
+        )
+
+        category = (
+            header_match.group(4)
+        )
+
+        date = datetime(
+            year,
+            month,
+            day
+        ).strftime(
+            "%Y-%m-%d"
+        )
+
+        return {
+            "body": body,
+            "date": date,
+            "category": category,
+        }
 
     except Exception as error:
 
@@ -353,9 +397,11 @@ def fetch_detail(url):
             error
         )
 
-        return ""
-
-
+        return {
+            "body": "",
+            "date": None,
+            "category": "その他",
+        }
 # =========================================================
 # 日付
 # =========================================================
@@ -494,14 +540,8 @@ def fetch_schedule():
             event_id
         )
 
-        event_box = link.parent
-
         title_node = link.select_one(
             "span.tit"
-        )
-
-        category_node = link.select_one(
-            "span.cat"
         )
 
         title = (
@@ -519,60 +559,27 @@ def fetch_schedule():
         if not title:
             continue
 
-        category = (
-            category_node.get_text(
-                " ",
-                strip=True
-            )
-            if category_node
-            else "その他"
-        )
-
-        date = None
-        container = event_box
-
-        for _ in range(4):
-
-            if not container:
-                break
-
-            previous = (
-                container.find_previous_sibling()
-            )
-
-            while previous:
-
-                previous_text = (
-                    previous.get_text(
-                        " ",
-                        strip=True
-                    )
-                )
-
-                date = extract_date(
-                    previous_text,
-                    schedule_year,
-                    schedule_month
-                )
-
-                if date:
-                    break
-
-                previous = (
-                    previous.find_previous_sibling()
-                )
-
-            if date:
-                break
-
-            container = container.parent
-
-        if not date:
-            continue
-
-        body = fetch_detail(
+        detail = fetch_detail(
             detail_url
         )
+
+        body = detail[
+            "body"
+        ]
+
+        date = detail[
+            "date"
+        ]
+
+        category = detail[
+            "category"
+        ]
+
+        if not date:
+            print(
+                f"date not found: {detail_url}"
+            )
+            continue
 
         if not should_include(
             category,
