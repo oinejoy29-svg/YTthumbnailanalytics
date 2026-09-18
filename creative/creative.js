@@ -11,10 +11,17 @@ const STREAM_SEEN_KEY =
 const STREAM_POSTED_KEY =
   "creativeDeskPostedStreams";
 
+const STREAM_EXPIRED_KEY =
+  "creativeDeskExpiredStreams";
+
+const STREAM_EXCLUDE_DAYS =
+  7;
+
 
 let streamClips = [];
 let streamSeenIds = new Set();
 let streamPostedIds = new Set();
+let streamExpiredIds = new Set();
 
 
 async function loadStreamClips() {
@@ -61,6 +68,25 @@ async function loadStreamClips() {
     }
 
 
+    try {
+
+      streamExpiredIds =
+        new Set(
+          JSON.parse(
+            localStorage.getItem(
+              STREAM_EXPIRED_KEY
+            ) || "[]"
+          )
+        );
+
+    } catch (error) {
+
+      streamExpiredIds =
+        new Set();
+
+    }
+
+
     streamClips =
       (
         Array.isArray(
@@ -72,11 +98,15 @@ async function loadStreamClips() {
         clip =>
           !streamPostedIds.has(
             clip.id
+          ) &&
+          !streamExpiredIds.has(
+            clip.id
           )
       );
 
 
     loadStreamState();
+    removeExpiredStreams();
     renderStreamClips();
     markCurrentStreamsAsSeen();
 
@@ -125,10 +155,12 @@ function loadStreamState() {
         clip => ({
           ...clip,
           status:
-            saved[clip.id]?.status ||
-            null,
           note:
             saved[clip.id]?.note ||
+            "",
+          excludedAt:
+            saved[clip.id]?.excludedAt ||
+            null
             ""
         })
       );
@@ -144,6 +176,70 @@ function loadStreamState() {
 
 }
 
+function removeExpiredStreams() {
+
+  const now =
+    Date.now();
+
+  const limit =
+    STREAM_EXCLUDE_DAYS *
+    24 *
+    60 *
+    60 *
+    1000;
+
+
+  streamClips =
+    streamClips.filter(
+      clip => {
+
+        if (
+          clip.status !==
+          "excluded"
+        ) {
+          return true;
+        }
+
+
+        if (
+          !clip.excludedAt
+        ) {
+          return true;
+        }
+
+
+        const expired =
+          now -
+          clip.excludedAt >=
+          limit;
+
+
+        if (expired) {
+
+          streamExpiredIds.add(
+            clip.id
+          );
+
+          return false;
+
+        }
+
+
+        return true;
+
+      }
+    );
+
+
+  localStorage.setItem(
+    STREAM_EXPIRED_KEY,
+    JSON.stringify(
+      [...streamExpiredIds]
+    )
+  );
+
+}
+
 
 function saveStreamState() {
 
@@ -155,7 +251,9 @@ function saveStreamState() {
 
       saved[clip.id] = {
         status: clip.status || null,
-        note: clip.note || ""
+        note: clip.note || "",
+        excludedAt:
+          clip.excludedAt || null
       };
 
     }
@@ -498,10 +596,30 @@ function createStatusButton(
     "click",
     () => {
 
+      const turningOff =
+        clip.status === status;
+
+
       clip.status =
-        clip.status === status
+        turningOff
           ? null
           : status;
+
+
+      if (
+        clip.status ===
+        "excluded"
+      ) {
+
+        clip.excludedAt =
+          Date.now();
+
+      } else {
+
+        clip.excludedAt =
+          null;
+
+      }
 
 
       saveStreamState();
