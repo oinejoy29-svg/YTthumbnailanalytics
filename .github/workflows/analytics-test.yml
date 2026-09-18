@@ -40,6 +40,9 @@ jobs:
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
         run: python creative/update_streams.py
 
+      - name: Install schedule dependencies
+        run: pip install beautifulsoup4 requests
+
       - name: Update Creative Desk Schedule
         run: python creative/update_schedule.py
         
