@@ -441,8 +441,11 @@ function renderCommonHeader() {
         "videos",
         `
           <svg viewBox="0 0 24 24">
-            <rect x="3" y="5" width="18" height="14" rx="2"></rect>
-            <path d="M10 9l5 3-5 3z"></path>
+            <path d="M4 8h16"></path>
+            <path d="M6 8v11"></path>
+            <path d="M18 8v11"></path>
+            <path d="M3 19h18"></path>
+            <path d="M8 5h8"></path>
           </svg>
         `
       )}
@@ -480,8 +483,10 @@ function renderCommonHeader() {
         "future",
         `
           <svg viewBox="0 0 24 24">
-            <path d="M4 18l5-5 4 3 7-9"></path>
-            <path d="M15 7h5v5"></path>
+            <circle cx="10" cy="12" r="6"></circle>
+            <path d="M10 8v4l3 2"></path>
+            <path d="M16 6h5v5"></path>
+            <path d="M21 6l-5 5"></path>
           </svg>
         `
       )}
@@ -492,11 +497,8 @@ function renderCommonHeader() {
         "creativeDesk",
         `
           <svg viewBox="0 0 24 24">
-            <path d="M4 8h16"></path>
-            <path d="M6 8v11"></path>
-            <path d="M18 8v11"></path>
-            <path d="M3 19h18"></path>
-            <path d="M8 5h8"></path>
+            <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+            <path d="M10 9l5 3-5 3z"></path>
           </svg>
         `
       )}
