@@ -494,73 +494,81 @@ def fetch_schedule():
             event_id
         )
 
-        container = link
+        event_box = link.parent
 
-        for _ in range(5):
-
-            if not container.parent:
-                break
-
-            container = (
-                container.parent
-            )
-
-            container_text = (
-                container.get_text(
-                    " ",
-                    strip=True
-                )
-            )
-
-            if extract_date(
-                container_text,
-                schedule_year,
-                schedule_month
-            ):
-                break
-
-        text = container.get_text(
-            " ",
-            strip=True
+        title_node = link.select_one(
+            "span.tit"
         )
 
-        date = extract_date(
-            text,
-            schedule_year,
-            schedule_month
+        category_node = link.select_one(
+            "span.cat"
         )
 
-        if not date:
-            continue
-
-        title = link.get_text(
-            " ",
-            strip=True
+        title = (
+            title_node.get_text(
+                " ",
+                strip=True
+            )
+            if title_node
+            else link.get_text(
+                " ",
+                strip=True
+            )
         )
 
         if not title:
             continue
 
-        category = "その他"
+        category = (
+            category_node.get_text(
+                " ",
+                strip=True
+            )
+            if category_node
+            else "その他"
+        )
 
-        categories = [
-            "握手会",
-            "ライブ/イベント",
-            "メディア",
-            "リリース",
-            "誕生日",
-            "その他",
-        ]
+        date = None
+        container = event_box
 
-        for possible_category in categories:
+        for _ in range(4):
 
-            if possible_category in text:
+            if not container:
+                break
 
-                category = (
-                    possible_category
+            previous = (
+                container.find_previous_sibling()
+            )
+
+            while previous:
+
+                previous_text = (
+                    previous.get_text(
+                        " ",
+                        strip=True
+                    )
                 )
 
+                date = extract_date(
+                    previous_text,
+                    schedule_year,
+                    schedule_month
+                )
+
+                if date:
+                    break
+
+                previous = (
+                    previous.find_previous_sibling()
+                )
+
+            if date:
                 break
+
+            container = container.parent
+
+        if not date:
+            continue
 
         body = fetch_detail(
             detail_url
