@@ -873,38 +873,63 @@ let scheduleCurrentYear =
 let scheduleCurrentMonth =
   scheduleToday.getMonth();
 
-const scheduleTestEvents = [
-  {
-    date: "2026-09-20",
-    genre: "LIVE",
-    title: "≒JOY 全国ツアー 東京公演",
-    status: "default"
-  },
-  {
-    date: "2026-09-23",
-    genre: "BOOK",
-    title: "≒JOY STYLE BOOK 発売",
-    status: "selected"
-  },
-  {
-    date: "2026-09-23",
-    genre: "TV",
-    title: "音楽特番 出演",
-    status: "ready"
-  },
-  {
-    date: "2026-09-27",
-    genre: "RELEASE",
-    title: "≒JOY ニューシングル発売",
-    status: "default"
-  },
-  {
-    date: "2026-09-30",
-    genre: "BIRTHDAY",
-    title: "メンバー誕生日",
-    status: "selected"
+let scheduleEvents = [];
+
+async function loadScheduleEvents() {
+
+  try {
+
+    const response =
+      await fetch(
+        "schedule.json",
+        {
+          cache: "no-store"
+        }
+      );
+
+    if (!response.ok) {
+
+      throw new Error(
+        `HTTP ${response.status}`
+      );
+
+    }
+
+    const data =
+      await response.json();
+
+    scheduleEvents =
+      (
+        Array.isArray(
+          data.events
+        )
+          ? data.events
+          : []
+      ).map(
+        event => ({
+          ...event,
+          status:
+            event.status ||
+            "default"
+        })
+      );
+
+    renderScheduleCalendar();
+
+  } catch (error) {
+
+    console.error(
+      "Schedule load failed:",
+      error
+    );
+
+    scheduleEvents = [];
+
+    renderScheduleCalendar();
+
   }
-];
+
+}
 
 
 function renderScheduleCalendar() {
@@ -1008,7 +1033,7 @@ function renderScheduleCalendar() {
         ).padStart(2, "0")}`;
 
       const dayEvents =
-        scheduleTestEvents.filter(
+        scheduleEvents.filter(
           event =>
             event.date ===
             dateKey
@@ -1163,7 +1188,7 @@ function renderScheduleDetail() {
             event.status =
               button.dataset.status;
 
-            renderScheduleCalendar();
+　　　　　　 loadScheduleEvents();
             renderScheduleDetail();
 
           }
