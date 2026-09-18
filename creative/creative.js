@@ -873,7 +873,93 @@ let scheduleCurrentYear =
 let scheduleCurrentMonth =
   scheduleToday.getMonth();
 
+const SCHEDULE_STATE_KEY =
+  "creativeDeskScheduleState";
+
+const SCHEDULE_DELETED_KEY =
+  "creativeDeskDeletedSchedule";
+
 let scheduleEvents = [];
+
+let scheduleDeletedIds =
+  new Set();
+
+function loadScheduleLocalState() {
+
+  let savedState = {};
+
+  try {
+
+    savedState =
+      JSON.parse(
+        localStorage.getItem(
+          SCHEDULE_STATE_KEY
+        ) || "{}"
+      );
+
+  } catch (error) {
+
+    savedState = {};
+
+  }
+
+  try {
+
+    scheduleDeletedIds =
+      new Set(
+        JSON.parse(
+          localStorage.getItem(
+            SCHEDULE_DELETED_KEY
+          ) || "[]"
+        )
+      );
+
+  } catch (error) {
+
+    scheduleDeletedIds =
+      new Set();
+
+  }
+
+  return savedState;
+
+}
+
+function saveScheduleState() {
+
+  const savedState = {};
+
+  scheduleEvents.forEach(
+    event => {
+
+      savedState[event.id] = {
+        status:
+          event.status ||
+          "default"
+      };
+
+    }
+  );
+
+  localStorage.setItem(
+    SCHEDULE_STATE_KEY,
+    JSON.stringify(
+      savedState
+    )
+  );
+
+}
+
+function saveDeletedSchedule() {
+
+  localStorage.setItem(
+    SCHEDULE_DELETED_KEY,
+    JSON.stringify(
+      [...scheduleDeletedIds]
+    )
+  );
+
+}
 
 async function loadScheduleEvents() {
 
@@ -898,6 +984,9 @@ async function loadScheduleEvents() {
     const data =
       await response.json();
 
+    const savedState =
+      loadScheduleLocalState();
+
     scheduleEvents =
       (
         Array.isArray(
@@ -905,14 +994,25 @@ async function loadScheduleEvents() {
         )
           ? data.events
           : []
-      ).map(
-        event => ({
-          ...event,
-          status:
-            event.status ||
-            "default"
-        })
-      );
+      )
+        .filter(
+          event =>
+            !scheduleDeletedIds.has(
+              String(event.id)
+            )
+        )
+        .map(
+          event => ({
+            ...event,
+            id:
+              String(event.id),
+            status:
+              savedState[
+                String(event.id)
+              ]?.status ||
+              "default"
+          })
+        );
 
     renderScheduleCalendar();
 
