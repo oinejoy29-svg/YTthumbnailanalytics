@@ -574,3 +574,76 @@
   }
 
 }
+
+/* =========================================================
+   SCHEDULE EVENT COLORS
+========================================================= */
+
+/* 状態 = ●の色 */
+
+.schedule-event.status-default .schedule-event-dot {
+  background: #aaa;
+}
+
+.schedule-event.status-selected .schedule-event-dot {
+  background: #e2b72f;
+}
+
+.schedule-event.status-ready .schedule-event-dot {
+  background: #35b86b;
+}
+
+
+/* ジャンル = 文字色 */
+
+.schedule-event.genre-live {
+  color: #d24b4b;
+}
+
+.schedule-event.genre-fes {
+  color: #e06c32;
+}
+
+.schedule-event.genre-event {
+  color: #b96a32;
+}
+
+.schedule-event.genre-tv {
+  color: #5278c8;
+}
+
+.schedule-event.genre-stream {
+  color: #7659bd;
+}
+
+.schedule-event.genre-release {
+  color: #d0528a;
+}
+
+.schedule-event.genre-book {
+  color: #9a6a35;
+}
+
+.schedule-event.genre-birthday {
+  color: #d45fa5;
+}
+
+.schedule-event.genre-movie {
+  color: #536779;
+}
+
+.schedule-event.genre-stage {
+  color: #8052a5;
+}
+
+.schedule-event.genre-award {
+  color: #b08b22;
+}
+
+.schedule-event.genre-campaign {
+  color: #278f86;
+}
+
+.schedule-event.genre-other {
+  color: #666;
+}
