@@ -322,26 +322,22 @@ def fetch_detail(url):
 # 日付
 # =========================================================
 
-def extract_date(text):
+def extract_date(
+    text,
+    year,
+    month
+):
 
     match = re.search(
-        r"(\d{1,2})\.(\d{1,2}).*?(\d{4})",
+        r"(?<!\d)(\d{1,2})(?!\d)",
         text
     )
 
     if not match:
         return None
 
-    month = int(
-        match.group(1)
-    )
-
     day = int(
-        match.group(2)
-    )
-
-    year = int(
-        match.group(3)
+        match.group(1)
     )
 
     try:
@@ -378,6 +374,31 @@ def fetch_schedule():
     soup = BeautifulSoup(
         response.text,
         "html.parser"
+    )
+
+    page_text = soup.get_text(
+        " ",
+        strip=True
+    )
+
+    year_month_match = re.search(
+        r"(\d{4})\s+(\d{1,2})\s+"
+        r"(?:January|February|March|April|May|June|"
+        r"July|August|September|October|November|December)",
+        page_text
+    )
+
+    if not year_month_match:
+        raise RuntimeError(
+            "schedule year/month not found"
+        )
+
+    schedule_year = int(
+        year_month_match.group(1)
+    )
+
+    schedule_month = int(
+        year_month_match.group(2)
     )
 
     events = []
@@ -442,7 +463,9 @@ def fetch_schedule():
             )
 
             if extract_date(
-                container_text
+                container_text,
+                schedule_year,
+                schedule_month
             ):
                 break
 
@@ -452,7 +475,9 @@ def fetch_schedule():
         )
 
         date = extract_date(
-            text
+            text,
+            schedule_year,
+            schedule_month
         )
 
         if not date:
