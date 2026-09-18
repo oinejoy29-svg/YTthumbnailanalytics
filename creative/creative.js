@@ -1014,7 +1014,7 @@ async function loadScheduleEvents() {
           })
         );
 
-　　loadScheduleEvents();
+    renderScheduleCalendar();
 
   } catch (error) {
 
@@ -1371,4 +1371,4 @@ scheduleNextMonth?.addEventListener(
 );
 
 
-renderScheduleCalendar();
+loadScheduleEvents();
