@@ -1288,7 +1288,9 @@ function renderScheduleDetail() {
             event.status =
               button.dataset.status;
 
-　　　　　　 loadScheduleEvents();
+            saveScheduleState();
+
+            renderScheduleCalendar();
             renderScheduleDetail();
 
           }
@@ -1314,17 +1316,7 @@ function renderScheduleDetail() {
           return;
         }
 
-        const index =
-          scheduleTestEvents.indexOf(
-            event
-          );
-
-        if (index !== -1) {
-          scheduleTestEvents.splice(
-            index,
-            1
-          );
-        }
+scheduleTestEvents.indexOf(
 
         selectedScheduleEvent =
           null;
