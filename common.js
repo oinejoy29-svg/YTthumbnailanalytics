@@ -280,6 +280,11 @@ function renderCommonHeader() {
       "/future/"
     );
 
+  const isCreativeDesk =
+    path.includes(
+      "/creative/"
+    );
+
 
   let activePage =
     "home";
@@ -294,6 +299,11 @@ function renderCommonHeader() {
 
     activePage =
       "future";
+
+  } else if (isCreativeDesk) {
+
+    activePage =
+      "creativeDesk";
 
   } else if (
     page === "videos"
@@ -314,7 +324,8 @@ function renderCommonHeader() {
 
   const rootPrefix =
     isVideoAnalytics ||
-    isFuture
+    isFuture ||
+    isCreativeDesk
       ? "../"
       : "";
 
@@ -322,7 +333,8 @@ function renderCommonHeader() {
   const navItem = (
     href,
     label,
-    key
+    key,
+    icon
   ) => {
 
     const active =
@@ -334,8 +346,14 @@ function renderCommonHeader() {
         class="switch-btn${active ? " active" : ""}"
         href="${href}"
         ${active ? 'aria-current="page"' : ""}
+        aria-label="${label}"
+        title="${label}"
       >
-        ${label}
+        ${
+          active
+            ? `<span class="nav-label">${label}</span>`
+            : `<span class="nav-icon" aria-hidden="true">${icon}</span>`
+        }
       </a>
     `;
 
@@ -352,7 +370,13 @@ function renderCommonHeader() {
         </div>
 
         <h1>
-          #切り抜くぞニアジョイ
+          <a
+            class="brand-home-link"
+            href="${rootPrefix}index.html"
+            aria-label="Home"
+          >
+            #切り抜くぞニアジョイ
+          </a>
         </h1>
 
       </div>
@@ -411,35 +435,7 @@ function renderCommonHeader() {
       aria-label="ページ切り替え"
     >
 
-      ${navItem(
-        `${rootPrefix}index.html`,
-        "Home",
-        "home"
-      )}
-
-      ${navItem(
-        `${rootPrefix}index.html?page=videos`,
-        "Video collections",
-        "videos"
-      )}
-
-      ${navItem(
-        `${rootPrefix}index.html?page=analytics`,
-        "Subscriber analytics",
-        "subscriberAnalytics"
-      )}
-
-      ${navItem(
-        `${rootPrefix}analytics/analytics.html`,
-        "Video analytics",
-        "videoAnalytics"
-      )}
-
-      ${navItem(
-        `${rootPrefix}future/future.html`,
-        "Future outlook",
-        "future"
-      )}
+{rootPrefix}index.html
 
     </nav>
   `;
