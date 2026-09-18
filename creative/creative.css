@@ -1,1 +1,294 @@
+/* =========================================================
+   STREAM CLIPS
+========================================================= */
 
+.stream-clips-section {
+  margin-top: 32px;
+}
+
+.creative-section-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.creative-section-head h3 {
+  margin: 4px 0 0;
+}
+
+.stream-new-count {
+  font-size: 12px;
+  font-weight: 700;
+}
+
+
+/* 一覧 */
+
+.stream-clips-list,
+.stream-reviewed-list {
+  display: grid;
+  gap: 10px;
+}
+
+
+/* 配信カード */
+
+.stream-clip-card {
+  position: relative;
+
+  display: grid;
+  grid-template-columns: 132px minmax(0, 1fr);
+  gap: 12px;
+
+  padding: 10px;
+
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 14px;
+}
+
+
+/* 新着の緑丸 */
+
+.stream-new-dot {
+  position: absolute;
+  top: 7px;
+  left: 7px;
+  z-index: 2;
+
+  width: 10px;
+  height: 10px;
+
+  background: #35b86b;
+  border: 2px solid #fff;
+  border-radius: 50%;
+}
+
+
+/* サムネ */
+
+.stream-thumbnail-link {
+  display: block;
+  align-self: start;
+
+  overflow: hidden;
+  border-radius: 9px;
+}
+
+.stream-thumbnail {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+
+  object-fit: cover;
+}
+
+
+/* 右側 */
+
+.stream-clip-body {
+  min-width: 0;
+}
+
+.stream-title-link {
+  display: inline-block;
+
+  max-width: 100%;
+
+  color: inherit;
+  text-decoration: none;
+}
+
+.stream-title {
+  margin: 0 0 7px;
+
+  overflow: hidden;
+
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.35;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+/* 状態操作 */
+
+.stream-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.stream-status-btn,
+.stream-posted-btn {
+  appearance: none;
+
+  min-height: 27px;
+  padding: 4px 10px;
+
+  font: inherit;
+  font-size: 11px;
+  font-weight: 700;
+
+  border: 0;
+  border-radius: 999px;
+
+  cursor: pointer;
+}
+
+.stream-status-btn {
+  color: #666;
+  background: #e9e9e9;
+}
+
+.stream-status-btn.candidate.active {
+  color: #5d4a00;
+  background: #f4df76;
+}
+
+.stream-status-btn.excluded.active {
+  color: #fff;
+  background: #777;
+}
+
+.stream-posted-btn {
+  margin-left: auto;
+
+  color: #fff;
+  background: #222;
+}
+
+
+/* メモ */
+
+.stream-note-wrap {
+  grid-column: 1 / -1;
+
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  min-width: 0;
+}
+
+.stream-note-label {
+  flex: 0 0 auto;
+
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.stream-note {
+  width: 100%;
+  min-width: 0;
+
+  padding: 6px 8px;
+
+  font: inherit;
+  font-size: 12px;
+
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.18);
+  border-radius: 0;
+  outline: none;
+}
+
+.stream-note:focus {
+  border-bottom-color: #222;
+}
+
+
+/* 空表示・確認済み */
+
+.stream-empty {
+  padding: 28px 12px;
+
+  color: #777;
+  font-size: 13px;
+  text-align: center;
+
+  border: 1px dashed rgba(0, 0, 0, 0.16);
+  border-radius: 14px;
+}
+
+.stream-reviewed-toggle {
+  display: block;
+
+  margin: 14px auto 0;
+  padding: 7px 13px;
+
+  color: #666;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 700;
+
+  background: transparent;
+  border: 0;
+
+  cursor: pointer;
+}
+
+.stream-reviewed-list {
+  margin-top: 10px;
+}
+
+
+/* =========================================================
+   STREAM CLIPS - MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+  .stream-clips-section {
+    margin-top: 24px;
+  }
+
+  .stream-clip-card {
+    grid-template-columns: 112px minmax(0, 1fr);
+    gap: 9px;
+
+    padding: 8px;
+    border-radius: 12px;
+  }
+
+  .stream-title {
+    margin-bottom: 6px;
+    font-size: 12px;
+  }
+
+  .stream-actions {
+    gap: 4px;
+  }
+
+  .stream-status-btn,
+  .stream-posted-btn {
+    min-height: 25px;
+    padding: 3px 8px;
+
+    font-size: 10px;
+  }
+
+  .stream-note-wrap {
+    gap: 5px;
+  }
+
+  .stream-note-label {
+    font-size: 10px;
+  }
+
+  .stream-note {
+    padding: 5px 6px;
+    font-size: 11px;
+  }
+
+  .stream-new-dot {
+    top: 5px;
+    left: 5px;
+  }
+
+}
