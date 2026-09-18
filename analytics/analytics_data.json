@@ -27549,43 +27549,7 @@
             "percentage": 0.38
           }
         ],
-        "externalSites": [
-          {
-            "detail": "twitter.com",
-            "views": 2,
-            "engagedViews": 2,
-            "watchMinutes": 4.0,
-            "percentage": 33.33
-          },
-          {
-            "detail": "Google Search",
-            "views": 1,
-            "engagedViews": 1,
-            "watchMinutes": 9.0,
-            "percentage": 16.67
-          },
-          {
-            "detail": "Naver",
-            "views": 1,
-            "engagedViews": 1,
-            "watchMinutes": 2.0,
-            "percentage": 16.67
-          },
-          {
-            "detail": "Yahoo Search",
-            "views": 1,
-            "engagedViews": 1,
-            "watchMinutes": 1.0,
-            "percentage": 16.67
-          },
-          {
-            "detail": "discord.com",
-            "views": 1,
-            "engagedViews": 1,
-            "watchMinutes": 0.0,
-            "percentage": 16.67
-          }
-        ]
+        "externalSites": []
       },
       "sharingServices": [
         {
