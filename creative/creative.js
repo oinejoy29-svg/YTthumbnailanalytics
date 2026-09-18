@@ -856,6 +856,14 @@ const scheduleNextMonth =
     "scheduleNextMonth"
   );
 
+const scheduleDetail =
+  document.getElementById(
+    "scheduleDetail"
+  );
+
+let selectedScheduleEvent =
+  null;
+
 const scheduleToday =
   new Date();
 
@@ -1026,6 +1034,18 @@ function renderScheduleCalendar() {
               <span class="schedule-event-label">${event.genre}</span>
             `;
 
+          eventButton.addEventListener(
+            "click",
+            () => {
+
+              selectedScheduleEvent =
+                event;
+
+              renderScheduleDetail();
+
+            }
+          );
+
           dayCell.appendChild(
             eventButton
           );
@@ -1046,6 +1066,154 @@ function renderScheduleCalendar() {
     );
 
   }
+
+}
+
+function renderScheduleDetail() {
+
+  if (
+    !scheduleDetail ||
+    !selectedScheduleEvent
+  ) {
+    return;
+  }
+
+  const event =
+    selectedScheduleEvent;
+
+  const date =
+    new Date(
+      `${event.date}T00:00:00`
+    );
+
+  const dateLabel =
+    `${date.getMonth() + 1}月${date.getDate()}日`;
+
+  scheduleDetail.hidden =
+    false;
+
+  scheduleDetail.innerHTML =
+    `
+      <div class="schedule-detail-head">
+
+        <div>
+
+          <div class="schedule-detail-meta">
+            ${dateLabel}
+            <span class="schedule-detail-genre">
+              ${event.genre}
+            </span>
+          </div>
+
+          <div class="schedule-detail-title">
+            ${event.title}
+          </div>
+
+        </div>
+
+        <button
+          class="schedule-delete-btn"
+          type="button"
+        >
+          削除
+        </button>
+
+      </div>
+
+      <div class="schedule-detail-status">
+
+        <button
+          class="schedule-status-btn default${event.status === "default" ? " active" : ""}"
+          type="button"
+          data-status="default"
+        >
+          初期
+        </button>
+
+        <button
+          class="schedule-status-btn selected${event.status === "selected" ? " active" : ""}"
+          type="button"
+          data-status="selected"
+        >
+          採用
+        </button>
+
+        <button
+          class="schedule-status-btn ready${event.status === "ready" ? " active" : ""}"
+          type="button"
+          data-status="ready"
+        >
+          素材準備済み
+        </button>
+
+      </div>
+    `;
+
+  scheduleDetail
+    .querySelectorAll(
+      ".schedule-status-btn"
+    )
+    .forEach(
+      button => {
+
+        button.addEventListener(
+          "click",
+          () => {
+
+            event.status =
+              button.dataset.status;
+
+            renderScheduleCalendar();
+            renderScheduleDetail();
+
+          }
+        );
+
+      }
+    );
+
+  scheduleDetail
+    .querySelector(
+      ".schedule-delete-btn"
+    )
+    ?.addEventListener(
+      "click",
+      () => {
+
+        const confirmed =
+          confirm(
+            "この予定を削除しますか？"
+          );
+
+        if (!confirmed) {
+          return;
+        }
+
+        const index =
+          scheduleTestEvents.indexOf(
+            event
+          );
+
+        if (index !== -1) {
+          scheduleTestEvents.splice(
+            index,
+            1
+          );
+        }
+
+        selectedScheduleEvent =
+          null;
+
+        scheduleDetail.hidden =
+          true;
+
+        scheduleDetail.innerHTML =
+          "";
+
+        renderScheduleCalendar();
+
+      }
+    );
 
 }
 
