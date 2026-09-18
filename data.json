@@ -1,7 +1,7 @@
 {
   "channelId": "UCiLmCoftZHWXSFuQlnEJSsQ",
   "channelName": "#切り抜くぞニアジョイ",
-  "updatedAt": "2026-09-18T23:11:24.934230+09:00",
+  "updatedAt": "2026-09-18T23:22:58.294859+09:00",
   "currentSubscriberCount": 596,
   "subscribers": [
     {
@@ -826,7 +826,7 @@
       "publishedAt": "2026-07-13T10:00:29Z",
       "sevenDayViews": 2404,
       "sevenDaySource": "legacy_excel",
-      "viewCountIncrease": 1,
+      "viewCountIncrease": 0,
       "popularRank": 19,
       "popularRankDay": "2026-09-18",
       "popularRankDayStart": 19,
@@ -993,14 +993,14 @@
       "thumbnail": "https://i.ytimg.com/vi/S4tXGHeKBHs/hqdefault.jpg",
       "duration": "9:39",
       "durationSeconds": 579,
-      "viewCount": 5697,
+      "viewCount": 5699,
       "tags": [
         "小澤愛実"
       ],
       "publishedAt": "2026-08-11T03:30:26Z",
       "sevenDayViews": 4259,
       "sevenDaySource": "legacy_excel",
-      "viewCountIncrease": 0,
+      "viewCountIncrease": 2,
       "popularRank": 16,
       "popularRankDay": "2026-09-18",
       "popularRankDayStart": 15,
@@ -1059,14 +1059,14 @@
       "thumbnail": "https://i.ytimg.com/vi/rSNhDgGJvPU/hqdefault.jpg",
       "duration": "5:21",
       "durationSeconds": 321,
-      "viewCount": 19100,
+      "viewCount": 19114,
       "tags": [
         "大西葵"
       ],
       "publishedAt": "2026-08-22T03:00:39Z",
       "sevenDayViews": 9710,
       "sevenDaySource": "legacy_excel",
-      "viewCountIncrease": 0,
+      "viewCountIncrease": 14,
       "popularRank": 3,
       "popularRankDay": "2026-09-18",
       "popularRankDayStart": 3,
@@ -1151,7 +1151,7 @@
         "逢田珠里依"
       ],
       "publishedAt": "2026-08-31T08:30:03Z",
-      "viewCountIncrease": 6,
+      "viewCountIncrease": 0,
       "popularRank": 11,
       "popularRankDay": "2026-09-18",
       "popularRankDayStart": 11,
@@ -1224,7 +1224,7 @@
       "thumbnail": "https://i.ytimg.com/vi/ueHZP7Pw6aI/hqdefault.jpg",
       "duration": "6:17",
       "durationSeconds": 377,
-      "viewCount": 9950,
+      "viewCount": 9951,
       "likeCount": 89,
       "commentCount": 1,
       "tags": [
@@ -1232,7 +1232,7 @@
       ],
       "publishedAt": "2026-09-07T11:42:35Z",
       "firstDetectedAt": "2026-09-07T23:55:34.751686+09:00",
-      "viewCountIncrease": 0,
+      "viewCountIncrease": 1,
       "sevenDayForecast": {
         "modelVersion": "v2",
         "createdAt": "2026-09-07T23:55:34.751686+09:00",
@@ -1418,7 +1418,7 @@
       "thumbnail": "https://i.ytimg.com/vi/shVv0BqrKkw/hqdefault.jpg",
       "duration": "10:55",
       "durationSeconds": 655,
-      "viewCount": 5140,
+      "viewCount": 5148,
       "likeCount": 51,
       "commentCount": 0,
       "tags": [
@@ -1426,7 +1426,7 @@
       ],
       "publishedAt": "2026-09-15T11:00:26Z",
       "firstDetectedAt": "2026-09-15T20:08:31.787926+09:00",
-      "viewCountIncrease": 52,
+      "viewCountIncrease": 8,
       "sevenDayForecast": {
         "modelVersion": "v2",
         "createdAt": "2026-09-15T20:08:31.787926+09:00",

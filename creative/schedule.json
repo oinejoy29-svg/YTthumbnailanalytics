@@ -1,14 +1,6 @@
 {
-  "updatedAt": "2026-09-18T14:11:49",
+  "updatedAt": "2026-09-18T14:23:22",
   "events": [
-    {
-      "id": "2750",
-      "date": "2026-09-01",
-      "genre": "STREAM",
-      "category": "メディア",
-      "title": "メディア SHOWROOM「火曜はじょ〜いドン！」",
-      "url": "https://nearly-equal-joy.jp/schedule/detail/2750"
-    },
     {
       "id": "3882",
       "date": "2026-09-01",
@@ -58,14 +50,6 @@
       "url": "https://nearly-equal-joy.jp/schedule/detail/3658"
     },
     {
-      "id": "3851",
-      "date": "2026-09-04",
-      "genre": "TV",
-      "category": "メディア",
-      "title": "メディア ミュージック・ジャパンTV 「≒JOY スペシャル vol.4」※江角怜音、大信田美月",
-      "url": "https://nearly-equal-joy.jp/schedule/detail/3851"
-    },
-    {
       "id": "3868",
       "date": "2026-09-04",
       "genre": "TV",
@@ -82,52 +66,12 @@
       "url": "https://nearly-equal-joy.jp/schedule/detail/3602"
     },
     {
-      "id": "3858",
-      "date": "2026-09-07",
-      "genre": "OTHER",
-      "category": "メディア",
-      "title": "メディア 集英社「週刊プレイボーイ」※逢田珠里依",
-      "url": "https://nearly-equal-joy.jp/schedule/detail/3858"
-    },
-    {
-      "id": "3838",
-      "date": "2026-09-11",
-      "genre": "OTHER",
-      "category": "メディア",
-      "title": "メディア FM大阪「OTOSHIMONO」 ※江角怜音、大信田美月",
-      "url": "https://nearly-equal-joy.jp/schedule/detail/3838"
-    },
-    {
-      "id": "3896",
-      "date": "2026-09-11",
-      "genre": "OTHER",
-      "category": "メディア",
-      "title": "メディア 白夜書房「BUBKA 11月号」※天野香乃愛、市原愛弓",
-      "url": "https://nearly-equal-joy.jp/schedule/detail/3896"
-    },
-    {
-      "id": "3849",
-      "date": "2026-09-12",
-      "genre": "TV",
-      "category": "メディア",
-      "title": "メディア ミュージック・ジャパンTV 「最新！ミュージック・ジャパンTVカウントダウン」※江角怜音、大信田美月",
-      "url": "https://nearly-equal-joy.jp/schedule/detail/3849"
-    },
-    {
       "id": "3891",
       "date": "2026-09-14",
       "genre": "STAGE",
       "category": "メディア",
       "title": "メディア 「アニメ！アニメ！」※村山結香（晴風サヤカ役）",
       "url": "https://nearly-equal-joy.jp/schedule/detail/3891"
-    },
-    {
-      "id": "2752",
-      "date": "2026-09-15",
-      "genre": "STREAM",
-      "category": "メディア",
-      "title": "メディア SHOWROOM「火曜はじょ〜いドン！」",
-      "url": "https://nearly-equal-joy.jp/schedule/detail/2752"
     },
     {
       "id": "3906",
@@ -208,14 +152,6 @@
       "category": "ライブ/イベント",
       "title": "ライブ/イベント 「スクールアイドルミュージカル」※村山結香",
       "url": "https://nearly-equal-joy.jp/schedule/detail/3494"
-    },
-    {
-      "id": "3799",
-      "date": "2026-09-30",
-      "genre": "OTHER",
-      "category": "メディア",
-      "title": "メディア 竹書房「TopYell NEO 2026AUTUMN」※逢田珠里依、江角怜音、山田杏佳",
-      "url": "https://nearly-equal-joy.jp/schedule/detail/3799"
     },
     {
       "id": "3865",

@@ -4996,24 +4996,10 @@
             "percentage": 0.35
           },
           {
-            "detail": "tokio",
-            "views": 1,
-            "engagedViews": 1,
-            "watchMinutes": 0.0,
-            "percentage": 0.35
-          },
-          {
             "detail": "≠me",
             "views": 1,
             "engagedViews": 1,
             "watchMinutes": 0.0,
-            "percentage": 0.35
-          },
-          {
-            "detail": "じょーいどん",
-            "views": 1,
-            "engagedViews": 1,
-            "watchMinutes": 6.0,
             "percentage": 0.35
           },
           {
@@ -5024,14 +5010,28 @@
             "percentage": 0.35
           },
           {
-            "detail": "ニアジョイ 切り抜き",
+            "detail": "ニアジョイラジオ",
             "views": 1,
             "engagedViews": 1,
-            "watchMinutes": 4.0,
+            "watchMinutes": 0.0,
             "percentage": 0.35
           },
           {
-            "detail": "ニアジョイラジオ",
+            "detail": "ニアリーイコール ジョイ",
+            "views": 1,
+            "engagedViews": 1,
+            "watchMinutes": 9.0,
+            "percentage": 0.35
+          },
+          {
+            "detail": "天野香乃愛",
+            "views": 1,
+            "engagedViews": 1,
+            "watchMinutes": 0.0,
+            "percentage": 0.35
+          },
+          {
+            "detail": "山田杏佳 showroom",
             "views": 1,
             "engagedViews": 1,
             "watchMinutes": 0.0,
@@ -27549,7 +27549,43 @@
             "percentage": 0.38
           }
         ],
-        "externalSites": []
+        "externalSites": [
+          {
+            "detail": "twitter.com",
+            "views": 2,
+            "engagedViews": 2,
+            "watchMinutes": 4.0,
+            "percentage": 33.33
+          },
+          {
+            "detail": "Google Search",
+            "views": 1,
+            "engagedViews": 1,
+            "watchMinutes": 9.0,
+            "percentage": 16.67
+          },
+          {
+            "detail": "Naver",
+            "views": 1,
+            "engagedViews": 1,
+            "watchMinutes": 2.0,
+            "percentage": 16.67
+          },
+          {
+            "detail": "Yahoo Search",
+            "views": 1,
+            "engagedViews": 1,
+            "watchMinutes": 1.0,
+            "percentage": 16.67
+          },
+          {
+            "detail": "discord.com",
+            "views": 1,
+            "engagedViews": 1,
+            "watchMinutes": 0.0,
+            "percentage": 16.67
+          }
+        ]
       },
       "sharingServices": [
         {
