@@ -2679,8 +2679,12 @@ body.page-leaving{
 
   .page-switch .switch-btn:not(.active) {
     width: 39px;
-    padding-left: 8px;
-    padding-right: 8px;
+    min-width: 39px;
+    max-width: 39px;
+    height: 39px;
+    padding: 0;
+    flex: 0 0 39px;
+    border-radius: 50%;
   }
 
   .page-switch .nav-icon,
