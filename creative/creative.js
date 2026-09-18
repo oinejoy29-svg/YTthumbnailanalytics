@@ -155,13 +155,14 @@ function loadStreamState() {
         clip => ({
           ...clip,
           status:
+            saved[clip.id]?.status ||
+            null,
           note:
             saved[clip.id]?.note ||
             "",
           excludedAt:
             saved[clip.id]?.excludedAt ||
             null
-            ""
         })
       );
 
