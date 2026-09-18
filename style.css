@@ -2684,6 +2684,11 @@ body.page-leaving{
     height: 39px;
     padding: 0;
     flex: 0 0 39px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     border-radius: 50%;
   }
 
