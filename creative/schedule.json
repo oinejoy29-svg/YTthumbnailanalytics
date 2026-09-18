@@ -1,92 +1,132 @@
 {
-  "updatedAt": "2026-09-18T14:23:22",
+  "updatedAt": "2026-09-18T15:04:55",
   "events": [
     {
-      "id": "3882",
+      "id": "3494",
       "date": "2026-09-01",
-      "genre": "BOOK",
-      "category": "メディア",
-      "title": "メディア 逢田珠里依1st写真集『夏はジュリイ』",
-      "url": "https://nearly-equal-joy.jp/schedule/detail/3882"
+      "genre": "STAGE",
+      "category": "ライブ/イベント",
+      "title": "「スクールアイドルミュージカル」※村山結香",
+      "url": "https://nearly-equal-joy.jp/schedule/detail/3494"
+    },
+    {
+      "id": "3493",
+      "date": "2026-09-02",
+      "genre": "STAGE",
+      "category": "ライブ/イベント",
+      "title": "「スクールアイドルミュージカル」※村山結香",
+      "url": "https://nearly-equal-joy.jp/schedule/detail/3493"
     },
     {
       "id": "3601",
       "date": "2026-09-02",
       "genre": "LIVE",
       "category": "ライブ/イベント",
-      "title": "ライブ/イベント ≒JOY 全国ツアー2026「この夏 全部 全部 僕にください」 埼玉県・大宮ソニックシティ 大ホール",
+      "title": "≒JOY 全国ツアー2026「この夏 全部 全部 僕にください」 埼玉県・大宮ソニックシティ 大ホール",
       "url": "https://nearly-equal-joy.jp/schedule/detail/3601"
-    },
-    {
-      "id": "3816",
-      "date": "2026-09-02",
-      "genre": "STAGE",
-      "category": "メディア",
-      "title": "メディア Huluオリジナル「フライングジョイ」シーズン2",
-      "url": "https://nearly-equal-joy.jp/schedule/detail/3816"
-    },
-    {
-      "id": "3817",
-      "date": "2026-09-02",
-      "genre": "STAGE",
-      "category": "メディア",
-      "title": "メディア Huluオリジナル「フライングジョイ」シーズン2",
-      "url": "https://nearly-equal-joy.jp/schedule/detail/3817"
     },
     {
       "id": "3843",
       "date": "2026-09-02",
       "genre": "TV",
-      "category": "ライブ/イベント",
-      "title": "メディア 関西テレビ「ピーチケパーチケ」※≒JOY",
+      "category": "メディア",
+      "title": "関西テレビ「ピーチケパーチケ」※≒JOY",
       "url": "https://nearly-equal-joy.jp/schedule/detail/3843"
     },
     {
-      "id": "3658",
+      "id": "3489",
       "date": "2026-09-04",
-      "genre": "LIVE",
+      "genre": "STAGE",
       "category": "ライブ/イベント",
-      "title": "ライブ/イベント 「第4回 IDOL RUNWAY COLLECTION 2026 AUTUMN/WINTER Supported by TGC」※≒JOY",
-      "url": "https://nearly-equal-joy.jp/schedule/detail/3658"
+      "title": "「スクールアイドルミュージカル」※村山結香",
+      "url": "https://nearly-equal-joy.jp/schedule/detail/3489"
     },
     {
-      "id": "3868",
+      "id": "3491",
       "date": "2026-09-04",
-      "genre": "TV",
-      "category": "メディア",
-      "title": "メディア フジテレビ「めざましテレビ」※江角怜音",
-      "url": "https://nearly-equal-joy.jp/schedule/detail/3868"
+      "genre": "STAGE",
+      "category": "ライブ/イベント",
+      "title": "「スクールアイドルミュージカル」※村山結香",
+      "url": "https://nearly-equal-joy.jp/schedule/detail/3491"
     },
     {
       "id": "3602",
       "date": "2026-09-05",
       "genre": "LIVE",
       "category": "ライブ/イベント",
-      "title": "ライブ/イベント ≒JOY 全国ツアー2026「この夏 全部 全部 僕にください」 石川県・本多の森北電ホール",
+      "title": "≒JOY 全国ツアー2026「この夏 全部 全部 僕にください」 石川県・本多の森北電ホール",
       "url": "https://nearly-equal-joy.jp/schedule/detail/3602"
+    },
+    {
+      "id": "3816",
+      "date": "2026-09-05",
+      "genre": "STAGE",
+      "category": "メディア",
+      "title": "Huluオリジナル「フライングジョイ」シーズン2",
+      "url": "https://nearly-equal-joy.jp/schedule/detail/3816"
+    },
+    {
+      "id": "3817",
+      "date": "2026-09-05",
+      "genre": "STAGE",
+      "category": "メディア",
+      "title": "Huluオリジナル「フライングジョイ」シーズン2",
+      "url": "https://nearly-equal-joy.jp/schedule/detail/3817"
+    },
+    {
+      "id": "3868",
+      "date": "2026-09-05",
+      "genre": "TV",
+      "category": "メディア",
+      "title": "フジテレビ「めざましテレビ」※江角怜音",
+      "url": "https://nearly-equal-joy.jp/schedule/detail/3868"
+    },
+    {
+      "id": "3887",
+      "date": "2026-09-05",
+      "genre": "TV",
+      "category": "メディア",
+      "title": "テレビ朝日「ゲームズ・ボンド」※小澤愛実、山田杏佳",
+      "url": "https://nearly-equal-joy.jp/schedule/detail/3887"
+    },
+    {
+      "id": "3906",
+      "date": "2026-09-05",
+      "genre": "STAGE",
+      "category": "メディア",
+      "title": "「ウォーカープラス」※村山結香（晴風サヤカ役）",
+      "url": "https://nearly-equal-joy.jp/schedule/detail/3906"
+    },
+    {
+      "id": "3884",
+      "date": "2026-09-06",
+      "genre": "STAGE",
+      "category": "メディア",
+      "title": "「encore」※村山結香（晴風サヤカ役）",
+      "url": "https://nearly-equal-joy.jp/schedule/detail/3884"
+    },
+    {
+      "id": "3882",
+      "date": "2026-09-13",
+      "genre": "BOOK",
+      "category": "メディア",
+      "title": "逢田珠里依1st写真集『夏はジュリイ』",
+      "url": "https://nearly-equal-joy.jp/schedule/detail/3882"
     },
     {
       "id": "3891",
       "date": "2026-09-14",
       "genre": "STAGE",
       "category": "メディア",
-      "title": "メディア 「アニメ！アニメ！」※村山結香（晴風サヤカ役）",
+      "title": "「アニメ！アニメ！」※村山結香（晴風サヤカ役）",
       "url": "https://nearly-equal-joy.jp/schedule/detail/3891"
-    },
-    {
-      "id": "3906",
-      "date": "2026-09-18",
-      "genre": "STAGE",
-      "category": "メディア",
-      "title": "メディア 「ウォーカープラス」※村山結香（晴風サヤカ役）",
-      "url": "https://nearly-equal-joy.jp/schedule/detail/3906"
     },
     {
       "id": "3488",
       "date": "2026-09-19",
       "genre": "STAGE",
       "category": "ライブ/イベント",
-      "title": "ライブ/イベント 「スクールアイドルミュージカル」※村山結香",
+      "title": "「スクールアイドルミュージカル」※村山結香",
       "url": "https://nearly-equal-joy.jp/schedule/detail/3488"
     },
     {
@@ -94,71 +134,39 @@
       "date": "2026-09-19",
       "genre": "TV",
       "category": "ライブ/イベント",
-      "title": "ライブ/イベント NHK「Venue101 EXTRA」公開収録※≒JOY",
+      "title": "NHK「Venue101 EXTRA」公開収録※≒JOY",
       "url": "https://nearly-equal-joy.jp/schedule/detail/3780"
     },
     {
-      "id": "3489",
+      "id": "3658",
       "date": "2026-09-20",
-      "genre": "STAGE",
+      "genre": "LIVE",
       "category": "ライブ/イベント",
-      "title": "ライブ/イベント 「スクールアイドルミュージカル」※村山結香",
-      "url": "https://nearly-equal-joy.jp/schedule/detail/3489"
+      "title": "「第4回 IDOL RUNWAY COLLECTION 2026 AUTUMN/WINTER Supported by TGC」※≒JOY",
+      "url": "https://nearly-equal-joy.jp/schedule/detail/3658"
     },
     {
       "id": "3490",
       "date": "2026-09-21",
       "genre": "STAGE",
       "category": "ライブ/イベント",
-      "title": "ライブ/イベント 「スクールアイドルミュージカル」※村山結香",
+      "title": "「スクールアイドルミュージカル」※村山結香",
       "url": "https://nearly-equal-joy.jp/schedule/detail/3490"
-    },
-    {
-      "id": "3491",
-      "date": "2026-09-22",
-      "genre": "STAGE",
-      "category": "ライブ/イベント",
-      "title": "ライブ/イベント 「スクールアイドルミュージカル」※村山結香",
-      "url": "https://nearly-equal-joy.jp/schedule/detail/3491"
-    },
-    {
-      "id": "2919",
-      "date": "2026-09-23",
-      "genre": "TV",
-      "category": "ライブ/イベント",
-      "title": "メディア MBSラジオ「アッパレやってまーす！水曜日」※江角怜音",
-      "url": "https://nearly-equal-joy.jp/schedule/detail/2919"
     },
     {
       "id": "3492",
       "date": "2026-09-23",
       "genre": "STAGE",
       "category": "ライブ/イベント",
-      "title": "ライブ/イベント 「スクールアイドルミュージカル」※村山結香",
+      "title": "「スクールアイドルミュージカル」※村山結香",
       "url": "https://nearly-equal-joy.jp/schedule/detail/3492"
-    },
-    {
-      "id": "3493",
-      "date": "2026-09-25",
-      "genre": "STAGE",
-      "category": "ライブ/イベント",
-      "title": "ライブ/イベント 「スクールアイドルミュージカル」※村山結香",
-      "url": "https://nearly-equal-joy.jp/schedule/detail/3493"
-    },
-    {
-      "id": "3494",
-      "date": "2026-09-26",
-      "genre": "STAGE",
-      "category": "ライブ/イベント",
-      "title": "ライブ/イベント 「スクールアイドルミュージカル」※村山結香",
-      "url": "https://nearly-equal-joy.jp/schedule/detail/3494"
     },
     {
       "id": "3865",
       "date": "2026-09-30",
       "genre": "LIVE",
-      "category": "メディア",
-      "title": "リリース 【発売日】≒JOY 全国ツアー2025「Our moon is getting full」",
+      "category": "リリース",
+      "title": "【発売日】≒JOY 全国ツアー2025「Our moon is getting full」",
       "url": "https://nearly-equal-joy.jp/schedule/detail/3865"
     }
   ]
