@@ -747,7 +747,7 @@ function renderStreamClips() {
 
 
 /* =========================================================
-   REVIEWED TOGGLE
+   REVIEWED MODAL
 ========================================================= */
 
 const streamReviewedToggle =
@@ -755,37 +755,59 @@ const streamReviewedToggle =
     "streamReviewedToggle"
   );
 
-
-if (streamReviewedToggle) {
-
-  streamReviewedToggle.addEventListener(
-    "click",
-    () => {
-
-      const reviewedList =
-        document.getElementById(
-          "streamReviewedList"
-        );
-
-
-      const opening =
-        reviewedList.hidden;
-
-
-      reviewedList.hidden =
-        !opening;
-
-
-      streamReviewedToggle.textContent =
-        opening
-          ? "確認済みを閉じる"
-          : "確認済みを表示";
-
-    }
+const streamReviewedOverlay =
+  document.getElementById(
+    "streamReviewedOverlay"
   );
 
-}
+const streamReviewedClose =
+  document.getElementById(
+    "streamReviewedClose"
+  );
 
+
+streamReviewedToggle?.addEventListener(
+  "click",
+  () => {
+
+    if (streamReviewedOverlay) {
+      streamReviewedOverlay.hidden =
+        false;
+    }
+
+  }
+);
+
+
+streamReviewedClose?.addEventListener(
+  "click",
+  () => {
+
+    if (streamReviewedOverlay) {
+      streamReviewedOverlay.hidden =
+        true;
+    }
+
+  }
+);
+
+
+streamReviewedOverlay?.addEventListener(
+  "click",
+  event => {
+
+    if (
+      event.target !==
+      streamReviewedOverlay
+    ) {
+      return;
+    }
+
+    streamReviewedOverlay.hidden =
+      true;
+
+  }
+);
 
 /* =========================================================
    START
