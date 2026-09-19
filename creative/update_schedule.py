@@ -73,15 +73,43 @@ def classify_genre(
     body=""
 ):
 
-    text = (
-        f"{title} {body}"
-    ).lower()
+    title_text = title.lower()
+    body_text = body.lower()
 
-    # 誕生日
+    # =====================================================
+    # 1. 公式カテゴリで確定できるもの
+    # =====================================================
+
     if category == "誕生日":
         return "BIRTHDAY"
 
-    # 本・写真集系
+    if category == "リリース":
+        return "RELEASE"
+
+    # =====================================================
+    # 2. タイトルを最優先で判定
+    # =====================================================
+
+    # リリース
+    release_words = [
+        "blu-ray",
+        "blu‐ray",
+        "ブルーレイ",
+        "dvd",
+        "シングル発売",
+        "アルバム発売",
+        "発売決定",
+        "発売日",
+        "リリース",
+    ]
+
+    if any(
+        word in title_text
+        for word in release_words
+    ):
+        return "RELEASE"
+
+    # 本・写真集
     book_words = [
         "写真集",
         "フォトブック",
@@ -90,16 +118,35 @@ def classify_genre(
         "style book",
         "stylebook",
         "スタイルブック",
-        "書籍",
+        "公式ブック",
+        "公式book",
         "ムック",
-        "book",
+        "書籍",
     ]
 
     if any(
-        word in text
+        word in title_text
         for word in book_words
     ):
         return "BOOK"
+
+    # 配信
+    stream_words = [
+        "hulu",
+        "abema",
+        "youtube",
+        "showroom",
+        "生配信",
+        "ライブ配信",
+        "配信決定",
+        "配信開始",
+    ]
+
+    if any(
+        word in title_text
+        for word in stream_words
+    ):
+        return "STREAM"
 
     # 映画
     movie_words = [
@@ -109,7 +156,7 @@ def classify_genre(
     ]
 
     if any(
-        word in text
+        word in title_text
         for word in movie_words
     ):
         return "MOVIE"
@@ -122,7 +169,7 @@ def classify_genre(
     ]
 
     if any(
-        word in text
+        word in title_text
         for word in stage_words
     ):
         return "STAGE"
@@ -136,27 +183,39 @@ def classify_genre(
     ]
 
     if any(
-        word in text
+        word in title_text
         for word in award_words
     ):
         return "AWARD"
 
-    # 配信
-    stream_words = [
-        "youtube",
-        "showroom",
-        "hulu",
-        "abema",
-        "配信",
-        "生配信",
-        "ライブ配信",
+    # フェス
+    fes_words = [
+        "festival",
+        "フェス",
+        "fes",
     ]
 
     if any(
-        word in text
-        for word in stream_words
+        word in title_text
+        for word in fes_words
     ):
-        return "STREAM"
+        return "FES"
+
+    # ライブ
+    live_words = [
+        "live",
+        "ライブ",
+        "コンサート",
+        "ツアー",
+        "tour",
+        "ワンマン",
+    ]
+
+    if any(
+        word in title_text
+        for word in live_words
+    ):
+        return "LIVE"
 
     # TV
     tv_words = [
@@ -171,45 +230,20 @@ def classify_genre(
         "テレ朝",
         "テレビ東京",
         "テレ東",
-        "bs",
-        "cs",
+        "関西テレビ",
+        "mbsテレビ",
+        "bs11",
+        "bs朝日",
+        "bs日テレ",
+        "bsフジ",
+        "bsテレ東",
     ]
 
     if any(
-        word in text
+        word in title_text
         for word in tv_words
     ):
         return "TV"
-
-    # フェス
-    fes_words = [
-        "festival",
-        "フェス",
-        "fes",
-    ]
-
-    if any(
-        word in text
-        for word in fes_words
-    ):
-        return "FES"
-
-    # ライブ
-    live_words = [
-        "live",
-        "ライブ",
-        "コンサート",
-        "ツアー",
-        "tour",
-        "公演",
-        "ワンマン",
-    ]
-
-    if any(
-        word in text
-        for word in live_words
-    ):
-        return "LIVE"
 
     # キャンペーン
     campaign_words = [
@@ -219,34 +253,49 @@ def classify_genre(
     ]
 
     if any(
-        word in text
+        word in title_text
         for word in campaign_words
     ):
         return "CAMPAIGN"
 
-    # リリース
-    if category == "リリース":
-        return "RELEASE"
+    # =====================================================
+    # 3. タイトルだけで不明な場合、本文を補助的に使用
+    # =====================================================
 
-    release_words = [
-        "シングル発売",
-        "アルバム発売",
-        "blu-ray",
-        "dvd",
-    ]
+    if category == "メディア":
 
-    if any(
-        word in text
-        for word in release_words
-    ):
-        return "RELEASE"
+        if any(
+            word in body_text
+            for word in stream_words
+        ):
+            return "STREAM"
 
-    # イベント
+        if any(
+            word in body_text
+            for word in tv_words
+        ):
+            return "TV"
+
+        if any(
+            word in body_text
+            for word in book_words
+        ):
+            return "BOOK"
+
+        if any(
+            word in body_text
+            for word in movie_words
+        ):
+            return "MOVIE"
+
+    # =====================================================
+    # 4. 公式カテゴリをフォールバックに使用
+    # =====================================================
+
     if category == "ライブ/イベント":
         return "EVENT"
 
     return "OTHER"
-
 
 # =========================================================
 # 掲載するか
