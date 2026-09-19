@@ -151,30 +151,43 @@
 
       </div>
 
-      <div class="schedule-calendar-card">
 
-        <div class="schedule-weekdays">
-          <div>日</div>
-          <div>月</div>
-          <div>火</div>
-          <div>水</div>
-          <div>木</div>
-          <div>金</div>
-          <div>土</div>
+
+      <div class="schedule-calendar-wrap">
+
+        <div class="schedule-calendar-card">
+
+          <div class="schedule-weekdays">
+            <div>日</div>
+            <div>月</div>
+            <div>火</div>
+            <div>水</div>
+            <div>木</div>
+            <div>金</div>
+            <div>土</div>
+          </div>
+
+          <div
+            class="schedule-calendar-grid"
+            id="scheduleCalendarGrid"
+          ></div>
+
         </div>
 
         <div
-          class="schedule-calendar-grid"
-          id="scheduleCalendarGrid"
-        ></div>
+          class="schedule-detail-overlay"
+          id="scheduleDetailOverlay"
+          hidden
+        >
+
+          <div
+            class="schedule-detail"
+            id="scheduleDetail"
+          ></div>
+
+        </div>
 
       </div>
-
-      <div
-        class="schedule-detail"
-        id="scheduleDetail"
-        hidden
-      ></div>
 
     </section>
 
