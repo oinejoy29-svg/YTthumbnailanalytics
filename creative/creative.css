@@ -294,6 +294,814 @@
 }
 
 /* =========================================================
+   STREAM CLIPS
+========================================================= */
+
+.stream-clips-section {
+  margin-top: 32px;
+}
+
+.creative-section-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.creative-section-head h3 {
+  margin: 4px 0 0;
+}
+
+.stream-new-count {
+  font-size: 12px;
+  font-weight: 700;
+}
+
+
+/* 一覧 */
+
+.stream-clips-list,
+.stream-reviewed-list {
+  display: grid;
+  gap: 10px;
+}
+
+
+/* 配信カード */
+
+.stream-clip-card {
+  position: relative;
+
+  display: grid;
+  grid-template-columns: 132px minmax(0, 1fr);
+  gap: 12px;
+
+  padding: 10px;
+
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 14px;
+}
+
+
+/* 新着の緑丸 */
+
+.stream-new-dot {
+  position: absolute;
+  top: 7px;
+  left: 7px;
+  z-index: 2;
+
+  width: 10px;
+  height: 10px;
+
+  background: #35b86b;
+  border: 2px solid #fff;
+  border-radius: 50%;
+}
+
+
+/* サムネ */
+
+.stream-thumbnail-link {
+  display: block;
+  align-self: start;
+
+  overflow: hidden;
+  border-radius: 9px;
+}
+
+.stream-thumbnail {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+
+  object-fit: cover;
+}
+
+
+/* 右側 */
+
+.stream-clip-body {
+  min-width: 0;
+}
+
+.stream-title-link {
+  display: inline-block;
+
+  max-width: 100%;
+
+  color: inherit;
+  text-decoration: none;
+}
+
+.stream-title {
+  margin: 0 0 7px;
+
+  overflow: hidden;
+
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.35;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+/* 状態操作 */
+
+.stream-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.stream-status-btn,
+.stream-posted-btn {
+  appearance: none;
+
+  min-height: 27px;
+  padding: 4px 10px;
+
+  font: inherit;
+  font-size: 11px;
+  font-weight: 700;
+
+  border: 0;
+  border-radius: 999px;
+
+  cursor: pointer;
+}
+
+.stream-status-btn {
+  color: #666;
+  background: #e9e9e9;
+}
+
+.stream-status-btn.candidate.active {
+  color: #5d4a00;
+  background: #f4df76;
+}
+
+.stream-status-btn.excluded.active {
+  color: #fff;
+  background: #777;
+}
+
+.stream-posted-btn {
+  margin-left: auto;
+
+  color: #fff;
+  background: #222;
+}
+
+
+/* メモ */
+
+.stream-note-wrap {
+  grid-column: 1 / -1;
+
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  min-width: 0;
+}
+
+.stream-note-label {
+  flex: 0 0 auto;
+
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.stream-note {
+  width: 100%;
+  min-width: 0;
+
+  padding: 6px 8px;
+
+  font: inherit;
+  font-size: 12px;
+
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.18);
+  border-radius: 0;
+  outline: none;
+}
+
+.stream-note:focus {
+  border-bottom-color: #222;
+}
+
+
+/* 空表示・確認済み */
+
+.stream-empty {
+  padding: 28px 12px;
+
+  color: #777;
+  font-size: 13px;
+  text-align: center;
+
+  border: 1px dashed rgba(0, 0, 0, 0.16);
+  border-radius: 14px;
+}
+
+.stream-reviewed-toggle {
+  display: block;
+
+  margin: 14px auto 0;
+  padding: 7px 13px;
+
+  color: #666;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 700;
+
+  background: transparent;
+  border: 0;
+
+  cursor: pointer;
+}
+
+.stream-reviewed-list {
+  margin-top: 10px;
+}
+
+
+/* =========================================================
+   STREAM CLIPS - MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+  .stream-clips-section {
+    margin-top: 24px;
+  }
+
+  .stream-clip-card {
+    grid-template-columns: 112px minmax(0, 1fr);
+    gap: 9px;
+
+    padding: 8px;
+    border-radius: 12px;
+  }
+
+  .stream-title {
+    margin-bottom: 6px;
+    font-size: 12px;
+  }
+
+  .stream-actions {
+    gap: 4px;
+  }
+
+  .stream-status-btn,
+  .stream-posted-btn {
+    min-height: 25px;
+    padding: 3px 8px;
+
+    font-size: 10px;
+  }
+
+  .stream-note-wrap {
+    gap: 5px;
+  }
+
+  .stream-note-label {
+    font-size: 10px;
+  }
+
+  .stream-note {
+    padding: 5px 6px;
+    font-size: 11px;
+  }
+
+  .stream-new-dot {
+    top: 5px;
+    left: 5px;
+  }
+
+}
+
+/* =========================================================
+   ≒JOY SCHEDULE
+========================================================= */
+
+.joy-schedule-section {
+  margin-top: 32px;
+}
+
+.schedule-section-head {
+  align-items: center;
+}
+
+.schedule-month-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.schedule-month-title {
+  min-width: 110px;
+
+  font-size: 14px;
+  font-weight: 800;
+  text-align: center;
+}
+
+.schedule-month-btn {
+  appearance: none;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 32px;
+  height: 32px;
+  padding: 0;
+
+  color: #222;
+  font: inherit;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1;
+
+  background: #fff;
+  border: 2px solid #222;
+  border-radius: 50%;
+
+  cursor: pointer;
+}
+
+.schedule-month-btn:hover {
+  transform: translateY(-1px);
+}
+
+.schedule-calendar-wrap {
+  position: relative;
+}
+
+.schedule-calendar-card {
+  overflow: hidden;
+
+  background: #fff;
+  border: 2px solid #222;
+  border-radius: 16px;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.08);
+}
+
+.schedule-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+
+  background: rgba(0, 0, 0, 0.035);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.14);
+}
+
+.schedule-weekdays > div {
+  padding: 8px 4px;
+
+  color: #666;
+  font-size: 11px;
+  font-weight: 800;
+  text-align: center;
+
+  border-right: 1px solid rgba(0, 0, 0, 0.10);
+}
+
+.schedule-weekdays > div:last-child {
+  border-right: 0;
+}
+
+.schedule-calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+}
+
+.schedule-day {
+  position: relative;
+
+  min-width: 0;
+  min-height: 125px;
+  padding: 7px;
+
+  background: #fff;
+  border-right: 1px solid rgba(0, 0, 0, 0.10);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.10);
+}
+
+.schedule-day:nth-child(7n) {
+  border-right: 0;
+}
+
+.schedule-day.empty {
+  background: rgba(0, 0, 0, 0.018);
+}
+
+.schedule-day-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 24px;
+  height: 24px;
+  margin-bottom: 5px;
+
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1;
+
+  border-radius: 50%;
+}
+
+.schedule-day.today .schedule-day-number {
+  color: #fff;
+  background: #222;
+}
+
+
+/* イベント */
+
+.schedule-event {
+  appearance: none;
+
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  width: 100%;
+  min-width: 0;
+  margin: 3px 0;
+  padding: 2px 3px;
+
+  font: inherit;
+  font-size: 10px;
+  font-weight: 800;
+  text-align: left;
+
+  background: transparent;
+  border: 0;
+  border-radius: 5px;
+
+  cursor: pointer;
+}
+
+.schedule-event:hover {
+  background: rgba(0, 0, 0, 0.045);
+}
+
+.schedule-event-dot {
+  flex: 0 0 auto;
+
+  width: 7px;
+  height: 7px;
+
+  background: #aaa;
+  border-radius: 50%;
+}
+
+.schedule-event-label {
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+/* 詳細 */
+
+.schedule-detail-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 18px;
+
+  background: rgba(0, 0, 0, 0.12);
+  border-radius: 16px;
+}
+
+.schedule-detail-overlay[hidden] {
+  display: none;
+}
+
+.schedule-detail {
+  width: min(520px, 90%);
+  margin: 0;
+  padding: 14px;
+
+  background: #fff;
+  border: 2px solid #222;
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+  .joy-schedule-section {
+    margin-top: 24px;
+  }
+
+  .schedule-section-head {
+    display: block;
+  }
+
+  .schedule-month-nav {
+    margin-top: 10px;
+  }
+
+  .schedule-month-title {
+    min-width: 100px;
+    font-size: 13px;
+  }
+
+  .schedule-month-btn {
+    width: 29px;
+    height: 29px;
+
+    font-size: 18px;
+  }
+
+  .schedule-calendar-card {
+    border-radius: 13px;
+  }
+
+  .schedule-weekdays > div {
+    padding: 6px 2px;
+    font-size: 9px;
+  }
+
+  .schedule-day {
+    min-height: 72px;
+    padding: 3px;
+  }
+
+  .schedule-day-number {
+    width: 18px;
+    height: 18px;
+    margin-bottom: 2px;
+
+    font-size: 9px;
+  }
+
+  .schedule-event {
+    gap: 2px;
+
+    margin: 1px 0;
+    padding: 1px;
+
+    font-size: 7px;
+  }
+
+  .schedule-event-dot {
+    width: 5px;
+    height: 5px;
+  }
+
+  .schedule-detail-overlay {
+    padding: 10px;
+    border-radius: 13px;
+  }
+
+  .schedule-detail {
+    width: min(94%, 420px);
+    margin: 0;
+    padding: 11px;
+
+    border-radius: 12px;
+  }
+
+}
+
+@media (max-width: 380px) {
+
+  .schedule-day {
+    min-height: 63px;
+  }
+
+  .schedule-event {
+    font-size: 6.5px;
+  }
+
+}
+
+/* =========================================================
+   SCHEDULE EVENT COLORS
+========================================================= */
+
+/* 状態 = ●の色 */
+
+.schedule-event.status-default .schedule-event-dot {
+  background: #aaa;
+}
+
+.schedule-event.status-selected .schedule-event-dot {
+  background: #e2b72f;
+}
+
+.schedule-event.status-ready .schedule-event-dot {
+  background: #35b86b;
+}
+
+
+/* ジャンル = 文字色 */
+
+.schedule-event.genre-live {
+  color: #d24b4b;
+}
+
+.schedule-event.genre-fes {
+  color: #e06c32;
+}
+
+.schedule-event.genre-event {
+  color: #b96a32;
+}
+
+.schedule-event.genre-tv {
+  color: #5278c8;
+}
+
+.schedule-event.genre-stream {
+  color: #7659bd;
+}
+
+.schedule-event.genre-release {
+  color: #d0528a;
+}
+
+.schedule-event.genre-book {
+  color: #9a6a35;
+}
+
+.schedule-event.genre-birthday {
+  color: #d45fa5;
+}
+
+.schedule-event.genre-movie {
+  color: #536779;
+}
+
+.schedule-event.genre-stage {
+  color: #8052a5;
+}
+
+.schedule-event.genre-award {
+  color: #b08b22;
+}
+
+.schedule-event.genre-campaign {
+  color: #278f86;
+}
+
+.schedule-event.genre-other {
+  color: #666;
+}
+
+/* =========================================================
+   SCHEDULE DETAIL
+========================================================= */
+
+.schedule-detail-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.schedule-detail-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  margin-bottom: 5px;
+
+  color: #777;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.schedule-detail-genre {
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.schedule-detail-title {
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 1.45;
+}
+
+.schedule-detail-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  margin-top: 13px;
+}
+
+.schedule-status-btn,
+.schedule-delete-btn {
+  appearance: none;
+
+  padding: 6px 11px;
+
+  font: inherit;
+  font-size: 11px;
+  font-weight: 800;
+
+  border: 0;
+  border-radius: 999px;
+
+  cursor: pointer;
+}
+
+.schedule-status-btn {
+  color: #666;
+  background: #e9e9e9;
+}
+
+.schedule-status-btn.default.active {
+  color: #fff;
+  background: #888;
+}
+
+.schedule-status-btn.selected.active {
+  color: #5d4a00;
+  background: #f4df76;
+}
+
+.schedule-status-btn.ready.active {
+  color: #fff;
+  background: #35b86b;
+}
+
+.schedule-delete-btn {
+  flex: 0 0 auto;
+
+  color: #777;
+  background: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+
+/* =========================================================
+   SCHEDULE DETAIL MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+  .schedule-detail-head {
+    gap: 8px;
+  }
+
+  .schedule-detail-meta {
+    gap: 6px;
+
+    margin-bottom: 4px;
+
+    font-size: 10px;
+  }
+
+  .schedule-detail-genre {
+    font-size: 9px;
+  }
+
+  .schedule-detail-title {
+    font-size: 13px;
+  }
+
+  .schedule-detail-status {
+    gap: 5px;
+
+    margin-top: 10px;
+  }
+
+  .schedule-status-btn,
+  .schedule-delete-btn {
+    padding: 5px 9px;
+
+    font-size: 10px;
+  }
+
+}
+
+/* =========================================================
    ≒JOY SCHEDULE
 ========================================================= */
 
