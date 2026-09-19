@@ -91,10 +91,45 @@
 
 
       <div
-        class="stream-reviewed-list"
-        id="streamReviewedList"
+        class="stream-reviewed-overlay"
+        id="streamReviewedOverlay"
         hidden
-      ></div>
+      >
+
+        <div class="stream-reviewed-modal">
+
+          <div class="stream-reviewed-modal-head">
+
+            <div>
+              <div class="section-kicker">
+                REVIEWED STREAMS
+              </div>
+
+              <h3>
+                確認済み
+              </h3>
+            </div>
+
+            <button
+              class="stream-reviewed-close"
+              id="streamReviewedClose"
+              type="button"
+              aria-label="閉じる"
+            >
+              ×
+            </button>
+
+          </div>
+
+
+          <div
+            class="stream-reviewed-list"
+            id="streamReviewedList"
+          ></div>
+
+        </div>
+
+      </div>
 
     </section>
 
