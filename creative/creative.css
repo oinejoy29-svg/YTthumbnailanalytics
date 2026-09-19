@@ -249,6 +249,84 @@
   margin-top: 10px;
 }
 
+.stream-reviewed-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 24px;
+
+  background: rgba(0, 0, 0, 0.28);
+}
+
+.stream-reviewed-overlay[hidden] {
+  display: none;
+}
+
+.stream-reviewed-modal {
+  width: min(720px, 100%);
+  max-height: min(720px, 85vh);
+  overflow-y: auto;
+
+  padding: 20px;
+
+  background: #fff;
+  border: 2px solid #222;
+  border-radius: 18px;
+
+  box-shadow: 0 8px 0 rgba(0, 0, 0, 0.12);
+}
+
+.stream-reviewed-modal-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+
+  margin-bottom: 16px;
+}
+
+.stream-reviewed-modal-head h3 {
+  margin: 4px 0 0;
+
+  font-size: 24px;
+  font-weight: 900;
+  letter-spacing: -.04em;
+}
+
+.stream-reviewed-close {
+  appearance: none;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex: 0 0 auto;
+
+  width: 34px;
+  height: 34px;
+  padding: 0;
+
+  background: #fff;
+  border: 2px solid #222;
+  border-radius: 50%;
+
+  font: inherit;
+  font-size: 21px;
+  font-weight: 800;
+  line-height: 1;
+
+  cursor: pointer;
+}
+
+.stream-reviewed-modal .stream-reviewed-list {
+  margin-top: 0;
+}
+
 
 /* =========================================================
    STREAM CLIPS - MOBILE
