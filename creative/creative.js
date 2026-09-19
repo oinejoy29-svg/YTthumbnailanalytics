@@ -832,6 +832,777 @@ function markCurrentStreamsAsSeen() {
 
 loadStreamClips();
 
+
+/* =========================================================
+   POSTING CALENDAR
+========================================================= */
+
+let postingCalendarData = {
+  videos: []
+};
+
+let postingCalendarMonth =
+  null;
+
+let postingRecommendation =
+  null;
+
+
+function postingDateObj(
+  date
+) {
+
+  return new Date(
+    `${date}T00:00:00+09:00`
+  );
+
+}
+
+
+function postingDateToIso(
+  date
+) {
+
+  const year =
+    date.getFullYear();
+
+  const month =
+    String(
+      date.getMonth() + 1
+    ).padStart(
+      2,
+      "0"
+    );
+
+  const day =
+    String(
+      date.getDate()
+    ).padStart(
+      2,
+      "0"
+    );
+
+  return (
+    `${year}-${month}-${day}`
+  );
+
+}
+
+
+function postingTodayJST() {
+
+  const parts =
+    new Intl.DateTimeFormat(
+      "en-CA",
+      {
+        timeZone:
+          "Asia/Tokyo",
+
+        year:
+          "numeric",
+
+        month:
+          "2-digit",
+
+        day:
+          "2-digit"
+      }
+    )
+      .formatToParts(
+        new Date()
+      );
+
+  const get =
+    type =>
+      parts.find(
+        part =>
+          part.type === type
+      )?.value || "";
+
+  return (
+    `${get("year")}-` +
+    `${get("month")}-` +
+    `${get("day")}`
+  );
+
+}
+
+
+function postingMonthDay(
+  date
+) {
+
+  if (!date) {
+    return "—";
+  }
+
+  const [
+    ,
+    month,
+    day
+  ] =
+    date
+      .split("-")
+      .map(Number);
+
+  return (
+    `${month}/${day}`
+  );
+
+}
+
+
+function postingDiffDays(
+  later,
+  earlier
+) {
+
+  return Math.round(
+    (
+      postingDateObj(later) -
+      postingDateObj(earlier)
+    ) /
+    86400000
+  );
+
+}
+
+
+function postingAddDays(
+  dateString,
+  days
+) {
+
+  const date =
+    postingDateObj(
+      dateString
+    );
+
+  date.setDate(
+    date.getDate() +
+    days
+  );
+
+  return postingDateToIso(
+    date
+  );
+
+}
+
+
+function postingEscapeHtml(
+  value
+) {
+
+  return String(
+    value ?? ""
+  )
+    .replace(
+      /[&<>"']/g,
+      char =>
+        ({
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#39;"
+        }[char])
+    );
+
+}
+
+
+/* =========================================================
+   POSTING INTERVALS
+========================================================= */
+
+function uniquePostingDates() {
+
+  return [
+    ...new Set(
+      postingCalendarData.videos
+        .map(
+          video =>
+            video.date
+        )
+        .filter(Boolean)
+    )
+  ]
+    .sort();
+
+}
+
+
+function averagePostingIntervals(
+  dates
+) {
+
+  if (
+    dates.length <
+    2
+  ) {
+
+    return 0;
+
+  }
+
+  const intervals =
+    [];
+
+  for (
+    let i = 1;
+    i < dates.length;
+    i++
+  ) {
+
+    intervals.push(
+      Math.max(
+        0,
+        postingDiffDays(
+          dates[i],
+          dates[i - 1]
+        )
+      )
+    );
+
+  }
+
+  return (
+    intervals.reduce(
+      (a, b) =>
+        a + b,
+      0
+    ) /
+    intervals.length
+  );
+
+}
+
+
+function calculatePostingRecommendation() {
+
+  const dates =
+    uniquePostingDates();
+
+  if (
+    !dates.length
+  ) {
+
+    return null;
+
+  }
+
+  const recentDates =
+    dates.slice(
+      -11
+    );
+
+  const recent =
+    averagePostingIntervals(
+      recentDates
+    );
+
+  const all =
+    averagePostingIntervals(
+      dates
+    );
+
+  let weightedInterval;
+
+  if (
+    recent > 0 &&
+    all > 0
+  ) {
+
+    weightedInterval =
+      recent *
+      .65 +
+      all *
+      .35;
+
+  } else {
+
+    weightedInterval =
+      recent ||
+      all ||
+      1;
+
+  }
+
+  const latestPost =
+    dates.at(-1);
+
+  const center =
+    postingAddDays(
+      latestPost,
+      Math.max(
+        1,
+        Math.round(
+          weightedInterval
+        )
+      )
+    );
+
+  const start =
+    postingAddDays(
+      center,
+      -1
+    );
+
+  const end =
+    postingAddDays(
+      center,
+      1
+    );
+
+  return {
+    recent,
+    all,
+    weightedInterval,
+    latestPost,
+    center,
+    start,
+    end
+  };
+
+}
+
+
+/* =========================================================
+   POSTING SUMMARY
+========================================================= */
+
+function renderPostingSummary() {
+
+  postingRecommendation =
+    calculatePostingRecommendation();
+
+  const recentElement =
+    document.getElementById(
+      "recentPostInterval"
+    );
+
+  const allElement =
+    document.getElementById(
+      "allPostInterval"
+    );
+
+  const recommendedElement =
+    document.getElementById(
+      "recommendedWindow"
+    );
+
+  if (
+    !recentElement ||
+    !allElement ||
+    !recommendedElement
+  ) {
+    return;
+  }
+
+  if (
+    !postingRecommendation
+  ) {
+
+    recentElement.textContent =
+      "—";
+
+    allElement.textContent =
+      "—";
+
+    recommendedElement.textContent =
+      "—";
+
+    return;
+
+  }
+
+  recentElement.textContent =
+    postingRecommendation.recent
+      .toFixed(1);
+
+  allElement.textContent =
+    postingRecommendation.all
+      .toFixed(1);
+
+  recommendedElement.textContent =
+    `${postingMonthDay(
+      postingRecommendation.start
+    )}〜${postingMonthDay(
+      postingRecommendation.end
+    )}`;
+
+  if (
+    !postingCalendarMonth
+  ) {
+
+    const initialDate =
+      postingDateObj(
+        postingRecommendation.start
+      );
+
+    postingCalendarMonth =
+      new Date(
+        initialDate.getFullYear(),
+        initialDate.getMonth(),
+        1
+      );
+
+  }
+
+}
+
+
+/* =========================================================
+   POSTING CALENDAR
+========================================================= */
+
+function postingVideosForDate(
+  date
+) {
+
+  return postingCalendarData.videos
+    .filter(
+      video =>
+        video.date ===
+        date
+    );
+
+}
+
+
+function isPostingRecommendationDate(
+  date
+) {
+
+  if (
+    !postingRecommendation
+  ) {
+
+    return false;
+
+  }
+
+  return (
+    date >=
+      postingRecommendation.start &&
+    date <=
+      postingRecommendation.end
+  );
+
+}
+
+
+function renderPostingCalendar() {
+
+  const grid =
+    document.getElementById(
+      "calendarGrid"
+    );
+
+  const monthLabel =
+    document.getElementById(
+      "calendarMonthLabel"
+    );
+
+  if (
+    !grid ||
+    !monthLabel
+  ) {
+    return;
+  }
+
+  if (
+    !postingCalendarMonth
+  ) {
+
+    const today =
+      postingDateObj(
+        postingTodayJST()
+      );
+
+    postingCalendarMonth =
+      new Date(
+        today.getFullYear(),
+        today.getMonth(),
+        1
+      );
+
+  }
+
+  const year =
+    postingCalendarMonth
+      .getFullYear();
+
+  const month =
+    postingCalendarMonth
+      .getMonth();
+
+  monthLabel.textContent =
+    `${year}年${month + 1}月`;
+
+  const firstDay =
+    new Date(
+      year,
+      month,
+      1
+    );
+
+  const lastDay =
+    new Date(
+      year,
+      month + 1,
+      0
+    );
+
+  const startBlank =
+    firstDay.getDay();
+
+  const days =
+    lastDay.getDate();
+
+  const cells =
+    [];
+
+  for (
+    let i = 0;
+    i < startBlank;
+    i++
+  ) {
+
+    cells.push(`
+      <div class="calendar-day empty"></div>
+    `);
+
+  }
+
+  for (
+    let day = 1;
+    day <= days;
+    day++
+  ) {
+
+    const date =
+      postingDateToIso(
+        new Date(
+          year,
+          month,
+          day
+        )
+      );
+
+    const videos =
+      postingVideosForDate(
+        date
+      );
+
+    const recommended =
+      isPostingRecommendationDate(
+        date
+      );
+
+    const today =
+      date ===
+      postingTodayJST();
+
+    cells.push(`
+      <div
+        class="
+          calendar-day
+          ${recommended ? "recommended-day" : ""}
+          ${today ? "today" : ""}
+        "
+      >
+
+        <span class="calendar-date">
+          ${day}
+        </span>
+
+        <div class="calendar-posts">
+
+          ${videos
+            .map(
+              video => `
+                <div
+                  class="calendar-post"
+                  title="${postingEscapeHtml(video.title || "")}"
+                >
+
+                  <img
+                    src="${postingEscapeHtml(video.thumbnail || "")}"
+                    alt=""
+                    loading="lazy"
+                  >
+
+                  <span class="calendar-post-title">
+                    ${postingEscapeHtml(video.title || "")}
+                  </span>
+
+                </div>
+              `
+            )
+            .join("")
+          }
+
+        </div>
+
+        ${
+          recommended &&
+          !videos.length
+            ? `
+              <span class="recommend-badge">
+                RECOMMENDED
+              </span>
+            `
+            : ""
+        }
+
+      </div>
+    `);
+
+  }
+
+  const remainder =
+    cells.length %
+    7;
+
+  if (
+    remainder !==
+    0
+  ) {
+
+    const missing =
+      7 -
+      remainder;
+
+    for (
+      let i = 0;
+      i < missing;
+      i++
+    ) {
+
+      cells.push(`
+        <div class="calendar-day empty"></div>
+      `);
+
+    }
+
+  }
+
+  grid.innerHTML =
+    cells.join("");
+
+}
+
+
+/* =========================================================
+   POSTING CALENDAR CONTROLS
+========================================================= */
+
+function setupPostingCalendarControls() {
+
+  const previousButton =
+    document.getElementById(
+      "prevMonth"
+    );
+
+  const nextButton =
+    document.getElementById(
+      "nextMonth"
+    );
+
+  previousButton?.addEventListener(
+    "click",
+    () => {
+
+      postingCalendarMonth =
+        new Date(
+          postingCalendarMonth.getFullYear(),
+          postingCalendarMonth.getMonth() - 1,
+          1
+        );
+
+      renderPostingCalendar();
+
+    }
+  );
+
+  nextButton?.addEventListener(
+    "click",
+    () => {
+
+      postingCalendarMonth =
+        new Date(
+          postingCalendarMonth.getFullYear(),
+          postingCalendarMonth.getMonth() + 1,
+          1
+        );
+
+      renderPostingCalendar();
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   POSTING CALENDAR DATA
+========================================================= */
+
+async function loadPostingCalendar() {
+
+  try {
+
+    const response =
+      await fetch(
+        "../data.json?ts=" +
+        Date.now(),
+        {
+          cache:
+            "no-store"
+        }
+      );
+
+    if (
+      !response.ok
+    ) {
+
+      throw new Error(
+        `HTTP ${response.status}`
+      );
+
+    }
+
+    const data =
+      await response.json();
+
+    postingCalendarData.videos =
+      Array.isArray(
+        data.videos
+      )
+        ? data.videos
+        : [];
+
+    renderPostingSummary();
+    renderPostingCalendar();
+    setupPostingCalendarControls();
+
+  } catch (error) {
+
+    console.error(
+      "Posting calendar load failed:",
+      error
+    );
+
+  }
+
+}
+
+
+loadPostingCalendar();
+
+
 /* =========================================================
    ≒JOY SCHEDULE
 ========================================================= */
