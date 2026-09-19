@@ -1335,11 +1335,26 @@ function renderScheduleDetail() {
           return;
         }
 
+        scheduleDeletedIds.add(
+          String(event.id)
+        );
+
+        saveDeletedSchedule();
+
+        scheduleEvents =
+          scheduleEvents.filter(
+            item =>
+              String(item.id) !==
+              String(event.id)
+          );
+
         selectedScheduleEvent =
           null;
 
-        scheduleDetail.hidden =
-          true;
+        if (scheduleDetailOverlay) {
+          scheduleDetailOverlay.hidden =
+            true;
+        }
 
         scheduleDetail.innerHTML =
           "";
