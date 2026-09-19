@@ -491,17 +491,18 @@ def extract_date(
 # 一覧取得
 # =========================================================
 
-def fetch_schedule():
+def fetch_schedule_page(
+    schedule_url
+):
 
     response = requests.get(
-        SCHEDULE_URL,
+        schedule_url,
         timeout=20,
         headers={
             "User-Agent":
                 "Mozilla/5.0"
         }
     )
-
     response.raise_for_status()
 
     soup = BeautifulSoup(
@@ -659,7 +660,40 @@ def fetch_schedule():
         )
     )
 
-    return events
+    next_url = None
+
+    current_year = schedule_year
+    current_month = schedule_month
+
+    next_year = current_year
+    next_month = current_month + 1
+
+    if next_month > 12:
+        next_month = 1
+        next_year += 1
+
+    for link in soup.find_all(
+        "a",
+        href=True
+    ):
+
+        link_text = link.get_text(
+            " ",
+            strip=True
+        )
+
+        if link_text == str(next_month):
+
+            candidate_url = urljoin(
+                schedule_url,
+                link["href"]
+            )
+
+            if "/schedule" in candidate_url:
+                next_url = candidate_url
+                break
+
+    return events, next_url
 
 
 # =========================================================
@@ -668,7 +702,56 @@ def fetch_schedule():
 
 def main():
 
-    events = fetch_schedule()
+    events = []
+    seen_event_ids = set()
+    visited_urls = set()
+
+    current_url = SCHEDULE_URL
+
+    while (
+        current_url and
+        current_url not in visited_urls
+    ):
+
+        visited_urls.add(
+            current_url
+        )
+
+        print(
+            f"fetching: {current_url}"
+        )
+
+        page_events, next_url = (
+            fetch_schedule_page(
+                current_url
+            )
+        )
+
+        for event in page_events:
+
+            event_id = str(
+                event["id"]
+            )
+
+            if event_id in seen_event_ids:
+                continue
+
+            seen_event_ids.add(
+                event_id
+            )
+
+            events.append(
+                event
+            )
+
+        current_url = next_url
+
+    events.sort(
+        key=lambda event: (
+            event["date"],
+            event["id"]
+        )
+    )
 
     output = {
         "updatedAt":
