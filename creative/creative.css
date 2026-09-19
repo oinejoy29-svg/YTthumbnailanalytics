@@ -338,6 +338,33 @@
     margin-top: 24px;
   }
 
+  .stream-reviewed-overlay {
+    padding: 14px;
+  }
+
+  .stream-reviewed-modal {
+    width: 100%;
+    max-height: 82vh;
+    padding: 14px;
+
+    border-radius: 15px;
+  }
+
+  .stream-reviewed-modal-head {
+    margin-bottom: 12px;
+  }
+
+  .stream-reviewed-modal-head h3 {
+    font-size: 20px;
+  }
+
+  .stream-reviewed-close {
+    width: 31px;
+    height: 31px;
+
+    font-size: 19px;
+  }
+
   .stream-clip-card {
     grid-template-columns: 112px minmax(0, 1fr);
     gap: 9px;
