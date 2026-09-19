@@ -861,6 +861,11 @@ const scheduleDetail =
     "scheduleDetail"
   );
 
+const scheduleDetailOverlay =
+  document.getElementById(
+    "scheduleDetailOverlay"
+  );
+
 let selectedScheduleEvent =
   null;
 
@@ -1214,8 +1219,10 @@ function renderScheduleDetail() {
   const dateLabel =
     `${date.getMonth() + 1}月${date.getDate()}日`;
 
-  scheduleDetail.hidden =
-    false;
+  if (scheduleDetailOverlay) {
+    scheduleDetailOverlay.hidden =
+      false;
+  }
 
   scheduleDetail.innerHTML =
     `
@@ -1236,12 +1243,24 @@ function renderScheduleDetail() {
 
         </div>
 
-        <button
-          class="schedule-delete-btn"
-          type="button"
-        >
-          削除
-        </button>
+        <div class="schedule-detail-actions">
+
+          <button
+            class="schedule-delete-btn"
+            type="button"
+          >
+            削除
+          </button>
+
+          <button
+            class="schedule-close-btn"
+            type="button"
+            aria-label="閉じる"
+          >
+            ×
+          </button>
+
+        </div>
 
       </div>
 
@@ -1329,7 +1348,45 @@ function renderScheduleDetail() {
 
       }
     );
+  scheduleDetail
+    .querySelector(
+      ".schedule-close-btn"
+    )
+    ?.addEventListener(
+      "click",
+      () => {
 
+        selectedScheduleEvent =
+          null;
+
+        if (scheduleDetailOverlay) {
+          scheduleDetailOverlay.hidden =
+            true;
+        }
+
+      }
+    );
+
+  scheduleDetailOverlay
+    ?.addEventListener(
+      "click",
+      event => {
+
+        if (
+          event.target !==
+          scheduleDetailOverlay
+        ) {
+          return;
+        }
+
+        selectedScheduleEvent =
+          null;
+
+        scheduleDetailOverlay.hidden =
+          true;
+
+      }
+    );
 }
 
 
