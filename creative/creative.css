@@ -14,8 +14,12 @@
   margin-bottom: 16px;
 }
 
-.creative-section-head h3 {
-  margin: 4px 0 0;
+.creative-section-head h2 {
+  margin: 6px 0;
+  font-size: clamp(27px, 4vw, 46px);
+  line-height: 1.05;
+  font-weight: 900;
+  letter-spacing: -.05em;
 }
 
 .stream-new-count {
@@ -42,13 +46,14 @@
   grid-template-columns: 132px minmax(0, 1fr);
   gap: 12px;
 
-  padding: 10px;
+  padding: 12px;
 
   background: #fff;
-  border: 1px solid rgba(0, 0, 0, 0.12);
-  border-radius: 14px;
-}
+  border: 2px solid #222;
+  border-radius: 16px;
 
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.08);
+}
 
 /* 新着の緑丸 */
 
@@ -132,9 +137,9 @@
 
   font: inherit;
   font-size: 11px;
-  font-weight: 700;
+  font-weight: 800;
 
-  border: 0;
+  border: 2px solid #222;
   border-radius: 999px;
 
   cursor: pointer;
@@ -219,18 +224,25 @@
 .stream-reviewed-toggle {
   display: block;
 
-  margin: 14px auto 0;
-  padding: 7px 13px;
+  margin: 16px auto 0;
+  padding: 7px 14px;
 
-  color: #666;
+  color: #222;
   font: inherit;
   font-size: 11px;
-  font-weight: 700;
+  font-weight: 800;
 
-  background: transparent;
-  border: 0;
+  background: #fff;
+  border: 2px solid #222;
+  border-radius: 999px;
+
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.10);
 
   cursor: pointer;
+}
+
+.stream-reviewed-toggle:hover {
+  transform: translateY(-1px);
 }
 
 .stream-reviewed-list {
@@ -729,6 +741,7 @@
 
 .schedule-calendar-wrap {
   position: relative;
+  margin-bottom: 32px;
 }
 
 .schedule-calendar-card {
