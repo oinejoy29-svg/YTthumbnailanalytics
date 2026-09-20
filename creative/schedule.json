@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-19T03:05:17",
+  "updatedAt": "2026-09-20T03:05:19",
   "events": [
     {
       "id": "3601",
@@ -88,6 +88,14 @@
       "category": "ライブ/イベント",
       "title": "NHK「Venue101 EXTRA」公開収録※≒JOY",
       "url": "https://nearly-equal-joy.jp/schedule/detail/3780"
+    },
+    {
+      "id": "3903",
+      "date": "2026-09-19",
+      "genre": "STREAM",
+      "category": "メディア",
+      "title": "YouTube「山添ノ国」※江角怜音、小澤愛実",
+      "url": "https://nearly-equal-joy.jp/schedule/detail/3903"
     },
     {
       "id": "3489",
