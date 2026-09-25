@@ -1,4 +1,21 @@
 /* =========================================================
+   CREATIVE DESK - PAGE LAYOUT
+   他ページと横幅・左右余白を統一
+========================================================= */
+
+.creative-page {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 28px 70px;
+}
+
+@media (max-width: 800px) {
+  .creative-page {
+    padding: 0 16px 50px;
+  }
+}
+
+/* =========================================================
    STREAM CLIPS
 ========================================================= */
 
@@ -14,12 +31,21 @@
   margin-bottom: 16px;
 }
 
-.creative-section-head h2 {
+/* =========================================================
+   CREATIVE DESK - SECTION HEADINGS
+   他ページの見出しと統一
+========================================================= */
+
+.creative-section-head h3 {
   margin: 6px 0;
   font-size: clamp(27px, 4vw, 46px);
-  line-height: 1.05;
-  font-weight: 900;
+  line-height: normal;
+  font-weight: bold;
   letter-spacing: -.05em;
+}
+
+.creative-section-head .section-kicker {
+  margin: 0;
 }
 
 .stream-new-count {
