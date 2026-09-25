@@ -358,6 +358,27 @@ select{
   font-weight:800;
 }
 
+.metric-value-with-unit{
+  margin-top:auto;
+
+  display:flex;
+  align-items:flex-end;
+  gap:6px;
+
+  min-width:0;
+  white-space:nowrap;
+}
+
+.metric-value-with-unit .metric-value{
+  margin-top:0;
+}
+
+.metric-value-with-unit .metric-unit{
+  margin-top:0;
+  margin-bottom:3px;
+  flex:none;
+}
+
 .metric-context{
   margin-top:10px;
 
