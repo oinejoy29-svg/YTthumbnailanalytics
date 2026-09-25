@@ -321,6 +321,93 @@ function renderApiUpdateWarning(){
 }
 
 /* =========================================================
+   API RECOVERY MODAL
+========================================================= */
+
+function initApiRecoveryModal(){
+
+  const infoButton =
+    document.getElementById(
+      "analyticsApiWarningInfo"
+    );
+
+  const overlay =
+    document.getElementById(
+      "analyticsApiRecoveryOverlay"
+    );
+
+  const closeButton =
+    document.getElementById(
+      "analyticsApiRecoveryClose"
+    );
+
+
+  if(
+    !infoButton ||
+    !overlay ||
+    !closeButton
+  ){
+    return;
+  }
+
+
+  const openModal = () => {
+
+    overlay.hidden = false;
+
+    document.body.style.overflow =
+      "hidden";
+  };
+
+
+  const closeModal = () => {
+
+    overlay.hidden = true;
+
+    document.body.style.overflow =
+      "";
+  };
+
+
+  infoButton.addEventListener(
+    "click",
+    openModal
+  );
+
+
+  closeButton.addEventListener(
+    "click",
+    closeModal
+  );
+
+
+  overlay.addEventListener(
+    "click",
+    event => {
+
+      if(event.target === overlay){
+        closeModal();
+      }
+    }
+  );
+
+
+  document.addEventListener(
+    "keydown",
+    event => {
+
+      if(
+        event.key === "Escape" &&
+        !overlay.hidden
+      ){
+        closeModal();
+      }
+    }
+  );
+}
+
+
+/* =========================================================
    LOAD REPORTING REACH DATA
 ========================================================= */
 
@@ -10751,6 +10838,8 @@ renderOverviewRanking();
   initReachNavigation();
 
   initAverageToggle();
+
+  initApiRecoveryModal();
 
   initOutsideTooltipDismiss();
 
