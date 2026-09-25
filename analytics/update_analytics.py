@@ -35,6 +35,7 @@ CLIENT_SECRET = os.environ["YT_ANALYTICS_CLIENT_SECRET"]
 REFRESH_TOKEN = os.environ["YT_ANALYTICS_REFRESH_TOKEN"]
 
 SCOPES = [
+)
     "https://www.googleapis.com/auth/yt-analytics.readonly"
 ]
 
@@ -44,7 +45,6 @@ credentials = Credentials(
     token_uri="https://oauth2.googleapis.com/token",
     client_id=CLIENT_ID,
     client_secret=CLIENT_SECRET,
-    scopes=SCOPES,
 )
 
 
