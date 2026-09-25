@@ -66,6 +66,106 @@
 
     </div>
 
+        </div>
+
+
+    <!-- ===================================================
+         API UPDATE WARNING
+    ==================================================== -->
+
+    <div
+      class="analytics-api-warning"
+      id="analyticsApiWarning"
+      hidden
+    >
+
+      <span>
+        APIデータが更新されていません
+      </span>
+
+      <button
+        class="analytics-api-warning-info"
+        id="analyticsApiWarningInfo"
+        type="button"
+        aria-label="API再取得方法を表示"
+      >
+        i
+      </button>
+
+    </div>
+
+
+    <!-- ===================================================
+         API RECOVERY MODAL
+    ==================================================== -->
+
+    <div
+      class="analytics-api-recovery-overlay"
+      id="analyticsApiRecoveryOverlay"
+      hidden
+    >
+
+      <div class="analytics-api-recovery-modal">
+
+        <button
+          class="analytics-api-recovery-close"
+          id="analyticsApiRecoveryClose"
+          type="button"
+          aria-label="閉じる"
+        >
+          ×
+        </button>
+
+        <div class="section-kicker">
+          API RECOVERY
+        </div>
+
+        <h3>
+          APIを再取得する
+        </h3>
+
+        <ol class="analytics-api-recovery-steps">
+
+          <li>
+            OAuth 2.0 Playgroundを開く
+          </li>
+
+          <li>
+            YouTubeの権限を2つ指定して認証する
+            <code>youtube.readonly</code>
+            <code>yt-analytics.readonly</code>
+          </li>
+
+          <li>
+            認証コードをトークンに交換し、
+            新しいRefresh Tokenを取得する
+          </li>
+
+          <li>
+            GitHubの
+            Settings → Secrets and variables → Actions
+            を開く
+          </li>
+
+          <li>
+            YT_ANALYTICS_REFRESH_TOKENを
+            新しいRefresh Tokenに更新する
+          </li>
+
+          <li>
+            GitHub Actionsを再実行する
+          </li>
+
+        </ol>
+
+      </div>
+
+    </div>
+
+
+    <!-- ===================================================
+         MODE SWITCH
+    ==================================================== -->
 
     <!-- ===================================================
          MODE SWITCH
