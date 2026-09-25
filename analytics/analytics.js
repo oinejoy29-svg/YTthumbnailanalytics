@@ -277,6 +277,50 @@ function renderApiStatus(){
 }
 
 /* =========================================================
+   API UPDATE WARNING
+========================================================= */
+
+function renderApiUpdateWarning(){
+
+  const warning =
+    document.getElementById(
+      "analyticsApiWarning"
+    );
+
+  if(!warning){
+    return;
+  }
+
+
+  if(!API_STATUS?.fetchedAt){
+
+    warning.hidden = false;
+
+    return;
+  }
+
+
+  const fetchedAt =
+    new Date(
+      API_STATUS.fetchedAt
+    );
+
+  const now =
+    new Date();
+
+
+  const diffHours =
+    (
+      now.getTime() -
+      fetchedAt.getTime()
+    ) / 3600000;
+
+
+  warning.hidden =
+    diffHours < 48;
+}
+
+/* =========================================================
    LOAD REPORTING REACH DATA
 ========================================================= */
 
@@ -10658,6 +10702,7 @@ await loadReachData();
 await loadApiStatus();
 
 renderApiStatus();
+renderApiUpdateWarning();
 
 await loadEndScreenData();
 
