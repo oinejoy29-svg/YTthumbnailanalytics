@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-24T03:05:11",
+  "updatedAt": "2026-09-25T15:54:41",
   "events": [
     {
       "id": "3601",
@@ -154,12 +154,28 @@
       "url": "https://nearly-equal-joy.jp/schedule/detail/3817"
     },
     {
+      "id": "3911",
+      "date": "2026-09-25",
+      "genre": "OTHER",
+      "category": "メディア",
+      "title": "ASCII.jp web連載「ニアジョイどらい部」※大信田美月、藤沢莉子",
+      "url": "https://nearly-equal-joy.jp/schedule/detail/3911"
+    },
+    {
       "id": "3494",
       "date": "2026-09-26",
       "genre": "STAGE",
       "category": "ライブ/イベント",
       "title": "「スクールアイドルミュージカル」※村山結香",
       "url": "https://nearly-equal-joy.jp/schedule/detail/3494"
+    },
+    {
+      "id": "3971",
+      "date": "2026-09-26",
+      "genre": "TV",
+      "category": "メディア",
+      "title": "NHK「Venue101 EXTRA」 ※≒JOY",
+      "url": "https://nearly-equal-joy.jp/schedule/detail/3971"
     },
     {
       "id": "3887",
