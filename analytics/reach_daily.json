@@ -1,13 +1,13 @@
 {
   "meta": {
     "reportType": "channel_reach_combined_a1",
-    "reportCount": 48,
-    "successfulReports": 48,
+    "reportCount": 49,
+    "successfulReports": 49,
     "failedReports": 0,
-    "rawRowCount": 386959,
-    "dailyRowCount": 1030,
+    "rawRowCount": 392338,
+    "dailyRowCount": 1059,
     "firstDate": "2026-08-07",
-    "lastDate": "2026-09-23",
+    "lastDate": "2026-09-24",
     "clickRateScale": "ratio_0_to_1"
   },
   "daily": [
@@ -7220,153 +7220,356 @@
       "thumbnailImpressions": 223,
       "thumbnailClickRate": 0.06278027,
       "thumbnailClickRatePercent": 6.28
+    },
+    {
+      "date": "2026-09-24",
+      "videoId": "2b_XBGYqJVU",
+      "thumbnailImpressions": 68,
+      "thumbnailClickRate": 0.02941176,
+      "thumbnailClickRatePercent": 2.94
+    },
+    {
+      "date": "2026-09-24",
+      "videoId": "3AQw6eUmK58",
+      "thumbnailImpressions": 33,
+      "thumbnailClickRate": 0.03030303,
+      "thumbnailClickRatePercent": 3.03
+    },
+    {
+      "date": "2026-09-24",
+      "videoId": "B75t0LqJUSg",
+      "thumbnailImpressions": 73,
+      "thumbnailClickRate": 0.02739726,
+      "thumbnailClickRatePercent": 2.74
+    },
+    {
+      "date": "2026-09-24",
+      "videoId": "D88Zd_OvaSs",
+      "thumbnailImpressions": 306,
+      "thumbnailClickRate": 0.10784314,
+      "thumbnailClickRatePercent": 10.78
+    },
+    {
+      "date": "2026-09-24",
+      "videoId": "DdvR0LbYUjQ",
+      "thumbnailImpressions": 139,
+      "thumbnailClickRate": 0.0647482,
+      "thumbnailClickRatePercent": 6.47
+    },
+    {
+      "date": "2026-09-24",
+      "videoId": "EvoV01i7fRw",
+      "thumbnailImpressions": 1023,
+      "thumbnailClickRate": 0.03519062,
+      "thumbnailClickRatePercent": 3.52
+    },
+    {
+      "date": "2026-09-24",
+      "videoId": "HJbI9RGGR2s",
+      "thumbnailImpressions": 104,
+      "thumbnailClickRate": 0.02884615,
+      "thumbnailClickRatePercent": 2.88
+    },
+    {
+      "date": "2026-09-24",
+      "videoId": "HgCgwKqeJBI",
+      "thumbnailImpressions": 112,
+      "thumbnailClickRate": 0.05357143,
+      "thumbnailClickRatePercent": 5.36
+    },
+    {
+      "date": "2026-09-24",
+      "videoId": "JVNpkPsotMU",
+      "thumbnailImpressions": 23,
+      "thumbnailClickRate": 0.08695652,
+      "thumbnailClickRatePercent": 8.7
+    },
+    {
+      "date": "2026-09-24",
+      "videoId": "K4mQYWHpcUI",
+      "thumbnailImpressions": 62,
+      "thumbnailClickRate": 0.03225806,
+      "thumbnailClickRatePercent": 3.23
+    },
+    {
+      "date": "2026-09-24",
+      "videoId": "KznIB6FNmAA",
+      "thumbnailImpressions": 579,
+      "thumbnailClickRate": 0.05872193,
+      "thumbnailClickRatePercent": 5.87
+    },
+    {
+      "date": "2026-09-24",
+      "videoId": "LMDZec3o3-g",
+      "thumbnailImpressions": 24,
+      "thumbnailClickRate": 0.0,
+      "thumbnailClickRatePercent": 0.0
+    },
+    {
+      "date": "2026-09-24",
+      "videoId": "PiikNxCE5_Q",
+      "thumbnailImpressions": 97,
+      "thumbnailClickRate": 0.06185567,
+      "thumbnailClickRatePercent": 6.19
+    },
+    {
+      "date": "2026-09-24",
+      "videoId": "PmD_nggctn4",
+      "thumbnailImpressions": 1380,
+      "thumbnailClickRate": 0.04057971,
+      "thumbnailClickRatePercent": 4.06
+    },
+    {
+      "date": "2026-09-24",
+      "videoId": "S4tXGHeKBHs",
+      "thumbnailImpressions": 352,
+      "thumbnailClickRate": 0.05113636,
+      "thumbnailClickRatePercent": 5.11
+    },
+    {
+      "date": "2026-09-24",
+      "videoId": "SlDTZdCoX7w",
+      "thumbnailImpressions": 707,
+      "thumbnailClickRate": 0.0990099,
+      "thumbnailClickRatePercent": 9.9
+    },
+    {
+      "date": "2026-09-24",
+      "videoId": "_l7l5BH4h_s",
+      "thumbnailImpressions": 568,
+      "thumbnailClickRate": 0.10387324,
+      "thumbnailClickRatePercent": 10.39
+    },
+    {
+      "date": "2026-09-24",
+      "videoId": "a1tQY33iFmM",
+      "thumbnailImpressions": 52,
+      "thumbnailClickRate": 0.01923077,
+      "thumbnailClickRatePercent": 1.92
+    },
+    {
+      "date": "2026-09-24",
+      "videoId": "a9U4uap71ME",
+      "thumbnailImpressions": 328,
+      "thumbnailClickRate": 0.04878049,
+      "thumbnailClickRatePercent": 4.88
+    },
+    {
+      "date": "2026-09-24",
+      "videoId": "aSN5lIcZzYk",
+      "thumbnailImpressions": 260,
+      "thumbnailClickRate": 0.03076923,
+      "thumbnailClickRatePercent": 3.08
+    },
+    {
+      "date": "2026-09-24",
+      "videoId": "dhys8ycR5Iw",
+      "thumbnailImpressions": 606,
+      "thumbnailClickRate": 0.03960396,
+      "thumbnailClickRatePercent": 3.96
+    },
+    {
+      "date": "2026-09-24",
+      "videoId": "g1GPX8SlOmU",
+      "thumbnailImpressions": 155,
+      "thumbnailClickRate": 0.05806452,
+      "thumbnailClickRatePercent": 5.81
+    },
+    {
+      "date": "2026-09-24",
+      "videoId": "i0EnUe6eS18",
+      "thumbnailImpressions": 663,
+      "thumbnailClickRate": 0.04524887,
+      "thumbnailClickRatePercent": 4.52
+    },
+    {
+      "date": "2026-09-24",
+      "videoId": "lcTtcqjTLlI",
+      "thumbnailImpressions": 35,
+      "thumbnailClickRate": 0.0,
+      "thumbnailClickRatePercent": 0.0
+    },
+    {
+      "date": "2026-09-24",
+      "videoId": "pE6Pi35mojw",
+      "thumbnailImpressions": 615,
+      "thumbnailClickRate": 0.06341463,
+      "thumbnailClickRatePercent": 6.34
+    },
+    {
+      "date": "2026-09-24",
+      "videoId": "rSNhDgGJvPU",
+      "thumbnailImpressions": 628,
+      "thumbnailClickRate": 0.04140127,
+      "thumbnailClickRatePercent": 4.14
+    },
+    {
+      "date": "2026-09-24",
+      "videoId": "shVv0BqrKkw",
+      "thumbnailImpressions": 285,
+      "thumbnailClickRate": 0.03157895,
+      "thumbnailClickRatePercent": 3.16
+    },
+    {
+      "date": "2026-09-24",
+      "videoId": "t04C_Fyj2Bs",
+      "thumbnailImpressions": 32130,
+      "thumbnailClickRate": 0.07382509,
+      "thumbnailClickRatePercent": 7.38
+    },
+    {
+      "date": "2026-09-24",
+      "videoId": "ueHZP7Pw6aI",
+      "thumbnailImpressions": 162,
+      "thumbnailClickRate": 0.02469136,
+      "thumbnailClickRatePercent": 2.47
     }
   ],
   "videos": {
     "2b_XBGYqJVU": {
-      "thumbnailImpressions": 5784,
-      "thumbnailClickRate": 0.02869986,
+      "thumbnailImpressions": 5852,
+      "thumbnailClickRate": 0.02870813,
       "thumbnailClickRatePercent": 2.87
     },
     "3AQw6eUmK58": {
-      "thumbnailImpressions": 14994,
-      "thumbnailClickRate": 0.05202081,
+      "thumbnailImpressions": 15027,
+      "thumbnailClickRate": 0.05197312,
       "thumbnailClickRatePercent": 5.2
     },
     "DdvR0LbYUjQ": {
-      "thumbnailImpressions": 19478,
-      "thumbnailClickRate": 0.04281754,
-      "thumbnailClickRatePercent": 4.28
+      "thumbnailImpressions": 19617,
+      "thumbnailClickRate": 0.04297293,
+      "thumbnailClickRatePercent": 4.3
     },
     "EvoV01i7fRw": {
-      "thumbnailImpressions": 82225,
-      "thumbnailClickRate": 0.04004865,
+      "thumbnailImpressions": 83248,
+      "thumbnailClickRate": 0.03998895,
       "thumbnailClickRatePercent": 4.0
     },
     "HgCgwKqeJBI": {
-      "thumbnailImpressions": 15139,
-      "thumbnailClickRate": 0.03870797,
-      "thumbnailClickRatePercent": 3.87
+      "thumbnailImpressions": 15251,
+      "thumbnailClickRate": 0.03881713,
+      "thumbnailClickRatePercent": 3.88
     },
     "JVNpkPsotMU": {
-      "thumbnailImpressions": 3710,
-      "thumbnailClickRate": 0.06630728,
-      "thumbnailClickRatePercent": 6.63
+      "thumbnailImpressions": 3733,
+      "thumbnailClickRate": 0.0664345,
+      "thumbnailClickRatePercent": 6.64
     },
     "K4mQYWHpcUI": {
-      "thumbnailImpressions": 6073,
-      "thumbnailClickRate": 0.03918986,
-      "thumbnailClickRatePercent": 3.92
+      "thumbnailImpressions": 6135,
+      "thumbnailClickRate": 0.0391198,
+      "thumbnailClickRatePercent": 3.91
     },
     "LMDZec3o3-g": {
-      "thumbnailImpressions": 4057,
-      "thumbnailClickRate": 0.04288883,
-      "thumbnailClickRatePercent": 4.29
+      "thumbnailImpressions": 4081,
+      "thumbnailClickRate": 0.04263661,
+      "thumbnailClickRatePercent": 4.26
     },
     "PmD_nggctn4": {
-      "thumbnailImpressions": 195206,
-      "thumbnailClickRate": 0.03304714,
-      "thumbnailClickRatePercent": 3.3
+      "thumbnailImpressions": 196586,
+      "thumbnailClickRate": 0.03310002,
+      "thumbnailClickRatePercent": 3.31
     },
     "_l7l5BH4h_s": {
-      "thumbnailImpressions": 22751,
-      "thumbnailClickRate": 0.0743264,
-      "thumbnailClickRatePercent": 7.43
+      "thumbnailImpressions": 23319,
+      "thumbnailClickRate": 0.0750461,
+      "thumbnailClickRatePercent": 7.5
     },
     "a1tQY33iFmM": {
-      "thumbnailImpressions": 9067,
-      "thumbnailClickRate": 0.06804897,
-      "thumbnailClickRatePercent": 6.8
+      "thumbnailImpressions": 9119,
+      "thumbnailClickRate": 0.06777059,
+      "thumbnailClickRatePercent": 6.78
     },
     "dhys8ycR5Iw": {
-      "thumbnailImpressions": 67778,
-      "thumbnailClickRate": 0.04405559,
-      "thumbnailClickRatePercent": 4.41
+      "thumbnailImpressions": 68384,
+      "thumbnailClickRate": 0.04401614,
+      "thumbnailClickRatePercent": 4.4
     },
     "g1GPX8SlOmU": {
-      "thumbnailImpressions": 99171,
-      "thumbnailClickRate": 0.05361447,
+      "thumbnailImpressions": 99326,
+      "thumbnailClickRate": 0.05362141,
       "thumbnailClickRatePercent": 5.36
     },
     "lcTtcqjTLlI": {
-      "thumbnailImpressions": 5838,
-      "thumbnailClickRate": 0.02449469,
-      "thumbnailClickRatePercent": 2.45
+      "thumbnailImpressions": 5873,
+      "thumbnailClickRate": 0.02434871,
+      "thumbnailClickRatePercent": 2.43
     },
     "S4tXGHeKBHs": {
-      "thumbnailImpressions": 82213,
-      "thumbnailClickRate": 0.05621982,
+      "thumbnailImpressions": 82565,
+      "thumbnailClickRate": 0.05619815,
       "thumbnailClickRatePercent": 5.62
     },
     "D88Zd_OvaSs": {
-      "thumbnailImpressions": 112356,
-      "thumbnailClickRate": 0.07163837,
-      "thumbnailClickRatePercent": 7.16
+      "thumbnailImpressions": 112662,
+      "thumbnailClickRate": 0.0717367,
+      "thumbnailClickRatePercent": 7.17
     },
     "pE6Pi35mojw": {
-      "thumbnailImpressions": 138999,
-      "thumbnailClickRate": 0.0605472,
-      "thumbnailClickRatePercent": 6.05
+      "thumbnailImpressions": 139614,
+      "thumbnailClickRate": 0.06055983,
+      "thumbnailClickRatePercent": 6.06
     },
     "rSNhDgGJvPU": {
-      "thumbnailImpressions": 157767,
-      "thumbnailClickRate": 0.05901107,
-      "thumbnailClickRatePercent": 5.9
+      "thumbnailImpressions": 158395,
+      "thumbnailClickRate": 0.05894126,
+      "thumbnailClickRatePercent": 5.89
     },
     "B75t0LqJUSg": {
-      "thumbnailImpressions": 29005,
-      "thumbnailClickRate": 0.05357697,
-      "thumbnailClickRatePercent": 5.36
+      "thumbnailImpressions": 29078,
+      "thumbnailClickRate": 0.05351124,
+      "thumbnailClickRatePercent": 5.35
     },
     "a9U4uap71ME": {
-      "thumbnailImpressions": 47868,
-      "thumbnailClickRate": 0.0571154,
+      "thumbnailImpressions": 48196,
+      "thumbnailClickRate": 0.05705868,
       "thumbnailClickRatePercent": 5.71
     },
     "SlDTZdCoX7w": {
-      "thumbnailImpressions": 148706,
-      "thumbnailClickRate": 0.06072384,
-      "thumbnailClickRatePercent": 6.07
+      "thumbnailImpressions": 149413,
+      "thumbnailClickRate": 0.06090501,
+      "thumbnailClickRatePercent": 6.09
     },
     "PiikNxCE5_Q": {
-      "thumbnailImpressions": 50771,
-      "thumbnailClickRate": 0.05605562,
+      "thumbnailImpressions": 50868,
+      "thumbnailClickRate": 0.05606668,
       "thumbnailClickRatePercent": 5.61
     },
     "HJbI9RGGR2s": {
-      "thumbnailImpressions": 39207,
-      "thumbnailClickRate": 0.04955748,
-      "thumbnailClickRatePercent": 4.96
+      "thumbnailImpressions": 39311,
+      "thumbnailClickRate": 0.04950268,
+      "thumbnailClickRatePercent": 4.95
     },
     "ueHZP7Pw6aI": {
-      "thumbnailImpressions": 60496,
-      "thumbnailClickRate": 0.06628537,
-      "thumbnailClickRatePercent": 6.63
+      "thumbnailImpressions": 60658,
+      "thumbnailClickRate": 0.06617429,
+      "thumbnailClickRatePercent": 6.62
     },
     "i0EnUe6eS18": {
-      "thumbnailImpressions": 70604,
-      "thumbnailClickRate": 0.06107303,
-      "thumbnailClickRatePercent": 6.11
+      "thumbnailImpressions": 71267,
+      "thumbnailClickRate": 0.06092582,
+      "thumbnailClickRatePercent": 6.09
     },
     "aSN5lIcZzYk": {
-      "thumbnailImpressions": 71886,
-      "thumbnailClickRate": 0.05432212,
-      "thumbnailClickRatePercent": 5.43
+      "thumbnailImpressions": 72146,
+      "thumbnailClickRate": 0.05423724,
+      "thumbnailClickRatePercent": 5.42
     },
     "shVv0BqrKkw": {
-      "thumbnailImpressions": 40280,
-      "thumbnailClickRate": 0.03793446,
+      "thumbnailImpressions": 40565,
+      "thumbnailClickRate": 0.03788981,
       "thumbnailClickRatePercent": 3.79
     },
     "KznIB6FNmAA": {
-      "thumbnailImpressions": 10124,
-      "thumbnailClickRate": 0.05679573,
-      "thumbnailClickRatePercent": 5.68
+      "thumbnailImpressions": 10703,
+      "thumbnailClickRate": 0.05689993,
+      "thumbnailClickRatePercent": 5.69
     },
     "t04C_Fyj2Bs": {
-      "thumbnailImpressions": 78596,
-      "thumbnailClickRate": 0.10111201,
-      "thumbnailClickRatePercent": 10.11
+      "thumbnailImpressions": 110726,
+      "thumbnailClickRate": 0.09319401,
+      "thumbnailClickRatePercent": 9.32
     }
   }
 }
