@@ -1768,12 +1768,21 @@ function openVideoDetail(
           </div>
 
           <div class="video-detail-actions">
+
             <button
               type="button"
               class="primary-btn edit-video-tags-btn"
               id="editVideoTags"
             >
-              タグを編集
+              タグ編集
+            </button>
+
+            <button
+              type="button"
+              class="primary-btn video-analytics-btn"
+              id="openVideoAnalytics"
+            >
+              分析を見る
             </button>
 
             ${
@@ -1785,11 +1794,12 @@ function openVideoDetail(
                     id="openSevenDayForecast"
                     aria-expanded="false"
                   >
-                    一週間予測
+                    予測結果
                   </button>
                 `
                 : ""
             }
+
           </div>
 
           ${
@@ -1822,13 +1832,46 @@ function openVideoDetail(
     () =>
       editVideoTags(video);
 
+  $("openVideoAnalytics").onclick =
+    () => {
+      window.location.href =
+        `analytics.html?mode=individual&video=${encodeURIComponent(video.id)}`;
+    };
+
   if (canShowForecast) {
+
     $("openSevenDayForecast")
       .onclick =
-      () =>
+      () => {
+
+        const panel =
+          $("sevenDayForecastResult");
+
+        const button =
+          $("openSevenDayForecast");
+
+        if (!panel || !button) {
+          return;
+        }
+
+
+        if (!panel.hidden) {
+
+          panel.hidden = true;
+
+          button.setAttribute(
+            "aria-expanded",
+            "false"
+          );
+
+          return;
+        }
+
+
         renderSevenDayForecastResult(
           video
         );
+      };
   }
 }
 
