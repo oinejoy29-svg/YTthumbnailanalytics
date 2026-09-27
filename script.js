@@ -1834,8 +1834,8 @@ function openVideoDetail(
 
   $("openVideoAnalytics").onclick =
     () => {
-      window.location.href =
-        `analytics.html?mode=individual&video=${encodeURIComponent(video.id)}`;
+　　　window.location.href =
+ 　　　 `analytics/analytics.html?mode=individual&video=${encodeURIComponent(video.id)}`;
     };
 
   if (canShowForecast) {
