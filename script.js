@@ -655,6 +655,39 @@ video.durationSeconds || 0
 );
 }
 
+function getVideoUploadNumber(
+  video
+) {
+  const orderedVideos =
+    [...(DATA.videos || [])]
+      .sort(
+        (a, b) => {
+          const aTime =
+            new Date(
+              a.publishedAt || ""
+            ).getTime();
+
+          const bTime =
+            new Date(
+              b.publishedAt || ""
+            ).getTime();
+
+          return aTime - bTime;
+        }
+      );
+
+  const index =
+    orderedVideos.findIndex(
+      item =>
+        String(item.id) ===
+        String(video.id)
+    );
+
+  return index >= 0
+    ? index + 1
+    : null;
+}
+
 const POPULAR_RANK_STATE_KEY =
   "popularRankingStateV2";
 
@@ -1288,6 +1321,11 @@ function renderVideos() {
           const newBadge =
             isNewBadgeVideo(video);
 
+          const uploadNumber =
+            getVideoUploadNumber(
+              video
+            );
+
           const upAmount =
             sort === "popular"
               ? popularRankUpAmount(
@@ -1347,8 +1385,12 @@ function renderVideos() {
                     </span>
                   </div>
 
-                  <span class="video-date">
-                    ${jpDate(video.date)}
+                  <span
+                    class="video-upload-number"
+                    title="${uploadNumber}本目のアップロード"
+                    aria-label="${uploadNumber}本目のアップロード"
+                  >
+                    ${uploadNumber ?? "—"}
                   </span>
                 </div>
 
