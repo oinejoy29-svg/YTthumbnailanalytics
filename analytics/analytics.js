@@ -10576,7 +10576,36 @@ function applyModeFromUrl(){
         "mode"
       );
 
+    const videoId =
+      params.get(
+        "video"
+      );
 
+
+    /*
+      VIDEO COLLECTIONSなどから
+      動画IDを指定して開いた場合
+    */
+    if(videoId){
+
+      const video =
+        getRealVideo(
+          videoId
+        );
+
+
+      if(video){
+
+        setIndividualVideo(
+          video
+        );
+      }
+    }
+
+
+    /*
+      表示モード
+    */
     if(
       mode === "overview" ||
       mode === "individual" ||
