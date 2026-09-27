@@ -2704,3 +2704,28 @@ body.page-leaving{
   }
 
 }
+
+/* =========================================================
+   VIDEO UPLOAD NUMBER
+========================================================= */
+
+.video-upload-number{
+  width:28px;
+  height:28px;
+  flex:0 0 28px;
+
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+
+  border-radius:50%;
+
+  background:#171717;
+  color:#f8f8f8;
+
+  font-size:12px;
+  font-weight:800;
+  line-height:1;
+
+  white-space:nowrap;
+}
