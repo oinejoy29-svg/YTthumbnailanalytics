@@ -1,197 +1,101 @@
 {
-  "updatedAt": "2026-09-30T09:10:37",
+  "updatedAt": "2026-10-01T09:38:32",
   "events": [
     {
-      "id": "3601",
-      "date": "2026-09-02",
-      "genre": "LIVE",
-      "category": "ライブ/イベント",
-      "title": "≒JOY 全国ツアー2026「この夏 全部 全部 僕にください」 埼玉県・大宮ソニックシティ 大ホール",
-      "url": "https://nearly-equal-joy.jp/schedule/detail/3601"
-    },
-    {
-      "id": "3843",
-      "date": "2026-09-02",
-      "genre": "TV",
-      "category": "メディア",
-      "title": "関西テレビ「ピーチケパーチケ」※≒JOY",
-      "url": "https://nearly-equal-joy.jp/schedule/detail/3843"
-    },
-    {
-      "id": "3868",
-      "date": "2026-09-04",
-      "genre": "TV",
-      "category": "メディア",
-      "title": "フジテレビ「めざましテレビ」※江角怜音",
-      "url": "https://nearly-equal-joy.jp/schedule/detail/3868"
-    },
-    {
-      "id": "3602",
-      "date": "2026-09-05",
-      "genre": "LIVE",
-      "category": "ライブ/イベント",
-      "title": "≒JOY 全国ツアー2026「この夏 全部 全部 僕にください」 石川県・本多の森北電ホール",
-      "url": "https://nearly-equal-joy.jp/schedule/detail/3602"
-    },
-    {
-      "id": "3884",
-      "date": "2026-09-06",
-      "genre": "OTHER",
-      "category": "メディア",
-      "title": "「encore」※村山結香（晴風サヤカ役）",
-      "url": "https://nearly-equal-joy.jp/schedule/detail/3884"
-    },
-    {
-      "id": "3882",
-      "date": "2026-09-13",
-      "genre": "BOOK",
-      "category": "メディア",
-      "title": "逢田珠里依1st写真集『夏はジュリイ』",
-      "url": "https://nearly-equal-joy.jp/schedule/detail/3882"
-    },
-    {
-      "id": "3891",
-      "date": "2026-09-14",
-      "genre": "OTHER",
-      "category": "メディア",
-      "title": "「アニメ！アニメ！」※村山結香（晴風サヤカ役）",
-      "url": "https://nearly-equal-joy.jp/schedule/detail/3891"
-    },
-    {
-      "id": "3816",
-      "date": "2026-09-18",
-      "genre": "STREAM",
-      "category": "メディア",
-      "title": "Huluオリジナル「フライングジョイ」シーズン2",
-      "url": "https://nearly-equal-joy.jp/schedule/detail/3816"
-    },
-    {
-      "id": "3906",
-      "date": "2026-09-18",
-      "genre": "OTHER",
-      "category": "メディア",
-      "title": "「ウォーカープラス」※村山結香（晴風サヤカ役）",
-      "url": "https://nearly-equal-joy.jp/schedule/detail/3906"
-    },
-    {
-      "id": "3488",
-      "date": "2026-09-19",
-      "genre": "STAGE",
-      "category": "ライブ/イベント",
-      "title": "「スクールアイドルミュージカル」※村山結香",
-      "url": "https://nearly-equal-joy.jp/schedule/detail/3488"
-    },
-    {
-      "id": "3780",
-      "date": "2026-09-19",
-      "genre": "TV",
-      "category": "ライブ/イベント",
-      "title": "NHK「Venue101 EXTRA」公開収録※≒JOY",
-      "url": "https://nearly-equal-joy.jp/schedule/detail/3780"
-    },
-    {
-      "id": "3903",
-      "date": "2026-09-19",
-      "genre": "STREAM",
-      "category": "メディア",
-      "title": "YouTube「山添ノ国」※江角怜音、小澤愛実",
-      "url": "https://nearly-equal-joy.jp/schedule/detail/3903"
-    },
-    {
-      "id": "3489",
-      "date": "2026-09-20",
-      "genre": "STAGE",
-      "category": "ライブ/イベント",
-      "title": "「スクールアイドルミュージカル」※村山結香",
-      "url": "https://nearly-equal-joy.jp/schedule/detail/3489"
-    },
-    {
-      "id": "3658",
-      "date": "2026-09-20",
+      "id": "3803",
+      "date": "2026-10-01",
       "genre": "EVENT",
       "category": "ライブ/イベント",
-      "title": "「第4回 IDOL RUNWAY COLLECTION 2026 AUTUMN/WINTER Supported by TGC」※≒JOY",
-      "url": "https://nearly-equal-joy.jp/schedule/detail/3658"
+      "title": "「SASUKEアイドル予選会2026 ー出場権争奪バトルー supported by CHINTAI」※大信田美月",
+      "url": "https://nearly-equal-joy.jp/schedule/detail/3803"
     },
     {
-      "id": "3490",
-      "date": "2026-09-21",
-      "genre": "STAGE",
-      "category": "ライブ/イベント",
-      "title": "「スクールアイドルミュージカル」※村山結香",
-      "url": "https://nearly-equal-joy.jp/schedule/detail/3490"
-    },
-    {
-      "id": "3491",
-      "date": "2026-09-22",
-      "genre": "STAGE",
-      "category": "ライブ/イベント",
-      "title": "「スクールアイドルミュージカル」※村山結香",
-      "url": "https://nearly-equal-joy.jp/schedule/detail/3491"
-    },
-    {
-      "id": "3492",
-      "date": "2026-09-23",
-      "genre": "STAGE",
-      "category": "ライブ/イベント",
-      "title": "「スクールアイドルミュージカル」※村山結香",
-      "url": "https://nearly-equal-joy.jp/schedule/detail/3492"
-    },
-    {
-      "id": "3493",
-      "date": "2026-09-25",
-      "genre": "STAGE",
-      "category": "ライブ/イベント",
-      "title": "「スクールアイドルミュージカル」※村山結香",
-      "url": "https://nearly-equal-joy.jp/schedule/detail/3493"
-    },
-    {
-      "id": "3817",
-      "date": "2026-09-25",
+      "id": "3818",
+      "date": "2026-10-02",
       "genre": "STREAM",
       "category": "メディア",
       "title": "Huluオリジナル「フライングジョイ」シーズン2",
-      "url": "https://nearly-equal-joy.jp/schedule/detail/3817"
+      "url": "https://nearly-equal-joy.jp/schedule/detail/3818"
     },
     {
-      "id": "3911",
-      "date": "2026-09-25",
-      "genre": "OTHER",
-      "category": "メディア",
-      "title": "ASCII.jp web連載「ニアジョイどらい部」※大信田美月、藤沢莉子",
-      "url": "https://nearly-equal-joy.jp/schedule/detail/3911"
-    },
-    {
-      "id": "3494",
-      "date": "2026-09-26",
-      "genre": "STAGE",
-      "category": "ライブ/イベント",
-      "title": "「スクールアイドルミュージカル」※村山結香",
-      "url": "https://nearly-equal-joy.jp/schedule/detail/3494"
-    },
-    {
-      "id": "3971",
-      "date": "2026-09-26",
+      "id": "3893",
+      "date": "2026-10-03",
       "genre": "TV",
       "category": "メディア",
       "title": "NHK「Venue101 EXTRA」 ※≒JOY",
-      "url": "https://nearly-equal-joy.jp/schedule/detail/3971"
+      "url": "https://nearly-equal-joy.jp/schedule/detail/3893"
     },
     {
-      "id": "3887",
-      "date": "2026-09-27",
-      "genre": "TV",
+      "id": "3819",
+      "date": "2026-10-09",
+      "genre": "STREAM",
       "category": "メディア",
-      "title": "テレビ朝日「ゲームズ・ボンド」※小澤愛実、山田杏佳",
-      "url": "https://nearly-equal-joy.jp/schedule/detail/3887"
+      "title": "Huluオリジナル「フライングジョイ」シーズン2",
+      "url": "https://nearly-equal-joy.jp/schedule/detail/3819"
     },
     {
-      "id": "3865",
-      "date": "2026-09-30",
-      "genre": "RELEASE",
-      "category": "リリース",
-      "title": "【発売日】≒JOY 全国ツアー2025「Our moon is getting full」",
-      "url": "https://nearly-equal-joy.jp/schedule/detail/3865"
+      "id": "3729",
+      "date": "2026-10-10",
+      "genre": "FES",
+      "category": "ライブ/イベント",
+      "title": "『LoveLive! Series 15th Anniversaryラブライブ！フェス 前夜祭 FILM LIVE 〜未来へ届けるタイムカプセル〜』※村山結香",
+      "url": "https://nearly-equal-joy.jp/schedule/detail/3729"
+    },
+    {
+      "id": "3787",
+      "date": "2026-10-10",
+      "genre": "EVENT",
+      "category": "ライブ/イベント",
+      "title": "「SBI証券 presents TGC KITAKYUSHU 2026 by TOKYO GIRLS COLLECTION」※≒JOY",
+      "url": "https://nearly-equal-joy.jp/schedule/detail/3787"
+    },
+    {
+      "id": "3730",
+      "date": "2026-10-11",
+      "genre": "FES",
+      "category": "ライブ/イベント",
+      "title": "『LoveLive! Series 15th Anniversaryラブライブ！フェス 前夜祭 FILM LIVE 〜未来へ届けるタイムカプセル〜』※村山結香",
+      "url": "https://nearly-equal-joy.jp/schedule/detail/3730"
+    },
+    {
+      "id": "3603",
+      "date": "2026-10-12",
+      "genre": "LIVE",
+      "category": "ライブ/イベント",
+      "title": "≒JOY 全国ツアー2026「この夏 全部 全部 僕にください」 兵庫県・神戸国際会館 こくさいホール",
+      "url": "https://nearly-equal-joy.jp/schedule/detail/3603"
+    },
+    {
+      "id": "3676",
+      "date": "2026-10-22",
+      "genre": "STAGE",
+      "category": "ライブ/イベント",
+      "title": "舞台『転生したらスライムだった件』３-魔王覚醒編＆八星輝翔編-　※髙橋舞",
+      "url": "https://nearly-equal-joy.jp/schedule/detail/3676"
+    },
+    {
+      "id": "3677",
+      "date": "2026-10-23",
+      "genre": "STAGE",
+      "category": "ライブ/イベント",
+      "title": "舞台『転生したらスライムだった件』３-魔王覚醒編＆八星輝翔編-　※髙橋舞",
+      "url": "https://nearly-equal-joy.jp/schedule/detail/3677"
+    },
+    {
+      "id": "3678",
+      "date": "2026-10-24",
+      "genre": "STAGE",
+      "category": "ライブ/イベント",
+      "title": "舞台『転生したらスライムだった件』３-魔王覚醒編＆八星輝翔編-　※髙橋舞",
+      "url": "https://nearly-equal-joy.jp/schedule/detail/3678"
+    },
+    {
+      "id": "3679",
+      "date": "2026-10-25",
+      "genre": "STAGE",
+      "category": "ライブ/イベント",
+      "title": "舞台『転生したらスライムだった件』３-魔王覚醒編＆八星輝翔編-　※髙橋舞",
+      "url": "https://nearly-equal-joy.jp/schedule/detail/3679"
     }
   ]
 }

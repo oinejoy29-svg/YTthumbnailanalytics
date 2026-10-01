@@ -1,13 +1,13 @@
 {
   "meta": {
     "reportType": "channel_end_screens_a1",
-    "reportCount": 52,
-    "successfulReports": 2,
-    "failedReports": 50,
-    "rawRowCount": 76,
-    "dailyRowCount": 22,
+    "reportCount": 53,
+    "successfulReports": 1,
+    "failedReports": 52,
+    "rawRowCount": 42,
+    "dailyRowCount": 12,
     "firstDate": "2026-08-08",
-    "lastDate": "2026-08-09"
+    "lastDate": "2026-08-08"
   },
   "daily": [
     {
@@ -105,86 +105,6 @@
       "clicks": 0,
       "clickRate": 0.0,
       "clickRatePercent": 0.0
-    },
-    {
-      "date": "2026-08-09",
-      "videoId": "DdvR0LbYUjQ",
-      "impressions": 16,
-      "clicks": 0,
-      "clickRate": 0.0,
-      "clickRatePercent": 0.0
-    },
-    {
-      "date": "2026-08-09",
-      "videoId": "EvoV01i7fRw",
-      "impressions": 58,
-      "clicks": 4,
-      "clickRate": 0.06896552,
-      "clickRatePercent": 6.9
-    },
-    {
-      "date": "2026-08-09",
-      "videoId": "HgCgwKqeJBI",
-      "impressions": 28,
-      "clicks": 0,
-      "clickRate": 0.0,
-      "clickRatePercent": 0.0
-    },
-    {
-      "date": "2026-08-09",
-      "videoId": "JVNpkPsotMU",
-      "impressions": 12,
-      "clicks": 0,
-      "clickRate": 0.0,
-      "clickRatePercent": 0.0
-    },
-    {
-      "date": "2026-08-09",
-      "videoId": "PmD_nggctn4",
-      "impressions": 138,
-      "clicks": 0,
-      "clickRate": 0.0,
-      "clickRatePercent": 0.0
-    },
-    {
-      "date": "2026-08-09",
-      "videoId": "_l7l5BH4h_s",
-      "impressions": 10,
-      "clicks": 0,
-      "clickRate": 0.0,
-      "clickRatePercent": 0.0
-    },
-    {
-      "date": "2026-08-09",
-      "videoId": "a1tQY33iFmM",
-      "impressions": 22,
-      "clicks": 0,
-      "clickRate": 0.0,
-      "clickRatePercent": 0.0
-    },
-    {
-      "date": "2026-08-09",
-      "videoId": "dhys8ycR5Iw",
-      "impressions": 61,
-      "clicks": 1,
-      "clickRate": 0.01639344,
-      "clickRatePercent": 1.64
-    },
-    {
-      "date": "2026-08-09",
-      "videoId": "g1GPX8SlOmU",
-      "impressions": 371,
-      "clicks": 3,
-      "clickRate": 0.00808625,
-      "clickRatePercent": 0.81
-    },
-    {
-      "date": "2026-08-09",
-      "videoId": "lcTtcqjTLlI",
-      "impressions": 6,
-      "clicks": 0,
-      "clickRate": 0.0,
-      "clickRatePercent": 0.0
     }
   ],
   "videos": {
@@ -195,25 +115,25 @@
       "clickRatePercent": 0.0
     },
     "DdvR0LbYUjQ": {
-      "impressions": 36,
+      "impressions": 20,
       "clicks": 0,
       "clickRate": 0.0,
       "clickRatePercent": 0.0
     },
     "EvoV01i7fRw": {
-      "impressions": 103,
-      "clicks": 7,
-      "clickRate": 0.06796117,
-      "clickRatePercent": 6.8
+      "impressions": 45,
+      "clicks": 3,
+      "clickRate": 0.06666667,
+      "clickRatePercent": 6.67
     },
     "HgCgwKqeJBI": {
-      "impressions": 60,
+      "impressions": 32,
       "clicks": 0,
       "clickRate": 0.0,
       "clickRatePercent": 0.0
     },
     "JVNpkPsotMU": {
-      "impressions": 22,
+      "impressions": 10,
       "clicks": 0,
       "clickRate": 0.0,
       "clickRatePercent": 0.0
@@ -225,37 +145,37 @@
       "clickRatePercent": 0.0
     },
     "PmD_nggctn4": {
-      "impressions": 258,
+      "impressions": 120,
       "clicks": 0,
       "clickRate": 0.0,
       "clickRatePercent": 0.0
     },
     "_l7l5BH4h_s": {
-      "impressions": 26,
+      "impressions": 16,
       "clicks": 0,
       "clickRate": 0.0,
       "clickRatePercent": 0.0
     },
     "a1tQY33iFmM": {
-      "impressions": 50,
+      "impressions": 28,
       "clicks": 0,
       "clickRate": 0.0,
       "clickRatePercent": 0.0
     },
     "dhys8ycR5Iw": {
-      "impressions": 127,
-      "clicks": 1,
-      "clickRate": 0.00787402,
-      "clickRatePercent": 0.79
+      "impressions": 66,
+      "clicks": 0,
+      "clickRate": 0.0,
+      "clickRatePercent": 0.0
     },
     "g1GPX8SlOmU": {
-      "impressions": 970,
-      "clicks": 4,
-      "clickRate": 0.00412371,
-      "clickRatePercent": 0.41
+      "impressions": 599,
+      "clicks": 1,
+      "clickRate": 0.00166945,
+      "clickRatePercent": 0.17
     },
     "lcTtcqjTLlI": {
-      "impressions": 8,
+      "impressions": 2,
       "clicks": 0,
       "clickRate": 0.0,
       "clickRatePercent": 0.0
