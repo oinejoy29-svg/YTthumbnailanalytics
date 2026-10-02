@@ -5,7 +5,7 @@
     "endDate": "2026-10-01",
     "videoCount": 30,
     "videoSuccessCount": 30,
-    "videoErrorCount": 0
+    "videoErrorCount": 1
   },
   "summary": {
     "views": 275853,
@@ -5445,6 +5445,43 @@
             "watchMinutes": 0.0,
             "percentage": 7.69
           }
+        ],
+        "subscriberDetails": [
+          {
+            "detail": "what-to-watch",
+            "views": 3289,
+            "engagedViews": 3230,
+            "watchMinutes": 29786.0,
+            "percentage": 95.75
+          },
+          {
+            "detail": "my-history",
+            "views": 68,
+            "engagedViews": 68,
+            "watchMinutes": 889.0,
+            "percentage": 1.98
+          },
+          {
+            "detail": "watch-later",
+            "views": 65,
+            "engagedViews": 65,
+            "watchMinutes": 629.0,
+            "percentage": 1.89
+          },
+          {
+            "detail": "/my_subscriptions",
+            "views": 12,
+            "engagedViews": 12,
+            "watchMinutes": 224.0,
+            "percentage": 0.35
+          },
+          {
+            "detail": "PP",
+            "views": 1,
+            "engagedViews": 1,
+            "watchMinutes": 25.0,
+            "percentage": 0.03
+          }
         ]
       },
       "sharingServices": [
@@ -7971,10 +8008,10 @@
           },
           {
             "source": "SUBSCRIBER",
-            "views": 3459,
+            "views": 3457,
             "engagedViews": 3038,
             "watchMinutes": 17056.0,
-            "percentage": 13.07
+            "percentage": 13.06
           },
           {
             "source": "YT_SEARCH",
@@ -8287,6 +8324,36 @@
             "engagedViews": 1,
             "watchMinutes": 0.0,
             "percentage": 1.85
+          }
+        ],
+        "subscriberDetails": [
+          {
+            "detail": "what-to-watch",
+            "views": 3185,
+            "engagedViews": 2775,
+            "watchMinutes": 15497.0,
+            "percentage": 92.21
+          },
+          {
+            "detail": "my-history",
+            "views": 126,
+            "engagedViews": 126,
+            "watchMinutes": 644.0,
+            "percentage": 3.65
+          },
+          {
+            "detail": "watch-later",
+            "views": 124,
+            "engagedViews": 121,
+            "watchMinutes": 849.0,
+            "percentage": 3.59
+          },
+          {
+            "detail": "/my_subscriptions",
+            "views": 19,
+            "engagedViews": 13,
+            "watchMinutes": 62.0,
+            "percentage": 0.55
           }
         ]
       },
@@ -10787,6 +10854,36 @@
             "watchMinutes": 0.0,
             "percentage": 20.0
           }
+        ],
+        "subscriberDetails": [
+          {
+            "detail": "what-to-watch",
+            "views": 658,
+            "engagedViews": 632,
+            "watchMinutes": 1374.0,
+            "percentage": 93.6
+          },
+          {
+            "detail": "watch-later",
+            "views": 16,
+            "engagedViews": 16,
+            "watchMinutes": 41.0,
+            "percentage": 2.28
+          },
+          {
+            "detail": "my-history",
+            "views": 15,
+            "engagedViews": 15,
+            "watchMinutes": 29.0,
+            "percentage": 2.13
+          },
+          {
+            "detail": "/my_subscriptions",
+            "views": 14,
+            "engagedViews": 13,
+            "watchMinutes": 32.0,
+            "percentage": 1.99
+          }
         ]
       },
       "sharingServices": [
@@ -12946,6 +13043,36 @@
             "watchMinutes": 4.0,
             "percentage": 100.0
           }
+        ],
+        "subscriberDetails": [
+          {
+            "detail": "what-to-watch",
+            "views": 53,
+            "engagedViews": 28,
+            "watchMinutes": 179.0,
+            "percentage": 70.67
+          },
+          {
+            "detail": "/my_subscriptions",
+            "views": 15,
+            "engagedViews": 12,
+            "watchMinutes": 53.0,
+            "percentage": 20.0
+          },
+          {
+            "detail": "watch-later",
+            "views": 6,
+            "engagedViews": 6,
+            "watchMinutes": 62.0,
+            "percentage": 8.0
+          },
+          {
+            "detail": "my-history",
+            "views": 1,
+            "engagedViews": 1,
+            "watchMinutes": 0.0,
+            "percentage": 1.33
+          }
         ]
       },
       "sharingServices": []
@@ -14816,6 +14943,36 @@
             "watchMinutes": 0.0,
             "percentage": 20.0
           }
+        ],
+        "subscriberDetails": [
+          {
+            "detail": "what-to-watch",
+            "views": 117,
+            "engagedViews": 116,
+            "watchMinutes": 297.0,
+            "percentage": 82.39
+          },
+          {
+            "detail": "/my_subscriptions",
+            "views": 20,
+            "engagedViews": 18,
+            "watchMinutes": 46.0,
+            "percentage": 14.08
+          },
+          {
+            "detail": "watch-later",
+            "views": 4,
+            "engagedViews": 4,
+            "watchMinutes": 23.0,
+            "percentage": 2.82
+          },
+          {
+            "detail": "my-history",
+            "views": 1,
+            "engagedViews": 1,
+            "watchMinutes": 0.0,
+            "percentage": 0.7
+          }
         ]
       },
       "sharingServices": [
@@ -16564,6 +16721,36 @@
             "engagedViews": 1,
             "watchMinutes": 3.0,
             "percentage": 16.67
+          }
+        ],
+        "subscriberDetails": [
+          {
+            "detail": "what-to-watch",
+            "views": 1810,
+            "engagedViews": 1799,
+            "watchMinutes": 6130.0,
+            "percentage": 95.36
+          },
+          {
+            "detail": "watch-later",
+            "views": 39,
+            "engagedViews": 39,
+            "watchMinutes": 139.0,
+            "percentage": 2.05
+          },
+          {
+            "detail": "my-history",
+            "views": 29,
+            "engagedViews": 29,
+            "watchMinutes": 62.0,
+            "percentage": 1.53
+          },
+          {
+            "detail": "/my_subscriptions",
+            "views": 20,
+            "engagedViews": 15,
+            "watchMinutes": 42.0,
+            "percentage": 1.05
           }
         ]
       },
@@ -18339,6 +18526,43 @@
             "watchMinutes": 0.0,
             "percentage": 16.67
           }
+        ],
+        "subscriberDetails": [
+          {
+            "detail": "what-to-watch",
+            "views": 1471,
+            "engagedViews": 1406,
+            "watchMinutes": 6263.0,
+            "percentage": 93.58
+          },
+          {
+            "detail": "watch-later",
+            "views": 43,
+            "engagedViews": 42,
+            "watchMinutes": 234.0,
+            "percentage": 2.74
+          },
+          {
+            "detail": "/my_subscriptions",
+            "views": 30,
+            "engagedViews": 23,
+            "watchMinutes": 107.0,
+            "percentage": 1.91
+          },
+          {
+            "detail": "my-history",
+            "views": 25,
+            "engagedViews": 25,
+            "watchMinutes": 84.0,
+            "percentage": 1.59
+          },
+          {
+            "detail": "PP",
+            "views": 3,
+            "engagedViews": 3,
+            "watchMinutes": 20.0,
+            "percentage": 0.19
+          }
         ]
       },
       "sharingServices": [
@@ -19917,6 +20141,36 @@
             "watchMinutes": 0.0,
             "percentage": 14.29
           }
+        ],
+        "subscriberDetails": [
+          {
+            "detail": "what-to-watch",
+            "views": 244,
+            "engagedViews": 244,
+            "watchMinutes": 440.0,
+            "percentage": 80.79
+          },
+          {
+            "detail": "/my_subscriptions",
+            "views": 34,
+            "engagedViews": 28,
+            "watchMinutes": 32.0,
+            "percentage": 11.26
+          },
+          {
+            "detail": "watch-later",
+            "views": 15,
+            "engagedViews": 15,
+            "watchMinutes": 29.0,
+            "percentage": 4.97
+          },
+          {
+            "detail": "my-history",
+            "views": 9,
+            "engagedViews": 9,
+            "watchMinutes": 5.0,
+            "percentage": 2.98
+          }
         ]
       },
       "sharingServices": [
@@ -21446,6 +21700,36 @@
             "engagedViews": 1,
             "watchMinutes": 0.0,
             "percentage": 25.0
+          }
+        ],
+        "subscriberDetails": [
+          {
+            "detail": "what-to-watch",
+            "views": 930,
+            "engagedViews": 912,
+            "watchMinutes": 2893.0,
+            "percentage": 92.26
+          },
+          {
+            "detail": "/my_subscriptions",
+            "views": 32,
+            "engagedViews": 24,
+            "watchMinutes": 60.0,
+            "percentage": 3.17
+          },
+          {
+            "detail": "watch-later",
+            "views": 31,
+            "engagedViews": 31,
+            "watchMinutes": 110.0,
+            "percentage": 3.08
+          },
+          {
+            "detail": "my-history",
+            "views": 15,
+            "engagedViews": 15,
+            "watchMinutes": 38.0,
+            "percentage": 1.49
           }
         ]
       },
@@ -23029,6 +23313,43 @@
             "watchMinutes": 0.0,
             "percentage": 8.33
           }
+        ],
+        "subscriberDetails": [
+          {
+            "detail": "what-to-watch",
+            "views": 3617,
+            "engagedViews": 3002,
+            "watchMinutes": 8333.0,
+            "percentage": 95.97
+          },
+          {
+            "detail": "my-history",
+            "views": 65,
+            "engagedViews": 65,
+            "watchMinutes": 161.0,
+            "percentage": 1.72
+          },
+          {
+            "detail": "/my_subscriptions",
+            "views": 44,
+            "engagedViews": 36,
+            "watchMinutes": 79.0,
+            "percentage": 1.17
+          },
+          {
+            "detail": "watch-later",
+            "views": 42,
+            "engagedViews": 41,
+            "watchMinutes": 189.0,
+            "percentage": 1.11
+          },
+          {
+            "detail": "PP",
+            "views": 1,
+            "engagedViews": 1,
+            "watchMinutes": 17.0,
+            "percentage": 0.03
+          }
         ]
       },
       "sharingServices": [
@@ -24004,83 +24325,83 @@
         },
         {
           "position": 22.0,
-          "watchRatio": 47.02
+          "watchRatio": 47.03
         },
         {
           "position": 23.0,
-          "watchRatio": 46.36
+          "watchRatio": 46.37
         },
         {
           "position": 24.0,
-          "watchRatio": 45.85
+          "watchRatio": 45.86
         },
         {
           "position": 25.0,
-          "watchRatio": 45.26
+          "watchRatio": 45.27
         },
         {
           "position": 26.0,
-          "watchRatio": 44.35
+          "watchRatio": 44.36
         },
         {
           "position": 27.0,
-          "watchRatio": 44.08
+          "watchRatio": 44.09
         },
         {
           "position": 28.0,
-          "watchRatio": 43.54
+          "watchRatio": 43.55
         },
         {
           "position": 29.0,
-          "watchRatio": 42.92
+          "watchRatio": 42.93
         },
         {
           "position": 30.0,
-          "watchRatio": 42.56
+          "watchRatio": 42.58
         },
         {
           "position": 31.0,
-          "watchRatio": 41.9
+          "watchRatio": 41.91
         },
         {
           "position": 32.0,
-          "watchRatio": 41.35
+          "watchRatio": 41.36
         },
         {
           "position": 33.0,
-          "watchRatio": 41.01
+          "watchRatio": 41.02
         },
         {
           "position": 34.0,
-          "watchRatio": 40.76
+          "watchRatio": 40.77
         },
         {
           "position": 35.0,
-          "watchRatio": 41.46
+          "watchRatio": 41.47
         },
         {
           "position": 36.0,
-          "watchRatio": 41.11
+          "watchRatio": 41.12
         },
         {
           "position": 37.0,
-          "watchRatio": 38.62
+          "watchRatio": 38.63
         },
         {
           "position": 38.0,
-          "watchRatio": 38.89
+          "watchRatio": 38.91
         },
         {
           "position": 39.0,
-          "watchRatio": 38.78
+          "watchRatio": 38.79
         },
         {
           "position": 40.0,
-          "watchRatio": 38.23
+          "watchRatio": 38.24
         },
         {
           "position": 41.0,
-          "watchRatio": 37.38
+          "watchRatio": 37.39
         },
         {
           "position": 42.0,
@@ -24332,7 +24653,7 @@
             "source": "SUBSCRIBER",
             "views": 4246,
             "engagedViews": 3255,
-            "watchMinutes": 15075.0,
+            "watchMinutes": 15078.0,
             "percentage": 39.57
           },
           {
@@ -24625,6 +24946,36 @@
             "engagedViews": 1,
             "watchMinutes": 3.0,
             "percentage": 3.57
+          }
+        ],
+        "subscriberDetails": [
+          {
+            "detail": "what-to-watch",
+            "views": 4065,
+            "engagedViews": 3085,
+            "watchMinutes": 14319.0,
+            "percentage": 95.78
+          },
+          {
+            "detail": "watch-later",
+            "views": 93,
+            "engagedViews": 93,
+            "watchMinutes": 541.0,
+            "percentage": 2.19
+          },
+          {
+            "detail": "my-history",
+            "views": 48,
+            "engagedViews": 48,
+            "watchMinutes": 133.0,
+            "percentage": 1.13
+          },
+          {
+            "detail": "/my_subscriptions",
+            "views": 38,
+            "engagedViews": 27,
+            "watchMinutes": 82.0,
+            "percentage": 0.9
           }
         ]
       },
@@ -25907,7 +26258,7 @@
         "sources": [
           {
             "source": "SUBSCRIBER",
-            "views": 9009,
+            "views": 9008,
             "engagedViews": 7450,
             "watchMinutes": 35103.0,
             "percentage": 50.47
@@ -25917,11 +26268,11 @@
             "views": 5259,
             "engagedViews": 5229,
             "watchMinutes": 30504.0,
-            "percentage": 29.46
+            "percentage": 29.47
           },
           {
             "source": "YT_SEARCH",
-            "views": 2446,
+            "views": 2445,
             "engagedViews": 1935,
             "watchMinutes": 8181.0,
             "percentage": 13.7
@@ -25979,10 +26330,10 @@
         "searchTerms": [
           {
             "detail": "夏はジュエリー",
-            "views": 523,
+            "views": 522,
             "engagedViews": 469,
             "watchMinutes": 1825.0,
-            "percentage": 25.93
+            "percentage": 25.88
           },
           {
             "detail": "逢田 珠里依",
@@ -26000,10 +26351,10 @@
           },
           {
             "detail": "逢田珠里依",
-            "views": 185,
-            "engagedViews": 114,
-            "watchMinutes": 545.0,
-            "percentage": 9.17
+            "views": 186,
+            "engagedViews": 115,
+            "watchMinutes": 546.0,
+            "percentage": 9.22
           },
           {
             "detail": "逢田珠里依 showroom",
@@ -26265,6 +26616,43 @@
             "engagedViews": 1,
             "watchMinutes": 0.0,
             "percentage": 2.56
+          }
+        ],
+        "subscriberDetails": [
+          {
+            "detail": "what-to-watch",
+            "views": 8728,
+            "engagedViews": 7183,
+            "watchMinutes": 33816.0,
+            "percentage": 96.92
+          },
+          {
+            "detail": "watch-later",
+            "views": 133,
+            "engagedViews": 133,
+            "watchMinutes": 750.0,
+            "percentage": 1.48
+          },
+          {
+            "detail": "my-history",
+            "views": 90,
+            "engagedViews": 90,
+            "watchMinutes": 411.0,
+            "percentage": 1.0
+          },
+          {
+            "detail": "/my_subscriptions",
+            "views": 53,
+            "engagedViews": 40,
+            "watchMinutes": 110.0,
+            "percentage": 0.59
+          },
+          {
+            "detail": "PP",
+            "views": 1,
+            "engagedViews": 1,
+            "watchMinutes": 0.0,
+            "percentage": 0.01
           }
         ]
       },
@@ -27102,19 +27490,19 @@
       "retention": [
         {
           "position": 1.0,
-          "watchRatio": 97.72
+          "watchRatio": 97.7
         },
         {
           "position": 2.0,
-          "watchRatio": 91.32
+          "watchRatio": 91.34
         },
         {
           "position": 3.0,
-          "watchRatio": 88.06
+          "watchRatio": 88.08
         },
         {
           "position": 4.0,
-          "watchRatio": 83.88
+          "watchRatio": 83.89
         },
         {
           "position": 5.0,
@@ -27122,383 +27510,383 @@
         },
         {
           "position": 6.0,
-          "watchRatio": 74.43
+          "watchRatio": 74.45
         },
         {
           "position": 7.0,
-          "watchRatio": 71.14
+          "watchRatio": 71.19
         },
         {
           "position": 8.0,
-          "watchRatio": 68.58
+          "watchRatio": 68.62
         },
         {
           "position": 9.0,
-          "watchRatio": 67.0
+          "watchRatio": 67.04
         },
         {
           "position": 10.0,
-          "watchRatio": 65.83
+          "watchRatio": 65.87
         },
         {
           "position": 11.0,
-          "watchRatio": 63.49
+          "watchRatio": 63.53
         },
         {
           "position": 12.0,
-          "watchRatio": 62.33
+          "watchRatio": 62.36
         },
         {
           "position": 13.0,
-          "watchRatio": 60.91
+          "watchRatio": 60.95
         },
         {
           "position": 14.0,
-          "watchRatio": 59.54
+          "watchRatio": 59.57
         },
         {
           "position": 15.0,
-          "watchRatio": 59.04
+          "watchRatio": 59.08
         },
         {
           "position": 16.0,
-          "watchRatio": 57.42
+          "watchRatio": 57.46
         },
         {
           "position": 17.0,
-          "watchRatio": 56.91
+          "watchRatio": 56.95
         },
         {
           "position": 18.0,
-          "watchRatio": 56.15
+          "watchRatio": 56.19
         },
         {
           "position": 19.0,
-          "watchRatio": 54.9
+          "watchRatio": 54.94
         },
         {
           "position": 20.0,
-          "watchRatio": 54.06
+          "watchRatio": 54.09
         },
         {
           "position": 21.0,
-          "watchRatio": 53.47
+          "watchRatio": 53.5
         },
         {
           "position": 22.0,
-          "watchRatio": 52.32
+          "watchRatio": 52.35
         },
         {
           "position": 23.0,
-          "watchRatio": 51.66
+          "watchRatio": 51.69
         },
         {
           "position": 24.0,
-          "watchRatio": 51.19
+          "watchRatio": 51.22
         },
         {
           "position": 25.0,
-          "watchRatio": 49.65
+          "watchRatio": 49.68
         },
         {
           "position": 26.0,
-          "watchRatio": 48.81
+          "watchRatio": 48.84
         },
         {
           "position": 27.0,
-          "watchRatio": 48.17
+          "watchRatio": 48.2
         },
         {
           "position": 28.0,
-          "watchRatio": 47.4
+          "watchRatio": 47.42
         },
         {
           "position": 29.0,
-          "watchRatio": 46.96
+          "watchRatio": 46.99
         },
         {
           "position": 30.0,
-          "watchRatio": 46.43
+          "watchRatio": 46.46
         },
         {
           "position": 31.0,
-          "watchRatio": 45.16
+          "watchRatio": 45.19
         },
         {
           "position": 32.0,
-          "watchRatio": 44.93
+          "watchRatio": 44.96
         },
         {
           "position": 33.0,
-          "watchRatio": 44.44
+          "watchRatio": 44.47
         },
         {
           "position": 34.0,
-          "watchRatio": 43.52
+          "watchRatio": 43.55
         },
         {
           "position": 35.0,
-          "watchRatio": 42.9
+          "watchRatio": 42.93
         },
         {
           "position": 36.0,
-          "watchRatio": 42.45
+          "watchRatio": 42.48
         },
         {
           "position": 37.0,
-          "watchRatio": 41.61
+          "watchRatio": 41.64
         },
         {
           "position": 38.0,
-          "watchRatio": 42.15
+          "watchRatio": 42.17
         },
         {
           "position": 39.0,
-          "watchRatio": 41.39
+          "watchRatio": 41.41
         },
         {
           "position": 40.0,
-          "watchRatio": 40.83
+          "watchRatio": 40.86
         },
         {
           "position": 41.0,
-          "watchRatio": 41.06
+          "watchRatio": 41.08
         },
         {
           "position": 42.0,
-          "watchRatio": 40.71
+          "watchRatio": 40.73
         },
         {
           "position": 43.0,
-          "watchRatio": 39.85
+          "watchRatio": 39.87
         },
         {
           "position": 44.0,
-          "watchRatio": 39.66
+          "watchRatio": 39.69
         },
         {
           "position": 45.0,
-          "watchRatio": 39.46
+          "watchRatio": 39.48
         },
         {
           "position": 46.0,
-          "watchRatio": 38.72
+          "watchRatio": 38.74
         },
         {
           "position": 47.0,
-          "watchRatio": 38.58
+          "watchRatio": 38.6
         },
         {
           "position": 48.0,
-          "watchRatio": 38.08
+          "watchRatio": 38.11
         },
         {
           "position": 49.0,
-          "watchRatio": 37.43
+          "watchRatio": 37.45
         },
         {
           "position": 50.0,
-          "watchRatio": 37.41
+          "watchRatio": 37.43
         },
         {
           "position": 51.0,
-          "watchRatio": 37.16
+          "watchRatio": 37.18
         },
         {
           "position": 52.0,
-          "watchRatio": 36.83
+          "watchRatio": 36.86
         },
         {
           "position": 53.0,
-          "watchRatio": 36.22
+          "watchRatio": 36.24
         },
         {
           "position": 54.0,
-          "watchRatio": 36.12
+          "watchRatio": 36.14
         },
         {
           "position": 55.0,
-          "watchRatio": 35.89
+          "watchRatio": 35.91
         },
         {
           "position": 56.0,
-          "watchRatio": 35.54
-        },
-        {
-          "position": 57.0,
           "watchRatio": 35.56
         },
         {
+          "position": 57.0,
+          "watchRatio": 35.58
+        },
+        {
           "position": 58.0,
-          "watchRatio": 35.09
+          "watchRatio": 35.11
         },
         {
           "position": 59.0,
-          "watchRatio": 34.56
+          "watchRatio": 34.58
         },
         {
           "position": 60.0,
-          "watchRatio": 34.74
+          "watchRatio": 34.76
         },
         {
           "position": 61.0,
-          "watchRatio": 34.35
+          "watchRatio": 34.37
         },
         {
           "position": 62.0,
-          "watchRatio": 34.27
+          "watchRatio": 34.29
         },
         {
           "position": 63.0,
-          "watchRatio": 34.35
+          "watchRatio": 34.37
         },
         {
           "position": 64.0,
-          "watchRatio": 34.41
+          "watchRatio": 34.43
         },
         {
           "position": 65.0,
-          "watchRatio": 33.88
+          "watchRatio": 33.9
         },
         {
           "position": 66.0,
-          "watchRatio": 34.5
+          "watchRatio": 34.52
         },
         {
           "position": 67.0,
-          "watchRatio": 34.33
+          "watchRatio": 34.35
         },
         {
           "position": 68.0,
-          "watchRatio": 33.86
+          "watchRatio": 33.88
         },
         {
           "position": 69.0,
-          "watchRatio": 33.51
+          "watchRatio": 33.53
         },
         {
           "position": 70.0,
-          "watchRatio": 33.18
+          "watchRatio": 33.2
         },
         {
           "position": 71.0,
-          "watchRatio": 32.51
+          "watchRatio": 32.53
         },
         {
           "position": 72.0,
-          "watchRatio": 32.49
+          "watchRatio": 32.51
         },
         {
           "position": 73.0,
-          "watchRatio": 32.3
+          "watchRatio": 32.32
         },
         {
           "position": 74.0,
-          "watchRatio": 31.73
+          "watchRatio": 31.75
         },
         {
           "position": 75.0,
-          "watchRatio": 31.58
+          "watchRatio": 31.6
         },
         {
           "position": 76.0,
-          "watchRatio": 31.17
+          "watchRatio": 31.19
         },
         {
           "position": 77.0,
-          "watchRatio": 30.8
+          "watchRatio": 30.82
         },
         {
           "position": 78.0,
-          "watchRatio": 30.62
+          "watchRatio": 30.64
         },
         {
           "position": 79.0,
-          "watchRatio": 30.54
+          "watchRatio": 30.56
         },
         {
           "position": 80.0,
-          "watchRatio": 30.02
+          "watchRatio": 30.04
         },
         {
           "position": 81.0,
-          "watchRatio": 29.92
+          "watchRatio": 29.94
         },
         {
           "position": 82.0,
-          "watchRatio": 29.29
+          "watchRatio": 29.3
         },
         {
           "position": 83.0,
-          "watchRatio": 29.02
+          "watchRatio": 29.04
         },
         {
           "position": 84.0,
-          "watchRatio": 28.86
+          "watchRatio": 28.87
         },
         {
           "position": 85.0,
-          "watchRatio": 28.71
+          "watchRatio": 28.73
         },
         {
           "position": 86.0,
-          "watchRatio": 28.06
+          "watchRatio": 28.07
         },
         {
           "position": 87.0,
-          "watchRatio": 28.26
+          "watchRatio": 28.28
         },
         {
           "position": 88.0,
-          "watchRatio": 27.87
+          "watchRatio": 27.89
         },
         {
           "position": 89.0,
-          "watchRatio": 27.28
+          "watchRatio": 27.29
         },
         {
           "position": 90.0,
-          "watchRatio": 27.19
+          "watchRatio": 27.21
         },
         {
           "position": 91.0,
-          "watchRatio": 26.85
+          "watchRatio": 26.86
         },
         {
           "position": 92.0,
-          "watchRatio": 26.21
+          "watchRatio": 26.23
         },
         {
           "position": 93.0,
-          "watchRatio": 25.9
+          "watchRatio": 25.92
         },
         {
           "position": 94.0,
-          "watchRatio": 25.84
+          "watchRatio": 25.86
         },
         {
           "position": 95.0,
-          "watchRatio": 25.29
+          "watchRatio": 25.3
         },
         {
           "position": 96.0,
-          "watchRatio": 25.25
+          "watchRatio": 25.26
         },
         {
           "position": 97.0,
-          "watchRatio": 25.02
+          "watchRatio": 25.04
         },
         {
           "position": 98.0,
-          "watchRatio": 24.55
+          "watchRatio": 24.56
         },
         {
           "position": 99.0,
-          "watchRatio": 24.41
+          "watchRatio": 24.42
         },
         {
           "position": 100.0,
-          "watchRatio": 23.93
+          "watchRatio": 23.95
         }
       ],
       "traffic": {
@@ -27508,21 +27896,21 @@
             "views": 2950,
             "engagedViews": 2914,
             "watchMinutes": 6870.0,
-            "percentage": 58.82
+            "percentage": 58.86
           },
           {
             "source": "RELATED_VIDEO",
-            "views": 1361,
-            "engagedViews": 1356,
-            "watchMinutes": 4230.0,
-            "percentage": 27.14
+            "views": 1360,
+            "engagedViews": 1355,
+            "watchMinutes": 4229.0,
+            "percentage": 27.13
           },
           {
             "source": "YT_SEARCH",
             "views": 304,
             "engagedViews": 221,
             "watchMinutes": 525.0,
-            "percentage": 6.06
+            "percentage": 6.07
           },
           {
             "source": "YT_CHANNEL",
@@ -27540,17 +27928,17 @@
           },
           {
             "source": "NO_LINK_OTHER",
-            "views": 69,
-            "engagedViews": 69,
+            "views": 68,
+            "engagedViews": 68,
             "watchMinutes": 125.0,
-            "percentage": 1.38
+            "percentage": 1.36
           },
           {
             "source": "PLAYLIST",
-            "views": 53,
-            "engagedViews": 53,
+            "views": 52,
+            "engagedViews": 52,
             "watchMinutes": 152.0,
-            "percentage": 1.06
+            "percentage": 1.04
           },
           {
             "source": "NOTIFICATION",
@@ -27737,6 +28125,36 @@
             "engagedViews": 1,
             "watchMinutes": 1.0,
             "percentage": 7.14
+          }
+        ],
+        "subscriberDetails": [
+          {
+            "detail": "what-to-watch",
+            "views": 2783,
+            "engagedViews": 2754,
+            "watchMinutes": 6483.0,
+            "percentage": 94.34
+          },
+          {
+            "detail": "watch-later",
+            "views": 74,
+            "engagedViews": 74,
+            "watchMinutes": 236.0,
+            "percentage": 2.51
+          },
+          {
+            "detail": "my-history",
+            "views": 49,
+            "engagedViews": 49,
+            "watchMinutes": 67.0,
+            "percentage": 1.66
+          },
+          {
+            "detail": "/my_subscriptions",
+            "views": 44,
+            "engagedViews": 37,
+            "watchMinutes": 82.0,
+            "percentage": 1.49
           }
         ]
       },
@@ -28938,7 +29356,7 @@
         "sources": [
           {
             "source": "SUBSCRIBER",
-            "views": 3953,
+            "views": 3952,
             "engagedViews": 3678,
             "watchMinutes": 10426.0,
             "percentage": 53.05
@@ -28948,7 +29366,7 @@
             "views": 2582,
             "engagedViews": 2573,
             "watchMinutes": 9602.0,
-            "percentage": 34.65
+            "percentage": 34.66
           },
           {
             "source": "YT_SEARCH",
@@ -28997,7 +29415,7 @@
             "views": 19,
             "engagedViews": 19,
             "watchMinutes": 49.0,
-            "percentage": 0.25
+            "percentage": 0.26
           },
           {
             "source": "HASHTAGS",
@@ -29219,6 +29637,36 @@
             "engagedViews": 1,
             "watchMinutes": 8.0,
             "percentage": 6.67
+          }
+        ],
+        "subscriberDetails": [
+          {
+            "detail": "what-to-watch",
+            "views": 3749,
+            "engagedViews": 3490,
+            "watchMinutes": 9774.0,
+            "percentage": 94.86
+          },
+          {
+            "detail": "watch-later",
+            "views": 83,
+            "engagedViews": 83,
+            "watchMinutes": 380.0,
+            "percentage": 2.1
+          },
+          {
+            "detail": "/my_subscriptions",
+            "views": 62,
+            "engagedViews": 47,
+            "watchMinutes": 120.0,
+            "percentage": 1.57
+          },
+          {
+            "detail": "my-history",
+            "views": 58,
+            "engagedViews": 58,
+            "watchMinutes": 151.0,
+            "percentage": 1.47
           }
         ]
       },
@@ -30651,6 +31099,43 @@
             "watchMinutes": 0.0,
             "percentage": 16.67
           }
+        ],
+        "subscriberDetails": [
+          {
+            "detail": "what-to-watch",
+            "views": 2221,
+            "engagedViews": 2067,
+            "watchMinutes": 7391.0,
+            "percentage": 91.81
+          },
+          {
+            "detail": "my-history",
+            "views": 96,
+            "engagedViews": 95,
+            "watchMinutes": 198.0,
+            "percentage": 3.97
+          },
+          {
+            "detail": "/my_subscriptions",
+            "views": 65,
+            "engagedViews": 56,
+            "watchMinutes": 194.0,
+            "percentage": 2.69
+          },
+          {
+            "detail": "watch-later",
+            "views": 36,
+            "engagedViews": 36,
+            "watchMinutes": 209.0,
+            "percentage": 1.49
+          },
+          {
+            "detail": "PP",
+            "views": 1,
+            "engagedViews": 1,
+            "watchMinutes": 0.0,
+            "percentage": 0.04
+          }
         ]
       },
       "sharingServices": [
@@ -31763,10 +32248,10 @@
         "sources": [
           {
             "source": "SUBSCRIBER",
-            "views": 6340,
-            "engagedViews": 5611,
-            "watchMinutes": 14163.0,
-            "percentage": 53.76
+            "views": 6341,
+            "engagedViews": 5613,
+            "watchMinutes": 14165.0,
+            "percentage": 53.77
           },
           {
             "source": "RELATED_VIDEO",
@@ -31780,7 +32265,7 @@
             "views": 1595,
             "engagedViews": 1080,
             "watchMinutes": 2344.0,
-            "percentage": 13.52
+            "percentage": 13.53
           },
           {
             "source": "YT_CHANNEL",
@@ -31791,10 +32276,10 @@
           },
           {
             "source": "NO_LINK_OTHER",
-            "views": 194,
-            "engagedViews": 194,
-            "watchMinutes": 343.0,
-            "percentage": 1.65
+            "views": 192,
+            "engagedViews": 192,
+            "watchMinutes": 340.0,
+            "percentage": 1.63
           },
           {
             "source": "YT_OTHER_PAGE",
@@ -32072,6 +32557,43 @@
             "engagedViews": 1,
             "watchMinutes": 0.0,
             "percentage": 1.41
+          }
+        ],
+        "subscriberDetails": [
+          {
+            "detail": "what-to-watch",
+            "views": 6116,
+            "engagedViews": 5410,
+            "watchMinutes": 13649.0,
+            "percentage": 96.54
+          },
+          {
+            "detail": "/my_subscriptions",
+            "views": 83,
+            "engagedViews": 62,
+            "watchMinutes": 171.0,
+            "percentage": 1.31
+          },
+          {
+            "detail": "my-history",
+            "views": 80,
+            "engagedViews": 80,
+            "watchMinutes": 136.0,
+            "percentage": 1.26
+          },
+          {
+            "detail": "watch-later",
+            "views": 51,
+            "engagedViews": 50,
+            "watchMinutes": 178.0,
+            "percentage": 0.81
+          },
+          {
+            "detail": "PP",
+            "views": 5,
+            "engagedViews": 5,
+            "watchMinutes": 20.0,
+            "percentage": 0.08
           }
         ]
       },
@@ -33156,255 +33678,8 @@
         }
       ],
       "traffic": {
-        "sources": [
-          {
-            "source": "SUBSCRIBER",
-            "views": 6044,
-            "engagedViews": 5038,
-            "watchMinutes": 11649.0,
-            "percentage": 48.13
-          },
-          {
-            "source": "RELATED_VIDEO",
-            "views": 3301,
-            "engagedViews": 3284,
-            "watchMinutes": 8923.0,
-            "percentage": 26.29
-          },
-          {
-            "source": "YT_SEARCH",
-            "views": 2678,
-            "engagedViews": 1682,
-            "watchMinutes": 3078.0,
-            "percentage": 21.33
-          },
-          {
-            "source": "YT_CHANNEL",
-            "views": 223,
-            "engagedViews": 215,
-            "watchMinutes": 434.0,
-            "percentage": 1.78
-          },
-          {
-            "source": "NO_LINK_OTHER",
-            "views": 109,
-            "engagedViews": 108,
-            "watchMinutes": 194.0,
-            "percentage": 0.87
-          },
-          {
-            "source": "YT_OTHER_PAGE",
-            "views": 90,
-            "engagedViews": 90,
-            "watchMinutes": 211.0,
-            "percentage": 0.72
-          },
-          {
-            "source": "PLAYLIST",
-            "views": 63,
-            "engagedViews": 63,
-            "watchMinutes": 171.0,
-            "percentage": 0.5
-          },
-          {
-            "source": "NOTIFICATION",
-            "views": 28,
-            "engagedViews": 28,
-            "watchMinutes": 60.0,
-            "percentage": 0.22
-          },
-          {
-            "source": "EXT_URL",
-            "views": 19,
-            "engagedViews": 19,
-            "watchMinutes": 24.0,
-            "percentage": 0.15
-          },
-          {
-            "source": "HASHTAGS",
-            "views": 3,
-            "engagedViews": 3,
-            "watchMinutes": 2.0,
-            "percentage": 0.02
-          }
-        ],
-        "searchTerms": [
-          {
-            "detail": "江角 怜音",
-            "views": 939,
-            "engagedViews": 748,
-            "watchMinutes": 1278.0,
-            "percentage": 41.73
-          },
-          {
-            "detail": "江角怜音",
-            "views": 815,
-            "engagedViews": 382,
-            "watchMinutes": 717.0,
-            "percentage": 36.22
-          },
-          {
-            "detail": "ニアジョイ",
-            "views": 202,
-            "engagedViews": 158,
-            "watchMinutes": 354.0,
-            "percentage": 8.98
-          },
-          {
-            "detail": "江角れのん",
-            "views": 84,
-            "engagedViews": 37,
-            "watchMinutes": 45.0,
-            "percentage": 3.73
-          },
-          {
-            "detail": "ニアジョイ 江角怜音",
-            "views": 43,
-            "engagedViews": 18,
-            "watchMinutes": 18.0,
-            "percentage": 1.91
-          },
-          {
-            "detail": "ニアリーイコールジョイ",
-            "views": 35,
-            "engagedViews": 27,
-            "watchMinutes": 58.0,
-            "percentage": 1.56
-          },
-          {
-            "detail": "江角怜音 showroom",
-            "views": 33,
-            "engagedViews": 19,
-            "watchMinutes": 35.0,
-            "percentage": 1.47
-          },
-          {
-            "detail": "江角伶音",
-            "views": 19,
-            "engagedViews": 6,
-            "watchMinutes": 18.0,
-            "percentage": 0.84
-          },
-          {
-            "detail": "江角怜音 切り抜き",
-            "views": 14,
-            "engagedViews": 2,
-            "watchMinutes": 3.0,
-            "percentage": 0.62
-          },
-          {
-            "detail": "江角れのん showroom",
-            "views": 12,
-            "engagedViews": 3,
-            "watchMinutes": 10.0,
-            "percentage": 0.53
-          },
-          {
-            "detail": "江角 怜音 showroom",
-            "views": 10,
-            "engagedViews": 6,
-            "watchMinutes": 5.0,
-            "percentage": 0.44
-          },
-          {
-            "detail": "江角",
-            "views": 8,
-            "engagedViews": 3,
-            "watchMinutes": 2.0,
-            "percentage": 0.36
-          },
-          {
-            "detail": "ニアジョイ showroom",
-            "views": 6,
-            "engagedViews": 5,
-            "watchMinutes": 8.0,
-            "percentage": 0.27
-          },
-          {
-            "detail": "ニアジョイ 怜音",
-            "views": 5,
-            "engagedViews": 2,
-            "watchMinutes": 9.0,
-            "percentage": 0.22
-          },
-          {
-            "detail": "江角怜音 アウト",
-            "views": 4,
-            "engagedViews": 1,
-            "watchMinutes": 0.0,
-            "percentage": 0.18
-          },
-          {
-            "detail": "ニアジョイ 江角",
-            "views": 3,
-            "engagedViews": 1,
-            "watchMinutes": 0.0,
-            "percentage": 0.13
-          },
-          {
-            "detail": "怜音",
-            "views": 3,
-            "engagedViews": 0,
-            "watchMinutes": 0.0,
-            "percentage": 0.13
-          },
-          {
-            "detail": "江角怜音 空手",
-            "views": 3,
-            "engagedViews": 0,
-            "watchMinutes": 0.0,
-            "percentage": 0.13
-          },
-          {
-            "detail": "ニアジョイ ノンフィクション",
-            "views": 2,
-            "engagedViews": 0,
-            "watchMinutes": 0.0,
-            "percentage": 0.09
-          },
-          {
-            "detail": "ニアジョイ 切り抜き",
-            "views": 2,
-            "engagedViews": 2,
-            "watchMinutes": 9.0,
-            "percentage": 0.09
-          },
-          {
-            "detail": "江角怜音 失言",
-            "views": 2,
-            "engagedViews": 0,
-            "watchMinutes": 0.0,
-            "percentage": 0.09
-          },
-          {
-            "detail": "瞳 メイク",
-            "views": 2,
-            "engagedViews": 2,
-            "watchMinutes": 1.0,
-            "percentage": 0.09
-          },
-          {
-            "detail": "野口衣織",
-            "views": 2,
-            "engagedViews": 1,
-            "watchMinutes": 0.0,
-            "percentage": 0.09
-          },
-          {
-            "detail": "さしはらちゃんねる",
-            "views": 1,
-            "engagedViews": 0,
-            "watchMinutes": 0.0,
-            "percentage": 0.04
-          },
-          {
-            "detail": "さなきあクッキング",
-            "views": 1,
-            "engagedViews": 1,
-            "watchMinutes": 0.0,
-            "percentage": 0.04
-          }
-        ],
+        "sources": [],
+        "searchTerms": [],
         "externalSites": [
           {
             "detail": "Google Search",
@@ -33440,6 +33715,43 @@
             "engagedViews": 1,
             "watchMinutes": 0.0,
             "percentage": 8.33
+          }
+        ],
+        "subscriberDetails": [
+          {
+            "detail": "what-to-watch",
+            "views": 5863,
+            "engagedViews": 4871,
+            "watchMinutes": 11230.0,
+            "percentage": 97.01
+          },
+          {
+            "detail": "/my_subscriptions",
+            "views": 78,
+            "engagedViews": 65,
+            "watchMinutes": 144.0,
+            "percentage": 1.29
+          },
+          {
+            "detail": "watch-later",
+            "views": 62,
+            "engagedViews": 61,
+            "watchMinutes": 178.0,
+            "percentage": 1.03
+          },
+          {
+            "detail": "my-history",
+            "views": 38,
+            "engagedViews": 38,
+            "watchMinutes": 85.0,
+            "percentage": 0.63
+          },
+          {
+            "detail": "PP",
+            "views": 3,
+            "engagedViews": 3,
+            "watchMinutes": 10.0,
+            "percentage": 0.05
           }
         ]
       },
@@ -34747,6 +35059,43 @@
             "watchMinutes": 3.0,
             "percentage": 4.17
           }
+        ],
+        "subscriberDetails": [
+          {
+            "detail": "what-to-watch",
+            "views": 15356,
+            "engagedViews": 7643,
+            "watchMinutes": 20117.0,
+            "percentage": 98.1
+          },
+          {
+            "detail": "/my_subscriptions",
+            "views": 108,
+            "engagedViews": 84,
+            "watchMinutes": 182.0,
+            "percentage": 0.69
+          },
+          {
+            "detail": "watch-later",
+            "views": 104,
+            "engagedViews": 104,
+            "watchMinutes": 294.0,
+            "percentage": 0.66
+          },
+          {
+            "detail": "my-history",
+            "views": 84,
+            "engagedViews": 84,
+            "watchMinutes": 125.0,
+            "percentage": 0.54
+          },
+          {
+            "detail": "PP",
+            "views": 1,
+            "engagedViews": 1,
+            "watchMinutes": 0.0,
+            "percentage": 0.01
+          }
         ]
       },
       "sharingServices": [
@@ -36002,6 +36351,43 @@
             "watchMinutes": 0.0,
             "percentage": 33.33
           }
+        ],
+        "subscriberDetails": [
+          {
+            "detail": "what-to-watch",
+            "views": 2531,
+            "engagedViews": 1978,
+            "watchMinutes": 4105.0,
+            "percentage": 94.44
+          },
+          {
+            "detail": "/my_subscriptions",
+            "views": 84,
+            "engagedViews": 58,
+            "watchMinutes": 112.0,
+            "percentage": 3.13
+          },
+          {
+            "detail": "watch-later",
+            "views": 41,
+            "engagedViews": 41,
+            "watchMinutes": 76.0,
+            "percentage": 1.53
+          },
+          {
+            "detail": "my-history",
+            "views": 23,
+            "engagedViews": 23,
+            "watchMinutes": 20.0,
+            "percentage": 0.86
+          },
+          {
+            "detail": "PP",
+            "views": 1,
+            "engagedViews": 1,
+            "watchMinutes": 2.0,
+            "percentage": 0.04
+          }
         ]
       },
       "sharingServices": [
@@ -37083,7 +37469,37 @@
             "percentage": 1.69
           }
         ],
-        "externalSites": []
+        "externalSites": [],
+        "subscriberDetails": [
+          {
+            "detail": "what-to-watch",
+            "views": 2993,
+            "engagedViews": 1339,
+            "watchMinutes": 2227.0,
+            "percentage": 95.84
+          },
+          {
+            "detail": "/my_subscriptions",
+            "views": 80,
+            "engagedViews": 44,
+            "watchMinutes": 75.0,
+            "percentage": 2.56
+          },
+          {
+            "detail": "watch-later",
+            "views": 39,
+            "engagedViews": 39,
+            "watchMinutes": 78.0,
+            "percentage": 1.25
+          },
+          {
+            "detail": "my-history",
+            "views": 11,
+            "engagedViews": 11,
+            "watchMinutes": 4.0,
+            "percentage": 0.35
+          }
+        ]
       },
       "sharingServices": [
         {
@@ -37995,24 +38411,24 @@
         "sources": [
           {
             "source": "SUBSCRIBER",
-            "views": 18340,
+            "views": 18339,
             "engagedViews": 8029,
             "watchMinutes": 17436.0,
-            "percentage": 80.58
+            "percentage": 80.59
           },
           {
             "source": "YT_SEARCH",
-            "views": 2291,
+            "views": 2290,
             "engagedViews": 970,
             "watchMinutes": 1589.0,
-            "percentage": 10.07
+            "percentage": 10.06
           },
           {
             "source": "RELATED_VIDEO",
-            "views": 1513,
+            "views": 1512,
             "engagedViews": 1486,
             "watchMinutes": 4235.0,
-            "percentage": 6.65
+            "percentage": 6.64
           },
           {
             "source": "YT_CHANNEL",
@@ -38074,17 +38490,17 @@
         "searchTerms": [
           {
             "detail": "江角怜音",
-            "views": 993,
+            "views": 992,
             "engagedViews": 414,
             "watchMinutes": 600.0,
-            "percentage": 51.32
+            "percentage": 51.29
           },
           {
             "detail": "江角 怜音",
             "views": 522,
             "engagedViews": 231,
             "watchMinutes": 403.0,
-            "percentage": 26.98
+            "percentage": 26.99
           },
           {
             "detail": "ニアジョイ",
@@ -38098,7 +38514,7 @@
             "views": 98,
             "engagedViews": 40,
             "watchMinutes": 69.0,
-            "percentage": 5.06
+            "percentage": 5.07
           },
           {
             "detail": "江角伶音",
@@ -38311,6 +38727,43 @@
             "engagedViews": 1,
             "watchMinutes": 0.0,
             "percentage": 3.85
+          }
+        ],
+        "subscriberDetails": [
+          {
+            "detail": "what-to-watch",
+            "views": 18070,
+            "engagedViews": 7852,
+            "watchMinutes": 16939.0,
+            "percentage": 98.53
+          },
+          {
+            "detail": "/my_subscriptions",
+            "views": 146,
+            "engagedViews": 56,
+            "watchMinutes": 139.0,
+            "percentage": 0.8
+          },
+          {
+            "detail": "watch-later",
+            "views": 80,
+            "engagedViews": 79,
+            "watchMinutes": 276.0,
+            "percentage": 0.44
+          },
+          {
+            "detail": "my-history",
+            "views": 39,
+            "engagedViews": 38,
+            "watchMinutes": 71.0,
+            "percentage": 0.21
+          },
+          {
+            "detail": "PP",
+            "views": 4,
+            "engagedViews": 4,
+            "watchMinutes": 9.0,
+            "percentage": 0.02
           }
         ]
       },
@@ -39458,6 +39911,36 @@
             "watchMinutes": 0.0,
             "percentage": 25.0
           }
+        ],
+        "subscriberDetails": [
+          {
+            "detail": "what-to-watch",
+            "views": 5955,
+            "engagedViews": 2247,
+            "watchMinutes": 5848.0,
+            "percentage": 96.85
+          },
+          {
+            "detail": "/my_subscriptions",
+            "views": 154,
+            "engagedViews": 50,
+            "watchMinutes": 82.0,
+            "percentage": 2.5
+          },
+          {
+            "detail": "my-history",
+            "views": 22,
+            "engagedViews": 22,
+            "watchMinutes": 34.0,
+            "percentage": 0.36
+          },
+          {
+            "detail": "watch-later",
+            "views": 18,
+            "engagedViews": 18,
+            "watchMinutes": 55.0,
+            "percentage": 0.29
+          }
         ]
       },
       "sharingServices": [
@@ -40483,6 +40966,36 @@
             "engagedViews": 1,
             "watchMinutes": 2.0,
             "percentage": 20.0
+          }
+        ],
+        "subscriberDetails": [
+          {
+            "detail": "what-to-watch",
+            "views": 5855,
+            "engagedViews": 1644,
+            "watchMinutes": 3539.0,
+            "percentage": 97.07
+          },
+          {
+            "detail": "/my_subscriptions",
+            "views": 144,
+            "engagedViews": 48,
+            "watchMinutes": 113.0,
+            "percentage": 2.39
+          },
+          {
+            "detail": "watch-later",
+            "views": 22,
+            "engagedViews": 22,
+            "watchMinutes": 69.0,
+            "percentage": 0.36
+          },
+          {
+            "detail": "my-history",
+            "views": 11,
+            "engagedViews": 11,
+            "watchMinutes": 30.0,
+            "percentage": 0.18
           }
         ]
       },
@@ -41539,6 +42052,43 @@
             "watchMinutes": 0.0,
             "percentage": 14.29
           }
+        ],
+        "subscriberDetails": [
+          {
+            "detail": "what-to-watch",
+            "views": 8118,
+            "engagedViews": 3352,
+            "watchMinutes": 10490.0,
+            "percentage": 97.07
+          },
+          {
+            "detail": "/my_subscriptions",
+            "views": 166,
+            "engagedViews": 72,
+            "watchMinutes": 170.0,
+            "percentage": 1.98
+          },
+          {
+            "detail": "watch-later",
+            "views": 60,
+            "engagedViews": 57,
+            "watchMinutes": 197.0,
+            "percentage": 0.72
+          },
+          {
+            "detail": "my-history",
+            "views": 18,
+            "engagedViews": 18,
+            "watchMinutes": 61.0,
+            "percentage": 0.22
+          },
+          {
+            "detail": "PP",
+            "views": 1,
+            "engagedViews": 1,
+            "watchMinutes": 3.0,
+            "percentage": 0.01
+          }
         ]
       },
       "sharingServices": [
@@ -42561,6 +43111,36 @@
             "watchMinutes": 1.0,
             "percentage": 25.0
           }
+        ],
+        "subscriberDetails": [
+          {
+            "detail": "what-to-watch",
+            "views": 9125,
+            "engagedViews": 4042,
+            "watchMinutes": 6950.0,
+            "percentage": 97.49
+          },
+          {
+            "detail": "/my_subscriptions",
+            "views": 170,
+            "engagedViews": 46,
+            "watchMinutes": 63.0,
+            "percentage": 1.82
+          },
+          {
+            "detail": "watch-later",
+            "views": 44,
+            "engagedViews": 44,
+            "watchMinutes": 98.0,
+            "percentage": 0.47
+          },
+          {
+            "detail": "my-history",
+            "views": 21,
+            "engagedViews": 21,
+            "watchMinutes": 28.0,
+            "percentage": 0.22
+          }
         ]
       },
       "sharingServices": [
@@ -43545,6 +44125,36 @@
             "watchMinutes": 8.0,
             "percentage": 25.0
           }
+        ],
+        "subscriberDetails": [
+          {
+            "detail": "what-to-watch",
+            "views": 8940,
+            "engagedViews": 3629,
+            "watchMinutes": 12875.0,
+            "percentage": 97.66
+          },
+          {
+            "detail": "/my_subscriptions",
+            "views": 146,
+            "engagedViews": 56,
+            "watchMinutes": 185.0,
+            "percentage": 1.59
+          },
+          {
+            "detail": "watch-later",
+            "views": 46,
+            "engagedViews": 43,
+            "watchMinutes": 206.0,
+            "percentage": 0.5
+          },
+          {
+            "detail": "my-history",
+            "views": 22,
+            "engagedViews": 22,
+            "watchMinutes": 58.0,
+            "percentage": 0.24
+          }
         ]
       },
       "sharingServices": [
@@ -44473,6 +45083,36 @@
             "watchMinutes": 0.0,
             "percentage": 0.88
           }
+        ],
+        "subscriberDetails": [
+          {
+            "detail": "what-to-watch",
+            "views": 6458,
+            "engagedViews": 1455,
+            "watchMinutes": 2379.0,
+            "percentage": 96.68
+          },
+          {
+            "detail": "/my_subscriptions",
+            "views": 144,
+            "engagedViews": 30,
+            "watchMinutes": 34.0,
+            "percentage": 2.16
+          },
+          {
+            "detail": "watch-later",
+            "views": 54,
+            "engagedViews": 50,
+            "watchMinutes": 180.0,
+            "percentage": 0.81
+          },
+          {
+            "detail": "my-history",
+            "views": 24,
+            "engagedViews": 24,
+            "watchMinutes": 33.0,
+            "percentage": 0.36
+          }
         ]
       },
       "sharingServices": [
@@ -44692,399 +45332,399 @@
         },
         {
           "position": 2.0,
-          "watchRatio": 86.23
+          "watchRatio": 86.22
         },
         {
           "position": 3.0,
-          "watchRatio": 80.78
+          "watchRatio": 80.75
         },
         {
           "position": 4.0,
-          "watchRatio": 79.09
+          "watchRatio": 79.06
         },
         {
           "position": 5.0,
-          "watchRatio": 74.81
+          "watchRatio": 74.77
         },
         {
           "position": 6.0,
-          "watchRatio": 72.6
+          "watchRatio": 72.56
         },
         {
           "position": 7.0,
-          "watchRatio": 69.74
+          "watchRatio": 69.7
         },
         {
           "position": 8.0,
-          "watchRatio": 66.88
+          "watchRatio": 66.97
         },
         {
           "position": 9.0,
-          "watchRatio": 66.62
+          "watchRatio": 66.71
         },
         {
           "position": 10.0,
-          "watchRatio": 64.81
+          "watchRatio": 64.76
         },
         {
           "position": 11.0,
-          "watchRatio": 65.58
+          "watchRatio": 65.54
         },
         {
           "position": 12.0,
-          "watchRatio": 62.99
+          "watchRatio": 62.94
         },
         {
           "position": 13.0,
-          "watchRatio": 65.19
+          "watchRatio": 65.15
         },
         {
           "position": 14.0,
-          "watchRatio": 66.1
+          "watchRatio": 66.06
         },
         {
           "position": 15.0,
-          "watchRatio": 63.51
+          "watchRatio": 63.46
         },
         {
           "position": 16.0,
-          "watchRatio": 62.86
+          "watchRatio": 62.81
         },
         {
           "position": 17.0,
-          "watchRatio": 61.56
+          "watchRatio": 61.51
         },
         {
           "position": 18.0,
-          "watchRatio": 61.95
+          "watchRatio": 61.9
         },
         {
           "position": 19.0,
-          "watchRatio": 62.34
+          "watchRatio": 62.29
         },
         {
           "position": 20.0,
-          "watchRatio": 60.78
+          "watchRatio": 60.73
         },
         {
           "position": 21.0,
-          "watchRatio": 60.91
+          "watchRatio": 60.86
         },
         {
           "position": 22.0,
-          "watchRatio": 59.35
+          "watchRatio": 59.3
         },
         {
           "position": 23.0,
-          "watchRatio": 60.26
+          "watchRatio": 60.21
         },
         {
           "position": 24.0,
-          "watchRatio": 58.83
+          "watchRatio": 58.78
         },
         {
           "position": 25.0,
-          "watchRatio": 59.61
+          "watchRatio": 59.56
         },
         {
           "position": 26.0,
-          "watchRatio": 59.87
+          "watchRatio": 59.82
         },
         {
           "position": 27.0,
-          "watchRatio": 57.53
+          "watchRatio": 57.48
         },
         {
           "position": 28.0,
-          "watchRatio": 56.62
+          "watchRatio": 56.57
         },
         {
           "position": 29.0,
-          "watchRatio": 56.36
+          "watchRatio": 56.31
         },
         {
           "position": 30.0,
-          "watchRatio": 56.23
+          "watchRatio": 56.18
         },
         {
           "position": 31.0,
-          "watchRatio": 54.81
+          "watchRatio": 54.75
         },
         {
           "position": 32.0,
-          "watchRatio": 53.51
+          "watchRatio": 53.45
         },
         {
           "position": 33.0,
-          "watchRatio": 53.38
+          "watchRatio": 53.32
         },
         {
           "position": 34.0,
-          "watchRatio": 52.21
+          "watchRatio": 52.15
         },
         {
           "position": 35.0,
-          "watchRatio": 52.34
+          "watchRatio": 52.28
         },
         {
           "position": 36.0,
-          "watchRatio": 51.43
+          "watchRatio": 51.37
         },
         {
           "position": 37.0,
-          "watchRatio": 52.21
+          "watchRatio": 52.15
         },
         {
           "position": 38.0,
-          "watchRatio": 52.73
+          "watchRatio": 52.8
         },
         {
           "position": 39.0,
-          "watchRatio": 52.73
+          "watchRatio": 52.8
         },
         {
           "position": 40.0,
-          "watchRatio": 51.69
+          "watchRatio": 51.63
         },
         {
           "position": 41.0,
-          "watchRatio": 48.44
+          "watchRatio": 48.37
         },
         {
           "position": 42.0,
-          "watchRatio": 46.88
+          "watchRatio": 46.81
         },
         {
           "position": 43.0,
-          "watchRatio": 47.01
+          "watchRatio": 46.94
         },
         {
           "position": 44.0,
-          "watchRatio": 46.49
+          "watchRatio": 46.42
         },
         {
           "position": 45.0,
-          "watchRatio": 45.19
+          "watchRatio": 45.12
         },
         {
           "position": 46.0,
-          "watchRatio": 44.16
+          "watchRatio": 44.08
         },
         {
           "position": 47.0,
-          "watchRatio": 43.51
+          "watchRatio": 43.56
         },
         {
           "position": 48.0,
-          "watchRatio": 42.21
+          "watchRatio": 42.26
         },
         {
           "position": 49.0,
-          "watchRatio": 42.99
+          "watchRatio": 43.04
         },
         {
           "position": 50.0,
-          "watchRatio": 42.6
+          "watchRatio": 42.65
         },
         {
           "position": 51.0,
-          "watchRatio": 41.69
+          "watchRatio": 41.74
         },
         {
           "position": 52.0,
-          "watchRatio": 42.08
+          "watchRatio": 42.13
         },
         {
           "position": 53.0,
-          "watchRatio": 41.3
+          "watchRatio": 41.22
         },
         {
           "position": 54.0,
-          "watchRatio": 41.3
+          "watchRatio": 41.22
         },
         {
           "position": 55.0,
-          "watchRatio": 39.74
+          "watchRatio": 39.66
         },
         {
           "position": 56.0,
-          "watchRatio": 38.96
+          "watchRatio": 38.88
         },
         {
           "position": 57.0,
-          "watchRatio": 38.96
+          "watchRatio": 38.88
         },
         {
           "position": 58.0,
-          "watchRatio": 37.92
+          "watchRatio": 37.84
         },
         {
           "position": 59.0,
-          "watchRatio": 37.53
+          "watchRatio": 37.45
         },
         {
           "position": 60.0,
-          "watchRatio": 36.36
+          "watchRatio": 36.28
         },
         {
           "position": 61.0,
-          "watchRatio": 37.01
+          "watchRatio": 36.93
         },
         {
           "position": 62.0,
-          "watchRatio": 35.71
+          "watchRatio": 35.63
         },
         {
           "position": 63.0,
-          "watchRatio": 35.84
+          "watchRatio": 35.76
         },
         {
           "position": 64.0,
-          "watchRatio": 34.94
+          "watchRatio": 34.85
         },
         {
           "position": 65.0,
-          "watchRatio": 34.68
+          "watchRatio": 34.59
         },
         {
           "position": 66.0,
-          "watchRatio": 34.55
+          "watchRatio": 34.46
         },
         {
           "position": 67.0,
-          "watchRatio": 34.81
+          "watchRatio": 34.72
         },
         {
           "position": 68.0,
-          "watchRatio": 33.77
+          "watchRatio": 33.68
         },
         {
           "position": 69.0,
-          "watchRatio": 34.68
+          "watchRatio": 34.59
         },
         {
           "position": 70.0,
-          "watchRatio": 33.12
+          "watchRatio": 33.03
         },
         {
           "position": 71.0,
-          "watchRatio": 33.51
+          "watchRatio": 33.42
         },
         {
           "position": 72.0,
-          "watchRatio": 33.77
+          "watchRatio": 33.68
         },
         {
           "position": 73.0,
-          "watchRatio": 33.77
+          "watchRatio": 33.68
         },
         {
           "position": 74.0,
-          "watchRatio": 33.25
+          "watchRatio": 33.16
         },
         {
           "position": 75.0,
-          "watchRatio": 32.47
+          "watchRatio": 32.38
         },
         {
           "position": 76.0,
-          "watchRatio": 32.34
+          "watchRatio": 32.25
         },
         {
           "position": 77.0,
-          "watchRatio": 31.56
+          "watchRatio": 31.47
         },
         {
           "position": 78.0,
-          "watchRatio": 31.3
+          "watchRatio": 31.21
         },
         {
           "position": 79.0,
-          "watchRatio": 31.3
+          "watchRatio": 31.21
         },
         {
           "position": 80.0,
-          "watchRatio": 31.56
+          "watchRatio": 31.47
         },
         {
           "position": 81.0,
-          "watchRatio": 31.56
+          "watchRatio": 31.47
         },
         {
           "position": 82.0,
-          "watchRatio": 31.43
+          "watchRatio": 31.34
         },
         {
           "position": 83.0,
-          "watchRatio": 31.56
+          "watchRatio": 31.47
         },
         {
           "position": 84.0,
-          "watchRatio": 30.65
+          "watchRatio": 30.56
         },
         {
           "position": 85.0,
-          "watchRatio": 30.39
+          "watchRatio": 30.3
         },
         {
           "position": 86.0,
-          "watchRatio": 30.13
+          "watchRatio": 30.04
         },
         {
           "position": 87.0,
-          "watchRatio": 30.26
+          "watchRatio": 30.17
         },
         {
           "position": 88.0,
-          "watchRatio": 30.52
+          "watchRatio": 30.43
         },
         {
           "position": 89.0,
-          "watchRatio": 30.52
+          "watchRatio": 30.43
         },
         {
           "position": 90.0,
-          "watchRatio": 30.0
+          "watchRatio": 29.91
         },
         {
           "position": 91.0,
-          "watchRatio": 28.96
+          "watchRatio": 28.87
         },
         {
           "position": 92.0,
-          "watchRatio": 28.96
+          "watchRatio": 28.87
         },
         {
           "position": 93.0,
-          "watchRatio": 27.53
+          "watchRatio": 27.44
         },
         {
           "position": 94.0,
-          "watchRatio": 27.4
+          "watchRatio": 27.31
         },
         {
           "position": 95.0,
-          "watchRatio": 27.4
+          "watchRatio": 27.31
         },
         {
           "position": 96.0,
-          "watchRatio": 27.53
+          "watchRatio": 27.44
         },
         {
           "position": 97.0,
-          "watchRatio": 27.14
+          "watchRatio": 27.05
         },
         {
           "position": 98.0,
-          "watchRatio": 26.1
+          "watchRatio": 26.01
         },
         {
           "position": 99.0,
-          "watchRatio": 25.97
+          "watchRatio": 25.88
         },
         {
           "position": 100.0,
-          "watchRatio": 25.06
+          "watchRatio": 24.97
         }
       ],
       "traffic": {
@@ -45094,7 +45734,7 @@
             "views": 1761,
             "engagedViews": 505,
             "watchMinutes": 996.0,
-            "percentage": 86.28
+            "percentage": 86.32
           },
           {
             "source": "RELATED_VIDEO",
@@ -45105,10 +45745,10 @@
           },
           {
             "source": "YT_CHANNEL",
-            "views": 73,
-            "engagedViews": 70,
-            "watchMinutes": 118.0,
-            "percentage": 3.58
+            "views": 72,
+            "engagedViews": 69,
+            "watchMinutes": 113.0,
+            "percentage": 3.53
           },
           {
             "source": "YT_OTHER_PAGE",
@@ -45143,7 +45783,7 @@
             "views": 5,
             "engagedViews": 4,
             "watchMinutes": 9.0,
-            "percentage": 0.24
+            "percentage": 0.25
           },
           {
             "source": "EXT_URL",
@@ -45183,6 +45823,36 @@
             "engagedViews": 1,
             "watchMinutes": 4.0,
             "percentage": 100.0
+          }
+        ],
+        "subscriberDetails": [
+          {
+            "detail": "what-to-watch",
+            "views": 1570,
+            "engagedViews": 449,
+            "watchMinutes": 889.0,
+            "percentage": 89.15
+          },
+          {
+            "detail": "/my_subscriptions",
+            "views": 173,
+            "engagedViews": 39,
+            "watchMinutes": 58.0,
+            "percentage": 9.82
+          },
+          {
+            "detail": "watch-later",
+            "views": 17,
+            "engagedViews": 16,
+            "watchMinutes": 44.0,
+            "percentage": 0.97
+          },
+          {
+            "detail": "my-history",
+            "views": 1,
+            "engagedViews": 1,
+            "watchMinutes": 3.0,
+            "percentage": 0.06
           }
         ]
       },
@@ -45401,135 +46071,135 @@
         },
         {
           "position": 12.0,
-          "watchRatio": 67.09
+          "watchRatio": 67.11
         },
         {
           "position": 13.0,
-          "watchRatio": 65.19
+          "watchRatio": 65.2
         },
         {
           "position": 14.0,
-          "watchRatio": 65.23
+          "watchRatio": 65.24
         },
         {
           "position": 15.0,
-          "watchRatio": 64.03
+          "watchRatio": 64.04
         },
         {
           "position": 16.0,
-          "watchRatio": 64.75
+          "watchRatio": 64.77
         },
         {
           "position": 17.0,
-          "watchRatio": 63.9
+          "watchRatio": 63.91
         },
         {
           "position": 18.0,
-          "watchRatio": 63.98
+          "watchRatio": 63.99
         },
         {
           "position": 19.0,
-          "watchRatio": 62.38
+          "watchRatio": 62.4
         },
         {
           "position": 20.0,
-          "watchRatio": 61.86
+          "watchRatio": 61.87
         },
         {
           "position": 21.0,
-          "watchRatio": 61.17
+          "watchRatio": 61.18
         },
         {
           "position": 22.0,
-          "watchRatio": 61.51
+          "watchRatio": 61.52
         },
         {
           "position": 23.0,
-          "watchRatio": 60.47
+          "watchRatio": 60.48
         },
         {
           "position": 24.0,
-          "watchRatio": 60.14
+          "watchRatio": 60.15
         },
         {
           "position": 25.0,
-          "watchRatio": 59.01
+          "watchRatio": 59.02
         },
         {
           "position": 26.0,
-          "watchRatio": 58.72
+          "watchRatio": 58.73
         },
         {
           "position": 27.0,
-          "watchRatio": 58.37
+          "watchRatio": 58.38
         },
         {
           "position": 28.0,
-          "watchRatio": 57.86
+          "watchRatio": 57.87
         },
         {
           "position": 29.0,
-          "watchRatio": 56.67
+          "watchRatio": 56.68
         },
         {
           "position": 30.0,
-          "watchRatio": 56.3
+          "watchRatio": 56.31
         },
         {
           "position": 31.0,
-          "watchRatio": 55.74
+          "watchRatio": 55.75
         },
         {
           "position": 32.0,
-          "watchRatio": 54.06
+          "watchRatio": 54.07
         },
         {
           "position": 33.0,
-          "watchRatio": 54.19
+          "watchRatio": 54.2
         },
         {
           "position": 34.0,
-          "watchRatio": 54.27
+          "watchRatio": 54.28
         },
         {
           "position": 35.0,
-          "watchRatio": 53.47
+          "watchRatio": 53.49
         },
         {
           "position": 36.0,
-          "watchRatio": 54.17
+          "watchRatio": 54.19
         },
         {
           "position": 37.0,
-          "watchRatio": 53.57
+          "watchRatio": 53.58
         },
         {
           "position": 38.0,
-          "watchRatio": 54.01
+          "watchRatio": 54.02
         },
         {
           "position": 39.0,
-          "watchRatio": 53.42
+          "watchRatio": 53.43
         },
         {
           "position": 40.0,
-          "watchRatio": 53.51
+          "watchRatio": 53.52
         },
         {
           "position": 41.0,
-          "watchRatio": 53.72
+          "watchRatio": 53.73
         },
         {
           "position": 42.0,
-          "watchRatio": 53.1
+          "watchRatio": 53.11
         },
         {
           "position": 43.0,
-          "watchRatio": 52.66
+          "watchRatio": 52.67
         },
         {
           "position": 44.0,
-          "watchRatio": 52.82
+          "watchRatio": 52.83
         },
         {
           "position": 45.0,
@@ -45537,23 +46207,23 @@
         },
         {
           "position": 46.0,
-          "watchRatio": 51.34
+          "watchRatio": 51.35
         },
         {
           "position": 47.0,
-          "watchRatio": 50.73
+          "watchRatio": 50.74
         },
         {
           "position": 48.0,
-          "watchRatio": 49.77
+          "watchRatio": 49.78
         },
         {
           "position": 49.0,
-          "watchRatio": 49.75
+          "watchRatio": 49.76
         },
         {
           "position": 50.0,
-          "watchRatio": 48.12
+          "watchRatio": 48.13
         },
         {
           "position": 51.0,
@@ -45565,15 +46235,15 @@
         },
         {
           "position": 53.0,
-          "watchRatio": 46.89
+          "watchRatio": 46.9
         },
         {
           "position": 54.0,
-          "watchRatio": 45.93
+          "watchRatio": 45.94
         },
         {
           "position": 55.0,
-          "watchRatio": 45.74
+          "watchRatio": 45.75
         },
         {
           "position": 56.0,
@@ -45581,11 +46251,11 @@
         },
         {
           "position": 57.0,
-          "watchRatio": 44.61
+          "watchRatio": 44.62
         },
         {
           "position": 58.0,
-          "watchRatio": 45.03
+          "watchRatio": 45.04
         },
         {
           "position": 59.0,
@@ -45597,19 +46267,19 @@
         },
         {
           "position": 61.0,
-          "watchRatio": 43.25
+          "watchRatio": 43.26
         },
         {
           "position": 62.0,
-          "watchRatio": 43.32
+          "watchRatio": 43.33
         },
         {
           "position": 63.0,
-          "watchRatio": 42.64
+          "watchRatio": 42.65
         },
         {
           "position": 64.0,
-          "watchRatio": 42.49
+          "watchRatio": 42.5
         },
         {
           "position": 65.0,
@@ -45617,11 +46287,11 @@
         },
         {
           "position": 66.0,
-          "watchRatio": 42.09
+          "watchRatio": 42.1
         },
         {
           "position": 67.0,
-          "watchRatio": 41.41
+          "watchRatio": 41.42
         },
         {
           "position": 68.0,
@@ -45633,7 +46303,7 @@
         },
         {
           "position": 70.0,
-          "watchRatio": 40.69
+          "watchRatio": 40.7
         },
         {
           "position": 71.0,
@@ -45645,7 +46315,7 @@
         },
         {
           "position": 73.0,
-          "watchRatio": 40.08
+          "watchRatio": 40.09
         },
         {
           "position": 74.0,
@@ -45653,11 +46323,11 @@
         },
         {
           "position": 75.0,
-          "watchRatio": 39.75
+          "watchRatio": 39.76
         },
         {
           "position": 76.0,
-          "watchRatio": 38.96
+          "watchRatio": 38.97
         },
         {
           "position": 77.0,
@@ -45673,15 +46343,15 @@
         },
         {
           "position": 80.0,
-          "watchRatio": 37.97
+          "watchRatio": 37.98
         },
         {
           "position": 81.0,
-          "watchRatio": 37.23
+          "watchRatio": 37.24
         },
         {
           "position": 82.0,
-          "watchRatio": 37.0
+          "watchRatio": 37.01
         },
         {
           "position": 83.0,
@@ -45689,11 +46359,11 @@
         },
         {
           "position": 84.0,
-          "watchRatio": 36.56
+          "watchRatio": 36.57
         },
         {
           "position": 85.0,
-          "watchRatio": 36.25
+          "watchRatio": 36.26
         },
         {
           "position": 86.0,
@@ -45701,15 +46371,15 @@
         },
         {
           "position": 87.0,
-          "watchRatio": 35.67
-        },
-        {
-          "position": 88.0,
           "watchRatio": 35.68
         },
         {
+          "position": 88.0,
+          "watchRatio": 35.69
+        },
+        {
           "position": 89.0,
-          "watchRatio": 35.28
+          "watchRatio": 35.29
         },
         {
           "position": 90.0,
@@ -45757,92 +46427,21 @@
         }
       ],
       "traffic": {
-        "sources": [
-          {
-            "source": "SUBSCRIBER",
-            "views": 29109,
-            "engagedViews": 12565,
-            "watchMinutes": 29517.0,
-            "percentage": 85.0
-          },
-          {
-            "source": "YT_SEARCH",
-            "views": 2749,
-            "engagedViews": 1457,
-            "watchMinutes": 2849.0,
-            "percentage": 8.03
-          },
-          {
-            "source": "RELATED_VIDEO",
-            "views": 1726,
-            "engagedViews": 1700,
-            "watchMinutes": 4250.0,
-            "percentage": 5.04
-          },
-          {
-            "source": "NO_LINK_OTHER",
-            "views": 233,
-            "engagedViews": 225,
-            "watchMinutes": 336.0,
-            "percentage": 0.68
-          },
-          {
-            "source": "YT_OTHER_PAGE",
-            "views": 181,
-            "engagedViews": 171,
-            "watchMinutes": 445.0,
-            "percentage": 0.53
-          },
-          {
-            "source": "YT_CHANNEL",
-            "views": 110,
-            "engagedViews": 100,
-            "watchMinutes": 140.0,
-            "percentage": 0.32
-          },
-          {
-            "source": "NOTIFICATION",
-            "views": 56,
-            "engagedViews": 56,
-            "watchMinutes": 114.0,
-            "percentage": 0.16
-          },
-          {
-            "source": "EXT_URL",
-            "views": 38,
-            "engagedViews": 38,
-            "watchMinutes": 44.0,
-            "percentage": 0.11
-          },
-          {
-            "source": "PLAYLIST",
-            "views": 32,
-            "engagedViews": 31,
-            "watchMinutes": 83.0,
-            "percentage": 0.09
-          },
-          {
-            "source": "HASHTAGS",
-            "views": 11,
-            "engagedViews": 11,
-            "watchMinutes": 24.0,
-            "percentage": 0.03
-          }
-        ],
+        "sources": [],
         "searchTerms": [
           {
             "detail": "小澤愛実",
-            "views": 972,
-            "engagedViews": 593,
-            "watchMinutes": 1129.0,
-            "percentage": 41.03
+            "views": 973,
+            "engagedViews": 594,
+            "watchMinutes": 1133.0,
+            "percentage": 41.12
           },
           {
             "detail": "ニアジョイ",
             "views": 825,
             "engagedViews": 405,
             "watchMinutes": 795.0,
-            "percentage": 34.82
+            "percentage": 34.87
           },
           {
             "detail": "江角怜音",
@@ -45856,14 +46455,14 @@
             "views": 87,
             "engagedViews": 30,
             "watchMinutes": 51.0,
-            "percentage": 3.67
+            "percentage": 3.68
           },
           {
             "detail": "山添 ニアジョイ",
-            "views": 73,
+            "views": 70,
             "engagedViews": 52,
-            "watchMinutes": 107.0,
-            "percentage": 3.08
+            "watchMinutes": 106.0,
+            "percentage": 2.96
           },
           {
             "detail": "小澤愛実 showroom",
@@ -45881,10 +46480,10 @@
           },
           {
             "detail": "ニアジョイ 山添",
-            "views": 38,
+            "views": 37,
             "engagedViews": 29,
             "watchMinutes": 54.0,
-            "percentage": 1.6
+            "percentage": 1.56
           },
           {
             "detail": "江角怜音 showroom",
@@ -45905,7 +46504,7 @@
             "views": 20,
             "engagedViews": 15,
             "watchMinutes": 33.0,
-            "percentage": 0.84
+            "percentage": 0.85
           },
           {
             "detail": "江角 怜音",
@@ -46062,6 +46661,36 @@
             "engagedViews": 1,
             "watchMinutes": 0.0,
             "percentage": 4.76
+          }
+        ],
+        "subscriberDetails": [
+          {
+            "detail": "what-to-watch",
+            "views": 28597,
+            "engagedViews": 12255,
+            "watchMinutes": 28745.0,
+            "percentage": 98.28
+          },
+          {
+            "detail": "/my_subscriptions",
+            "views": 292,
+            "engagedViews": 101,
+            "watchMinutes": 177.0,
+            "percentage": 1.0
+          },
+          {
+            "detail": "watch-later",
+            "views": 142,
+            "engagedViews": 138,
+            "watchMinutes": 439.0,
+            "percentage": 0.49
+          },
+          {
+            "detail": "my-history",
+            "views": 67,
+            "engagedViews": 67,
+            "watchMinutes": 148.0,
+            "percentage": 0.23
           }
         ]
       },
@@ -46231,87 +46860,87 @@
         },
         {
           "position": 15.0,
-          "watchRatio": 74.73
+          "watchRatio": 74.77
         },
         {
           "position": 16.0,
-          "watchRatio": 73.13
+          "watchRatio": 73.16
         },
         {
           "position": 17.0,
-          "watchRatio": 72.86
+          "watchRatio": 72.89
         },
         {
           "position": 18.0,
-          "watchRatio": 70.95
+          "watchRatio": 70.98
         },
         {
           "position": 19.0,
-          "watchRatio": 70.55
+          "watchRatio": 70.58
         },
         {
           "position": 20.0,
-          "watchRatio": 68.07
+          "watchRatio": 68.1
         },
         {
           "position": 21.0,
-          "watchRatio": 67.49
+          "watchRatio": 67.52
         },
         {
           "position": 22.0,
-          "watchRatio": 66.37
+          "watchRatio": 66.4
         },
         {
           "position": 23.0,
-          "watchRatio": 64.68
+          "watchRatio": 64.71
         },
         {
           "position": 24.0,
-          "watchRatio": 64.47
+          "watchRatio": 64.5
         },
         {
           "position": 25.0,
-          "watchRatio": 63.13
+          "watchRatio": 63.16
         },
         {
           "position": 26.0,
-          "watchRatio": 62.38
+          "watchRatio": 62.41
         },
         {
           "position": 27.0,
-          "watchRatio": 61.1
+          "watchRatio": 61.13
         },
         {
           "position": 28.0,
-          "watchRatio": 60.65
+          "watchRatio": 60.68
         },
         {
           "position": 29.0,
-          "watchRatio": 59.74
+          "watchRatio": 59.77
         },
         {
           "position": 30.0,
-          "watchRatio": 58.8
+          "watchRatio": 58.83
         },
         {
           "position": 31.0,
-          "watchRatio": 58.92
+          "watchRatio": 58.95
         },
         {
           "position": 32.0,
-          "watchRatio": 57.95
+          "watchRatio": 57.98
         },
         {
           "position": 33.0,
-          "watchRatio": 57.71
+          "watchRatio": 57.74
         },
         {
           "position": 34.0,
-          "watchRatio": 56.8
+          "watchRatio": 56.83
         },
         {
           "position": 35.0,
-          "watchRatio": 56.44
+          "watchRatio": 56.47
         },
         {
           "position": 36.0,
@@ -46578,24 +47207,24 @@
         "sources": [
           {
             "source": "SUBSCRIBER",
-            "views": 6131,
+            "views": 6117,
             "engagedViews": 2791,
-            "watchMinutes": 5184.0,
-            "percentage": 90.98
+            "watchMinutes": 5185.0,
+            "percentage": 90.96
           },
           {
             "source": "RELATED_VIDEO",
             "views": 264,
             "engagedViews": 263,
             "watchMinutes": 517.0,
-            "percentage": 3.92
+            "percentage": 3.93
           },
           {
             "source": "YT_SEARCH",
             "views": 170,
             "engagedViews": 86,
             "watchMinutes": 140.0,
-            "percentage": 2.52
+            "percentage": 2.53
           },
           {
             "source": "NOTIFICATION",
@@ -46754,6 +47383,43 @@
             "engagedViews": 1,
             "watchMinutes": 2.0,
             "percentage": 100.0
+          }
+        ],
+        "subscriberDetails": [
+          {
+            "detail": "what-to-watch",
+            "views": 5880,
+            "engagedViews": 2681,
+            "watchMinutes": 4967.0,
+            "percentage": 96.13
+          },
+          {
+            "detail": "/my_subscriptions",
+            "views": 195,
+            "engagedViews": 68,
+            "watchMinutes": 121.0,
+            "percentage": 3.19
+          },
+          {
+            "detail": "watch-later",
+            "views": 36,
+            "engagedViews": 36,
+            "watchMinutes": 82.0,
+            "percentage": 0.59
+          },
+          {
+            "detail": "my-history",
+            "views": 5,
+            "engagedViews": 5,
+            "watchMinutes": 10.0,
+            "percentage": 0.08
+          },
+          {
+            "detail": "PP",
+            "views": 1,
+            "engagedViews": 1,
+            "watchMinutes": 2.0,
+            "percentage": 0.02
           }
         ]
       },
