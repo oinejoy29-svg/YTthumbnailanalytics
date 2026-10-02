@@ -5211,6 +5211,10 @@ const trafficValuePlugin = {
       chart.getDatasetMeta(0);
 
 
+    const sources =
+      chart.$trafficSources || [];
+
+
     ctx.save();
 
     ctx.fillStyle =
@@ -5228,17 +5232,43 @@ const trafficValuePlugin = {
     meta.data.forEach(
       (bar,index) => {
 
-        const value =
-          data.datasets[0]
-            .data[index];
+        const percentage =
+          Number(
+            data.datasets[0]
+              .data[index]
+          );
+
+
+        const views =
+          (
+            sources[index]?.views !== null &&
+            sources[index]?.views !== undefined
+          )
+            ? Number(
+                sources[index].views
+              )
+            : null;
+
+
+        const percentageText =
+          Number.isFinite(percentage)
+            ? `${percentage.toFixed(1)}%`
+            : "—";
+
+
+        const viewsText =
+          Number.isFinite(views)
+            ? `${views.toLocaleString("ja-JP")}回`
+            : "—";
+
 
         const text =
-          `${value}%`;
+          `${percentageText}　${viewsText}`;
 
 
         const x =
           Math.min(
-            chart.chartArea.right - 30,
+            chart.chartArea.right - 90,
             bar.x + 8
           );
 
@@ -5661,6 +5691,8 @@ function renderTrafficSourceChart(){
         }
       }
     );
+  CHARTS.traffic.$trafficSources =
+    sources;
 }
 
 /* =========================================================
@@ -5740,10 +5772,32 @@ function createTrafficDetailRow(
       "strong"
     );
 
-  value.textContent =
+
+  const views =
+    (
+      row?.views !== null &&
+      row?.views !== undefined
+    )
+      ? Number(
+          row.views
+        )
+      : null;
+
+
+  const percentageText =
     Number.isFinite(percentage)
       ? `${percentage.toFixed(1)}%`
       : "—";
+
+
+  const viewsText =
+    Number.isFinite(views)
+      ? `${views.toLocaleString("ja-JP")}回`
+      : "—";
+
+
+  value.textContent =
+    `${percentageText}　${viewsText}`;
 
 
   element.append(
