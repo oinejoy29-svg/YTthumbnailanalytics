@@ -1063,12 +1063,12 @@ def get_video_traffic(
         "subscriberDetails": subscriber_details
     }
 
-    def get_video_sharing_services(
+
+def get_video_sharing_services(
     video_id,
     start_date,
     end_date
 ):
-    
     """
     動画のシェア先を取得する。
 
