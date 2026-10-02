@@ -1068,6 +1068,7 @@ def get_video_traffic(
     start_date,
     end_date
 ):
+    
     """
     動画のシェア先を取得する。
 
