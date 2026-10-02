@@ -848,10 +848,21 @@ def get_video_traffic(
     )
 
 
+    subscriber_details = (
+        get_video_traffic_detail(
+            video_id,
+            start_date,
+            end_date,
+            "SUBSCRIBER"
+        )
+    )
+
+
     return {
         "sources": sources,
         "searchTerms": search_terms,
-        "externalSites": external_sites
+        "externalSites": external_sites,
+        "subscriberDetails": subscriber_details
     }
 
 def get_video_sharing_services(
