@@ -819,6 +819,10 @@ def get_video_traffic(
     """
     流入元・検索語・外部サイトを
     一括取得する。
+
+    SUBSCRIBER は詳細を取得し、
+    ホーム・登録チャンネル・後で見る・履歴・その他
+    に分解する。
     """
 
     sources = get_video_traffic_sources(
@@ -858,18 +862,206 @@ def get_video_traffic(
     )
 
 
+    # =====================================================
+    # SUBSCRIBER を詳細別に再分類
+    # =====================================================
+
+    subscriber_groups = {
+        "HOME": {
+            "source": "HOME",
+            "views": 0,
+            "engagedViews": 0,
+            "watchMinutes": 0
+        },
+        "SUBSCRIBER": {
+            "source": "SUBSCRIBER",
+            "views": 0,
+            "engagedViews": 0,
+            "watchMinutes": 0
+        },
+        "WATCH_LATER": {
+            "source": "WATCH_LATER",
+            "views": 0,
+            "engagedViews": 0,
+            "watchMinutes": 0
+        },
+        "HISTORY": {
+            "source": "HISTORY",
+            "views": 0,
+            "engagedViews": 0,
+            "watchMinutes": 0
+        },
+        "SUBSCRIBER_OTHER": {
+            "source": "SUBSCRIBER_OTHER",
+            "views": 0,
+            "engagedViews": 0,
+            "watchMinutes": 0
+        }
+    }
+
+
+    for row in subscriber_details:
+
+        detail = row.get(
+            "detail",
+            ""
+        )
+
+        if detail == "what-to-watch":
+            group_key = "HOME"
+
+        elif detail == "/my_subscriptions":
+            group_key = "SUBSCRIBER"
+
+        elif detail == "watch-later":
+            group_key = "WATCH_LATER"
+
+        elif detail == "my-history":
+            group_key = "HISTORY"
+
+        else:
+            group_key = "SUBSCRIBER_OTHER"
+
+
+        subscriber_groups[group_key]["views"] += int(
+            row.get(
+                "views",
+                0
+            )
+        )
+
+        subscriber_groups[group_key]["engagedViews"] += int(
+            row.get(
+                "engagedViews",
+                0
+            )
+        )
+
+        subscriber_groups[group_key]["watchMinutes"] += float(
+            row.get(
+                "watchMinutes",
+                0
+            )
+        )
+
+
+    # =====================================================
+    # 元の SUBSCRIBER を sources から削除
+    # =====================================================
+
+    original_subscriber = None
+
+    for row in sources:
+
+        if row.get("source") == "SUBSCRIBER":
+            original_subscriber = row
+            break
+
+
+    sources = [
+        row
+        for row in sources
+        if row.get("source") != "SUBSCRIBER"
+    ]
+
+
+    # =====================================================
+    # 詳細で取得できなかった差分も失わない
+    # =====================================================
+
+    if original_subscriber is not None:
+
+        original_views = int(
+            original_subscriber.get(
+                "views",
+                0
+            )
+        )
+
+        detail_views = sum(
+            group["views"]
+            for group in subscriber_groups.values()
+        )
+
+        missing_views = max(
+            0,
+            original_views - detail_views
+        )
+
+        subscriber_groups[
+            "SUBSCRIBER_OTHER"
+        ]["views"] += missing_views
+
+
+    # =====================================================
+    # 0回の分類は表示しない
+    # =====================================================
+
+    for group in subscriber_groups.values():
+
+        if group["views"] <= 0:
+            continue
+
+        group["watchMinutes"] = round(
+            group["watchMinutes"],
+            2
+        )
+
+        sources.append(group)
+
+
+    # =====================================================
+    # 分解後の流入元割合を再計算
+    # =====================================================
+
+    total_source_views = sum(
+        int(
+            row.get(
+                "views",
+                0
+            )
+        )
+        for row in sources
+    )
+
+
+    for row in sources:
+
+        views = int(
+            row.get(
+                "views",
+                0
+            )
+        )
+
+        row["percentage"] = (
+            round(
+                (
+                    views /
+                    total_source_views
+                ) * 100,
+                2
+            )
+            if total_source_views > 0
+            else 0
+        )
+
+
+    sources.sort(
+        key=lambda row: row.get(
+            "views",
+            0
+        ),
+        reverse=True
+    )
+
+
     return {
         "sources": sources,
         "searchTerms": search_terms,
         "externalSites": external_sites,
         "subscriberDetails": subscriber_details
     }
-
-def get_video_sharing_services(
-    video_id,
-    start_date,
-    end_date
-):
     """
     動画のシェア先を取得する。
 
