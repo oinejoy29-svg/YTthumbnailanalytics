@@ -611,22 +611,22 @@
     },
     {
       "date": "2026-10-05",
-      "subscribers": 687,
+      "subscribers": 688,
       "forecasts": {
         "30": {
-          "positive": 878,
-          "standard": 846,
-          "cautious": 814
+          "positive": 882,
+          "standard": 850,
+          "cautious": 817
         },
         "90": {
-          "positive": 1260,
-          "standard": 1165,
-          "cautious": 1069
+          "positive": 1270,
+          "standard": 1173,
+          "cautious": 1076
         },
         "365": {
-          "positive": 3011,
-          "standard": 2624,
-          "cautious": 2236
+          "positive": 3049,
+          "standard": 2655,
+          "cautious": 2262
         }
       }
     }
