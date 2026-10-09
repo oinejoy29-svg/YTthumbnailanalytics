@@ -713,6 +713,27 @@
           "cautious": 2427
         }
       }
+    },
+    {
+      "date": "2026-10-10",
+      "subscribers": 710,
+      "forecasts": {
+        "30": {
+          "positive": 880,
+          "standard": 852,
+          "cautious": 823
+        },
+        "90": {
+          "positive": 1221,
+          "standard": 1136,
+          "cautious": 1050
+        },
+        "365": {
+          "positive": 2781,
+          "standard": 2436,
+          "cautious": 2091
+        }
+      }
     }
   ],
   "milestoneForecasts": [
