@@ -884,22 +884,22 @@
     },
     {
       "date": "2026-10-18",
-      "subscribers": 740,
+      "subscribers": 741,
       "forecasts": {
         "30": {
-          "positive": 882,
-          "standard": 859,
-          "cautious": 835
+          "positive": 886,
+          "standard": 862,
+          "cautious": 838
         },
         "90": {
-          "positive": 1167,
-          "standard": 1096,
-          "cautious": 1025
+          "positive": 1177,
+          "standard": 1104,
+          "cautious": 1032
         },
         "365": {
-          "positive": 2472,
-          "standard": 2184,
-          "cautious": 1895
+          "positive": 2510,
+          "standard": 2215,
+          "cautious": 1920
         }
       }
     }
