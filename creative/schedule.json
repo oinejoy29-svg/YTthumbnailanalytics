@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-02T15:11:08",
+  "updatedAt": "2026-10-19T04:41:06",
   "events": [
     {
       "id": "3803",
@@ -64,6 +64,22 @@
       "category": "ライブ/イベント",
       "title": "≒JOY 全国ツアー2026「この夏 全部 全部 僕にください」 兵庫県・神戸国際会館 こくさいホール",
       "url": "https://nearly-equal-joy.jp/schedule/detail/3603"
+    },
+    {
+      "id": "4025",
+      "date": "2026-10-12",
+      "genre": "LIVE",
+      "category": "メディア",
+      "title": "TBS系「CDTVライブ！ライブ！」※≒JOY",
+      "url": "https://nearly-equal-joy.jp/schedule/detail/4025"
+    },
+    {
+      "id": "4027",
+      "date": "2026-10-15",
+      "genre": "OTHER",
+      "category": "メディア",
+      "title": "ワニブックスWEBマガジン「Newsクランチ！」連載『≒JOY大信田美月の推し麺を探せ！』※大信田美月",
+      "url": "https://nearly-equal-joy.jp/schedule/detail/4027"
     },
     {
       "id": "3676",
