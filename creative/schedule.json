@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-19T04:41:06",
+  "updatedAt": "2026-10-20T08:03:30",
   "events": [
     {
       "id": "3803",
@@ -80,6 +80,14 @@
       "category": "メディア",
       "title": "ワニブックスWEBマガジン「Newsクランチ！」連載『≒JOY大信田美月の推し麺を探せ！』※大信田美月",
       "url": "https://nearly-equal-joy.jp/schedule/detail/4027"
+    },
+    {
+      "id": "4038",
+      "date": "2026-10-20",
+      "genre": "OTHER",
+      "category": "メディア",
+      "title": "ASCII.jp web連載「ニアジョイどらい部」※天野香乃愛、山野愛月",
+      "url": "https://nearly-equal-joy.jp/schedule/detail/4038"
     },
     {
       "id": "3676",

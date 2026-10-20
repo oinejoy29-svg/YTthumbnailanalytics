@@ -266,11 +266,11 @@
     "downloadUrl": "https://youtubereporting.googleapis.com/v1/media/CHANNEL/iLmCoftZHWXSFuQlnEJSsQ/jobs/29172486-413e-4639-a700-7a624d64d652/reports/20620279296?alt=media"
   },
   {
-    "id": "20484364826",
+    "id": "20645287006",
     "startTime": "2026-09-14T07:00:00Z",
     "endTime": "2026-09-15T07:00:00Z",
-    "createTime": "2026-09-23T11:54:35.933728Z",
-    "downloadUrl": "https://youtubereporting.googleapis.com/v1/media/CHANNEL/iLmCoftZHWXSFuQlnEJSsQ/jobs/29172486-413e-4639-a700-7a624d64d652/reports/20484364826?alt=media"
+    "createTime": "2026-10-19T07:34:01.383565Z",
+    "downloadUrl": "https://youtubereporting.googleapis.com/v1/media/CHANNEL/iLmCoftZHWXSFuQlnEJSsQ/jobs/29172486-413e-4639-a700-7a624d64d652/reports/20645287006?alt=media"
   },
   {
     "id": "20639997543",
@@ -287,11 +287,11 @@
     "downloadUrl": "https://youtubereporting.googleapis.com/v1/media/CHANNEL/iLmCoftZHWXSFuQlnEJSsQ/jobs/29172486-413e-4639-a700-7a624d64d652/reports/20644895825?alt=media"
   },
   {
-    "id": "17633847448",
+    "id": "20647181878",
     "startTime": "2026-09-17T07:00:00Z",
     "endTime": "2026-09-18T07:00:00Z",
-    "createTime": "2026-09-21T22:01:48.143143Z",
-    "downloadUrl": "https://youtubereporting.googleapis.com/v1/media/CHANNEL/iLmCoftZHWXSFuQlnEJSsQ/jobs/29172486-413e-4639-a700-7a624d64d652/reports/17633847448?alt=media"
+    "createTime": "2026-10-19T12:06:17.025015Z",
+    "downloadUrl": "https://youtubereporting.googleapis.com/v1/media/CHANNEL/iLmCoftZHWXSFuQlnEJSsQ/jobs/29172486-413e-4639-a700-7a624d64d652/reports/20647181878?alt=media"
   },
   {
     "id": "20505476213",
@@ -476,11 +476,11 @@
     "downloadUrl": "https://youtubereporting.googleapis.com/v1/media/CHANNEL/iLmCoftZHWXSFuQlnEJSsQ/jobs/29172486-413e-4639-a700-7a624d64d652/reports/20642180698?alt=media"
   },
   {
-    "id": "9907631283",
+    "id": "20649216597",
     "startTime": "2026-10-14T07:00:00Z",
     "endTime": "2026-10-15T07:00:00Z",
-    "createTime": "2026-10-16T21:26:48.554829Z",
-    "downloadUrl": "https://youtubereporting.googleapis.com/v1/media/CHANNEL/iLmCoftZHWXSFuQlnEJSsQ/jobs/29172486-413e-4639-a700-7a624d64d652/reports/9907631283?alt=media"
+    "createTime": "2026-10-20T04:42:11.189988Z",
+    "downloadUrl": "https://youtubereporting.googleapis.com/v1/media/CHANNEL/iLmCoftZHWXSFuQlnEJSsQ/jobs/29172486-413e-4639-a700-7a624d64d652/reports/20649216597?alt=media"
   },
   {
     "id": "20636569971",
@@ -495,5 +495,19 @@
     "endTime": "2026-10-17T07:00:00Z",
     "createTime": "2026-10-18T05:39:43.670728Z",
     "downloadUrl": "https://youtubereporting.googleapis.com/v1/media/CHANNEL/iLmCoftZHWXSFuQlnEJSsQ/jobs/29172486-413e-4639-a700-7a624d64d652/reports/20640909644?alt=media"
+  },
+  {
+    "id": "20645920806",
+    "startTime": "2026-10-17T07:00:00Z",
+    "endTime": "2026-10-18T07:00:00Z",
+    "createTime": "2026-10-19T08:55:07.460944Z",
+    "downloadUrl": "https://youtubereporting.googleapis.com/v1/media/CHANNEL/iLmCoftZHWXSFuQlnEJSsQ/jobs/29172486-413e-4639-a700-7a624d64d652/reports/20645920806?alt=media"
+  },
+  {
+    "id": "17708317066",
+    "startTime": "2026-10-18T07:00:00Z",
+    "endTime": "2026-10-19T07:00:00Z",
+    "createTime": "2026-10-20T02:44:38.300963Z",
+    "downloadUrl": "https://youtubereporting.googleapis.com/v1/media/CHANNEL/iLmCoftZHWXSFuQlnEJSsQ/jobs/29172486-413e-4639-a700-7a624d64d652/reports/17708317066?alt=media"
   }
 ]
