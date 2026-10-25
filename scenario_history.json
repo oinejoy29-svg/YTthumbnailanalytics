@@ -1031,22 +1031,22 @@
     },
     {
       "date": "2026-10-25",
-      "subscribers": 752,
+      "subscribers": 753,
       "forecasts": {
         "30": {
-          "positive": 852,
-          "standard": 835,
-          "cautious": 819
+          "positive": 856,
+          "standard": 839,
+          "cautious": 822
         },
         "90": {
-          "positive": 1051,
-          "standard": 1001,
-          "cautious": 952
+          "positive": 1061,
+          "standard": 1010,
+          "cautious": 959
         },
         "365": {
-          "positive": 1966,
-          "standard": 1763,
-          "cautious": 1561
+          "positive": 2003,
+          "standard": 1795,
+          "cautious": 1587
         }
       }
     }
