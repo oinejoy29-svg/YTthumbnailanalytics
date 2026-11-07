@@ -1,125 +1,61 @@
 {
-  "updatedAt": "2026-10-23T08:07:54",
+  "updatedAt": "2026-11-07T09:27:34",
   "events": [
     {
-      "id": "3803",
-      "date": "2026-10-01",
-      "genre": "EVENT",
+      "id": "3604",
+      "date": "2026-11-02",
+      "genre": "LIVE",
       "category": "ライブ/イベント",
-      "title": "「SASUKEアイドル予選会2026 ー出場権争奪バトルー supported by CHINTAI」※大信田美月",
-      "url": "https://nearly-equal-joy.jp/schedule/detail/3803"
+      "title": "≒JOY 全国ツアー2026「この夏 全部 全部 僕にください」 宮城県・東京エレクトロンホール宮城 大ホール",
+      "url": "https://nearly-equal-joy.jp/schedule/detail/3604"
     },
     {
-      "id": "3818",
-      "date": "2026-10-02",
-      "genre": "STREAM",
-      "category": "メディア",
-      "title": "Huluオリジナル「フライングジョイ」シーズン2",
-      "url": "https://nearly-equal-joy.jp/schedule/detail/3818"
+      "id": "3973",
+      "date": "2026-11-07",
+      "genre": "FES",
+      "category": "ライブ/イベント",
+      "title": "早稲田祭2026「StarryCube ANIME FES 2026 powered by 早稲田大学アニメ声優会」※江角怜音、小澤愛実",
+      "url": "https://nearly-equal-joy.jp/schedule/detail/3973"
     },
     {
-      "id": "3893",
-      "date": "2026-10-03",
+      "id": "4098",
+      "date": "2026-11-13",
       "genre": "TV",
       "category": "メディア",
-      "title": "NHK「Venue101 EXTRA」 ※≒JOY",
-      "url": "https://nearly-equal-joy.jp/schedule/detail/3893"
+      "title": "日本テレビ系「バズリズム02」※≒JOY",
+      "url": "https://nearly-equal-joy.jp/schedule/detail/4098"
     },
     {
-      "id": "3819",
-      "date": "2026-10-09",
-      "genre": "STREAM",
-      "category": "メディア",
-      "title": "Huluオリジナル「フライングジョイ」シーズン2",
-      "url": "https://nearly-equal-joy.jp/schedule/detail/3819"
-    },
-    {
-      "id": "3729",
-      "date": "2026-10-10",
+      "id": "3512",
+      "date": "2026-11-14",
       "genre": "FES",
       "category": "ライブ/イベント",
-      "title": "『LoveLive! Series 15th Anniversaryラブライブ！フェス 前夜祭 FILM LIVE 〜未来へ届けるタイムカプセル〜』※村山結香",
-      "url": "https://nearly-equal-joy.jp/schedule/detail/3729"
+      "title": "『LoveLive! Series 15th Anniversary ラブライブ！フェス』※村山結香",
+      "url": "https://nearly-equal-joy.jp/schedule/detail/3512"
     },
     {
-      "id": "3787",
-      "date": "2026-10-10",
-      "genre": "EVENT",
-      "category": "ライブ/イベント",
-      "title": "「SBI証券 presents TGC KITAKYUSHU 2026 by TOKYO GIRLS COLLECTION」※≒JOY",
-      "url": "https://nearly-equal-joy.jp/schedule/detail/3787"
-    },
-    {
-      "id": "3730",
-      "date": "2026-10-11",
+      "id": "3513",
+      "date": "2026-11-15",
       "genre": "FES",
       "category": "ライブ/イベント",
-      "title": "『LoveLive! Series 15th Anniversaryラブライブ！フェス 前夜祭 FILM LIVE 〜未来へ届けるタイムカプセル〜』※村山結香",
-      "url": "https://nearly-equal-joy.jp/schedule/detail/3730"
+      "title": "『LoveLive! Series 15th Anniversary ラブライブ！フェス』※村山結香",
+      "url": "https://nearly-equal-joy.jp/schedule/detail/3513"
     },
     {
-      "id": "3603",
-      "date": "2026-10-12",
+      "id": "4074",
+      "date": "2026-11-25",
+      "genre": "RELEASE",
+      "category": "リリース",
+      "title": "【発売日】≒JOY 6thシングル『ロックスター様』",
+      "url": "https://nearly-equal-joy.jp/schedule/detail/4074"
+    },
+    {
+      "id": "3822",
+      "date": "2026-11-28",
       "genre": "LIVE",
       "category": "ライブ/イベント",
-      "title": "≒JOY 全国ツアー2026「この夏 全部 全部 僕にください」 兵庫県・神戸国際会館 こくさいホール",
-      "url": "https://nearly-equal-joy.jp/schedule/detail/3603"
-    },
-    {
-      "id": "4025",
-      "date": "2026-10-12",
-      "genre": "LIVE",
-      "category": "メディア",
-      "title": "TBS系「CDTVライブ！ライブ！」※≒JOY",
-      "url": "https://nearly-equal-joy.jp/schedule/detail/4025"
-    },
-    {
-      "id": "4027",
-      "date": "2026-10-15",
-      "genre": "OTHER",
-      "category": "メディア",
-      "title": "ワニブックスWEBマガジン「Newsクランチ！」連載『≒JOY大信田美月の推し麺を探せ！』※大信田美月",
-      "url": "https://nearly-equal-joy.jp/schedule/detail/4027"
-    },
-    {
-      "id": "4038",
-      "date": "2026-10-20",
-      "genre": "OTHER",
-      "category": "メディア",
-      "title": "ASCII.jp web連載「ニアジョイどらい部」※天野香乃愛、山野愛月",
-      "url": "https://nearly-equal-joy.jp/schedule/detail/4038"
-    },
-    {
-      "id": "3676",
-      "date": "2026-10-22",
-      "genre": "STAGE",
-      "category": "ライブ/イベント",
-      "title": "舞台『転生したらスライムだった件』３-魔王覚醒編＆八星輝翔編-　※髙橋舞",
-      "url": "https://nearly-equal-joy.jp/schedule/detail/3676"
-    },
-    {
-      "id": "3677",
-      "date": "2026-10-23",
-      "genre": "STAGE",
-      "category": "ライブ/イベント",
-      "title": "舞台『転生したらスライムだった件』３-魔王覚醒編＆八星輝翔編-　※髙橋舞",
-      "url": "https://nearly-equal-joy.jp/schedule/detail/3677"
-    },
-    {
-      "id": "3678",
-      "date": "2026-10-24",
-      "genre": "STAGE",
-      "category": "ライブ/イベント",
-      "title": "舞台『転生したらスライムだった件』３-魔王覚醒編＆八星輝翔編-　※髙橋舞",
-      "url": "https://nearly-equal-joy.jp/schedule/detail/3678"
-    },
-    {
-      "id": "3679",
-      "date": "2026-10-25",
-      "genre": "STAGE",
-      "category": "ライブ/イベント",
-      "title": "舞台『転生したらスライムだった件』３-魔王覚醒編＆八星輝翔編-　※髙橋舞",
-      "url": "https://nearly-equal-joy.jp/schedule/detail/3679"
+      "title": "≒JOY 全国ツアー2026「この夏 全部 全部 僕にください」香川県・レクザムホール 大ホール",
+      "url": "https://nearly-equal-joy.jp/schedule/detail/3822"
     }
   ]
 }
