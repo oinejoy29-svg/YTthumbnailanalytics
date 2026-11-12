@@ -3103,3 +3103,11 @@ body.page-leaving{
   }
 }
 
+/* スマホでプレビュー編集画面が拡大されるのを防止 */
+@media (max-width: 800px) {
+  .video-preview-field textarea,
+  .video-preview-field input {
+    font-size: 16px;
+  }
+}
+
