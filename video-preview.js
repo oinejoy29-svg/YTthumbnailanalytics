@@ -400,7 +400,6 @@
       "aria-hidden", "false"
     );
 
-    $p("videoPreviewTitle").focus();
   }
 
   function closeEditor() {
