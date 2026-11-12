@@ -35755,84 +35755,28 @@
             "views": 2804,
             "engagedViews": 2766,
             "watchMinutes": 6513.0,
-            "percentage": 53.02
-          },
-          {
-            "source": "RELATED_VIDEO",
-            "views": 1437,
-            "engagedViews": 1431,
-            "watchMinutes": 4494.0,
-            "percentage": 27.17
-          },
-          {
-            "source": "YT_SEARCH",
-            "views": 417,
-            "engagedViews": 272,
-            "watchMinutes": 651.0,
-            "percentage": 7.88
-          },
-          {
-            "source": "YT_CHANNEL",
-            "views": 194,
-            "engagedViews": 186,
-            "watchMinutes": 417.0,
-            "percentage": 3.67
-          },
-          {
-            "source": "PLAYLIST",
-            "views": 80,
-            "engagedViews": 79,
-            "watchMinutes": 238.0,
-            "percentage": 1.51
+            "percentage": 94.13
           },
           {
             "source": "WATCH_LATER",
             "views": 77,
             "engagedViews": 77,
             "watchMinutes": 247.0,
-            "percentage": 1.46
-          },
-          {
-            "source": "YT_OTHER_PAGE",
-            "views": 74,
-            "engagedViews": 74,
-            "watchMinutes": 198.0,
-            "percentage": 1.4
-          },
-          {
-            "source": "NO_LINK_OTHER",
-            "views": 70,
-            "engagedViews": 70,
-            "watchMinutes": 126.0,
-            "percentage": 1.32
+            "percentage": 2.58
           },
           {
             "source": "HISTORY",
             "views": 50,
             "engagedViews": 50,
             "watchMinutes": 70.0,
-            "percentage": 0.95
+            "percentage": 1.68
           },
           {
             "source": "SUBSCRIBER",
             "views": 48,
             "engagedViews": 39,
             "watchMinutes": 85.0,
-            "percentage": 0.91
-          },
-          {
-            "source": "NOTIFICATION",
-            "views": 22,
-            "engagedViews": 22,
-            "watchMinutes": 54.0,
-            "percentage": 0.42
-          },
-          {
-            "source": "EXT_URL",
-            "views": 16,
-            "engagedViews": 16,
-            "watchMinutes": 25.0,
-            "percentage": 0.3
+            "percentage": 1.61
           }
         ],
         "searchTerms": [

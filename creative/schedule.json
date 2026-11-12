@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-12T05:18:58",
+  "updatedAt": "2026-11-12T10:30:01",
   "events": [
     {
       "id": "3604",
@@ -50,12 +50,44 @@
       "url": "https://nearly-equal-joy.jp/schedule/detail/3513"
     },
     {
+      "id": "4108",
+      "date": "2026-11-16",
+      "genre": "STREAM",
+      "category": "メディア",
+      "title": "リスパ「#ニアジョイとリスパ」※大信田美月、小澤愛実、山田杏佳、山野愛月",
+      "url": "https://nearly-equal-joy.jp/schedule/detail/4108"
+    },
+    {
+      "id": "4109",
+      "date": "2026-11-18",
+      "genre": "STREAM",
+      "category": "メディア",
+      "title": "リスパ「#ニアジョイとリスパ」※市原愛弓、大西葵、髙橋舞、村山結香",
+      "url": "https://nearly-equal-joy.jp/schedule/detail/4109"
+    },
+    {
+      "id": "4110",
+      "date": "2026-11-20",
+      "genre": "STREAM",
+      "category": "メディア",
+      "title": "リスパ「#ニアジョイとリスパ」※逢田珠里依、天野香乃愛、江角怜音、藤沢莉子",
+      "url": "https://nearly-equal-joy.jp/schedule/detail/4110"
+    },
+    {
       "id": "4074",
       "date": "2026-11-25",
       "genre": "RELEASE",
       "category": "リリース",
       "title": "【発売日】≒JOY 6thシングル『ロックスター様』",
       "url": "https://nearly-equal-joy.jp/schedule/detail/4074"
+    },
+    {
+      "id": "4111",
+      "date": "2026-11-25",
+      "genre": "STREAM",
+      "category": "メディア",
+      "title": "リスパ「#ニアジョイとリスパ」※≒JOY",
+      "url": "https://nearly-equal-joy.jp/schedule/detail/4111"
     },
     {
       "id": "3822",
