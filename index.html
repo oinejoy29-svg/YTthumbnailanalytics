@@ -267,6 +267,17 @@
   </select>
 
 </div>        </div>
+  
+<div class="video-preview-toolbar">
+  <button
+    id="addVideoPreview"
+    class="primary-btn"
+    type="button"
+  >
+    ＋ 新規投稿プレビュー
+  </button>
+</div>
+
 
  
         <div id="videoGrid" class="video-grid"></div>
@@ -515,6 +526,115 @@
 
   </div>
 
+　
+<!-- =========================
+     NEW VIDEO PREVIEW MODAL
+========================== -->
+<div
+  id="videoPreviewModal"
+  class="modal video-preview-modal"
+  aria-hidden="true"
+>
+  <div class="modal-inner video-preview-inner">
+
+    <div class="modal-head">
+      <div>
+        <span class="section-kicker">
+          VIDEO PREVIEW
+        </span>
+        <h2 id="videoPreviewModalTitle">
+          新動画プレビュー
+        </h2>
+      </div>
+
+      <button
+        id="closeVideoPreview"
+        class="close-btn"
+        type="button"
+        aria-label="閉じる"
+      >
+        ×
+      </button>
+    </div>
+
+    <form id="videoPreviewForm">
+
+      <div class="video-preview-field">
+        <label for="videoPreviewTitle">
+          動画タイトル
+        </label>
+        <textarea
+          id="videoPreviewTitle"
+          rows="3"
+          maxlength="200"
+          placeholder="動画タイトルを入力"
+          required
+        ></textarea>
+      </div>
+
+      <div class="video-preview-field">
+        <label for="videoPreviewImage">
+          サムネイル画像
+        </label>
+        <input
+          id="videoPreviewImage"
+          type="file"
+          accept="image/png,image/jpeg,image/webp"
+        >
+      </div>
+
+      <div
+        id="videoPreviewImageArea"
+        class="video-preview-image-area"
+        hidden
+      >
+        <img
+          id="videoPreviewImageDisplay"
+          alt="サムネイルのプレビュー"
+        >
+      </div>
+
+      <p
+        id="videoPreviewError"
+        class="video-preview-error"
+        role="alert"
+        hidden
+      ></p>
+
+      <div class="video-preview-actions">
+
+        <button
+          id="deleteVideoPreview"
+          class="video-preview-delete"
+          type="button"
+          hidden
+        >
+          削除
+        </button>
+
+        <button
+          id="cancelVideoPreview"
+          class="video-preview-cancel"
+          type="button"
+        >
+          キャンセル
+        </button>
+
+        <button
+          id="saveVideoPreview"
+          class="primary-btn"
+          type="submit"
+        >
+          保存
+        </button>
+
+      </div>
+    </form>
+
+  </div>
+</div>
+
+
 <!-- =========================
      TAG EDIT MODAL
 ========================== -->
@@ -650,6 +770,7 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
 <script src="common.js"></script>
 <script src="script.js"></script>
+<script src="video-preview.js"></script>
 <script src="home/home.js"></script>
 
 </body>
