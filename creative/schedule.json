@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-07T09:27:34",
+  "updatedAt": "2026-11-12T05:18:58",
   "events": [
     {
       "id": "3604",
@@ -32,6 +32,14 @@
       "category": "ライブ/イベント",
       "title": "『LoveLive! Series 15th Anniversary ラブライブ！フェス』※村山結香",
       "url": "https://nearly-equal-joy.jp/schedule/detail/3512"
+    },
+    {
+      "id": "4113",
+      "date": "2026-11-14",
+      "genre": "BOOK",
+      "category": "メディア",
+      "title": "週刊プレイボーイ公式YouTubeチャンネル 週プレChannel「デジタル写真集　本人が語ってみた！」※逢田珠里依",
+      "url": "https://nearly-equal-joy.jp/schedule/detail/4113"
     },
     {
       "id": "3513",
