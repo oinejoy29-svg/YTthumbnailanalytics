@@ -1,8 +1,8 @@
 {
   "channelId": "UCiLmCoftZHWXSFuQlnEJSsQ",
   "channelName": "#切り抜くぞニアジョイ",
-  "updatedAt": "2026-11-15T19:08:09.481034+09:00",
-  "currentSubscriberCount": 849,
+  "updatedAt": "2026-11-15T23:36:43.478772+09:00",
+  "currentSubscriberCount": 853,
   "subscribers": [
     {
       "date": "2026-04-03",
@@ -910,7 +910,7 @@
     },
     {
       "date": "2026-11-15",
-      "count": 849
+      "count": 853
     }
   ],
   "videos": [
@@ -926,7 +926,7 @@
       "publishedAt": "2026-04-03T19:06:34Z",
       "sevenDayViews": 3051,
       "sevenDaySource": "legacy_excel",
-      "viewCountIncrease": 1,
+      "viewCountIncrease": 0,
       "popularRank": 25,
       "popularRankDay": "2026-11-15",
       "popularRankDayStart": 25,
@@ -941,19 +941,19 @@
       "thumbnail": "https://i.ytimg.com/vi/PmD_nggctn4/hqdefault.jpg",
       "duration": "13:20",
       "durationSeconds": 800,
-      "viewCount": 32573,
+      "viewCount": 32594,
       "tags": [
         "小澤愛実"
       ],
       "publishedAt": "2026-04-26T08:26:24Z",
       "sevenDayViews": 107,
       "sevenDaySource": "legacy_excel",
-      "viewCountIncrease": 72,
+      "viewCountIncrease": 21,
       "popularRank": 3,
       "popularRankDay": "2026-11-15",
       "popularRankDayStart": 3,
       "popularRankChange": 0,
-      "likeCount": 626,
+      "likeCount": 628,
       "commentCount": 16
     },
     {
@@ -992,8 +992,8 @@
       "publishedAt": "2026-06-09T13:41:44Z",
       "sevenDayViews": 23,
       "sevenDaySource": "legacy_excel",
-      "viewCountIncrease": 2,
-      "popularRank": 42,
+      "viewCountIncrease": 0,
+      "popularRank": 43,
       "popularRankDay": "2026-11-15",
       "popularRankDayStart": 42,
       "popularRankChange": 0,
@@ -1015,7 +1015,7 @@
       "sevenDayViews": 41,
       "sevenDaySource": "legacy_excel",
       "viewCountIncrease": 0,
-      "popularRank": 43,
+      "popularRank": 44,
       "popularRankDay": "2026-11-15",
       "popularRankDayStart": 43,
       "popularRankChange": 0,
@@ -1036,7 +1036,7 @@
       "publishedAt": "2026-07-11T03:00:32Z",
       "sevenDayViews": 3155,
       "sevenDaySource": "legacy_excel",
-      "viewCountIncrease": 2,
+      "viewCountIncrease": 0,
       "popularRank": 33,
       "popularRankDay": "2026-11-15",
       "popularRankDayStart": 33,
@@ -1051,14 +1051,14 @@
       "thumbnail": "https://i.ytimg.com/vi/DdvR0LbYUjQ/hqdefault.jpg",
       "duration": "15:44",
       "durationSeconds": 944,
-      "viewCount": 5221,
+      "viewCount": 5223,
       "tags": [
         "小澤愛実"
       ],
       "publishedAt": "2026-07-13T10:00:29Z",
       "sevenDayViews": 2404,
       "sevenDaySource": "legacy_excel",
-      "viewCountIncrease": 3,
+      "viewCountIncrease": 2,
       "popularRank": 30,
       "popularRankDay": "2026-11-15",
       "popularRankDayStart": 30,
@@ -1073,15 +1073,15 @@
       "thumbnail": "https://i.ytimg.com/vi/JVNpkPsotMU/hqdefault.jpg",
       "duration": "3:38",
       "durationSeconds": 218,
-      "viewCount": 1806,
+      "viewCount": 1808,
       "tags": [
         "大西葵"
       ],
       "publishedAt": "2026-07-18T10:30:12Z",
       "sevenDayViews": 1183,
       "sevenDaySource": "legacy_excel",
-      "viewCountIncrease": 1,
-      "popularRank": 41,
+      "viewCountIncrease": 2,
+      "popularRank": 42,
       "popularRankDay": "2026-11-15",
       "popularRankDayStart": 41,
       "popularRankChange": 0,
@@ -1095,7 +1095,7 @@
       "thumbnail": "https://i.ytimg.com/vi/3AQw6eUmK58/hqdefault.jpg",
       "duration": "8:05",
       "durationSeconds": 485,
-      "viewCount": 2959,
+      "viewCount": 2960,
       "tags": [
         "大信田美月"
       ],
@@ -1117,14 +1117,14 @@
       "thumbnail": "https://i.ytimg.com/vi/_l7l5BH4h_s/hqdefault.jpg",
       "duration": "17:17",
       "durationSeconds": 1037,
-      "viewCount": 9865,
+      "viewCount": 9871,
       "tags": [
         "江角怜音"
       ],
       "publishedAt": "2026-07-27T11:00:06Z",
       "sevenDayViews": 3072,
       "sevenDaySource": "legacy_excel",
-      "viewCountIncrease": 20,
+      "viewCountIncrease": 6,
       "popularRank": 17,
       "popularRankDay": "2026-11-15",
       "popularRankDayStart": 17,
@@ -1139,14 +1139,14 @@
       "thumbnail": "https://i.ytimg.com/vi/dhys8ycR5Iw/hqdefault.jpg",
       "duration": "15:36",
       "durationSeconds": 936,
-      "viewCount": 12440,
+      "viewCount": 12445,
       "tags": [
         "山田杏佳"
       ],
       "publishedAt": "2026-07-31T03:00:15Z",
       "sevenDayViews": 4400,
       "sevenDaySource": "legacy_excel",
-      "viewCountIncrease": 9,
+      "viewCountIncrease": 5,
       "popularRank": 12,
       "popularRankDay": "2026-11-15",
       "popularRankDayStart": 12,
@@ -1161,19 +1161,19 @@
       "thumbnail": "https://i.ytimg.com/vi/EvoV01i7fRw/hqdefault.jpg",
       "duration": "15:55",
       "durationSeconds": 955,
-      "viewCount": 21050,
+      "viewCount": 21061,
       "tags": [
         "逢田珠里依"
       ],
       "publishedAt": "2026-08-01T03:00:07Z",
       "sevenDayViews": 11349,
       "sevenDaySource": "legacy_excel",
-      "viewCountIncrease": 36,
+      "viewCountIncrease": 11,
       "popularRank": 7,
       "popularRankDay": "2026-11-15",
       "popularRankDayStart": 7,
       "popularRankChange": 0,
-      "likeCount": 638,
+      "likeCount": 640,
       "commentCount": 36
     },
     {
@@ -1183,14 +1183,14 @@
       "thumbnail": "https://i.ytimg.com/vi/HgCgwKqeJBI/hqdefault.jpg",
       "duration": "6:44",
       "durationSeconds": 404,
-      "viewCount": 5333,
+      "viewCount": 5335,
       "tags": [
         "天野香乃愛"
       ],
       "publishedAt": "2026-08-04T10:00:11Z",
       "sevenDayViews": 4199,
       "sevenDaySource": "legacy_excel",
-      "viewCountIncrease": 4,
+      "viewCountIncrease": 2,
       "popularRank": 29,
       "popularRankDay": "2026-11-15",
       "popularRankDayStart": 29,
@@ -1205,7 +1205,7 @@
       "thumbnail": "https://i.ytimg.com/vi/g1GPX8SlOmU/hqdefault.jpg",
       "duration": "8:55",
       "durationSeconds": 535,
-      "viewCount": 8100,
+      "viewCount": 8102,
       "tags": [
         "天野香乃愛"
       ],
@@ -1227,14 +1227,14 @@
       "thumbnail": "https://i.ytimg.com/vi/S4tXGHeKBHs/hqdefault.jpg",
       "duration": "9:39",
       "durationSeconds": 579,
-      "viewCount": 7852,
+      "viewCount": 7863,
       "tags": [
         "小澤愛実"
       ],
       "publishedAt": "2026-08-11T03:30:26Z",
       "sevenDayViews": 4259,
       "sevenDaySource": "legacy_excel",
-      "viewCountIncrease": 23,
+      "viewCountIncrease": 11,
       "popularRank": 22,
       "popularRankDay": "2026-11-15",
       "popularRankDayStart": 22,
@@ -1249,7 +1249,7 @@
       "thumbnail": "https://i.ytimg.com/vi/D88Zd_OvaSs/hqdefault.jpg",
       "duration": "6:43",
       "durationSeconds": 403,
-      "viewCount": 13926,
+      "viewCount": 13930,
       "tags": [
         "大信田美月"
       ],
@@ -1271,14 +1271,14 @@
       "thumbnail": "https://i.ytimg.com/vi/pE6Pi35mojw/hqdefault.jpg",
       "duration": "5:05",
       "durationSeconds": 305,
-      "viewCount": 16409,
+      "viewCount": 16435,
       "tags": [
         "江角怜音"
       ],
       "publishedAt": "2026-08-16T03:30:38Z",
       "sevenDayViews": 7635,
       "sevenDaySource": "legacy_excel",
-      "viewCountIncrease": 61,
+      "viewCountIncrease": 26,
       "popularRank": 8,
       "popularRankDay": "2026-11-15",
       "popularRankDayStart": 8,
@@ -1293,14 +1293,14 @@
       "thumbnail": "https://i.ytimg.com/vi/rSNhDgGJvPU/hqdefault.jpg",
       "duration": "5:21",
       "durationSeconds": 321,
-      "viewCount": 22093,
+      "viewCount": 22099,
       "tags": [
         "大西葵"
       ],
       "publishedAt": "2026-08-22T03:00:39Z",
       "sevenDayViews": 9710,
       "sevenDaySource": "legacy_excel",
-      "viewCountIncrease": 16,
+      "viewCountIncrease": 6,
       "popularRank": 5,
       "popularRankDay": "2026-11-15",
       "popularRankDayStart": 5,
@@ -1315,7 +1315,7 @@
       "thumbnail": "https://i.ytimg.com/vi/a9U4uap71ME/hqdefault.jpg",
       "duration": "3:30",
       "durationSeconds": 210,
-      "viewCount": 5512,
+      "viewCount": 5516,
       "tags": [
         "大信田美月",
         "村山結香"
@@ -1323,7 +1323,7 @@
       "publishedAt": "2026-08-24T03:00:32Z",
       "sevenDayViews": 2952,
       "sevenDaySource": "legacy_excel",
-      "viewCountIncrease": 17,
+      "viewCountIncrease": 4,
       "popularRank": 28,
       "popularRankDay": "2026-11-15",
       "popularRankDayStart": 28,
@@ -1338,14 +1338,14 @@
       "thumbnail": "https://i.ytimg.com/vi/B75t0LqJUSg/hqdefault.jpg",
       "duration": "3:26",
       "durationSeconds": 206,
-      "viewCount": 3756,
+      "viewCount": 3757,
       "tags": [
         "髙橋舞"
       ],
       "publishedAt": "2026-08-26T04:00:12Z",
       "sevenDayViews": 3416,
       "sevenDaySource": "legacy_excel",
-      "viewCountIncrease": 2,
+      "viewCountIncrease": 1,
       "popularRank": 34,
       "popularRankDay": "2026-11-15",
       "popularRankDayStart": 34,
@@ -1360,17 +1360,17 @@
       "thumbnail": "https://i.ytimg.com/vi/SlDTZdCoX7w/hqdefault.jpg",
       "duration": "5:48",
       "durationSeconds": 348,
-      "viewCount": 24884,
+      "viewCount": 24902,
       "tags": [
         "江角怜音"
       ],
       "publishedAt": "2026-08-28T08:50:34Z",
-      "viewCountIncrease": 13,
+      "viewCountIncrease": 18,
       "popularRank": 4,
       "popularRankDay": "2026-11-15",
       "popularRankDayStart": 4,
       "popularRankChange": 0,
-      "likeCount": 322,
+      "likeCount": 323,
       "commentCount": 3
     },
     {
@@ -1380,12 +1380,12 @@
       "thumbnail": "https://i.ytimg.com/vi/PiikNxCE5_Q/hqdefault.jpg",
       "duration": "4:40",
       "durationSeconds": 280,
-      "viewCount": 7904,
+      "viewCount": 7905,
       "tags": [
         "逢田珠里依"
       ],
       "publishedAt": "2026-08-31T08:30:03Z",
-      "viewCountIncrease": 2,
+      "viewCountIncrease": 1,
       "popularRank": 21,
       "popularRankDay": "2026-11-15",
       "popularRankDayStart": 21,
@@ -1439,7 +1439,7 @@
         "differenceViews": -2618,
         "differencePercent": -28.15
       },
-      "viewCountIncrease": 2,
+      "viewCountIncrease": 0,
       "popularRank": 24,
       "popularRankDay": "2026-11-15",
       "popularRankDayStart": 24,
@@ -1458,7 +1458,7 @@
       "thumbnail": "https://i.ytimg.com/vi/ueHZP7Pw6aI/hqdefault.jpg",
       "duration": "6:17",
       "durationSeconds": 377,
-      "viewCount": 11859,
+      "viewCount": 11860,
       "likeCount": 101,
       "commentCount": 1,
       "tags": [
@@ -1466,7 +1466,7 @@
       ],
       "publishedAt": "2026-09-07T11:42:35Z",
       "firstDetectedAt": "2026-09-07T23:55:34.751686+09:00",
-      "viewCountIncrease": 5,
+      "viewCountIncrease": 1,
       "sevenDayForecast": {
         "modelVersion": "v2",
         "createdAt": "2026-09-07T23:55:34.751686+09:00",
@@ -1528,15 +1528,15 @@
       "thumbnail": "https://i.ytimg.com/vi/i0EnUe6eS18/hqdefault.jpg",
       "duration": "3:16",
       "durationSeconds": 196,
-      "viewCount": 13332,
-      "likeCount": 107,
+      "viewCount": 13361,
+      "likeCount": 108,
       "commentCount": 0,
       "tags": [
         "市原愛弓"
       ],
       "publishedAt": "2026-09-09T09:00:35Z",
       "firstDetectedAt": "2026-09-09T20:08:23.929690+09:00",
-      "viewCountIncrease": 28,
+      "viewCountIncrease": 29,
       "sevenDayForecast": {
         "modelVersion": "v2",
         "createdAt": "2026-09-09T20:08:23.929690+09:00",
@@ -1592,7 +1592,7 @@
       "thumbnail": "https://i.ytimg.com/vi/aSN5lIcZzYk/hqdefault.jpg",
       "duration": "8:33",
       "durationSeconds": 513,
-      "viewCount": 11034,
+      "viewCount": 11035,
       "likeCount": 113,
       "commentCount": 4,
       "tags": [
@@ -1660,7 +1660,7 @@
       "thumbnail": "https://i.ytimg.com/vi/shVv0BqrKkw/hqdefault.jpg",
       "duration": "10:55",
       "durationSeconds": 655,
-      "viewCount": 7743,
+      "viewCount": 7744,
       "likeCount": 63,
       "commentCount": 0,
       "tags": [
@@ -1668,7 +1668,7 @@
       ],
       "publishedAt": "2026-09-15T11:00:26Z",
       "firstDetectedAt": "2026-09-15T20:08:31.787926+09:00",
-      "viewCountIncrease": 0,
+      "viewCountIncrease": 1,
       "sevenDayForecast": {
         "modelVersion": "v2",
         "createdAt": "2026-09-15T20:08:31.787926+09:00",
@@ -1732,7 +1732,7 @@
       "thumbnail": "https://i.ytimg.com/vi/KznIB6FNmAA/hqdefault.jpg",
       "duration": "4:51",
       "durationSeconds": 291,
-      "viewCount": 2238,
+      "viewCount": 2239,
       "likeCount": 34,
       "commentCount": 0,
       "tags": [
@@ -1740,7 +1740,7 @@
       ],
       "publishedAt": "2026-09-20T08:00:23Z",
       "firstDetectedAt": "2026-09-20T20:07:18.363540+09:00",
-      "viewCountIncrease": 0,
+      "viewCountIncrease": 1,
       "sevenDayForecast": {
         "modelVersion": "v2",
         "createdAt": "2026-09-20T20:07:18.363540+09:00",
@@ -1800,15 +1800,15 @@
       "thumbnail": "https://i.ytimg.com/vi/t04C_Fyj2Bs/hqdefault.jpg",
       "duration": "4:56",
       "durationSeconds": 296,
-      "viewCount": 45857,
-      "likeCount": 386,
+      "viewCount": 45936,
+      "likeCount": 387,
       "commentCount": 6,
       "tags": [
         "小澤愛実"
       ],
       "publishedAt": "2026-09-22T09:00:36Z",
       "firstDetectedAt": "2026-09-22T20:08:06.343204+09:00",
-      "viewCountIncrease": 126,
+      "viewCountIncrease": 79,
       "sevenDayForecast": {
         "modelVersion": "v2",
         "createdAt": "2026-09-22T20:08:06.343204+09:00",
@@ -1874,7 +1874,7 @@
       "thumbnail": "https://i.ytimg.com/vi/m1jU2iwTG5U/hqdefault.jpg",
       "duration": "3:36",
       "durationSeconds": 216,
-      "viewCount": 8851,
+      "viewCount": 8855,
       "likeCount": 116,
       "commentCount": 1,
       "tags": [
@@ -1882,7 +1882,7 @@
       ],
       "publishedAt": "2026-09-27T11:00:15Z",
       "firstDetectedAt": "2026-09-27T21:52:44.488794+09:00",
-      "viewCountIncrease": 30,
+      "viewCountIncrease": 4,
       "sevenDayForecast": {
         "modelVersion": "v2",
         "createdAt": "2026-09-27T21:52:44.488794+09:00",
@@ -1944,15 +1944,15 @@
       "thumbnail": "https://i.ytimg.com/vi/oeV7MAVhGCI/hqdefault.jpg",
       "duration": "6:29",
       "durationSeconds": 389,
-      "viewCount": 40514,
-      "likeCount": 517,
+      "viewCount": 40572,
+      "likeCount": 519,
       "commentCount": 22,
       "tags": [
         "逢田珠里依"
       ],
       "publishedAt": "2026-10-02T10:00:16Z",
       "firstDetectedAt": "2026-10-02T22:43:52.052329+09:00",
-      "viewCountIncrease": 59,
+      "viewCountIncrease": 58,
       "sevenDayForecast": {
         "modelVersion": "v2",
         "createdAt": "2026-10-02T22:43:52.052329+09:00",
@@ -2018,7 +2018,7 @@
       "thumbnail": "https://i.ytimg.com/vi/0hBOS6GVWsY/hqdefault.jpg",
       "duration": "9:43",
       "durationSeconds": 583,
-      "viewCount": 9020,
+      "viewCount": 9024,
       "likeCount": 78,
       "commentCount": 4,
       "tags": [
@@ -2026,7 +2026,7 @@
       ],
       "publishedAt": "2026-10-04T09:00:10Z",
       "firstDetectedAt": "2026-10-04T22:05:48.271879+09:00",
-      "viewCountIncrease": 6,
+      "viewCountIncrease": 4,
       "sevenDayForecast": {
         "modelVersion": "v2",
         "createdAt": "2026-10-04T22:05:48.271879+09:00",
@@ -2090,7 +2090,7 @@
       "thumbnail": "https://i.ytimg.com/vi/xJT3fT7echE/hqdefault.jpg",
       "duration": "4:55",
       "durationSeconds": 295,
-      "viewCount": 2828,
+      "viewCount": 2831,
       "likeCount": 34,
       "commentCount": 1,
       "tags": [
@@ -2158,7 +2158,7 @@
       "thumbnail": "https://i.ytimg.com/vi/Hj9mgv4CHcg/hqdefault.jpg",
       "duration": "2:42",
       "durationSeconds": 162,
-      "viewCount": 10483,
+      "viewCount": 10494,
       "likeCount": 115,
       "commentCount": 0,
       "tags": [
@@ -2166,7 +2166,7 @@
       ],
       "publishedAt": "2026-10-15T10:02:24Z",
       "firstDetectedAt": "2026-10-15T21:32:10.678854+09:00",
-      "viewCountIncrease": 21,
+      "viewCountIncrease": 11,
       "sevenDayForecast": {
         "modelVersion": "v2",
         "createdAt": "2026-10-15T21:32:10.678854+09:00",
@@ -2233,7 +2233,7 @@
       "thumbnail": "https://i.ytimg.com/vi/jpVlOkTHx-I/hqdefault.jpg",
       "duration": "2:24",
       "durationSeconds": 144,
-      "viewCount": 5999,
+      "viewCount": 6002,
       "likeCount": 45,
       "commentCount": 2,
       "tags": [
@@ -2241,7 +2241,7 @@
       ],
       "publishedAt": "2026-10-17T11:06:49Z",
       "firstDetectedAt": "2026-10-17T20:29:32.039123+09:00",
-      "viewCountIncrease": 5,
+      "viewCountIncrease": 3,
       "sevenDayForecast": {
         "modelVersion": "v2",
         "createdAt": "2026-10-17T20:29:32.039123+09:00",
@@ -2305,7 +2305,7 @@
       "thumbnail": "https://i.ytimg.com/vi/Bf2qzR_rHro/hqdefault.jpg",
       "duration": "2:12",
       "durationSeconds": 132,
-      "viewCount": 12610,
+      "viewCount": 12618,
       "likeCount": 69,
       "commentCount": 1,
       "tags": [
@@ -2313,7 +2313,7 @@
       ],
       "publishedAt": "2026-10-21T10:01:21Z",
       "firstDetectedAt": "2026-10-21T21:48:19.281885+09:00",
-      "viewCountIncrease": 17,
+      "viewCountIncrease": 8,
       "sevenDayForecast": {
         "modelVersion": "v2",
         "createdAt": "2026-10-21T21:48:19.281885+09:00",
@@ -2377,7 +2377,7 @@
       "thumbnail": "https://i.ytimg.com/vi/Mlo6Kul8iXA/hqdefault.jpg",
       "duration": "3:13",
       "durationSeconds": 193,
-      "viewCount": 4208,
+      "viewCount": 4213,
       "likeCount": 48,
       "commentCount": 0,
       "tags": [
@@ -2441,7 +2441,7 @@
       "thumbnail": "https://i.ytimg.com/vi/1dS5fjI-oa0/hqdefault.jpg",
       "duration": "2:05",
       "durationSeconds": 125,
-      "viewCount": 5883,
+      "viewCount": 5886,
       "likeCount": 52,
       "commentCount": 0,
       "tags": [
@@ -2449,7 +2449,7 @@
       ],
       "publishedAt": "2026-10-25T12:40:26Z",
       "firstDetectedAt": "2026-10-25T23:45:17.441026+09:00",
-      "viewCountIncrease": 10,
+      "viewCountIncrease": 3,
       "sevenDayForecast": {
         "modelVersion": "v2",
         "createdAt": "2026-10-25T23:45:17.441026+09:00",
@@ -2509,7 +2509,7 @@
       "thumbnail": "https://i.ytimg.com/vi/Xwk2_eLzjrs/hqdefault.jpg",
       "duration": "3:39",
       "durationSeconds": 219,
-      "viewCount": 3721,
+      "viewCount": 3723,
       "likeCount": 46,
       "commentCount": 0,
       "tags": [
@@ -2517,7 +2517,7 @@
       ],
       "publishedAt": "2026-10-29T10:01:20Z",
       "firstDetectedAt": "2026-10-29T23:00:21.312365+09:00",
-      "viewCountIncrease": 5,
+      "viewCountIncrease": 2,
       "sevenDayForecast": {
         "modelVersion": "v2",
         "createdAt": "2026-10-29T23:00:21.312365+09:00",
@@ -2583,7 +2583,7 @@
       "thumbnail": "https://i.ytimg.com/vi/WbeCqEWDyXM/hqdefault.jpg",
       "duration": "13:12",
       "durationSeconds": 792,
-      "viewCount": 21883,
+      "viewCount": 21896,
       "likeCount": 346,
       "commentCount": 6,
       "tags": [
@@ -2591,7 +2591,7 @@
       ],
       "publishedAt": "2026-11-01T09:30:34Z",
       "firstDetectedAt": "2026-11-01T18:53:14.895945+09:00",
-      "viewCountIncrease": 59,
+      "viewCountIncrease": 13,
       "sevenDayForecast": {
         "modelVersion": "v2",
         "createdAt": "2026-11-01T18:53:14.895945+09:00",
@@ -2657,7 +2657,7 @@
       "thumbnail": "https://i.ytimg.com/vi/2Z68jSocsVk/hqdefault.jpg",
       "duration": "3:55",
       "durationSeconds": 235,
-      "viewCount": 5201,
+      "viewCount": 5203,
       "likeCount": 60,
       "commentCount": 3,
       "tags": [],
@@ -2732,7 +2732,7 @@
       "thumbnail": "https://i.ytimg.com/vi/Xe3neeRaAxk/hqdefault.jpg",
       "duration": "3:14",
       "durationSeconds": 194,
-      "viewCount": 10034,
+      "viewCount": 10099,
       "likeCount": 124,
       "commentCount": 2,
       "tags": [
@@ -2740,7 +2740,7 @@
       ],
       "publishedAt": "2026-11-08T10:01:35Z",
       "firstDetectedAt": "2026-11-08T23:09:34.897237+09:00",
-      "viewCountIncrease": 111,
+      "viewCountIncrease": 65,
       "sevenDayForecast": {
         "modelVersion": "v2",
         "createdAt": "2026-11-08T23:09:34.897237+09:00",
@@ -2802,7 +2802,7 @@
       "thumbnail": "https://i.ytimg.com/vi/DxRP9ZO2MNY/hqdefault.jpg",
       "duration": "5:00",
       "durationSeconds": 300,
-      "viewCount": 3664,
+      "viewCount": 3674,
       "likeCount": 85,
       "commentCount": 3,
       "tags": [
@@ -2810,7 +2810,7 @@
       ],
       "publishedAt": "2026-11-10T10:01:28Z",
       "firstDetectedAt": "2026-11-10T19:36:25.579362+09:00",
-      "viewCountIncrease": 22,
+      "viewCountIncrease": 10,
       "sevenDayForecast": {
         "modelVersion": "v2",
         "createdAt": "2026-11-10T19:36:25.579362+09:00",
@@ -2864,7 +2864,7 @@
       "thumbnail": "https://i.ytimg.com/vi/rhjfm4mDbNo/hqdefault.jpg",
       "duration": "3:22",
       "durationSeconds": 202,
-      "viewCount": 471,
+      "viewCount": 515,
       "likeCount": 9,
       "commentCount": 0,
       "tags": [
@@ -2872,7 +2872,7 @@
       ],
       "publishedAt": "2026-11-14T10:01:34Z",
       "firstDetectedAt": "2026-11-14T23:00:02.948945+09:00",
-      "viewCountIncrease": 98,
+      "viewCountIncrease": 44,
       "sevenDayForecast": {
         "modelVersion": "v2",
         "createdAt": "2026-11-14T23:00:02.948945+09:00",
@@ -2908,7 +2908,7 @@
           "durationFactor": 0.9
         }
       },
-      "popularRank": 44,
+      "popularRank": 45,
       "popularRankDay": "2026-11-15",
       "popularRankDayStart": 44,
       "popularRankChange": 0
@@ -2920,15 +2920,15 @@
       "thumbnail": "https://i.ytimg.com/vi/ZNhniw4DI7U/hqdefault.jpg",
       "duration": "3:32",
       "durationSeconds": 212,
-      "viewCount": 180,
-      "likeCount": 14,
+      "viewCount": 2063,
+      "likeCount": 57,
       "commentCount": 1,
       "tags": [
         "市原愛弓"
       ],
       "publishedAt": "2026-11-15T09:00:26Z",
       "firstDetectedAt": "2026-11-15T19:08:09.481034+09:00",
-      "viewCountIncrease": 0,
+      "viewCountIncrease": 1883,
       "sevenDayForecast": {
         "modelVersion": "v2",
         "createdAt": "2026-11-15T19:08:09.481034+09:00",
@@ -2970,10 +2970,10 @@
           "durationFactor": 0.9
         }
       },
-      "popularRank": 45,
+      "popularRank": 41,
       "popularRankDay": "2026-11-15",
       "popularRankDayStart": 45,
-      "popularRankChange": 0
+      "popularRankChange": 4
     }
   ],
   "memo": null,
