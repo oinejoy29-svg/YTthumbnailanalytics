@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-16T04:32:33",
+  "updatedAt": "2026-11-16T10:24:34",
   "events": [
     {
       "id": "3604",
@@ -88,6 +88,14 @@
       "category": "メディア",
       "title": "リスパ「#ニアジョイとリスパ」※≒JOY",
       "url": "https://nearly-equal-joy.jp/schedule/detail/4111"
+    },
+    {
+      "id": "4117",
+      "date": "2026-11-27",
+      "genre": "STREAM",
+      "category": "メディア",
+      "title": "TOKYO MX「バンマニ!リアルアイカツ！チャレンジ～現役アイドルがアイカツ！ゲームバトル～」※天野香乃愛",
+      "url": "https://nearly-equal-joy.jp/schedule/detail/4117"
     },
     {
       "id": "3822",
