@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-17T11:22:39",
+  "updatedAt": "2026-11-20T10:45:55",
   "events": [
     {
       "id": "3604",
@@ -66,6 +66,22 @@
       "url": "https://nearly-equal-joy.jp/schedule/detail/4109"
     },
     {
+      "id": "4028",
+      "date": "2026-11-19",
+      "genre": "OTHER",
+      "category": "メディア",
+      "title": "ワニブックスWEBマガジン「Newsクランチ！」連載『≒JOY大信田美月の推し麺を探せ！』※大信田美月",
+      "url": "https://nearly-equal-joy.jp/schedule/detail/4028"
+    },
+    {
+      "id": "4095",
+      "date": "2026-11-20",
+      "genre": "OTHER",
+      "category": "メディア",
+      "title": "ASCII.jp web連載「ニアジョイどらい部」※江角怜音、山田杏佳",
+      "url": "https://nearly-equal-joy.jp/schedule/detail/4095"
+    },
+    {
       "id": "4110",
       "date": "2026-11-20",
       "genre": "STREAM",
@@ -88,6 +104,22 @@
       "category": "メディア",
       "title": "リスパ「#ニアジョイとリスパ」※≒JOY",
       "url": "https://nearly-equal-joy.jp/schedule/detail/4111"
+    },
+    {
+      "id": "4125",
+      "date": "2026-11-25",
+      "genre": "OTHER",
+      "category": "メディア",
+      "title": "文化放送「矢吹奈子のレコメン！」※市原愛弓、藤沢莉子",
+      "url": "https://nearly-equal-joy.jp/schedule/detail/4125"
+    },
+    {
+      "id": "4129",
+      "date": "2026-11-26",
+      "genre": "OTHER",
+      "category": "メディア",
+      "title": "Lucky FM(茨城放送)「MUSIC STATE」※天野香乃愛、江角怜音",
+      "url": "https://nearly-equal-joy.jp/schedule/detail/4129"
     },
     {
       "id": "4117",
